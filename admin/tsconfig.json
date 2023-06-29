@@ -1,10 +1,16 @@
 {
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    },
     "compilerOptions": {
         "target": "ESNext",
-        "module": "CommonJS",
+        "module": "ESNext",
+        "moduleResolution": "Node",
         "noImplicitAny": true,
         "strictNullChecks": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
         "noEmit": true,
         "skipLibCheck": true,
         "baseUrl": "./",
@@ -13,7 +19,12 @@
         },
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "sourceRoot": "~/",
+        "types": ["vite/client"]
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*"],
+    "exclude": ["src/loader.ts"]
 }
