@@ -1,0 +1,16 @@
+{
+    "name": "server",
+    "private": true,
+    "scripts": {
+        "preserve": "envsubst < \"../build/index.html\" > \"/tmp/index.html\" && mv /tmp/index.html ../build/index.html",
+        "serve": "node server.js"
+    },
+    "dependencies": {
+        "compression": "^1.7.4",
+        "express": "^4.17.1",
+        "helmet": "^7.0.0"
+    },
+    "engines": {
+        "node": "18"
+    }
+}

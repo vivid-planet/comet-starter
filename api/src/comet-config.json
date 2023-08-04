@@ -1,0 +1,12 @@
+{
+    "imgproxy": {
+        "maxSrcResolution": 70,
+        "quality": 80
+    },
+    "dam": {
+        "additionalMimeTypes": [],
+        "uploadsMaxFileSize": 500,
+        "allowedImageSizes": [320, 420, 640, 750, 768, 828, 1024, 1080, 1200, 1920, 2048, 3840],
+        "allowedImageAspectRatios": ["16x9", "4x3", "3x2", "3x1", "2x1", "1x1", "1x2", "1x3", "2x3", "3x4", "9x16"]
+    }
+}

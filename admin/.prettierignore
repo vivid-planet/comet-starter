@@ -1,0 +1,7 @@
+package-lock.json
+.gitignore
+*.lock
+*.gql
+*.dist
+src/fragmentTypes.json
+src/graphql.generated.ts
