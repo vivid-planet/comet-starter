@@ -1,0 +1,13 @@
+.env
+.env.local
+.env.secrets
+/node_modules
+/build
+/lang
+/lang-extracted/
+/*-lang/
+fragmentTypes.json
+/schema.*
+**/*.generated.ts
+/block-meta.json
+/comet-config.json

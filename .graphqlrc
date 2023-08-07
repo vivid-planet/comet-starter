@@ -1,0 +1,2 @@
+schema: 'api/schema.gql'
+documents: '*/src/**/*.{gql,ts,tsx}'
