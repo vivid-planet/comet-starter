@@ -121,7 +121,6 @@ const config = (env: unknown, argv: Argv): webpack.Configuration => {
             static: {
                 directory: path.join(__dirname, "public"),
             },
-            host: "0.0.0.0",
             port: Number(process.env.ADMIN_PORT || 8001),
             allowedHosts: "all",
             compress: true,
