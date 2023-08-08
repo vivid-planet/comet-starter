@@ -3,9 +3,7 @@
 .env.secrets
 /node_modules
 /build
-/lang
-/lang-extracted/
-/*-lang/
+/lang-compiled/
 fragmentTypes.json
 /schema.*
 **/*.generated.ts
