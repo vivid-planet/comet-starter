@@ -38,6 +38,9 @@ ln -sf ../api/schema.gql ./site/
 ln -sf ../api/block-meta.json ./site/
 ln -sf ../api/src/comet-config.json ./site/
 
+# Lang install
+sh ./intl-update.sh
+
 npm --prefix admin install &
 npm --prefix api install &
 npm --prefix site install &
