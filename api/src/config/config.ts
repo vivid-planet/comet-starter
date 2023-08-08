@@ -17,7 +17,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         helmRelease: envVars.HELM_RELEASE,
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
-        corsAllowedOrigins: new RegExp(envVars.CORS_ALLOWED_ORIGINS),
+        corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),
         auth: {
             useAuthProxy: envVars.USE_AUTHPROXY,
             basicAuthPassword: envVars.BASIC_AUTH_PASSWORD,

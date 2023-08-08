@@ -27,7 +27,7 @@ async function bootstrap(): Promise<void> {
 
     app.setGlobalPrefix("api");
     app.enableCors({
-        origin: config.corsAllowedOrigins,
+        origin: config.corsAllowedOrigin,
         methods: ["GET", "POST"],
         credentials: false,
         exposedHeaders: [],
