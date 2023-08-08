@@ -2,7 +2,7 @@ module.exports = {
     scripts: [
         {
             name: "docker",
-            script: "node docker-compose.js",
+            script: "docker compose up",
             group: "api",
         },
         {
