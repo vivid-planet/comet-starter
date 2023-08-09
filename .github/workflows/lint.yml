@@ -1,0 +1,74 @@
+name: Lint
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+    branches:
+      - main
+      - next
+  push:
+    branches:
+      - main
+      - next
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.actor }}"
+
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: "Library: Clone translations"
+        uses: actions/checkout@v3
+        with:
+          repository: vivid-planet/comet-lang
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: "lang/comet-lang"
+
+      - name: "Starter: Clone translations"
+        uses: actions/checkout@v3
+        with:
+          repository: vivid-planet/comet-starter-lang
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: "lang/starter-lang"
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
+
+      - name: Copy schema files
+        run: npm run copy-schema-files
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test:ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: test-results
+          path: "**/junit.xml"
