@@ -81,7 +81,7 @@ export default function CustomApp({ Component, pageProps, locale, messages }: Cu
 const getInitialProps: typeof App.getInitialProps = async (appContext) => {
     const locale = appContext.router.locale ?? defaultLanguage;
 
-    const [appProps, messages] = await Promise.all([App.getInitialProps(appContext), getMessages()[locale]]);
+    const [appProps, messages] = await Promise.all([App.getInitialProps(appContext), getMessages(locale)]);
 
     return { ...appProps, locale, messages };
 };
