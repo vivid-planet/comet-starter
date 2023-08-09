@@ -4,6 +4,7 @@
 /node_modules
 /build
 /lang-compiled/
+/lang-extracted/
 fragmentTypes.json
 /schema.*
 **/*.generated.ts
