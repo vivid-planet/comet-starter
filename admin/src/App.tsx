@@ -17,24 +17,18 @@ import {
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { ContentScope } from "@src/common/ContentScopeProvider";
+import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
 import * as React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { FormattedMessage, IntlProvider } from "react-intl";
 
-import cometAdminMessagesDe from "../lang/comet-admin/de.json";
-import cometAdminMessagesEn from "../lang/comet-admin/en.json";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 import { Routes } from "./Routes";
-
-const cometAdminMessages = {
-    en: cometAdminMessagesEn,
-    de: cometAdminMessagesDe,
-};
 
 const GlobalStyle = () => (
     <Global
@@ -71,7 +65,7 @@ export function App() {
                         resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => configs[scope.domain],
                     }}
                 >
-                    <IntlProvider locale="de" defaultLocale="de" messages={cometAdminMessages["de"]}>
+                    <IntlProvider locale="en" defaultLocale="en" messages={getMessages()}>
                         <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
                             <MuiThemeProvider theme={theme}>
                                 <DndProvider backend={HTML5Backend}>

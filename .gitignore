@@ -10,3 +10,4 @@ comet-lang
 /api/uploads
 .env.local
 .env.secrets
+lang
