@@ -1,5 +1,6 @@
+import { defaultLanguage } from "@src/config";
 import { getMessages } from "@src/lang";
-import { AppProps, NextWebVitalsMetric } from "next/app";
+import App, { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
 import * as React from "react";
@@ -36,13 +37,19 @@ export function reportWebVitals({ id, name, label, value }: NextWebVitalsMetric)
     }
 }
 
-export default function App({ Component, pageProps }: AppProps): JSX.Element {
+interface CustomAppProps extends AppProps {
+    locale: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    messages: any;
+}
+
+export default function CustomApp({ Component, pageProps, locale, messages }: CustomAppProps): JSX.Element {
     return (
         // see https://github.com/vercel/next.js/tree/master/examples/with-react-intl
         // for a complete strategy to couple next with react-intl
         // defaultLocale prevents missing message warning for locale defined in code,
         // see https://github.com/formatjs/formatjs/issues/251
-        <IntlProvider locale="en" defaultLocale="en" messages={getMessages()}>
+        <IntlProvider locale={locale} defaultLocale={defaultLanguage} messages={messages}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
@@ -70,3 +77,13 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         </IntlProvider>
     );
 }
+
+const getInitialProps: typeof App.getInitialProps = async (appContext) => {
+    const locale = appContext.router.locale ?? defaultLanguage;
+
+    const [appProps, messages] = await Promise.all([App.getInitialProps(appContext), getMessages()[locale]]);
+
+    return { ...appProps, locale, messages };
+};
+
+CustomApp.getInitialProps = getInitialProps;
