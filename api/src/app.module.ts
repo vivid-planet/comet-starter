@@ -52,7 +52,7 @@ export class AppModule {
                         autoSchemaFile: "schema.gql",
                         context: ({ req }: { req: Request }) => ({ ...req }),
                         cors: {
-                            origin: config.corsAllowedOrigins.map((val: string) => new RegExp(val)),
+                            origin: config.corsAllowedOrigin,
                             methods: ["GET", "POST"],
                             credentials: false,
                             exposedHeaders: [],
