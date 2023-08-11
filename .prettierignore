@@ -4,4 +4,5 @@ api/
 site/
 schema.graphql
 api/uploads/
+create-comet-app/
 lang/
