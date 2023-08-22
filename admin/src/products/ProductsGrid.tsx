@@ -18,6 +18,7 @@ import {
 import { Add, Delete, Edit } from "@comet/admin-icons";
 import { Box, Button, IconButton } from "@mui/material";
 import { DataGrid, GridColDef, GridToolbarQuickFilter } from "@mui/x-data-grid";
+import { parseISO } from "date-fns";
 import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -28,6 +29,7 @@ const productFragment = gql`
         id
         name
         description
+        createdAt
     }
 `;
 
@@ -74,6 +76,12 @@ export function ProductsGrid(): React.ReactElement {
     const stackApi = useStackSwitchApi();
 
     const columns: GridColDef<GQLProductGridItemFragment>[] = [
+        {
+            field: "createdAt",
+            flex: 1,
+            headerName: intl.formatMessage({ id: "product.createdAt", defaultMessage: "Created at" }),
+            renderCell: ({ row }) => intl.formatDate(parseISO(row.createdAt)),
+        },
         {
             field: "name",
             flex: 1,
