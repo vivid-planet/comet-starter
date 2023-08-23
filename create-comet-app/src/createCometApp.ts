@@ -37,10 +37,10 @@ void (async () => {
         .option("--showcase", " Adds showcase content to the project. (default)")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
         .action((projectName: string, showcaseContent: boolean, verbose: boolean) => {
-            if (!isValidProjectName(projectName)) {
-                console.log(kleur.bgRed("Please provide a valid project name."));
+            if (isValidProjectName(projectName)) {
+                createCometApp({ projectName, showcaseContent, verbose });
             }
-            createCometApp({ projectName, showcaseContent, verbose });
+            console.log(kleur.bgRed("Please provide a valid project name."));
         });
     program.parse();
 })();
