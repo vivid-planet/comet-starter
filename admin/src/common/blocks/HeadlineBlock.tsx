@@ -25,7 +25,7 @@ export const HeadlineBlock = createCompositeBlock({
     blocks: {
         headline: {
             block: RichTextBlock,
-            title: "Headline",
+            title: <FormattedMessage id="headlineBlock.title" defaultMessage="Headline" />,
         },
         level: {
             block: createCompositeSetting<HeadlineBlockData["level"]>({
