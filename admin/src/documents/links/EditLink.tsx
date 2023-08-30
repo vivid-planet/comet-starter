@@ -79,7 +79,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
                 <RouterPrompt
                     message={(location) => {
                         return intl.formatMessage({
-                            id: "comet.editPage.discardChanges",
+                            id: "editPage.discardChanges",
                             defaultMessage: "Discard unsaved changes?",
                         });
                     }}
@@ -105,7 +105,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
             </Toolbar>
             <MainContent>
                 <RouterTabs>
-                    <RouterTab label={intl.formatMessage({ id: "comet.generic.content", defaultMessage: "Content" })} path="">
+                    <RouterTab label={intl.formatMessage({ id: "generic.content", defaultMessage: "Content" })} path="">
                         <AdminComponentRoot>{rootBlocksApi.content.adminUI}</AdminComponentRoot>
                     </RouterTab>
                 </RouterTabs>

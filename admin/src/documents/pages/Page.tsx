@@ -10,7 +10,7 @@ import { SeoBlock } from "./blocks/SeoBlock";
 import { EditPage } from "./EditPage";
 
 export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageInput> = {
-    displayName: <FormattedMessage id="comet.generic.page" defaultMessage="Page" />,
+    displayName: <FormattedMessage id="generic.page" defaultMessage="Page" />,
     editComponent: EditPage,
     menuIcon: File,
     hideInMenuIcon: FileNotMenu,

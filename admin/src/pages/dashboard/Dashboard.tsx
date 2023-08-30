@@ -48,30 +48,28 @@ export const Dashboard: React.FC = () => {
     const { data } = useQuery<GQLDashboardCurrentUserQuery, GQLDashboardCurrentUserQueryVariables>(currentUserQuery);
 
     return (
-        <Stack topLevelTitle={intl.formatMessage({ id: "comet.dashboard", defaultMessage: "Dashboard" })}>
+        <Stack topLevelTitle={intl.formatMessage({ id: "dashboard", defaultMessage: "Dashboard" })}>
             <Header>
                 <DateTime />
                 <Greeting variant="h1">
                     {data ? (
                         <FormattedMessage
-                            id="comet.pages.dashboard.helloUser"
+                            id="pages.dashboard.helloUser"
                             defaultMessage="Hallo {givenName}!"
                             values={{ givenName: data.currentUser.name }}
                         />
                     ) : (
-                        <FormattedMessage id="comet.pages.dashboard.hello" defaultMessage="Hallo!" />
+                        <FormattedMessage id="pages.dashboard.hello" defaultMessage="Hallo!" />
                     )}
                 </Greeting>
             </Header>
             <MainContent>
                 <Grid container direction="row" spacing={4}>
-                    <WidgetContainer
-                        header={<FormattedMessage id="comet.pages.dashboard.latestContentUpdates" defaultMessage="Latest Content Updates" />}
-                    >
+                    <WidgetContainer header={<FormattedMessage id="pages.dashboard.latestContentUpdates" defaultMessage="Latest Content Updates" />}>
                         <LatestContentUpdates />
                     </WidgetContainer>
                     {process.env.NODE_ENV !== "development" && (
-                        <WidgetContainer header={<FormattedMessage id="comet.pages.dashboard.latestBuilds" defaultMessage="Latest Builds" />}>
+                        <WidgetContainer header={<FormattedMessage id="pages.dashboard.latestBuilds" defaultMessage="Latest Builds" />}>
                             <LatestBuilds />
                         </WidgetContainer>
                     )}
