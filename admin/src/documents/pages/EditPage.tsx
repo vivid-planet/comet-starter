@@ -108,7 +108,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                     message={(location) => {
                         if (location.pathname.startsWith(match.url)) return true; //we navigated within our self
                         return intl.formatMessage({
-                            id: "comet.editPage.discardChanges",
+                            id: "editPage.discardChanges",
                             defaultMessage: "Discard unsaved changes?",
                         });
                     }}
@@ -140,7 +140,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             }}
                             color="info"
                         >
-                            <FormattedMessage id="comet.pages.pages.page.edit.preview" defaultMessage="Web preview" />
+                            <FormattedMessage id="pages.pages.page.edit.preview" defaultMessage="Web preview" />
                         </Button>
                         {pageSaveButton}
                     </Stack>
@@ -153,12 +153,12 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             key: "content",
                             label: (
                                 <AdminTabLabel isValid={rootBlocksApi.content.isValid}>
-                                    <FormattedMessage id="comet.blocks" defaultMessage="Blocks" />
+                                    <FormattedMessage id="generic.blocks" defaultMessage="Blocks" />
                                 </AdminTabLabel>
                             ),
                             content: (
                                 <AdminComponentRoot
-                                    title={intl.formatMessage({ id: "comet.pages.pages.page.edit.pageBlocks.title", defaultMessage: "Page" })}
+                                    title={intl.formatMessage({ id: "pages.pages.page.edit.pageBlocks.title", defaultMessage: "Page" })}
                                 >
                                     {rootBlocksApi.content.adminUI}
                                 </AdminComponentRoot>
@@ -168,7 +168,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             key: "config",
                             label: (
                                 <AdminTabLabel isValid={rootBlocksApi.seo.isValid}>
-                                    <FormattedMessage id="comet.pages.pages.page.edit.config" defaultMessage="Config" />{" "}
+                                    <FormattedMessage id="pages.pages.page.edit.config" defaultMessage="Config" />{" "}
                                 </AdminTabLabel>
                             ),
                             content: rootBlocksApi.seo.adminUI,

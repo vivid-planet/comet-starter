@@ -41,7 +41,7 @@ export const LatestBuilds: React.FC = () => {
                         columns={[
                             {
                                 name: "runtime",
-                                header: intl.formatMessage({ id: "comet.dashboard.latestBuilds.runtime", defaultMessage: "Runtime" }),
+                                header: intl.formatMessage({ id: "dashboard.latestBuilds.runtime", defaultMessage: "Runtime" }),
                                 render: (row) => (
                                     <BuildRuntime
                                         startTime={row.startTime ? parseISO(row.startTime) : undefined}
@@ -51,7 +51,7 @@ export const LatestBuilds: React.FC = () => {
                             },
                             {
                                 name: "status",
-                                header: intl.formatMessage({ id: "comet.dashboard.latestBuilds.status", defaultMessage: "Status" }),
+                                header: intl.formatMessage({ id: "dashboard.latestBuilds.status", defaultMessage: "Status" }),
                                 render: (row) => {
                                     return <BuildStatus status={row.status}>{row.status}</BuildStatus>;
                                 },

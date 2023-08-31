@@ -9,7 +9,7 @@ import { FormattedMessage } from "react-intl";
 import { EditLink } from "./EditLink";
 
 export const Link: DocumentInterface<Pick<GQLLink, "content">, GQLLinkInput> = {
-    displayName: <FormattedMessage id="comet.generic.link" defaultMessage="Link" />,
+    displayName: <FormattedMessage id="generic.link" defaultMessage="Link" />,
     editComponent: EditLink,
     menuIcon: LinkIcon,
     getQuery: gql`

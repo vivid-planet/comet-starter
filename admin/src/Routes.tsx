@@ -17,7 +17,7 @@ import { ProductsPage } from "./products/ProductsPage";
 const categories: AllCategories = [
     {
         category: "MainNavigation",
-        label: <FormattedMessage id="comet.menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
+        label: <FormattedMessage id="menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
     },
 ];
 
