@@ -18,7 +18,7 @@ export async function createInitialGitCommit() {
         });
     });
 
-    await exec('git ls-remote git@gitlab.vivid-planet.com:comet/starter | head -1 | sed "s/HEAD//"', (error, stdout, stderr) => {
+    await exec('git ls-remote git@github.com:vivid-planet/comet-starter.git | head -1 | sed "s/HEAD//"', (error, stdout, stderr) => {
         if (error) {
             console.log(kleur.bgRed(`Error while making initial commit.`));
             console.log(kleur.red(stderr));

@@ -7,7 +7,7 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
         maxDepth: 5,
         ignore: `./.git/**`,
     });
-    const placeholder = /[Ss]tarter/;
+    const placeholder = /[Ss]tarter/g;
     const value = projectName;
     let changedFiles = 0;
 

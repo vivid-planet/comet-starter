@@ -3,7 +3,7 @@ import kleur from "kleur";
 import process from "process";
 
 export async function createWorkingDirectoryCopy(projectName: string, verbose: boolean): Promise<void> {
-    const clone = `git clone --depth 1 git@gitlab.vivid-planet.com:comet/starter ./${projectName}`;
+    const clone = `git clone --depth 1 git@github.com:vivid-planet/comet-starter.git ./${projectName}`;
 
     await new Promise<void>((resolve, reject) => {
         exec(clone, (error, stdout, stderr) => {
