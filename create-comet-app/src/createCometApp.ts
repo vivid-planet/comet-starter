@@ -39,8 +39,9 @@ void (async () => {
         .action((projectName: string, showcaseContent: boolean, verbose: boolean) => {
             if (isValidProjectName(projectName)) {
                 createCometApp({ projectName, showcaseContent, verbose });
+            } else {
+                console.log(kleur.bgRed("Please provide a valid project name."));
             }
-            console.log(kleur.bgRed("Please provide a valid project name."));
         });
     program.parse();
 })();
