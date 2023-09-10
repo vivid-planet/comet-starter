@@ -47,7 +47,7 @@ void (async () => {
 })();
 
 async function createCometApp(projectConfiguration: ProjectConfiguration) {
-    console.log(kleur.white(`Creating a new comet app in `) + kleur.yellow(`${process.cwd()}\n`));
+    console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
     console.log(kleur.bold("Using npm.\n"));
     console.log(kleur.white(`Initializing project with${projectConfiguration.showcaseContent ? "" : "out"} showcase content\n`));
     await createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
