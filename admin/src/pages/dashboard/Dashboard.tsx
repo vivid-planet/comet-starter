@@ -68,7 +68,7 @@ export const Dashboard: React.FC = () => {
                     <WidgetContainer header={<FormattedMessage id="pages.dashboard.latestContentUpdates" defaultMessage="Latest Content Updates" />}>
                         <LatestContentUpdates />
                     </WidgetContainer>
-                    {process.env.NODE_ENV !== "development" && (
+                    {import.meta.env.MODE !== "development" && (
                         <WidgetContainer header={<FormattedMessage id="pages.dashboard.latestBuilds" defaultMessage="Latest Builds" />}>
                             <LatestBuilds />
                         </WidgetContainer>

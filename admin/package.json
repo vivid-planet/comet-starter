@@ -7,7 +7,7 @@
         "build": "npm run intl:compile && run-p gql:types generate-block-types && cross-env BABEL_ENV=production webpack --config ./webpack.config.ts --mode production --progress",
         "serve": "cd server && npm run serve",
         "vite:start": "npm run intl:compile intl:compile && run-p gql:types generate-block-types && vite",
-        "vite:build": "npm run intl:compile && run-p gql:types generate-block-types && vite build",
+        "vite:build": "npm run intl:compile && run-p gql:types generate-block-types && NODE_ENV=production vite build",
         "vite:preview": "npm run vite:build && vite preview",
         "gql:types": "graphql-codegen",
         "gql:watch": "graphql-codegen --watch",
