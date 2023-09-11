@@ -7,7 +7,7 @@ module.exports = {
         },
         {
             name: "admin",
-            script: "npm run --prefix admin start",
+            script: "npm run --prefix admin vite:start",
             group: "admin",
         },
         {
