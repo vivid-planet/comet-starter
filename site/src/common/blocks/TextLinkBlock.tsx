@@ -9,7 +9,7 @@ export const TextLinkBlock = withPreview(
         return (
             <LinkBlock data={link}>
                 <a>
-                    {text} <SvgUse xlinkHref="/chevron.svg#chevron" width={20} height={20} />
+                    {text} <SvgUse xlinkHref="/comet-logo.svg#logo" width={20} height={20} />
                 </a>
             </LinkBlock>
         );
