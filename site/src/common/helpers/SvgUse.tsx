@@ -1,13 +1,11 @@
 import * as React from "react";
 
-interface SvgUseProps {
+interface SvgUseProps extends React.SVGProps<SVGSVGElement> {
     xlinkHref: string;
-    width: number;
-    height: number;
 }
 
-export const SvgUse: React.FunctionComponent<SvgUseProps> = ({ xlinkHref, width, height }) => (
-    <svg width={width} height={height}>
+export const SvgUse: React.FunctionComponent<SvgUseProps> = ({ xlinkHref, ...props }) => (
+    <svg {...props}>
         <use xlinkHref={createAssetUrl(xlinkHref)} />
     </svg>
 );
