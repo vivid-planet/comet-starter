@@ -14,7 +14,6 @@ export default defineConfig(({ mode }) => {
             createHtmlPlugin({
                 minify: true,
                 entry: resolve(__dirname, "src/loader.ts"),
-                template: "public/index.html",
                 inject: {
                     data: {
                         environmentValues: envVarsToLoad
@@ -49,13 +48,6 @@ export default defineConfig(({ mode }) => {
         },
         build: {
             outDir: "build",
-            // chunkSizeWarningLimit: 700,
-            assetsInlineLimit: 0,
-            lib: {
-                entry: resolve(__dirname, "src/loader.ts"),
-                fileName: "comet-admin",
-                formats: ["es"],
-            },
         },
     };
 });
