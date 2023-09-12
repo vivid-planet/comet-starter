@@ -3,6 +3,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "material-design-icons/iconfont/material-icons.css";
+import "./polyfills";
 
 import { ApolloProvider } from "@apollo/client";
 import { ErrorDialogHandler, MuiThemeProvider, RouterBrowserRouter, SnackbarProvider } from "@comet/admin";
