@@ -1,5 +1,5 @@
 function isNodeVersionGreaterThan18(): boolean {
-    const [major, minor] = process.versions.node.split(".").map(Number);
+    const [major] = process.versions.node.split(".").map(Number);
     return major >= 18;
 }
 
