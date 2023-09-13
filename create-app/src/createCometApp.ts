@@ -76,10 +76,5 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Shutdown all services.\n`));
     console.log(kleur.cyan(`npm run --prefix api fixtures`));
     console.log(kleur.white(`Imports fixtures.\n`));
-
-    console.log(kleur.green("\n##########################################"));
-    console.log(kleur.green("#                                        #"));
-    console.log(kleur.green("#   ☄️ Successfully created Comet app     #"));
-    console.log(kleur.green("#                                        #"));
-    console.log(kleur.green("##########################################"));
+    console.log(kleur.green(`\n☄️ Successfully created Comet app: ${projectConfiguration.projectName}`));
 }
