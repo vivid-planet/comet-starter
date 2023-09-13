@@ -1,24 +1,18 @@
-import { exec } from "child_process";
+import { execSync } from "child_process";
 import kleur from "kleur";
 import process from "process";
 
-export async function createWorkingDirectoryCopy(projectName: string, verbose: boolean): Promise<void> {
+export function createWorkingDirectoryCopy(projectName: string, verbose: boolean): boolean {
     const clone = `git clone --depth 1 git@github.com:vivid-planet/comet-starter.git ./${projectName}`;
-
-    await new Promise<void>((resolve, reject) => {
-        exec(clone, (error, stdout, stderr) => {
-            if (error) {
-                console.log(kleur.red(stderr));
-                reject();
-            }
-            if (stdout && verbose) {
-                console.log(kleur.grey(stdout));
-            }
-            process.chdir(`./${projectName}`);
-            resolve();
-        });
-    }).catch(() => {
+    try {
+        execSync(clone);
+        process.chdir(`./${projectName}`);
+        if (verbose) {
+            console.log(kleur.white("Cloned git repository."));
+        }
+    } catch (e) {
         console.log(kleur.bgRed(`Error while cloning working directory to ${projectName}`));
-        process.exit(1);
-    });
+        return false;
+    }
+    return true;
 }

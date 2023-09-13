@@ -50,7 +50,9 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
     console.log(kleur.bold("Using npm.\n"));
     console.log(kleur.white(`Initializing project with${projectConfiguration.showcaseContent ? "" : "out"} showcase content\n`));
-    await createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
+    if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
+        return;
+    }
     await cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     const spinner = createSpinner("Installing dependencies").start();
