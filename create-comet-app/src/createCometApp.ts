@@ -56,7 +56,7 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     const spinner = createSpinner("Installing dependencies").start();
-    await installProjectPackages();
+    installProjectPackages();
     if (!projectConfiguration.showcaseContent) {
         await removeShowcaseContent(projectConfiguration.verbose);
     }
