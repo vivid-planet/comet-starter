@@ -59,7 +59,7 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
         await removeShowcaseContent(projectConfiguration.verbose);
     }
     spinner.success({ text: "Installation successful" });
-    await createInitialGitCommit();
+    createInitialGitCommit();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
     console.log(kleur.white(`nvm use\n`));
