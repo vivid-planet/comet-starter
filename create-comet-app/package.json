@@ -1,5 +1,5 @@
 {
-  "name": "create-comet-app",
+  "name": "@comet/create-app",
   "version": "1.0.0",
   "bin": {
     "@comet/create-app": "./bin/create-comet-app.js"
