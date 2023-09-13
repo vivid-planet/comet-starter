@@ -34,44 +34,33 @@ async function removeFileContent(verbose: boolean): Promise<void> {
         cwd: process.cwd(),
         fix: true,
     });
-
-    contentToRemove.map((content) => {
+    for (const content of contentToRemove) {
         if (!existsSync(content.file)) {
             console.log(kleur.bgYellow(`File: ${content.file} does not exist!`));
             console.log(kleur.bgYellow(`Skipping: ${content.file}...`));
-        } else {
-            let fileContent = readFileSync(content.file).toString();
-
-            content.replacements.map((stringToRemove) => {
-                fileContent = fileContent.replaceAll(stringToRemove, "");
-            });
-
-            try {
-                eslint
-                    .lintText(fileContent, {
-                        filePath: content.file,
-                    })
-                    .then((lintedFileContent) => {
-                        const output =
-                            lintedFileContent[0] && lintedFileContent[0].output ? lintedFileContent[0].output : lintedFileContent[0].source;
-                        writeFileSync(content.file, output ?? fileContent);
-                    })
-                    .catch(() => {
-                        writeFileSync(content.file, fileContent);
-                        console.log(kleur.yellow(`Could not lint: ${content.file}!`));
-                    });
-
-                if (verbose) {
-                    console.log(kleur.grey(`Info: Replaced content in ${content.file}`));
-                }
-            } catch (e) {
-                console.log(kleur.yellow(`Could not save changes in: ${content.file}!`));
-            }
+            continue;
         }
-    });
+        let fileContent = readFileSync(content.file).toString();
+        for (const replacement of content.replacements) {
+            fileContent = fileContent.replaceAll(replacement, "");
+        }
+        try {
+            const lintedFileContent = await eslint.lintText(fileContent, {
+                filePath: content.file,
+            });
+            const output = lintedFileContent[0] && lintedFileContent[0].output ? lintedFileContent[0].output : lintedFileContent[0].source;
+            writeFileSync(content.file, output ?? fileContent);
+            if (verbose) {
+                console.log(kleur.grey(`Info: Replaced content in ${content.file}`));
+            }
+        } catch (e) {
+            writeFileSync(content.file, fileContent);
+            console.log(kleur.yellow(`Could not lint: ${content.file}!`));
+        }
+    }
 }
 
-export async function removeShowcaseContent(verbose: boolean): Promise<void> {
+export async function removeShowcaseContent(verbose: boolean) {
     await removeFileContent(verbose);
     const filesToRemove: string[] = [
         "api/src/products",
@@ -79,5 +68,5 @@ export async function removeShowcaseContent(verbose: boolean): Promise<void> {
         "api/src/db/fixtures/generators/product.fixture.ts",
         "api/src/db/migrations/Migration20220721123033.ts",
     ];
-    await deleteFilesAndFolders(filesToRemove, verbose);
+    deleteFilesAndFolders(filesToRemove, verbose);
 }
