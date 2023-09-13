@@ -3,7 +3,7 @@ import kleur from "kleur";
 import { createSpinner } from "nanospinner";
 import process from "process";
 
-import { version } from "../package.json";
+import { version, name } from "../package.json";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
@@ -30,7 +30,7 @@ void (async () => {
         return;
     }
 
-    program.name("create-comet-app").description("CLI to create a comet app").version(version);
+    program.name(name).description("CLI to create a comet app").version(version);
     program
         .argument("<projectName>", "Sets the name of the project.")
         .option("--no-showcase", "Disables the addition of showcase content in the project.")
