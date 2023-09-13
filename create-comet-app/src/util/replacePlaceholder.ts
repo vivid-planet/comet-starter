@@ -8,7 +8,6 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
         ignore: `./.git/**`,
     });
     const placeholder = /[Ss]tarter/g;
-    const value = projectName;
     let changedFiles = 0;
 
     files.forEach((file) => {
@@ -22,7 +21,7 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
                 if (verbose) {
                     console.log(kleur.grey(`Info: Replaced content in ${file}`));
                 }
-                fs.writeFileSync(file, contents.replaceAll(placeholder, value));
+                fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
                 changedFiles++;
             }
         } catch (e) {
