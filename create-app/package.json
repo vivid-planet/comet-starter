@@ -41,6 +41,7 @@
     "prettier": "^2.1.2"
   },
   "publishConfig": {
-    "@comet:registry": "https://gitlab.vivid-planet.com/api/v4/projects/990/packages/npm/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
