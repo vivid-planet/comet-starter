@@ -1,10 +1,10 @@
 import kleur from "kleur";
 import * as deleteFileOrFolder from "rimraf";
 
-export async function deleteFilesAndFolders(files: string[], verbose: boolean): Promise<void> {
+export function deleteFilesAndFolders(files: string[], verbose: boolean) {
     for (const toDelete of files) {
         try {
-            await deleteFileOrFolder.native(`./${toDelete}`, {
+            deleteFileOrFolder.sync(`./${toDelete}`, {
                 maxRetries: 5,
                 retryDelay: 1000,
             });
@@ -12,7 +12,9 @@ export async function deleteFilesAndFolders(files: string[], verbose: boolean): 
                 console.log(kleur.grey(`Info: Deleted ${toDelete}`));
             }
         } catch (e) {
-            console.log(e);
+            if (verbose) {
+                console.log(e);
+            }
             console.log(kleur.yellow(`Could not delete ${toDelete}`));
         }
     }

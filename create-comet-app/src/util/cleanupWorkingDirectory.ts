@@ -1,6 +1,6 @@
 import { deleteFilesAndFolders } from "./deleteFilesAndFolders";
 
-export async function cleanupWorkingDirectory(verbose: boolean): Promise<void> {
+export function cleanupWorkingDirectory(verbose: boolean) {
     const cleanupFilesDirectories = ["create-comet-app", ".git"];
-    await deleteFilesAndFolders(cleanupFilesDirectories, verbose);
+    deleteFilesAndFolders(cleanupFilesDirectories, verbose);
 }
