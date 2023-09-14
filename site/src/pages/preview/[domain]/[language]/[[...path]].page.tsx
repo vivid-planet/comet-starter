@@ -1,11 +1,14 @@
 import { parsePreviewParams, SitePreviewProvider } from "@comet/cms-site";
+import { useContentScope } from "@src/common/contentScope/ContentScope";
 import Page, { createGetUniversalProps, PageUniversalProps } from "@src/pages/[[...path]].page";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import React from "react";
 
 export default function AuthenticatedPreviewPage(props: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
+    const scope = useContentScope();
+
     return (
-        <SitePreviewProvider previewPath={`/preview/${props.domain}`}>
+        <SitePreviewProvider previewPath={`/preview/${scope.domain}/${scope.language}`}>
             <Page {...props} />
         </SitePreviewProvider>
     );

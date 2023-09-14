@@ -1,4 +1,5 @@
-import { defaultLanguage } from "@src/config";
+import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
+import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
 import App, { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
@@ -38,18 +39,18 @@ export function reportWebVitals({ id, name, label, value }: NextWebVitalsMetric)
 }
 
 interface CustomAppProps extends AppProps {
-    locale: string;
+    scope: ContentScope;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     messages: any;
 }
 
-export default function CustomApp({ Component, pageProps, locale, messages }: CustomAppProps): JSX.Element {
+export default function CustomApp({ Component, pageProps, scope, messages }: CustomAppProps): JSX.Element {
     return (
         // see https://github.com/vercel/next.js/tree/master/examples/with-react-intl
         // for a complete strategy to couple next with react-intl
         // defaultLocale prevents missing message warning for locale defined in code,
         // see https://github.com/formatjs/formatjs/issues/251
-        <IntlProvider locale={locale} defaultLocale={defaultLanguage} messages={messages}>
+        <IntlProvider locale={scope.language} defaultLocale={defaultLanguage} messages={messages}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
@@ -72,18 +73,29 @@ export default function CustomApp({ Component, pageProps, locale, messages }: Cu
                     />
                 </>
             )}
-            <GlobalStyle />
-            <Component {...pageProps} />
+            <ContentScopeProvider scope={scope}>
+                <GlobalStyle />
+                <Component {...pageProps} />
+            </ContentScopeProvider>
         </IntlProvider>
     );
 }
 
 const getInitialProps: typeof App.getInitialProps = async (appContext) => {
-    const locale = appContext.router.locale ?? defaultLanguage;
+    let scope: ContentScope;
 
-    const [appProps, messages] = await Promise.all([App.getInitialProps(appContext), getMessages(locale)]);
+    if (typeof appContext.router.query.domain === "string" && typeof appContext.router.query.language === "string") {
+        // Site preview
+        scope = { domain: appContext.router.query.domain, language: appContext.router.query.language };
+    } else {
+        // Live site
+        const language = appContext.router.locale ?? defaultLanguage;
+        scope = { domain, language };
+    }
 
-    return { ...appProps, locale, messages };
+    const [appProps, messages] = await Promise.all([App.getInitialProps(appContext), getMessages(scope)]);
+
+    return { ...appProps, scope, messages };
 };
 
 CustomApp.getInitialProps = getInitialProps;

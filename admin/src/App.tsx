@@ -62,7 +62,13 @@ export function App() {
                 <SitesConfigProvider
                     value={{
                         configs: config.sitesConfig,
-                        resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => configs[scope.domain],
+                        resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
+                            const siteConfig = configs[scope.domain];
+                            return {
+                                ...siteConfig,
+                                previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
+                            };
+                        },
                     }}
                 >
                     <IntlProvider locale="en" defaultLocale="en" messages={getMessages()}>

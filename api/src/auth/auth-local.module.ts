@@ -23,7 +23,7 @@ export class AuthLocalModule {
                         email: "demo@comet-dxp.com",
                         language: "en",
                         role: "admin",
-                        domains: ["main"],
+                        domains: ["main", "secondary"],
                     },
                 }),
                 createAuthResolver({
