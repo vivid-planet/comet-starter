@@ -1,3 +1,4 @@
+import { SvgUse } from "@src/common/helpers/SvgUse";
 import { gql } from "graphql-request";
 import * as React from "react";
 import styled from "styled-components";
@@ -12,6 +13,7 @@ interface Props {
 function Header({ header }: Props): JSX.Element {
     return (
         <Root>
+            <SvgUse xlinkHref="/comet-logo.svg#logo" />
             <nav>
                 <TopLevelNavigation>
                     {header.map((node) => (
