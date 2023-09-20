@@ -22,11 +22,11 @@
     "dependencies": {
         "@apollo/client": "^3.2.5",
         "@babel/core": "^7.0.0",
-        "@comet/admin": "^4.4.1",
-        "@comet/admin-icons": "^4.4.1",
-        "@comet/admin-rte": "^4.4.1",
-        "@comet/admin-theme": "^4.4.1",
-        "@comet/blocks-admin": "^4.4.1",
+        "@comet/admin": "^4.4.3",
+        "@comet/admin-icons": "^4.4.3",
+        "@comet/admin-rte": "^4.4.3",
+        "@comet/admin-theme": "^4.4.3",
+        "@comet/blocks-admin": "^4.4.3",
         "@comet/cms-admin": "^4.2.0",
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
@@ -56,8 +56,8 @@
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
-        "@comet/cli": "^4.4.1",
-        "@comet/eslint-config": "^4.4.1",
+        "@comet/cli": "^4.4.3",
+        "@comet/eslint-config": "^4.4.3",
         "@formatjs/cli": "^3.0.1",
         "@gitbeaker/node": "^35.6.0",
         "@graphql-codegen/add": "^3.0.0",
