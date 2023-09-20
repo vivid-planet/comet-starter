@@ -8,13 +8,11 @@ import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
 import { installProjectPackages } from "./util/installProjectPackages";
-import { removeShowcaseContent } from "./util/removeShowcaseContent";
 import { replacePlaceholder } from "./util/replacePlaceholder";
 import { validateNodeVersion } from "./util/validateNodeVersion";
 
 interface ProjectConfiguration {
     projectName: string;
-    showcaseContent: boolean;
     verbose: boolean;
 }
 
@@ -33,12 +31,10 @@ void (async () => {
     program.name(name).description("CLI to create a comet app").version(version);
     program
         .argument("<projectName>", "Sets the name of the project.")
-        .option("--no-showcase", "Disables the addition of showcase content in the project.")
-        .option("--showcase", " Adds showcase content to the project. (default)")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
         .action((projectName: string, showcaseContent: boolean, verbose: boolean) => {
             if (isValidProjectName(projectName)) {
-                createCometApp({ projectName, showcaseContent, verbose });
+                createCometApp({ projectName, verbose });
             } else {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
@@ -48,7 +44,6 @@ void (async () => {
 
 async function createCometApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
-    console.log(kleur.white(`Initializing project with${projectConfiguration.showcaseContent ? "" : "out"} showcase content\n`));
     if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
         return;
     }
@@ -56,9 +51,6 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     const spinner = createSpinner("Installing dependencies").start();
     installProjectPackages();
-    if (!projectConfiguration.showcaseContent) {
-        await removeShowcaseContent(projectConfiguration.verbose);
-    }
     spinner.success({ text: "Installation successful" });
     createInitialGitCommit();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
