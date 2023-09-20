@@ -25,6 +25,5 @@
         "sourceRoot": "~/",
         "types": ["vite/client"]
     },
-    "include": ["src/**/*"],
-    "exclude": ["src/loader.ts"]
+    "include": ["src/**/*"]
 }
