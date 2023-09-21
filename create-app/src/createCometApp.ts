@@ -14,6 +14,7 @@ import { isValidNodeVersion } from "./util/isValidNodeVersion";
 interface ProjectConfiguration {
     projectName: string;
     verbose: boolean;
+    noInstall: boolean;
 }
 
 function isValidProjectName(value: string): boolean {
@@ -32,9 +33,10 @@ void (async () => {
     program
         .argument("<projectName>", "Sets the name of the project.")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
-        .action((projectName: string, showcaseContent: boolean, verbose: boolean) => {
+        .option("-ni, --no-install", "Disables the installation of dependencies.")
+        .action((projectName: string, verbose: boolean, noInstall: boolean) => {
             if (isValidProjectName(projectName)) {
-                createCometApp({ projectName, verbose });
+                createCometApp({ projectName, verbose, noInstall });
             } else {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
@@ -49,9 +51,13 @@ async function createCometApp(projectConfiguration: ProjectConfiguration) {
     }
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
-    const spinner = createSpinner("Installing dependencies").start();
-    installProjectPackages();
-    spinner.success({ text: "Installation successful" });
+    if (projectConfiguration.noInstall) {
+        console.log(kleur.white(`Skipping installation of dependencies`));
+    } else {
+        const spinner = createSpinner("Installing dependencies").start();
+        installProjectPackages();
+        spinner.success({ text: "Installation successful" });
+    }
     createInitialGitCommit();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
