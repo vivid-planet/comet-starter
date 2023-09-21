@@ -57,6 +57,9 @@ jobs:
       - name: Copy schema files
         run: npm run copy-schema-files
 
+      - name: Intl Update
+        run: ./admin/intl-update.sh & ./site/intl-update.sh
+
       - name: Lint
         run: npm run lint
 
