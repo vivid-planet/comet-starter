@@ -39,7 +39,8 @@ ln -sf ../api/block-meta.json ./site/
 ln -sf ../api/src/comet-config.json ./site/
 
 # Lang install
-sh ./intl-update.sh
+sh ./site/intl-update.sh
+sh ./admin/intl-update.sh
 
 npm --prefix admin install &
 npm --prefix api install &
