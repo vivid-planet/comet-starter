@@ -27,4 +27,21 @@ Example usage with arguments:
 npx @comet/create-app my-project -v
 ```
 
+Example output:
+```
+Creating a new Comet app in /Users/maximilianpelka/Documents/Development
+
+Cloning into './my-project'
+Cloned git repository.
+
+Successfully replaced content in 15 files
+
+Installing dependencies...
+
+Installation successful
+
+Success! Created 'test-project' at '/<installation-path>/test-project'
+
+```
+
 This command will create a new Comet app with the name "my-project" and enable verbose output in the console logs.
