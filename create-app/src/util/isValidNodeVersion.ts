@@ -3,6 +3,6 @@ function isNodeVersionGreaterThan18(): boolean {
     return major >= 18;
 }
 
-export function validateNodeVersion() {
+export function isValidNodeVersion() {
     return isNodeVersionGreaterThan18();
 }

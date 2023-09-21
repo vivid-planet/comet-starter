@@ -9,7 +9,7 @@ import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
 import { installProjectPackages } from "./util/installProjectPackages";
 import { replacePlaceholder } from "./util/replacePlaceholder";
-import { validateNodeVersion } from "./util/validateNodeVersion";
+import { isValidNodeVersion } from "./util/isValidNodeVersion";
 
 interface ProjectConfiguration {
     projectName: string;
@@ -23,7 +23,7 @@ function isValidProjectName(value: string): boolean {
 
 void (async () => {
     const program = new Command();
-    if (!validateNodeVersion()) {
+    if (!isValidNodeVersion()) {
         console.log(kleur.bgRed("Invalid Node Version (your Node.js version is prior to v18)."));
         return;
     }
