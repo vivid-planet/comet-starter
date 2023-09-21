@@ -11,7 +11,7 @@ import { WidgetContainer } from "@src/dashboard/WidgetContainer";
 import * as React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
-import { GQLDashboardCurrentUserQuery, GQLDashboardCurrentUserQueryVariables } from "./Dashboard.generated";
+import { GQLDashboardCurrentUserQuery, GQLDashboardCurrentUserQueryVariables } from "./DashboardPage.generated";
 
 const Header = styled("div")`
     position: relative;
@@ -43,7 +43,7 @@ const currentUserQuery = gql`
     }
 `;
 
-export const Dashboard: React.FC = () => {
+export const DashboardPage: React.FC = () => {
     const intl = useIntl();
     const { data } = useQuery<GQLDashboardCurrentUserQuery, GQLDashboardCurrentUserQueryVariables>(currentUserQuery);
 
