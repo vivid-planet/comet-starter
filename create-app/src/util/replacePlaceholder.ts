@@ -26,7 +26,7 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
             }
         } catch (e) {
             console.log(e);
-            console.log(kleur.yellow(`Could not replace Placeholder in ${file}`));
+            console.log(kleur.yellow(`Could not replace placeholder in ${file}`));
         }
     });
     if (verbose) {
