@@ -1,7 +1,6 @@
 import { MasterLayout, RouteWithErrorBoundary } from "@comet/admin";
 import { Domain } from "@comet/admin-icons";
 import { AllCategories, ContentScopeIndicator, createRedirectsPage, DamPage, PagesPage, PublisherPage, SitePreview } from "@comet/cms-admin";
-import { Dashboard } from "@src/pages/dashboard/Dashboard";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -10,6 +9,7 @@ import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScope
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { MasterMenu } from "./common/MasterMenu";
+import { DashboardPage } from "./dashboard/DashboardPage";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 import { ProductsPage } from "./products/ProductsPage";
@@ -33,7 +33,7 @@ export const Routes: React.FC = () => {
                         render={(props) => (
                             <MasterLayout headerComponent={MasterHeader} menuComponent={MasterMenu}>
                                 <Switch>
-                                    <RouteWithErrorBoundary path={`${match.path}/dashboard`} component={Dashboard} />
+                                    <RouteWithErrorBoundary path={`${match.path}/dashboard`} component={DashboardPage} />
                                     <RouteWithErrorBoundary
                                         path={`${match.path}/pages/pagetree/:category`}
                                         render={() => (
