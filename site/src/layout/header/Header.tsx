@@ -13,7 +13,7 @@ interface Props {
 function Header({ header }: Props): JSX.Element {
     return (
         <Root>
-            <SvgUse xlinkHref="/comet-logo.svg#logo" />
+            <SvgUse href="/comet-logo.svg#logo" />
             <nav>
                 <TopLevelNavigation>
                     {header.map((node) => (
