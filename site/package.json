@@ -25,7 +25,7 @@
         "intl:compile": "formatjs compile-folder --format simple --ast ../lang/starter-lang/site lang-compiled/"
     },
     "dependencies": {
-        "@comet/cms-site": "^4.4.1",
+        "@comet/cms-site": "^4.4.3",
         "@opentelemetry/api": "^1.4.0",
         "@opentelemetry/auto-instrumentations-node": "^0.36.1",
         "@opentelemetry/exporter-trace-otlp-http": "^0.35.1",
@@ -46,8 +46,8 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
-        "@comet/cli": "^4.4.1",
-        "@comet/eslint-config": "^4.4.1",
+        "@comet/cli": "^4.4.3",
+        "@comet/eslint-config": "^4.4.3",
         "@formatjs/cli": "^4.2.33",
         "@gitbeaker/node": "^35.6.0",
         "@graphql-codegen/add": "^3.0.0",

@@ -71,7 +71,10 @@ export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "chi
     );
     const values: ContentScopeValues<ContentScope> = {
         domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key })),
-        language: [{ label: "English", value: "en" }],
+        language: [
+            { label: "English", value: "en" },
+            { label: "German", value: "de" },
+        ],
     };
 
     return (

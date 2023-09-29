@@ -26,7 +26,7 @@ module.exports = {
 
         return config;
     },
-    i18n: {
+    i18n: process.env.SITE_IS_PREVIEW === "true" ? undefined : {
         locales: process.env.NEXT_PUBLIC_SITE_LANGUAGES.split(","),
         defaultLocale: process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE,
         localeDetection: process.env.NODE_ENV !== "development",
