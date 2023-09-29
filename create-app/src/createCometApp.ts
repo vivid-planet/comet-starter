@@ -3,13 +3,13 @@ import kleur from "kleur";
 import { createSpinner } from "nanospinner";
 import process from "process";
 
-import { version, name } from "../package.json";
+import { name, version } from "../package.json";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
 import { installProjectPackages } from "./util/installProjectPackages";
-import { replacePlaceholder } from "./util/replacePlaceholder";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
+import { replacePlaceholder } from "./util/replacePlaceholder";
 
 interface ProjectConfiguration {
     projectName: string;
