@@ -34,9 +34,9 @@ void (async () => {
         .argument("<projectName>", "Sets the name of the project.")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
         .option("-ni, --no-install", "Disables the installation of dependencies.")
-        .action((projectName: string, verbose: boolean, noInstall: boolean) => {
+        .action((projectName: string, options) => {
             if (isValidProjectName(projectName)) {
-                createCometApp({ projectName, verbose, noInstall });
+                createCometApp({ projectName, verbose: options.verbose, noInstall: !options.install });
             } else {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
