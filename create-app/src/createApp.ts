@@ -36,7 +36,7 @@ void (async () => {
         .option("-ni, --no-install", "Disables the installation of dependencies.")
         .action((projectName: string, options) => {
             if (isValidProjectName(projectName)) {
-                createCometApp({ projectName, verbose: options.verbose, noInstall: !options.install });
+                createApp({ projectName, verbose: options.verbose, noInstall: !options.install });
             } else {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
@@ -44,7 +44,7 @@ void (async () => {
     program.parse();
 })();
 
-async function createCometApp(projectConfiguration: ProjectConfiguration) {
+async function createApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
     if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
         return;
