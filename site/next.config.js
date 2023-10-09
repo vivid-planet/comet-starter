@@ -5,9 +5,32 @@
 const cometConfig = require("./comet-config.json");
 
 /**
+ * @type {import('next').NextConfig['i18n'] | undefined}
+ **/
+let i18n = undefined;
+
+if (process.env.SITE_IS_PREVIEW !== "true") {
+  if (!process.env.NEXT_PUBLIC_SITE_LANGUAGES) {
+    throw new Error("Missing environment variable NEXT_PUBLIC_SITE_LANGUAGES");
+  }
+
+  if (!process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE) {
+    throw new Error(
+      "Missing environment variable NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE"
+    );
+  }
+
+  i18n = {
+    locales: process.env.NEXT_PUBLIC_SITE_LANGUAGES.split(","),
+    defaultLocale: process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE,
+    localeDetection: process.env.NODE_ENV === "development" ? false : undefined,
+  };
+}
+
+/**
  * @type {import('next').NextConfig}
  **/
-module.exports = {
+const nextConfig = {
     pageExtensions: ["page.ts", "page.tsx"],
     cleanDistDir: process.env.NODE_ENV !== "production", // sitemap and robots.txt are pre-existing
     basePath: process.env.SITE_IS_PREVIEW === "true" ? "/site" : "",
@@ -26,11 +49,7 @@ module.exports = {
 
         return config;
     },
-    i18n: process.env.SITE_IS_PREVIEW === "true" ? undefined : {
-        locales: process.env.NEXT_PUBLIC_SITE_LANGUAGES.split(","),
-        defaultLocale: process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE,
-        localeDetection: process.env.NODE_ENV !== "development",
-    },
+    i18n,
     typescript: {
         ignoreBuildErrors: process.env.NODE_ENV === "production",
     },
@@ -92,3 +111,5 @@ module.exports = {
         },
     ],
 };
+
+module.exports = nextConfig;
