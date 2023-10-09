@@ -2,7 +2,7 @@
     "name": "@comet/create-app",
     "version": "1.0.0",
     "bin": {
-        "@comet/create-app": "./bin/create-comet-app.js"
+        "@comet/create-app": "./bin/index.js"
     },
     "files": [
         "bin/**/*.js",
@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "prebuild": "npm run clean",
-        "build": "tsc --project tsconfig.build.json",
+        "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
         "lint": "npm run lint:eslint && npm run lint:tsc",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",

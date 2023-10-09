@@ -45,3 +45,18 @@ Success! Created 'test-project' at '/<installation-path>/test-project'
 ```
 
 This command will create a new Comet app with the name "my-project" and enable verbose output in the console logs.
+
+## For developers
+
+### Development
+
+To test the script locally, run the following commands:
+
+1. Start the development process:
+    ```
+    bash npm start
+    ```
+2. Run the script:
+    ```
+    node ./bin/index.js
+    ```
