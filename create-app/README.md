@@ -57,6 +57,8 @@ To test the script locally, run the following commands:
    npm start
     ```
 2. Run the script:
-    ```
+    ```bash
     node ./bin/index.js
     ```
+
+Testing a close to production usage of the tool can be done by calling `npm link` in the create-app/ directory. Then `npx @comet/create-app` can be used.
