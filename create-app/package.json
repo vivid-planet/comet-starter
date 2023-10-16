@@ -26,6 +26,7 @@
         "rimraf": "^5.0.1"
     },
     "devDependencies": {
+        "@tsconfig/node18": "^18.2.2",
         "@comet/eslint-config": "^4.3.0",
         "@types/prompts": "^2.4.4",
         "prettier": "^2.1.2"
