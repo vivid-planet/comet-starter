@@ -1,4 +1,8 @@
 {
     "extends": "@comet/eslint-config/react",
+    "plugins": ["react-refresh"],
+    "rules": {
+        "react-refresh/only-export-components": "warn"
+    },
     "ignorePatterns": ["schema.json", "src/fragmentTypes.json", "src/**/*.generated.ts"]
 }

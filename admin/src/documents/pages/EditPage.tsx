@@ -13,7 +13,7 @@ import {
     useSiteConfig,
 } from "@comet/cms-admin";
 import { Button, CircularProgress, IconButton, Stack } from "@mui/material";
-import { useContentScope } from "@src/common/ContentScopeProvider";
+import { useContentScope } from "@src/common/ContentScopeConfig";
 import { GQLPageTreeNodeCategory } from "@src/graphql.generated";
 import * as React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
