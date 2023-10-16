@@ -2,9 +2,7 @@
     "compilerOptions": {
         "target": "es2022",
         "module": "CommonJS",
-        "jsx": "react",
         "baseUrl": "./",
-        "rootDirs": ["src/", "./"],
         "outDir": "lib/",
         "noEmit": false,
         "skipLibCheck": true,
