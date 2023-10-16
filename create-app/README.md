@@ -53,8 +53,8 @@ This command will create a new Comet app with the name "my-project" and enable v
 To test the script locally, run the following commands:
 
 1. Start the development process:
-    ```
-    bash npm start
+    ```bash
+   npm start
     ```
 2. Run the script:
     ```
