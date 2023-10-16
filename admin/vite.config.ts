@@ -15,18 +15,10 @@ export default defineConfig(({ mode }) => {
                 entry: resolve(__dirname, "src/loader.ts"),
                 inject: {
                     data: {
-                        environmentValues: envVarsToLoad
-                            .map(
-                                (envVarKey) =>
-                                    `window.EXTERNAL__${envVarKey}__ = ${
-                                        mode === "production"
-                                            ? `$${envVarKey}`
-                                            : process.env[envVarKey]
-                                            ? JSON.stringify(process.env[envVarKey])
-                                            : undefined
-                                    };`,
-                            )
-                            .join("\n"),
+                        environmentValues: envVarsToLoad.map((envVarKey) => ({
+                            key: envVarKey,
+                            value: mode === "production" ? `$${envVarKey}` : process.env[envVarKey],
+                        })),
                     },
                 },
             }),

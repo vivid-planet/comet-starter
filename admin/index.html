@@ -6,7 +6,7 @@
         <title>Starter Admin</title>
         <script type="text/javascript">
             (function() {
-                <%- environmentValues %>
+                <%- environmentValues.map((env) => `window.EXTERNAL__${env.key}__ = '${env.value}';`).join("\n") %>
             })();
         </script>
     </head>
