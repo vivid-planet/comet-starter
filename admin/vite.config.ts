@@ -18,7 +18,13 @@ export default defineConfig(({ mode }) => {
                         environmentValues: envVarsToLoad
                             .map(
                                 (envVarKey) =>
-                                    `window.EXTERNAL__${envVarKey}__ = '${mode === "production" ? `$${envVarKey}` : process.env[envVarKey]}';`,
+                                    `window.EXTERNAL__${envVarKey}__ = ${
+                                        mode === "production"
+                                            ? `$${envVarKey}`
+                                            : process.env[envVarKey]
+                                            ? JSON.stringify(process.env[envVarKey])
+                                            : undefined
+                                    };`,
                             )
                             .join("\n"),
                     },
