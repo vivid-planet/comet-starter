@@ -4,13 +4,14 @@ import {
     FinalForm,
     FinalFormInput,
     FinalFormSaveSplitButton,
+    Loading,
     MainContent,
     Toolbar,
     ToolbarActions,
     ToolbarBackButton,
     ToolbarFillSpace,
 } from "@comet/admin";
-import { Card, CardContent, CircularProgress } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -62,7 +63,7 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
     }
 
     if (loading) {
-        return <CircularProgress />;
+        return <Loading behavior="fillPageHeight" />;
     }
 
     const initialValues: Partial<FormValues> = data?.product ?? {};
