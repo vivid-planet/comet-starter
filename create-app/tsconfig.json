@@ -8,7 +8,6 @@
         "allowSyntheticDefaultImports": true,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
-        "exactOptionalPropertyTypes": true
     },
     "include": ["src/**/*"]
 }
