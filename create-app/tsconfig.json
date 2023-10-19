@@ -1,13 +1,14 @@
 {
     "extends": "@tsconfig/node18/tsconfig.json",
     "compilerOptions": {
+        "rootDir": "./src",
         "baseUrl": "./",
         "outDir": "lib/",
         "noEmit": false,
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
+        "allowUnusedLabels": false
     },
     "include": ["src/**/*"]
 }
