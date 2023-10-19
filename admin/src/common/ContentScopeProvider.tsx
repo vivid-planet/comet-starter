@@ -1,11 +1,15 @@
 import { gql, useQuery } from "@apollo/client";
 import { Domain as DomainIcon, Language as LanguageIcon } from "@comet/admin-icons";
 import {
+    ContentScopeConfigProps,
     ContentScopeControls as ContentScopeControlsLibrary,
     ContentScopeControlsConfig,
     ContentScopeProvider as ContentScopeProviderLibrary,
     ContentScopeProviderProps,
     ContentScopeValues,
+    useContentScope as useContentScopeLibrary,
+    UseContentScopeApi,
+    useContentScopeConfig as useContentScopeConfigLibrary,
     useSitesConfig,
 } from "@comet/cms-admin";
 import { CircularProgress } from "@mui/material";
@@ -18,6 +22,11 @@ type Language = "en" | string;
 export interface ContentScope {
     domain: Domain;
     language: Language;
+}
+
+// convenince wrapper for app (Bind Generic)
+export function useContentScope(): UseContentScopeApi<ContentScope> {
+    return useContentScopeLibrary<ContentScope>();
 }
 
 const controlsConfig: ContentScopeControlsConfig<ContentScope> = {
@@ -35,6 +44,10 @@ const controlsConfig: ContentScopeControlsConfig<ContentScope> = {
 export const ContentScopeControls: React.FC = () => {
     return <ContentScopeControlsLibrary<ContentScope> config={controlsConfig} />;
 };
+
+export function useContentScopeConfig(p: ContentScopeConfigProps): void {
+    return useContentScopeConfigLibrary(p);
+}
 
 const currentUserQuery = gql`
     query CurrentUserScope {
