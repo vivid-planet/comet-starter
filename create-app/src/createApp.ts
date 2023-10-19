@@ -3,13 +3,14 @@ import kleur from "kleur";
 import { createSpinner } from "nanospinner";
 import process from "process";
 
-import { name, version } from "../package.json";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
-import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
 import { installProjectPackages } from "./util/installProjectPackages";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { replacePlaceholder } from "./util/replacePlaceholder";
+
+const version = require("../package.json").version;
+const name = require("../package.json").name;
 
 interface ProjectConfiguration {
     projectName: string;
@@ -58,7 +59,6 @@ async function createApp(projectConfiguration: ProjectConfiguration) {
         installProjectPackages();
         spinner.success({ text: "Installation successful" });
     }
-    createInitialGitCommit();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
     console.log(kleur.white(`nvm use\n`));
