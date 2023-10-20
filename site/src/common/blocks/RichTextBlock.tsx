@@ -3,6 +3,7 @@ import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { RawDraftContentState } from "draft-js";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
+import styled from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -74,7 +75,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent as RawDraftContentState)}>
-                {rendered}
+                <TextWrapper>{rendered}</TextWrapper>
             </PreviewSkeleton>
         );
     },
@@ -84,3 +85,17 @@ export const RichTextBlock = withPreview(
 export function hasDraftContent(draftContent: RawDraftContentState): boolean {
     return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
 }
+
+const TextWrapper = styled.div`
+    white-space: pre-line;
+
+    //set height on empty p to make it possible to set paragraph spaces in RTE
+    &:empty {
+        margin-bottom: 0;
+
+        :before {
+            white-space: pre;
+            content: " ";
+        }
+    }
+`;
