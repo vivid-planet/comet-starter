@@ -7,7 +7,7 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
         maxDepth: 5,
         ignore: `./.git/**`,
     });
-    const placeholder = /(comet-)?[Ss]tarter/g;
+    const placeholder = /[Ss]tarter/g;
     let changedFiles = 0;
 
     files.forEach((file) => {
@@ -18,11 +18,12 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
             const contents = fs.readFileSync(file, "utf8").toString();
 
             if (placeholder.test(contents)) {
+                if (file.endsWith("intl-update.sh")) fs.writeFileSync(file, contents.replaceAll("lang/starter-lang", `lang/${projectName}-lang`));
+                else fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
+                changedFiles++;
                 if (verbose) {
                     console.log(kleur.grey(`Info: Replaced content in ${file}`));
                 }
-                fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
-                changedFiles++;
             }
         } catch (e) {
             console.log(e);
