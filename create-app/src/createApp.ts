@@ -4,6 +4,7 @@ import { createSpinner } from "nanospinner";
 import process from "process";
 
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
+import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
 import { installProjectPackages } from "./util/installProjectPackages";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
@@ -56,8 +57,9 @@ async function createApp(projectConfiguration: ProjectConfiguration) {
         console.log(kleur.white(`Skipping installation of dependencies`));
     } else {
         const spinner = createSpinner("Installing dependencies").start();
-        installProjectPackages();
+        installProjectPackages(projectConfiguration.verbose);
         spinner.success({ text: "Installation successful" });
+        createInitialGitCommit();
     }
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
