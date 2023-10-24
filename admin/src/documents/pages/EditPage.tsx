@@ -6,7 +6,7 @@ import {
     BlockPreviewWithTabs,
     createUsePage,
     EditPageLayout,
-    openPreviewWindow,
+    openSitePreviewWindow,
     PageName,
     useBlockPreview,
     useCmsBlockContext,
@@ -136,7 +136,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             startIcon={<Preview />}
                             disabled={!pageState}
                             onClick={() => {
-                                openPreviewWindow(pageState.path, contentScopeMatch.url);
+                                openSitePreviewWindow(pageState.path, contentScopeMatch.url);
                             }}
                             color="info"
                         >
