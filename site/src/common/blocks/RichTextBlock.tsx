@@ -25,7 +25,12 @@ const defaultRenderers: Renderers = {
      */
     blocks: {
         // Paragraph
-        unstyled: (children, { keys }) => children.map((child, idx) => <p key={keys[idx]}>{child}</p>),
+        unstyled: (children, { keys }) =>
+            children.map((child, idx) => (
+                <TextWrapper key={keys[idx]}>
+                    <p>{child}</p>
+                </TextWrapper>
+            )),
         // Headlines
         "header-one": (children, { keys }) => children.map((child, idx) => <h1 key={keys[idx]}>{child}</h1>),
         "header-two": (children, { keys }) => children.map((child, idx) => <h2 key={keys[idx]}>{child}</h2>),
@@ -75,7 +80,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent as RawDraftContentState)}>
-                <TextWrapper>{rendered}</TextWrapper>
+                {rendered}
             </PreviewSkeleton>
         );
     },
@@ -89,7 +94,6 @@ export function hasDraftContent(draftContent: RawDraftContentState): boolean {
 const TextWrapper = styled.div`
     white-space: pre-line;
 
-    //set height on empty p to make it possible to set paragraph spaces in RTE
     &:empty {
         margin-bottom: 0;
 
