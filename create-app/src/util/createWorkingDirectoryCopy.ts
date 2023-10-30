@@ -3,7 +3,7 @@ import kleur from "kleur";
 import process from "process";
 
 export function createWorkingDirectoryCopy(projectName: string, verbose: boolean): boolean {
-    const clone = `git clone --depth 1 git@github.com:vivid-planet/comet-starter.git ./${projectName}`;
+    const clone = `git clone --depth 1 https://github.com/vivid-planet/comet-starter.git ./${projectName}`;
     try {
         execSync(clone);
         process.chdir(`./${projectName}`);
