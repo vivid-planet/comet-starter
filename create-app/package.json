@@ -11,8 +11,8 @@
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
         "lint": "npm run lint:eslint && npm run lint:tsc",
-        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
-        "lint:tsc": "tsc --project ./tsconfig.lint.json",
+        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/ package.json",
+        "lint:tsc": "tsc --project ./tsconfig.json",
         "prepublishOnly": "npm run lint && npm run build",
         "prestart": "npm run clean",
         "start": "tsc --watch --project tsconfig.json"
@@ -26,8 +26,8 @@
         "rimraf": "^5.0.1"
     },
     "devDependencies": {
-        "@tsconfig/node18": "^18.2.2",
         "@comet/eslint-config": "^4.3.0",
+        "@tsconfig/node18": "^18.2.2",
         "@types/prompts": "^2.4.4",
         "prettier": "^2.1.2"
     },

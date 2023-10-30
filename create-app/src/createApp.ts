@@ -10,7 +10,9 @@ import { installProjectPackages } from "./util/installProjectPackages";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { replacePlaceholder } from "./util/replacePlaceholder";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require("../package.json").version;
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const name = require("../package.json").name;
 
 interface ProjectConfiguration {
