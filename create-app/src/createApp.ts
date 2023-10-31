@@ -53,11 +53,11 @@ async function createApp(projectConfiguration: ProjectConfiguration) {
     }
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
+    createInitialGitCommit();
     if (projectConfiguration.noInstall) {
         console.log(kleur.white(`Skipping installation of dependencies`));
     } else {
         const spinner = createSpinner("Installing dependencies").start();
-        createInitialGitCommit();
         installProjectPackages(projectConfiguration.verbose);
         spinner.success({ text: "Installation successful" });
     }
