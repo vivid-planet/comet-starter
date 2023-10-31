@@ -29,7 +29,8 @@
         "@comet/eslint-config": "^4.3.0",
         "@tsconfig/node18": "^18.2.2",
         "@types/prompts": "^2.4.4",
-        "prettier": "^2.1.2"
+        "prettier": "^2.1.2",
+        "typescript": "^5.2.2"
     },
     "publishConfig": {
         "access": "public",
