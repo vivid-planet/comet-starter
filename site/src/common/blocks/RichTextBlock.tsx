@@ -25,32 +25,61 @@ const defaultRenderers: Renderers = {
      */
     blocks: {
         // Paragraph
-        unstyled: (children, { keys }) =>
-            children.map((child, idx) => (
-                <TextWrapper key={keys[idx]}>
-                    <p>{child}</p>
-                </TextWrapper>
-            )),
+        unstyled: (children, { keys }) => children.map((child, idx) => <StyledComponent key={keys[idx]}>{child}</StyledComponent>),
         // Headlines
-        "header-one": (children, { keys }) => children.map((child, idx) => <h1 key={keys[idx]}>{child}</h1>),
-        "header-two": (children, { keys }) => children.map((child, idx) => <h2 key={keys[idx]}>{child}</h2>),
-        "header-three": (children, { keys }) => children.map((child, idx) => <h3 key={keys[idx]}>{child}</h3>),
-        "header-four": (children, { keys }) => children.map((child, idx) => <h4 key={keys[idx]}>{child}</h4>),
-        "header-five": (children, { keys }) => children.map((child, idx) => <h5 key={keys[idx]}>{child}</h5>),
-        "header-six": (children, { keys }) => children.map((child, idx) => <h6 key={keys[idx]}>{child}</h6>),
+        "header-one": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h1" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
+        "header-two": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h2" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
+        "header-three": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h3" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
+        "header-four": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h4" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
+        "header-five": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h5" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
+        "header-six": (children, { keys }) =>
+            children.map((child, idx) => (
+                <StyledComponent as="h6" key={keys[idx]}>
+                    {child}
+                </StyledComponent>
+            )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <li key={keys[index]}>{child}</li>
+                    <StyledComponent as="li" key={keys[index]}>
+                        {child}
+                    </StyledComponent>
                 ))}
             </ul>
         ),
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <li key={keys[index]}>{child}</li>
+                    <StyledComponent as="li" key={keys[index]}>
+                        {child}
+                    </StyledComponent>
                 ))}
             </ol>
         ),
@@ -91,7 +120,7 @@ export function hasDraftContent(draftContent: RawDraftContentState): boolean {
     return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
 }
 
-const TextWrapper = styled.div`
+const StyledComponent = styled.p`
     white-space: pre-line;
 
     &:empty {
