@@ -41,6 +41,17 @@ Success! Created 'test-project' at '/<installation-path>/test-project'
 
 This command will create a new Comet app with the name "my-project" and enable verbose output in the console logs.
 
+### Commands
+
+The following commands can be used to customize the project setup:
+- `remove-site`: Removes the site from the project.
+
+Example usage:
+
+```
+npx @comet/create-app remove-site
+```
+
 ## For developers
 
 ### Development

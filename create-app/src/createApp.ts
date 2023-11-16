@@ -2,6 +2,7 @@ import { Command } from "commander";
 import kleur from "kleur";
 import process from "process";
 
+import { removeSite } from "./scripts/remove-site/src/removeSite";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
@@ -39,6 +40,14 @@ void (async () => {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
         });
+
+    program.addCommand(
+        new Command("remove-site").action(() => {
+            console.log(kleur.white(`Removing site from project`));
+            removeSite();
+        }),
+    );
+
     program.parse();
 })();
 
