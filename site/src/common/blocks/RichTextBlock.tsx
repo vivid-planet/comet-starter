@@ -25,61 +25,61 @@ const defaultRenderers: Renderers = {
      */
     blocks: {
         // Paragraph
-        unstyled: (children, { keys }) => children.map((child, idx) => <StyledComponent key={keys[idx]}>{child}</StyledComponent>),
+        unstyled: (children, { keys }) => children.map((child, idx) => <Text key={keys[idx]}>{child}</Text>),
         // Headlines
         "header-one": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h1" key={keys[idx]}>
+                <Text as="h1" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h2" key={keys[idx]}>
+                <Text as="h2" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h3" key={keys[idx]}>
+                <Text as="h3" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h4" key={keys[idx]}>
+                <Text as="h4" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h5" key={keys[idx]}>
+                <Text as="h5" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledComponent as="h6" key={keys[idx]}>
+                <Text as="h6" key={keys[idx]}>
                     {child}
-                </StyledComponent>
+                </Text>
             )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <StyledComponent as="li" key={keys[index]}>
+                    <Text as="li" key={keys[index]}>
                         {child}
-                    </StyledComponent>
+                    </Text>
                 ))}
             </ul>
         ),
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <StyledComponent as="li" key={keys[index]}>
+                    <Text as="li" key={keys[index]}>
                         {child}
-                    </StyledComponent>
+                    </Text>
                 ))}
             </ol>
         ),
@@ -120,12 +120,11 @@ export function hasDraftContent(draftContent: RawDraftContentState): boolean {
     return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
 }
 
-const StyledComponent = styled.p`
+const Text = styled.p`
     white-space: pre-line;
 
+    // Workaround empty paragraphs used as spacing
     &:empty {
-        margin-bottom: 0;
-
         :before {
             white-space: pre;
             content: " ";
