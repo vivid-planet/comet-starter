@@ -2,10 +2,10 @@
     "name": "starter-site",
     "private": true,
     "scripts": {
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && npm run build:preBuild && NODE_OPTIONS='--inspect=localhost:9230' dotenv -c secrets -- node server.js",
+        "dev": "run-s intl:update intl:compile && run-p gql:types generate-block-types && npm run build:preBuild && NODE_OPTIONS='--inspect=localhost:9230' dotenv -c secrets -- node server.js",
         "preview-next-build": "next build",
         "next-build": "npm run build:publicGenerated && next build",
-        "build": "npm run intl:compile && run-p gql:types generate-block-types && npm run build:preBuild",
+        "build": "run-s intl:update intl:compile && run-p gql:types generate-block-types && npm run build:preBuild",
         "build:preBuild": "run-s clear:preBuild build:preBuild:tsc",
         "build:preBuild:tsc": "tsc --project tsconfig.preBuild.json",
         "build:publicGenerated": "node preBuild/build/preBuild/src/publicGenerator/generate.js",
@@ -15,14 +15,15 @@
         "gql:types": "graphql-codegen",
         "gql:watch": "graphql-codegen --watch",
         "clear:preBuild": "rimraf preBuild/build",
-        "lint": "npm run intl:compile && run-p gql:types generate-block-types && run-p lint:eslint lint:tsc",
+        "lint": "run-s intl:update intl:compile && run-p gql:types generate-block-types && run-p lint:eslint lint:tsc",
         "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
         "lint:tsc": "tsc --project .",
         "lint:tscPreBuild": "tsc --project tsconfig.preBuild.json",
         "generate-block-types": "comet generate-block-types",
         "generate-block-types:watch": "chokidar -s \"**/block-meta.json\" -c \"npm run generate-block-types\"",
         "intl:extract": "formatjs extract \"src/**/*.ts*\" --ignore **/*.d.ts --out-file lang-extracted/de.json --format simple",
-        "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/"
+        "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/",
+        "intl:update": "sh intl-update.sh"
     },
     "dependencies": {
         "@comet/cms-site": "^4.5.0",
