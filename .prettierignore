@@ -3,5 +3,5 @@ admin/
 api/
 site/
 schema.graphql
-api/uploads/
 lang/
+create-app/

@@ -1,0 +1,38 @@
+{
+    "name": "@comet/create-app",
+    "version": "1.0.0",
+    "bin": "./bin/index.js",
+    "files": [
+        "bin/index.js",
+        "lib/**/*.js"
+    ],
+    "scripts": {
+        "prebuild": "npm run clean",
+        "build": "tsc --project tsconfig.json",
+        "clean": "rimraf lib",
+        "lint": "npm run lint:eslint && npm run lint:tsc",
+        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/ package.json",
+        "lint:tsc": "tsc --project ./tsconfig.json",
+        "prepublishOnly": "npm run lint && npm run build",
+        "prestart": "npm run clean",
+        "start": "tsc --watch --project tsconfig.json"
+    },
+    "dependencies": {
+        "commander": "^11.0.0",
+        "eslint": "^8.0.0",
+        "glob": "^10.3.3",
+        "kleur": "^4.1.5",
+        "rimraf": "^5.0.1"
+    },
+    "devDependencies": {
+        "@comet/eslint-config": "^4.3.0",
+        "@tsconfig/node18": "^18.2.2",
+        "@types/prompts": "^2.4.4",
+        "prettier": "^2.1.2",
+        "typescript": "^5.2.2"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    }
+}
