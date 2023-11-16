@@ -1,14 +1,14 @@
 # @comet/create-app
 
-This is a command-line tool to create a new Comet app. It sets up a project with the necessary configuration and files
-to get started quickly.
+This is a command-line interface to create a new Comet application.
+It sets up a project with the necessary configuration and files to get started quickly.
 
 ## Usage
 
 To create a new Comet app, run the following command:
 
-```
-npx @comet/create-app
+```bash
+npx @comet/create-app <project-name>
 ```
 
 ### Arguments
@@ -22,24 +22,12 @@ The following arguments can be passed to customize the project setup:
 
 Example usage with arguments:
 
-```
+```bash
 npx @comet/create-app my-project -v
 ```
 
-Example output:
-```
-Creating a new Comet app in /Users/maximilianpelka/Documents/Development
 
-Cloning into './my-project'
-Cloned git repository.
-
-Successfully replaced content in 15 files
-
-Success! Created 'test-project' at '/<installation-path>/test-project'
-
-```
-
-This command will create a new Comet app with the name "my-project" and enable verbose output in the console logs.
+This command will create a new Comet app with the name "my-project" and enable verbose logging.
 
 ## For developers
 
@@ -56,4 +44,4 @@ To test the script locally, run the following commands:
     node ./bin/index.js
     ```
 
-Testing a close to production usage of the tool can be done by calling `npm link` in the create-app/ directory. Then `npx @comet/create-app` can be used.
+Testing a close to production usage of the CLI can be done by calling `npm link` in the create-app/ directory. Then `npx @comet/create-app` can be used.
