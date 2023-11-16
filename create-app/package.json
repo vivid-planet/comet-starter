@@ -22,7 +22,6 @@
         "eslint": "^8.0.0",
         "glob": "^10.3.3",
         "kleur": "^4.1.5",
-        "nanospinner": "^1.1.0",
         "rimraf": "^5.0.1"
     },
     "devDependencies": {
