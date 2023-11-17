@@ -123,7 +123,7 @@ export function hasDraftContent(draftContent: RawDraftContentState): boolean {
 const Text = styled.p`
     white-space: pre-line;
 
-    // Workaround empty paragraphs used as spacing
+    // Workaround when empty paragraphs are used as "spacing" in content
     &:empty {
         :before {
             white-space: pre;
