@@ -1,6 +1,18 @@
 {
     "name": "@comet/create-app",
     "version": "1.0.0",
+    "description": "Command-line interface to create a new Comet application",
+    "homepage": "https://github.com/vivid-planet/comet-starter/create-app#readme",
+    "bugs": {
+        "url": "https://github.com/vivid-planet/comet-starter/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vivid-planet/comet-starter",
+        "directory": "create-app"
+    },
+    "license": "BSD-2-Clause",
+    "author": "Vivid Planet Software GmbH <office@vivid-planet.com> (https://www.vivid-planet.com/)",
     "bin": "./bin/index.js",
     "files": [
         "bin/index.js",
