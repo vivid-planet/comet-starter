@@ -8,6 +8,7 @@ import {
     ContentScopeModule,
     CurrentUserInterface,
     DamModule,
+    DependenciesModule,
     FilesService,
     ImagesService,
     KubernetesModule,
@@ -118,6 +119,7 @@ export class AppModule {
                 StatusModule,
                 ProductsModule,
                 MenusModule,
+                DependenciesModule,
             ],
         };
     }

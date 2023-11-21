@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 import { File, FileNotMenu } from "@comet/admin-icons";
-import { DocumentInterface } from "@comet/cms-admin";
+import { createDocumentRootBlocksMethods, DocumentInterface } from "@comet/cms-admin";
 import { GQLPage, GQLPageInput } from "@src/graphql.generated";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -44,11 +44,8 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
             }
         }
     `,
-    inputToOutput: (input) => {
-        return {
-            content: PageContentBlock.state2Output(PageContentBlock.input2State(input.content)),
-            seo: SeoBlock.state2Output(SeoBlock.input2State(input.seo)),
-        };
-    },
-    anchors: (input) => PageContentBlock.anchors?.(PageContentBlock.input2State(input.content)) ?? [],
+    ...createDocumentRootBlocksMethods({
+        content: PageContentBlock,
+        seo: SeoBlock,
+    }),
 };
