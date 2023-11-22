@@ -32,10 +32,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "PixelImage",
-                                "SvgImage"
-                            ],
+                            "blocks": {
+                                "pixelImage": "PixelImage",
+                                "svgImage": "SvgImage"
+                            },
                             "nullable": false
                         }
                     ]
@@ -60,10 +60,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "PixelImage",
-                                "SvgImage"
-                            ],
+                            "blocks": {
+                                "pixelImage": "PixelImage",
+                                "svgImage": "SvgImage"
+                            },
                             "nullable": false
                         }
                     ]
@@ -141,6 +141,11 @@
                             "name": "archived",
                             "kind": "Boolean",
                             "nullable": false
+                        },
+                        {
+                            "name": "scope",
+                            "kind": "Json",
+                            "nullable": true
                         },
                         {
                             "name": "fileUrl",
@@ -308,10 +313,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "InternalLink",
-                                "ExternalLink"
-                            ],
+                            "blocks": {
+                                "internal": "InternalLink",
+                                "external": "ExternalLink"
+                            },
                             "nullable": false
                         }
                     ]
@@ -336,10 +341,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "InternalLink",
-                                "ExternalLink"
-                            ],
+                            "blocks": {
+                                "internal": "InternalLink",
+                                "external": "ExternalLink"
+                            },
                             "nullable": false
                         }
                     ]
@@ -467,16 +472,16 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "Space",
-                                "RichText",
-                                "Headline",
-                                "DamImage",
-                                "TextImage",
-                                "DamVideo",
-                                "YouTubeVideo",
-                                "LinkList"
-                            ],
+                            "blocks": {
+                                "space": "Space",
+                                "richtext": "RichText",
+                                "headline": "Headline",
+                                "image": "DamImage",
+                                "textImage": "TextImage",
+                                "damVideo": "DamVideo",
+                                "youTubeVideo": "YouTubeVideo",
+                                "links": "LinkList"
+                            },
                             "nullable": false
                         }
                     ]
@@ -533,6 +538,11 @@
                             "name": "archived",
                             "kind": "Boolean",
                             "nullable": false
+                        },
+                        {
+                            "name": "scope",
+                            "kind": "Json",
+                            "nullable": true
                         },
                         {
                             "name": "image",
@@ -723,10 +733,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "InternalLink",
-                                "ExternalLink"
-                            ],
+                            "blocks": {
+                                "internal": "InternalLink",
+                                "external": "ExternalLink"
+                            },
                             "nullable": false
                         }
                     ]
@@ -751,10 +761,10 @@
                         {
                             "name": "props",
                             "kind": "OneOfBlocks",
-                            "blocks": [
-                                "InternalLink",
-                                "ExternalLink"
-                            ],
+                            "blocks": {
+                                "internal": "InternalLink",
+                                "external": "ExternalLink"
+                            },
                             "nullable": false
                         }
                     ]
@@ -1042,6 +1052,11 @@
                             "name": "archived",
                             "kind": "Boolean",
                             "nullable": false
+                        },
+                        {
+                            "name": "scope",
+                            "kind": "Json",
+                            "nullable": true
                         },
                         {
                             "name": "fileUrl",
