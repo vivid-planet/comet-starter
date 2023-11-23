@@ -48,7 +48,7 @@ The following commands can be used to customize the project setup:
 
 Example usage:
 
-```
+```bash
 npx @comet/create-app remove-site
 ```
 
