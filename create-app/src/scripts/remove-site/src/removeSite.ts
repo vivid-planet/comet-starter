@@ -1,21 +1,6 @@
-import { exec } from "child_process";
 import * as fs from "fs";
 
-function deleteFilesAndFolders() {
-    const cwd = process.cwd();
-
-    exec(`rm -rf ${cwd}/site`, (error, stdout, stderr) => {
-        if (error) {
-            console.error("Error:", error.message);
-            return;
-        }
-        if (stderr) {
-            console.error(stderr);
-            return;
-        }
-        console.log("Successfully deleted site!");
-    });
-}
+import { deleteFilesAndFolders } from "../../../util/deleteFilesAndFolders";
 
 function removeSiteReferences() {
     removeReference(".vscode/settings.json", /, "site"/g);
@@ -38,6 +23,6 @@ function removeReference(filePath: string, regex: RegExp) {
 }
 
 export function removeSite() {
-    deleteFilesAndFolders();
+    deleteFilesAndFolders(["site"], false);
     removeSiteReferences();
 }
