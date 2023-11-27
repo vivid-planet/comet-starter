@@ -22,7 +22,15 @@ function removeReference(filePath: string, regex: RegExp) {
     fs.writeFileSync(filePath, result, "utf8");
 }
 
+function cwdIsCometProject(): boolean {
+    return fs.existsSync("api/src/comet-config.json") && fs.readFileSync("admin/package.json", "utf8").includes("@comet");
+}
+
 export function removeSite() {
+    if (!cwdIsCometProject()) {
+        console.error("This command must be run from the root of a Comet project.");
+        return;
+    }
     deleteFilesAndFolders(["site"], false);
     removeSiteReferences();
 }
