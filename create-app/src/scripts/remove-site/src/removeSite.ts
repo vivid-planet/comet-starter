@@ -1,5 +1,6 @@
 import * as fs from "fs";
 
+import { cwdIsCometProject } from "../../../util/cwdIsCometProject";
 import { deleteFilesAndFolders } from "../../../util/deleteFilesAndFolders";
 
 function removeSiteReferences() {
@@ -20,10 +21,6 @@ function removeReference(filePath: string, regex: RegExp) {
     const data = fs.readFileSync(filePath, "utf8");
     const result = data.replace(regex, "");
     fs.writeFileSync(filePath, result, "utf8");
-}
-
-function cwdIsCometProject(): boolean {
-    return fs.existsSync("api/src/comet-config.json") && fs.readFileSync("admin/package.json", "utf8").includes("@comet");
 }
 
 export function removeSite() {
