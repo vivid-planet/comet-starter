@@ -29,6 +29,17 @@ npx @comet/create-app my-project -v
 
 This command will create a new Comet app with the name "my-project" and enable verbose logging.
 
+### Commands
+
+The following commands can be used to customize the project setup:
+- `remove-site`: Removes the site from the project.
+
+Example usage:
+
+```bash
+npx @comet/create-app remove-site
+```
+
 ## For developers
 
 ### Development
