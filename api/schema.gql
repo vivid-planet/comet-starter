@@ -221,6 +221,7 @@ type PaginatedPages {
 }
 
 type CurrentUser {
+  id: ID!
   name: String!
   email: String!
   language: String!

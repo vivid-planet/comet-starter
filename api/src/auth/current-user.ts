@@ -1,5 +1,5 @@
 import { CurrentUserInterface, CurrentUserLoaderInterface } from "@comet/cms-api";
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, ID, ObjectType } from "@nestjs/graphql";
 
 declare module "@comet/cms-api" {
     interface CurrentUserInterface {
@@ -9,6 +9,7 @@ declare module "@comet/cms-api" {
 
 @ObjectType()
 export class CurrentUser implements CurrentUserInterface {
+    @Field(() => ID)
     id: string;
     @Field()
     name: string;
