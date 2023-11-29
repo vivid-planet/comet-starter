@@ -1,6 +1,9 @@
 /* eslint-disable */
 
 // @ts-check
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});
 
 const cometConfig = require("./comet-config.json");
 
@@ -112,4 +115,4 @@ const nextConfig = {
     ],
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

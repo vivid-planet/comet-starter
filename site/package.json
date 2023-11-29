@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@comet/cms-site": "^5.0.0",
+        "@next/bundle-analyzer": "^12.3.4",
         "@opentelemetry/api": "^1.4.0",
         "@opentelemetry/auto-instrumentations-node": "^0.36.1",
         "@opentelemetry/exporter-trace-otlp-http": "^0.35.1",
