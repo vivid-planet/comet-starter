@@ -2,6 +2,7 @@ import { Command } from "commander";
 import kleur from "kleur";
 import process from "process";
 
+import { removeShowcaseContent } from "./scripts/remove-showcase/src/removeShowcase";
 import { removeSite } from "./scripts/remove-site/src/removeSite";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
@@ -40,6 +41,13 @@ void (async () => {
                 console.log(kleur.bgRed("Please provide a valid project name."));
             }
         });
+
+    program.addCommand(
+        new Command("remove-showcase").action(() => {
+            console.log(kleur.white(`Removing showcase content from project`));
+            removeShowcaseContent();
+        }),
+    );
 
     program.addCommand(
         new Command("remove-site").action(() => {
