@@ -1,8 +1,9 @@
 import { MasterLayout, RouteWithErrorBoundary } from "@comet/admin";
 import { Domain } from "@comet/admin-icons";
-import { AllCategories, ContentScopeIndicator, createRedirectsPage, DamPage, PagesPage, PublisherPage, SitePreview } from "@comet/cms-admin";
+import { ContentScopeIndicator, createRedirectsPage, DamPage, PagesPage, PublisherPage, SitePreview } from "@comet/cms-admin";
+import { pageTreeCategories, urlParamToCategory } from "@src/pageTree/pageTreeCategories";
 import * as React from "react";
-import { FormattedMessage } from "react-intl";
+import { RouteComponentProps } from "react-router";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "./common/ContentScopeIndicatorStyles";
@@ -13,13 +14,6 @@ import { DashboardPage } from "./dashboard/DashboardPage";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 import { ProductsPage } from "./products/ProductsPage";
-
-const categories: AllCategories = [
-    {
-        category: "MainNavigation",
-        label: <FormattedMessage id="menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
-    },
-];
 
 const RedirectsPage = createRedirectsPage();
 
@@ -36,28 +30,36 @@ export const Routes: React.FC = () => {
                                     <RouteWithErrorBoundary path={`${match.path}/dashboard`} component={DashboardPage} />
                                     <RouteWithErrorBoundary
                                         path={`${match.path}/pages/pagetree/:category`}
-                                        render={() => (
-                                            <PagesPage
-                                                category="MainNavigation"
-                                                allCategories={categories}
-                                                path="/pages/pagetree/main-navigation"
-                                                documentTypes={{ Page, Link }}
-                                                renderContentScopeIndicator={(scope) => (
-                                                    <ContentScopeIndicator variant="toolbar">
-                                                        <ContentScopeIndicatorContent>
-                                                            <Domain fontSize="small" />
-                                                            <ContentScopeIndicatorDomain variant="body2" textTransform="uppercase">
-                                                                {scope.domain}
-                                                            </ContentScopeIndicatorDomain>
-                                                            {" | "}
-                                                            <ContentScopeIndicatorLanguage variant="body2" textTransform="uppercase">
-                                                                {scope.language}
-                                                            </ContentScopeIndicatorLanguage>
-                                                        </ContentScopeIndicatorContent>
-                                                    </ContentScopeIndicator>
-                                                )}
-                                            />
-                                        )}
+                                        render={({ match: { params } }: RouteComponentProps<{ category: string }>) => {
+                                            const category = urlParamToCategory(params.category);
+
+                                            if (category === undefined) {
+                                                return <Redirect to={`${match.url}/dashboard`} />;
+                                            }
+
+                                            return (
+                                                <PagesPage
+                                                    category={category}
+                                                    allCategories={pageTreeCategories}
+                                                    path={`/pages/pagetree/${params.category}`}
+                                                    documentTypes={{ Page, Link }}
+                                                    renderContentScopeIndicator={(scope) => (
+                                                        <ContentScopeIndicator variant="toolbar">
+                                                            <ContentScopeIndicatorContent>
+                                                                <Domain fontSize="small" />
+                                                                <ContentScopeIndicatorDomain variant="body2" textTransform="uppercase">
+                                                                    {scope.domain}
+                                                                </ContentScopeIndicatorDomain>
+                                                                {" | "}
+                                                                <ContentScopeIndicatorLanguage variant="body2" textTransform="uppercase">
+                                                                    {scope.language}
+                                                                </ContentScopeIndicatorLanguage>
+                                                            </ContentScopeIndicatorContent>
+                                                        </ContentScopeIndicator>
+                                                    )}
+                                                />
+                                            );
+                                        }}
                                     />
 
                                     <RouteWithErrorBoundary path={`${match.path}/structured-content/products`} component={ProductsPage} />
