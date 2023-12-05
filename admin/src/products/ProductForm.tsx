@@ -53,10 +53,7 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
 
     const submit = useSubmitMutation(id);
 
-    const { data, error, loading } = useQuery<GQLProductQuery, GQLProductQueryVariables>(productQuery, {
-        variables: { id: id as string },
-        skip: !id,
-    });
+    const { data, error, loading } = useQuery<GQLProductQuery, GQLProductQueryVariables>(productQuery, id ? { variables: { id } } : { skip: true });
 
     if (error) {
         return <FormattedMessage id="common.error" defaultMessage="Something went wrong. Please try again later." />;
