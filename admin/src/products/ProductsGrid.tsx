@@ -17,7 +17,7 @@ import {
     useStackSwitchApi,
 } from "@comet/admin";
 import { Add, Delete, Edit } from "@comet/admin-icons";
-import { Box, Button, IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { DataGrid, GridColDef, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { parseISO } from "date-fns";
 import React from "react";
@@ -126,20 +126,18 @@ export function ProductsGrid(): React.ReactElement {
     const rowCount = data?.products.totalCount;
 
     return (
-        <MainContent>
-            <Box sx={{ height: "calc(100vh - 100px)", display: "flex" }}>
-                <DataGrid
-                    {...dataGridProps}
-                    rows={rows}
-                    columns={columns}
-                    rowCount={rowCount}
-                    disableSelectionOnClick
-                    loading={loading}
-                    components={{
-                        Toolbar: ProductsToolbar,
-                    }}
-                />
-            </Box>
+        <MainContent fullHeight disablePadding>
+            <DataGrid
+                {...dataGridProps}
+                rows={rows}
+                columns={columns}
+                rowCount={rowCount}
+                disableSelectionOnClick
+                loading={loading}
+                components={{
+                    Toolbar: ProductsToolbar,
+                }}
+            />
         </MainContent>
     );
 }
