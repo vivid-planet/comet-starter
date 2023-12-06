@@ -14,7 +14,6 @@ import {
     ToolbarItem,
     useDataGridRemote,
     usePersistentColumnState,
-    useStackSwitchApi,
 } from "@comet/admin";
 import { Add, Delete, Edit } from "@comet/admin-icons";
 import { Button, IconButton } from "@mui/material";
@@ -74,8 +73,6 @@ export function ProductsGrid(): React.ReactElement {
     const dataGridProps = { ...useDataGridRemote(), ...usePersistentColumnState("ProductsGrid") };
     const intl = useIntl();
 
-    const stackApi = useStackSwitchApi();
-
     const columns: GridColDef<GQLProductGridItemFragment>[] = [
         {
             field: "createdAt",
@@ -103,7 +100,7 @@ export function ProductsGrid(): React.ReactElement {
             align: "right",
             renderCell: ({ row }) => (
                 <>
-                    <IconButton onClick={() => stackApi.activatePage("edit", `${row.id}`)} size="large">
+                    <IconButton component={StackLink} pageName="edit" payload={row.id} size="large">
                         <Edit color="primary" />
                     </IconButton>
                     <TableDeleteButton icon={<Delete />} mutation={deleteProductMutation} selectedId={row.id} text="" />
