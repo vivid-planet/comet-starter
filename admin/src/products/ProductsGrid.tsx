@@ -3,6 +3,7 @@ import {
     GridFilterButton,
     MainContent,
     muiGridFilterToGql,
+    muiGridPagingToGql,
     muiGridSortToGql,
     StackLink,
     TableDeleteButton,
@@ -114,8 +115,7 @@ export function ProductsGrid(): React.ReactElement {
     const { data, loading, error } = useQuery<GQLProductsQuery, GQLProductsQueryVariables>(productsQuery, {
         variables: {
             ...muiGridFilterToGql(columns, dataGridProps.filterModel),
-            offset: dataGridProps.page * dataGridProps.pageSize,
-            limit: dataGridProps.pageSize,
+            ...muiGridPagingToGql({ page: dataGridProps.page, pageSize: dataGridProps.pageSize }),
             sort: muiGridSortToGql(dataGridProps.sortModel),
         },
     });
