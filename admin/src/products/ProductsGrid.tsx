@@ -58,9 +58,11 @@ function ProductsToolbar(): React.ReactElement {
             <ToolbarItem>
                 <GridToolbarQuickFilter />
             </ToolbarItem>
+            <ToolbarItem>
+                <GridFilterButton />
+            </ToolbarItem>
             <ToolbarFillSpace />
             <ToolbarActions>
-                <GridFilterButton />
                 <Button variant="contained" color="primary" component={StackLink} pageName="add" payload="add" startIcon={<Add />}>
                     <FormattedMessage id="products.addProduct" defaultMessage="Add product" />
                 </Button>
