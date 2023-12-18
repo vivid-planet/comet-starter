@@ -108,7 +108,7 @@ export const RichTextBlock = withPreview(
         const rendered = redraft(draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent as RawDraftContentState)}>
+            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent)}>
                 {rendered}
             </PreviewSkeleton>
         );
@@ -116,8 +116,16 @@ export const RichTextBlock = withPreview(
     { label: "Rich Text" },
 );
 
-export function hasDraftContent(draftContent: RawDraftContentState): boolean {
+export function hasDraftContent(draftContent: unknown): boolean {
+    if (!isDraftContent(draftContent)) {
+        throw new TypeError(`Invalid draft content: ${draftContent}`);
+    }
+
     return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
+}
+
+function isDraftContent(draftContent: unknown): draftContent is RawDraftContentState {
+    return typeof draftContent === "object" && draftContent !== null && "blocks" in draftContent;
 }
 
 const Text = styled.p`
