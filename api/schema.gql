@@ -120,17 +120,6 @@ type FilenameResponse {
   isOccupied: Boolean!
 }
 
-type CurrentUserPermission {
-  permission: String!
-}
-
-type User {
-  id: String!
-  name: String!
-  email: String!
-  language: String!
-}
-
 type Product {
   id: ID!
   creatorId: String!
