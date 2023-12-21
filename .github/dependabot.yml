@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    versioning-strategy: "lockfile-only"
+    assignees:
+      - "johnnyomair"
+
+  - package-ecosystem: "npm"
+    directory: "/admin"
+    schedule:
+      interval: "daily"
+    versioning-strategy: "lockfile-only"
+    assignees:
+      - "johnnyomair"
+
+  - package-ecosystem: "npm"
+    directory: "/api"
+    schedule:
+      interval: "daily"
+    versioning-strategy: "lockfile-only"
+
+  - package-ecosystem: "npm"
+    directory: "/site"
+    schedule:
+      interval: "daily"
+    versioning-strategy: "lockfile-only"
+    assignees:
+      - "johnnyomair"
+
+  - package-ecosystem: "npm"
+    directory: "/create-app"
+    schedule:
+      interval: "daily"
+    versioning-strategy: "lockfile-only"
+    assignees:
+      - "johnnyomair"
