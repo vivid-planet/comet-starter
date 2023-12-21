@@ -1,26 +1,19 @@
-import * as fs from "fs";
-
 import { cwdIsCometProject } from "../../../util/cwdIsCometProject";
 import { deleteFilesAndFolders } from "../../../util/deleteFilesAndFolders";
+import { removeReferenceInFile } from "../../../util/removeReferenceInFile";
 
 function removeSiteReferences() {
-    removeReference(".vscode/settings.json", /, "site"/g);
-    removeReference(".env", /.*site.*\n/gim);
-    removeReference("install.sh", /.*site.*\n/gim);
-    removeReference(".prettierignore", /.*site.*\n/gim);
-    removeReference("copy-schema-files.js", /.*site.*\n/gim);
-    removeReference("lint-staged.config.js", /.*site.*\n/gim);
-    removeReference("admin/src/environment.ts", /, "SITES_CONFIG"/g);
-    removeReference("./package.json", / browser:site/g);
-    removeReference("./package.json", /.*site.*\n/gim);
-    removeReference("admin/src/config.ts", /.*site.*\n/gim);
-    removeReference("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis);
-}
-
-function removeReference(filePath: string, regex: RegExp) {
-    const data = fs.readFileSync(filePath, "utf8");
-    const result = data.replace(regex, "");
-    fs.writeFileSync(filePath, result, "utf8");
+    removeReferenceInFile(".vscode/settings.json", /, "site"/g);
+    removeReferenceInFile(".env", /.*site.*\n/gim);
+    removeReferenceInFile("install.sh", /.*site.*\n/gim);
+    removeReferenceInFile(".prettierignore", /.*site.*\n/gim);
+    removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim);
+    removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim);
+    removeReferenceInFile("admin/src/environment.ts", /, "SITES_CONFIG"/g);
+    removeReferenceInFile("./package.json", / browser:site/g);
+    removeReferenceInFile("./package.json", /.*site.*\n/gim);
+    removeReferenceInFile("admin/src/config.ts", /.*site.*\n/gim);
+    removeReferenceInFile("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis);
 }
 
 export function removeSite() {
