@@ -5,6 +5,11 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
@@ -13,6 +18,11 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
@@ -21,12 +31,22 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "npm"
     directory: "/site"
     schedule:
       interval: "daily"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
@@ -35,5 +55,10 @@ updates:
     schedule:
       interval: "daily"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
