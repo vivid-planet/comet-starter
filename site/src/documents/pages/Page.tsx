@@ -1,7 +1,6 @@
 import { SeoBlock } from "@src/documents/pages/blocks/SeoBlock";
 import { Layout, PropsWithLayout } from "@src/layout/Layout";
 import { gql } from "graphql-request";
-import Head from "next/head";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
@@ -27,9 +26,6 @@ export function Page(props: PropsWithLayout<GQLPageQuery>): JSX.Element {
     const document = props.pageContent?.document;
     return (
         <Layout {...props.layout}>
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
             {document?.__typename === "Page" && (
                 <SeoBlock
                     data={document.seo}
