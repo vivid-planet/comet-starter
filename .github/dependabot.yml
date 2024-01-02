@@ -3,37 +3,62 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
   - package-ecosystem: "npm"
     directory: "/admin"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
   - package-ecosystem: "npm"
     directory: "/api"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "npm"
     directory: "/site"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
 
   - package-ecosystem: "npm"
     directory: "/create-app"
     schedule:
-      interval: "daily"
+      interval: "weekly"
     versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
     assignees:
       - "johnnyomair"
