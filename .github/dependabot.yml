@@ -27,6 +27,19 @@ updates:
       - "johnnyomair"
 
   - package-ecosystem: "npm"
+    directory: "/admin/server"
+    schedule:
+      interval: "weekly"
+    versioning-strategy: "lockfile-only"
+    groups:
+      non-major-versions:
+        update-types:
+          - "minor"
+          - "patch"
+    assignees:
+      - "johnnyomair"
+
+  - package-ecosystem: "npm"
     directory: "/api"
     schedule:
       interval: "weekly"
