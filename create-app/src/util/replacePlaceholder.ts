@@ -19,7 +19,6 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
 
             if (placeholder.test(contents)) {
                 if (file.endsWith("intl-update.sh")) fs.writeFileSync(file, contents.replaceAll("lang/starter-lang", `lang/${projectName}-lang`));
-                else if (file.endsWith("lint-staged.config.js")) fs.writeFileSync(file, contents.replaceAll(/"create.*lint:tsc",\n/gs, ""));
                 else fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
                 changedFiles++;
                 if (verbose) {
