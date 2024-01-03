@@ -15,10 +15,10 @@ npx @comet/create-app <project-name>
 
 The following arguments can be passed to customize the project setup:
 
-- `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
-- `-v` or `--verbose`: Enables extra console logs for verbose output.
-- `-V` or `--version`: Outputs the version number.
-- `-h` or `--help`: Display help for the command.
+-   `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
+-   `-v` or `--verbose`: Enables extra console logs for verbose output.
+-   `-V` or `--version`: Outputs the version number.
+-   `-h` or `--help`: Display help for the command.
 
 Example usage with arguments:
 
@@ -26,14 +26,13 @@ Example usage with arguments:
 npx @comet/create-app my-project -v
 ```
 
-
 This command will create a new Comet app with the name "my-project" and enable verbose logging.
 
 ### Commands
 
 The following commands can be used to customize the project setup:
 
-- `remove-showcase`: Removes the showcase content from the project.
+-   `remove-showcase`: Removes the showcase content from the project.
 
 Example usage:
 
@@ -41,7 +40,7 @@ Example usage:
 npx @comet/create-app remove-showcase
 ```
 
-- `remove-site`: Removes the site from the project.
+-   `remove-site`: Removes the site from the project.
 
 Example usage:
 
@@ -57,7 +56,7 @@ To test the script locally, run the following commands:
 
 1. Start the development process:
     ```bash
-   npm start
+    npm start
     ```
 2. Run the script:
     ```bash
