@@ -49,6 +49,8 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    assignees:
+      - "johnnyomair"
 
   - package-ecosystem: "npm"
     directory: "/site"
