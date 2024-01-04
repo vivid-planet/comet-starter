@@ -1,3 +1,5 @@
+import { json } from "express";
+
 if (process.env.TRACING_ENABLED) {
     require("./tracing");
 }
@@ -48,6 +50,7 @@ async function bootstrap(): Promise<void> {
             contentSecurityPolicy: false, // configure this when API returns HTML
         }),
     );
+    app.use(json({ limit: "1mb" }));
     app.use(compression());
     app.use(cookieParser());
 
