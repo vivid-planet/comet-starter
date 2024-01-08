@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
@@ -16,7 +16,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/admin"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
@@ -29,7 +29,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/admin/server"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
@@ -42,7 +42,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/api"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
@@ -55,7 +55,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/site"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
@@ -68,7 +68,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/create-app"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     versioning-strategy: "lockfile-only"
     groups:
       non-major-versions:
