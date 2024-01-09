@@ -1,0 +1,8 @@
+addAssignees: author
+
+addReviewers: true
+
+reviewers:
+  - johnnyomair
+  - dkarnutsch
+  - thomasdax98
