@@ -1,6 +1,5 @@
-import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
+import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { RawDraftContentState } from "draft-js";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
@@ -104,29 +103,17 @@ interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
 }
 
 export const RichTextBlock = withPreview(
-    ({ data: { draftContent }, renderers = defaultRenderers }: RichTextBlockProps) => {
-        const rendered = redraft(draftContent, renderers);
+    ({ data, renderers = defaultRenderers }: RichTextBlockProps) => {
+        const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent)}>
+            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasRichTextBlockContent(data)}>
                 {rendered}
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
-
-export function hasDraftContent(draftContent: unknown): boolean {
-    if (!isDraftContent(draftContent)) {
-        throw new TypeError(`Invalid draft content: ${draftContent}`);
-    }
-
-    return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
-}
-
-function isDraftContent(draftContent: unknown): draftContent is RawDraftContentState {
-    return typeof draftContent === "object" && draftContent !== null && "blocks" in draftContent;
-}
 
 const Text = styled.p`
     white-space: pre-line;
