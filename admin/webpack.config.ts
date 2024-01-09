@@ -20,6 +20,7 @@ const config = (env: unknown, argv: Argv): webpack.Configuration => {
                 environmentValues: environment.map((env) => ({ key: env, value: argv.mode === "production" ? `$${env}` : process.env[env] })),
             },
             hash: true,
+            favicon: "public/favicon.ico",
         }),
     ];
 
