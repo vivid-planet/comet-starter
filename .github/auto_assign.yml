@@ -8,3 +8,6 @@ reviewers:
   - johnnyomair
   - nsams
   - thomasdax98
+
+skipUsers:
+  - dependabot[bot]
