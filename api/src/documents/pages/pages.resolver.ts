@@ -5,6 +5,7 @@ import {
     PageTreeService,
     SortArgs,
     SortDirection,
+    SubjectEntity,
     validateNotModified,
 } from "@comet/cms-api";
 import { QueryOrderMap } from "@mikro-orm/core";
@@ -51,6 +52,7 @@ export class PagesResolver {
     }
 
     @Mutation(() => Page)
+    @SubjectEntity(Page, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
     async savePage(
         @Args("pageId", { type: () => ID }) pageId: string,
         @Args("input", { type: () => PageInput }) input: PageInput,
