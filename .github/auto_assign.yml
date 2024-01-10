@@ -3,6 +3,8 @@ addAssignees: author
 addReviewers: true
 
 reviewers:
-  - johnnyomair
   - dkarnutsch
+  - fraxachun
+  - johnnyomair
+  - nsams
   - thomasdax98
