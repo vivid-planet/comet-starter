@@ -1,6 +1,5 @@
-import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
+import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { RawDraftContentState } from "draft-js";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
@@ -104,21 +103,17 @@ interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
 }
 
 export const RichTextBlock = withPreview(
-    ({ data: { draftContent }, renderers = defaultRenderers }: RichTextBlockProps) => {
-        const rendered = redraft(draftContent, renderers);
+    ({ data, renderers = defaultRenderers }: RichTextBlockProps) => {
+        const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasDraftContent(draftContent as RawDraftContentState)}>
+            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasRichTextBlockContent(data)}>
                 {rendered}
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
-
-export function hasDraftContent(draftContent: RawDraftContentState): boolean {
-    return !(draftContent.blocks.length == 1 && draftContent.blocks[0].text === "");
-}
 
 const Text = styled.p`
     white-space: pre-line;
