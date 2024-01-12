@@ -1,11 +1,12 @@
 import { inferContentScopeFromContext } from "@src/common/contentScope/inferContentScopeFromContext";
 import { domain as configuredDomain } from "@src/config";
 import { Page as PageTypePage, pageQuery as PageTypePageQuery } from "@src/documents/pages/Page";
+import { GQLPageQuery } from "@src/documents/pages/Page.generated";
 import { GQLPage } from "@src/graphql.generated";
-import { getLayout } from "@src/layout/Layout";
+import { getLayout, PropsWithLayout } from "@src/layout/Layout";
 import NotFound404 from "@src/pages/404.page";
 import { createGraphQLClient } from "@src/util/createGraphQLClient";
-import { gql } from "graphql-request";
+import { gql, RequestDocument } from "graphql-request";
 import {
     GetServerSidePropsContext,
     GetServerSidePropsResult,
@@ -23,7 +24,7 @@ interface PageProps {
     documentType: string;
     id: string;
 }
-export type PageUniversalProps = PageProps & GQLPage;
+export type PageUniversalProps = PageProps & GQLPage & PropsWithLayout<GQLPageQuery>;
 
 export default function Page(props: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
     if (!pageTypes[props.documentType]) {
@@ -48,7 +49,8 @@ const pageTypeQuery = gql`
     }
 `;
 
-const pageTypes = {
+type PageTypes = Record<string, { query: RequestDocument; component: React.ComponentType<PageUniversalProps> }>;
+const pageTypes: PageTypes = {
     Page: {
         query: PageTypePageQuery,
         component: PageTypePage,
