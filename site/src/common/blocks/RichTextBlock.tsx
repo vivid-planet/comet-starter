@@ -17,6 +17,9 @@ const defaultRenderers: Renderers = {
         // The key passed here is just an index based on rendering order inside a block
         BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
         ITALIC: (children, { key }) => <em key={key}>{children}</em>,
+        SUB: (children, { key }) => <sub key={key}>{children}</sub>,
+        SUP: (children, { key }) => <sup key={key}>{children}</sup>,
+        STRIKETHROUGH: (children, { key }) => <s key={key}>{children}</s>,
     },
     /**
      * Blocks receive children and depth
