@@ -9,4 +9,4 @@ fragmentTypes.json
 /schema.*
 **/*.generated.ts
 /block-meta.json
-/comet-config.json
+src/comet-config.json
