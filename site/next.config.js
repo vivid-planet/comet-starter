@@ -5,7 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
 
-const cometConfig = require("./comet-config.json");
+const cometConfig = require("./src/comet-config.json");
 
 /**
  * @type {import('next').NextConfig['i18n'] | undefined}

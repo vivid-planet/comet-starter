@@ -28,7 +28,7 @@ ln -sf ../.env.local ./admin/
 ln -sf ../.env.secrets ./admin/
 ln -sf ../api/schema.gql ./admin/
 ln -sf ../api/block-meta.json ./admin/
-ln -sf ../api/src/comet-config.json ./admin/
+ln -sf ../../api/src/comet-config.json ./admin/src/
 
 # create site symlinks
 ln -sf ../.env ./site/
@@ -36,7 +36,7 @@ ln -sf ../.env.local ./site/
 ln -sf ../.env.secrets ./site/
 ln -sf ../api/schema.gql ./site/
 ln -sf ../api/block-meta.json ./site/
-ln -sf ../api/src/comet-config.json ./site/
+ln -sf ../../api/src/comet-config.json ./site/src/
 
 # Lang install
 sh ./site/intl-update.sh

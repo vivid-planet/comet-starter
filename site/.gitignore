@@ -42,7 +42,7 @@ schema.json
 block-meta.json
 src/**/*.generated.ts
 preBuild/**/*.generated.ts
-comet-config.json
+src/comet-config.json
 
 public/sitemap.xml
 public/robots.txt
