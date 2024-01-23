@@ -18,6 +18,7 @@
 
 # production
 /build
+/preBuild/build
 
 # misc
 .DS_Store

@@ -1,5 +1,7 @@
+# Copy from .gitignore until prettier v3 is in use
 # compiled output
 /dist
+
 /node_modules
 .env
 .env.local
@@ -45,5 +47,4 @@ package-lock.json
 *.lock
 *.gql
 *.dist
-uploads/
 block-meta.json

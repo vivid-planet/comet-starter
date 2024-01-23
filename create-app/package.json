@@ -24,7 +24,7 @@
         "clean": "rimraf lib",
         "lint": "run-p lint:prettier lint:eslint lint:tsc",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}' --ignore-path .gitignore",
+        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
         "prepublishOnly": "npm run lint && npm run build",
         "prestart": "npm run clean",
