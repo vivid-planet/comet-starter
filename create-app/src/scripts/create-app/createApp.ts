@@ -1,10 +1,10 @@
 import kleur from "kleur";
 import process from "process";
 
-import { cleanupWorkingDirectory } from "../../util/cleanupWorkingDirectory";
-import { createInitialGitCommit } from "../../util/createInitialGitCommit";
-import { createWorkingDirectoryCopy } from "../../util/createWorkingDirectoryCopy";
 import { replacePlaceholder } from "../../util/replacePlaceholder";
+import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
+import { createInitialGitCommit } from "./createInitialGitCommit";
+import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
 
 interface ProjectConfiguration {
     projectName: string;

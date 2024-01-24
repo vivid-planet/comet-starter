@@ -5,14 +5,10 @@ import { createApp } from "./scripts/create-app/createApp";
 import { removeShowcaseContent } from "./scripts/remove-showcase/removeShowcase";
 import { removeSite } from "./scripts/remove-site/removeSite";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
+import { isValidProjectName } from "./util/isValidProjectName";
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { name, version } = require("../package.json");
-
-function isValidProjectName(value: string): boolean {
-    const allowedFormat = /^[A-Za-z0-9][A-Za-z0-9-]*$/;
-    return allowedFormat.test(value);
-}
 
 void (async () => {
     const program = new Command();
