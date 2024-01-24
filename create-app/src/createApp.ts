@@ -4,6 +4,7 @@ import process from "process";
 
 import { removeShowcaseContent } from "./scripts/remove-showcase/src/removeShowcase";
 import { removeSite } from "./scripts/remove-site/src/removeSite";
+import { cleanupReadme } from "./util/cleanupReadme";
 import { cleanupWorkingDirectory } from "./util/cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./util/createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./util/createWorkingDirectoryCopy";
@@ -64,6 +65,7 @@ async function createApp(projectConfiguration: ProjectConfiguration) {
     if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
         return;
     }
+    cleanupReadme();
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     createInitialGitCommit();
