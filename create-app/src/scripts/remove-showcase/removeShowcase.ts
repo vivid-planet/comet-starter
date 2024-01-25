@@ -2,8 +2,8 @@ import { ESLint } from "eslint";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import kleur from "kleur";
 
-import { cwdIsCometProject } from "../../../util/cwdIsCometProject";
-import { deleteFilesAndFolders } from "../../../util/deleteFilesAndFolders";
+import { cwdIsCometProject } from "../../util/cwdIsCometProject";
+import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 
 async function removeFileContent() {
     const contentToRemove: Array<{

@@ -1,6 +1,6 @@
-import { cwdIsCometProject } from "../../../util/cwdIsCometProject";
-import { deleteFilesAndFolders } from "../../../util/deleteFilesAndFolders";
-import { removeReferenceInFile } from "../../../util/removeReferenceInFile";
+import { cwdIsCometProject } from "../../util/cwdIsCometProject";
+import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
+import { removeReferenceInFile } from "../../util/removeReferenceInFile";
 
 function removeSiteReferences() {
     removeReferenceInFile(".vscode/settings.json", /, "site"/g);

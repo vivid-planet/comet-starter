@@ -1,5 +1,5 @@
-import { deleteFilesAndFolders } from "./deleteFilesAndFolders";
-import { removeReferenceInFile } from "./removeReferenceInFile";
+import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
+import { removeReferenceInFile } from "../../util/removeReferenceInFile";
 
 export function cleanupWorkingDirectory(verbose: boolean) {
     deleteFilesAndFolders(["create-app", ".git", ".github", "LICENSE"], verbose);
