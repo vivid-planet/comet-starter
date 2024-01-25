@@ -1,3 +1,4 @@
+import { program } from "commander";
 import { ESLint } from "eslint";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import kleur from "kleur";
@@ -61,8 +62,7 @@ async function removeFileContent() {
 
 export async function removeShowcaseContent() {
     if (!cwdIsCometProject()) {
-        console.log(kleur.bgYellow(`This command must be run from the root of a Comet project.`));
-        return;
+        program.error(`This command must be run from the root of a Comet project.`);
     }
 
     await removeFileContent();
