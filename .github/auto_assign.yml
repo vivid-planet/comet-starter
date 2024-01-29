@@ -11,3 +11,6 @@ reviewers:
 
 skipUsers:
   - dependabot[bot]
+
+skipKeywords:
+  - Merge main into next
