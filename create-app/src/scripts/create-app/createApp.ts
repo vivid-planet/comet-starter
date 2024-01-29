@@ -2,6 +2,7 @@ import kleur from "kleur";
 import process from "process";
 
 import { replacePlaceholder } from "../../util/replacePlaceholder";
+import { cleanupReadme } from "./cleanupReadme";
 import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
@@ -14,6 +15,7 @@ interface ProjectConfiguration {
 export async function createApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
     createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
+    cleanupReadme();
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     createInitialGitCommit();
