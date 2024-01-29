@@ -1,10 +1,10 @@
 import { SeoBlock } from "@src/documents/pages/blocks/SeoBlock";
-import { Layout } from "@src/layout/Layout";
-import { PageUniversalProps } from "@src/pages/[[...path]].page";
+import { Layout, PropsWithLayout } from "@src/layout/Layout";
 import { gql } from "graphql-request";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
+import { GQLPageQuery } from "./Page.generated";
 
 export const pageQuery = gql`
     query Page($pageId: ID!) {
@@ -22,7 +22,7 @@ export const pageQuery = gql`
     }
 `;
 
-export function Page(props: PageUniversalProps): JSX.Element {
+export function Page(props: PropsWithLayout<GQLPageQuery>): JSX.Element {
     const document = props.pageContent?.document;
     return (
         <Layout {...props.layout}>
