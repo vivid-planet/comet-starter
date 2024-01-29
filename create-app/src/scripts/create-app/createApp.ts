@@ -2,6 +2,7 @@ import kleur from "kleur";
 import process from "process";
 
 import { replacePlaceholder } from "../../util/replacePlaceholder";
+import { cleanupReadme } from "./cleanupReadme";
 import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
@@ -16,6 +17,7 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
     if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
         return;
     }
+    cleanupReadme();
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     createInitialGitCommit();
