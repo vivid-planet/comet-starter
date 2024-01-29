@@ -1,9 +1,7 @@
-import { program } from "commander";
 import { ESLint } from "eslint";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import kleur from "kleur";
 
-import { cwdIsCometProject } from "../../util/cwdIsCometProject";
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 
 async function removeFileContent() {
@@ -61,10 +59,6 @@ async function removeFileContent() {
 }
 
 export async function removeShowcaseContent() {
-    if (!cwdIsCometProject()) {
-        program.error(`This command must be run from the root of a Comet project.`);
-    }
-
     await removeFileContent();
     const filesToRemove: string[] = [
         "api/src/products",

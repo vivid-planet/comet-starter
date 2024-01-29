@@ -1,6 +1,3 @@
-import { program } from "commander";
-
-import { cwdIsCometProject } from "../../util/cwdIsCometProject";
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 import { removeReferenceInFile } from "../../util/removeReferenceInFile";
 
@@ -19,9 +16,6 @@ function removeSiteReferences() {
 }
 
 export function removeSite() {
-    if (!cwdIsCometProject()) {
-        program.error("This command must be run from the root of a Comet project.");
-    }
     deleteFilesAndFolders(["site"], false);
     removeSiteReferences();
 }

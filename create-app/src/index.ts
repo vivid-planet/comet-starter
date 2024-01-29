@@ -1,9 +1,10 @@
-import { Command, program } from "commander";
+import { Command } from "commander";
 import kleur from "kleur";
 
 import { createApp } from "./scripts/create-app/createApp";
 import { removeShowcaseContent } from "./scripts/remove-showcase/removeShowcase";
 import { removeSite } from "./scripts/remove-site/removeSite";
+import { cwdIsCometProject } from "./util/cwdIsCometProject";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { isValidProjectName } from "./util/isValidProjectName";
 
@@ -16,6 +17,7 @@ if (!isValidNodeVersion()) {
 }
 
 void (async () => {
+    const program = new Command();
     program.name(name).description("CLI to create a Comet app").version(version);
     program
         .argument("<projectName>", "Sets the name of the project.")
@@ -31,6 +33,10 @@ void (async () => {
 
     program.addCommand(
         new Command("remove-showcase").action(() => {
+            if (!cwdIsCometProject()) {
+                program.error(`This command must be run from the root of a Comet project.`);
+            }
+
             console.log(kleur.white(`Removing showcase content from project`));
             removeShowcaseContent();
         }),
@@ -38,6 +44,10 @@ void (async () => {
 
     program.addCommand(
         new Command("remove-site").action(() => {
+            if (!cwdIsCometProject()) {
+                program.error(`This command must be run from the root of a Comet project.`);
+            }
+
             console.log(kleur.white(`Removing site from project`));
             removeSite();
         }),
