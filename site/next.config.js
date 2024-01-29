@@ -110,6 +110,10 @@ const nextConfig = {
                         .replace(/\s{2,}/g, " ")
                         .trim(),
                 },
+                {
+                    key: 'Access-Control-Allow-Origin',
+                    value: process.env.ADMIN_URL,
+                 }
             ],
         },
     ],
