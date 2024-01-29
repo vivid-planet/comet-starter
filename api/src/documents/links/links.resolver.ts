@@ -1,4 +1,4 @@
-import { PageTreeNodeVisibility, PageTreeService, validateNotModified } from "@comet/cms-api";
+import { AffectedEntity, PageTreeNodeVisibility, PageTreeService, validateNotModified } from "@comet/cms-api";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
 import { UnauthorizedException } from "@nestjs/common";
@@ -17,6 +17,7 @@ export class LinksResolver {
     }
 
     @Mutation(() => Link)
+    @AffectedEntity(Link, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
     async saveLink(
         @Args("linkId", { type: () => ID }) linkId: string,
         @Args("input", { type: () => LinkInput }) input: LinkInput,

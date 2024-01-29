@@ -1,6 +1,15 @@
 import { MasterLayout, RouteWithErrorBoundary } from "@comet/admin";
 import { Domain } from "@comet/admin-icons";
-import { AllCategories, ContentScopeIndicator, createRedirectsPage, DamPage, PagesPage, PublisherPage, SitePreview } from "@comet/cms-admin";
+import {
+    AllCategories,
+    ContentScopeIndicator,
+    createRedirectsPage,
+    DamPage,
+    PagesPage,
+    PublisherPage,
+    SitePreview,
+    UserPermissionsPage,
+} from "@comet/cms-admin";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -62,6 +71,7 @@ export const Routes: React.FC = () => {
 
                                     <RouteWithErrorBoundary path={`${match.path}/structured-content/products`} component={ProductsPage} />
                                     <RouteWithErrorBoundary path={`${match.path}/assets`} component={DamPage} />
+                                    <RouteWithErrorBoundary path={`${match.path}/user-permissions`} component={UserPermissionsPage} />
 
                                     <RouteWithErrorBoundary path={`${match.path}/system/publisher`} component={PublisherPage} />
                                     <RouteWithErrorBoundary

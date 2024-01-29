@@ -1,3 +1,5 @@
+import { SiteConfig } from "@comet/cms-admin";
+
 import cometConfig from "../comet-config.json";
 import { environment } from "./environment";
 
@@ -24,5 +26,7 @@ export function createConfig() {
         commitSha: environmentVariables.COMMIT_SHA,
     };
 }
+
+export type SitesConfig = Record<string, SiteConfig>;
 
 export type Config = ReturnType<typeof createConfig>;

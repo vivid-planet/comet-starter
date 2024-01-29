@@ -1,14 +1,14 @@
-import { createAuthResolver, createCometAuthGuard, createStaticAuthedUserStrategy } from "@comet/cms-api";
+import { createAuthResolver, createCometAuthGuard, createStaticAuthedUserStrategy, CurrentUser } from "@comet/cms-api";
 import { DynamicModule, Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
-import { Config } from "@src/config/config";
 
-import { CurrentUser } from "./current-user";
+import { AccessControlService } from "./access-control.service";
+import { staticUsers } from "./static-users";
+import { UserService } from "./user.service";
 
 @Module({})
 export class AuthLocalModule {
-    //does currently not use config, but might be one day
-    static forRoot(config: Config): DynamicModule {
+    static forRoot(): DynamicModule {
         if (process.env.NODE_ENV !== "development") {
             throw new Error("AuthLocalModule must only be used in development");
         }
@@ -17,14 +17,7 @@ export class AuthLocalModule {
             module: AuthLocalModule,
             providers: [
                 createStaticAuthedUserStrategy({
-                    staticAuthedUser: {
-                        id: "10f266b8-ec2e-4a0c-98ec-2cfacceda1b7",
-                        name: "Test Admin",
-                        email: "demo@comet-dxp.com",
-                        language: "en",
-                        role: "admin",
-                        domains: ["main", "secondary"],
-                    },
+                    staticAuthedUser: staticUsers[0].id,
                 }),
                 createAuthResolver({
                     currentUser: CurrentUser,
@@ -33,7 +26,10 @@ export class AuthLocalModule {
                     provide: APP_GUARD,
                     useClass: createCometAuthGuard(["static-authed-user"]),
                 },
+                UserService,
+                AccessControlService,
             ],
+            exports: [UserService, AccessControlService],
         };
     }
 }

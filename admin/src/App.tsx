@@ -11,6 +11,7 @@ import {
     BuildInformationProvider,
     CmsBlockContextProvider,
     createHttpClient,
+    CurrentUserProvider,
     LocaleProvider,
     SiteConfig,
     SitesConfigProvider,
@@ -58,48 +59,50 @@ const pageTreeDocumentTypes = {
 export function App() {
     return (
         <ApolloProvider client={apolloClient}>
-            <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                <SitesConfigProvider
-                    value={{
-                        configs: config.sitesConfig,
-                        resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
-                            const siteConfig = configs[scope.domain];
-                            return {
-                                ...siteConfig,
-                                previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
-                            };
-                        },
-                    }}
-                >
-                    <IntlProvider locale="en" defaultLocale="en" messages={getMessages()}>
-                        <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
-                            <MuiThemeProvider theme={theme}>
-                                <DndProvider backend={HTML5Backend}>
-                                    <SnackbarProvider>
-                                        <CmsBlockContextProvider
-                                            damConfig={{
-                                                apiUrl: config.apiUrl,
-                                                apiClient,
-                                                maxFileSize: config.dam.uploadsMaxFileSize,
-                                                maxSrcResolution: config.imgproxy.maxSrcResolution,
-                                                allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
-                                            }}
-                                            pageTreeCategories={categories}
-                                            pageTreeDocumentTypes={pageTreeDocumentTypes}
-                                        >
-                                            <RouterBrowserRouter>
-                                                <GlobalStyle />
-                                                <Routes />
-                                                <ErrorDialogHandler />
-                                            </RouterBrowserRouter>
-                                        </CmsBlockContextProvider>
-                                    </SnackbarProvider>
-                                </DndProvider>
-                            </MuiThemeProvider>
-                        </LocaleProvider>
-                    </IntlProvider>
-                </SitesConfigProvider>
-            </BuildInformationProvider>
+            <CurrentUserProvider>
+                <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
+                    <SitesConfigProvider
+                        value={{
+                            configs: config.sitesConfig,
+                            resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
+                                const siteConfig = configs[scope.domain];
+                                return {
+                                    ...siteConfig,
+                                    previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
+                                };
+                            },
+                        }}
+                    >
+                        <IntlProvider locale="en" defaultLocale="en" messages={getMessages()}>
+                            <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                <MuiThemeProvider theme={theme}>
+                                    <DndProvider backend={HTML5Backend}>
+                                        <SnackbarProvider>
+                                            <CmsBlockContextProvider
+                                                damConfig={{
+                                                    apiUrl: config.apiUrl,
+                                                    apiClient,
+                                                    maxFileSize: config.dam.uploadsMaxFileSize,
+                                                    maxSrcResolution: config.imgproxy.maxSrcResolution,
+                                                    allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
+                                                }}
+                                                pageTreeCategories={categories}
+                                                pageTreeDocumentTypes={pageTreeDocumentTypes}
+                                            >
+                                                <RouterBrowserRouter>
+                                                    <GlobalStyle />
+                                                    <Routes />
+                                                    <ErrorDialogHandler />
+                                                </RouterBrowserRouter>
+                                            </CmsBlockContextProvider>
+                                        </SnackbarProvider>
+                                    </DndProvider>
+                                </MuiThemeProvider>
+                            </LocaleProvider>
+                        </IntlProvider>
+                    </SitesConfigProvider>
+                </BuildInformationProvider>
+            </CurrentUserProvider>
         </ApolloProvider>
     );
 }
