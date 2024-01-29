@@ -14,9 +14,7 @@ interface ProjectConfiguration {
 
 export async function createApp(projectConfiguration: ProjectConfiguration) {
     console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
-    if (!createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose)) {
-        return;
-    }
+    createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
     cleanupReadme();
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
