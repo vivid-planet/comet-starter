@@ -12,7 +12,6 @@ import {
     CmsBlockContextProvider,
     createHttpClient,
     LocaleProvider,
-    SiteConfig,
     SitesConfigProvider,
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
@@ -62,7 +61,7 @@ export function App() {
                 <SitesConfigProvider
                     value={{
                         configs: config.sitesConfig,
-                        resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
+                        resolveSiteConfigForScope: (configs, scope: ContentScope) => {
                             const siteConfig = configs[scope.domain];
                             return {
                                 ...siteConfig,

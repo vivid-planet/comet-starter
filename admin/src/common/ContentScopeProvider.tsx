@@ -13,6 +13,7 @@ import {
     useContentScopeConfig as useContentScopeConfigLibrary,
     useSitesConfig,
 } from "@comet/cms-admin";
+import { SitesConfig } from "@src/config";
 import React from "react";
 
 import { GQLCurrentUserScopeQuery, GQLCurrentUserScopeQueryVariables } from "./ContentScopeProvider.generated";
@@ -59,7 +60,7 @@ const currentUserQuery = gql`
 `;
 
 export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
-    const sitesConfig = useSitesConfig();
+    const sitesConfig = useSitesConfig<SitesConfig>();
     const { loading, data } = useQuery<GQLCurrentUserScopeQuery, GQLCurrentUserScopeQueryVariables>(currentUserQuery);
 
     if (loading || !data) return <Loading behavior="fillPageHeight" />;

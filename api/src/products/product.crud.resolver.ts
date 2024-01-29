@@ -1,10 +1,9 @@
 // Scaffolded by the CRUD generator on 2023-03-20.
-import { AllowForRole, GetCurrentUser, SubjectEntity, validateNotModified } from "@comet/cms-api";
+import { AffectedEntity, CurrentUser, GetCurrentUser, RequiredPermission, validateNotModified } from "@comet/cms-api";
 import { FindOptions } from "@mikro-orm/core";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
 import { Args, ID, Int, Mutation, Query, ResolveField, Resolver } from "@nestjs/graphql";
-import { CurrentUser } from "@src/auth/current-user";
 
 import { PaginatedProducts } from "./dto/paginated-products";
 import { ProductInput } from "./dto/product.input";
@@ -14,6 +13,7 @@ import { ProductsAclService } from "./products.acl.service";
 import { ProductsService } from "./products.service";
 
 @Resolver(() => Product)
+@RequiredPermission(["products"])
 export class ProductCrudResolver {
     constructor(
         private readonly productsService: ProductsService,
@@ -22,7 +22,7 @@ export class ProductCrudResolver {
     ) {}
 
     @Query(() => Product)
-    @SubjectEntity(Product)
+    @AffectedEntity(Product)
     async product(@Args("id", { type: () => ID }) id: string): Promise<Product> {
         const product = await this.repository.findOneOrFail(id);
         return product;
@@ -58,7 +58,7 @@ export class ProductCrudResolver {
     }
 
     @Mutation(() => Product)
-    @SubjectEntity(Product)
+    @AffectedEntity(Product)
     async updateProduct(
         @GetCurrentUser() user: CurrentUser,
         @Args("id", { type: () => ID }) id: string,
@@ -81,9 +81,8 @@ export class ProductCrudResolver {
         return product;
     }
 
-    @AllowForRole("Admin")
     @Mutation(() => Boolean)
-    @SubjectEntity(Product)
+    @AffectedEntity(Product)
     async deleteProduct(@GetCurrentUser() user: CurrentUser, @Args("id", { type: () => ID }) id: string): Promise<boolean> {
         const product = await this.repository.findOneOrFail(id);
         if (!this.productsAclService.isEditingAllowed(product, user)) {
@@ -94,7 +93,6 @@ export class ProductCrudResolver {
         return true;
     }
 
-    @AllowForRole("Admin")
     @ResolveField(() => Int)
     sales(): number {
         return 0;
