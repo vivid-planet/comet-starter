@@ -5,15 +5,16 @@ import "@fontsource/roboto/700.css";
 import "material-design-icons/iconfont/material-icons.css";
 
 import { ApolloProvider } from "@apollo/client";
-import { ErrorDialogHandler, MuiThemeProvider, RouterBrowserRouter, SnackbarProvider } from "@comet/admin";
+import { ErrorDialogHandler, MasterLayout, MuiThemeProvider, RouterBrowserRouter, SnackbarProvider } from "@comet/admin";
 import {
-    AllCategories,
     BuildInformationProvider,
     CmsBlockContextProvider,
     createHttpClient,
     CurrentUserProvider,
     LocaleProvider,
+    MasterMenuRoutes,
     SiteConfig,
+    SitePreview,
     SitesConfigProvider,
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
@@ -23,13 +24,14 @@ import { theme } from "@src/theme";
 import * as React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { FormattedMessage, IntlProvider } from "react-intl";
+import { IntlProvider } from "react-intl";
+import { Route, Switch } from "react-router";
 
 import { createApolloClient } from "./common/apollo/createApolloClient";
+import { ContentScopeProvider } from "./common/ContentScopeProvider";
+import { MasterHeader } from "./common/MasterHeader";
+import MasterMenu, { categories, masterMenuData, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { createConfig } from "./config";
-import { Link } from "./documents/links/Link";
-import { Page } from "./documents/pages/Page";
-import { Routes } from "./Routes";
 
 const GlobalStyle = () => (
     <Global
@@ -43,18 +45,6 @@ const GlobalStyle = () => (
 const config = createConfig();
 const apolloClient = createApolloClient(config.apiUrl);
 const apiClient = createHttpClient(config.apiUrl);
-
-const categories: AllCategories = [
-    {
-        category: "MainNavigation",
-        label: <FormattedMessage id="menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
-    },
-];
-
-const pageTreeDocumentTypes = {
-    Page,
-    Link,
-};
 
 export function App() {
     return (
@@ -91,7 +81,23 @@ export function App() {
                                             >
                                                 <RouterBrowserRouter>
                                                     <GlobalStyle />
-                                                    <Routes />
+                                                    <ContentScopeProvider>
+                                                        {({ match }) => (
+                                                            <Switch>
+                                                                <Route
+                                                                    path={`${match.path}/preview`}
+                                                                    render={(props) => <SitePreview {...props} />}
+                                                                />
+                                                                <Route
+                                                                    render={() => (
+                                                                        <MasterLayout headerComponent={MasterHeader} menuComponent={MasterMenu}>
+                                                                            <MasterMenuRoutes menu={masterMenuData} />
+                                                                        </MasterLayout>
+                                                                    )}
+                                                                />
+                                                            </Switch>
+                                                        )}
+                                                    </ContentScopeProvider>
                                                     <ErrorDialogHandler />
                                                 </RouterBrowserRouter>
                                             </CmsBlockContextProvider>
