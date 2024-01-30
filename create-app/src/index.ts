@@ -12,7 +12,7 @@ import { isValidProjectName } from "./util/isValidProjectName";
 const { name, version } = require("../package.json");
 
 if (!isValidNodeVersion()) {
-    console.error("Invalid Node Version (your Node.js version is prior to v18).");
+    console.error("Invalid Node Version (your Node.js version is prior to v20).");
     process.exit(1);
 }
 
