@@ -73,6 +73,7 @@ export class AppModule {
                         availableContentScopes: [
                             { domain: "main", language: "de" },
                             { domain: "main", language: "en" },
+                            { domain: "secondary", language: "de" },
                             { domain: "secondary", language: "en" },
                         ],
                         userService,
