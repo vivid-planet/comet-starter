@@ -39,6 +39,7 @@
     "devDependencies": {
         "@comet/eslint-config": "^5.4.0",
         "@tsconfig/node18": "^18.2.2",
+        "@types/node": "^20.0.0",
         "prettier": "^2.1.2",
         "typescript": "~5.1.0"
     },
