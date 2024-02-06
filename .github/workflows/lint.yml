@@ -6,7 +6,6 @@ on:
       - opened
       - synchronize
       - reopened
-      - closed
     branches:
       - main
       - next
