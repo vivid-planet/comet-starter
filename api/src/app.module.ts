@@ -38,7 +38,6 @@ import { StatusModule } from "./status/status.module";
 @Module({})
 export class AppModule {
     static forRoot(config: Config): DynamicModule {
-        const authModule = AuthModule.forRoot(config);
         return {
             module: AppModule,
             imports: [
@@ -67,7 +66,7 @@ export class AppModule {
                     }),
                     inject: [BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES],
                 }),
-                authModule,
+                AuthModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
                         availablePermissions: ["products"],
@@ -81,7 +80,7 @@ export class AppModule {
                         accessControlService,
                     }),
                     inject: [UserService, AccessControlService],
-                    imports: [authModule],
+                    imports: [AuthModule],
                 }),
                 BlocksModule.forRoot({
                     imports: [PageTreeModule, DamModule],

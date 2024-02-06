@@ -1,48 +1,26 @@
-import {
-    createAuthProxyJwtStrategy,
-    createAuthResolver,
-    createCometAuthGuard,
-    createStaticCredentialsBasicStrategy,
-    CurrentUser,
-} from "@comet/cms-api";
-import { DynamicModule, Module } from "@nestjs/common";
+import { createAuthResolver, createCometAuthGuard, createStaticAuthedUserStrategy, CurrentUser } from "@comet/cms-api";
+import { Module } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
-import { Config } from "@src/config/config";
 
 import { AccessControlService } from "./access-control.service";
-import { AuthLocalModule } from "./auth-local.module";
+import { staticUsers } from "./static-users";
 import { UserService } from "./user.service";
 
-@Module({})
-export class AuthModule {
-    static forRoot(config: Config): DynamicModule {
-        if (!config.auth.useAuthProxy) {
-            return AuthLocalModule.forRoot();
-        }
-
-        return {
-            module: AuthModule,
-            providers: [
-                createStaticCredentialsBasicStrategy({
-                    username: "vivid",
-                    password: config.auth.basicAuthPassword,
-                }),
-                createAuthProxyJwtStrategy({
-                    jwksUri: config.auth.idpJwksUri,
-                }),
-                createAuthResolver({
-                    currentUser: CurrentUser,
-                    endSessionEndpoint: config.auth.idpEndSessionEndpoint,
-                    postLogoutRedirectUri: config.auth.postLogoutRedirectUri,
-                }),
-                {
-                    provide: APP_GUARD,
-                    useClass: createCometAuthGuard(["auth-proxy-jwt", "static-credentials-basic"]),
-                },
-                UserService,
-                AccessControlService,
-            ],
-            exports: [UserService, AccessControlService],
-        };
-    }
-}
+@Module({
+    providers: [
+        createStaticAuthedUserStrategy({
+            staticAuthedUser: staticUsers[0].id,
+        }),
+        createAuthResolver({
+            currentUser: CurrentUser,
+        }),
+        {
+            provide: APP_GUARD,
+            useClass: createCometAuthGuard(["static-authed-user"]),
+        },
+        UserService,
+        AccessControlService,
+    ],
+    exports: [UserService, AccessControlService],
+})
+export class AuthModule {}

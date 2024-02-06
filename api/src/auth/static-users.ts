@@ -7,10 +7,4 @@ export const staticUsers: User[] = [
         email: "demo@comet-dxp.com",
         language: "en",
     },
-    {
-        id: "2",
-        name: "Non-Admin",
-        email: "test@test.com",
-        language: "en",
-    },
 ];
