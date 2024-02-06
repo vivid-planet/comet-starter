@@ -4,7 +4,6 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
-    MasterMenu as CometMasterMenu,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -19,7 +18,7 @@ import { FormattedMessage } from "react-intl";
 
 import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "./ContentScopeIndicatorStyles";
 
-export const categories: AllCategories = [
+export const pageTreeCategories: AllCategories = [
     {
         category: "MainNavigation",
         label: <FormattedMessage id="menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
@@ -49,7 +48,7 @@ export const masterMenuData: MasterMenuData = [
             render: () => (
                 <PagesPage
                     path="/pages/pagetree/main-navigation"
-                    allCategories={categories}
+                    allCategories={pageTreeCategories}
                     documentTypes={pageTreeDocumentTypes}
                     category="MainNavigation"
                     renderContentScopeIndicator={(scope) => (
@@ -127,6 +126,3 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "pageTree",
     },
 ];
-
-const MasterMenu = () => <CometMasterMenu menu={masterMenuData} />;
-export default MasterMenu;

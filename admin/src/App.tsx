@@ -12,6 +12,7 @@ import {
     createHttpClient,
     CurrentUserProvider,
     LocaleProvider,
+    MasterMenu,
     MasterMenuRoutes,
     SiteConfig,
     SitePreview,
@@ -30,7 +31,7 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import MasterMenu, { categories, masterMenuData, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { createConfig } from "./config";
 
 const GlobalStyle = () => (
@@ -76,7 +77,7 @@ export function App() {
                                                     maxSrcResolution: config.imgproxy.maxSrcResolution,
                                                     allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
                                                 }}
-                                                pageTreeCategories={categories}
+                                                pageTreeCategories={pageTreeCategories}
                                                 pageTreeDocumentTypes={pageTreeDocumentTypes}
                                             >
                                                 <RouterBrowserRouter>
@@ -90,7 +91,10 @@ export function App() {
                                                                 />
                                                                 <Route
                                                                     render={() => (
-                                                                        <MasterLayout headerComponent={MasterHeader} menuComponent={MasterMenu}>
+                                                                        <MasterLayout
+                                                                            headerComponent={MasterHeader}
+                                                                            menuComponent={() => <MasterMenu menu={masterMenuData} />}
+                                                                        >
                                                                             <MasterMenuRoutes menu={masterMenuData} />
                                                                         </MasterLayout>
                                                                     )}
