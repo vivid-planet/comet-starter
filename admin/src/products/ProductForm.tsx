@@ -1,11 +1,10 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
-    Field,
     FinalForm,
-    FinalFormInput,
     FinalFormSaveSplitButton,
     Loading,
     MainContent,
+    TextField,
     Toolbar,
     ToolbarActions,
     ToolbarBackButton,
@@ -77,20 +76,13 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
             <MainContent>
                 <Card>
                     <CardContent>
-                        <Field
-                            required
-                            fullWidth
-                            name="name"
-                            component={FinalFormInput}
-                            label={intl.formatMessage({ id: "products.name", defaultMessage: "Name" })}
-                        />
-                        <Field
+                        <TextField required fullWidth name="name" label={intl.formatMessage({ id: "products.name", defaultMessage: "Name" })} />
+                        <TextField
                             required
                             fullWidth
                             multiline
                             rows={5}
                             name="description"
-                            component={FinalFormInput}
                             label={intl.formatMessage({ id: "products.description", defaultMessage: "Description" })}
                         />
                     </CardContent>
