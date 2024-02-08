@@ -94,7 +94,9 @@ const nextConfig = {
                 {
                     key: "Content-Security-Policy",
                     value: `
-                                default-src 'self' https:;
+                                default-src 'self';
+                                form-action 'self'; 
+                                object-src 'none';
                                 img-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 media-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 style-src 'self' 'unsafe-inline'; 
@@ -102,6 +104,8 @@ const nextConfig = {
                                 script-src 'self' 'unsafe-inline' https:${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""};
                                 connect-src 'self' https:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 frame-ancestors ${process.env.ADMIN_URL};
+                                upgrade-insecure-requests; 
+                                block-all-mixed-content;
                             `
                         .replace(/\s{2,}/g, " ")
                         .trim(),
