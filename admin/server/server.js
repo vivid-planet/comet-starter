@@ -19,6 +19,12 @@ app.use(
                 "font-src": ["'self'", "https:", "data:"],
             },
         },
+        xXssProtection: false,
+        strictTransportSecurity: {
+            maxAge: 63072000,
+            includeSubDomains: true,
+            preload: true,
+        },
     }),
 );
 
