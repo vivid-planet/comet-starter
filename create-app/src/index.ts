@@ -22,9 +22,10 @@ void (async () => {
     program
         .argument("<projectName>", "Sets the name of the project.")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
+        .option("-ni, --no-install", "Disables the automatic installation of dependencies.")
         .action((projectName: string, options) => {
             if (isValidProjectName(projectName)) {
-                createApp({ projectName, verbose: options.verbose });
+                createApp({ projectName, verbose: options.verbose, install: options.install });
             } else {
                 program.error("Please provide a valid project name.");
             }
@@ -52,6 +53,5 @@ void (async () => {
             removeSite();
         }),
     );
-
     program.parse();
 })();
