@@ -76,6 +76,10 @@ const nextConfig = {
                     value: "require-corp",
                 },
                 {
+                    key: "Cross-Origin-Opener-Policy",
+                    value: "same-origin",
+                },
+                {
                     key: "X-XSS-Protection",
                     value: "1; mode=block",
                 },
