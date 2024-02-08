@@ -1,5 +1,6 @@
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 import { removeReferenceInFile } from "../../util/removeReferenceInFile";
+import { runEslintFix } from "../../util/runEslintFix";
 
 function removeSiteReferences() {
     removeReferenceInFile(".vscode/settings.json", /, "site"/g);
@@ -16,4 +17,5 @@ function removeSiteReferences() {
 export function removeSite() {
     deleteFilesAndFolders(["site"], false);
     removeSiteReferences();
+    runEslintFix();
 }

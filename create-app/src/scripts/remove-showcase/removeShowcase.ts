@@ -2,6 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
 import kleur from "kleur";
 
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
+import { runEslintFix } from "../../util/runEslintFix";
 
 async function removeFileContent() {
     const contentToRemove: Array<{
@@ -58,4 +59,5 @@ export async function removeShowcaseContent() {
         "api/src/db/migrations/Migration20220721123033.ts",
     ];
     deleteFilesAndFolders(filesToRemove, false);
+    runEslintFix();
 }
