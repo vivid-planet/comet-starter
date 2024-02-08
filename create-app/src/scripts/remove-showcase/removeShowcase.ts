@@ -1,4 +1,3 @@
-import { ESLint } from "eslint";
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import kleur from "kleur";
 
@@ -30,26 +29,18 @@ async function removeFileContent() {
             replacements: ["MikroOrmModule.forFeature([Product]), "],
         },
     ];
-    const eslint = new ESLint({
-        cwd: process.cwd(),
-        fix: true,
-    });
     for (const content of contentToRemove) {
         if (!existsSync(content.file)) {
             console.log(kleur.bgYellow(`File: ${content.file} does not exist!`));
             console.log(kleur.bgYellow(`Skipping: ${content.file}...`));
             continue;
         }
-        let fileContent = readFileSync(content.file).toString();
+        let fileContent = readFileSync(content.file, "utf-8").toString();
         for (const replacement of content.replacements) {
             fileContent = fileContent.replaceAll(replacement, "");
         }
         try {
-            const lintedFileContent = await eslint.lintText(fileContent, {
-                filePath: content.file,
-            });
-            const output = lintedFileContent[0] && lintedFileContent[0].output ? lintedFileContent[0].output : lintedFileContent[0].source;
-            writeFileSync(content.file, output ?? fileContent);
+            writeFileSync(content.file, fileContent);
         } catch (e) {
             writeFileSync(content.file, fileContent);
             console.log(kleur.yellow(`Could not lint: ${content.file}!`));
