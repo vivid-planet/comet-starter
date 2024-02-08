@@ -80,6 +80,10 @@ const nextConfig = {
                     value: "same-origin",
                 },
                 {
+                    key: "Cross-Origin-Resource-Policy",
+                    value: "same-site"
+                },
+                {
                     key: "X-XSS-Protection",
                     value: "1; mode=block",
                 },
