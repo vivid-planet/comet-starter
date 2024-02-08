@@ -61,10 +61,8 @@ export const Routes: React.FC = () => {
                                             );
                                         }}
                                     />
-
                                     <RouteWithErrorBoundary path={`${match.path}/structured-content/products`} component={ProductsPage} />
                                     <RouteWithErrorBoundary path={`${match.path}/assets`} component={DamPage} />
-
                                     <RouteWithErrorBoundary path={`${match.path}/system/publisher`} component={PublisherPage} />
                                     <RouteWithErrorBoundary
                                         path={`${match.path}/system/redirects`}
