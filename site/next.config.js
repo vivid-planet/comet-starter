@@ -72,6 +72,10 @@ const nextConfig = {
                     value: "max-age=63072000; includeSubDomains; preload",
                 },
                 {
+                    key: "Cross-Origin-Embedder-Policy",
+                    value: "require-corp",
+                },
+                {
                     key: "X-XSS-Protection",
                     value: "1; mode=block",
                 },
