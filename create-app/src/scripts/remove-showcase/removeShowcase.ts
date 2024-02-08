@@ -7,15 +7,15 @@ import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 async function removeFileContent() {
     const contentToRemove: Array<{
         file: string;
-        replacements: RegExp[];
+        replacements: Array<string | RegExp>;
     }> = [
         {
             file: `./admin/src/Routes.tsx`,
-            replacements: [/<.*?products.*?>/gs],
+            replacements: [/\n[ ]*<.*?products.*?>/g],
         },
         {
             file: `./admin/src/common/MasterMenu.tsx`,
-            replacements: [/<MenuItemRouterLink[ \n]*primary={intl.formatMessage\({ id: "comet.menu.products".*products`}[ \n]*\/>/gs],
+            replacements: [/\n[ ]*<MenuCollapsibleItem.*products`}\n[ ]*\/>\n[ ]*<\/MenuCollapsibleItem>/gs],
         },
         {
             file: `./api/src/app.module.ts`,
@@ -23,11 +23,11 @@ async function removeFileContent() {
         },
         {
             file: `./api/src/db/fixtures/fixtures.console.ts`,
-            replacements: [/constructor.*Product.*{}/gs, /await Promise.all\(\[generateProducts.*]\);/gs],
+            replacements: [/, @InjectRepository.*Product.*<Product>/gs, /await Promise.all\(\[generateProducts.*]\);/gs],
         },
         {
             file: `./api/src/db/fixtures/fixtures.module.ts`,
-            replacements: [/imports: \[MikroOrmModule.forFeature\(\[Product]\), ConfigModule, ConsoleModule],/gs],
+            replacements: ["MikroOrmModule.forFeature([Product]), "],
         },
     ];
     const eslint = new ESLint({
