@@ -11,19 +11,19 @@ async function removeFileContent() {
     }> = [
         {
             file: `./admin/src/Routes.tsx`,
-            replacements: [/\n[ ]*<.*?products.*?>/g],
+            replacements: [/\s*<.*?products.*?>/g],
         },
         {
             file: `./admin/src/common/MasterMenu.tsx`,
-            replacements: [/\n[ ]*<MenuCollapsibleItem.*products`}\n[ ]*\/>\n[ ]*<\/MenuCollapsibleItem>/gs],
+            replacements: [/\s*<MenuCollapsibleItem.*products`}\s*\/>\s*<\/MenuCollapsibleItem>/gs],
         },
         {
             file: `./api/src/app.module.ts`,
-            replacements: [/ProductsModule,\n/gs],
+            replacements: [/\s*ProductsModule,/gs],
         },
         {
             file: `./api/src/db/fixtures/fixtures.console.ts`,
-            replacements: [/, @InjectRepository.*Product.*<Product>/gs, /await Promise.all\(\[generateProducts.*]\);/gs],
+            replacements: [/, @InjectRepository.*Product.*<Product>/gs, /\s*await Promise.all\(\[generateProducts.*]\);/gs],
         },
         {
             file: `./api/src/db/fixtures/fixtures.module.ts`,
