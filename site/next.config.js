@@ -84,10 +84,6 @@ const nextConfig = {
                     value: "same-site"
                 },
                 {
-                    key: "X-Frame-Options",
-                    value: "SAMEORIGIN",
-                },
-                {
                     key: "Permissions-Policy",
                     value: "",
                 },
