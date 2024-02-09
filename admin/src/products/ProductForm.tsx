@@ -4,6 +4,7 @@ import {
     FinalFormSaveSplitButton,
     Loading,
     MainContent,
+    TextAreaField,
     TextField,
     Toolbar,
     ToolbarActions,
@@ -77,11 +78,9 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
                 <Card>
                     <CardContent>
                         <TextField required fullWidth name="name" label={intl.formatMessage({ id: "products.name", defaultMessage: "Name" })} />
-                        <TextField
+                        <TextAreaField
                             required
                             fullWidth
-                            multiline
-                            rows={5}
                             name="description"
                             label={intl.formatMessage({ id: "products.description", defaultMessage: "Description" })}
                         />
