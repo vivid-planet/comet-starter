@@ -26,11 +26,11 @@
     },
     "dependencies": {
         "@comet/cms-site": "6.0.0-canary-20231122070819",
-        "@opentelemetry/api": "^1.4.0",
-        "@opentelemetry/auto-instrumentations-node": "^0.36.1",
-        "@opentelemetry/exporter-trace-otlp-http": "^0.35.1",
-        "@opentelemetry/sdk-node": "^0.35.1",
-        "draft-js": "^0.11.7",
+        "@next/bundle-analyzer": "^12.3.4",
+        "@opentelemetry/api": "^1.7.0",
+        "@opentelemetry/auto-instrumentations-node": "^0.40.0",
+        "@opentelemetry/exporter-trace-otlp-http": "^0.46.0",
+        "@opentelemetry/sdk-node": "^0.46.0",
         "express": "^4.0.0",
         "fs-extra": "^9.0.0",
         "graphql": "^15.0.0",
@@ -46,8 +46,8 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
-        "@comet/cli": "6.0.0-canary-20231122070819",
-        "@comet/eslint-config": "6.0.0-canary-20231122070819",
+        "@comet/cli": "6.0.0-canary-20240126133306",
+        "@comet/eslint-config": "6.0.0-canary-20240126133306",
         "@formatjs/cli": "^4.2.33",
         "@gitbeaker/node": "^35.6.0",
         "@graphql-codegen/add": "^3.0.0",
