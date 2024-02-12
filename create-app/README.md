@@ -16,6 +16,7 @@ npx @comet/create-app <project-name>
 The following arguments can be passed to customize the project setup:
 
 - `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
+- `-ni` or `--no-install`: Disables the automatic installation of dependencies.
 - `-v` or `--verbose`: Enables extra console logs for verbose output.
 - `-V` or `--version`: Outputs the version number.
 - `-h` or `--help`: Display help for the command.
