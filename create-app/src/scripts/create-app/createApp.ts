@@ -5,6 +5,7 @@ import process from "process";
 
 import { replacePlaceholder } from "../../util/replacePlaceholder";
 import { runEslintFix } from "../../util/runEslintFix";
+import { amendCommitChanges } from "./amendCommitChanges";
 import { cleanupReadme } from "./cleanupReadme";
 import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
@@ -34,6 +35,7 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
         }
     }
     runEslintFix();
+    amendCommitChanges();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
     console.log(kleur.white(`nvm use\n`));
