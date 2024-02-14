@@ -31,7 +31,7 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
 import { createConfig } from "./config";
 
 const GlobalStyle = () => (
