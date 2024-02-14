@@ -68,20 +68,12 @@ const nextConfig = {
             source: "/:path*",
             headers: [
                 {
-                    key: "X-DNS-Prefetch-Control",
-                    value: "on",
-                },
-                {
                     key: "Strict-Transport-Security",
                     value: "max-age=63072000; includeSubDomains; preload",
                 },
                 {
-                    key: "X-XSS-Protection",
-                    value: "1; mode=block",
-                },
-                {
-                    key: "X-Frame-Options",
-                    value: "SAMEORIGIN",
+                    key: "Cross-Origin-Opener-Policy",
+                    value: "same-origin",
                 },
                 {
                     key: "Permissions-Policy",
@@ -98,7 +90,9 @@ const nextConfig = {
                 {
                     key: "Content-Security-Policy",
                     value: `
-                                default-src 'self' https:;
+                                default-src 'self';
+                                form-action 'self'; 
+                                object-src 'none';
                                 img-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 media-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 style-src 'self' 'unsafe-inline'; 
@@ -106,6 +100,8 @@ const nextConfig = {
                                 script-src 'self' 'unsafe-inline' https:${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""};
                                 connect-src 'self' https:${process.env.NODE_ENV === "development" ? " http:" : ""};
                                 frame-ancestors ${process.env.ADMIN_URL};
+                                upgrade-insecure-requests; 
+                                block-all-mixed-content;
                             `
                         .replace(/\s{2,}/g, " ")
                         .trim(),
