@@ -1,7 +1,25 @@
+# Copy from .gitignore until prettier v3 is in use
+.env
+.env.local
+.env.secrets
+
+/node_modules
+
+/build
+
+/lang/
+/lang-compiled/
+/lang-extracted/
+
+fragmentTypes.json
+/schema.*
+
+**/*.generated.ts
+/block-meta.json
+/comet-config.json
+
 package-lock.json
 .gitignore
 *.lock
 *.gql
 *.dist
-src/fragmentTypes.json
-src/graphql.generated.ts

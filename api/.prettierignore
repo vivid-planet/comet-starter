@@ -1,6 +1,50 @@
+# Copy from .gitignore until prettier v3 is in use
+# compiled output
+/dist
+
+/node_modules
+.env
+.env.local
+.env.secrets
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
+# Tests
+/coverage
+/.nyc_output
+junit.xml
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Uploads
+/uploads
+
 package-lock.json
 .gitignore
 *.lock
 *.gql
 *.dist
-uploads/
+block-meta.json
