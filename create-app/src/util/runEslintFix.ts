@@ -5,7 +5,6 @@ import { hasDependenciesInstalled } from "./hasDependenciesInstalled";
 
 export function runEslintFix() {
     const microservices = ["admin", "api", "site"];
-    console.log("Fixing ESLint errors");
 
     for (const microservice of microservices) {
         if (!fs.existsSync(microservice)) {
