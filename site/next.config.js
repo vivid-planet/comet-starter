@@ -105,9 +105,9 @@ const nextConfig = {
                         .trim(),
                 },
                 {
-                    key: 'Access-Control-Allow-Origin',
+                    key: "Access-Control-Allow-Origin",
                     value: process.env.ADMIN_URL,
-                 }
+                },
             ],
         },
     ],

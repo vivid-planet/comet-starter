@@ -1,5 +1,5 @@
+import { CurrentUser } from "@comet/cms-api";
 import { Injectable } from "@nestjs/common";
-import { CurrentUser } from "@src/auth/current-user";
 
 import { Product } from "./entities/product.entity";
 

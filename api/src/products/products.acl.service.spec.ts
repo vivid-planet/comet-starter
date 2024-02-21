@@ -1,5 +1,5 @@
+import { CurrentUser } from "@comet/cms-api";
 import { Test, TestingModule } from "@nestjs/testing";
-import { CurrentUser } from "@src/auth/current-user";
 
 import { Product } from "./entities/product.entity";
 import { ProductsAclService } from "./products.acl.service";
