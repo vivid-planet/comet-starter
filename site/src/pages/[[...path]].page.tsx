@@ -123,7 +123,7 @@ const pagesQuery = gql`
 
 export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
     const paths: Array<{ params: { path: string[] }; locale: string }> = [];
-    if (process.env.SITE_IS_PREVIEW !== "true") {
+    if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW !== "true") {
         for (const locale of locales) {
             const data = await createGraphQLClient().request<GQLPagesQuery, GQLPagesQueryVariables>(pagesQuery, {
                 scope: { domain: configuredDomain, language: locale },

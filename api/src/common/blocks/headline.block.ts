@@ -9,7 +9,7 @@ import {
     ExtractBlockInput,
     inputToData,
 } from "@comet/blocks-api";
-import { IsEnum, ValidateNested } from "class-validator";
+import { IsEnum } from "class-validator";
 
 import { RichTextBlock } from "./rich-text.block";
 
@@ -28,7 +28,6 @@ class HeadlineBlockData extends BlockData {
 }
 
 class HeadlineBlockInput extends BlockInput {
-    @ValidateNested()
     @ChildBlockInput(RichTextBlock)
     headline: ExtractBlockInput<typeof RichTextBlock>;
 

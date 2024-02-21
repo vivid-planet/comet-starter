@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Lang files
 /lang-compiled/
 /lang-extracted/
+/lang/
 
 # dependencies
 /node_modules
@@ -42,7 +44,7 @@ schema.json
 block-meta.json
 src/**/*.generated.ts
 preBuild/**/*.generated.ts
-comet-config.json
+src/comet-config.json
 
 public/sitemap.xml
 public/robots.txt

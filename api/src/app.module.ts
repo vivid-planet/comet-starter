@@ -32,6 +32,8 @@ import { AuthModule } from "./auth/auth.module";
 import { UserService } from "./auth/user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
+import { DamFile } from "./dam/entities/dam-file.entity";
+import { DamFolder } from "./dam/entities/dam-folder.entity";
 import { MenusModule } from "./menus/menus.module";
 import { StatusModule } from "./status/status.module";
 
@@ -111,6 +113,8 @@ export class AppModule {
                     backend: config.blob.storage,
                 }),
                 DamModule.register({
+                    File: DamFile,
+                    Folder: DamFolder,
                     damConfig: {
                         filesBaseUrl: `${config.apiUrl}/dam/files`,
                         imagesBaseUrl: `${config.apiUrl}/dam/images`,

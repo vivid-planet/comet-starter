@@ -9,7 +9,7 @@ export function ProductsPage(): React.ReactElement {
     const intl = useIntl();
 
     return (
-        <Stack topLevelTitle="Products">
+        <Stack topLevelTitle={intl.formatMessage({ id: "products.title", defaultMessage: "Products" })}>
             <StackSwitch>
                 <StackPage name="table">
                     <ProductsGrid />

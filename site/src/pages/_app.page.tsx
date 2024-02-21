@@ -48,9 +48,7 @@ export default function CustomApp({ Component, pageProps, scope, messages }: Cus
     return (
         // see https://github.com/vercel/next.js/tree/master/examples/with-react-intl
         // for a complete strategy to couple next with react-intl
-        // defaultLocale prevents missing message warning for locale defined in code,
-        // see https://github.com/formatjs/formatjs/issues/251
-        <IntlProvider locale={scope.language} defaultLocale={defaultLanguage} messages={messages}>
+        <IntlProvider locale={scope.language} messages={messages}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
