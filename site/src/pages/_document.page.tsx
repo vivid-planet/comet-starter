@@ -31,7 +31,9 @@ export default class MyDocument extends Document {
     render(): JSX.Element {
         return (
             <Html>
-                <Head />
+                <Head>
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
                 <body>
                     {process.env.NEXT_PUBLIC_GTM_ID && (
                         <noscript>

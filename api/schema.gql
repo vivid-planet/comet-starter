@@ -255,6 +255,42 @@ type PaginatedProducts {
   totalCount: Int!
 }
 
+type DamFolder {
+  id: ID!
+  name: String!
+  numberOfChildFolders: Int!
+  numberOfFiles: Int!
+  mpath: [ID!]!
+  archived: Boolean!
+  isInboxFromOtherScope: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  parent: DamFolder
+  parents: [DamFolder!]!
+}
+
+type DamFile {
+  id: ID!
+  folder: DamFolder
+  name: String!
+  size: Int!
+  mimetype: String!
+  contentHash: String!
+  title: String
+  altText: String
+  archived: Boolean!
+  image: DamFileImage
+  license: DamFileLicense
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  importSourceId: String
+  importSourceType: String
+  fileUrl: String!
+  duplicates: [DamFile!]!
+  damPath: String!
+  dependents(offset: Int! = 0, limit: Int! = 25, filter: DependentFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
+}
+
 type PaginatedPageTreeNodes {
   nodes: [PageTreeNode!]!
   totalCount: Int!
@@ -291,42 +327,6 @@ input DependencyFilter {
 type PaginatedRedirects {
   nodes: [Redirect!]!
   totalCount: Int!
-}
-
-type DamFolder {
-  id: ID!
-  name: String!
-  numberOfChildFolders: Int!
-  numberOfFiles: Int!
-  mpath: [ID!]!
-  archived: Boolean!
-  isInboxFromOtherScope: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  parent: DamFolder
-  parents: [DamFolder!]!
-}
-
-type DamFile {
-  id: ID!
-  folder: DamFolder
-  name: String!
-  size: Int!
-  mimetype: String!
-  contentHash: String!
-  title: String
-  altText: String
-  archived: Boolean!
-  image: DamFileImage
-  license: DamFileLicense
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  importSourceId: String
-  importSourceType: String
-  fileUrl: String!
-  duplicates: [DamFile!]!
-  damPath: String!
-  dependents(offset: Int! = 0, limit: Int! = 25, filter: DependentFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
 }
 
 type PaginatedDamItems {

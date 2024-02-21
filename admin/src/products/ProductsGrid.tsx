@@ -3,6 +3,7 @@ import {
     GridFilterButton,
     MainContent,
     muiGridFilterToGql,
+    muiGridPagingToGql,
     muiGridSortToGql,
     StackLink,
     TableDeleteButton,
@@ -13,10 +14,9 @@ import {
     ToolbarItem,
     useDataGridRemote,
     usePersistentColumnState,
-    useStackSwitchApi,
 } from "@comet/admin";
 import { Add, Delete, Edit } from "@comet/admin-icons";
-import { Box, Button, IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { DataGrid, GridColDef, GridToolbarQuickFilter } from "@mui/x-data-grid";
 import { parseISO } from "date-fns";
 import React from "react";
@@ -58,9 +58,11 @@ function ProductsToolbar(): React.ReactElement {
             <ToolbarItem>
                 <GridToolbarQuickFilter />
             </ToolbarItem>
+            <ToolbarItem>
+                <GridFilterButton />
+            </ToolbarItem>
             <ToolbarFillSpace />
             <ToolbarActions>
-                <GridFilterButton />
                 <Button variant="contained" color="primary" component={StackLink} pageName="add" payload="add" startIcon={<Add />}>
                     <FormattedMessage id="products.addProduct" defaultMessage="Add product" />
                 </Button>
@@ -72,8 +74,6 @@ function ProductsToolbar(): React.ReactElement {
 export function ProductsGrid(): React.ReactElement {
     const dataGridProps = { ...useDataGridRemote(), ...usePersistentColumnState("ProductsGrid") };
     const intl = useIntl();
-
-    const stackApi = useStackSwitchApi();
 
     const columns: GridColDef<GQLProductGridItemFragment>[] = [
         {
@@ -102,7 +102,7 @@ export function ProductsGrid(): React.ReactElement {
             align: "right",
             renderCell: ({ row }) => (
                 <>
-                    <IconButton onClick={() => stackApi.activatePage("edit", `${row.id}`)} size="large">
+                    <IconButton component={StackLink} pageName="edit" payload={row.id} size="large">
                         <Edit color="primary" />
                     </IconButton>
                     <TableDeleteButton icon={<Delete />} mutation={deleteProductMutation} selectedId={row.id} text="" />
@@ -114,8 +114,7 @@ export function ProductsGrid(): React.ReactElement {
     const { data, loading, error } = useQuery<GQLProductsQuery, GQLProductsQueryVariables>(productsQuery, {
         variables: {
             ...muiGridFilterToGql(columns, dataGridProps.filterModel),
-            offset: dataGridProps.page * dataGridProps.pageSize,
-            limit: dataGridProps.pageSize,
+            ...muiGridPagingToGql({ page: dataGridProps.page, pageSize: dataGridProps.pageSize }),
             sort: muiGridSortToGql(dataGridProps.sortModel),
         },
     });
@@ -126,20 +125,18 @@ export function ProductsGrid(): React.ReactElement {
     const rowCount = data?.products.totalCount;
 
     return (
-        <MainContent>
-            <Box sx={{ height: "calc(100vh - 100px)", display: "flex" }}>
-                <DataGrid
-                    {...dataGridProps}
-                    rows={rows}
-                    columns={columns}
-                    rowCount={rowCount}
-                    disableSelectionOnClick
-                    loading={loading}
-                    components={{
-                        Toolbar: ProductsToolbar,
-                    }}
-                />
-            </Box>
+        <MainContent fullHeight disablePadding>
+            <DataGrid
+                {...dataGridProps}
+                rows={rows}
+                columns={columns}
+                rowCount={rowCount}
+                disableSelectionOnClick
+                loading={loading}
+                components={{
+                    Toolbar: ProductsToolbar,
+                }}
+            />
         </MainContent>
     );
 }

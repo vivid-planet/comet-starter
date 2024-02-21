@@ -1,4 +1,4 @@
-import { Field, FinalFormSelect } from "@comet/admin";
+import { SelectField } from "@comet/admin";
 import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
 import { createRichTextBlock } from "@comet/cms-admin";
 import { MenuItem } from "@mui/material";
@@ -32,21 +32,17 @@ export const HeadlineBlock = createCompositeBlock({
                 defaultValue: "header-one",
                 AdminComponent: ({ state, updateState }) => (
                     <BlocksFinalForm<Pick<HeadlineBlockData, "level">> onSubmit={({ level }) => updateState(level)} initialValues={{ level: state }}>
-                        <Field name="level" label={<FormattedMessage id="headlineBlock.level" defaultMessage="Level" />} fullWidth>
-                            {(props) => (
-                                <FinalFormSelect {...props}>
-                                    <MenuItem value="header-one">
-                                        <FormattedMessage id="headlineBlock.headerOne" defaultMessage="Header One" />
-                                    </MenuItem>
-                                    <MenuItem value="header-two">
-                                        <FormattedMessage id="headlineBlock.headerTwo" defaultMessage="Header Two" />
-                                    </MenuItem>
-                                    <MenuItem value="header-three">
-                                        <FormattedMessage id="headlineBlock.headerThree" defaultMessage="Header Three" />
-                                    </MenuItem>
-                                </FinalFormSelect>
-                            )}
-                        </Field>
+                        <SelectField name="level" label={<FormattedMessage id="headlineBlock.level" defaultMessage="Level" />} fullWidth>
+                            <MenuItem value="header-one">
+                                <FormattedMessage id="headlineBlock.headerOne" defaultMessage="Header One" />
+                            </MenuItem>
+                            <MenuItem value="header-two">
+                                <FormattedMessage id="headlineBlock.headerTwo" defaultMessage="Header Two" />
+                            </MenuItem>
+                            <MenuItem value="header-three">
+                                <FormattedMessage id="headlineBlock.headerThree" defaultMessage="Header Three" />
+                            </MenuItem>
+                        </SelectField>
                     </BlocksFinalForm>
                 ),
             }),

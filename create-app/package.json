@@ -1,6 +1,6 @@
 {
     "name": "@comet/create-app",
-    "version": "1.0.1",
+    "version": "1.6.0",
     "description": "Command-line interface to create a new Comet application",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
     "bugs": {
@@ -22,8 +22,9 @@
         "prebuild": "npm run clean",
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
-        "lint": "npm run lint:eslint && npm run lint:tsc",
-        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/ package.json",
+        "lint": "run-p lint:prettier lint:eslint lint:tsc",
+        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
+        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
         "prepublishOnly": "npm run lint && npm run build",
         "prestart": "npm run clean",
@@ -38,10 +39,10 @@
     },
     "devDependencies": {
         "@comet/eslint-config": "^6.1.0",
-        "@tsconfig/node18": "^18.2.2",
-        "@types/prompts": "^2.4.4",
+        "@tsconfig/node20": "^20.1.2",
+        "@types/node": "^20.0.0",
         "prettier": "^2.1.2",
-        "typescript": "^5.2.2"
+        "typescript": "~5.1.0"
     },
     "publishConfig": {
         "access": "public",

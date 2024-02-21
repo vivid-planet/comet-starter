@@ -15,7 +15,7 @@ export default function AuthenticatedPreviewPage(props: InferGetServerSidePropsT
 }
 
 export const getServerSideProps: GetServerSideProps<PageUniversalProps> = async (context) => {
-    if (process.env.NODE_ENV === "production" && process.env.SITE_IS_PREVIEW !== "true") {
+    if (process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_SITE_IS_PREVIEW !== "true") {
         return { notFound: true };
     }
 
