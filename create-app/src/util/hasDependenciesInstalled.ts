@@ -6,5 +6,8 @@ export function hasDependenciesInstalled(microservice: string): boolean {
         return false;
     }
     const packageJson = fs.readFileSync(`${process.cwd()}/${microservice}/package.json`, "utf8");
-    return (packageJson.includes("dependencies") || packageJson.includes("devDependencies")) && fs.existsSync("node_modules");
+    return (
+        (packageJson.includes("dependencies") || packageJson.includes("devDependencies")) &&
+        fs.existsSync(`${process.cwd()}/${microservice}/node_modules`)
+    );
 }
