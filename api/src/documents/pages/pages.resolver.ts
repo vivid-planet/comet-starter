@@ -1,11 +1,12 @@
 import {
+    AffectedEntity,
     OffsetBasedPaginationArgs,
     PageTreeNodeInterface,
     PageTreeNodeVisibility,
     PageTreeService,
+    RequiredPermission,
     SortArgs,
     SortDirection,
-    SubjectEntity,
     validateNotModified,
 } from "@comet/cms-api";
 import { QueryOrderMap } from "@mikro-orm/core";
@@ -23,6 +24,7 @@ import { Page } from "./entities/page.entity";
 class PagesArgs extends IntersectionType(OffsetBasedPaginationArgs, SortArgs) {}
 
 @Resolver(() => Page)
+@RequiredPermission(["pageTree"])
 export class PagesResolver {
     constructor(@InjectRepository(Page) private readonly repository: EntityRepository<Page>, private readonly pageTreeService: PageTreeService) {}
 
@@ -52,7 +54,7 @@ export class PagesResolver {
     }
 
     @Mutation(() => Page)
-    @SubjectEntity(Page, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
+    @AffectedEntity(Page, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
     async savePage(
         @Args("pageId", { type: () => ID }) pageId: string,
         @Args("input", { type: () => PageInput }) input: PageInput,

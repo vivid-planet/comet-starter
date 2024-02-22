@@ -18,6 +18,7 @@
         "lint": "npm run lint:prepare && run-p lint:eslint lint:tsc",
         "lint:prepare": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
+        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
         "lint:tscPreBuild": "tsc --project tsconfig.preBuild.json",
         "generate-block-types": "comet generate-block-types",
@@ -26,7 +27,7 @@
         "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/"
     },
     "dependencies": {
-        "@comet/cms-site": "^5.6.0",
+        "@comet/cms-site": "^6.1.0",
         "@next/bundle-analyzer": "^12.3.4",
         "@opentelemetry/api": "^1.7.0",
         "@opentelemetry/auto-instrumentations-node": "^0.40.0",
@@ -47,8 +48,8 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
-        "@comet/cli": "^5.6.0",
-        "@comet/eslint-config": "^5.6.0",
+        "@comet/cli": "^6.1.0",
+        "@comet/eslint-config": "^6.1.0",
         "@formatjs/cli": "^4.2.33",
         "@gitbeaker/node": "^35.6.0",
         "@graphql-codegen/add": "^3.0.0",
