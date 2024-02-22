@@ -45,6 +45,5 @@ sh ./admin/intl-update.sh
 npm --prefix admin install
 npm --prefix api install
 npm --prefix site install
-wait
 
 mkdir -p ./api/uploads
