@@ -9,9 +9,3 @@
 
 # Go Templates can not be formatted with prettier (https://github.com/prettier/prettier/issues/6517)
 chart/*/templates/*
-
-# Microservices are checked by each microservice on its own
-admin/
-api/
-site/
-create-app/
