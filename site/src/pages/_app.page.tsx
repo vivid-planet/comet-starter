@@ -9,11 +9,92 @@ import { IntlProvider } from "react-intl";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+    /* this fixes a problem with flexbox and avoids overflows https://defensivecss.dev/tip/flexbox-min-content-size/ */
+    * {
+        min-width: 0;
+    }
+
+    /*
+        Prevent adjustments of font size after orientation changes in iOS.
+    */
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    /* 
+        Remove the margin in all browsers.
+        Improve text rendering with font-smoothing
+    */
     body {
         margin: 0;
         -webkit-text-size-adjust: none;
         font-family: sans-serif;
         font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Remove default margin from headlines and text */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        margin: 0;
+    }
+
+    /* Prevent sub and sup elements from affecting the line height in all browsers. */
+    sub,
+    sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+    }
+
+    sub {
+        bottom: -0.25em;
+    }
+
+    sup {
+        top: -0.5em;
+    }
+
+    /* Change the font styles in all browsers. */
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+        font-size: 100%;
+    }
+
+    /* adjust form border for iOS */
+    input,
+    select,
+    textarea {
+        border-radius: 0;
+    }
+
+    /* Improve media defaults */
+    img,
+    picture,
+    video,
+    canvas,
+    svg {
+        display: block;
+        max-width: 100%;
+    }
+
+    /*
+        Create a root stacking context
+        the isolation property allows us to create a new stacking context without needing to set a z-index.
+    */
+    #root,
+    #__next {
+        isolation: isolate;
     }
 `;
 
