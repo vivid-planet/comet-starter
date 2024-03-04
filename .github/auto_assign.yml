@@ -9,8 +9,5 @@ reviewers:
   - nsams
   - thomasdax98
 
-skipUsers:
-  - dependabot[bot]
-
 skipKeywords:
   - Merge main into next
