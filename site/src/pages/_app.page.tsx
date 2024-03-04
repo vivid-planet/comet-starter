@@ -21,15 +21,14 @@ const GlobalStyle = createGlobalStyle`
         -webkit-text-size-adjust: 100%;
     }
 
-    /* 
-        Remove the margin in all browsers.
-        Improve text rendering with font-smoothing
-    */
     body {
         margin: 0;
-        -webkit-text-size-adjust: none;
         font-family: sans-serif;
-        font-weight: 400;
+
+        /* Prevent font size adjustments after orientation changes in mobile devices */
+        -webkit-text-size-adjust: none;
+
+        /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
@@ -62,19 +61,14 @@ const GlobalStyle = createGlobalStyle`
         top: -0.5em;
     }
 
-    /* Change the font styles in all browsers. */
     button,
     input,
     select,
     textarea {
+        /* Change the font styles in all browsers. */
         font: inherit;
-        font-size: 100%;
-    }
 
-    /* adjust form border for iOS */
-    input,
-    select,
-    textarea {
+        /* adjust form border for iOS */
         border-radius: 0;
     }
 
