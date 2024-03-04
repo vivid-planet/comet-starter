@@ -1,4 +1,5 @@
 import {
+    AccessLogModule,
     BlobStorageModule,
     BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES,
     BlocksModule,
@@ -132,6 +133,7 @@ export class AppModule {
                 ProductsModule,
                 MenusModule,
                 DependenciesModule,
+                ...(process.env.NODE_ENV === "production" ? [AccessLogModule] : []),
             ],
         };
     }
