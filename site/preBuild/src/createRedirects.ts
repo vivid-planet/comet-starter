@@ -1,12 +1,14 @@
 import { gql } from "graphql-request";
-import { Redirect } from "next/dist/lib/load-custom-routes";
+import { Redirect, Rewrite } from "next/dist/lib/load-custom-routes";
 
 import { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "../../src/blocks.generated";
 import { createGraphQLClient } from "../../src/util/createGraphQLClient";
 import { GQLRedirectsQuery, GQLRedirectsQueryVariables } from "./createRedirects.generated";
 
 const createRedirects = async () => {
-    return [...(await createApiRedirects()), ...(await createInternalRedirects())];
+    const { rewrites, redirects } = await createApiRedirects();
+
+    return { rewrites, redirects: [...redirects, ...(await createInternalRedirects())] };
 };
 
 const redirectsQuery = gql`
@@ -53,14 +55,15 @@ const createInternalRedirects = async (): Promise<Redirect[]> => {
         },
     ];
 };
-const createApiRedirects = async (): Promise<Redirect[]> => {
+const createApiRedirects = async (): Promise<{ redirects: Redirect[]; rewrites: Rewrite[] }> => {
     const apiUrl = process.env.API_URL_INTERNAL;
     if (!apiUrl) {
         console.error("No Environment Variable API_URL_INTERNAL available. Can not perform redirect config");
-        return [];
+        return { redirects: [], rewrites: [] };
     }
 
     const redirects: Redirect[] = [];
+    const rewrites: Rewrite[] = [];
 
     for await (const redirect of getRedirects()) {
         let source: string | undefined;
@@ -90,11 +93,19 @@ const createApiRedirects = async (): Promise<Redirect[]> => {
         }
 
         if (source && destination) {
-            redirects.push({ source, destination, permanent: true });
+            if (source.toLowerCase() === destination.toLowerCase()) {
+                const newSource = source
+                    .split("")
+                    .map((char) => (char.toLowerCase() === char.toUpperCase() ? char : `(${char.toLowerCase()}|${char.toUpperCase()})`))
+                    .join("");
+                rewrites.push({ source: newSource, destination });
+            } else {
+                redirects.push({ source, destination, permanent: true });
+            }
         }
     }
 
-    return redirects;
+    return { redirects, rewrites };
 };
 
 export { createRedirects };

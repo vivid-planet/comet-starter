@@ -35,9 +35,14 @@ const nextConfig = {
     pageExtensions: ["page.ts", "page.tsx"],
     cleanDistDir: process.env.NODE_ENV !== "production", // sitemap and robots.txt are pre-existing
     basePath: process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true" ? "/site" : "",
+    rewrites: async () => {
+        if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true") return [];
+        var { rewrites } = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
+        return rewrites;
+    },
     redirects: async () => {
         if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true") return [];
-        var redirects = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
+        var { redirects } = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
         return redirects;
     },
     images: {
