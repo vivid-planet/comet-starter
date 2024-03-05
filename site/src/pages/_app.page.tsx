@@ -68,7 +68,7 @@ const GlobalStyle = createGlobalStyle`
         /* Change the font styles in all browsers. */
         font: inherit;
 
-        /* adjust form border for iOS */
+        /* Remove default border-radius that is added by iOS Safari */
         border-radius: 0;
     }
 
