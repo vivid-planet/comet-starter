@@ -23,7 +23,6 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         margin: 0;
-        font-family: sans-serif;
 
         /* Prevent font size adjustments after orientation changes in mobile devices */
         -webkit-text-size-adjust: none;
