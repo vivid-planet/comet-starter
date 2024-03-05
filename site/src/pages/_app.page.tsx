@@ -9,7 +9,7 @@ import { IntlProvider } from "react-intl";
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-    /* this fixes a problem with flexbox and avoids overflows https://defensivecss.dev/tip/flexbox-min-content-size/ */
+    /* Fix a problem with Flexbox to avoid overflows: https://defensivecss.dev/tip/flexbox-min-content-size/ */
     * {
         min-width: 0;
     }
