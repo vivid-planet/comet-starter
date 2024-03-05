@@ -43,7 +43,7 @@ const GlobalStyle = createGlobalStyle`
         margin: 0;
     }
 
-    /* Prevent sub and sup elements from affecting the line height in all browsers. */
+    /* Prevent sub and sup elements from affecting the line height in all browsers */
     sub,
     sup {
         font-size: 75%;
