@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     /*
-        Prevent adjustments of font size after orientation changes in iOS.
+        Prevent adjustments of font size after orientation changes in iOS
     */
     html {
         -webkit-text-size-adjust: 100%;
