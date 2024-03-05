@@ -64,7 +64,7 @@ const GlobalStyle = createGlobalStyle`
     input,
     select,
     textarea {
-        /* inherit font to apply the webs default font for form elements */
+        /* Use the application's default font for form elements */
         font: inherit;
 
         /* Remove default border-radius that is added by iOS Safari */
