@@ -37,7 +37,7 @@ const nextConfig = {
     basePath: process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true" ? "/site" : "",
     rewrites: async () => {
         if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true") return [];
-        var { rewrites } = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
+        var rewrites = await require("./preBuild/build/preBuild/src/createRewrites").createRewrites();
         return rewrites;
     },
     redirects: async () => {

@@ -24,7 +24,7 @@ const redirectsQuery = gql`
     }
 `;
 
-async function* getRedirects() {
+export async function* getRedirects() {
     let offset = 0;
     const limit = 100;
 
@@ -87,21 +87,13 @@ const createApiRedirects = async (): Promise<{ redirects: Redirect[]; rewrites: 
             }
         }
 
-        if (source === destination) {
+        if (source?.toLowerCase() === destination?.toLowerCase()) {
             console.warn(`Skipping redirect loop ${source} -> ${destination}`);
             continue;
         }
 
-        if (source && destination) {
-            if (source.toLowerCase() === destination.toLowerCase()) {
-                const newSource = source
-                    .split("")
-                    .map((char) => (char.toLowerCase() === char.toUpperCase() ? char : `(${char.toLowerCase()}|${char.toUpperCase()})`))
-                    .join("");
-                rewrites.push({ source: newSource, destination });
-            } else {
-                redirects.push({ source, destination, permanent: true });
-            }
+        if (source && destination && source.toLowerCase() !== destination.toLowerCase()) {
+            redirects.push({ source, destination, permanent: true });
         }
     }
 
