@@ -1,14 +1,12 @@
 import { gql } from "graphql-request";
-import { Redirect, Rewrite } from "next/dist/lib/load-custom-routes";
+import { Redirect } from "next/dist/lib/load-custom-routes";
 
 import { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "../../src/blocks.generated";
 import { createGraphQLClient } from "../../src/util/createGraphQLClient";
 import { GQLRedirectsQuery, GQLRedirectsQueryVariables } from "./createRedirects.generated";
 
 const createRedirects = async () => {
-    const { rewrites, redirects } = await createApiRedirects();
-
-    return { rewrites, redirects: [...redirects, ...(await createInternalRedirects())] };
+    return [...(await createApiRedirects()), ...(await createInternalRedirects())];
 };
 
 const redirectsQuery = gql`
@@ -55,15 +53,14 @@ const createInternalRedirects = async (): Promise<Redirect[]> => {
         },
     ];
 };
-const createApiRedirects = async (): Promise<{ redirects: Redirect[]; rewrites: Rewrite[] }> => {
+const createApiRedirects = async (): Promise<Redirect[]> => {
     const apiUrl = process.env.API_URL_INTERNAL;
     if (!apiUrl) {
         console.error("No Environment Variable API_URL_INTERNAL available. Can not perform redirect config");
-        return { redirects: [], rewrites: [] };
+        return [];
     }
 
     const redirects: Redirect[] = [];
-    const rewrites: Rewrite[] = [];
 
     for await (const redirect of getRedirects()) {
         let source: string | undefined;
@@ -97,7 +94,7 @@ const createApiRedirects = async (): Promise<{ redirects: Redirect[]; rewrites: 
         }
     }
 
-    return { redirects, rewrites };
+    return redirects;
 };
 
 export { createRedirects };

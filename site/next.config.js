@@ -42,7 +42,7 @@ const nextConfig = {
     },
     redirects: async () => {
         if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW === "true") return [];
-        var { redirects } = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
+        var redirects = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
         return redirects;
     },
     images: {
