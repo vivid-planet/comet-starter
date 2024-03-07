@@ -89,7 +89,7 @@ const createApiRedirects = async (): Promise<Redirect[]> => {
             continue;
         }
 
-        if (source && destination && source.toLowerCase() !== destination.toLowerCase()) {
+        if (source && destination) {
             redirects.push({ source, destination, permanent: true });
         }
     }
