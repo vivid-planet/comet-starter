@@ -78,6 +78,7 @@ const GlobalStyle = createGlobalStyle`
     /*
         Create a root stacking context
         the isolation property allows us to create a new stacking context without needing to set a z-index.
+        Fore more info please check out https://www.joshwcomeau.com/css/custom-css-reset/#eight-root-stacking-context-9
     */
     #root,
     #__next {
