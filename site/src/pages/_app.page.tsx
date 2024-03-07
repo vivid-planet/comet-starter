@@ -14,19 +14,13 @@ const GlobalStyle = createGlobalStyle`
         min-width: 0;
     }
 
-    /*
-        Prevent adjustments of font size after orientation changes in iOS
-    */
+    /* Prevent font size adjustments after orientation changes in mobile devices*/
     html {
         -webkit-text-size-adjust: 100%;
     }
 
     body {
         margin: 0;
-
-        /* Prevent font size adjustments after orientation changes in mobile devices */
-        -webkit-text-size-adjust: none;
-
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
