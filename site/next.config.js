@@ -42,6 +42,7 @@ const nextConfig = {
     },
     images: {
         deviceSizes: cometConfig.dam.allowedImageSizes,
+        imageSizes: cometConfig.dam.allowedImageSizes,
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         var path = require("path");
