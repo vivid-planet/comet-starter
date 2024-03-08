@@ -1,4 +1,3 @@
-import { gql, useQuery } from "@apollo/client";
 import { Domain as DomainIcon, Language as LanguageIcon } from "@comet/admin-icons";
 import {
     ContentScopeConfigProps,
@@ -10,12 +9,11 @@ import {
     useContentScope as useContentScopeLibrary,
     UseContentScopeApi,
     useContentScopeConfig as useContentScopeConfigLibrary,
+    useCurrentUser,
     useSitesConfig,
 } from "@comet/cms-admin";
-import { CircularProgress } from "@mui/material";
+import { SitesConfig } from "@src/config";
 import React from "react";
-
-import { GQLCurrentUserScopeQuery, GQLCurrentUserScopeQueryVariables } from "./ContentScopeProvider.generated";
 
 type Domain = "main" | "secondary" | string;
 type Language = "en" | string;
@@ -49,29 +47,21 @@ export function useContentScopeConfig(p: ContentScopeConfigProps): void {
     return useContentScopeConfigLibrary(p);
 }
 
-const currentUserQuery = gql`
-    query CurrentUserScope {
-        currentUser {
-            role
-            domains
-        }
-    }
-`;
-
 export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
-    const sitesConfig = useSitesConfig();
-    const { loading, data } = useQuery<GQLCurrentUserScopeQuery, GQLCurrentUserScopeQueryVariables>(currentUserQuery);
+    const sitesConfig = useSitesConfig<SitesConfig>();
+    const user = useCurrentUser();
 
-    if (loading || !data) return <CircularProgress />;
-
-    const allowedUserDomains = data.currentUser.domains;
+    const allowedUserDomains = user.allowedContentScopes.map((contentScope) => contentScope.domain);
 
     const allowedSiteConfigs = Object.fromEntries(
-        Object.entries(sitesConfig.configs).filter(([siteKey, siteConfig]) => (allowedUserDomains ? allowedUserDomains.includes(siteKey) : true)),
+        Object.entries(sitesConfig.configs).filter(([siteKey, _siteConfig]) => allowedUserDomains.includes(siteKey)),
     );
     const values: ContentScopeValues<ContentScope> = {
         domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key })),
-        language: [{ label: "English", value: "en" }],
+        language: [
+            { label: "English", value: "en" },
+            { label: "German", value: "de" },
+        ],
     };
 
     return (

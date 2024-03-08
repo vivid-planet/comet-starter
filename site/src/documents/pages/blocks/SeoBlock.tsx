@@ -1,5 +1,6 @@
 import { generateImageUrl, PropsWithData } from "@comet/cms-site";
 import { SeoBlockData } from "@src/blocks.generated";
+import { useContentScope } from "@src/common/contentScope/ContentScope";
 import Head from "next/head";
 import * as React from "react";
 
@@ -8,10 +9,11 @@ interface SeoBlockProps extends PropsWithData<SeoBlockData> {
     canonicalUrl: string;
 }
 export const SeoBlock: React.FunctionComponent<SeoBlockProps> = ({
-    data: { htmlTitle, metaDescription, openGraphTitle, openGraphDescription, openGraphImage, noIndex },
+    data: { htmlTitle, metaDescription, openGraphTitle, openGraphDescription, openGraphImage, noIndex, alternativeLinks },
     title,
     canonicalUrl,
 }) => {
+    const { language } = useContentScope();
     const usedHtmlTitle = htmlTitle && htmlTitle != "" ? htmlTitle : title;
     return (
         <>
@@ -21,6 +23,10 @@ export const SeoBlock: React.FunctionComponent<SeoBlockProps> = ({
                 {/* Meta*/}
                 {metaDescription && <meta name="description" content={metaDescription} />}
                 <link rel="canonical" href={canonicalUrl} />
+                <link rel="alternate" hrefLang={language} href={canonicalUrl} />
+                {alternativeLinks.map((link) => (
+                    <link key={link.code} rel="alternate" hrefLang={link.code} href={link.url} />
+                ))}
 
                 {/* Open Graph */}
                 {openGraphTitle && <meta property={"og:title"} content={openGraphTitle} />}

@@ -1,27 +1,22 @@
 import {
-    OffsetBasedPaginationArgs,
+    AffectedEntity,
     PageTreeNodeInterface,
     PageTreeNodeVisibility,
     PageTreeService,
-    SortArgs,
-    SortDirection,
+    RequiredPermission,
     validateNotModified,
 } from "@comet/cms-api";
-import { QueryOrderMap } from "@mikro-orm/core";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
 import { UnauthorizedException } from "@nestjs/common";
-import { Args, ArgsType, ID, IntersectionType, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 
 import { PageInput } from "./dto/page.input";
-import { PaginatedPages } from "./dto/paginated-pages";
 import { Page } from "./entities/page.entity";
 
-@ArgsType()
-class PagesArgs extends IntersectionType(OffsetBasedPaginationArgs, SortArgs) {}
-
 @Resolver(() => Page)
+@RequiredPermission(["pageTree"])
 export class PagesResolver {
     constructor(@InjectRepository(Page) private readonly repository: EntityRepository<Page>, private readonly pageTreeService: PageTreeService) {}
 
@@ -30,27 +25,13 @@ export class PagesResolver {
         return this.repository.findOne(pageId);
     }
 
-    @Query(() => PaginatedPages)
-    async pages(@Args() args: PagesArgs): Promise<PaginatedPages> {
-        const { offset, limit, sortColumnName, sortDirection = SortDirection.ASC } = args;
-
-        let orderBy: QueryOrderMap<Page> | undefined;
-
-        if (sortColumnName) {
-            orderBy = { [sortColumnName]: sortDirection };
-        }
-
-        const [pages, totalCount] = await this.repository.findAndCount({}, { offset, limit, orderBy });
-
-        return new PaginatedPages(pages, totalCount, args);
-    }
-
     @ResolveField(() => PageTreeNode, { nullable: true })
     async pageTreeNode(@Parent() page: Page): Promise<PageTreeNodeInterface | null> {
         return this.pageTreeService.createReadApi().getFirstNodeByAttachedPageId(page.id);
     }
 
     @Mutation(() => Page)
+    @AffectedEntity(Page, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
     async savePage(
         @Args("pageId", { type: () => ID }) pageId: string,
         @Args("input", { type: () => PageInput }) input: PageInput,

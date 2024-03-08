@@ -1,19 +1,19 @@
 import {
+    AccessLogModule,
     BlobStorageModule,
     BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
     BuildsModule,
-    ContentScope,
-    ContentScopeModule,
-    CurrentUserInterface,
     DamModule,
+    DependenciesModule,
     FilesService,
     ImagesService,
     KubernetesModule,
     PageTreeModule,
     PageTreeService,
     RedirectsModule,
+    UserPermissionsModule,
 } from "@comet/cms-api";
 import { ApolloDriver } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
@@ -28,10 +28,13 @@ import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 import { ProductsModule } from "@src/products/products.module";
 import { Request } from "express";
 
+import { AccessControlService } from "./auth/access-control.service";
 import { AuthModule } from "./auth/auth.module";
-import { AuthLocalModule } from "./auth/auth-local.module";
+import { UserService } from "./auth/user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
+import { DamFile } from "./dam/entities/dam-file.entity";
+import { DamFolder } from "./dam/entities/dam-folder.entity";
 import { MenusModule } from "./menus/menus.module";
 import { StatusModule } from "./status/status.module";
 
@@ -66,12 +69,21 @@ export class AppModule {
                     }),
                     inject: [BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES],
                 }),
-                config.auth.useAuthProxy ? AuthModule.forRoot(config) : AuthLocalModule.forRoot(config),
-                ContentScopeModule.forRoot({
-                    canAccessScope(requestScope: ContentScope, user: CurrentUserInterface) {
-                        if (!user.domains) return true; //all domains
-                        return user.domains.includes(requestScope.domain);
-                    },
+                AuthModule,
+                UserPermissionsModule.forRootAsync({
+                    useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
+                        availablePermissions: ["products"],
+                        availableContentScopes: [
+                            { domain: "main", language: "de" },
+                            { domain: "main", language: "en" },
+                            { domain: "secondary", language: "de" },
+                            { domain: "secondary", language: "en" },
+                        ],
+                        userService,
+                        accessControlService,
+                    }),
+                    inject: [UserService, AccessControlService],
+                    imports: [AuthModule],
                 }),
                 BlocksModule.forRoot({
                     imports: [PageTreeModule, DamModule],
@@ -102,6 +114,8 @@ export class AppModule {
                     backend: config.blob.storage,
                 }),
                 DamModule.register({
+                    File: DamFile,
+                    Folder: DamFolder,
                     damConfig: {
                         filesBaseUrl: `${config.apiUrl}/dam/files`,
                         imagesBaseUrl: `${config.apiUrl}/dam/images`,
@@ -118,6 +132,8 @@ export class AppModule {
                 StatusModule,
                 ProductsModule,
                 MenusModule,
+                DependenciesModule,
+                ...(process.env.NODE_ENV === "production" ? [AccessLogModule] : []),
             ],
         };
     }

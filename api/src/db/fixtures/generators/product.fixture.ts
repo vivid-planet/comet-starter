@@ -1,8 +1,9 @@
+import { faker } from "@faker-js/faker";
 import { EntityRepository } from "@mikro-orm/postgresql";
+import { staticUsers } from "@src/auth/static-users";
 import { Product } from "@src/products/entities/product.entity";
 import { mapLimit } from "async";
 import { SingleBar } from "cli-progress";
-import * as faker from "faker";
 
 interface GenerateProducts {
     repository: EntityRepository<Product>;
@@ -12,7 +13,7 @@ interface GenerateProducts {
 
 export const generateProducts = async ({ repository, bar, total }: GenerateProducts): Promise<Product[]> => {
     const generateRandomProduct = async (): Promise<Product> => {
-        const product = repository.create({ name: faker.random.word(), description: faker.random.words(), creatorId: faker.datatype.uuid() });
+        const product = repository.create({ name: faker.lorem.word(), description: faker.lorem.words(), creatorId: staticUsers[0].id });
         repository.persist(product);
 
         bar.increment(1, {

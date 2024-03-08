@@ -1,23 +1,23 @@
 import { gql } from "@apollo/client";
-import { MainContent, RouterPrompt, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
+import { Loading, MainContent, RouterPrompt, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft, Preview } from "@comet/admin-icons";
 import { AdminComponentRoot, AdminTabLabel } from "@comet/blocks-admin";
 import {
     BlockPreviewWithTabs,
     createUsePage,
     EditPageLayout,
-    openPreviewWindow,
+    openSitePreviewWindow,
     PageName,
     useBlockPreview,
     useCmsBlockContext,
     useSiteConfig,
 } from "@comet/cms-admin";
-import { Button, CircularProgress, IconButton, Stack } from "@mui/material";
+import { Button, IconButton, Stack } from "@mui/material";
 import { useContentScope } from "@src/common/ContentScopeProvider";
 import { GQLPageTreeNodeCategory } from "@src/graphql.generated";
 import * as React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useHistory, useRouteMatch } from "react-router";
+import { useRouteMatch } from "react-router";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
@@ -68,13 +68,8 @@ const usePage = createUsePage({
 
 export const EditPage: React.FC<Props> = ({ id, category }) => {
     const intl = useIntl();
-    const history = useHistory();
     const { pageState, rootBlocksApi, hasChanges, loading, dialogs, pageSaveButton, handleSavePage } = usePage({
         pageId: id,
-
-        onValidationFailed: () => {
-            history.push(`${match}/content`);
-        },
     });
 
     const match = useRouteMatch();
@@ -98,7 +93,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
     if (!pageState) return <></>;
 
     if (loading) {
-        return <CircularProgress />;
+        return <Loading behavior="fillPageHeight" />;
     }
 
     return (
@@ -136,7 +131,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             startIcon={<Preview />}
                             disabled={!pageState}
                             onClick={() => {
-                                openPreviewWindow(pageState.path, contentScopeMatch.url);
+                                openSitePreviewWindow(pageState.path, contentScopeMatch.url);
                             }}
                             color="info"
                         >

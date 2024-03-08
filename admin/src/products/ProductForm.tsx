@@ -1,16 +1,17 @@
 import { useMutation, useQuery } from "@apollo/client";
 import {
-    Field,
     FinalForm,
-    FinalFormInput,
     FinalFormSaveSplitButton,
+    Loading,
     MainContent,
+    TextAreaField,
+    TextField,
     Toolbar,
     ToolbarActions,
     ToolbarBackButton,
     ToolbarFillSpace,
 } from "@comet/admin";
-import { Card, CardContent, CircularProgress } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
@@ -52,17 +53,14 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
 
     const submit = useSubmitMutation(id);
 
-    const { data, error, loading } = useQuery<GQLProductQuery, GQLProductQueryVariables>(productQuery, {
-        variables: { id: id as string },
-        skip: !id,
-    });
+    const { data, error, loading } = useQuery<GQLProductQuery, GQLProductQueryVariables>(productQuery, id ? { variables: { id } } : { skip: true });
 
     if (error) {
         return <FormattedMessage id="common.error" defaultMessage="Something went wrong. Please try again later." />;
     }
 
     if (loading) {
-        return <CircularProgress />;
+        return <Loading behavior="fillPageHeight" />;
     }
 
     const initialValues: Partial<FormValues> = data?.product ?? {};
@@ -79,20 +77,11 @@ export function ProductForm({ id }: FormProps): React.ReactElement {
             <MainContent>
                 <Card>
                     <CardContent>
-                        <Field
+                        <TextField required fullWidth name="name" label={intl.formatMessage({ id: "products.name", defaultMessage: "Name" })} />
+                        <TextAreaField
                             required
                             fullWidth
-                            name="name"
-                            component={FinalFormInput}
-                            label={intl.formatMessage({ id: "products.name", defaultMessage: "Name" })}
-                        />
-                        <Field
-                            required
-                            fullWidth
-                            multiline
-                            rows={5}
                             name="description"
-                            component={FinalFormInput}
                             label={intl.formatMessage({ id: "products.description", defaultMessage: "Description" })}
                         />
                     </CardContent>

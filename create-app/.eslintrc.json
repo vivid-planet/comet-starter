@@ -1,0 +1,6 @@
+{
+    "extends": ["@comet/eslint-config/nestjs"],
+    "rules": {
+        "@comet/no-other-module-relative-import": "off"
+    }
+}
