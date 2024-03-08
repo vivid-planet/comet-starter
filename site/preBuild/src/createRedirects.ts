@@ -34,7 +34,30 @@ export async function* getRedirects() {
             limit,
         });
 
-        yield* paginatedRedirects.nodes;
+        yield* paginatedRedirects.nodes.map((redirect) => {
+            let source: string | undefined;
+            let destination: string | undefined;
+
+            if (redirect.sourceType === "path") {
+                source = redirect.source;
+            }
+
+            const target = redirect.target as RedirectsLinkBlockData;
+
+            if (target.block !== undefined) {
+                switch (target.block.type) {
+                    case "internal":
+                        destination = (target.block.props as InternalLinkBlockData).targetPage?.path;
+                        break;
+
+                    case "external":
+                        destination = (target.block.props as ExternalLinkBlockData).targetUrl;
+                        break;
+                }
+            }
+
+            return { ...redirect, source, destination };
+        });
 
         if (offset + limit >= paginatedRedirects.totalCount) {
             break;
@@ -63,27 +86,7 @@ const createApiRedirects = async (): Promise<Redirect[]> => {
     const redirects: Redirect[] = [];
 
     for await (const redirect of getRedirects()) {
-        let source: string | undefined;
-        let destination: string | undefined;
-
-        if (redirect.sourceType === "path") {
-            source = redirect.source;
-        }
-
-        const target = redirect.target as RedirectsLinkBlockData;
-
-        if (target.block !== undefined) {
-            switch (target.block.type) {
-                case "internal":
-                    destination = (target.block.props as InternalLinkBlockData).targetPage?.path;
-                    break;
-
-                case "external":
-                    destination = (target.block.props as ExternalLinkBlockData).targetUrl;
-                    break;
-            }
-        }
-
+        const { source, destination } = redirect;
         if (source?.toLowerCase() === destination?.toLowerCase()) {
             console.warn(`Skipping redirect loop ${source} -> ${destination}`);
             continue;

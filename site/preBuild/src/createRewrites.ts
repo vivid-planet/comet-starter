@@ -1,6 +1,5 @@
 import { Rewrite } from "next/dist/lib/load-custom-routes";
 
-import { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "../../src/blocks.generated";
 import { getRedirects } from "./createRedirects";
 
 const createRewrites = async () => {
@@ -13,26 +12,7 @@ const createRewrites = async () => {
     const rewrites: Rewrite[] = [];
 
     for await (const redirect of getRedirects()) {
-        let source: string | undefined;
-        let destination: string | undefined;
-
-        if (redirect.sourceType === "path") {
-            source = redirect.source;
-        }
-
-        const target = redirect.target as RedirectsLinkBlockData;
-
-        if (target.block !== undefined) {
-            switch (target.block.type) {
-                case "internal":
-                    destination = (target.block.props as InternalLinkBlockData).targetPage?.path;
-                    break;
-
-                case "external":
-                    destination = (target.block.props as ExternalLinkBlockData).targetUrl;
-                    break;
-            }
-        }
+        const { source, destination } = redirect;
 
         if (source && destination && source.toLowerCase() === destination.toLowerCase()) {
             const firstChar = source.charAt(1);
