@@ -166,7 +166,7 @@ type Product {
   name: String!
   description: String!
   createdAt: DateTime!
-  updatedAt: DateTime
+  updatedAt: DateTime!
 }
 
 type Link implements DocumentInterface {

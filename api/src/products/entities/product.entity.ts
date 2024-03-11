@@ -31,7 +31,7 @@ export class Product extends BaseEntity<Product, "id"> {
     })
     createdAt: Date = new Date();
 
-    @Field({ nullable: true })
+    @Field()
     @Property({
         columnType: "timestamp with time zone",
         onUpdate: () => new Date(),
