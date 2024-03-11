@@ -26,7 +26,6 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Remove default margin from headlines and text */
     h1,
     h2,
     h3,
