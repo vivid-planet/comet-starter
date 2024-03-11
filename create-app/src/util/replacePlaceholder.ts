@@ -26,11 +26,13 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
                 }
             }
         } catch (e) {
-            console.log(e);
-            console.log(kleur.yellow(`Could not replace placeholder in ${file}`));
+            console.log(kleur.yellow(`Warn: Could not replace placeholder in ${file}`));
+            if (verbose) {
+                console.log(kleur.grey(`Info: ${e}`));
+            }
         }
     });
     if (verbose) {
-        console.log(kleur.green(`Successfully replaced content in ${changedFiles} files`));
+        console.log(kleur.grey(`Info: Successfully replaced content in ${changedFiles} files`));
     }
 }

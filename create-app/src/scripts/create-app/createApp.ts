@@ -18,40 +18,45 @@ interface ProjectConfiguration {
 }
 
 export async function createApp(projectConfiguration: ProjectConfiguration) {
-    console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
+    console.log(`Creating a new Comet app in ${kleur.blue(`${process.cwd()}\n`)}`);
     createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
-    cleanupReadme();
+    cleanupReadme(projectConfiguration.verbose);
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
-    createInitialGitCommit();
+    createInitialGitCommit(projectConfiguration.verbose);
     if (projectConfiguration.install) {
         const spinner = createSpinner("Installing project...").spin();
         try {
             execSync("sh ./install.sh");
             spinner.success();
-            console.log("Installation completed successfully.");
+            if (projectConfiguration.verbose) console.log(kleur.grey("Info: Successfully installed project."));
+            runEslintFix(projectConfiguration.verbose);
         } catch (error) {
-            spinner.error({ text: `An error occurred while installing the project: ${error}` });
+            spinner.error();
+            console.log(kleur.yellow("Warn: Could not install project."));
+            if (projectConfiguration.verbose) console.log(kleur.grey(`Info: ${error}`));
         }
     }
-    runEslintFix();
     amendCommitChanges();
-    console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
-    console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
-    console.log(kleur.white(`nvm use\n`));
-    console.log(kleur.cyan(`sh ./install.sh\n`));
-    console.log(kleur.white(`Installs dependencies.\n`));
+    console.log(`\nSuccess! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`);
+    console.log(`Inside that directory, you can run several commands:\n`);
+    console.log(kleur.cyan(`nvm use`));
+    console.log(`Switches to the correct Node.js version.\n`);
+    if (!projectConfiguration.install) {
+        console.log(kleur.cyan(`sh ./install.sh`));
+        console.log(`Installs dependencies.\n`);
+    }
     console.log(kleur.cyan(`npm run dev`));
-    console.log(kleur.white(`Starts all services.\n`));
+    console.log(`Starts all services.\n`);
     console.log(kleur.cyan(`npx dev-pm status [--interval]`));
-    console.log(kleur.white(`Checks the status of services.\n`));
+    console.log(`Checks the status of services.\n`);
     console.log(kleur.cyan(`npx dev-pm logs <service>`));
-    console.log(kleur.white(`Shows the logs of a service.\n`));
+    console.log(`Shows the logs of a service.\n`);
     console.log(kleur.cyan(`npx dev-pm restart <service>`));
-    console.log(kleur.white(`Restarts a service.\n`));
+    console.log(`Restarts a service.\n`);
     console.log(kleur.cyan(`npx dev-pm shutdown`));
-    console.log(kleur.white(`Shutdown all services.\n`));
+    console.log(`Shutdown all services.\n`);
     console.log(kleur.cyan(`npm run --prefix api fixtures`));
-    console.log(kleur.white(`Imports fixtures.\n`));
+    console.log(`Imports fixtures.\n`);
     console.log(kleur.green(`\n☄️ Successfully created Comet app: ${projectConfiguration.projectName}`));
 }
