@@ -10,16 +10,16 @@ async function removeFileContent() {
         replacements: Array<string | RegExp>;
     }> = [
         {
-            file: `./admin/src/Routes.tsx`,
-            replacements: [/\s*<.*?products.*?>/g],
+            file: `./admin/src/common/masterMenuData.tsx`,
+            replacements: [/.{217}\.products.*?,\s{5}},\n/gs, /.*Products.*/gm],
         },
         {
-            file: `./admin/src/common/MasterMenu.tsx`,
-            replacements: [/\s*<MenuCollapsibleItem.*products`}\s*\/>\s*<\/MenuCollapsibleItem>/gs],
+            file: `api/src/auth/permission.interface.ts`,
+            replacements: [/\n.*products.*?}\n/gs],
         },
         {
             file: `./api/src/app.module.ts`,
-            replacements: [/\s*ProductsModule,/gs],
+            replacements: [/\s*ProductsModule,/gs, '"products"'],
         },
         {
             file: `./api/src/db/fixtures/fixtures.console.ts`,
