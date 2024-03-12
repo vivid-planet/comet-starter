@@ -4,11 +4,12 @@ import { gql } from "graphql-request";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
-import { GQLPageQuery } from "./Page.generated";
+import { DocumentTypeLoaderOptions, InferDocumentTypeLoaderPropsType } from "./index";
+import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
-export const pageQuery = gql`
-    query Page($pageId: ID!) {
-        pageContent: pageTreeNode(id: $pageId) {
+const pageQuery = gql`
+    query Page($pageTreeNodeId: ID!) {
+        pageContent: pageTreeNode(id: $pageTreeNodeId) {
             name
             path
             document {
@@ -22,8 +23,17 @@ export const pageQuery = gql`
     }
 `;
 
-export function Page(props: PropsWithLayout<GQLPageQuery>): JSX.Element {
+export async function loader({ client, pageTreeNodeId }: DocumentTypeLoaderOptions) {
+    return client.request<GQLPageQuery, GQLPageQueryVariables>(pageQuery, {
+        pageTreeNodeId,
+    });
+}
+
+export function Page(props: PropsWithLayout<InferDocumentTypeLoaderPropsType<typeof loader>>): JSX.Element {
+    if (!props.pageContent) throw new Error("Could not load page content");
     const document = props.pageContent?.document;
+    if (document?.__typename != "Page") throw new Error("invalid document type");
+
     return (
         <Layout {...props.layout}>
             {document?.__typename === "Page" && (
