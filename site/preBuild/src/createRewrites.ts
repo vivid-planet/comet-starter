@@ -15,11 +15,7 @@ const createRewrites = async () => {
         const { source, destination } = redirect;
 
         if (source && destination && source.toLowerCase() === destination.toLowerCase()) {
-            const firstChar = source.charAt(1);
-
-            const pattern = new RegExp(`(${firstChar.toLowerCase()}|${firstChar.toUpperCase()})`, "g");
-
-            rewrites.push({ source: source.replace(pattern, "($1)"), destination });
+            rewrites.push({ source, destination });
         }
     }
 
