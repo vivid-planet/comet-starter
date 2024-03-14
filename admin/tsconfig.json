@@ -2,8 +2,8 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "CommonJS",
-        "noImplicitAny": true,
-        "strictNullChecks": true,
+        "strict": true,
+        "strictFunctionTypes": false,
         "jsx": "react",
         "noEmit": true,
         "skipLibCheck": true,
