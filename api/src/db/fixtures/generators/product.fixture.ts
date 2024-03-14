@@ -13,7 +13,11 @@ interface GenerateProducts {
 
 export const generateProducts = async ({ repository, bar, total }: GenerateProducts): Promise<Product[]> => {
     const generateRandomProduct = async (): Promise<Product> => {
-        const product = repository.create({ name: faker.lorem.word(), description: faker.lorem.words(), creatorId: staticUsers[0].id });
+        const product = repository.create({
+            name: faker.lorem.word(),
+            description: faker.lorem.words(),
+            creatorId: staticUsers.vividPlanetEmployee.id,
+        });
         repository.persist(product);
 
         bar.increment(1, {
