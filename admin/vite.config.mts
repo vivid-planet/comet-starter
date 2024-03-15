@@ -9,7 +9,30 @@ import { environment as envVarsToLoad } from "./src/environment";
 export default defineConfig(({ mode }) => {
     return {
         plugins: [
-            react(),
+            react({
+                jsxImportSource: "@emotion/react",
+                plugins: [
+                    [
+                        "@swc/plugin-emotion",
+                        {
+                            importMap: {
+                                "@mui/system": {
+                                    styled: {
+                                        canonicalImport: ["@emotion/styled", "default"],
+                                        styledBaseImport: ["@mui/system", "styled"],
+                                    },
+                                },
+                                "@mui/material/styles": {
+                                    styled: {
+                                        canonicalImport: ["@emotion/styled", "default"],
+                                        styledBaseImport: ["@mui/material/styles", "styled"],
+                                    },
+                                },
+                            },
+                        },
+                    ],
+                ],
+            }),
             createHtmlPlugin({
                 minify: true,
                 entry: resolve(__dirname, "src/loader.ts"),
