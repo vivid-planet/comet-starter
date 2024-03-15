@@ -32,12 +32,11 @@ app.get("/status/health", (req, res) => {
     res.send("OK!");
 });
 
-// Serve static build an cache for 30d
 app.use(
     express.static("../build", {
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".html")) {
-                // Don't cache the index.html at all
+                // Don't cache the index.html at all to make sure applications updates are applied
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_caching
                 res.setHeader("cache-control", "no-store, max-age: 0");
             } else if (path.endsWith(".js")) {
@@ -45,7 +44,7 @@ app.use(
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#caching_static_assets
                 res.setHeader("cache-control", "public, max-age=31536000, immutable");
             } else {
-                // Icons and Fonts could be changed over time
+                // Icons and Fonts could be changed over time, cache for 7d
                 res.setHeader("cache-control", "public, max-age=604800, immutable");
             }
         },
