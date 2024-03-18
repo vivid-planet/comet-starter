@@ -70,6 +70,8 @@ export const masterMenuData: MasterMenuData = [
         },
         requiredPermission: "pageTree",
     },
+    // This line is needed for @comet/create-app (Do not remove this line)
+    // https://github.com/vivid-planet/comet-starter/pull/194#discussion_r1519813689
     {
         primary: <FormattedMessage id="menu.structuredContent" defaultMessage="Structured Content" />,
         icon: <Data />,

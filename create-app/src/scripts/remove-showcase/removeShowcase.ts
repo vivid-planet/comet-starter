@@ -11,7 +11,7 @@ async function removeFileContent() {
     }> = [
         {
             file: `./admin/src/common/masterMenuData.tsx`,
-            replacements: [/.{217}\.products.*?,\s{5}},\n/gs, /.*Products.*/gm],
+            replacements: [/\s*\/\/ This.*\.products.*?,\s{5}},/gs, /.*Products.*/gm],
         },
         {
             file: `api/src/auth/permission.interface.ts`,
