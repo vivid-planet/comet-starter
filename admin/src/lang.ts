@@ -16,14 +16,6 @@ const projectMessages = {
 };
 
 export const getMessages = (): ResolvedIntlConfig["messages"] => {
-<<<<<<< HEAD
-    // in dev mode we use the default messages to have immediate changes
-    if (import.meta.env.MODE === "development") {
-        return {};
-    }
-
-=======
->>>>>>> origin/main
     return {
         ...cometMessages["en"],
         ...projectMessages["en"],
