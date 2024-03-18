@@ -42,9 +42,8 @@ ln -sf ../../api/src/comet-config.json ./site/src/
 sh ./site/intl-update.sh
 sh ./admin/intl-update.sh
 
-npm --prefix admin install &
-npm --prefix api install &
-npm --prefix site install &
-wait
+npm --prefix admin install
+npm --prefix api install
+npm --prefix site install
 
 mkdir -p ./api/uploads

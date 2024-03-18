@@ -1,7 +1,11 @@
+import { execSync } from "child_process";
 import kleur from "kleur";
+import { createSpinner } from "nanospinner";
 import process from "process";
 
 import { replacePlaceholder } from "../../util/replacePlaceholder";
+import { runEslintFix } from "../../util/runEslintFix";
+import { amendCommitChanges } from "./amendCommitChanges";
 import { cleanupReadme } from "./cleanupReadme";
 import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
@@ -10,6 +14,7 @@ import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
 interface ProjectConfiguration {
     projectName: string;
     verbose: boolean;
+    install: boolean;
 }
 
 export async function createApp(projectConfiguration: ProjectConfiguration) {
@@ -19,6 +24,18 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
     cleanupWorkingDirectory(projectConfiguration.verbose);
     replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
     createInitialGitCommit();
+    if (projectConfiguration.install) {
+        const spinner = createSpinner("Installing project...").spin();
+        try {
+            execSync("sh ./install.sh");
+            spinner.success();
+            console.log("Installation completed successfully.");
+            runEslintFix();
+        } catch (error) {
+            spinner.error({ text: `An error occurred while installing the project: ${error}` });
+        }
+    }
+    amendCommitChanges();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
     console.log(kleur.white(`nvm use\n`));
