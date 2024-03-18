@@ -24,7 +24,6 @@
     },
     "devDependencies": {
         "@comet/dev-process-manager": "^2.0.0",
-        "@swc/plugin-emotion": "^2.5.120",
         "dotenv-cli": "^6.0.0",
         "husky": "^7.0.1",
         "lint-staged": "^11.1.1",
