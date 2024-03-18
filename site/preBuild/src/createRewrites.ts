@@ -14,8 +14,8 @@ const createRewrites = async () => {
     for await (const redirect of getRedirects()) {
         const { source, destination } = redirect;
 
-        /* A rewrite is created for each redirect where source and destination differ only by casing (otherwise this causes a redirection loop).
-        E.g. a rewrite is created for the redirect /Example -> /example*/
+        // A rewrite is created for each redirect where the source and destination differ only by casing (otherwise, this causes a redirection loop).
+        // For instance, a rewrite is created for the redirect /Example -> /example.
         if (source && destination && source.toLowerCase() === destination.toLowerCase()) {
             rewrites.push({ source, destination });
         }
