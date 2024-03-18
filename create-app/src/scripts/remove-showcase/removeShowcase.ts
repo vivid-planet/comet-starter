@@ -32,8 +32,8 @@ async function removeFileContent(verbose: boolean) {
     ];
     for (const content of contentToRemove) {
         if (!existsSync(content.file)) {
-            console.log(kleur.yellow(`Warn: File ${content.file} does not exist!`));
-            console.log(kleur.yellow(`Warn: Skipping: ${content.file}...`));
+            console.log(kleur.yellow(`File ${content.file} does not exist!`));
+            console.log(kleur.yellow(`Skipping: ${content.file}...`));
             continue;
         }
         let fileContent = readFileSync(content.file, "utf-8").toString();
@@ -44,8 +44,8 @@ async function removeFileContent(verbose: boolean) {
             writeFileSync(content.file, fileContent);
         } catch (e) {
             writeFileSync(content.file, fileContent);
-            console.log(kleur.yellow(`Warn: Could not lint: ${content.file}!`));
-            if (verbose) console.log(kleur.grey(`Info: ${e}`));
+            console.log(kleur.yellow(`Could not lint: ${content.file}!`));
+            if (verbose) console.log(kleur.grey(`${e}`));
         }
     }
 }

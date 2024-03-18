@@ -8,12 +8,12 @@ export function createWorkingDirectoryCopy(projectName: string, verbose: boolean
         execSync(clone);
         process.chdir(`./${projectName}`);
         if (verbose) {
-            console.log(kleur.grey("Info: Cloned git repository."));
+            console.log(kleur.grey("Cloned git repository."));
         }
     } catch (e) {
-        console.log(kleur.red("Error: Could not clone git repository."));
+        console.log(kleur.red("Could not clone git repository."));
         if (verbose) {
-            console.log(kleur.grey(`Info: ${e}`));
+            console.log(kleur.grey(`${e}`));
         }
         process.exit(1);
     }

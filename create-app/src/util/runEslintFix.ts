@@ -11,7 +11,7 @@ export function runEslintFix(verbose: boolean) {
         if (!fs.existsSync(microservice)) {
             continue;
         } else if (!hasDependenciesInstalled(microservice) && verbose) {
-            console.log(kleur.grey(`Info: Skipping ESLint fix in ${microservice} because dependencies are not installed.`));
+            console.log(kleur.grey(`Skipping ESLint fix in ${microservice} because dependencies are not installed.`));
             continue;
         }
 
@@ -19,9 +19,9 @@ export function runEslintFix(verbose: boolean) {
             if (microservice !== "api") execSync(`npm --prefix ${microservice} run prelint`);
             execSync(`npm run --prefix ${microservice} lint:eslint -- --fix`);
         } catch (err) {
-            console.log(kleur.yellow(`Warn: Failed to fix ESLint errors in ${microservice}.`));
+            console.log(kleur.yellow(`Failed to fix ESLint errors in ${microservice}.`));
             if (verbose) {
-                console.log(kleur.grey(`Info: ${err}`));
+                console.log(kleur.grey(`${err}`));
             }
         }
     }

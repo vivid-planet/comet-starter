@@ -22,17 +22,17 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
                 else fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
                 changedFiles++;
                 if (verbose) {
-                    console.log(kleur.grey(`Info: Replaced content in ${file}`));
+                    console.log(kleur.grey(`Replaced content in ${file}`));
                 }
             }
         } catch (e) {
-            console.log(kleur.yellow(`Warn: Could not replace placeholder in ${file}`));
+            console.log(kleur.yellow(`Could not replace placeholder in ${file}`));
             if (verbose) {
-                console.log(kleur.grey(`Info: ${e}`));
+                console.log(kleur.grey(`${e}`));
             }
         }
     });
     if (verbose) {
-        console.log(kleur.grey(`Info: Successfully replaced content in ${changedFiles} files`));
+        console.log(kleur.grey(`Successfully replaced content in ${changedFiles} files`));
     }
 }

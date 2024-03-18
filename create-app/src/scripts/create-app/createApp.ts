@@ -29,12 +29,12 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
         try {
             execSync("sh ./install.sh");
             spinner.success();
-            if (projectConfiguration.verbose) console.log(kleur.grey("Info: Successfully installed project."));
+            if (projectConfiguration.verbose) console.log(kleur.grey("Successfully installed project."));
             runEslintFix(projectConfiguration.verbose);
         } catch (error) {
             spinner.error();
-            console.log(kleur.yellow("Warn: Could not install project."));
-            if (projectConfiguration.verbose) console.log(kleur.grey(`Info: ${error}`));
+            console.log(kleur.yellow("Could not install project."));
+            if (projectConfiguration.verbose) console.log(kleur.grey(`${error}`));
         }
     }
     amendCommitChanges();

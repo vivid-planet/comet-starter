@@ -9,12 +9,12 @@ export function deleteFilesAndFolders(files: string[], verbose: boolean) {
                 retryDelay: 1000,
             });
             if (verbose) {
-                console.log(kleur.grey(`Info: Deleted ${toDelete}`));
+                console.log(kleur.grey(`Deleted ${toDelete}`));
             }
         } catch (e) {
-            console.log(kleur.yellow(`Warn: Could not delete ${toDelete}`));
+            console.log(kleur.yellow(`Could not delete ${toDelete}`));
             if (verbose) {
-                console.log(kleur.grey(`Info: ${e}`));
+                console.log(kleur.grey(`${e}`));
             }
         }
     }

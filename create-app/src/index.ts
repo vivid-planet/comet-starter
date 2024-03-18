@@ -27,7 +27,7 @@ void (async () => {
             if (isValidProjectName(projectName)) {
                 createApp({ projectName, verbose: options.verbose, install: options.install });
             } else {
-                program.error("Error: Please provide a valid project name.");
+                program.error("Please provide a valid project name.");
             }
         })
         .configureOutput({ outputError: (str, write) => write(kleur.bgRed(str)) });
@@ -35,10 +35,10 @@ void (async () => {
     program.addCommand(
         new Command("remove-showcase").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
             if (!cwdIsCometProject()) {
-                program.error(`Error: his command must be run from the root of a Comet project.`);
+                program.error("This command must be run from the root of a Comet project.");
             }
 
-            console.log(`Removing showcase content from project`);
+            console.log("Removing showcase content from project...");
             removeShowcaseContent(options.verbose);
         }),
     );
@@ -46,10 +46,10 @@ void (async () => {
     program.addCommand(
         new Command("remove-site").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
             if (!cwdIsCometProject()) {
-                program.error(`Error: This command must be run from the root of a Comet project.`);
+                program.error(`This command must be run from the root of a Comet project.`);
             }
 
-            console.log(`Removing site from project`);
+            console.log("Removing site from project...");
             removeSite(options.verbose);
         }),
     );

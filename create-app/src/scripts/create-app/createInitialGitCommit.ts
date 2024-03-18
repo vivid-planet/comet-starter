@@ -9,12 +9,12 @@ export function createInitialGitCommit(verbose: boolean) {
         execSync("git checkout -b setup-project");
         execSync(`git commit -m "Initial commit from Starter" -m "Based on ${basedOnCommit}"`);
         if (verbose) {
-            console.log(kleur.grey("Info: Created initial git commit."));
+            console.log(kleur.grey("Created initial git commit."));
         }
     } catch (e) {
-        console.log(kleur.yellow("Warn: Could not create git commit."));
+        console.log(kleur.yellow("Could not create git commit."));
         if (verbose) {
-            console.log(kleur.grey(`Info: ${e}`));
+            console.log(kleur.grey(`${e}`));
         }
     }
 }

@@ -7,12 +7,12 @@ export function removeReferenceInFile(filePath: string, regex: RegExp, verbose: 
         const result = data.replace(regex, "");
         fs.writeFileSync(filePath, result, "utf8");
         if (verbose) {
-            console.log(kleur.grey(`Info: Removed reference in ${filePath}`));
+            console.log(kleur.grey(`Removed reference in ${filePath}`));
         }
     } catch (e) {
-        console.log(kleur.yellow(`Warn: Could not remove reference in ${filePath}`));
+        console.log(kleur.yellow(`Could not remove reference in ${filePath}`));
         if (verbose) {
-            console.log(kleur.grey(`Info: ${e}`));
+            console.log(kleur.grey(`${e}`));
         }
     }
 }
