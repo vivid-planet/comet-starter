@@ -24,6 +24,9 @@ const GlobalStyle = createGlobalStyle`
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        /* Get the same width when using 100% or 100vw */
+        width: 100vw;
+        overflow-x: hidden
     }
 
     h1,
