@@ -1,7 +1,8 @@
-import * as React from "react";
-import { Page as PageTypePage, loader as pageTypePageLoader } from "./Page";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { GraphQLClient } from "graphql-request";
+import * as React from "react";
+
+import { loader as pageTypePageLoader, Page as PageTypePage } from "./Page";
 
 export type DocumentTypeLoaderOptions = { client: GraphQLClient; pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput };
 export type InferDocumentTypeLoaderPropsType<T> = T extends (options: DocumentTypeLoaderOptions) => Promise<infer Return> ? Return : never;

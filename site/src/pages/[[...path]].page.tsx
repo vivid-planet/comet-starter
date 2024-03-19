@@ -1,6 +1,6 @@
 import { inferContentScopeFromContext } from "@src/common/contentScope/inferContentScopeFromContext";
 import { domain as configuredDomain } from "@src/config";
-import { GQLPage } from "@src/graphql.generated";
+import { documentTypes } from "@src/documents/pages";
 import { getLayout } from "@src/layout/Layout";
 import NotFound404 from "@src/pages/404.page";
 import { createGraphQLClient } from "@src/util/createGraphQLClient";
@@ -16,10 +16,9 @@ import {
 } from "next";
 import * as React from "react";
 
-import { GQLPagesQuery, GQLPagesQueryVariables, GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables } from "./[[...path]].page.generated";
-import { documentTypes } from "@src/documents/pages";
+import { GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables, GQLPagesQuery, GQLPagesQueryVariables } from "./[[...path]].page.generated";
 
-type PageProps = {
+export type PageProps = {
     documentType: string;
     id: string;
 } & Record<string, unknown>;
