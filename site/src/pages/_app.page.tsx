@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+
         /* Get the same width when using 100% or 100vw */
         width: 100vw;
         overflow-x: hidden
@@ -77,9 +78,7 @@ const GlobalStyle = createGlobalStyle`
         max-width: 100%;
     }
 
-    /*
-        Create a root stacking context: https://www.joshwcomeau.com/css/custom-css-reset/#eight-root-stacking-context-9
-    */
+    /* Create a root stacking context: https://www.joshwcomeau.com/css/custom-css-reset/#eight-root-stacking-context-9 */
     #root,
     #__next {
         isolation: isolate;
