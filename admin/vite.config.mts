@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => {
         optimizeDeps: {
             esbuildOptions: {
                 // Node.js global to browser globalThis. https://github.com/vitejs/vite/discussions/5912
-                // "gloabl is not defined" occures dirctly after loading. used by draft-is package
+                // "global is not defined" occurs directly after loading. Used by draft-is package
                 define: {
                     global: "globalThis",
                 },
