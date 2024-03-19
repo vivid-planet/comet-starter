@@ -1,4 +1,4 @@
-import { SeoBlock } from "@src/documents/pages/blocks/SeoBlock";
+import { SeoBlock } from "@src/documents/blocks/SeoBlock";
 import { Layout, PropsWithLayout } from "@src/layout/Layout";
 import { gql } from "graphql-request";
 import * as React from "react";

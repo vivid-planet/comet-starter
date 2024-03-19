@@ -1,6 +1,6 @@
 import { inferContentScopeFromContext } from "@src/common/contentScope/inferContentScopeFromContext";
 import { domain as configuredDomain } from "@src/config";
-import { documentTypes } from "@src/documents/pages";
+import { documentTypes } from "@src/documents";
 import { getLayout } from "@src/layout/Layout";
 import NotFound404 from "@src/pages/404.page";
 import { createGraphQLClient } from "@src/util/createGraphQLClient";
