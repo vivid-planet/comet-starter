@@ -22,8 +22,7 @@
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
-        "inlineSources": true,
-        "types": ["vite/client"]
+        "inlineSources": true
     },
     "include": ["src/**/*"]
 }
