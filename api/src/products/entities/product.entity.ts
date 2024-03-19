@@ -1,19 +1,17 @@
+import { CrudGenerator } from "@comet/cms-api";
 import { BaseEntity, Entity, OptionalProps, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { v4 } from "uuid";
 
 @ObjectType()
 @Entity()
+@CrudGenerator({ targetDirectory: `${__dirname}/../generated/` })
 export class Product extends BaseEntity<Product, "id"> {
     [OptionalProps]?: "createdAt" | "updatedAt";
 
     @Field(() => ID)
     @PrimaryKey({ type: "uuid" })
     id: string = v4();
-
-    @Field()
-    @Property({ columnType: "uuid" })
-    creatorId: string;
 
     @Field()
     @Property({

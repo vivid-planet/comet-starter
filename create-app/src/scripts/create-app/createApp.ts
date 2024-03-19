@@ -30,11 +30,11 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
             execSync("sh ./install.sh");
             spinner.success();
             console.log("Installation completed successfully.");
+            runEslintFix();
         } catch (error) {
             spinner.error({ text: `An error occurred while installing the project: ${error}` });
         }
     }
-    runEslintFix();
     amendCommitChanges();
     console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
     console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
