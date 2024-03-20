@@ -161,14 +161,6 @@ type PaginatedUserList {
   totalCount: Int!
 }
 
-type Product {
-  id: ID!
-  name: String!
-  description: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type Link implements DocumentInterface {
   id: ID!
   updatedAt: DateTime!
@@ -241,11 +233,6 @@ input DependentFilter {
   rootGraphqlObjectType: String
   rootId: String
   rootColumnName: String
-}
-
-type PaginatedProducts {
-  nodes: [Product!]!
-  totalCount: Int!
 }
 
 type DamFolder {
@@ -387,8 +374,6 @@ type Query {
   damFoldersList(offset: Int! = 0, limit: Int! = 25, sortColumnName: String, sortDirection: SortDirection! = ASC, scope: DamScopeInput! = {}, parentId: ID, includeArchived: Boolean, filter: FolderFilterInput): PaginatedDamFolders!
   damFolder(id: ID!): DamFolder!
   damFolderByNameAndParentId(scope: DamScopeInput! = {}, name: String!, parentId: ID): DamFolder
-  product(id: ID!): Product!
-  products(offset: Int! = 0, limit: Int! = 25, search: String, filter: ProductFilter, sort: [ProductSort!]): PaginatedProducts!
   mainMenu(scope: PageTreeNodeScopeInput!): [PageTreeNode!]!
 }
 
@@ -516,27 +501,6 @@ input FolderFilterInput {
   searchText: String
 }
 
-input ProductFilter {
-  name: StringFilter
-  description: StringFilter
-  createdAt: DateFilter
-  updatedAt: DateFilter
-  and: [ProductFilter!]
-  or: [ProductFilter!]
-}
-
-input ProductSort {
-  field: ProductSortField!
-  direction: SortDirection! = ASC
-}
-
-enum ProductSortField {
-  name
-  description
-  createdAt
-  updatedAt
-}
-
 type Mutation {
   currentUserSignOut: String!
   userPermissionsCreatePermission(userId: String!, input: UserPermissionInput!): UserPermission!
@@ -572,9 +536,6 @@ type Mutation {
   updateDamFolder(id: ID!, input: UpdateDamFolderInput!): DamFolder!
   moveDamFolders(folderIds: [ID!]!, targetFolderId: ID, scope: DamScopeInput! = {}): [DamFolder!]!
   deleteDamFolder(id: ID!): Boolean!
-  createProduct(input: ProductInput!): Product!
-  updateProduct(id: ID!, input: ProductUpdateInput!, lastUpdatedAt: DateTime): Product!
-  deleteProduct(id: ID!): Boolean!
 }
 
 input UserPermissionInput {
@@ -700,14 +661,4 @@ input UpdateDamFolderInput {
   name: String
   parentId: ID
   archived: Boolean
-}
-
-input ProductInput {
-  name: String!
-  description: String!
-}
-
-input ProductUpdateInput {
-  name: String
-  description: String
 }
