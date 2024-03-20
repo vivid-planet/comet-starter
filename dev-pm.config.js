@@ -9,6 +9,7 @@ module.exports = {
             name: "admin",
             script: "npm run --prefix admin start",
             group: "admin",
+            waitOn: ["tcp:$API_PORT"],
         },
         {
             name: "admin-codegen",
