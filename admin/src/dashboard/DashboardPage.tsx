@@ -22,7 +22,7 @@ export function DashboardPage() {
             <MainContent>
                 <Grid container direction="row" spacing={4}>
                     <LatestContentUpdates />
-                    {process.env.NODE_ENV !== "development" && <LatestBuildsDashboardWidget />}
+                    {import.meta.env.MODE !== "development" && <LatestBuildsDashboardWidget />}
                 </Grid>
             </MainContent>
         </Stack>
