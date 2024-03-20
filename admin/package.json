@@ -11,7 +11,9 @@
         "gql:watch": "graphql-codegen --watch",
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "run-p lint:eslint lint:tsc",
+        "lint:ci": "npm run lint && npm run lint:generated-files-not-modified",
         "lint:eslint": "eslint --max-warnings 0 --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
+        "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
         "lint:tsc": "tsc --project .",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "intl:extract": "formatjs extract \"src/**/*.ts*\" --ignore ./**.d.ts --out-file lang-extracted/en.json --format simple",
@@ -19,7 +21,8 @@
         "intl:compile:starter-admin": "formatjs compile-folder --format simple --ast lang/starter-lang/admin lang-compiled/starter-admin",
         "intl:compile": "run-p intl:compile:starter-admin intl:compile:comet",
         "generate-block-types": "comet generate-block-types --inputs",
-        "generate-block-types:watch": "chokidar -s \"**/block-meta.json\" -c \"npm run generate-block-types\""
+        "generate-block-types:watch": "chokidar -s \"**/block-meta.json\" -c \"npm run generate-block-types\"",
+        "admin-generator": "rimraf 'src/*/generated' && comet-admin-generator generate crud-generator-config.ts"
     },
     "dependencies": {
         "@apollo/client": "^3.2.5",
@@ -38,6 +41,7 @@
         "@mui/styles": "^5.8.6",
         "@mui/system": "^5.8.6",
         "@mui/x-data-grid": "^5.17.26",
+        "@mui/x-data-grid-pro": "^5.17.26",
         "axios": "^0.21.0",
         "change-case": "^5.3.0",
         "date-fns": "^2.28.0",
@@ -45,6 +49,7 @@
         "file-saver": "^2.0.2",
         "final-form": "^4.16.1",
         "graphql": "^15.4.0",
+        "graphql-anywhere": "^4.2.8",
         "history": "^4.10.0",
         "lodash.isequal": "^4.0.0",
         "material-design-icons": "^3.0.1",
