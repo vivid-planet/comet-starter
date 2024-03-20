@@ -1,10 +1,17 @@
 {
+    "ts-node": {
+        "compilerOptions": {
+            "module": "commonjs"
+        }
+    },
     "compilerOptions": {
         "target": "ESNext",
-        "module": "CommonJS",
+        "module": "ESNext",
+        "moduleResolution": "Node",
         "noImplicitAny": true,
         "strictNullChecks": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
+        "jsxImportSource": "@emotion/react",
         "noEmit": true,
         "skipLibCheck": true,
         "baseUrl": "./",
@@ -13,7 +20,9 @@
         },
         "esModuleInterop": true,
         "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
+        "inlineSources": true
     },
     "include": ["src/**/*"]
 }
