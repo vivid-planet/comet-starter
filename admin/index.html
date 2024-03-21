@@ -6,12 +6,11 @@
         <title>Starter Admin</title>
         <script type="text/javascript">
             (function() {
-<%= environmentValues.map((env) => `window.EXTERNAL__${env.key}__ = '${env.value}';`).join("\n") %>
+                <%- environmentValues.map((env) => `window.EXTERNAL__${env.key}__ = ${env.value ? `'${env.value}'` : undefined};`).join("\n") %>
             })();
         </script>
     </head>
     <body>
-        <div id="root">
-        </div>
+        <div id="root"></div>
     </body>
 </html>
