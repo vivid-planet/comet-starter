@@ -163,12 +163,10 @@ type PaginatedUserList {
 
 type Product {
   id: ID!
-  creatorId: String!
   name: String!
   description: String!
   createdAt: DateTime!
-  updatedAt: DateTime
-  sales: Int!
+  updatedAt: DateTime!
 }
 
 type Link implements DocumentInterface {
@@ -519,7 +517,6 @@ input FolderFilterInput {
 }
 
 input ProductFilter {
-  creatorId: StringFilter
   name: StringFilter
   description: StringFilter
   createdAt: DateFilter
@@ -535,6 +532,7 @@ input ProductSort {
 
 enum ProductSortField {
   name
+  description
   createdAt
   updatedAt
 }
@@ -575,7 +573,7 @@ type Mutation {
   moveDamFolders(folderIds: [ID!]!, targetFolderId: ID, scope: DamScopeInput! = {}): [DamFolder!]!
   deleteDamFolder(id: ID!): Boolean!
   createProduct(input: ProductInput!): Product!
-  updateProduct(id: ID!, input: ProductInput!, lastUpdatedAt: DateTime): Product!
+  updateProduct(id: ID!, input: ProductUpdateInput!, lastUpdatedAt: DateTime): Product!
   deleteProduct(id: ID!): Boolean!
 }
 
@@ -707,4 +705,9 @@ input UpdateDamFolderInput {
 input ProductInput {
   name: String!
   description: String!
+}
+
+input ProductUpdateInput {
+  name: String
+  description: String
 }

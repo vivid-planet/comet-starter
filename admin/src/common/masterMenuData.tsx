@@ -12,7 +12,7 @@ import {
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
-import { ProductsPage } from "@src/products/ProductsPage";
+import { ProductsPage } from "@src/products/generated/ProductsPage";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 

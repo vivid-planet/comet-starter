@@ -16,3 +16,5 @@ fragmentTypes.json
 **/*.generated.ts
 /block-meta.json
 src/comet-config.json
+
+.swc/
