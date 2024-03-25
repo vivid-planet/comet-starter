@@ -11,38 +11,38 @@ import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
 
-interface ProjectConfiguration {
+interface CommandOptions {
     projectName: string;
     verbose: boolean;
     install: boolean;
 }
 
-export async function createApp(projectConfiguration: ProjectConfiguration) {
+export async function createApp(commandOptions: CommandOptions) {
     console.log(`Creating a new Comet app in ${kleur.blue(`${process.cwd()}\n`)}`);
-    createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
-    cleanupReadme(projectConfiguration.verbose);
-    cleanupWorkingDirectory(projectConfiguration.verbose);
-    replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
-    createInitialGitCommit(projectConfiguration.verbose);
-    if (projectConfiguration.install) {
+    createWorkingDirectoryCopy(commandOptions.projectName, commandOptions.verbose);
+    cleanupReadme(commandOptions.verbose);
+    cleanupWorkingDirectory(commandOptions.verbose);
+    replacePlaceholder(commandOptions.projectName, commandOptions.verbose);
+    createInitialGitCommit(commandOptions.verbose);
+    if (commandOptions.install) {
         const spinner = createSpinner("Installing project...").spin();
         try {
             execSync("sh ./install.sh");
             spinner.success();
-            if (projectConfiguration.verbose) console.log(kleur.grey("Successfully installed project."));
-            runEslintFix(projectConfiguration.verbose);
+            if (commandOptions.verbose) console.log(kleur.grey("Successfully installed project."));
+            runEslintFix(commandOptions.verbose);
         } catch (error) {
             spinner.error();
             console.log(kleur.yellow("Could not install project."));
-            if (projectConfiguration.verbose) console.log(kleur.grey(`${error}`));
+            if (commandOptions.verbose) console.log(kleur.grey(`${error}`));
         }
     }
     amendCommitChanges();
-    console.log(`\nSuccess! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`);
+    console.log(`\nSuccess! Created '${commandOptions.projectName}' at '${process.cwd()}'.`);
     console.log(`Inside that directory, you can run several commands:\n`);
     console.log(kleur.cyan(`nvm use`));
     console.log(`Switches to the correct Node.js version.\n`);
-    if (!projectConfiguration.install) {
+    if (!commandOptions.install) {
         console.log(kleur.cyan(`sh ./install.sh`));
         console.log(`Installs dependencies.\n`);
     }
@@ -58,5 +58,5 @@ export async function createApp(projectConfiguration: ProjectConfiguration) {
     console.log(`Shutdown all services.\n`);
     console.log(kleur.cyan(`npm run --prefix api fixtures`));
     console.log(`Imports fixtures.\n`);
-    console.log(kleur.green(`\n☄️ Successfully created Comet app: ${projectConfiguration.projectName}`));
+    console.log(kleur.green(`\n☄️ Successfully created Comet app: ${commandOptions.projectName}`));
 }
