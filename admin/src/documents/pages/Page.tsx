@@ -1,7 +1,8 @@
 import { gql } from "@apollo/client";
 import { File, FileNotMenu } from "@comet/admin-icons";
-import { createDocumentRootBlocksMethods, DocumentInterface } from "@comet/cms-admin";
+import { createDocumentDependencyMethods, createDocumentRootBlocksMethods, DependencyInterface, DocumentInterface } from "@comet/cms-admin";
 import { GQLPage, GQLPageInput } from "@src/graphql.generated";
+import { categoryToUrlParam } from "@src/pageTree/pageTreeCategories";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
@@ -9,7 +10,7 @@ import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
 import { EditPage } from "./EditPage";
 
-export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageInput> = {
+export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageInput> & DependencyInterface = {
     displayName: <FormattedMessage id="generic.page" defaultMessage="Page" />,
     editComponent: EditPage,
     menuIcon: File,
@@ -47,5 +48,13 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
     ...createDocumentRootBlocksMethods({
         content: PageContentBlock,
         seo: SeoBlock,
+    }),
+    ...createDocumentDependencyMethods({
+        rootQueryName: "page",
+        rootBlocks: {
+            content: PageContentBlock,
+            seo: { block: SeoBlock, path: "/config" },
+        },
+        basePath: ({ pageTreeNode }) => `/pages/pagetree/${categoryToUrlParam(pageTreeNode.category)}/${pageTreeNode.id}/edit`,
     }),
 };

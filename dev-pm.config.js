@@ -25,7 +25,7 @@ module.exports = {
         },
         {
             name: "api",
-            script: "npm --prefix api run db:migrate && npm --prefix api run start:dev",
+            script: "npm --prefix api run start:dev",
             group: "api",
             waitOn: ["tcp:$POSTGRESQL_PORT", "tcp:$IMGPROXY_PORT"],
         },
