@@ -22,7 +22,7 @@
         "mikro-orm:migration:generate": "mikro-orm migration:create",
         "start": "npm run prebuild && dotenv -c secrets -- nest start",
         "start:debug": "npm run prebuild && dotenv -c secrets -- nest start --debug --watch --preserveWatchOutput",
-        "start:dev": "npm run prebuild && dotenv -c secrets -- nest start --watch --preserveWatchOutput",
+        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -c secrets -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
@@ -51,8 +51,8 @@
     "dependencies": {
         "@aws-sdk/client-s3": "^3.49.0",
         "@azure/storage-blob": "^12.0.0",
-        "@comet/blocks-api": "^6.3.0",
-        "@comet/cms-api": "^6.3.0",
+        "@comet/blocks-api": "^6.4.0",
+        "@comet/cms-api": "^6.4.0",
         "@faker-js/faker": "^8.3.1",
         "@hapi/accept": "^5.0.0",
         "@mikro-orm/cli": "^5.0.5",
@@ -98,7 +98,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@comet/eslint-config": "^6.3.0",
+        "@comet/eslint-config": "^6.4.0",
         "@nestjs/cli": "^9.0.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",
