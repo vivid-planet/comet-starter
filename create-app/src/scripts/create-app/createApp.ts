@@ -11,47 +11,52 @@ import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
 
-interface ProjectConfiguration {
+interface CommandOptions {
     projectName: string;
     verbose: boolean;
     install: boolean;
 }
 
-export async function createApp(projectConfiguration: ProjectConfiguration) {
-    console.log(kleur.white(`Creating a new Comet app in `) + kleur.yellow(`${process.cwd()}\n`));
-    createWorkingDirectoryCopy(projectConfiguration.projectName, projectConfiguration.verbose);
-    cleanupReadme();
-    cleanupWorkingDirectory(projectConfiguration.verbose);
-    replacePlaceholder(projectConfiguration.projectName, projectConfiguration.verbose);
-    createInitialGitCommit();
-    if (projectConfiguration.install) {
+export async function createApp(commandOptions: CommandOptions) {
+    console.log(`Creating a new Comet app in ${kleur.blue(`${process.cwd()}\n`)}`);
+    createWorkingDirectoryCopy(commandOptions.projectName, commandOptions.verbose);
+    cleanupReadme(commandOptions.verbose);
+    cleanupWorkingDirectory(commandOptions.verbose);
+    replacePlaceholder(commandOptions.projectName, commandOptions.verbose);
+    createInitialGitCommit(commandOptions.verbose);
+    if (commandOptions.install) {
         const spinner = createSpinner("Installing project...").spin();
         try {
             execSync("sh ./install.sh");
             spinner.success();
-            console.log("Installation completed successfully.");
-            runEslintFix();
+            if (commandOptions.verbose) console.log(kleur.grey("Successfully installed project."));
+            runEslintFix(commandOptions.verbose);
         } catch (error) {
-            spinner.error({ text: `An error occurred while installing the project: ${error}` });
+            spinner.error();
+            console.log(kleur.yellow("Could not install project."));
+            if (commandOptions.verbose) console.log(kleur.grey(`${error}`));
         }
     }
     amendCommitChanges();
-    console.log(`\n${kleur.white(`Success! Created '${projectConfiguration.projectName}' at '${process.cwd()}'.`)}`);
-    console.log(kleur.white(`Inside that directory, you can run several commands:\n`));
-    console.log(kleur.white(`nvm use\n`));
-    console.log(kleur.cyan(`sh ./install.sh\n`));
-    console.log(kleur.white(`Installs dependencies.\n`));
+    console.log(`\nSuccess! Created '${commandOptions.projectName}' at '${process.cwd()}'.`);
+    console.log(`Inside that directory, you can run several commands:\n`);
+    console.log(kleur.cyan(`nvm use`));
+    console.log(`Switches to the correct Node.js version.\n`);
+    if (!commandOptions.install) {
+        console.log(kleur.cyan(`sh ./install.sh`));
+        console.log(`Installs dependencies.\n`);
+    }
     console.log(kleur.cyan(`npm run dev`));
-    console.log(kleur.white(`Starts all services.\n`));
+    console.log(`Starts all services.\n`);
     console.log(kleur.cyan(`npx dev-pm status [--interval]`));
-    console.log(kleur.white(`Checks the status of services.\n`));
+    console.log(`Checks the status of services.\n`);
     console.log(kleur.cyan(`npx dev-pm logs <service>`));
-    console.log(kleur.white(`Shows the logs of a service.\n`));
+    console.log(`Shows the logs of a service.\n`);
     console.log(kleur.cyan(`npx dev-pm restart <service>`));
-    console.log(kleur.white(`Restarts a service.\n`));
+    console.log(`Restarts a service.\n`);
     console.log(kleur.cyan(`npx dev-pm shutdown`));
-    console.log(kleur.white(`Shutdown all services.\n`));
+    console.log(`Shutdown all services.\n`);
     console.log(kleur.cyan(`npm run --prefix api fixtures`));
-    console.log(kleur.white(`Imports fixtures.\n`));
-    console.log(kleur.green(`\n☄️ Successfully created Comet app: ${projectConfiguration.projectName}`));
+    console.log(`Imports fixtures.\n`);
+    console.log(kleur.green(`\n☄️ Successfully created Comet app: ${commandOptions.projectName}`));
 }

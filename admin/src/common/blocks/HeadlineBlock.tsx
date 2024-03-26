@@ -1,7 +1,5 @@
-import { SelectField } from "@comet/admin";
-import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
+import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField } from "@comet/blocks-admin";
 import { createRichTextBlock } from "@comet/cms-admin";
-import { MenuItem } from "@mui/material";
 import { HeadlineBlockData } from "@src/blocks.generated";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -28,23 +26,14 @@ export const HeadlineBlock = createCompositeBlock({
             title: <FormattedMessage id="headlineBlock.title" defaultMessage="Headline" />,
         },
         level: {
-            block: createCompositeSetting<HeadlineBlockData["level"]>({
+            block: createCompositeBlockSelectField<HeadlineBlockData["level"]>({
                 defaultValue: "header-one",
-                AdminComponent: ({ state, updateState }) => (
-                    <BlocksFinalForm<Pick<HeadlineBlockData, "level">> onSubmit={({ level }) => updateState(level)} initialValues={{ level: state }}>
-                        <SelectField name="level" label={<FormattedMessage id="headlineBlock.level" defaultMessage="Level" />} fullWidth>
-                            <MenuItem value="header-one">
-                                <FormattedMessage id="headlineBlock.headerOne" defaultMessage="Header One" />
-                            </MenuItem>
-                            <MenuItem value="header-two">
-                                <FormattedMessage id="headlineBlock.headerTwo" defaultMessage="Header Two" />
-                            </MenuItem>
-                            <MenuItem value="header-three">
-                                <FormattedMessage id="headlineBlock.headerThree" defaultMessage="Header Three" />
-                            </MenuItem>
-                        </SelectField>
-                    </BlocksFinalForm>
-                ),
+                options: [
+                    { value: "header-one", label: <FormattedMessage id="headlineBlock.headerOne" defaultMessage="Header One" /> },
+                    { value: "header-two", label: <FormattedMessage id="headlineBlock.headerTwo" defaultMessage="Header Two" /> },
+                    { value: "header-three", label: <FormattedMessage id="headlineBlock.headerThree" defaultMessage="Header Three" /> },
+                ],
+                fieldProps: { label: <FormattedMessage id="headlineBlock.level" defaultMessage="Level" />, fullWidth: true },
             }),
         },
     },
