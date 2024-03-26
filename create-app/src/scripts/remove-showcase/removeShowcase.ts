@@ -4,7 +4,7 @@ import kleur from "kleur";
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 import { runEslintFix } from "../../util/runEslintFix";
 
-async function removeFileContent() {
+async function removeFileContent(verbose: boolean) {
     const contentToRemove: Array<{
         file: string;
         replacements: Array<string | RegExp>;
@@ -32,8 +32,8 @@ async function removeFileContent() {
     ];
     for (const content of contentToRemove) {
         if (!existsSync(content.file)) {
-            console.log(kleur.bgYellow(`File: ${content.file} does not exist!`));
-            console.log(kleur.bgYellow(`Skipping: ${content.file}...`));
+            console.log(kleur.yellow(`File ${content.file} does not exist!`));
+            console.log(kleur.yellow(`Skipping: ${content.file}...`));
             continue;
         }
         let fileContent = readFileSync(content.file, "utf-8").toString();
@@ -45,19 +45,19 @@ async function removeFileContent() {
         } catch (e) {
             writeFileSync(content.file, fileContent);
             console.log(kleur.yellow(`Could not lint: ${content.file}!`));
-            console.log(e);
+            if (verbose) console.log(kleur.grey(`${e}`));
         }
     }
 }
 
-export async function removeShowcaseContent() {
-    await removeFileContent();
+export async function removeShowcaseContent(verbose: boolean) {
+    await removeFileContent(verbose);
     const filesToRemove: string[] = [
         "api/src/products",
         "admin/src/products",
         "api/src/db/fixtures/generators/product.fixture.ts",
         "api/src/db/migrations/Migration20220721123033.ts",
     ];
-    deleteFilesAndFolders(filesToRemove, false);
-    runEslintFix();
+    deleteFilesAndFolders(filesToRemove, verbose);
+    runEslintFix(verbose);
 }

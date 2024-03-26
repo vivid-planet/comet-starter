@@ -33,24 +33,24 @@ void (async () => {
         .configureOutput({ outputError: (str, write) => write(kleur.bgRed(str)) });
 
     program.addCommand(
-        new Command("remove-showcase").action(() => {
+        new Command("remove-showcase").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
             if (!cwdIsCometProject()) {
-                program.error(`This command must be run from the root of a Comet project.`);
+                program.error("This command must be run from the root of a Comet project.");
             }
 
-            console.log(kleur.white(`Removing showcase content from project`));
-            removeShowcaseContent();
+            console.log("Removing showcase content from project...");
+            removeShowcaseContent(options.verbose);
         }),
     );
 
     program.addCommand(
-        new Command("remove-site").action(() => {
+        new Command("remove-site").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
             if (!cwdIsCometProject()) {
                 program.error(`This command must be run from the root of a Comet project.`);
             }
 
-            console.log(kleur.white(`Removing site from project`));
-            removeSite();
+            console.log("Removing site from project...");
+            removeSite(options.verbose);
         }),
     );
     program.parse();
