@@ -15,7 +15,7 @@ export class AccessControlService extends AbstractAccessControlService {
         }
 
         if (user.email === staticUsers.editor.email) {
-            return [{ permission: "products" }];
+            return [{ permission: "pageTree" }];
         }
 
         return [];

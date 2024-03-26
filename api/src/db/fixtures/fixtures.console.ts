@@ -1,9 +1,5 @@
 import { MikroORM, UseRequestContext } from "@mikro-orm/core";
-import { InjectRepository } from "@mikro-orm/nestjs";
-import { EntityRepository } from "@mikro-orm/postgresql";
 import { Injectable, Logger } from "@nestjs/common";
-import { generateProducts } from "@src/db/fixtures/generators/product.fixture";
-import { Product } from "@src/products/entities/product.entity";
 import { MultiBar, Options, Presets } from "cli-progress";
 import { Command, Console } from "nestjs-console";
 
@@ -12,7 +8,7 @@ import { Command, Console } from "nestjs-console";
 export class FixturesConsole {
     private readonly logger = new Logger(FixturesConsole.name);
 
-    constructor(private readonly orm: MikroORM, @InjectRepository(Product) private readonly productsRepository: EntityRepository<Product>) {}
+    constructor(private readonly orm: MikroORM) {}
 
     barOptions: Options = {
         format: `{bar} {percentage}% | {value}/{total} {title} | ETA: {eta_formatted} | Duration: {duration_formatted}`,
@@ -41,7 +37,7 @@ export class FixturesConsole {
         await migrator.up();
 
         const multiBar = new MultiBar(this.barOptions, Presets.shades_classic);
-        await Promise.all([generateProducts({ repository: this.productsRepository, bar: multiBar.create(total, 0), total })]);
+        // Add your fixtures here
         multiBar.stop();
 
         await this.orm.em.flush();
