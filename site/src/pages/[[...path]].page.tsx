@@ -1,7 +1,6 @@
 import { inferContentScopeFromContext } from "@src/common/contentScope/inferContentScopeFromContext";
 import { domain as configuredDomain } from "@src/config";
-import { Page as PageTypePage, pageQuery as PageTypePageQuery } from "@src/documents/pages/Page";
-import { GQLPage } from "@src/graphql.generated";
+import { documentTypes } from "@src/documents";
 import { getLayout } from "@src/layout/Layout";
 import NotFound404 from "@src/pages/404.page";
 import { createGraphQLClient } from "@src/util/createGraphQLClient";
@@ -17,16 +16,15 @@ import {
 } from "next";
 import * as React from "react";
 
-import { GQLPagesQuery, GQLPagesQueryVariables, GQLPageTypeQuery, GQLPageTypeQueryVariables } from "./[[...path]].page.generated";
+import { GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables, GQLPagesQuery, GQLPagesQueryVariables } from "./[[...path]].page.generated";
 
-interface PageProps {
+export type PageProps = {
     documentType: string;
     id: string;
-}
-export type PageUniversalProps = PageProps & GQLPage;
+} & Record<string, unknown>;
 
 export default function Page(props: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-    if (!pageTypes[props.documentType]) {
+    if (!documentTypes[props.documentType]) {
         return (
             <NotFound404>
                 <div>
@@ -35,12 +33,12 @@ export default function Page(props: InferGetStaticPropsType<typeof getStaticProp
             </NotFound404>
         );
     }
-    const { component: Component } = pageTypes[props.documentType];
+    const { component: Component } = documentTypes[props.documentType];
     return <Component {...props} />;
 }
 
-const pageTypeQuery = gql`
-    query PageType($path: String!, $scope: PageTreeNodeScopeInput!) {
+const documentTypeQuery = gql`
+    query DocumentType($path: String!, $scope: PageTreeNodeScopeInput!) {
         pageTreeNodeByPath(path: $path, scope: $scope) {
             id
             documentType
@@ -48,14 +46,7 @@ const pageTypeQuery = gql`
     }
 `;
 
-const pageTypes = {
-    Page: {
-        query: PageTypePageQuery,
-        component: PageTypePage,
-    },
-};
-
-export const getStaticProps: GetStaticProps<PageUniversalProps> = async (context) => {
+export const getStaticProps: GetStaticProps<PageProps> = async (context) => {
     const getUniversalProps = createGetUniversalProps();
     return getUniversalProps(context);
 };
@@ -74,7 +65,7 @@ export function createGetUniversalProps({
 }: CreateGetUniversalPropsOptions = {}) {
     return async function getUniversalProps<Context extends GetStaticPropsContext | GetServerSidePropsContext>(
         context: Context,
-    ): Promise<Context extends GetStaticPropsContext ? GetStaticPropsResult<PageUniversalProps> : GetServerSidePropsResult<PageUniversalProps>> {
+    ): Promise<Context extends GetStaticPropsContext ? GetStaticPropsResult<PageProps> : GetServerSidePropsResult<PageProps>> {
         const { params } = context;
 
         const client = createGraphQLClient({ includeInvisibleBlocks, includeInvisiblePages, previewDamUrls });
@@ -82,8 +73,8 @@ export function createGetUniversalProps({
 
         const path = params?.path ?? "";
 
-        //fetch pageType
-        const data = await client.request<GQLPageTypeQuery, GQLPageTypeQueryVariables>(pageTypeQuery, {
+        //fetch documentType
+        const data = await client.request<GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables>(documentTypeQuery, {
             path: `/${Array.isArray(path) ? path.join("/") : path}`,
             scope,
         });
@@ -92,19 +83,19 @@ export function createGetUniversalProps({
             console.log("got no data from api", data, path);
             return { notFound: true };
         }
-        const pageId = data.pageTreeNodeByPath.id;
+        const pageTreeNodeId = data.pageTreeNodeByPath.id;
 
-        //pageType dependent query
-        const { query: queryForPageType } = pageTypes[data.pageTreeNodeByPath.documentType];
+        //documentType dependent loader
+        const { loader: loaderForPageType } = documentTypes[data.pageTreeNodeByPath.documentType];
 
-        const [layout, pageTypeData] = await Promise.all([getLayout(client, scope), client.request(queryForPageType, { pageId })]);
+        const [layout, documentTypeData] = await Promise.all([getLayout(client, scope), loaderForPageType({ client, scope, pageTreeNodeId })]);
 
         return {
             props: {
                 layout,
-                ...pageTypeData,
+                ...documentTypeData,
                 documentType: data.pageTreeNodeByPath.documentType,
-                id: pageId,
+                id: pageTreeNodeId,
                 scope,
             },
         };
