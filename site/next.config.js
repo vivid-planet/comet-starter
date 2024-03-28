@@ -45,9 +45,7 @@ const nextConfig = {
         var redirects = await require("./preBuild/build/preBuild/src/createRedirects").createRedirects();
         return redirects;
     },
-    images: {
-        deviceSizes: cometConfig.dam.allowedImageSizes,
-    },
+    images: cometConfig.images,
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
         var path = require("path");
 
