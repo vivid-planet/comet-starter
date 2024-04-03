@@ -9,6 +9,7 @@ module.exports = {
             name: "admin",
             script: "npm run --prefix admin start",
             group: "admin",
+            waitOn: ["tcp:$API_PORT"],
         },
         {
             name: "admin-codegen",
@@ -24,7 +25,7 @@ module.exports = {
         },
         {
             name: "api",
-            script: "npm --prefix api run db:migrate && npm --prefix api run start:dev",
+            script: "npm --prefix api run start:dev",
             group: "api",
             waitOn: ["tcp:$POSTGRESQL_PORT", "tcp:$IMGPROXY_PORT"],
         },

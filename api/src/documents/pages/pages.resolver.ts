@@ -20,9 +20,10 @@ import { Page } from "./entities/page.entity";
 export class PagesResolver {
     constructor(@InjectRepository(Page) private readonly repository: EntityRepository<Page>, private readonly pageTreeService: PageTreeService) {}
 
-    @Query(() => Page, { nullable: true })
-    async page(@Args("pageId", { type: () => ID }) pageId: string): Promise<Page | null> {
-        return this.repository.findOne(pageId);
+    @Query(() => Page)
+    @AffectedEntity(Page)
+    async page(@Args("id", { type: () => ID }) id: string): Promise<Page> {
+        return this.repository.findOneOrFail({ id });
     }
 
     @ResolveField(() => PageTreeNode, { nullable: true })

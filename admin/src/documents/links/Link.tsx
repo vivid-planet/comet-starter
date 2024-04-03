@@ -1,14 +1,19 @@
 import { gql } from "@apollo/client";
 import { Link as LinkIcon } from "@comet/admin-icons";
-import { createDocumentRootBlocksMethods, DocumentInterface } from "@comet/cms-admin";
+import { createDocumentDependencyMethods, createDocumentRootBlocksMethods, DependencyInterface, DocumentInterface } from "@comet/cms-admin";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { GQLLink, GQLLinkInput } from "@src/graphql.generated";
+import { categoryToUrlParam } from "@src/pageTree/pageTreeCategories";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { EditLink } from "./EditLink";
 
-export const Link: DocumentInterface<Pick<GQLLink, "content">, GQLLinkInput> = {
+const rootBlocks = {
+    content: LinkBlock,
+};
+
+export const Link: DocumentInterface<Pick<GQLLink, "content">, GQLLinkInput> & DependencyInterface = {
     displayName: <FormattedMessage id="generic.link" defaultMessage="Link" />,
     editComponent: EditLink,
     menuIcon: LinkIcon,
@@ -41,7 +46,10 @@ export const Link: DocumentInterface<Pick<GQLLink, "content">, GQLLinkInput> = {
             }
         }
     `,
-    ...createDocumentRootBlocksMethods({
-        content: LinkBlock,
+    ...createDocumentRootBlocksMethods(rootBlocks),
+    ...createDocumentDependencyMethods({
+        rootQueryName: "link",
+        rootBlocks,
+        basePath: ({ pageTreeNode }) => `/pages/pagetree/${categoryToUrlParam(pageTreeNode.category)}/${pageTreeNode.id}/edit`,
     }),
 };

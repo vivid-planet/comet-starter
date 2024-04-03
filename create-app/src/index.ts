@@ -32,13 +32,13 @@ void (async () => {
         .configureOutput({ outputError: (str, write) => write(kleur.bgRed(str)) });
 
     program.addCommand(
-        new Command("remove-site").action(() => {
+        new Command("remove-site").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
             if (!cwdIsCometProject()) {
                 program.error(`This command must be run from the root of a Comet project.`);
             }
 
-            console.log(kleur.white(`Removing site from project`));
-            removeSite();
+            console.log("Removing site from project...");
+            removeSite(options.verbose);
         }),
     );
     program.parse();

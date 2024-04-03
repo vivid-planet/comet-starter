@@ -2,20 +2,20 @@ import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 import { removeReferenceInFile } from "../../util/removeReferenceInFile";
 import { runEslintFix } from "../../util/runEslintFix";
 
-function removeSiteReferences() {
-    removeReferenceInFile(".vscode/settings.json", /, "site"/g);
-    removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_SITE_IS_PREVIEW=false\n\n/gms);
-    removeReferenceInFile("install.sh", /.*site.*\n/gim);
-    removeReferenceInFile(".prettierignore", /.*site.*\n/gim);
-    removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim);
-    removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim);
-    removeReferenceInFile("./package.json", / browser:site/g);
-    removeReferenceInFile("./package.json", /.*site.*\n/gim);
-    removeReferenceInFile("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis);
+function removeSiteReferences(verbose: boolean) {
+    removeReferenceInFile(".vscode/settings.json", /, "site"/g, verbose);
+    removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_SITE_IS_PREVIEW=false\n\n/gms, verbose);
+    removeReferenceInFile("install.sh", /.*site.*\n/gim, verbose);
+    removeReferenceInFile(".prettierignore", /.*site.*\n/gim, verbose);
+    removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim, verbose);
+    removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim, verbose);
+    removeReferenceInFile("./package.json", / browser:site/g, verbose);
+    removeReferenceInFile("./package.json", /.*site.*\n/gim, verbose);
+    removeReferenceInFile("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis, verbose);
 }
 
-export function removeSite() {
-    deleteFilesAndFolders(["site"], false);
-    removeSiteReferences();
-    runEslintFix();
+export function removeSite(verbose: boolean) {
+    deleteFilesAndFolders(["site"], verbose);
+    removeSiteReferences(verbose);
+    runEslintFix(verbose);
 }
