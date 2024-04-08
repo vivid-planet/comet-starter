@@ -33,14 +33,6 @@ This command will create a new Comet app with the name "my-project" and enable v
 
 The following commands can be used to customize the project setup:
 
--   `remove-showcase`: Removes the showcase content from the project.
-
-Example usage:
-
-```bash
-npx @comet/create-app remove-showcase
-```
-
 -   `remove-site`: Removes the site from the project.
 
 Example usage:

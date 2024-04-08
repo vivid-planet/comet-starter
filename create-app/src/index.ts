@@ -2,7 +2,6 @@ import { Command } from "commander";
 import kleur from "kleur";
 
 import { createApp } from "./scripts/create-app/createApp";
-import { removeShowcaseContent } from "./scripts/remove-showcase/removeShowcase";
 import { removeSite } from "./scripts/remove-site/removeSite";
 import { cwdIsCometProject } from "./util/cwdIsCometProject";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
@@ -31,17 +30,6 @@ void (async () => {
             }
         })
         .configureOutput({ outputError: (str, write) => write(kleur.bgRed(str)) });
-
-    program.addCommand(
-        new Command("remove-showcase").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
-            if (!cwdIsCometProject()) {
-                program.error("This command must be run from the root of a Comet project.");
-            }
-
-            console.log("Removing showcase content from project...");
-            removeShowcaseContent(options.verbose);
-        }),
-    );
 
     program.addCommand(
         new Command("remove-site").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
