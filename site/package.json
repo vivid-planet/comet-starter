@@ -51,7 +51,6 @@
         "@comet/cli": "^6.5.0",
         "@comet/eslint-config": "^6.5.0",
         "@formatjs/cli": "^4.2.33",
-        "@gitbeaker/node": "^35.6.0",
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",
         "@graphql-codegen/named-operations-object": "^2.0.0",
