@@ -1,4 +1,4 @@
-import { Assets, Dashboard, Data, Domain, PageTree, Snips, Wrench } from "@comet/admin-icons";
+import { Assets, Dashboard, Domain, PageTree, Snips, Wrench } from "@comet/admin-icons";
 import {
     AllCategories,
     ContentScopeIndicator,
@@ -12,7 +12,6 @@ import {
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
-import { ProductsPage } from "@src/products/generated/ProductsPage";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
@@ -69,20 +68,6 @@ export const masterMenuData: MasterMenuData = [
             ),
         },
         requiredPermission: "pageTree",
-    },
-    {
-        primary: <FormattedMessage id="menu.structuredContent" defaultMessage="Structured Content" />,
-        icon: <Data />,
-        submenu: [
-            {
-                primary: <FormattedMessage id="menu.products" defaultMessage="Products" />,
-                route: {
-                    path: "/structured-content/products",
-                    component: ProductsPage,
-                },
-            },
-        ],
-        requiredPermission: "products",
     },
     {
         primary: <FormattedMessage id="menu.dam" defaultMessage="Assets" />,

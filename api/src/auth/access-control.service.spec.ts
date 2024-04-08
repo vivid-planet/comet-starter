@@ -41,10 +41,10 @@ describe("AccessControlService", () => {
             expect(permissions).toEqual(UserPermissions.allPermissions);
         });
 
-        it("should return products permission for German editor", () => {
+        it("should return pageTree permission for German editor", () => {
             const permissions = service.getPermissionsForUser(staticUsers.editor);
 
-            expect(permissions).toEqual([{ permission: "products" }]);
+            expect(permissions).toEqual([{ permission: "pageTree" }]);
         });
     });
 
