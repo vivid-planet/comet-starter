@@ -301,6 +301,11 @@
         "name": "Link",
         "fields": [
             {
+                "name": "title",
+                "kind": "String",
+                "nullable": true
+            },
+            {
                 "name": "attachedBlocks",
                 "kind": "NestedObjectList",
                 "object": {
@@ -357,6 +362,11 @@
                 "name": "activeType",
                 "kind": "String",
                 "nullable": false
+            },
+            {
+                "name": "title",
+                "kind": "String",
+                "nullable": true
             }
         ]
     },
