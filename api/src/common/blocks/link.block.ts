@@ -1,7 +1,4 @@
-import { createOneOfBlock, ExternalLinkBlock } from "@comet/blocks-api";
-import { InternalLinkBlock } from "@comet/cms-api";
+import { ExternalLinkBlock } from "@comet/blocks-api";
+import { createLinkBlock, InternalLinkBlock } from "@comet/cms-api";
 
-export const LinkBlock = createOneOfBlock(
-    { supportedBlocks: { internal: InternalLinkBlock, external: ExternalLinkBlock }, allowEmpty: false },
-    "Link",
-);
+export const LinkBlock = createLinkBlock({ supportedBlocks: { internal: InternalLinkBlock, external: ExternalLinkBlock } });
