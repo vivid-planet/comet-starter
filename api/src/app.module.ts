@@ -15,7 +15,7 @@ import {
     RedirectsModule,
     UserPermissionsModule,
 } from "@comet/cms-api";
-import { ApolloDriver } from "@nestjs/apollo";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
 import { Enhancer, GraphQLModule } from "@nestjs/graphql";
 import { DbModule } from "@src/db/db.module";
@@ -25,6 +25,7 @@ import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
+import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
@@ -45,13 +46,22 @@ export class AppModule {
             imports: [
                 ConfigModule.forRoot(config),
                 DbModule,
-                GraphQLModule.forRootAsync({
+                GraphQLModule.forRootAsync<ApolloDriverConfig>({
                     driver: ApolloDriver,
                     imports: [BlocksModule],
                     useFactory: (dependencies: Record<string, unknown>) => ({
                         debug: config.debug,
                         playground: config.debug,
                         autoSchemaFile: "schema.gql",
+                        formatError: (error) => {
+                            // Disable GraphQL field suggestions in production
+                            if (process.env.NODE_ENV !== "development") {
+                                if (error instanceof ValidationError) {
+                                    return new ValidationError("Invalid request.");
+                                }
+                            }
+                            return error;
+                        },
                         context: ({ req }: { req: Request }) => ({ ...req }),
                         cors: {
                             origin: config.corsAllowedOrigin,
