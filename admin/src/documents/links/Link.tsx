@@ -4,7 +4,6 @@ import { createDocumentDependencyMethods, createDocumentRootBlocksMethods, Depen
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { GQLLink, GQLLinkInput } from "@src/graphql.generated";
 import { categoryToUrlParam } from "@src/pageTree/pageTreeCategories";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { EditLink } from "./EditLink";

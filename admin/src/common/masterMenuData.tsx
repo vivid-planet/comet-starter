@@ -12,7 +12,6 @@ import {
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
-import React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "./ContentScopeIndicatorStyles";
