@@ -35,7 +35,7 @@ import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { createConfig } from "./config";
+import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -92,30 +92,32 @@ export function App() {
                                                     pageTreeCategories={pageTreeCategories}
                                                     pageTreeDocumentTypes={pageTreeDocumentTypes}
                                                 >
-                                                    <RouterBrowserRouter>
-                                                        <GlobalStyle />
-                                                        <ContentScopeProvider>
-                                                            {({ match }) => (
-                                                                <Switch>
-                                                                    <Route
-                                                                        path={`${match.path}/preview`}
-                                                                        render={(props) => <SitePreview {...props} />}
-                                                                    />
-                                                                    <Route
-                                                                        render={() => (
-                                                                            <MasterLayout
-                                                                                headerComponent={MasterHeader}
-                                                                                menuComponent={() => <MasterMenu menu={masterMenuData} />}
-                                                                            >
-                                                                                <MasterMenuRoutes menu={masterMenuData} />
-                                                                            </MasterLayout>
-                                                                        )}
-                                                                    />
-                                                                </Switch>
-                                                            )}
-                                                        </ContentScopeProvider>
-                                                        <ErrorDialogHandler />
-                                                    </RouterBrowserRouter>
+                                                    <ConfigProvider config={config}>
+                                                        <RouterBrowserRouter>
+                                                            <GlobalStyle />
+                                                            <ContentScopeProvider>
+                                                                {({ match }) => (
+                                                                    <Switch>
+                                                                        <Route
+                                                                            path={`${match.path}/preview`}
+                                                                            render={(props) => <SitePreview {...props} />}
+                                                                        />
+                                                                        <Route
+                                                                            render={() => (
+                                                                                <MasterLayout
+                                                                                    headerComponent={MasterHeader}
+                                                                                    menuComponent={() => <MasterMenu menu={masterMenuData} />}
+                                                                                >
+                                                                                    <MasterMenuRoutes menu={masterMenuData} />
+                                                                                </MasterLayout>
+                                                                            )}
+                                                                        />
+                                                                    </Switch>
+                                                                )}
+                                                            </ContentScopeProvider>
+                                                            <ErrorDialogHandler />
+                                                        </RouterBrowserRouter>
+                                                    </ConfigProvider>
                                                 </CmsBlockContextProvider>
                                             </SnackbarProvider>
                                         </DndProvider>
