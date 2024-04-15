@@ -10,6 +10,7 @@ function removeSiteReferences(verbose: boolean) {
     removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("./package.json", / browser:site/g, verbose);
+    removeReferenceInFile("./package.json", /site\|create-app/g, verbose);
     removeReferenceInFile("./package.json", /.*site.*\n/gim, verbose);
     removeReferenceInFile("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis, verbose);
 }
