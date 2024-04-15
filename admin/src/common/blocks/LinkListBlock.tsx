@@ -1,5 +1,4 @@
 import { createListBlock } from "@comet/blocks-admin";
-import React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { TextLinkBlock } from "./TextLinkBlock";

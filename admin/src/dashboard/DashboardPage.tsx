@@ -1,7 +1,6 @@
 import { MainContent, Stack } from "@comet/admin";
 import { DashboardHeader, LatestBuildsDashboardWidget } from "@comet/cms-admin";
 import { Grid } from "@mui/material";
-import * as React from "react";
 import { useIntl } from "react-intl";
 
 import backgroundImage1x from "./dashboard-image@1x.jpg";

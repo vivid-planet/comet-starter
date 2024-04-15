@@ -1,7 +1,6 @@
 import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField } from "@comet/blocks-admin";
 import { createRichTextBlock } from "@comet/cms-admin";
 import { HeadlineBlockData } from "@src/blocks.generated";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { LinkBlock } from "./LinkBlock";
