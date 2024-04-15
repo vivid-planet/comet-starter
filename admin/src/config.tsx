@@ -1,5 +1,5 @@
 import { SiteConfig } from "@comet/cms-admin";
-import React, { createContext, PropsWithChildren, useContext } from "react";
+import { createContext, PropsWithChildren, useContext } from "react";
 
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
