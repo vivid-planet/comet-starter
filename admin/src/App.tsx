@@ -54,45 +54,45 @@ const apiClient = createHttpClient(config.apiUrl);
 
 export function App() {
     return (
-        <ApolloProvider client={apolloClient}>
-            <CurrentUserProvider>
-                <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                    <SitesConfigProvider
-                        value={{
-                            configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
-                                const siteConfig = configs[scope.domain];
-                                return {
-                                    ...siteConfig,
-                                    previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
-                                };
-                            },
-                        }}
-                    >
-                        <DependenciesConfigProvider
-                            entityDependencyMap={{
-                                Page,
-                                Link,
-                                DamFile: createDamFileDependency(),
+        <ConfigProvider config={config}>
+            <ApolloProvider client={apolloClient}>
+                <CurrentUserProvider>
+                    <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
+                        <SitesConfigProvider
+                            value={{
+                                configs: config.sitesConfig,
+                                resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
+                                    const siteConfig = configs[scope.domain];
+                                    return {
+                                        ...siteConfig,
+                                        previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
+                                    };
+                                },
                             }}
                         >
-                            <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
-                                    <MuiThemeProvider theme={theme}>
-                                        <DndProvider backend={HTML5Backend}>
-                                            <SnackbarProvider>
-                                                <CmsBlockContextProvider
-                                                    damConfig={{
-                                                        apiUrl: config.apiUrl,
-                                                        apiClient,
-                                                        maxFileSize: config.dam.uploadsMaxFileSize,
-                                                        maxSrcResolution: config.imgproxy.maxSrcResolution,
-                                                        allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
-                                                    }}
-                                                    pageTreeCategories={pageTreeCategories}
-                                                    pageTreeDocumentTypes={pageTreeDocumentTypes}
-                                                >
-                                                    <ConfigProvider config={config}>
+                            <DependenciesConfigProvider
+                                entityDependencyMap={{
+                                    Page,
+                                    Link,
+                                    DamFile: createDamFileDependency(),
+                                }}
+                            >
+                                <IntlProvider locale="en" messages={getMessages()}>
+                                    <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                        <MuiThemeProvider theme={theme}>
+                                            <DndProvider backend={HTML5Backend}>
+                                                <SnackbarProvider>
+                                                    <CmsBlockContextProvider
+                                                        damConfig={{
+                                                            apiUrl: config.apiUrl,
+                                                            apiClient,
+                                                            maxFileSize: config.dam.uploadsMaxFileSize,
+                                                            maxSrcResolution: config.imgproxy.maxSrcResolution,
+                                                            allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
+                                                        }}
+                                                        pageTreeCategories={pageTreeCategories}
+                                                        pageTreeDocumentTypes={pageTreeDocumentTypes}
+                                                    >
                                                         <RouterBrowserRouter>
                                                             <GlobalStyle />
                                                             <ContentScopeProvider>
@@ -117,17 +117,17 @@ export function App() {
                                                             </ContentScopeProvider>
                                                             <ErrorDialogHandler />
                                                         </RouterBrowserRouter>
-                                                    </ConfigProvider>
-                                                </CmsBlockContextProvider>
-                                            </SnackbarProvider>
-                                        </DndProvider>
-                                    </MuiThemeProvider>
-                                </LocaleProvider>
-                            </IntlProvider>
-                        </DependenciesConfigProvider>
-                    </SitesConfigProvider>
-                </BuildInformationProvider>
-            </CurrentUserProvider>
-        </ApolloProvider>
+                                                    </CmsBlockContextProvider>
+                                                </SnackbarProvider>
+                                            </DndProvider>
+                                        </MuiThemeProvider>
+                                    </LocaleProvider>
+                                </IntlProvider>
+                            </DependenciesConfigProvider>
+                        </SitesConfigProvider>
+                    </BuildInformationProvider>
+                </CurrentUserProvider>
+            </ApolloProvider>
+        </ConfigProvider>
     );
 }
