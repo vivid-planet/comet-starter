@@ -3,7 +3,6 @@ import { File, FileNotMenu } from "@comet/admin-icons";
 import { createDocumentDependencyMethods, createDocumentRootBlocksMethods, DependencyInterface, DocumentInterface } from "@comet/cms-admin";
 import { GQLPage, GQLPageInput } from "@src/graphql.generated";
 import { categoryToUrlParam } from "@src/pageTree/pageTreeCategories";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";

@@ -25,7 +25,6 @@ import { css, Global } from "@emotion/react";
 import { ContentScope } from "@src/common/ContentScopeProvider";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
-import * as React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { IntlProvider } from "react-intl";

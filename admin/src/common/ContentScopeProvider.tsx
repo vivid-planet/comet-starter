@@ -13,7 +13,6 @@ import {
     useSitesConfig,
 } from "@comet/cms-admin";
 import { SitesConfig } from "@src/config";
-import React from "react";
 
 type Domain = "main" | "secondary" | string;
 type Language = "en" | string;
@@ -39,9 +38,9 @@ const controlsConfig: ContentScopeControlsConfig<ContentScope> = {
 };
 
 // convenince wrapper for app (Bind config and Generic)
-export const ContentScopeControls: React.FC = () => {
+export function ContentScopeControls() {
     return <ContentScopeControlsLibrary<ContentScope> config={controlsConfig} />;
-};
+}
 
 export function useContentScopeConfig(p: ContentScopeConfigProps): void {
     return useContentScopeConfigLibrary(p);
