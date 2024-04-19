@@ -22,7 +22,7 @@
         "mikro-orm:migration:generate": "mikro-orm migration:create",
         "start": "npm run prebuild && dotenv -c secrets -- nest start",
         "start:debug": "npm run prebuild && dotenv -c secrets -- nest start --debug --watch --preserveWatchOutput",
-        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -c secrets -- nest start --watch --preserveWatchOutput",
+        "start:dev": "npm run prebuild && npm run db:migrate && dotenv -c secrets -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
