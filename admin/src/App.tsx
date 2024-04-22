@@ -17,7 +17,6 @@ import {
     LocaleProvider,
     MasterMenu,
     MasterMenuRoutes,
-    SiteConfig,
     SitePreview,
     SitesConfigProvider,
 } from "@comet/cms-admin";
@@ -55,43 +54,38 @@ export function App() {
     return (
         <ConfigProvider config={config}>
             <ApolloProvider client={apolloClient}>
-                <CurrentUserProvider>
-                    <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                        <SitesConfigProvider
-                            value={{
-                                configs: config.sitesConfig,
-                                resolveSiteConfigForScope: (configs: Record<string, SiteConfig>, scope: ContentScope) => {
-                                    const siteConfig = configs[scope.domain];
-                                    return {
-                                        ...siteConfig,
-                                        previewUrl: `${siteConfig.previewUrl}/${scope.language}`,
-                                    };
-                                },
+                <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
+                    <SitesConfigProvider
+                        value={{
+                            configs: config.sitesConfig,
+                            resolveSiteConfigForScope: (configs, scope: ContentScope) => configs[scope.domain],
+                        }}
+                    >
+                        <DependenciesConfigProvider
+                            entityDependencyMap={{
+                                Page,
+                                Link,
+                                DamFile: createDamFileDependency(),
                             }}
                         >
-                            <DependenciesConfigProvider
-                                entityDependencyMap={{
-                                    Page,
-                                    Link,
-                                    DamFile: createDamFileDependency(),
-                                }}
-                            >
-                                <IntlProvider locale="en" messages={getMessages()}>
-                                    <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
-                                        <MuiThemeProvider theme={theme}>
-                                            <DndProvider backend={HTML5Backend}>
-                                                <SnackbarProvider>
-                                                    <CmsBlockContextProvider
-                                                        damConfig={{
-                                                            apiUrl: config.apiUrl,
-                                                            apiClient,
-                                                            maxFileSize: config.dam.uploadsMaxFileSize,
-                                                            maxSrcResolution: config.imgproxy.maxSrcResolution,
-                                                            allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
-                                                        }}
-                                                        pageTreeCategories={pageTreeCategories}
-                                                        pageTreeDocumentTypes={pageTreeDocumentTypes}
-                                                    >
+                            <IntlProvider locale="en" messages={getMessages()}>
+                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                    <MuiThemeProvider theme={theme}>
+                                        <DndProvider backend={HTML5Backend}>
+                                            <SnackbarProvider>
+                                                <CmsBlockContextProvider
+                                                    damConfig={{
+                                                        apiUrl: config.apiUrl,
+                                                        apiClient,
+                                                        maxFileSize: config.dam.uploadsMaxFileSize,
+                                                        maxSrcResolution: config.imgproxy.maxSrcResolution,
+                                                        allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
+                                                    }}
+                                                    pageTreeCategories={pageTreeCategories}
+                                                    pageTreeDocumentTypes={pageTreeDocumentTypes}
+                                                >
+                                                    <ErrorDialogHandler />
+                                                    <CurrentUserProvider>
                                                         <RouterBrowserRouter>
                                                             <GlobalStyle />
                                                             <ContentScopeProvider>
@@ -114,18 +108,17 @@ export function App() {
                                                                     </Switch>
                                                                 )}
                                                             </ContentScopeProvider>
-                                                            <ErrorDialogHandler />
                                                         </RouterBrowserRouter>
-                                                    </CmsBlockContextProvider>
-                                                </SnackbarProvider>
-                                            </DndProvider>
-                                        </MuiThemeProvider>
-                                    </LocaleProvider>
-                                </IntlProvider>
-                            </DependenciesConfigProvider>
-                        </SitesConfigProvider>
-                    </BuildInformationProvider>
-                </CurrentUserProvider>
+                                                    </CurrentUserProvider>
+                                                </CmsBlockContextProvider>
+                                            </SnackbarProvider>
+                                        </DndProvider>
+                                    </MuiThemeProvider>
+                                </LocaleProvider>
+                            </IntlProvider>
+                        </DependenciesConfigProvider>
+                    </SitesConfigProvider>
+                </BuildInformationProvider>
             </ApolloProvider>
         </ConfigProvider>
     );

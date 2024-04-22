@@ -4,7 +4,7 @@ if (process.env.TRACING_ENABLED) {
     require("./tracing");
 }
 
-import { ExceptionInterceptor, ValidationExceptionFactory } from "@comet/cms-api";
+import { CdnGuard, ExceptionInterceptor, ValidationExceptionFactory } from "@comet/cms-api";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
@@ -53,6 +53,11 @@ async function bootstrap(): Promise<void> {
     app.use(json({ limit: "1mb" })); // increase default limit of 100kb for saving large pages
     app.use(compression());
     app.use(cookieParser());
+
+    // If CDN is enabled, make sure all traffic is either coming from the CDN or internal sources
+    if (config.cdn.originCheckSecret) {
+        app.useGlobalGuards(new CdnGuard({ headerName: "x-cdn-origin-check", headerValue: config.cdn.originCheckSecret }));
+    }
 
     // https://mikro-orm.io/docs/usage-with-nestjs#app-shutdown-and-cleanup
     app.enableShutdownHooks();

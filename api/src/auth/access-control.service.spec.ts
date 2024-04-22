@@ -21,7 +21,7 @@ describe("AccessControlService", () => {
                 id: "b26d86a7-32bb-4c84-ab9d-d167dddd40ff",
                 name: "Unknown User",
                 email: "unknown@example.com",
-                language: "en",
+                locale: "en",
             };
 
             const permissions = service.getPermissionsForUser(unknownUser);
@@ -54,7 +54,7 @@ describe("AccessControlService", () => {
                 id: "b26d86a7-32bb-4c84-ab9d-d167dddd40ff",
                 name: "Unknown User",
                 email: "unknown@example.com",
-                language: "en",
+                locale: "en",
             };
 
             const contentScopes = service.getContentScopesForUser(unknownUser);

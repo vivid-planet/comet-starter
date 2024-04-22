@@ -1,3 +1,4 @@
+import { SitePreviewProvider } from "@comet/cms-site";
 import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
 import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
@@ -136,8 +137,10 @@ export default function CustomApp({ Component, pageProps, scope, messages }: Cus
                 </>
             )}
             <ContentScopeProvider scope={scope}>
-                <GlobalStyle />
-                <Component {...pageProps} />
+                <SitePreviewProvider>
+                    <GlobalStyle />
+                    <Component {...pageProps} />
+                </SitePreviewProvider>
             </ContentScopeProvider>
         </IntlProvider>
     );
