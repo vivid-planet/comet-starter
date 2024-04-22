@@ -71,7 +71,10 @@ export class MigrateConsole {
             this.logger.log(`Executed migrations. Trying to commit...`);
             await em.commit();
             this.logger.log("Migrations successfully committed");
-            await this.dependenciesService.createViews();
+
+            if (process.env.NODE_ENV === "development") {
+                await this.dependenciesService.createViews();
+            }
         } catch (error) {
             this.logger.error(error);
             await em.rollback();
