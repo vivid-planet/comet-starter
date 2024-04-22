@@ -1,16 +1,17 @@
-import { SeoBlock } from "@src/documents/pages/blocks/SeoBlock";
-import { Layout, PropsWithLayout } from "@src/layout/Layout";
-import { gql } from "graphql-request";
+import { gql, previewParams, SeoBlock } from "@comet/cms-site";
+import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
+import { createGraphQLFetch } from "@src/util/graphQLClient";
+import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
+import { notFound } from "next/navigation";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
-import { GQLPageQuery } from "./Page.generated";
+import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
-export const pageQuery = gql`
-    query Page($pageId: ID!) {
-        pageContent: pageTreeNode(id: $pageId) {
+const pageQuery = gql`
+    query Page($pageTreeNodeId: ID!) {
+        pageContent: pageTreeNode(id: $pageTreeNodeId) {
             name
-            path
             document {
                 __typename
                 ... on Page {
@@ -22,22 +23,42 @@ export const pageQuery = gql`
     }
 `;
 
-export function Page(props: PropsWithLayout<GQLPageQuery>): JSX.Element {
-    const document = props.pageContent?.document;
+export async function Page({ pageTreeNodeId }: { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }) {
+    const { previewData } = previewParams() || { previewData: undefined };
+    const graphQLFetch = createGraphQLFetch(previewData);
+
+    const data = await graphQLFetch<GQLPageQuery, GQLPageQueryVariables>(pageQuery, {
+        pageTreeNodeId,
+    });
+
+    if (!data.pageContent) throw new Error("Could not load page content");
+    if (!data.pageContent.document) {
+        // no document attached to page
+        notFound(); //no return needed
+    }
+    if (data.pageContent.document?.__typename != "Page") throw new Error(`invalid document type`);
+
+    [data.pageContent.document.content, data.pageContent.document.seo] = await Promise.all([
+        recursivelyLoadBlockData({
+            blockType: "PageContent",
+            blockData: data.pageContent.document.content,
+            graphQLFetch,
+            fetch,
+            pageTreeNodeId,
+        }),
+        recursivelyLoadBlockData({
+            blockType: "Seo",
+            blockData: data.pageContent.document.seo,
+            graphQLFetch,
+            fetch,
+            pageTreeNodeId,
+        }),
+    ]);
+
     return (
-        <Layout {...props.layout}>
-            {document?.__typename === "Page" && (
-                <SeoBlock
-                    data={document.seo}
-                    title={props.pageContent?.name ?? ""}
-                    canonicalUrl={`${process.env.NEXT_PUBLIC_SITE_URL}${props.pageContent?.path}`}
-                />
-            )}
-            {document && document.__typename === "Page" ? (
-                <>
-                    <div>{document.content && <PageContentBlock data={document.content} />}</div>
-                </>
-            ) : null}
-        </Layout>
+        <>
+            <SeoBlock data={data.pageContent.document.seo} title={data.pageContent.name} />
+            <PageContentBlock data={data.pageContent.document.content} />
+        </>
     );
 }

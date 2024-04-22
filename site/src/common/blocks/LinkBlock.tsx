@@ -1,6 +1,9 @@
-import { ExternalLinkBlock, InternalLinkBlock, OneOfBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
+"use client";
+import { ExternalLinkBlock, OneOfBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
 import { LinkBlockData } from "@src/blocks.generated";
 import * as React from "react";
+
+import { InternalLinkBlock } from "./InternalLinkBlock";
 
 const supportedBlocks: SupportedBlocks = {
     internal: ({ children, title, ...props }) => (

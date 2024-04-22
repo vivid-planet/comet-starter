@@ -24,7 +24,7 @@ const config: CodegenConfig = {
             config: pluginConfig,
         },
         "./src/": {
-            documents: ["./src/**/!(*.generated).{ts,tsx}", "./preBuild/src/**/!(*.generated).{ts,tsx}"],
+            documents: ["./src/**/!(*.generated).{ts,tsx}"],
             preset: "near-operation-file",
             presetConfig: {
                 extension: ".generated.ts",
