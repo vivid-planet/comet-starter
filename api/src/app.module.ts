@@ -130,7 +130,19 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
-                ...(process.env.NODE_ENV === "production" ? [AccessLogModule] : []),
+                ...(process.env.NODE_ENV === "production"
+                    ? [
+                          AccessLogModule.forRoot({
+                              shouldLogRequest: ({ user }) => {
+                                  // ignore Basic Authed User
+                                  if (user === true) {
+                                      return false;
+                                  }
+                                  return true;
+                              },
+                          }),
+                      ]
+                    : []),
             ],
         };
     }
