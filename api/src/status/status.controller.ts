@@ -1,9 +1,9 @@
-import { PublicApi } from "@comet/cms-api";
+import { DisableCometGuards } from "@comet/cms-api";
 import { EntityManager } from "@mikro-orm/postgresql";
 import { Controller, Get } from "@nestjs/common";
 
 @Controller("status")
-@PublicApi()
+@DisableCometGuards()
 export class StatusController {
     constructor(private readonly entityManager: EntityManager) {}
 

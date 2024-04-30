@@ -1,14 +1,11 @@
-import { parsePreviewParams, SitePreviewProvider } from "@comet/cms-site";
-import { useContentScope } from "@src/common/contentScope/ContentScope";
+import { SitePreviewProvider } from "@comet/cms-site";
 import Page, { createGetUniversalProps, PageUniversalProps } from "@src/pages/[[...path]].page";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import React from "react";
 
 export default function AuthenticatedPreviewPage(props: InferGetServerSidePropsType<typeof getServerSideProps>): JSX.Element {
-    const scope = useContentScope();
-
     return (
-        <SitePreviewProvider previewPath={`/preview/${scope.domain}/${scope.language}`}>
+        <SitePreviewProvider>
             <Page {...props} />
         </SitePreviewProvider>
     );
@@ -19,9 +16,8 @@ export const getServerSideProps: GetServerSideProps<PageUniversalProps> = async 
         return { notFound: true };
     }
 
-    const { includeInvisibleBlocks } = parsePreviewParams(context.query);
     const getUniversalProps = createGetUniversalProps({
-        includeInvisibleBlocks,
+        includeInvisibleBlocks: true, // TODO Fix when migrating to App Router
         includeInvisiblePages: true,
         previewDamUrls: true,
     });

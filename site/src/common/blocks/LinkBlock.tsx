@@ -16,7 +16,7 @@ const supportedBlocks: SupportedBlocks = {
 };
 
 interface LinkBlockProps extends PropsWithData<LinkBlockData> {
-    children: React.ReactElement;
+    children: React.ReactNode;
 }
 
 export const LinkBlock = withPreview(
