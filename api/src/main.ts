@@ -13,6 +13,7 @@ import { useContainer } from "class-validator";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
+import { resolve } from "path";
 
 import { createConfig } from "./config/config";
 
@@ -53,6 +54,8 @@ async function bootstrap(): Promise<void> {
     app.use(json({ limit: "1mb" })); // increase default limit of 100kb for saving large pages
     app.use(compression());
     app.use(cookieParser());
+
+    app.useStaticAssets(resolve(__dirname, "../public"));
 
     // https://mikro-orm.io/docs/usage-with-nestjs#app-shutdown-and-cleanup
     app.enableShutdownHooks();
