@@ -1,4 +1,3 @@
-import { DependenciesService } from "@comet/cms-api";
 import { MikroORM } from "@mikro-orm/core";
 import { Injectable, Logger } from "@nestjs/common";
 import { Command, Console } from "nestjs-console";
@@ -8,7 +7,7 @@ import { Command, Console } from "nestjs-console";
 export class MigrateConsole {
     private readonly logger = new Logger(MigrateConsole.name);
 
-    constructor(private readonly orm: MikroORM, private readonly dependenciesService: DependenciesService) {}
+    constructor(private readonly orm: MikroORM) {}
 
     private async sleep(s: number): Promise<unknown> {
         return new Promise((resolve) => {
@@ -71,10 +70,6 @@ export class MigrateConsole {
             this.logger.log(`Executed migrations. Trying to commit...`);
             await em.commit();
             this.logger.log("Migrations successfully committed");
-
-            if (process.env.NODE_ENV === "development") {
-                await this.dependenciesService.createViews();
-            }
         } catch (error) {
             this.logger.error(error);
             await em.rollback();
