@@ -23,7 +23,6 @@ const PreviewPage: React.FunctionComponent = () => {
                 blockData: iFrameBridge.block,
                 graphQLFetch,
                 fetch,
-                pageTreeNodeId: undefined, //we don't have a pageTreeNodeId in preview
             });
             setBlockData(newData);
         }

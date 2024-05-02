@@ -44,14 +44,12 @@ export async function Page({ pageTreeNodeId }: { pageTreeNodeId: string; scope: 
             blockData: data.pageContent.document.content,
             graphQLFetch,
             fetch,
-            pageTreeNodeId,
         }),
         recursivelyLoadBlockData({
             blockType: "Seo",
             blockData: data.pageContent.document.seo,
             graphQLFetch,
             fetch,
-            pageTreeNodeId,
         }),
     ]);
 
