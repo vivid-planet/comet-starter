@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   pull_request:
@@ -28,27 +28,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: "Admin: Clone library translations"
-        uses: actions/checkout@v3
-        with:
-          repository: vivid-planet/comet-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "admin/lang/comet-lang"
-
-      - name: "Admin: Clone starter translations"
-        uses: actions/checkout@v3
-        with:
-          repository: vivid-planet/comet-starter-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "admin/lang/starter-lang"
-
-      - name: "Site: Clone starter translations"
-        uses: actions/checkout@v3
-        with:
-          repository: vivid-planet/comet-starter-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "site/lang/starter-lang"
-
       - name: Use Node.js 20.x
         uses: actions/setup-node@v3
         with:
@@ -63,8 +42,12 @@ jobs:
       - name: Copy schema files
         run: npm run copy-schema-files
 
-      - name: Lint
-        run: npm run lint
+      - name: Test
+        run: npm run test:ci
 
-      - name: Build
-        run: npm run build
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: test-results
+          path: "**/junit.xml"
