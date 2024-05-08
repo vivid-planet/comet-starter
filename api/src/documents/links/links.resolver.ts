@@ -1,8 +1,16 @@
-import { AffectedEntity, PageTreeNodeVisibility, PageTreeService, RequiredPermission, validateNotModified } from "@comet/cms-api";
+import {
+    AffectedEntity,
+    PageTreeNodeInterface,
+    PageTreeNodeVisibility,
+    PageTreeService,
+    RequiredPermission,
+    validateNotModified,
+} from "@comet/cms-api";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
 import { UnauthorizedException } from "@nestjs/common";
-import { Args, ID, Mutation, Query, Resolver } from "@nestjs/graphql";
+import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 
 import { LinkInput } from "./dto/link.input";
 import { Link } from "./entities/link.entity";
@@ -15,6 +23,11 @@ export class LinksResolver {
     @Query(() => Link, { nullable: true })
     async link(@Args("linkId", { type: () => ID }) linkId: string): Promise<Link | null> {
         return this.repository.findOne(linkId);
+    }
+
+    @ResolveField(() => PageTreeNode, { nullable: true })
+    async pageTreeNode(@Parent() link: Link): Promise<PageTreeNodeInterface | null> {
+        return this.pageTreeService.createReadApi({ visibility: "all" }).getFirstNodeByAttachedPageId(link.id);
     }
 
     @Mutation(() => Link)

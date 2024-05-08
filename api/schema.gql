@@ -168,6 +168,7 @@ type Link implements DocumentInterface {
   updatedAt: DateTime!
   content: LinkBlockData!
   createdAt: DateTime!
+  pageTreeNode: PageTreeNode
 }
 
 interface DocumentInterface {
@@ -177,21 +178,6 @@ interface DocumentInterface {
 
 """Link root block data"""
 scalar LinkBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
-
-type Page implements DocumentInterface {
-  id: ID!
-  updatedAt: DateTime!
-  content: PageContentBlockData!
-  seo: SeoBlockData!
-  createdAt: DateTime!
-  pageTreeNode: PageTreeNode
-}
-
-"""PageContent root block data"""
-scalar PageContentBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
-
-"""Seo root block data"""
-scalar SeoBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 type PageTreeNodeScope {
   domain: String!
@@ -237,6 +223,21 @@ input DependentFilter {
   rootColumnName: String
 }
 
+type Page implements DocumentInterface {
+  id: ID!
+  updatedAt: DateTime!
+  content: PageContentBlockData!
+  seo: SeoBlockData!
+  createdAt: DateTime!
+  pageTreeNode: PageTreeNode
+}
+
+"""PageContent root block data"""
+scalar PageContentBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""Seo root block data"""
+scalar SeoBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
 type DamFolder {
   id: ID!
   name: String!
@@ -278,9 +279,8 @@ type PaginatedPageTreeNodes {
   totalCount: Int!
 }
 
-type Redirect implements DocumentInterface {
+type Redirect {
   id: ID!
-  updatedAt: DateTime!
   sourceType: RedirectSourceTypeValues!
   source: String!
   target: JSONObject!
@@ -288,6 +288,7 @@ type Redirect implements DocumentInterface {
   active: Boolean!
   generationType: RedirectGenerationType!
   createdAt: DateTime!
+  updatedAt: DateTime!
   dependencies(offset: Int! = 0, limit: Int! = 25, filter: DependencyFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
 }
 
