@@ -55,14 +55,12 @@ async function bootstrap(): Promise<void> {
     app.use(compression());
     app.use(cookieParser());
 
-<<<<<<< HEAD
     // If CDN is enabled, make sure all traffic is either coming from the CDN or internal sources
     if (config.cdn.originCheckSecret) {
         app.useGlobalGuards(new CdnGuard({ headerName: "x-cdn-origin-check", headerValue: config.cdn.originCheckSecret }));
     }
-=======
+
     app.useStaticAssets(resolve(__dirname, "../public"));
->>>>>>> main
 
     // https://mikro-orm.io/docs/usage-with-nestjs#app-shutdown-and-cleanup
     app.enableShutdownHooks();
