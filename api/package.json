@@ -49,8 +49,15 @@
         }
     },
     "dependencies": {
+<<<<<<< HEAD
         "@comet/blocks-api": "7.0.0-canary-20240508103439",
         "@comet/cms-api": "7.0.0-canary-20240508103439",
+=======
+        "@aws-sdk/client-s3": "^3.49.0",
+        "@azure/storage-blob": "^12.0.0",
+        "@comet/blocks-api": "^6.9.0",
+        "@comet/cms-api": "^6.9.0",
+>>>>>>> main
         "@faker-js/faker": "^8.3.1",
         "@hapi/accept": "^5.0.0",
         "@mikro-orm/cli": "^5.0.5",
@@ -95,7 +102,11 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/eslint-config": "7.0.0-canary-20240508103439",
+=======
+        "@comet/eslint-config": "^6.9.0",
+>>>>>>> main
         "@nestjs/cli": "^9.0.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",
@@ -112,11 +123,11 @@
         "jest-junit": "^13.2.0",
         "npm-run-all": "^4.1.5",
         "prettier": "^2.1.2",
-        "ts-jest": "^27.0.0",
+        "ts-jest": "^29.0.0",
         "ts-loader": "^8.0.8",
         "ts-node": "^10.0.0",
         "tsconfig-paths": "^3.9.0",
-        "typescript": "^4.0.5"
+        "typescript": "~5.1.0"
     },
     "mikro-orm": {
         "useTsNode": true,

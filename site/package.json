@@ -27,8 +27,13 @@
         "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@comet/cms-site": "7.0.0-canary-20240508103439",
         "@next/bundle-analyzer": "^14.0.0",
+=======
+        "@comet/cms-site": "^6.9.0",
+        "@next/bundle-analyzer": "^12.3.4",
+>>>>>>> main
         "@opentelemetry/api": "^1.7.0",
         "@opentelemetry/auto-instrumentations-node": "^0.40.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.46.0",
@@ -37,10 +42,17 @@
         "fs-extra": "^9.0.0",
         "graphql": "^15.0.0",
         "graphql-request": "^3.0.0",
+<<<<<<< HEAD
         "next": "^14.0.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-intl": "^5.0.0",
+=======
+        "next": "^12.0.0",
+        "react": "^17.0.0",
+        "react-dom": "^17.0.0",
+        "react-intl": "^6.0.0",
+>>>>>>> main
         "react-is": "^17.0.2",
         "redraft": "^0.10.0",
         "sitemap": "^6.0.0",
@@ -48,9 +60,15 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/cli": "7.0.0-canary-20240508103439",
         "@comet/eslint-config": "7.0.0-canary-20240508103439",
         "@formatjs/cli": "^4.2.33",
+=======
+        "@comet/cli": "^6.9.0",
+        "@comet/eslint-config": "^6.9.0",
+        "@formatjs/cli": "^6.0.0",
+>>>>>>> main
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",
         "@graphql-codegen/named-operations-object": "^2.0.0",
@@ -68,6 +86,6 @@
         "prettier": "^2.0.0",
         "rimraf": "^3.0.0",
         "tsconfig-paths": "^3.0.0",
-        "typescript": "^4.0.0"
+        "typescript": "~5.1.0"
     }
 }

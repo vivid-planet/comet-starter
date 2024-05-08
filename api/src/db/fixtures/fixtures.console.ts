@@ -1,3 +1,4 @@
+import { DependenciesService } from "@comet/cms-api";
 import { MikroORM, UseRequestContext } from "@mikro-orm/core";
 import { Injectable, Logger } from "@nestjs/common";
 import { MultiBar, Options, Presets } from "cli-progress";
@@ -8,7 +9,7 @@ import { Command, Console } from "nestjs-console";
 export class FixturesConsole {
     private readonly logger = new Logger(FixturesConsole.name);
 
-    constructor(private readonly orm: MikroORM) {}
+    constructor(private readonly orm: MikroORM, private readonly dependenciesService: DependenciesService) {}
 
     barOptions: Options = {
         format: `{bar} {percentage}% | {value}/{total} {title} | ETA: {eta_formatted} | Duration: {duration_formatted}`,
@@ -39,6 +40,8 @@ export class FixturesConsole {
         const multiBar = new MultiBar(this.barOptions, Presets.shades_classic);
         // Add your fixtures here
         multiBar.stop();
+
+        await this.dependenciesService.createViews();
 
         await this.orm.em.flush();
     }
