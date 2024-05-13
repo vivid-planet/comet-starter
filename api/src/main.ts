@@ -13,6 +13,7 @@ import { useContainer } from "class-validator";
 import compression from "compression";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
+import { resolve } from "path";
 
 import { createConfig } from "./config/config";
 
@@ -58,6 +59,8 @@ async function bootstrap(): Promise<void> {
     if (config.cdn.originCheckSecret) {
         app.useGlobalGuards(new CdnGuard({ headerName: "x-cdn-origin-check", headerValue: config.cdn.originCheckSecret }));
     }
+
+    app.useStaticAssets(resolve(__dirname, "../public"));
 
     // https://mikro-orm.io/docs/usage-with-nestjs#app-shutdown-and-cleanup
     app.enableShutdownHooks();

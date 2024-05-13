@@ -24,7 +24,7 @@ const pageQuery = gql`
 `;
 
 export async function Page({ pageTreeNodeId }: { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }) {
-    const { previewData } = previewParams() || { previewData: undefined };
+    const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphQLFetch = createGraphQLFetch(previewData);
 
     const data = await graphQLFetch<GQLPageQuery, GQLPageQueryVariables>(pageQuery, {

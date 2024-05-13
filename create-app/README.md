@@ -17,17 +17,25 @@ The following arguments can be passed to customize the project setup:
 
 -   `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
 -   `-ni` or `--no-install`: Disables the automatic installation of dependencies.
+-   `-r` or `--repository <repository>`: Repository to clone from. Defaults to `https://github.com/vivid-planet/comet-starter.git`.
+-   `-b` or `--branch <branch>`: Branch to checkout. Defaults to `main`.
 -   `-v` or `--verbose`: Enables extra console logs for verbose output.
 -   `-V` or `--version`: Outputs the version number.
 -   `-h` or `--help`: Display help for the command.
 
-Example usage with arguments:
+#### Example usage with arguments
+
+Create a new Comet app with the name "my-project" and enable verbose logging:
 
 ```bash
 npx @comet/create-app my-project -v
 ```
 
-This command will create a new Comet app with the name "my-project" and enable verbose logging.
+Create a new Comet app with a different repository and branch:
+
+```bash
+npx @comet/create-app my-project -r https://github.com/my-company/comet-starter.git -b next
+```
 
 ### Commands
 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function Layout({ children, params }: PropsWithChildren<{ params: { lang: string } }>) {
     // TODO support multiple domains, get domain by Host header
-    const { scope, previewData } = previewParams() || { scope: { domain, language: params.lang }, previewData: undefined };
+    const { scope, previewData } = (await previewParams()) || { scope: { domain, language: params.lang }, previewData: undefined };
     const graphQLFetch = createGraphQLFetch(previewData);
 
     const { header } = await graphQLFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(

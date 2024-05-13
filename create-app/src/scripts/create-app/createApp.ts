@@ -11,15 +11,17 @@ import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
 import { createInitialGitCommit } from "./createInitialGitCommit";
 import { createWorkingDirectoryCopy } from "./createWorkingDirectoryCopy";
 
-interface CommandOptions {
+export interface CreateAppCommandOptions {
     projectName: string;
     verbose: boolean;
     install: boolean;
+    repository?: string;
+    branch?: string;
 }
 
-export async function createApp(commandOptions: CommandOptions) {
+export async function createApp(commandOptions: CreateAppCommandOptions) {
     console.log(`Creating a new Comet app in ${kleur.blue(`${process.cwd()}\n`)}`);
-    createWorkingDirectoryCopy(commandOptions.projectName, commandOptions.verbose);
+    createWorkingDirectoryCopy(commandOptions);
     cleanupReadme(commandOptions.verbose);
     cleanupWorkingDirectory(commandOptions.verbose);
     replacePlaceholder(commandOptions.projectName, commandOptions.verbose);
