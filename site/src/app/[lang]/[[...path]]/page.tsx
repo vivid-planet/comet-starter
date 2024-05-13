@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { path: string[]; lang:
 
     const props = {
         pageTreeNodeId,
-        scope,
+        scope: scope as GQLPageTreeNodeScopeInput, //TODO fix type, the scope from previewParams() is not compatible with GQLPageTreeNodeScopeInput,
     };
     const { component: Component } = documentTypes[data.pageTreeNodeByPath.documentType];
 
