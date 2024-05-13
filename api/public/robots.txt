@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /*resize:$resizeWidth:$resizeHeight # Prevents robots from crawling image URL templates
