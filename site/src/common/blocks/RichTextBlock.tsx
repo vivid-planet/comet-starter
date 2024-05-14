@@ -4,7 +4,6 @@ import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
 
-import { HiddenIfInvalidLink } from "../helpers/HiddenIfInvalidLink";
 import { LinkBlock } from "./LinkBlock";
 
 /**
@@ -94,11 +93,9 @@ const defaultRenderers: Renderers = {
         // key is the entity key value from raw
         LINK: (children, data: LinkBlockData, { key }) => {
             return (
-                <HiddenIfInvalidLink link={data}>
-                    <LinkBlock key={key} data={data}>
-                        <a>{children}</a>
-                    </LinkBlock>
-                </HiddenIfInvalidLink>
+                <LinkBlock key={key} data={data}>
+                    <a>{children}</a>
+                </LinkBlock>
             );
         },
     },
