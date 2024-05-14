@@ -1,4 +1,4 @@
-import { useIFrameBridge } from "@comet/cms-site";
+import { usePreview } from "@comet/cms-site";
 import { ExternalLinkBlockData, InternalLinkBlockData, LinkBlockData } from "@src/blocks.generated";
 import * as React from "react";
 
@@ -8,9 +8,9 @@ interface HiddenIfInvalidLinkProps {
 }
 
 export function HiddenIfInvalidLink({ link: { block }, children }: HiddenIfInvalidLinkProps): React.ReactElement | null {
-    const { hasBridge: isInPreview } = useIFrameBridge();
+    const { previewType } = usePreview();
 
-    if (isInPreview) {
+    if (previewType === "BlockPreview") {
         return children;
     }
 
