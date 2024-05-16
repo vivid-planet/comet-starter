@@ -56,9 +56,6 @@ const theme: ThemeInterface = {
             white: "#ffffff",
         },
     },
-    fonts: {
-        primary: "Poppins, sans-serif",
-    },
     shape: {
         borderRadius: 4,
     },

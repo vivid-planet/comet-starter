@@ -1,10 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
 enum Spacing {
-    d400 = "var(--spacing-400)",
-    d300 = "var(--spacing-300)",
-    d200 = "var(--spacing-200)",
-    d100 = "var(--spacing-100)",
+    d400 = "var(--spacing-d400)",
+    d300 = "var(--spacing-d300)",
+    d200 = "var(--spacing-d200)",
+    d100 = "var(--spacing-d100)",
     s600 = "var(--spacing-s600)",
     s500 = "var(--spacing-s500)",
     s400 = "var(--spacing-s400)",
@@ -15,10 +15,10 @@ enum Spacing {
 
 const ResponsiveSpacingStyle = createGlobalStyle`
     :root {
-        --spacing-400: 72px;
-        --spacing-300: 44px;
-        --spacing-200: 28px;
-        --spacing-100: 20px;
+        --spacing-d400: 72px;
+        --spacing-d300: 44px;
+        --spacing-d200: 28px;
+        --spacing-d100: 20px;
         --spacing-s600: 32px;
         --spacing-s500: 24px;
         --spacing-s400: 16px;
@@ -27,30 +27,30 @@ const ResponsiveSpacingStyle = createGlobalStyle`
         --spacing-s100: 4px;
     }
 
-    ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         :root {
-            --spacing-400: 96px;
-            --spacing-300: 68px;
-            --spacing-200: 52px;
-            --spacing-100: 24px;
+            --spacing-d400: 96px;
+            --spacing-d300: 68px;
+            --spacing-d200: 52px;
+            --spacing-d100: 24px;
         }
     }
 
-    ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         :root {
-            --spacing-400: 120px;
-            --spacing-300: 84px;
-            --spacing-200: 64px;
-            --spacing-100: 32px;
+            --spacing-d400: 120px;
+            --spacing-d300: 84px;
+            --spacing-d200: 64px;
+            --spacing-d100: 32px;
         }
     }
 
-    ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         :root {
-            --spacing-400: 172px;
-            --spacing-300: 100px;
-            --spacing-200: 72px;
-            --spacing-100: 48px;
+            --spacing-d400: 172px;
+            --spacing-d300: 100px;
+            --spacing-d200: 72px;
+            --spacing-d100: 48px;
         }
     }
 `;

@@ -36,9 +36,6 @@ export interface ThemeInterface {
             white: string;
         };
     };
-    fonts: {
-        primary: string;
-    };
     shape: {
         borderRadius: number;
     };
