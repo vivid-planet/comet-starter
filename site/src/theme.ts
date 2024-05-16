@@ -65,10 +65,10 @@ const theme: ThemeInterface = {
         borderRadius: 4,
     },
     breakpoints: {
-        XS: createBreakpoint(600),
-        SM: createBreakpoint(900),
-        MD: createBreakpoint(1200),
-        LG: createBreakpoint(1600),
+        xs: createBreakpoint(600),
+        sm: createBreakpoint(900),
+        md: createBreakpoint(1200),
+        lg: createBreakpoint(1600),
     },
     zIndex: {
         mobileStepper: 1000,
@@ -87,16 +87,16 @@ const theme: ThemeInterface = {
             font-weight: 600;
             margin-bottom: 20px;
 
-            ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
                 font-size: 48px;
             }
 
-            ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.md.mediaQuery} {
                 font-size: 61px;
                 margin-bottom: 30px;
             }
 
-            ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
                 font-size: 90px;
             }
         `,
@@ -106,16 +106,16 @@ const theme: ThemeInterface = {
             font-weight: 600;
             margin-bottom: 12px;
 
-            ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
                 font-size: 39px;
             }
 
-            ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.md.mediaQuery} {
                 font-size: 48px;
                 margin-bottom: 16px;
             }
 
-            ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
                 font-size: 67px;
                 margin-bottom: 20px;
             }
@@ -126,16 +126,16 @@ const theme: ThemeInterface = {
             font-weight: 600;
             margin-bottom: 12px;
 
-            ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
                 font-size: 33px;
             }
 
-            ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.md.mediaQuery} {
                 font-size: 39px;
                 margin-bottom: 16px;
             }
 
-            ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
                 font-size: 50px;
                 margin-bottom: 20px;
             }
@@ -146,16 +146,16 @@ const theme: ThemeInterface = {
             font-weight: 600;
             margin-bottom: 6px;
 
-            ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
                 font-size: 28px;
             }
 
-            ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.md.mediaQuery} {
                 font-size: 31px;
                 margin-bottom: 8px;
             }
 
-            ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
                 font-size: 38px;
                 margin-bottom: 10px;
             }
@@ -166,16 +166,16 @@ const theme: ThemeInterface = {
             font-weight: 600;
             margin-bottom: 6px;
 
-            ${({ theme }) => theme.breakpoints.SM.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
                 font-size: 23px;
             }
 
-            ${({ theme }) => theme.breakpoints.MD.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.md.mediaQuery} {
                 font-size: 25px;
                 margin-bottom: 8px;
             }
 
-            ${({ theme }) => theme.breakpoints.LG.mediaQuery} {
+            ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
                 font-size: 28px;
                 margin-bottom: 10px;
             }

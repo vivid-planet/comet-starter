@@ -45,10 +45,10 @@ export interface ThemeInterface {
         borderRadius: number;
     };
     breakpoints: {
-        XS: Breakpoint;
-        SM: Breakpoint;
-        MD: Breakpoint;
-        LG: Breakpoint;
+        xs: Breakpoint;
+        sm: Breakpoint;
+        md: Breakpoint;
+        lg: Breakpoint;
     };
     zIndex: {
         mobileStepper: number;
