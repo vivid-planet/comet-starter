@@ -1,6 +1,7 @@
 import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
 import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
+import { ResponsiveSpacingStyle } from "@src/util/spacing";
 import App, { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
@@ -137,6 +138,7 @@ export default function CustomApp({ Component, pageProps, scope, messages }: Cus
             )}
             <ContentScopeProvider scope={scope}>
                 <GlobalStyle />
+                <ResponsiveSpacingStyle />
                 <Component {...pageProps} />
             </ContentScopeProvider>
         </IntlProvider>
