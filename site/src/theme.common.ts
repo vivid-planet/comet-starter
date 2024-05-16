@@ -26,7 +26,6 @@ interface PaletteColorGraduation {
 }
 
 export interface ThemeInterface {
-    name: string;
     palette: {
         primary: PaletteColor;
         grey: PaletteColorGraduation;

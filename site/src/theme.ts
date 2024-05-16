@@ -9,8 +9,7 @@ const createBreakpoint = (value: number): Breakpoint => {
     };
 };
 
-const themeStarter: ThemeInterface = {
-    name: "starter",
+const theme: ThemeInterface = {
     palette: {
         primary: {
             light: "#4b9fea",
@@ -201,4 +200,4 @@ const themeStarter: ThemeInterface = {
     },
 };
 
-export default themeStarter;
+export default theme;
