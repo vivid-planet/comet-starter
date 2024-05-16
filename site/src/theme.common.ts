@@ -1,5 +1,3 @@
-import { DefaultTheme, FlattenInterpolation, ThemeProps } from "styled-components";
-
 export interface Breakpoint {
     mediaQuery: string;
     value: number;
@@ -60,7 +58,6 @@ export interface ThemeInterface {
         snackbar: number;
         tooltip: number;
     };
-    typography: Record<string, FlattenInterpolation<ThemeProps<DefaultTheme>>>;
 }
 
 declare module "styled-components" {
