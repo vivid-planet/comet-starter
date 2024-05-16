@@ -5,14 +5,14 @@ export interface Breakpoint {
     value: number;
 }
 
-export interface PaletteColor {
+interface PaletteColor {
     light: string;
     main: string;
     dark: string;
     contrastText: string;
 }
 
-export interface ColorGraduation {
+interface PaletteColorGraduation {
     50: string;
     100: string;
     200: string;
@@ -29,7 +29,7 @@ export interface ThemeInterface {
     name: string;
     palette: {
         primary: PaletteColor;
-        grey: ColorGraduation;
+        grey: PaletteColorGraduation;
         error: PaletteColor;
         warning: PaletteColor;
         info: PaletteColor;
