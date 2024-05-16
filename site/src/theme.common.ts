@@ -51,6 +51,16 @@ export interface ThemeInterface {
         MD: Breakpoint;
         LG: Breakpoint;
     };
+    zIndex: {
+        mobileStepper: number;
+        fab: number;
+        speedDial: number;
+        appBar: number;
+        drawer: number;
+        modal: number;
+        snackbar: number;
+        tooltip: number;
+    };
     typography: Record<string, FlattenInterpolation<ThemeProps<DefaultTheme>>>;
 }
 

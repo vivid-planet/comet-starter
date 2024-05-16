@@ -71,6 +71,16 @@ const themeStarter: ThemeInterface = {
         MD: createBreakpoint(1200),
         LG: createBreakpoint(1600),
     },
+    zIndex: {
+        mobileStepper: 1000,
+        fab: 1050,
+        speedDial: 1050,
+        appBar: 1100,
+        drawer: 1200,
+        modal: 1300,
+        snackbar: 1400,
+        tooltip: 1500,
+    },
     typography: {
         h600: css`
             font-size: 32px;
