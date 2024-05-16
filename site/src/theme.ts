@@ -1,13 +1,11 @@
-import { Breakpoint, ThemeInterface } from "./theme.common";
-
-const createBreakpoint = (value: number): Breakpoint => {
+const createBreakpoint = (value: number) => {
     return {
         mediaQuery: `@media (min-width: ${value}px)`,
         value: value,
     };
 };
 
-const theme: ThemeInterface = {
+const theme = {
     palette: {
         primary: {
             light: "#4b9fea",
@@ -77,4 +75,10 @@ const theme: ThemeInterface = {
     },
 };
 
-export default theme;
+declare module "styled-components" {
+    type ThemeInterface = typeof theme;
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    export interface DefaultTheme extends ThemeInterface {}
+}
+
+export { theme };
