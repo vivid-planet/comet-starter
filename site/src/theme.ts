@@ -49,10 +49,6 @@ const theme = {
             dark: "#488938",
             contrastText: "#090909",
         },
-        common: {
-            black: "#000000",
-            white: "#ffffff",
-        },
     },
     shape: {
         borderRadius: 4,
