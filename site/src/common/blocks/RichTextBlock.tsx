@@ -1,8 +1,8 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
-import styled from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -27,61 +27,66 @@ const defaultRenderers: Renderers = {
      */
     blocks: {
         // Paragraph
-        unstyled: (children, { keys }) => children.map((child, idx) => <Text key={keys[idx]}>{child}</Text>),
+        unstyled: (children, { keys }) =>
+            children.map((child, idx) => (
+                <Typography variant={"p200"} component={"p"} key={keys[idx]}>
+                    {child}
+                </Typography>
+            )),
         // Headlines
         "header-one": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h1" key={keys[idx]}>
+                <Typography variant={"h600"} component={"h1"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h2" key={keys[idx]}>
+                <Typography variant={"h550"} component={"h2"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h3" key={keys[idx]}>
+                <Typography variant={"h500"} component={"h3"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h4" key={keys[idx]}>
+                <Typography variant={"h450"} component={"h4"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h5" key={keys[idx]}>
+                <Typography variant={"h400"} component={"h5"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, idx) => (
-                <Text as="h6" key={keys[idx]}>
+                <Typography variant={"h350"} component={"h6"} key={keys[idx]}>
                     {child}
-                </Text>
+                </Typography>
             )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text as="li" key={keys[index]}>
+                    <Typography variant={"p200"} component={"li"} key={keys[index]} disableMargin>
                         {child}
-                    </Text>
+                    </Typography>
                 ))}
             </ul>
         ),
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text as="li" key={keys[index]}>
+                    <Typography variant={"p200"} component={"li"} key={keys[index]} disableMargin>
                         {child}
-                    </Text>
+                    </Typography>
                 ))}
             </ol>
         ),
@@ -117,15 +122,3 @@ export const RichTextBlock = withPreview(
     },
     { label: "Rich Text" },
 );
-
-const Text = styled.p`
-    white-space: pre-line;
-
-    // Workaround when empty paragraphs are used as "spacing" in content
-    &:empty {
-        :before {
-            white-space: pre;
-            content: " ";
-        }
-    }
-`;
