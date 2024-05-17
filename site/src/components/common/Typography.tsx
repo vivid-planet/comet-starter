@@ -6,12 +6,12 @@ export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h350" | "h4
 
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
-    variant: TypographyVariant;
+    variant?: TypographyVariant;
     disableMargin?: boolean;
     children?: React.ReactNode;
 }
 
-export const Typography = ({ component = "div", variant, disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
+export const Typography = ({ component = "div", variant = "p200", disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
     <Text component={component} disableMargin={disableMargin} variant={variant} as={component} {...restProps}>
         {children}
     </Text>
@@ -19,7 +19,17 @@ export const Typography = ({ component = "div", variant, disableMargin, children
 
 const Text = styled.div<TypographyProps>`
     font-family: ${TypographyStyle.fontFamily};
-    ${({ variant }) => TypographyStyle.variants[variant]};
+    ${({ variant = "p200" }) => TypographyStyle.variants[variant]};
     ${({ disableMargin }) => disableMargin && "margin-bottom: 0;"}
     margin-top: 0;
+
+    white-space: pre-line;
+
+    // Workaround when empty paragraphs are used as "spacing" in content
+    &:empty {
+        :before {
+            white-space: pre;
+            content: " ";
+        }
+    }
 `;
