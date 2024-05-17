@@ -13,6 +13,10 @@ const theme = {
             dark: "#155fa0",
             contrastText: "#ffffff",
         },
+        text: {
+            primary: "#212121",
+            secondary: "#757575",
+        },
         grey: {
             50: "#fafafa",
             100: "#f5f5f5",
