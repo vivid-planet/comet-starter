@@ -1056,6 +1056,47 @@
         ]
     },
     {
+        "name": "Space",
+        "fields": [
+            {
+                "name": "spacing",
+                "kind": "Enum",
+                "enum": [
+                    "D100",
+                    "D200",
+                    "D300",
+                    "D400",
+                    "S100",
+                    "S200",
+                    "S300",
+                    "S400",
+                    "S500",
+                    "S600"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "spacing",
+                "kind": "Enum",
+                "enum": [
+                    "D100",
+                    "D200",
+                    "D300",
+                    "D400",
+                    "S100",
+                    "S200",
+                    "S300",
+                    "S400",
+                    "S500",
+                    "S600"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "SvgImage",
         "fields": [
             {

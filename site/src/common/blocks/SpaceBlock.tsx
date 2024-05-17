@@ -1,10 +1,15 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { SpaceBlockData } from "@src/blocks.generated";
-import * as React from "react";
+import { Spacing } from "@src/util/spacing";
+import styled from "styled-components";
 
 export const SpaceBlock = withPreview(
-    ({ data: { height } }: PropsWithData<SpaceBlockData>) => {
-        return <div style={{ height: `${height}px` }} />;
+    ({ data: { spacing } }: PropsWithData<SpaceBlockData>) => {
+        return <Root spacing={Spacing[spacing]} />;
     },
     { label: "Space" },
 );
+
+const Root = styled.div<{ spacing: Spacing }>`
+    height: ${({ spacing }) => spacing};
+`;
