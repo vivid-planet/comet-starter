@@ -29,7 +29,7 @@ const defaultRenderers: Renderers = {
         // Paragraph
         unstyled: (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"p200"} component={"p"} key={keys[idx]}>
+                <Typography component={"p"} key={keys[idx]}>
                     {child}
                 </Typography>
             )),
@@ -64,18 +64,12 @@ const defaultRenderers: Renderers = {
                     {child}
                 </Typography>
             )),
-        "header-six": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Typography variant={"h350"} component={"h6"} key={keys[idx]}>
-                    {child}
-                </Typography>
-            )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography variant={"p200"} component={"li"} key={keys[index]} disableMargin>
+                    <Typography component={"li"} key={keys[index]} disableMargin>
                         {child}
                     </Typography>
                 ))}
@@ -84,7 +78,7 @@ const defaultRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography variant={"p200"} component={"li"} key={keys[index]} disableMargin>
+                    <Typography component={"li"} key={keys[index]} disableMargin>
                         {child}
                     </Typography>
                 ))}
