@@ -120,11 +120,12 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
+    color?: string;
     disableMargin?: boolean;
     children?: React.ReactNode;
 }
 
-export const Typography = ({ component = "div", variant = "p200", disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
+export const Typography = ({ component = "div", variant, color, disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
     <Text as={component} variant={variant} disableMargin={disableMargin} {...restProps}>
         {children}
     </Text>
@@ -132,6 +133,7 @@ export const Typography = ({ component = "div", variant = "p200", disableMargin,
 
 const Text = styled.div<TypographyProps>`
     font-family: ${({ theme }) => theme.fontFamily};
+    color: ${({ theme, color }) => (color ? color : theme.palette.text.primary)};
     ${({ variant = "p200" }) => TypographyVariantStyle[variant]};
     ${({ disableMargin }) => disableMargin && "margin-bottom: 0;"}
     margin-top: 0;
