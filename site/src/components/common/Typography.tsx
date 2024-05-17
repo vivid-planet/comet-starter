@@ -125,14 +125,13 @@ export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const Typography = ({ component = "div", variant = "p200", disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
-    <Text component={component} disableMargin={disableMargin} variant={variant} as={component} {...restProps}>
+    <Text as={component} variant={variant} disableMargin={disableMargin} {...restProps}>
         {children}
     </Text>
 );
 
 const Text = styled.div<TypographyProps>`
-    // TODO: add when theme is available
-    // font-family: ${({ theme }) => theme.typography.fontFamily};
+    font-family: ${({ theme }) => theme.fontFamily};
     ${({ variant = "p200" }) => TypographyVariantStyle[variant]};
     ${({ disableMargin }) => disableMargin && "margin-bottom: 0;"}
     margin-top: 0;
