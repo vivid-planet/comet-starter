@@ -7,24 +7,24 @@ interface HiddenIfInvalidLinkProps {
     children: React.ReactElement;
 }
 
-export function HiddenIfInvalidLink({ link: { block }, children }: HiddenIfInvalidLinkProps): React.ReactElement | null {
+export function HiddenIfInvalidLink({ link, children }: HiddenIfInvalidLinkProps) {
     const { previewType } = usePreview();
 
     if (previewType === "BlockPreview") {
         return children;
     }
 
-    if (!isValidLink(block)) {
+    if (!isValidLink(link)) {
         return null;
     }
 
     return children;
 }
 
-const isValidLink = (linkBlock: LinkBlockData["block"]) => {
+const isValidLink = (link: LinkBlockData) => {
     return Boolean(
-        linkBlock &&
-            ((linkBlock.type === "internal" && (linkBlock.props as InternalLinkBlockData).targetPage) ||
-                (linkBlock.type === "external" && (linkBlock.props as ExternalLinkBlockData).targetUrl)),
+        link.block &&
+            ((link.block.type === "internal" && (link.block.props as InternalLinkBlockData).targetPage) ||
+                (link.block.type === "external" && (link.block.props as ExternalLinkBlockData).targetUrl)),
     );
 };
