@@ -29,38 +29,38 @@ const defaultRenderers: Renderers = {
         // Paragraph
         unstyled: (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography component={"p"} key={keys[idx]}>
+                <Typography component={"p"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         // Headlines
         "header-one": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h600"} component={"h1"} key={keys[idx]}>
+                <Typography variant={"h600"} component={"h1"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h550"} component={"h2"} key={keys[idx]}>
+                <Typography variant={"h550"} component={"h2"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h500"} component={"h3"} key={keys[idx]}>
+                <Typography variant={"h500"} component={"h3"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h450"} component={"h4"} key={keys[idx]}>
+                <Typography variant={"h450"} component={"h4"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h400"} component={"h5"} key={keys[idx]}>
+                <Typography variant={"h400"} component={"h5"} key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
@@ -69,7 +69,7 @@ const defaultRenderers: Renderers = {
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component={"li"} key={keys[index]} disableMargin>
+                    <Typography component={"li"} key={keys[index]}>
                         {child}
                     </Typography>
                 ))}
@@ -78,7 +78,7 @@ const defaultRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component={"li"} key={keys[index]} disableMargin>
+                    <Typography component={"li"} key={keys[index]}>
                         {child}
                     </Typography>
                 ))}

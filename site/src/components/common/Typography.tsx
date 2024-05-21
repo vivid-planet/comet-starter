@@ -1,4 +1,5 @@
-import * as React from "react";
+import { Spacing } from "@src/util/spacing";
+import { HTMLAttributes, ReactElement, ReactNode } from "react";
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from "styled-components";
 
 export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "p200" | "p100";
@@ -8,7 +9,6 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
         font-size: 32px;
         line-height: 110%;
         font-weight: 700;
-        margin-bottom: 20px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
             font-size: 48px;
@@ -16,7 +16,6 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 61px;
-            margin-bottom: 30px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
@@ -27,7 +26,6 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
         font-size: 29px;
         line-height: 110%;
         font-weight: 700;
-        margin-bottom: 12px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
             font-size: 39px;
@@ -35,19 +33,16 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 48px;
-            margin-bottom: 16px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 67px;
-            margin-bottom: 20px;
         }
     `,
     h500: css`
         font-size: 26px;
         line-height: 110%;
         font-weight: 700;
-        margin-bottom: 12px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
             font-size: 33px;
@@ -55,19 +50,16 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 39px;
-            margin-bottom: 16px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 50px;
-            margin-bottom: 20px;
         }
     `,
     h450: css`
         font-size: 23px;
         line-height: 110%;
         font-weight: 700;
-        margin-bottom: 6px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
             font-size: 28px;
@@ -75,19 +67,16 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 31px;
-            margin-bottom: 8px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 38px;
-            margin-bottom: 10px;
         }
     `,
     h400: css`
         font-size: 20px;
         line-height: 110%;
         font-weight: 700;
-        margin-bottom: 6px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
             font-size: 23px;
@@ -95,38 +84,34 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 25px;
-            margin-bottom: 8px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 28px;
-            margin-bottom: 10px;
         }
     `,
     p200: css`
         font-size: 16px;
         line-height: 120%;
         font-weight: 400;
-        margin-bottom: 18px;
     `,
     p100: css`
         font-size: 14px;
         line-height: 120%;
         font-weight: 400;
-        margin-bottom: 10px;
     `,
 };
 
-export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
+export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
     color?: string;
-    disableMargin?: boolean;
-    children?: React.ReactNode;
+    gutterBottom?: boolean;
+    children?: ReactNode;
 }
 
-export const Typography = ({ component = "div", variant, color, disableMargin, children, ...restProps }: TypographyProps): React.ReactElement => (
-    <Text as={component} variant={variant} disableMargin={disableMargin} {...restProps}>
+export const Typography = ({ component = "div", children, ...restProps }: TypographyProps): ReactElement => (
+    <Text as={component} {...restProps}>
         {children}
     </Text>
 );
@@ -135,7 +120,7 @@ const Text = styled.div<TypographyProps>`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme, color }) => (color ? color : theme.palette.text.primary)};
     ${({ variant = "p200" }) => TypographyVariantStyle[variant]};
-    ${({ disableMargin }) => disableMargin && "margin-bottom: 0;"}
+    ${({ gutterBottom = false }) => gutterBottom && `margin-bottom: ${Spacing.S300};`}
     margin-top: 0;
 
     white-space: pre-line;
