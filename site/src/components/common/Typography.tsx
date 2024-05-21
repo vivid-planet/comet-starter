@@ -7,7 +7,7 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     h600: css`
         font-size: 32px;
         line-height: 110%;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 20px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -26,7 +26,7 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     h550: css`
         font-size: 29px;
         line-height: 110%;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 12px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -46,7 +46,7 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     h500: css`
         font-size: 26px;
         line-height: 110%;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 12px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -66,7 +66,7 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     h450: css`
         font-size: 23px;
         line-height: 110%;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 6px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -86,7 +86,7 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     h400: css`
         font-size: 20px;
         line-height: 110%;
-        font-weight: 600;
+        font-weight: 700;
         margin-bottom: 6px;
 
         ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -106,13 +106,13 @@ const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<The
     p200: css`
         font-size: 16px;
         line-height: 120%;
-        font-weight: 300;
+        font-weight: 400;
         margin-bottom: 18px;
     `,
     p100: css`
         font-size: 14px;
         line-height: 120%;
-        font-weight: 300;
+        font-weight: 400;
         margin-bottom: 10px;
     `,
 };
