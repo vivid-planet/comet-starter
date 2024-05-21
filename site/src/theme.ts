@@ -54,9 +54,6 @@ const theme = {
             contrastText: "#090909",
         },
     },
-    shape: {
-        borderRadius: 4,
-    },
     breakpoints: {
         xs: createBreakpoint(600),
         sm: createBreakpoint(900),
