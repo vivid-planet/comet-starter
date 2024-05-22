@@ -17,6 +17,102 @@
         ]
     },
     {
+        "name": "CallToActionButton",
+        "fields": [
+            {
+                "name": "textLink",
+                "kind": "Block",
+                "block": "TextLink",
+                "nullable": false
+            },
+            {
+                "name": "variant",
+                "kind": "Enum",
+                "enum": [
+                    "Contained",
+                    "Outlined",
+                    "Text"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "textLink",
+                "kind": "Block",
+                "block": "TextLink",
+                "nullable": false
+            },
+            {
+                "name": "variant",
+                "kind": "Enum",
+                "enum": [
+                    "Contained",
+                    "Outlined",
+                    "Text"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "CallToActionButtonList",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "CallToActionButton",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "CallToActionButton",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "DamImage",
         "fields": [
             {
@@ -491,7 +587,9 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "links": "LinkList"
+                                "links": "LinkList",
+                                "callToActionButton": "CallToActionButton",
+                                "callToActionButtonList": "CallToActionButtonList"
                             },
                             "nullable": false
                         }
@@ -533,7 +631,9 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "links": "LinkList"
+                                "links": "LinkList",
+                                "callToActionButton": "CallToActionButton",
+                                "callToActionButtonList": "CallToActionButtonList"
                             },
                             "nullable": false
                         }
