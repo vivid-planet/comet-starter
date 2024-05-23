@@ -29,24 +29,6 @@ export const theme = {
             800: "#424242",
             900: "#212121",
         },
-        error: {
-            light: "#c6523f",
-            main: "#bc3520",
-            dark: "#832617",
-            contrastText: "#ffffff",
-        },
-        warning: {
-            light: "#f5c15f",
-            main: "#f3b346",
-            dark: "#a87d32",
-            contrastText: "#090909",
-        },
-        success: {
-            light: "#77d06a",
-            main: "#66c54f",
-            dark: "#488938",
-            contrastText: "#090909",
-        },
     },
     breakpoints: {
         xs: createBreakpoint(600),
