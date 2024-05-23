@@ -4,12 +4,12 @@ import { SpaceBlockData } from "@src/blocks.generated";
 import styled from "styled-components";
 
 export const SpaceBlock = withPreview(
-    ({ data: { spacing: spacingVariant } }: PropsWithData<SpaceBlockData>) => {
-        return <Root $spacingVariant={spacingVariant} />;
+    ({ data: { spacing } }: PropsWithData<SpaceBlockData>) => {
+        return <Root $spacing={spacing} />;
     },
     { label: "Space" },
 );
 
-const Root = styled.div<{ $spacingVariant: SpaceBlockData["spacing"] }>`
-    height: ${({ theme, $spacingVariant }) => theme.spacing[$spacingVariant]};
+const Root = styled.div<{ $spacing: SpaceBlockData["spacing"] }>`
+    height: ${({ theme, $spacing }) => theme.spacing[$spacing]};
 `;
