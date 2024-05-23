@@ -1,17 +1,17 @@
 import { createGlobalStyle } from "styled-components";
 
-enum Spacing {
-    D400 = "var(--spacing-d400)",
-    D300 = "var(--spacing-d300)",
-    D200 = "var(--spacing-d200)",
-    D100 = "var(--spacing-d100)",
-    S600 = "var(--spacing-s600)",
-    S500 = "var(--spacing-s500)",
-    S400 = "var(--spacing-s400)",
-    S300 = "var(--spacing-s300)",
-    S200 = "var(--spacing-s200)",
-    S100 = "var(--spacing-s100)",
-}
+const spacing = {
+    d400: "var(--spacing-d400)",
+    d300: "var(--spacing-d300)",
+    d200: "var(--spacing-d200)",
+    d100: "var(--spacing-d100)",
+    s600: "var(--spacing-s600)",
+    s500: "var(--spacing-s500)",
+    s400: "var(--spacing-s400)",
+    s300: "var(--spacing-s300)",
+    s200: "var(--spacing-s200)",
+    s100: "var(--spacing-s100)",
+};
 
 const ResponsiveSpacingStyle = createGlobalStyle`
     :root {
@@ -55,4 +55,4 @@ const ResponsiveSpacingStyle = createGlobalStyle`
     }
 `;
 
-export { ResponsiveSpacingStyle, Spacing };
+export { ResponsiveSpacingStyle, spacing };
