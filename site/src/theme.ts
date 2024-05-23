@@ -5,7 +5,7 @@ const createBreakpoint = (value: number) => {
     };
 };
 
-const theme = {
+export const theme = {
     palette: {
         primary: {
             light: "#4b9fea",
@@ -62,5 +62,3 @@ declare module "styled-components" {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
     export interface DefaultTheme extends Theme {}
 }
-
-export { theme };
