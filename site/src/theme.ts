@@ -41,12 +41,6 @@ const theme = {
             dark: "#a87d32",
             contrastText: "#090909",
         },
-        info: {
-            light: "#73c1f2",
-            main: "#5cb4f0",
-            dark: "#417da6",
-            contrastText: "#090909",
-        },
         success: {
             light: "#77d06a",
             main: "#66c54f",
