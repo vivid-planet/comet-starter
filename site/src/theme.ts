@@ -36,6 +36,18 @@ export const theme = {
         md: createBreakpoint(1200),
         lg: createBreakpoint(1600),
     },
+    spacing: {
+        D400: "var(--spacing-d400)",
+        D300: "var(--spacing-d300)",
+        D200: "var(--spacing-d200)",
+        D100: "var(--spacing-d100)",
+        S600: "var(--spacing-s600)",
+        S500: "var(--spacing-s500)",
+        S400: "var(--spacing-s400)",
+        S300: "var(--spacing-s300)",
+        S200: "var(--spacing-s200)",
+        S100: "var(--spacing-s100)",
+    },
 };
 
 type Theme = typeof theme;
