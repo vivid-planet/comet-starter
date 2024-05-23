@@ -1,8 +1,9 @@
 import { createSpaceBlock } from "@comet/blocks-admin";
+import { SpaceBlockData } from "@src/blocks.generated";
 import { ReactNode } from "react";
 import { FormattedMessage } from "react-intl";
 
-const options: { value: string; label: ReactNode }[] = [
+const options: { value: SpaceBlockData["spacing"]; label: ReactNode }[] = [
     { value: "D100", label: <FormattedMessage id="spaceBlock.d100" defaultMessage="Dynamic 100" /> },
     { value: "D200", label: <FormattedMessage id="spaceBlock.d200" defaultMessage="Dynamic 200" /> },
     { value: "D300", label: <FormattedMessage id="spaceBlock.d300" defaultMessage="Dynamic 300" /> },
@@ -15,4 +16,4 @@ const options: { value: string; label: ReactNode }[] = [
     { value: "S600", label: <FormattedMessage id="spaceBlock.s600" defaultMessage="Static 600" /> },
 ];
 
-export const SpaceBlock = createSpaceBlock<string>({ defaultValue: options[0].value, options });
+export const SpaceBlock = createSpaceBlock<SpaceBlockData["spacing"]>({ defaultValue: options[0].value, options });

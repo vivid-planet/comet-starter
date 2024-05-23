@@ -13,4 +13,4 @@ enum Spacing {
     S600 = "S600",
 }
 
-export const SpaceBlock = createSpaceBlock({ spacing: Spacing }, "Space");
+export const SpaceBlock = createSpaceBlock({ spacing: Spacing });
