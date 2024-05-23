@@ -2,7 +2,7 @@ import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/Con
 import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
-import { ResponsiveSpacingStyle } from "@src/util/spacing";
+import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import App, { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
