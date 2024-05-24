@@ -1,4 +1,3 @@
-import { Spacing } from "@src/util/spacing";
 import { HTMLAttributes, ReactElement, ReactNode } from "react";
 import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from "styled-components";
 
@@ -120,7 +119,7 @@ const Text = styled.div<TypographyProps>`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme, color }) => (color ? color : theme.palette.text.primary)};
     ${({ variant = "p200" }) => TypographyVariantStyle[variant]};
-    ${({ gutterBottom = false }) => gutterBottom && `margin-bottom: ${Spacing.S300};`}
+    ${({ theme, gutterBottom = false }) => gutterBottom && `margin-bottom: ${theme.spacing.S300};`}
     margin-top: 0;
 
     white-space: pre-line;
