@@ -2,6 +2,7 @@
 import { BlocksBlock, PropsWithData, SupportedBlocks, YouTubeVideoBlock } from "@comet/cms-site";
 import { PageContentBlockData } from "@src/blocks.generated";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
+import { CallToActionButtonListBlock } from "@src/common/blocks/CallToActionButtonListBlock";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { HeadlineBlock } from "@src/common/blocks/HeadlineBlock";
@@ -20,6 +21,7 @@ const supportedBlocks: SupportedBlocks = {
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
     links: (props) => <LinkListBlock data={props} />,
+    callToActionButtonList: (props) => <CallToActionButtonListBlock data={props} />,
 };
 
 export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
