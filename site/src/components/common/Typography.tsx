@@ -1,9 +1,9 @@
-import { HTMLAttributes, ReactElement, ReactNode } from "react";
-import styled, { css, DefaultTheme, FlattenInterpolation, ThemeProps } from "styled-components";
+import { HTMLAttributes, ReactNode } from "react";
+import styled, { css } from "styled-components";
 
 export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "p200" | "p100";
 
-const TypographyVariantStyle: Record<TypographyVariant, FlattenInterpolation<ThemeProps<DefaultTheme>>> = {
+const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> = {
     h600: css`
         font-size: 32px;
         line-height: 110%;
@@ -109,26 +109,26 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     children?: ReactNode;
 }
 
-export const Typography = ({ component = "div", children, ...restProps }: TypographyProps): ReactElement => (
-    <Text as={component} {...restProps}>
+export const Typography = ({ component = "div", variant = "p200", children, ...restProps }: TypographyProps) => (
+    <Text as={component} variant={variant} {...restProps}>
         {children}
     </Text>
 );
 
-const Text = styled.div<TypographyProps>`
+interface TextProps {
+    variant: TypographyVariant;
+    color?: string;
+    gutterBottom?: boolean;
+}
+
+const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme, color }) => (color ? color : theme.palette.text.primary)};
-    ${({ variant = "p200" }) => TypographyVariantStyle[variant]};
-    ${({ theme, gutterBottom = false }) => gutterBottom && `margin-bottom: ${theme.spacing.S300};`}
+    color: ${({ theme, color }) => color || theme.palette.text.primary};
+    ${({ variant }) => typographyVariantStyle[variant]};
+    ${({ theme, gutterBottom }) =>
+        gutterBottom &&
+        css`
+            margin-bottom: ${theme.spacing.S300};
+        `}
     margin-top: 0;
-
-    white-space: pre-line;
-
-    // Workaround when empty paragraphs are used as "spacing" in content
-    &:empty {
-        :before {
-            white-space: pre;
-            content: " ";
-        }
-    }
 `;

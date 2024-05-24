@@ -3,6 +3,7 @@ import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
+import styled from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -29,9 +30,9 @@ const defaultRenderers: Renderers = {
         // Paragraph
         unstyled: (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography component={"p"} key={keys[idx]} gutterBottom>
+                <StyledTyphography component={"p"} key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </StyledTyphography>
             )),
         // Headlines
         "header-one": (children, { keys }) =>
@@ -116,3 +117,11 @@ export const RichTextBlock = withPreview(
     },
     { label: "Rich Text" },
 );
+
+const StyledTyphography = styled(Typography)`
+    // Show empty lines as spacing between paragraphs
+    &:empty:not(:first-child:last-child):before {
+        white-space: pre;
+        content: " ";
+    }
+`;
