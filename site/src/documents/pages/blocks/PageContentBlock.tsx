@@ -8,7 +8,6 @@ import { LinkListBlock } from "@src/common/blocks/LinkListBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
-import { FunctionComponent } from "react";
 
 const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
@@ -22,6 +21,6 @@ const supportedBlocks: SupportedBlocks = {
     links: (props) => <LinkListBlock data={props} />,
 };
 
-export const PageContentBlock: FunctionComponent<PropsWithData<PageContentBlockData>> = ({ data }) => {
+export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
     return <BlocksBlock data={data} supportedBlocks={supportedBlocks} />;
 };
