@@ -41,51 +41,51 @@ const defaultRenderers: Renderers = {
             )),
         "header-one": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant="h600" key={keys[idx]} gutterBottom>
+                <Text variant="h600" key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </Text>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant="h550" key={keys[idx]} gutterBottom>
+                <Text variant="h550" key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </Text>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant="h500" key={keys[idx]} gutterBottom>
+                <Text variant="h500" key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </Text>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant="h450" key={keys[idx]} gutterBottom>
+                <Text variant="h450" key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </Text>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant="h400" key={keys[idx]} gutterBottom>
+                <Text variant="h400" key={keys[idx]} gutterBottom>
                     {child}
-                </Typography>
+                </Text>
             )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component="li" key={keys[index]}>
+                    <Text component="li" key={keys[index]}>
                         {child}
-                    </Typography>
+                    </Text>
                 ))}
             </ul>
         ),
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component="li" key={keys[index]}>
+                    <Text component="li" key={keys[index]}>
                         {child}
-                    </Typography>
+                    </Text>
                 ))}
             </ol>
         ),
