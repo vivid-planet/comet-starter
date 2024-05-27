@@ -34,7 +34,7 @@ export const RichTextBlock = createRichTextBlock({
             "paragraph-two": {
                 label: <FormattedMessage id="richTextBlock.paragraph-two" defaultMessage="Paragraph 2" />,
                 renderConfig: {
-                    element: (p) => <Typography paragraph fontSize={14} {...p} />,
+                    element: (p) => <Typography paragraph variant="body2" {...p} />,
                 },
             },
         },
