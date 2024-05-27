@@ -114,7 +114,6 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
-    color?: string;
     gutterBottom?: boolean;
     children?: ReactNode;
 }
@@ -127,13 +126,12 @@ export const Typography = ({ component, variant = "p200", children, ...restProps
 
 interface TextProps {
     variant: TypographyVariant;
-    color?: string;
     gutterBottom?: boolean;
 }
 
 const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme, color }) => color || theme.palette.text.primary};
+    color: ${({ theme }) => theme.palette.text.primary};
     ${({ variant }) => typographyVariantStyle[variant]};
     margin-bottom: ${({ theme, gutterBottom }) => (gutterBottom ? theme.spacing.S300 : 0)};
     margin-top: 0;
