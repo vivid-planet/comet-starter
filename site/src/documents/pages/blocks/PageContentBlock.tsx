@@ -1,3 +1,4 @@
+"use client";
 import { BlocksBlock, PropsWithData, SupportedBlocks, YouTubeVideoBlock } from "@comet/cms-site";
 import { PageContentBlockData } from "@src/blocks.generated";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
