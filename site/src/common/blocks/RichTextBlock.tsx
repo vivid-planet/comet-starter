@@ -30,9 +30,9 @@ const defaultRenderers: Renderers = {
         // Paragraph
         unstyled: (children, { keys }) =>
             children.map((child, idx) => (
-                <StyledTyphography component={"p"} key={keys[idx]} gutterBottom>
+                <Text component={"p"} key={keys[idx]} gutterBottom>
                     {child}
-                </StyledTyphography>
+                </Text>
             )),
         // Headlines
         "header-one": (children, { keys }) =>
@@ -118,7 +118,9 @@ export const RichTextBlock = withPreview(
     { label: "Rich Text" },
 );
 
-const StyledTyphography = styled(Typography)`
+const Text = styled(Typography)`
+    white-space: pre-line;
+
     // Show empty lines as spacing between paragraphs
     &:empty:not(:first-child:last-child):before {
         white-space: pre;

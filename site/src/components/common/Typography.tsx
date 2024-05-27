@@ -125,10 +125,6 @@ const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme, color }) => color || theme.palette.text.primary};
     ${({ variant }) => typographyVariantStyle[variant]};
-    ${({ theme, gutterBottom }) =>
-        gutterBottom &&
-        css`
-            margin-bottom: ${theme.spacing.S300};
-        `}
+    margin-bottom: ${({ theme, gutterBottom }) => (gutterBottom ? theme.spacing.S300 : 0)};
     margin-top: 0;
 `;
