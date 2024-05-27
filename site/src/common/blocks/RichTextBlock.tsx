@@ -28,44 +28,44 @@ const defaultRenderers: Renderers = {
      */
     blocks: {
         "paragraph-one": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "paragraph-two": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="p100" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="p100" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-one": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="h600" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="h600" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-two": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="h550" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="h550" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-three": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="h500" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="h500" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-four": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="h450" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="h450" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-five": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text variant="h400" key={keys[idx]} gutterBottom>
+            children.map((child, index) => (
+                <Text variant="h400" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
