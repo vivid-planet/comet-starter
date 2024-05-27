@@ -101,6 +101,16 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
     `,
 };
 
+const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap> = {
+    h600: "h1",
+    h550: "h2",
+    h500: "h3",
+    h450: "h4",
+    h400: "h5",
+    p200: "p",
+    p100: "p",
+};
+
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
@@ -109,8 +119,8 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     children?: ReactNode;
 }
 
-export const Typography = ({ component = "div", variant = "p200", children, ...restProps }: TypographyProps) => (
-    <Text as={component} variant={variant} {...restProps}>
+export const Typography = ({ component, variant = "p200", children, ...restProps }: TypographyProps) => (
+    <Text as={component || variantToElementMap[variant]} variant={variant} {...restProps}>
         {children}
     </Text>
 );

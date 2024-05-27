@@ -27,41 +27,39 @@ const defaultRenderers: Renderers = {
      * Note that children are an array of blocks with same styling,
      */
     blocks: {
-        // Paragraph
         unstyled: (children, { keys }) =>
             children.map((child, idx) => (
-                <Text component={"p"} key={keys[idx]} gutterBottom>
+                <Text key={keys[idx]} gutterBottom>
                     {child}
                 </Text>
             )),
-        // Headlines
         "header-one": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h600"} component={"h1"} key={keys[idx]} gutterBottom>
+                <Typography variant="h600" key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h550"} component={"h2"} key={keys[idx]} gutterBottom>
+                <Typography variant="h550" key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h500"} component={"h3"} key={keys[idx]} gutterBottom>
+                <Typography variant="h500" key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h450"} component={"h4"} key={keys[idx]} gutterBottom>
+                <Typography variant="h450" key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, idx) => (
-                <Typography variant={"h400"} component={"h5"} key={keys[idx]} gutterBottom>
+                <Typography variant="h400" key={keys[idx]} gutterBottom>
                     {child}
                 </Typography>
             )),
@@ -70,7 +68,7 @@ const defaultRenderers: Renderers = {
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component={"li"} key={keys[index]}>
+                    <Typography component="li" key={keys[index]}>
                         {child}
                     </Typography>
                 ))}
@@ -79,7 +77,7 @@ const defaultRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Typography component={"li"} key={keys[index]}>
+                    <Typography component="li" key={keys[index]}>
                         {child}
                     </Typography>
                 ))}
@@ -91,13 +89,11 @@ const defaultRenderers: Renderers = {
      */
     entities: {
         // key is the entity key value from raw
-        LINK: (children, data: LinkBlockData, { key }) => {
-            return (
-                <LinkBlock key={key} data={data}>
-                    <a>{children}</a>
-                </LinkBlock>
-            );
-        },
+        LINK: (children, data: LinkBlockData, { key }) => (
+            <LinkBlock key={key} data={data}>
+                <a>{children}</a>
+            </LinkBlock>
+        ),
     },
 };
 
@@ -110,7 +106,7 @@ export const RichTextBlock = withPreview(
         const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasRichTextBlockContent(data)}>
+            <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
                 {rendered}
             </PreviewSkeleton>
         );
