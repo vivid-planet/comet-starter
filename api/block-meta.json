@@ -483,6 +483,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "headline": "Headline",
@@ -524,6 +525,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "headline": "Headline",
