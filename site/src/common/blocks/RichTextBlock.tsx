@@ -41,7 +41,7 @@ const defaultRenderers: Renderers = {
             )),
         "paragraph-small": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="p100" key={keys[index]} gutterBottom>
+                <Text variant="p200" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),

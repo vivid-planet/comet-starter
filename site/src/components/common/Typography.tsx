@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p200" | "p100";
+export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p300" | "p200";
 
 const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> = {
     h600: css`
@@ -106,12 +106,12 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
             font-size: 22px;
         }
     `,
-    p200: css`
+    p300: css`
         font-size: 16px;
         line-height: 120%;
         font-weight: 400;
     `,
-    p100: css`
+    p200: css`
         font-size: 14px;
         line-height: 120%;
         font-weight: 400;
@@ -125,8 +125,8 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
     h450: "h4",
     h400: "h5",
     h350: "h6",
+    p300: "p",
     p200: "p",
-    p100: "p",
 };
 
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
@@ -136,7 +136,7 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     children?: ReactNode;
 }
 
-export const Typography = ({ component, variant = "p200", children, ...restProps }: TypographyProps) => (
+export const Typography = ({ component, variant = "p300", children, ...restProps }: TypographyProps) => (
     <Text as={component || variantToElementMap[variant]} variant={variant} {...restProps}>
         {children}
     </Text>
