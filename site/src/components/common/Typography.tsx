@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "p200" | "p100";
+export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p200" | "p100";
 
 const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> = {
     h600: css`
@@ -89,6 +89,23 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
             font-size: 28px;
         }
     `,
+    h350: css`
+        font-size: 18px;
+        line-height: 110%;
+        font-weight: 700;
+
+        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+            font-size: 20px;
+        }
+
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+            font-size: 22px;
+        }
+
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+            font-size: 24px;
+        }
+    `,
     p200: css`
         font-size: 16px;
         line-height: 120%;
@@ -107,6 +124,7 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
     h500: "h3",
     h450: "h4",
     h400: "h5",
+    h350: "h6",
     p200: "p",
     p100: "p",
 };

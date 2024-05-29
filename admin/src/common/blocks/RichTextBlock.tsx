@@ -7,25 +7,6 @@ import { LinkBlock } from "./LinkBlock";
 export const RichTextBlock = createRichTextBlock({
     link: LinkBlock,
     rte: {
-        supports: [
-            "bold",
-            "italic",
-            "underline",
-            "strikethrough",
-            "sub",
-            "sup",
-            "header-one",
-            "header-two",
-            "header-three",
-            "header-four",
-            "header-five",
-            "ordered-list",
-            "unordered-list",
-            "link",
-            "links-remove",
-            "non-breaking-space",
-            "soft-hyphen",
-        ],
         standardBlockType: "paragraph-standard",
         blocktypeMap: {
             "paragraph-standard": {

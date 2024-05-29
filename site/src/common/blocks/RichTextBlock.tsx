@@ -69,6 +69,12 @@ const defaultRenderers: Renderers = {
                     {child}
                 </Text>
             )),
+        "header-six": (children, { keys }) =>
+            children.map((child, index) => (
+                <Text variant="h350" key={keys[index]} gutterBottom>
+                    {child}
+                </Text>
+            )),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
