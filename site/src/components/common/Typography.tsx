@@ -99,11 +99,11 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         }
 
         ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-            font-size: 22px;
+            font-size: 21px;
         }
 
         ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
-            font-size: 24px;
+            font-size: 22px;
         }
     `,
     p200: css`
