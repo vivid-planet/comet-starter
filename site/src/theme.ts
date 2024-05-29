@@ -30,6 +30,7 @@ export const theme = {
             900: "#212121",
         },
     },
+    fontFamily: "Arial, sans-serif",
     breakpoints: {
         xs: createBreakpoint(600),
         sm: createBreakpoint(900),

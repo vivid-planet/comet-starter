@@ -1,5 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
@@ -26,42 +27,57 @@ const defaultRenderers: Renderers = {
      * Note that children are an array of blocks with same styling,
      */
     blocks: {
-        // Paragraph
-        unstyled: (children, { keys }) => children.map((child, idx) => <Text key={keys[idx]}>{child}</Text>),
-        // Headlines
+        unstyled: (children, { keys }) =>
+            children.map((child, index) => (
+                <Text key={keys[index]} gutterBottom>
+                    {child}
+                </Text>
+            )),
+        "paragraph-standard": (children, { keys }) =>
+            children.map((child, index) => (
+                <Text key={keys[index]} gutterBottom>
+                    {child}
+                </Text>
+            )),
+        "paragraph-small": (children, { keys }) =>
+            children.map((child, index) => (
+                <Text variant="p200" key={keys[index]} gutterBottom>
+                    {child}
+                </Text>
+            )),
         "header-one": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h1" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h600" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-two": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h2" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h550" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-three": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h3" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h500" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-four": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h4" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h450" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-five": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h5" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h400" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
         "header-six": (children, { keys }) =>
-            children.map((child, idx) => (
-                <Text as="h6" key={keys[idx]}>
+            children.map((child, index) => (
+                <Text variant="h350" key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
@@ -70,7 +86,7 @@ const defaultRenderers: Renderers = {
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text as="li" key={keys[index]}>
+                    <Text component="li" key={keys[index]}>
                         {child}
                     </Text>
                 ))}
@@ -79,7 +95,7 @@ const defaultRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text as="li" key={keys[index]}>
+                    <Text component="li" key={keys[index]}>
                         {child}
                     </Text>
                 ))}
@@ -91,13 +107,11 @@ const defaultRenderers: Renderers = {
      */
     entities: {
         // key is the entity key value from raw
-        LINK: (children, data: LinkBlockData, { key }) => {
-            return (
-                <LinkBlock key={key} data={data}>
-                    <a>{children}</a>
-                </LinkBlock>
-            );
-        },
+        LINK: (children, data: LinkBlockData, { key }) => (
+            <LinkBlock key={key} data={data}>
+                <a>{children}</a>
+            </LinkBlock>
+        ),
     },
 };
 
@@ -110,7 +124,7 @@ export const RichTextBlock = withPreview(
         const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasRichTextBlockContent(data)}>
+            <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
                 {rendered}
             </PreviewSkeleton>
         );
@@ -118,14 +132,12 @@ export const RichTextBlock = withPreview(
     { label: "Rich Text" },
 );
 
-const Text = styled.p`
+const Text = styled(Typography)`
     white-space: pre-line;
 
-    // Workaround when empty paragraphs are used as "spacing" in content
-    &:empty {
-        :before {
-            white-space: pre;
-            content: " ";
-        }
+    // Show empty lines as spacing between paragraphs
+    &:empty:not(:first-child:last-child):before {
+        white-space: pre;
+        content: " ";
     }
 `;
