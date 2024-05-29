@@ -26,13 +26,13 @@ export const RichTextBlock = createRichTextBlock({
             "non-breaking-space",
             "soft-hyphen",
         ],
-        standardBlockType: "paragraph-one",
+        standardBlockType: "paragraph-standard",
         blocktypeMap: {
-            "paragraph-one": {
-                label: <FormattedMessage id="richTextBlock.paragraph-one" defaultMessage="Paragraph 1" />,
+            "paragraph-standard": {
+                label: <FormattedMessage id="richTextBlock.paragraph-one" defaultMessage="Paragraph Standard" />,
             },
-            "paragraph-two": {
-                label: <FormattedMessage id="richTextBlock.paragraph-two" defaultMessage="Paragraph 2" />,
+            "paragraph-small": {
+                label: <FormattedMessage id="richTextBlock.paragraph-two" defaultMessage="Paragraph Small" />,
                 renderConfig: {
                     element: (p) => <Typography paragraph variant="body2" {...p} />,
                 },

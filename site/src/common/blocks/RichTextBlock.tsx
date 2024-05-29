@@ -27,13 +27,13 @@ const defaultRenderers: Renderers = {
      * Note that children are an array of blocks with same styling,
      */
     blocks: {
-        "paragraph-one": (children, { keys }) =>
+        "paragraph-standard": (children, { keys }) =>
             children.map((child, index) => (
                 <Text key={keys[index]} gutterBottom>
                     {child}
                 </Text>
             )),
-        "paragraph-two": (children, { keys }) =>
+        "paragraph-small": (children, { keys }) =>
             children.map((child, index) => (
                 <Text variant="p100" key={keys[index]} gutterBottom>
                     {child}
