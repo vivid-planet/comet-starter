@@ -6,19 +6,20 @@ type ButtonVariant = "Contained" | "Outlined" | "Text";
 type ButtonProps = {
     variant?: ButtonVariant;
     onClick?: () => void;
+    disabled?: boolean;
     children?: ReactNode;
 } & (HTMLAttributes<HTMLButtonElement> | (HTMLAttributes<HTMLAnchorElement> & Pick<HTMLAnchorElement, "href" | "target">));
 
-export const Button = ({ children, variant = "Outlined", ...htmlAttributes }: ButtonProps) => {
+export const Button = ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }: ButtonProps) => {
     const asHtmlElement = "href" in htmlAttributes ? "a" : "button";
     return (
-        <Root as={asHtmlElement} $variant={variant} {...htmlAttributes}>
+        <Root as={asHtmlElement} $variant={variant} $disabled={disabled} {...htmlAttributes}>
             {children}
         </Root>
     );
 };
 
-export const Root = styled.div<{ $variant: ButtonVariant }>`
+export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
     display: inline-flex;
     box-sizing: border-box;
     padding: ${({ theme }) => `${theme.spacing.S400} ${theme.spacing.S500}`};
@@ -36,41 +37,65 @@ export const Root = styled.div<{ $variant: ButtonVariant }>`
     font-weight: 700;
     line-height: 110%;
 
-    ${({ $variant }) =>
+    ${({ theme, $variant, $disabled }) =>
         $variant === "Contained" &&
         css`
-            background-color: ${({ theme }) => theme.palette.primary.main};
-            color: ${({ theme }) => theme.palette.primary.contrastText};
-            border: 1px solid ${({ theme }) => theme.palette.primary.main};
+            background-color: ${theme.palette.primary.main};
+            color: ${theme.palette.primary.contrastText};
+            border: 1px solid ${theme.palette.primary.main};
 
             &:hover {
-                background-color: ${({ theme }) => theme.palette.primary.dark};
-                border: 1px solid ${({ theme }) => theme.palette.primary.dark};
+                background-color: ${theme.palette.primary.dark};
+                border: 1px solid ${theme.palette.primary.dark};
             }
+
+            ${$disabled &&
+            css`
+                background-color: ${theme.palette.grey._200};
+                color: ${theme.palette.grey._400};
+                border: 1px solid ${theme.palette.grey._200};
+            `}
         `}
 
-    ${({ $variant }) =>
+    ${({ theme, $variant, $disabled }) =>
         $variant === "Outlined" &&
         css`
             background-color: transparent;
-            color: ${({ theme }) => theme.palette.primary.main};
-            border: 1px solid ${({ theme }) => theme.palette.primary.main};
+            color: ${theme.palette.primary.main};
+            border: 1px solid ${theme.palette.primary.main};
 
             &:hover {
-                color: ${({ theme }) => theme.palette.primary.dark};
-                border: 1px solid ${({ theme }) => theme.palette.primary.dark};
+                color: ${theme.palette.primary.dark};
+                border: 1px solid ${theme.palette.primary.dark};
             }
+
+            ${$disabled &&
+            css`
+                color: ${theme.palette.grey._300};
+                border: 1px solid ${theme.palette.grey._200};
+            `}
         `}
     
-    ${({ $variant }) =>
+    ${({ theme, $variant, $disabled }) =>
         $variant === "Text" &&
         css`
             background-color: transparent;
-            color: ${({ theme }) => theme.palette.primary.main};
+            color: ${theme.palette.primary.main};
             border: 1px solid transparent;
 
             &:hover {
-                color: ${({ theme }) => theme.palette.primary.dark};
+                color: ${theme.palette.primary.dark};
             }
+
+            ${$disabled &&
+            css`
+                color: ${theme.palette.grey._300};
+            `}
+        `}
+    
+    ${({ $disabled }) =>
+        $disabled &&
+        css`
+            pointer-events: none;
         `}
 `;
