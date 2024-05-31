@@ -6,7 +6,6 @@ import { CallToActionButtonListBlock } from "@src/common/blocks/CallToActionButt
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { HeadlineBlock } from "@src/common/blocks/HeadlineBlock";
-import { LinkListBlock } from "@src/common/blocks/LinkListBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
@@ -20,7 +19,6 @@ const supportedBlocks: SupportedBlocks = {
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
-    links: (props) => <LinkListBlock data={props} />,
     callToActionButtonList: (props) => <CallToActionButtonListBlock data={props} />,
 };
 
