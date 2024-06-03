@@ -19,7 +19,7 @@ enum Variant {
     Text = "Text",
 }
 
-class CallToActionButtonBlockData extends BlockData {
+class CallToActionBlockData extends BlockData {
     @ChildBlock(TextLinkBlock)
     textLink: BlockDataInterface;
 
@@ -27,7 +27,7 @@ class CallToActionButtonBlockData extends BlockData {
     variant: Variant;
 }
 
-class CallToActionButtonBlockInput extends BlockInput {
+class CallToActionBlockInput extends BlockInput {
     @ChildBlockInput(TextLinkBlock)
     textLink: ExtractBlockInput<typeof TextLinkBlock>;
 
@@ -35,9 +35,9 @@ class CallToActionButtonBlockInput extends BlockInput {
     @BlockField({ type: "enum", enum: Variant })
     variant: Variant;
 
-    transformToBlockData(): CallToActionButtonBlockData {
-        return inputToData(CallToActionButtonBlockData, this);
+    transformToBlockData(): CallToActionBlockData {
+        return inputToData(CallToActionBlockData, this);
     }
 }
 
-export const CallToActionButtonBlock = createBlock(CallToActionButtonBlockData, CallToActionButtonBlockInput, "CallToActionButton");
+export const CallToActionBlock = createBlock(CallToActionBlockData, CallToActionBlockInput, "CallToAction");

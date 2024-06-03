@@ -17,7 +17,7 @@
         ]
     },
     {
-        "name": "CallToActionButton",
+        "name": "CallToAction",
         "fields": [
             {
                 "name": "textLink",
@@ -56,7 +56,7 @@
         ]
     },
     {
-        "name": "CallToActionButtonList",
+        "name": "CallToActionList",
         "fields": [
             {
                 "name": "blocks",
@@ -76,7 +76,7 @@
                         {
                             "name": "props",
                             "kind": "Block",
-                            "block": "CallToActionButton",
+                            "block": "CallToAction",
                             "nullable": false
                         }
                     ]
@@ -103,7 +103,7 @@
                         {
                             "name": "props",
                             "kind": "Block",
-                            "block": "CallToActionButton",
+                            "block": "CallToAction",
                             "nullable": false
                         }
                     ]
@@ -530,8 +530,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToActionButton": "CallToActionButton",
-                                "callToActionButtonList": "CallToActionButtonList"
+                                "callToAction": "CallToAction",
+                                "callToActionList": "CallToActionList"
                             },
                             "nullable": false
                         }
@@ -573,8 +573,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToActionButton": "CallToActionButton",
-                                "callToActionButtonList": "CallToActionButtonList"
+                                "callToAction": "CallToAction",
+                                "callToActionList": "CallToActionList"
                             },
                             "nullable": false
                         }

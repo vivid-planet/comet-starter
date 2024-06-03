@@ -1,18 +1,18 @@
 "use client";
 import { PropsWithData, withPreview } from "@comet/cms-site";
-import { CallToActionButtonListBlockData } from "@src/blocks.generated";
-import { CallToActionButtonBlock } from "@src/common/blocks/CallToActionButtonBlock";
+import { CallToActionListBlockData } from "@src/blocks.generated";
+import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
 import styled from "styled-components";
 
-export const CallToActionButtonListBlock = withPreview(
-    ({ data: { blocks } }: PropsWithData<CallToActionButtonListBlockData>) => (
+export const CallToActionListBlock = withPreview(
+    ({ data: { blocks } }: PropsWithData<CallToActionListBlockData>) => (
         <Root>
             {blocks.map((block) => (
-                <CallToActionButtonBlock data={block.props} key={block.key} />
+                <CallToActionBlock data={block.props} key={block.key} />
             ))}
         </Root>
     ),
-    { label: "Button list" },
+    { label: "Call To Action List" },
 );
 
 const Root = styled.div`
