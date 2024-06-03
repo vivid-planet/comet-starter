@@ -1,0 +1,58 @@
+import { PropsWithData, withPreview } from "@comet/cms-site";
+import { ColumnsBlockData } from "@src/blocks.generated";
+import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
+import { pageGridLayoutStyle } from "@src/util/PageGridLayoutStyle";
+import styled, { css } from "styled-components";
+
+const column1Grid = {
+    "2-20-2": "3 / 23",
+    "4-16-4": "5 / 21",
+    "6-12-6": "7 / 19",
+    "9-9": "3 / 12",
+    "12-6": "3 / 15",
+    "6-12": "3 / 9",
+};
+
+const column2Grid = {
+    "9-9": "14 / 23",
+    "12-6": "17 / 23",
+    "6-12": "11 / 23",
+};
+
+export const ColumnsBlock = withPreview(
+    ({
+        data: {
+            columns: { columns, layout },
+        },
+    }: PropsWithData<ColumnsBlockData>) => {
+        return (
+            <GridRoot>
+                {columns.map((column, index) => {
+                    const gridColumn = index === 0 ? column1Grid[layout] : column2Grid[layout];
+                    return (
+                        <Column $column={gridColumn} key={index}>
+                            <ColumnsContentBlock data={column.props} />
+                        </Column>
+                    );
+                })}
+            </GridRoot>
+        );
+    },
+    { label: "Columns" },
+);
+
+const GridRoot = styled.div`
+    ${pageGridLayoutStyle};
+`;
+
+const Column = styled.div<{ $column: string }>`
+    grid-column: 3 / 23;
+
+    ${({ theme, $column }) =>
+        $column &&
+        css`
+            ${theme.breakpoints.xs.mediaQuery} {
+                grid-column: ${$column};
+            }
+        `};
+`;

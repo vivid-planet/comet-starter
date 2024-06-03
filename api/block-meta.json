@@ -17,6 +17,165 @@
         ]
     },
     {
+        "name": "Columns",
+        "fields": [
+            {
+                "name": "columns",
+                "kind": "Block",
+                "block": "ColumnsLayout",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "columns",
+                "kind": "Block",
+                "block": "ColumnsLayout",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ColumnsContent",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "richtext": "RichText",
+                                "space": "Space"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "richtext": "RichText",
+                                "space": "Space"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ColumnsLayout",
+        "fields": [
+            {
+                "name": "layout",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "columns",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "ColumnsContent",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "layout",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "columns",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "ColumnsContent",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "DamImage",
         "fields": [
             {
@@ -527,7 +686,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "links": "LinkList"
+                                "links": "LinkList",
+                                "columns": "Columns"
                             },
                             "nullable": false
                         }
@@ -569,7 +729,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "links": "LinkList"
+                                "links": "LinkList",
+                                "columns": "Columns"
                             },
                             "nullable": false
                         }
