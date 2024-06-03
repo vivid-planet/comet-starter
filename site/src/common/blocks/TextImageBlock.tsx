@@ -1,6 +1,6 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { TextImageBlockData } from "@src/blocks.generated";
-import * as React from "react";
+import { BlockRoot } from "@src/components/common/BlockRoot";
 import styled from "styled-components";
 
 import { DamImageBlock } from "./DamImageBlock";
@@ -11,7 +11,7 @@ export const TextImageBlock = withPreview(
         return (
             <Root>
                 {imagePosition === "left" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
-                <RichTextBlock data={text} />
+                <RichTextBlock data={text} disableBlockRoot />
                 {imagePosition === "right" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
             </Root>
         );
@@ -19,8 +19,8 @@ export const TextImageBlock = withPreview(
     { label: "Text/Image" },
 );
 
-const Root = styled.div`
+const Root = styled(BlockRoot)`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 20px;
+    column-gap: ${({ theme }) => theme.spacing.D100};
 `;

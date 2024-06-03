@@ -1,5 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { BlockRoot } from "@src/components/common/BlockRoot";
 import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
@@ -117,16 +118,19 @@ const defaultRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
+    disableBlockRoot?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRenderers }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRenderers, disableBlockRoot }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                {rendered}
-            </PreviewSkeleton>
+            <BlockRoot disableBlockRoot={disableBlockRoot}>
+                <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
+                    {rendered}
+                </PreviewSkeleton>
+            </BlockRoot>
         );
     },
     { label: "Rich Text" },
