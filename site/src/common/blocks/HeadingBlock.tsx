@@ -1,6 +1,7 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/components/common/Typography";
+import { CSSProperties } from "react";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -71,7 +72,7 @@ const headlineTagMap: Record<HeadingBlockData["htmlTag"], keyof HTMLElementTagNa
     H6: "h6",
 };
 
-const textAlignmentMap: Record<HeadingBlockData["textAlignment"], "left" | "center"> = {
+const textAlignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["textAlign"]> = {
     Left: "left",
     Center: "center",
 };
@@ -89,6 +90,6 @@ export const HeadingBlock = withPreview(
     { label: "Headline" },
 );
 
-const Root = styled.div<{ $textAlign: "left" | "center" }>`
+const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
     text-align: ${({ $textAlign }) => $textAlign};
 `;
