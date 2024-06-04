@@ -95,7 +95,7 @@ const defaultRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <OrderedListItem depth={depth} component="li" key={keys[index]}>
+                    <OrderedListItem $depth={depth} component="li" key={keys[index]}>
                         {child}
                     </OrderedListItem>
                 ))}
@@ -142,6 +142,6 @@ const Text = styled(Typography)`
     }
 `;
 
-const OrderedListItem = styled(Text)<{ depth: number }>`
-    list-style-type: ${({ depth }) => (depth % 3 === 1 ? "lower-alpha" : depth % 3 === 2 ? "lower-roman" : "decimal")};
+const OrderedListItem = styled(Text)<{ $depth: number }>`
+    list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
 `;
