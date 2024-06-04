@@ -7,20 +7,10 @@ import styled from "styled-components";
 
 import { defaultRichTextRenderers, RichTextBlock } from "./RichTextBlock";
 
-// Custom renderers to render unstyled content with h400 styling for eyebrow
 const eyebrowRenderers: Renderers = {
     inline: defaultRichTextRenderers.inline,
-    blocks: {
-        unstyled: (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant={"h400"} component={"h5"} key={keys[index]} gutterBottom>
-                    {child}
-                </Typography>
-            )),
-    },
 };
 
-// Custom renderers to render headline content with given html tag
 const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers => ({
     inline: defaultRichTextRenderers.inline,
     blocks: {
@@ -82,7 +72,9 @@ export const HeadingBlock = withPreview(
         const headlineTag = headlineTagMap[htmlTag];
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
-                <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
+                <Typography variant={"h400"} component={"h5"} gutterBottom>
+                    <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
+                </Typography>
                 <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
             </Root>
         );
