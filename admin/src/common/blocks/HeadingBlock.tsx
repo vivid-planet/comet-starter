@@ -35,22 +35,22 @@ const HeadlineRichTextBlock = createRichTextBlock({
         standardBlockType: "header-one",
         blocktypeMap: {
             "header-one": {
-                label: <FormattedMessage id="headingBlock.headline.size.600" defaultMessage="Size 600" />,
+                label: <FormattedMessage id="headingBlock.size600" defaultMessage="Size 600" />,
             },
             "header-two": {
-                label: <FormattedMessage id="headingBlock.headline.size.550" defaultMessage="Size 550" />,
+                label: <FormattedMessage id="headingBlock.size550" defaultMessage="Size 550" />,
             },
             "header-three": {
-                label: <FormattedMessage id="headingBlock.headline.size.500" defaultMessage="Size 500" />,
+                label: <FormattedMessage id="headingBlock.size500" defaultMessage="Size 500" />,
             },
             "header-four": {
-                label: <FormattedMessage id="headingBlock.headline.size.450" defaultMessage="Size 450" />,
+                label: <FormattedMessage id="headingBlock.size450" defaultMessage="Size 450" />,
             },
             "header-five": {
-                label: <FormattedMessage id="headingBlock.headline.size.400" defaultMessage="Size 400" />,
+                label: <FormattedMessage id="headingBlock.size400" defaultMessage="Size 400" />,
             },
             "header-six": {
-                label: <FormattedMessage id="headingBlock.headline.size.350" defaultMessage="Size 350" />,
+                label: <FormattedMessage id="headingBlock.size350" defaultMessage="Size 350" />,
             },
         },
     },
