@@ -79,7 +79,7 @@ export const HeadingBlock = withPreview(
             </Root>
         );
     },
-    { label: "Headline" },
+    { label: "Heading" },
 );
 
 const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
