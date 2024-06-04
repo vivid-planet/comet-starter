@@ -25,7 +25,6 @@ export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
     padding: ${({ theme }) => `${theme.spacing.S400} ${theme.spacing.S500}`};
     border-radius: 4px;
     cursor: pointer;
-    user-select: none;
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease-out;
