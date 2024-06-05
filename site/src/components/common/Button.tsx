@@ -50,9 +50,9 @@ export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
 
             ${$disabled &&
             css`
-                background-color: ${theme.palette.grey._200};
-                color: ${theme.palette.grey._400};
-                border: 1px solid ${theme.palette.grey._200};
+                background-color: ${theme.palette.grey["50"]};
+                color: ${theme.palette.grey["400"]};
+                border: 1px solid ${theme.palette.grey["200"]};
             `}
         `}
 
@@ -70,8 +70,8 @@ export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
 
             ${$disabled &&
             css`
-                color: ${theme.palette.grey._300};
-                border: 1px solid ${theme.palette.grey._200};
+                color: ${theme.palette.grey["300"]};
+                border: 1px solid ${theme.palette.grey["200"]};
             `}
         `}
     
@@ -88,7 +88,7 @@ export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
 
             ${$disabled &&
             css`
-                color: ${theme.palette.grey._300};
+                color: ${theme.palette.grey["300"]};
             `}
         `}
     
