@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { forwardRef, HTMLAttributes, ReactNode, RefObject } from "react";
 import styled, { css } from "styled-components";
 
 type ButtonVariant = "Contained" | "Outlined" | "Text";
@@ -10,14 +10,19 @@ type ButtonProps = {
     children?: ReactNode;
 } & (HTMLAttributes<HTMLButtonElement> | (HTMLAttributes<HTMLAnchorElement> & Pick<HTMLAnchorElement, "href" | "target">));
 
-export const Button = ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }: ButtonProps) => {
-    const asHtmlElement = "href" in htmlAttributes ? "a" : "button";
-    return (
-        <Root as={asHtmlElement} $variant={variant} $disabled={disabled} {...htmlAttributes}>
-            {children}
-        </Root>
-    );
-};
+export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+    ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }, ref) => {
+        return "href" in htmlAttributes ? (
+            <Root as={"a"} ref={ref as RefObject<HTMLAnchorElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
+                {children}
+            </Root>
+        ) : (
+            <Root as={"button"} ref={ref as RefObject<HTMLButtonElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
+                {children}
+            </Root>
+        );
+    },
+);
 
 export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
     display: inline-flex;
