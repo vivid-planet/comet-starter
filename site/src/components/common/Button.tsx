@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, ReactNode, RefObject } from "react";
+import { forwardRef, HTMLAttributes, ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 type ButtonVariant = "Contained" | "Outlined" | "Text";
@@ -12,12 +12,10 @@ type ButtonProps = {
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }, ref) => {
-        return "href" in htmlAttributes ? (
-            <Root as={"a"} ref={ref as RefObject<HTMLAnchorElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
-                {children}
-            </Root>
-        ) : (
-            <Root as={"button"} ref={ref as RefObject<HTMLButtonElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
+        const isAnchorElement = "href" in htmlAttributes;
+        return (
+            // @ts-expect-error ref is correct for HTMLButtonElement and HTMLAnchorElement
+            <Root as={isAnchorElement ? "a" : "button"} ref={ref} $variant={variant} $disabled={disabled} {...htmlAttributes}>
                 {children}
             </Root>
         );
