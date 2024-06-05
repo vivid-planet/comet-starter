@@ -530,7 +530,6 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToAction": "CallToAction",
                                 "callToActionList": "CallToActionList"
                             },
                             "nullable": false
@@ -573,7 +572,6 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToAction": "CallToAction",
                                 "callToActionList": "CallToActionList"
                             },
                             "nullable": false
