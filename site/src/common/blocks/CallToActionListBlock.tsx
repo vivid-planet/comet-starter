@@ -1,15 +1,13 @@
 "use client";
-import { PropsWithData, withPreview } from "@comet/cms-site";
+import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
 import styled from "styled-components";
 
 export const CallToActionListBlock = withPreview(
-    ({ data: { blocks } }: PropsWithData<CallToActionListBlockData>) => (
+    ({ data }: PropsWithData<CallToActionListBlockData>) => (
         <Root>
-            {blocks.map((block) => (
-                <CallToActionBlock data={block.props} key={block.key} />
-            ))}
+            <ListBlock data={data} block={(block) => <CallToActionBlock data={block} />} />
         </Root>
     ),
     { label: "Call To Action List" },
