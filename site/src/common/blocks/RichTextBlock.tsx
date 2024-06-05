@@ -2,7 +2,7 @@ import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } 
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -116,20 +116,35 @@ export const defaultRichTextRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
+    disableLastGutterBottom?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, disableLastGutterBottom }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                {rendered}
+                <Root $disableLastGutterBottom={disableLastGutterBottom}>{rendered}</Root>
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
+
+const Root = styled.div<{ $disableLastGutterBottom?: boolean }>`
+    ${({ theme, $disableLastGutterBottom }) =>
+        $disableLastGutterBottom &&
+        css`
+            > *:last-child {
+                margin-bottom: 0;
+
+                ${theme.breakpoints.xs.mediaQuery} {
+                    margin-bottom: 0;
+                }
+            }
+        `};
+`;
 
 const Text = styled(Typography)`
     white-space: pre-line;
