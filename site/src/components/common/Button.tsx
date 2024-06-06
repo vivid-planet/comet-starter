@@ -1,13 +1,11 @@
-import { forwardRef, HTMLAttributes, ReactNode, RefObject } from "react";
+import { forwardRef, HTMLAttributes, RefObject } from "react";
 import styled, { css } from "styled-components";
 
 type ButtonVariant = "Contained" | "Outlined" | "Text";
 
 type ButtonProps = {
     variant?: ButtonVariant;
-    onClick?: () => void;
     disabled?: boolean;
-    children?: ReactNode;
 } & (HTMLAttributes<HTMLButtonElement> | (HTMLAttributes<HTMLAnchorElement> & Pick<HTMLAnchorElement, "href" | "target">));
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
