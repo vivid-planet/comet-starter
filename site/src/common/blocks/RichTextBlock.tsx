@@ -118,20 +118,23 @@ const defaultRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
-    disableBlockRoot?: boolean;
+    isNested?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRenderers, disableBlockRoot }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRenderers, isNested }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
-        return (
-            <BlockRoot disableBlockRoot={disableBlockRoot}>
-                <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                    {rendered}
-                </PreviewSkeleton>
-            </BlockRoot>
+        const content = (
+            <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
+                {rendered}
+            </PreviewSkeleton>
         );
+
+        if (isNested) {
+            return content;
+        }
+        return <BlockRoot>{content}</BlockRoot>;
     },
     { label: "Rich Text" },
 );

@@ -4,21 +4,14 @@ import styled, { css } from "styled-components";
 
 interface BlockRootProps extends HTMLAttributes<HTMLDivElement> {
     grid?: boolean;
-    disableBlockRoot?: boolean;
     children?: ReactNode;
 }
 
-export const BlockRoot = ({ grid, disableBlockRoot, children, ...restProps }: BlockRootProps) => {
-    if (disableBlockRoot) {
-        return <>{children}</>;
-    }
-
-    return (
-        <Root $grid={grid} {...restProps}>
-            {children}
-        </Root>
-    );
-};
+export const BlockRoot = ({ grid, children, ...restProps }: BlockRootProps) => (
+    <Root $grid={grid} {...restProps}>
+        {children}
+    </Root>
+);
 
 const Root = styled.div<{ $grid?: boolean }>`
     max-width: var(--defaultMaxWidth);

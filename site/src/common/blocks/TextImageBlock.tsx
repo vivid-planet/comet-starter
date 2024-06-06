@@ -11,7 +11,7 @@ export const TextImageBlock = withPreview(
         return (
             <Root>
                 {imagePosition === "left" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
-                <RichTextBlock data={text} disableBlockRoot />
+                <RichTextBlock data={text} isNested />
                 {imagePosition === "right" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
             </Root>
         );
