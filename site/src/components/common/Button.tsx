@@ -83,7 +83,6 @@ const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> 
 
 const commonButtonStyle = css`
     display: inline-flex;
-    box-sizing: border-box;
     padding: ${({ theme }) => `${theme.spacing.S400} ${theme.spacing.S500}`};
     border-radius: 4px;
     cursor: pointer;
