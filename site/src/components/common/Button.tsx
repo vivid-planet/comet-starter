@@ -1,7 +1,8 @@
+import { CallToActionBlockData } from "@src/blocks.generated";
 import { forwardRef, HTMLAttributes, RefObject } from "react";
 import styled, { css } from "styled-components";
 
-type ButtonVariant = "Contained" | "Outlined" | "Text";
+type ButtonVariant = CallToActionBlockData["variant"];
 
 type ButtonProps = {
     variant?: ButtonVariant;
@@ -9,7 +10,7 @@ type ButtonProps = {
 } & (HTMLAttributes<HTMLButtonElement> | (HTMLAttributes<HTMLAnchorElement> & Pick<HTMLAnchorElement, "href" | "target">));
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-    ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }, ref) => {
+    ({ variant = "Contained", disabled = false, children, ...htmlAttributes }, ref) => {
         return "href" in htmlAttributes ? (
             <StyledAnchor ref={ref as RefObject<HTMLAnchorElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
                 {children}
