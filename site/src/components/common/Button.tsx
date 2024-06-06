@@ -87,7 +87,7 @@ const commonButtonStyle = css`
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
 
     text-align: center;
     text-decoration: none;
