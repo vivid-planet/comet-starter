@@ -1,4 +1,4 @@
-import { forwardRef, HTMLAttributes, ReactNode } from "react";
+import { forwardRef, HTMLAttributes, ReactNode, RefObject } from "react";
 import styled, { css } from "styled-components";
 
 type ButtonVariant = "Contained" | "Outlined" | "Text";
@@ -12,17 +12,76 @@ type ButtonProps = {
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     ({ variant = "Outlined", disabled = false, children, ...htmlAttributes }, ref) => {
-        const isAnchorElement = "href" in htmlAttributes;
-        return (
-            // @ts-expect-error ref is correct for HTMLButtonElement and HTMLAnchorElement
-            <Root as={isAnchorElement ? "a" : "button"} ref={ref} $variant={variant} $disabled={disabled} {...htmlAttributes}>
+        return "href" in htmlAttributes ? (
+            <StyledAnchor ref={ref as RefObject<HTMLAnchorElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
                 {children}
-            </Root>
+            </StyledAnchor>
+        ) : (
+            <StyledButton ref={ref as RefObject<HTMLButtonElement>} $variant={variant} disabled={disabled} {...htmlAttributes}>
+                {children}
+            </StyledButton>
         );
     },
 );
 
-export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
+const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
+    Contained: css`
+        ${({ theme }) => css`
+            background-color: ${theme.palette.primary.main};
+            color: ${theme.palette.primary.contrastText};
+            border: 1px solid ${theme.palette.primary.main};
+
+            &:hover {
+                background-color: ${theme.palette.primary.dark};
+                border: 1px solid ${theme.palette.primary.dark};
+            }
+        `}
+    `,
+    Outlined: css`
+        ${({ theme }) => css`
+            background-color: transparent;
+            color: ${theme.palette.primary.main};
+            border: 1px solid ${theme.palette.primary.main};
+
+            &:hover {
+                color: ${theme.palette.primary.dark};
+                border: 1px solid ${theme.palette.primary.dark};
+            }
+        `}
+    `,
+    Text: css`
+        ${({ theme }) => css`
+            background-color: transparent;
+            color: ${theme.palette.primary.main};
+            border: 1px solid transparent;
+
+            &:hover {
+                color: ${theme.palette.primary.dark};
+            }
+        `}
+    `,
+};
+
+const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
+    Contained: css`
+        ${({ theme }) => css`
+            background-color: ${theme.palette.grey["50"]};
+            color: ${theme.palette.grey["400"]};
+            border: 1px solid ${theme.palette.grey["200"]};
+        `}
+    `,
+    Outlined: css`
+        ${({ theme }) => css`
+            color: ${theme.palette.grey["300"]};
+            border: 1px solid ${theme.palette.grey["200"]};
+        `}
+    `,
+    Text: css`
+        color: ${({ theme }) => theme.palette.grey["300"]};
+    `,
+};
+
+const commonButtonStyle = css`
     display: inline-flex;
     box-sizing: border-box;
     padding: ${({ theme }) => `${theme.spacing.S400} ${theme.spacing.S500}`};
@@ -38,66 +97,26 @@ export const Root = styled.div<{ $variant: ButtonVariant; $disabled: boolean }>`
     font-size: 16px;
     font-weight: 700;
     line-height: 110%;
+`;
 
-    ${({ theme, $variant, $disabled }) =>
-        $variant === "Contained" &&
-        css`
-            background-color: ${theme.palette.primary.main};
-            color: ${theme.palette.primary.contrastText};
-            border: 1px solid ${theme.palette.primary.main};
+const StyledAnchor = styled.a<{ $variant: ButtonVariant; $disabled: boolean }>`
+    ${commonButtonStyle};
+    ${({ $variant }) => buttonVariantStyle[$variant]};
 
-            &:hover {
-                background-color: ${theme.palette.primary.dark};
-                border: 1px solid ${theme.palette.primary.dark};
-            }
-
-            ${$disabled &&
-            css`
-                background-color: ${theme.palette.grey["50"]};
-                color: ${theme.palette.grey["400"]};
-                border: 1px solid ${theme.palette.grey["200"]};
-            `}
-        `}
-
-    ${({ theme, $variant, $disabled }) =>
-        $variant === "Outlined" &&
-        css`
-            background-color: transparent;
-            color: ${theme.palette.primary.main};
-            border: 1px solid ${theme.palette.primary.main};
-
-            &:hover {
-                color: ${theme.palette.primary.dark};
-                border: 1px solid ${theme.palette.primary.dark};
-            }
-
-            ${$disabled &&
-            css`
-                color: ${theme.palette.grey["300"]};
-                border: 1px solid ${theme.palette.grey["200"]};
-            `}
-        `}
-    
-    ${({ theme, $variant, $disabled }) =>
-        $variant === "Text" &&
-        css`
-            background-color: transparent;
-            color: ${theme.palette.primary.main};
-            border: 1px solid transparent;
-
-            &:hover {
-                color: ${theme.palette.primary.dark};
-            }
-
-            ${$disabled &&
-            css`
-                color: ${theme.palette.grey["300"]};
-            `}
-        `}
-    
-    ${({ $disabled }) =>
+    ${({ $variant, $disabled }) =>
         $disabled &&
         css`
             pointer-events: none;
+            ${disabledButtonVariantStyle[$variant]};
         `}
+`;
+
+const StyledButton = styled.button<{ $variant: ButtonVariant }>`
+    ${commonButtonStyle};
+    ${({ $variant }) => buttonVariantStyle[$variant]};
+
+    &:disabled {
+        pointer-events: none;
+        ${({ $variant }) => disabledButtonVariantStyle[$variant]};
+    }
 `;
