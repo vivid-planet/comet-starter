@@ -13,7 +13,7 @@ import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
-    richtext: (props) => <RichTextBlock data={props} />,
+    richtext: (props) => <RichTextBlock data={props} addPageLayoutStyle />,
     headline: (props) => <HeadlineBlock data={props} />,
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,

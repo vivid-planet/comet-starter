@@ -1,7 +1,7 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { BlockRoot } from "@src/components/common/BlockRoot";
 import { Typography } from "@src/components/common/Typography";
+import { pageLayoutStyle } from "@src/util/PageLayoutStyle";
 import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
@@ -118,26 +118,25 @@ const defaultRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
-    isNested?: boolean;
+    addPageLayoutStyle?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRenderers, isNested }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRenderers, addPageLayoutStyle = false }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
-        const content = (
+        return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                {rendered}
+                <Root $addPageLayoutStyle={addPageLayoutStyle}>{rendered}</Root>
             </PreviewSkeleton>
         );
-
-        if (isNested) {
-            return content;
-        }
-        return <BlockRoot>{content}</BlockRoot>;
     },
     { label: "Rich Text" },
 );
+
+const Root = styled.div<{ $addPageLayoutStyle: boolean }>`
+    ${({ $addPageLayoutStyle }) => $addPageLayoutStyle && pageLayoutStyle};
+`;
 
 const Text = styled(Typography)`
     white-space: pre-line;
