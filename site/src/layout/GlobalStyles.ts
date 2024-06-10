@@ -1,5 +1,4 @@
 "use client";
-import { gridColumnsCSSVars } from "@src/util/gridColumnsCSSVars";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -9,10 +8,6 @@ export const GlobalStyle = createGlobalStyle`
     }
     
     html {
-        --defaultMaxWidth: 1600px;
-        --vwDiff: calc(100vw - 100%);
-        ${gridColumnsCSSVars()};
-        
         /* Prevent font size adjustments after orientation changes in mobile devices */
         -webkit-text-size-adjust: 100%;
     }

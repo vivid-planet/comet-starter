@@ -2,7 +2,7 @@ import { gridTotalColumns } from "@src/theme";
 import { css } from "styled-components";
 
 export const pageGridLayoutStyle = css`
-    max-width: var(--defaultMaxWidth);
+    max-width: ${({ theme }) => theme.defaultMaxWidth};
     margin: 0 auto;
     box-sizing: border-box;
 
