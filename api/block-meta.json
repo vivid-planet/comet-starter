@@ -304,8 +304,14 @@
         ]
     },
     {
-        "name": "Headline",
+        "name": "Heading",
         "fields": [
+            {
+                "name": "eyebrow",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
             {
                 "name": "headline",
                 "kind": "Block",
@@ -313,30 +319,60 @@
                 "nullable": false
             },
             {
-                "name": "level",
+                "name": "htmlTag",
                 "kind": "Enum",
                 "enum": [
-                    "header-one",
-                    "header-two",
-                    "header-three"
+                    "H1",
+                    "H2",
+                    "H3",
+                    "H4",
+                    "H5",
+                    "H6"
+                ],
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "Left",
+                    "Center"
                 ],
                 "nullable": false
             }
         ],
         "inputFields": [
             {
+                "name": "eyebrow",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
                 "name": "headline",
                 "kind": "Block",
                 "block": "RichText",
                 "nullable": false
             },
             {
-                "name": "level",
+                "name": "htmlTag",
                 "kind": "Enum",
                 "enum": [
-                    "header-one",
-                    "header-two",
-                    "header-three"
+                    "H1",
+                    "H2",
+                    "H3",
+                    "H4",
+                    "H5",
+                    "H6"
+                ],
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "Left",
+                    "Center"
                 ],
                 "nullable": false
             }
@@ -525,7 +561,7 @@
                                 "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
-                                "headline": "Headline",
+                                "heading": "Heading",
                                 "image": "DamImage",
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
@@ -567,7 +603,7 @@
                                 "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
-                                "headline": "Headline",
+                                "heading": "Heading",
                                 "image": "DamImage",
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
