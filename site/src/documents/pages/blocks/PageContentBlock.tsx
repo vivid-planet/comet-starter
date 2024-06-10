@@ -4,7 +4,7 @@ import { PageContentBlockData } from "@src/blocks.generated";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
-import { HeadlineBlock } from "@src/common/blocks/HeadlineBlock";
+import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { LinkListBlock } from "@src/common/blocks/LinkListBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
@@ -14,7 +14,7 @@ const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} />,
-    headline: (props) => <HeadlineBlock data={props} />,
+    heading: (props) => <HeadingBlock data={props} />,
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
