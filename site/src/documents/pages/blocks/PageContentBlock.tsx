@@ -15,7 +15,7 @@ const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} addPageGridLayoutStyle />,
-    heading: (props) => <HeadingBlock data={props} />,
+    heading: (props) => <HeadingBlock data={props} addPageGridLayoutStyle />,
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,

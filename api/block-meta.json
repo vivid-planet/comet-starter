@@ -63,7 +63,8 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "space": "Space"
+                                "space": "Space",
+                                "heading": "Heading"
                             },
                             "nullable": false
                         }
@@ -98,7 +99,8 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "space": "Space"
+                                "space": "Space",
+                                "heading": "Heading"
                             },
                             "nullable": false
                         }
