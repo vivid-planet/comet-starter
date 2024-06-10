@@ -1,7 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/components/common/Typography";
-import * as React from "react";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -10,7 +9,7 @@ import { LinkBlock } from "./LinkBlock";
 /**
  * Define the renderers
  */
-const defaultRenderers: Renderers = {
+export const defaultRichTextRenderers: Renderers = {
     /**
      * Those callbacks will be called recursively to render a nested structure
      */
@@ -120,7 +119,7 @@ interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRenderers }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
