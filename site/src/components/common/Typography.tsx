@@ -194,7 +194,7 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
-    gutterBottom?: boolean;
+    addMarginBottom?: boolean;
     children?: ReactNode;
 }
 
@@ -206,7 +206,7 @@ export const Typography = ({ component, variant = "p300", children, ...restProps
 
 interface TextProps {
     variant: TypographyVariant;
-    gutterBottom?: boolean;
+    addMarginBottom?: boolean;
 }
 
 const Text = styled.div<TextProps>`
@@ -215,8 +215,8 @@ const Text = styled.div<TextProps>`
     ${({ variant }) => typographyVariantStyle[variant]};
     margin-top: 0;
 
-    ${({ theme, gutterBottom }) =>
-        !gutterBottom &&
+    ${({ theme, addMarginBottom }) =>
+        !addMarginBottom &&
         css`
             margin-bottom: 0;
 

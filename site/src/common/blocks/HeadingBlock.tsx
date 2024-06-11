@@ -16,37 +16,37 @@ const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers =
     blocks: {
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h600"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h600"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h550"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h550"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h500"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h500"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h450"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h450"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h400"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h400"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h350"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h350"} component={htmlTag} key={keys[index]} addMarginBottom>
                     {child}
                 </Typography>
             )),
@@ -72,7 +72,7 @@ export const HeadingBlock = withPreview(
         const headlineTag = headlineTagMap[htmlTag];
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
-                <Typography variant={"h400"} component={"h5"} gutterBottom>
+                <Typography variant={"h400"} component={"h5"} addMarginBottom>
                     <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                 </Typography>
                 <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
