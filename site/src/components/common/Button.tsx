@@ -87,7 +87,8 @@ const commonButtonStyle = css<{ $variant: ButtonVariant }>`
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    transition: background-color 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    transition-property: background-color, color, border-color;
 
     text-align: center;
     text-decoration: none;
