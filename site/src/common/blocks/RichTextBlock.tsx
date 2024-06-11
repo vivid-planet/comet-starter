@@ -94,9 +94,9 @@ export const defaultRichTextRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text component="li" key={keys[index]}>
+                    <OrderedListItem $depth={depth} component="li" key={keys[index]}>
                         {child}
-                    </Text>
+                    </OrderedListItem>
                 ))}
             </ol>
         ),
@@ -154,4 +154,8 @@ const Text = styled(Typography)`
         white-space: pre;
         content: " ";
     }
+`;
+
+const OrderedListItem = styled(Text)<{ $depth: number }>`
+    list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
 `;
