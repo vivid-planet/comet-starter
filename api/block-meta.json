@@ -20,17 +20,65 @@
         "name": "Columns",
         "fields": [
             {
+                "name": "layout",
+                "kind": "String",
+                "nullable": false
+            },
+            {
                 "name": "columns",
-                "kind": "Block",
-                "block": "ColumnsLayout",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "ColumnsContent",
+                            "nullable": false
+                        }
+                    ]
+                },
                 "nullable": false
             }
         ],
         "inputFields": [
             {
+                "name": "layout",
+                "kind": "String",
+                "nullable": false
+            },
+            {
                 "name": "columns",
-                "kind": "Block",
-                "block": "ColumnsLayout",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "ColumnsContent",
+                            "nullable": false
+                        }
+                    ]
+                },
                 "nullable": false
             }
         ]
@@ -102,73 +150,6 @@
                                 "space": "Space",
                                 "heading": "Heading"
                             },
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": false
-            }
-        ]
-    },
-    {
-        "name": "ColumnsLayout",
-        "fields": [
-            {
-                "name": "layout",
-                "kind": "String",
-                "nullable": false
-            },
-            {
-                "name": "columns",
-                "kind": "NestedObjectList",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "key",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "visible",
-                            "kind": "Boolean",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "Block",
-                            "block": "ColumnsContent",
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": false
-            }
-        ],
-        "inputFields": [
-            {
-                "name": "layout",
-                "kind": "String",
-                "nullable": false
-            },
-            {
-                "name": "columns",
-                "kind": "NestedObjectList",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "key",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "visible",
-                            "kind": "Boolean",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "Block",
-                            "block": "ColumnsContent",
                             "nullable": false
                         }
                     ]

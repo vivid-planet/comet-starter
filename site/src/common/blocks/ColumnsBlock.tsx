@@ -20,11 +20,7 @@ const column2Grid = {
 };
 
 export const ColumnsBlock = withPreview(
-    ({
-        data: {
-            columns: { columns, layout },
-        },
-    }: PropsWithData<ColumnsBlockData>) => {
+    ({ data: { columns, layout } }: PropsWithData<ColumnsBlockData>) => {
         return (
             <GridRoot>
                 {columns.map((column, index) => {

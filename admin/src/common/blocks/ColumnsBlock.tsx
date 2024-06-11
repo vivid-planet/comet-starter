@@ -1,11 +1,4 @@
-import {
-    BlockCategory,
-    ColumnsLayoutPreview,
-    ColumnsLayoutPreviewContent,
-    ColumnsLayoutPreviewSpacing,
-    createColumnsBlock,
-    createCompositeBlock,
-} from "@comet/blocks-admin";
+import { ColumnsLayoutPreview, ColumnsLayoutPreviewContent, ColumnsLayoutPreviewSpacing, createColumnsBlock } from "@comet/blocks-admin";
 import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
 import { FormattedMessage } from "react-intl";
 
@@ -105,23 +98,9 @@ const twoColumnLayouts = [
     },
 ];
 
-export const ColumnsBlock = createCompositeBlock(
-    {
-        name: "Columns",
-        displayName: <FormattedMessage id="columnsBlock" defaultMessage="Columns" />,
-        blocks: {
-            columns: {
-                block: createColumnsBlock({
-                    name: "Columns",
-                    displayName: <FormattedMessage id="columnsBlock.displayName" defaultMessage="Columns" />,
-                    contentBlock: ColumnsContentBlock,
-                    layouts: [...oneColumnLayouts, ...twoColumnLayouts],
-                }),
-            },
-        },
-    },
-    (block) => {
-        block.category = BlockCategory.Layout;
-        return block;
-    },
-);
+export const ColumnsBlock = createColumnsBlock({
+    name: "Columns",
+    displayName: <FormattedMessage id="columnsBlock.displayName" defaultMessage="Columns" />,
+    contentBlock: ColumnsContentBlock,
+    layouts: [...oneColumnLayouts, ...twoColumnLayouts],
+});
