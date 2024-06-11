@@ -32,7 +32,7 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
 
             &:hover {
                 background-color: ${theme.palette.primary.dark};
-                border: 1px solid ${theme.palette.primary.dark};
+                border-color: ${theme.palette.primary.dark};
             }
         `}
     `,
@@ -44,7 +44,7 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
 
             &:hover {
                 color: ${theme.palette.primary.dark};
-                border: 1px solid ${theme.palette.primary.dark};
+                border-color: ${theme.palette.primary.dark};
             }
         `}
     `,
@@ -66,13 +66,13 @@ const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> 
         ${({ theme }) => css`
             background-color: ${theme.palette.grey["50"]};
             color: ${theme.palette.grey["400"]};
-            border: 1px solid ${theme.palette.grey["200"]};
+            border-color: ${theme.palette.grey["200"]};
         `}
     `,
     Outlined: css`
         ${({ theme }) => css`
             color: ${theme.palette.grey["300"]};
-            border: 1px solid ${theme.palette.grey["200"]};
+            border-color: ${theme.palette.grey["200"]};
         `}
     `,
     Text: css`
