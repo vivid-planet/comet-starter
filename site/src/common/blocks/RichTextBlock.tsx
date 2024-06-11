@@ -1,7 +1,7 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { ConditionalPageGridLayout } from "@src/components/common/ConditionalPageGridLayout";
 import { Typography } from "@src/components/common/Typography";
-import { pageGridLayoutStyle } from "@src/util/PageGridLayoutStyle";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -126,19 +126,16 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $addPageGridLayoutStyle={addPageGridLayoutStyle}>{rendered}</Root>
+                <ConditionalPageGridLayout pageGridLayout={addPageGridLayoutStyle} gridColumn={"3/23"}>
+                    {rendered}
+                </ConditionalPageGridLayout>
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
 
-const Root = styled.div<{ $addPageGridLayoutStyle: boolean }>`
-    ${({ $addPageGridLayoutStyle }) => $addPageGridLayoutStyle && pageGridLayoutStyle};
-`;
-
 const Text = styled(Typography)`
-    grid-column: inherit;
     white-space: pre-line;
 
     // Show empty lines as spacing between paragraphs

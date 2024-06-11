@@ -1,7 +1,7 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
+import { ConditionalPageGridLayout } from "@src/components/common/ConditionalPageGridLayout";
 import { Typography } from "@src/components/common/Typography";
-import { pageGridLayoutStyle } from "@src/util/PageGridLayoutStyle";
 import { CSSProperties } from "react";
 import { Renderers } from "redraft";
 import styled from "styled-components";
@@ -72,34 +72,21 @@ interface HeadingBlockProps extends PropsWithData<HeadingBlockData> {
     addPageGridLayoutStyle?: boolean;
 }
 
-type OwnerState = {
-    textAlign: CSSProperties["textAlign"];
-    addPageGridLayoutStyle: boolean;
-};
-
 export const HeadingBlock = withPreview(
     ({ data: { eyebrow, headline, htmlTag, textAlignment }, addPageGridLayoutStyle = false }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
-        const ownerState: OwnerState = { textAlign: textAlignmentMap[textAlignment], addPageGridLayoutStyle };
         return (
-            <Root $ownerState={ownerState}>
-                <Wrapper>
-                    <Typography variant={"h400"} component={"h5"} gutterBottom>
-                        <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
-                    </Typography>
-                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
-                </Wrapper>
+            <Root pageGridLayout={addPageGridLayoutStyle} gridColumn={"3/23"} $textAlign={textAlignmentMap[textAlignment]}>
+                <Typography variant={"h400"} component={"h5"} gutterBottom>
+                    <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
+                </Typography>
+                <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
             </Root>
         );
     },
     { label: "Heading" },
 );
 
-const Root = styled.div<{ $ownerState: OwnerState }>`
-    ${({ $ownerState }) => $ownerState.addPageGridLayoutStyle && pageGridLayoutStyle}
-    text-align: ${({ $ownerState }) => $ownerState.textAlign};
-`;
-
-const Wrapper = styled.div`
-    grid-column: inherit;
+const Root = styled(ConditionalPageGridLayout)<{ $textAlign: CSSProperties["textAlign"] }>`
+    text-align: ${({ $textAlign }) => $textAlign};
 `;
