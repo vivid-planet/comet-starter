@@ -2,7 +2,8 @@
     "name": "starter",
     "private": true,
     "scripts": {
-        "dev": "dotenv -c secrets -- dev-pm start",
+        "create-site-configs-env": "npx @comet/cli inject-site-configs -i .env.site-configs.tpl -o .env.site-configs",
+        "dev": "npm run create-site-configs-env && dotenv -c secrets -- dev-pm start",
         "copy-schema-files": "node copy-schema-files.js",
         "lint": "run-p lint:*",
         "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}'",
@@ -23,6 +24,7 @@
         "browser:jaeger": "dotenv -c secrets -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'"
     },
     "devDependencies": {
+        "@comet/cli": "7.0.0-beta.0",
         "@comet/dev-process-manager": "^2.0.0",
         "dotenv-cli": "^7.0.0",
         "husky": "^9.0.0",

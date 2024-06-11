@@ -21,11 +21,13 @@ npm install
 ln -sf ../.env ./api/
 ln -sf ../.env.local ./api/
 ln -sf ../.env.secrets ./api/
+ln -sf ../.env.site-configs ./api/
 
 # create admin symlinks
 ln -sf ../.env ./admin/
 ln -sf ../.env.local ./admin/
 ln -sf ../.env.secrets ./admin/
+ln -sf ../.env.site-configs ./admin/
 ln -sf ../api/schema.gql ./admin/
 ln -sf ../api/block-meta.json ./admin/
 ln -sf ../../api/src/comet-config.json ./admin/src/
@@ -34,6 +36,7 @@ ln -sf ../../api/src/comet-config.json ./admin/src/
 ln -sf ../.env ./site/
 ln -sf ../.env.local ./site/
 ln -sf ../.env.secrets ./site/
+ln -sf ../.env.site-configs ./site/
 ln -sf ../api/schema.gql ./site/
 ln -sf ../api/block-meta.json ./site/
 ln -sf ../../api/src/comet-config.json ./site/src/

@@ -2,6 +2,7 @@ export let domain = "";
 export let languages: string[] = [];
 export let defaultLanguage = "";
 
+// TODO Use site-configs once migrated to App-Router
 if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW !== "true") {
     if (process.env.NEXT_PUBLIC_SITE_DOMAIN) {
         domain = process.env.NEXT_PUBLIC_SITE_DOMAIN;

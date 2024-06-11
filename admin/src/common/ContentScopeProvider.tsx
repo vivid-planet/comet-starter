@@ -10,16 +10,8 @@ import {
     UseContentScopeApi,
     useContentScopeConfig as useContentScopeConfigLibrary,
     useCurrentUser,
-    useSitesConfig,
 } from "@comet/cms-admin";
-import { SitesConfig } from "@src/config";
-
-type Domain = "main" | "secondary" | string;
-type Language = "en" | string;
-export interface ContentScope {
-    domain: Domain;
-    language: Language;
-}
+import { ContentScope } from "@src/config";
 
 // convenince wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi<ContentScope> {
@@ -47,20 +39,17 @@ export function useContentScopeConfig(p: ContentScopeConfigProps): void {
 }
 
 export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
-    const sitesConfig = useSitesConfig<SitesConfig>();
     const user = useCurrentUser();
 
-    const allowedUserDomains = user.allowedContentScopes.map((contentScope) => contentScope.domain);
-
-    const allowedSiteConfigs = Object.fromEntries(
-        Object.entries(sitesConfig.configs).filter(([siteKey, _siteConfig]) => allowedUserDomains.includes(siteKey)),
-    );
+    const allowedUserDomains = user.allowedContentScopes
+        .map((contentScope) => contentScope.domain)
+        .filter((value, index, array) => array.indexOf(value) === index);
+    const allowedUserLanguages = user.allowedContentScopes
+        .map((contentScope) => contentScope.language)
+        .filter((value, index, array) => array.indexOf(value) === index);
     const values: ContentScopeValues<ContentScope> = {
-        domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key })),
-        language: [
-            { label: "English", value: "en" },
-            { label: "German", value: "de" },
-        ],
+        domain: allowedUserDomains.map((value) => ({ value })),
+        language: allowedUserLanguages.map((value) => ({ value })),
     };
 
     return (

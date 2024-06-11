@@ -1,6 +1,7 @@
 .env
 .env.local
 .env.secrets
+.env.site-configs
 
 /node_modules
 

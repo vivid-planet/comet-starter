@@ -115,4 +115,7 @@ export class EnvironmentVariables {
     @IsString()
     @ValidateIf(() => process.env.NODE_ENV === "production")
     CDN_ORIGIN_CHECK_SECRET: string;
+
+    @IsString()
+    PRIVATE_SITE_CONFIGS: string;
 }

@@ -21,7 +21,6 @@ import {
     SitesConfigProvider,
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
-import { ContentScope } from "@src/common/ContentScopeProvider";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
 import { DndProvider } from "react-dnd";
@@ -33,7 +32,7 @@ import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { ConfigProvider, createConfig } from "./config";
+import { ConfigProvider, ContentScope, createConfig, SitesConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -55,10 +54,19 @@ export function App() {
         <ConfigProvider config={config}>
             <ApolloProvider client={apolloClient}>
                 <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                    <SitesConfigProvider
+                    <SitesConfigProvider<SitesConfig>
                         value={{
                             configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs, scope: ContentScope) => configs[scope.domain],
+                            resolveSiteConfigForScope: (configs, scope: ContentScope) => {
+                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                                if (!siteConfig) throw new Error(`siteConfig not found for country ${scope.domain}`);
+                                return {
+                                    url: siteConfig.url,
+                                    preloginEnabled: siteConfig.preloginEnabled || false,
+                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview`,
+                                    sitePreviewApiUrl: `${config.previewUrl}/api/site-preview`,
+                                };
+                            },
                         }}
                     >
                         <DependenciesConfigProvider

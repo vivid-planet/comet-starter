@@ -2,6 +2,10 @@ import cometConfig from "@src/comet-config.json";
 import { plainToClass } from "class-transformer";
 import { validateSync } from "class-validator";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+// eslint-disable-next-line
+import type { PrivateSiteConfig } from "../../../site-configs.types";
 import { EnvironmentVariables } from "./environment-variables";
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -59,6 +63,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         cdn: {
             originCheckSecret: envVars.CDN_ORIGIN_CHECK_SECRET,
         },
+        siteConfigs: JSON.parse(envVars.PRIVATE_SITE_CONFIGS) as PrivateSiteConfig[],
     };
 }
 
