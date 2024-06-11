@@ -1,8 +1,7 @@
-import { CallToActionBlockData } from "@src/blocks.generated";
 import { forwardRef, HTMLAttributes, RefObject } from "react";
 import styled, { css } from "styled-components";
 
-type ButtonVariant = CallToActionBlockData["variant"];
+export type ButtonVariant = "contained" | "outlined" | "text";
 
 type ButtonProps = {
     variant?: ButtonVariant;
@@ -10,7 +9,7 @@ type ButtonProps = {
 } & (HTMLAttributes<HTMLButtonElement> | (HTMLAttributes<HTMLAnchorElement> & Pick<HTMLAnchorElement, "href" | "target">));
 
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-    ({ variant = "Contained", disabled = false, children, ...htmlAttributes }, ref) => {
+    ({ variant = "contained", disabled = false, children, ...htmlAttributes }, ref) => {
         return "href" in htmlAttributes ? (
             <StyledAnchor ref={ref as RefObject<HTMLAnchorElement>} $variant={variant} $disabled={disabled} {...htmlAttributes}>
                 {children}
@@ -24,7 +23,7 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
 );
 
 const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
-    Contained: css`
+    contained: css`
         ${({ theme }) => css`
             background-color: ${theme.palette.primary.main};
             color: ${theme.palette.primary.contrastText};
@@ -36,7 +35,7 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
             }
         `}
     `,
-    Outlined: css`
+    outlined: css`
         ${({ theme }) => css`
             background-color: transparent;
             color: ${theme.palette.primary.main};
@@ -48,7 +47,7 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
             }
         `}
     `,
-    Text: css`
+    text: css`
         ${({ theme }) => css`
             background-color: transparent;
             color: ${theme.palette.primary.main};
@@ -62,20 +61,20 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
 };
 
 const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
-    Contained: css`
+    contained: css`
         ${({ theme }) => css`
             background-color: ${theme.palette.grey["50"]};
             color: ${theme.palette.grey["400"]};
             border-color: ${theme.palette.grey["200"]};
         `}
     `,
-    Outlined: css`
+    outlined: css`
         ${({ theme }) => css`
             color: ${theme.palette.grey["300"]};
             border-color: ${theme.palette.grey["200"]};
         `}
     `,
-    Text: css`
+    text: css`
         color: ${({ theme }) => theme.palette.grey["300"]};
     `,
 };
