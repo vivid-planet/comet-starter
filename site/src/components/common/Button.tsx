@@ -80,7 +80,7 @@ const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> 
     `,
 };
 
-const commonButtonStyle = css`
+const commonButtonStyle = css<{ $variant: ButtonVariant }>`
     display: inline-flex;
     padding: ${({ theme }) => `${theme.spacing.S400} ${theme.spacing.S500}`};
     border-radius: 4px;
@@ -95,11 +95,12 @@ const commonButtonStyle = css`
     font-size: 16px;
     font-weight: 700;
     line-height: 110%;
+
+    ${({ $variant }) => buttonVariantStyle[$variant]};
 `;
 
 const StyledAnchor = styled.a<{ $variant: ButtonVariant; $disabled: boolean }>`
     ${commonButtonStyle};
-    ${({ $variant }) => buttonVariantStyle[$variant]};
 
     ${({ $variant, $disabled }) =>
         $disabled &&
@@ -111,7 +112,6 @@ const StyledAnchor = styled.a<{ $variant: ButtonVariant; $disabled: boolean }>`
 
 const StyledButton = styled.button<{ $variant: ButtonVariant }>`
     ${commonButtonStyle};
-    ${({ $variant }) => buttonVariantStyle[$variant]};
 
     &:disabled {
         pointer-events: none;
