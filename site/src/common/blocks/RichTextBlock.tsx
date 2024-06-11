@@ -28,55 +28,55 @@ export const defaultRichTextRenderers: Renderers = {
     blocks: {
         unstyled: (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} addMarginBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-standard": (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} addMarginBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-small": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="p200" key={keys[index]} addMarginBottom>
+                <Text variant="p200" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h600" key={keys[index]} addMarginBottom>
+                <Text variant="h600" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h550" key={keys[index]} addMarginBottom>
+                <Text variant="h550" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h500" key={keys[index]} addMarginBottom>
+                <Text variant="h500" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h450" key={keys[index]} addMarginBottom>
+                <Text variant="h450" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h400" key={keys[index]} addMarginBottom>
+                <Text variant="h400" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h350" key={keys[index]} addMarginBottom>
+                <Text variant="h350" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
@@ -116,25 +116,25 @@ export const defaultRichTextRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
-    disableLastMarginBottom?: boolean;
+    disableLastBottomSpacing?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers, disableLastMarginBottom }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, disableLastBottomSpacing }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $disableLastMarginBottom={disableLastMarginBottom}>{rendered}</Root>
+                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
 
-const Root = styled.div<{ $disableLastMarginBottom?: boolean }>`
-    ${({ theme, $disableLastMarginBottom }) =>
-        $disableLastMarginBottom &&
+const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
+    ${({ theme, $disableLastBottomSpacing }) =>
+        $disableLastBottomSpacing &&
         css`
             > *:last-child {
                 margin-bottom: 0;

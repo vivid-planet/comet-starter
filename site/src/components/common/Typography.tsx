@@ -194,7 +194,7 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
 export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
-    addMarginBottom?: boolean;
+    bottomSpacing?: boolean;
     children?: ReactNode;
 }
 
@@ -206,7 +206,7 @@ export const Typography = ({ component, variant = "p300", children, ...restProps
 
 interface TextProps {
     variant: TypographyVariant;
-    addMarginBottom?: boolean;
+    bottomSpacing?: boolean;
 }
 
 const Text = styled.div<TextProps>`
@@ -215,8 +215,8 @@ const Text = styled.div<TextProps>`
     ${({ variant }) => typographyVariantStyle[variant]};
     margin-top: 0;
 
-    ${({ theme, addMarginBottom }) =>
-        !addMarginBottom &&
+    ${({ theme, bottomSpacing }) =>
+        !bottomSpacing &&
         css`
             margin-bottom: 0;
 
