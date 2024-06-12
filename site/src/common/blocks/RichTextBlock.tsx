@@ -1,5 +1,7 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
+import { TextLink } from "@src/components/common/TextLink";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
 import styled from "styled-components";
@@ -108,7 +110,7 @@ export const defaultRichTextRenderers: Renderers = {
         // key is the entity key value from raw
         LINK: (children, data: LinkBlockData, { key }) => (
             <LinkBlock key={key} data={data}>
-                <a>{children}</a>
+                <TextLink disabled={!isValidLink(data)}>{children}</TextLink>
             </LinkBlock>
         ),
     },
