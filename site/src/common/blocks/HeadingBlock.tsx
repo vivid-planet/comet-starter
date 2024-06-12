@@ -1,10 +1,10 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
-import { GridRoot } from "@src/components/common/GridRoot";
+import { PageGridLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
 import { CSSProperties } from "react";
 import { Renderers } from "redraft";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { defaultRichTextRenderers, RichTextBlock } from "./RichTextBlock";
 
@@ -68,44 +68,32 @@ const textAlignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties[
     Center: "center",
 };
 
-interface HeadingBlockProps extends PropsWithData<HeadingBlockData> {
-    shouldApplyPageGridLayout?: boolean;
-}
-
-type OwnerState = {
-    textAlign: CSSProperties["textAlign"];
-    shouldApplyPageGridLayout?: boolean;
-};
+type HeadingBlockProps = PropsWithData<HeadingBlockData>;
 
 export const HeadingBlock = withPreview(
-    ({ data: { eyebrow, headline, htmlTag, textAlignment }, shouldApplyPageGridLayout }: HeadingBlockProps) => {
+    ({ data: { eyebrow, headline, htmlTag, textAlignment } }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
-        const ownerState: OwnerState = { textAlign: textAlignmentMap[textAlignment], shouldApplyPageGridLayout };
-        const content = (
-            <Root $ownerState={ownerState}>
+
+        return (
+            <Root $textAlign={textAlignmentMap[textAlignment]}>
                 <Typography variant={"h400"} component={"h5"} bottomSpacing>
                     <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                 </Typography>
                 <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
             </Root>
         );
-
-        // TODO: move GridRoot to PageContentBlock in comet v7
-        if (shouldApplyPageGridLayout) {
-            return <GridRoot>{content}</GridRoot>;
-        }
-
-        return content;
     },
     { label: "Heading" },
 );
 
-const Root = styled.div<{ $ownerState: OwnerState }>`
-    text-align: ${({ $ownerState }) => $ownerState.textAlign};
+export const PageContentHeadingBlock = (props: HeadingBlockProps) => (
+    <PageGridLayout>
+        <StandardPageGridColumn>
+            <HeadingBlock {...props} />
+        </StandardPageGridColumn>
+    </PageGridLayout>
+);
 
-    ${({ $ownerState }) =>
-        $ownerState.shouldApplyPageGridLayout &&
-        css`
-            grid-column: 3 / 23;
-        `}
+const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
+    text-align: ${({ $textAlign }) => $textAlign};
 `;

@@ -1,6 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { GridRoot } from "@src/components/common/GridRoot";
+import { PageGridLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
@@ -117,44 +117,33 @@ export const defaultRichTextRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
-    shouldApplyPageGridLayout?: boolean;
     disableLastBottomSpacing?: boolean;
-}
-
-interface OwnerState {
-    disableLastBottomSpacing?: boolean;
-    shouldApplyPageGridLayout?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers, shouldApplyPageGridLayout, disableLastBottomSpacing }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, disableLastBottomSpacing }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
-        const ownerState: OwnerState = { disableLastBottomSpacing, shouldApplyPageGridLayout };
-        const content = (
+
+        return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $ownerState={ownerState}>{rendered}</Root>
+                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
             </PreviewSkeleton>
         );
-
-        // TODO: move GridRoot to PageContentBlock in comet v7
-        if (shouldApplyPageGridLayout) {
-            return <GridRoot>{content}</GridRoot>;
-        }
-
-        return content;
     },
     { label: "Rich Text" },
 );
 
-const Root = styled.div<{ $ownerState: OwnerState }>`
-    ${({ $ownerState }) =>
-        $ownerState.shouldApplyPageGridLayout &&
-        css`
-            grid-column: 3 / 23;
-        `}
+export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
+    <PageGridLayout>
+        <StandardPageGridColumn>
+            <RichTextBlock {...props} />
+        </StandardPageGridColumn>
+    </PageGridLayout>
+);
 
-    ${({ theme, $ownerState }) =>
-        $ownerState.disableLastBottomSpacing &&
+const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
+    ${({ theme, $disableLastBottomSpacing }) =>
+        $disableLastBottomSpacing &&
         css`
             > *:last-child {
                 margin-bottom: 0;
