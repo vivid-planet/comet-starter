@@ -1,9 +1,9 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { ConditionalPageGridLayout } from "@src/components/common/ConditionalPageGridLayout";
+import { GridRoot } from "@src/components/common/GridRoot";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -117,23 +117,36 @@ export const defaultRichTextRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
-    addPageGridLayoutStyle?: boolean;
+    shouldApplyPageGridLayout?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers, addPageGridLayoutStyle = false }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, shouldApplyPageGridLayout = false }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
-        return (
+        const content = (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <ConditionalPageGridLayout pageGridLayout={addPageGridLayoutStyle} gridColumn={"3/23"}>
-                    {rendered}
-                </ConditionalPageGridLayout>
+                <Root $shouldApplyPageGridLayout={shouldApplyPageGridLayout}>{rendered}</Root>
             </PreviewSkeleton>
         );
+
+        // TODO: move GridRoot to PageContentBlock in comet v7
+        if (shouldApplyPageGridLayout) {
+            return <GridRoot>{content}</GridRoot>;
+        }
+
+        return content;
     },
     { label: "Rich Text" },
 );
+
+const Root = styled.div<{ $shouldApplyPageGridLayout: boolean }>`
+    ${({ $shouldApplyPageGridLayout }) =>
+        $shouldApplyPageGridLayout &&
+        css`
+            grid-column: 3 / 23;
+        `}
+`;
 
 const Text = styled(Typography)`
     white-space: pre-line;

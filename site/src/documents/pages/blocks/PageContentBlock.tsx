@@ -14,8 +14,8 @@ import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
-    richtext: (props) => <RichTextBlock data={props} addPageGridLayoutStyle />,
-    heading: (props) => <HeadingBlock data={props} addPageGridLayoutStyle />,
+    richtext: (props) => <RichTextBlock data={props} shouldApplyPageGridLayout />,
+    heading: (props) => <HeadingBlock data={props} shouldApplyPageGridLayout />,
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,

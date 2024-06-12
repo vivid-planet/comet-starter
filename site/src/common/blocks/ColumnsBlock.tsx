@@ -1,7 +1,7 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { ColumnsBlockData } from "@src/blocks.generated";
 import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
-import { ConditionalPageGridLayout } from "@src/components/common/ConditionalPageGridLayout";
+import { GridRoot } from "@src/components/common/GridRoot";
 import styled, { css } from "styled-components";
 
 const column1Grid = {
@@ -22,7 +22,7 @@ const column2Grid = {
 export const ColumnsBlock = withPreview(
     ({ data: { columns, layout } }: PropsWithData<ColumnsBlockData>) => {
         return (
-            <ConditionalPageGridLayout pageGridLayout>
+            <GridRoot>
                 {columns.map((column, index) => {
                     const gridColumn = index === 0 ? column1Grid[layout] : column2Grid[layout];
                     return (
@@ -31,7 +31,7 @@ export const ColumnsBlock = withPreview(
                         </Column>
                     );
                 })}
-            </ConditionalPageGridLayout>
+            </GridRoot>
         );
     },
     { label: "Columns" },
