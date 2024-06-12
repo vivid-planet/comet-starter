@@ -206,9 +206,11 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading"
+                                "heading": "Heading",
+                                "callToActionList": "CallToActionList"
                             },
                             "nullable": false
                         }
@@ -242,9 +244,11 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading"
+                                "heading": "Heading",
+                                "callToActionList": "CallToActionList"
                             },
                             "nullable": false
                         }

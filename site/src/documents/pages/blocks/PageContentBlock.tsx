@@ -21,7 +21,7 @@ const supportedBlocks: SupportedBlocks = {
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
-    callToActionList: (props) => <CallToActionListBlock data={props} />,
+    callToActionList: (props) => <CallToActionListBlock data={props} shouldApplyPageGridLayout />,
 };
 
 export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
