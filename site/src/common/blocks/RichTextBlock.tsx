@@ -4,7 +4,7 @@ import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { TextLink } from "@src/components/common/TextLink";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -30,55 +30,55 @@ export const defaultRichTextRenderers: Renderers = {
     blocks: {
         unstyled: (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} gutterBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-standard": (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} gutterBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-small": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="p200" key={keys[index]} gutterBottom>
+                <Text variant="p200" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h600" key={keys[index]} gutterBottom>
+                <Text variant="h600" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h550" key={keys[index]} gutterBottom>
+                <Text variant="h550" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h500" key={keys[index]} gutterBottom>
+                <Text variant="h500" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h450" key={keys[index]} gutterBottom>
+                <Text variant="h450" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h400" key={keys[index]} gutterBottom>
+                <Text variant="h400" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h350" key={keys[index]} gutterBottom>
+                <Text variant="h350" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
@@ -118,20 +118,35 @@ export const defaultRichTextRenderers: Renderers = {
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
+    disableLastBottomSpacing?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, disableLastBottomSpacing }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                {rendered}
+                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
             </PreviewSkeleton>
         );
     },
     { label: "Rich Text" },
 );
+
+const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
+    ${({ theme, $disableLastBottomSpacing }) =>
+        $disableLastBottomSpacing &&
+        css`
+            > *:last-child {
+                margin-bottom: 0;
+
+                ${theme.breakpoints.xs.mediaQuery} {
+                    margin-bottom: 0;
+                }
+            }
+        `};
+`;
 
 const Text = styled(Typography)`
     white-space: pre-line;
