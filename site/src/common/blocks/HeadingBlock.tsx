@@ -17,37 +17,37 @@ const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers =
     blocks: {
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h600"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h600"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h550"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h550"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h500"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h500"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h450"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h450"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h400"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h400"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h350"} component={htmlTag} key={keys[index]} gutterBottom>
+                <Typography variant={"h350"} component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
@@ -74,16 +74,16 @@ interface HeadingBlockProps extends PropsWithData<HeadingBlockData> {
 
 type OwnerState = {
     textAlign: CSSProperties["textAlign"];
-    shouldApplyPageGridLayout: boolean;
+    shouldApplyPageGridLayout?: boolean;
 };
 
 export const HeadingBlock = withPreview(
-    ({ data: { eyebrow, headline, htmlTag, textAlignment }, shouldApplyPageGridLayout = false }: HeadingBlockProps) => {
+    ({ data: { eyebrow, headline, htmlTag, textAlignment }, shouldApplyPageGridLayout }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
         const ownerState: OwnerState = { textAlign: textAlignmentMap[textAlignment], shouldApplyPageGridLayout };
         const content = (
             <Root $ownerState={ownerState}>
-                <Typography variant={"h400"} component={"h5"} gutterBottom>
+                <Typography variant={"h400"} component={"h5"} bottomSpacing>
                     <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                 </Typography>
                 <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />

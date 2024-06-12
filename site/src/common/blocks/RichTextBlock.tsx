@@ -29,55 +29,55 @@ export const defaultRichTextRenderers: Renderers = {
     blocks: {
         unstyled: (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} gutterBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-standard": (children, { keys }) =>
             children.map((child, index) => (
-                <Text key={keys[index]} gutterBottom>
+                <Text key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "paragraph-small": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="p200" key={keys[index]} gutterBottom>
+                <Text variant="p200" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h600" key={keys[index]} gutterBottom>
+                <Text variant="h600" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h550" key={keys[index]} gutterBottom>
+                <Text variant="h550" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h500" key={keys[index]} gutterBottom>
+                <Text variant="h500" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h450" key={keys[index]} gutterBottom>
+                <Text variant="h450" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h400" key={keys[index]} gutterBottom>
+                <Text variant="h400" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Text variant="h350" key={keys[index]} gutterBottom>
+                <Text variant="h350" key={keys[index]} bottomSpacing>
                     {child}
                 </Text>
             )),
@@ -118,15 +118,21 @@ export const defaultRichTextRenderers: Renderers = {
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
     shouldApplyPageGridLayout?: boolean;
+    disableLastBottomSpacing?: boolean;
+}
+
+interface OwnerState {
+    disableLastBottomSpacing?: boolean;
+    shouldApplyPageGridLayout?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers = defaultRichTextRenderers, shouldApplyPageGridLayout = false }: RichTextBlockProps) => {
+    ({ data, renderers = defaultRichTextRenderers, shouldApplyPageGridLayout, disableLastBottomSpacing }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
-
+        const ownerState: OwnerState = { disableLastBottomSpacing, shouldApplyPageGridLayout };
         const content = (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $shouldApplyPageGridLayout={shouldApplyPageGridLayout}>{rendered}</Root>
+                <Root $ownerState={ownerState}>{rendered}</Root>
             </PreviewSkeleton>
         );
 
@@ -140,12 +146,24 @@ export const RichTextBlock = withPreview(
     { label: "Rich Text" },
 );
 
-const Root = styled.div<{ $shouldApplyPageGridLayout: boolean }>`
-    ${({ $shouldApplyPageGridLayout }) =>
-        $shouldApplyPageGridLayout &&
+const Root = styled.div<{ $ownerState: OwnerState }>`
+    ${({ $ownerState }) =>
+        $ownerState.shouldApplyPageGridLayout &&
         css`
             grid-column: 3 / 23;
         `}
+
+    ${({ theme, $ownerState }) =>
+        $ownerState.disableLastBottomSpacing &&
+        css`
+            > *:last-child {
+                margin-bottom: 0;
+
+                ${theme.breakpoints.xs.mediaQuery} {
+                    margin-bottom: 0;
+                }
+            }
+        `};
 `;
 
 const Text = styled(Typography)`
