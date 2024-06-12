@@ -1,10 +1,9 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-type TextLinkProps = {
+interface TextLinkProps extends PropsWithChildren<HTMLAttributes<HTMLAnchorElement>> {
     disabled?: boolean;
-    children?: ReactNode;
-} & HTMLAttributes<HTMLAnchorElement>;
+}
 
 export const TextLink = ({ disabled = false, children, ...props }: TextLinkProps) => (
     <StyledAnchor $disabled={disabled} {...props}>
