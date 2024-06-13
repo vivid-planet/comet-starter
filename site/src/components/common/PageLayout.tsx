@@ -23,7 +23,3 @@ const Root = styled.div<{ $grid?: boolean }>`
             grid-template-columns: repeat(${gridTotalColumns}, 1fr);
         `}
 `;
-
-export const StandardPageGridColumn = styled.div`
-    grid-column: 3 / 23;
-`;

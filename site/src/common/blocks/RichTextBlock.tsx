@@ -1,6 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { PageLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
+import { PageLayout } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
@@ -135,9 +135,9 @@ export const RichTextBlock = withPreview(
 
 export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     <PageLayout grid>
-        <StandardPageGridColumn>
+        <GridColumn>
             <RichTextBlock {...props} />
-        </StandardPageGridColumn>
+        </GridColumn>
     </PageLayout>
 );
 
@@ -167,4 +167,8 @@ const Text = styled(Typography)`
 
 const OrderedListItem = styled(Text)<{ $depth: number }>`
     list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
+`;
+
+const GridColumn = styled.div`
+    grid-column: 3 / 23;
 `;

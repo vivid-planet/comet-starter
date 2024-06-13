@@ -2,7 +2,7 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
-import { PageLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
+import { PageLayout } from "@src/components/common/PageLayout";
 import styled from "styled-components";
 
 type CallToActionListBlockProps = PropsWithData<CallToActionListBlockData>;
@@ -18,9 +18,9 @@ export const CallToActionListBlock = withPreview(
 
 export const PageContentCallToActionListBlock = (props: CallToActionListBlockProps) => (
     <PageLayout grid>
-        <StandardPageGridColumn>
+        <GridColumn>
             <CallToActionListBlock {...props} />
-        </StandardPageGridColumn>
+        </GridColumn>
     </PageLayout>
 );
 
@@ -33,4 +33,8 @@ const Root = styled.div`
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         gap: ${({ theme }) => theme.spacing.S400};
     }
+`;
+
+const GridColumn = styled.div`
+    grid-column: 3 / 23;
 `;
