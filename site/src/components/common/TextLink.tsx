@@ -6,12 +6,12 @@ interface TextLinkProps extends PropsWithChildren<HTMLAttributes<HTMLAnchorEleme
 }
 
 export const TextLink = ({ disabled = false, children, ...props }: TextLinkProps) => (
-    <StyledAnchor $disabled={disabled} {...props}>
+    <Root as={disabled ? "span" : "a"} $disabled={disabled} {...props}>
         {children}
-    </StyledAnchor>
+    </Root>
 );
 
-const StyledAnchor = styled.a<{ $disabled: boolean }>`
+const Root = styled.a<{ $disabled: boolean }>`
     text-decoration: none;
 
     ${({ $disabled }) =>
