@@ -59,7 +59,7 @@ export function App() {
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
                                 const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
-                                if (!siteConfig) throw new Error(`siteConfig not found for country ${scope.domain}`);
+                                if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
