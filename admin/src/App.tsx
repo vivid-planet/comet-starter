@@ -32,7 +32,7 @@ import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { ConfigProvider, ContentScope, createConfig, SitesConfig } from "./config";
+import { ConfigProvider, ContentScope, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -54,7 +54,7 @@ export function App() {
         <ConfigProvider config={config}>
             <ApolloProvider client={apolloClient}>
                 <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                    <SitesConfigProvider<SitesConfig>
+                    <SitesConfigProvider<typeof config.sitesConfig>
                         value={{
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
