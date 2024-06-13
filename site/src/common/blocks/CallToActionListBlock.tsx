@@ -2,7 +2,7 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
-import { PageGridLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
+import { PageLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
 import styled from "styled-components";
 
 type CallToActionListBlockProps = PropsWithData<CallToActionListBlockData>;
@@ -17,11 +17,11 @@ export const CallToActionListBlock = withPreview(
 );
 
 export const PageContentCallToActionListBlock = (props: CallToActionListBlockProps) => (
-    <PageGridLayout>
+    <PageLayout grid>
         <StandardPageGridColumn>
             <CallToActionListBlock {...props} />
         </StandardPageGridColumn>
-    </PageGridLayout>
+    </PageLayout>
 );
 
 const Root = styled.div`

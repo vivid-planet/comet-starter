@@ -1,6 +1,6 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
-import { PageGridLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
+import { PageLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
 import { CSSProperties } from "react";
 import { Renderers } from "redraft";
@@ -87,11 +87,11 @@ export const HeadingBlock = withPreview(
 );
 
 export const PageContentHeadingBlock = (props: HeadingBlockProps) => (
-    <PageGridLayout>
+    <PageLayout grid>
         <StandardPageGridColumn>
             <HeadingBlock {...props} />
         </StandardPageGridColumn>
-    </PageGridLayout>
+    </PageLayout>
 );
 
 const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`

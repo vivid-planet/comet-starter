@@ -1,6 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { PageGridLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
+import { PageLayout, StandardPageGridColumn } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
@@ -134,11 +134,11 @@ export const RichTextBlock = withPreview(
 );
 
 export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
-    <PageGridLayout>
+    <PageLayout grid>
         <StandardPageGridColumn>
             <RichTextBlock {...props} />
         </StandardPageGridColumn>
-    </PageGridLayout>
+    </PageLayout>
 );
 
 const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
