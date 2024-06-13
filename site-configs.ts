@@ -16,12 +16,6 @@ export type Config = Omit<SiteConfig, "domains"> & {
 const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     const path = `${__dirname}/site-configs`;
 
-    // Fallback
-    if (!fs.existsSync(path)) {
-        const localSiteConfigsImport = await import("./site-configs.local");
-        return localSiteConfigsImport.default;
-    }
-
     const files = fs.readdirSync(path).filter((file) => !file.startsWith("_"));
     const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: Config }[];
     return imports.map((imprt, index) => {
