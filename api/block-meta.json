@@ -557,6 +557,182 @@
         ]
     },
     {
+        "name": "Media",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "MediaContent",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "MediaContent",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "MediaContent",
+        "fields": [
+            {
+                "name": "attachedBlocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "image": "MediaDamImage",
+                                "damVideo": "MediaDamVideo",
+                                "youTubeVideo": "YouTubeVideo"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            },
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
+            },
+            {
+                "name": "block",
+                "kind": "NestedObject",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "image": "MediaDamImage",
+                                "damVideo": "MediaDamVideo",
+                                "youTubeVideo": "YouTubeVideo"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
+            }
+        ]
+    },
+    {
+        "name": "MediaDamImage",
+        "fields": [
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "1x1",
+                    "2x3",
+                    "3x4"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "1x1",
+                    "2x3",
+                    "3x4"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "MediaDamVideo",
+        "fields": [
+            {
+                "name": "video",
+                "kind": "Block",
+                "block": "DamVideo",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "1x1",
+                    "16x9",
+                    "21x9",
+                    "3x2",
+                    "4x3",
+                    "4x5",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "video",
+                "kind": "Block",
+                "block": "DamVideo",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "1x1",
+                    "16x9",
+                    "21x9",
+                    "3x2",
+                    "4x3",
+                    "4x5",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "OptionalPixelImage",
         "fields": [
             {
@@ -620,7 +796,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "Media"
                             },
                             "nullable": false
                         }
@@ -662,7 +839,8 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "Media"
                             },
                             "nullable": false
                         }
