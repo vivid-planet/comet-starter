@@ -38,7 +38,7 @@ export const ColumnsBlock = withPreview(
 );
 
 const Column = styled.div<{ $column: string }>`
-    grid-column: 3 / 23;
+    grid-column: 3 / -3;
 
     ${({ theme, $column }) =>
         $column &&

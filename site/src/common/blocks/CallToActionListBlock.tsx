@@ -18,9 +18,9 @@ export const CallToActionListBlock = withPreview(
 
 export const PageContentCallToActionListBlock = (props: CallToActionListBlockProps) => (
     <PageLayout grid>
-        <GridColumn>
+        <PageLayoutContent>
             <CallToActionListBlock {...props} />
-        </GridColumn>
+        </PageLayoutContent>
     </PageLayout>
 );
 
@@ -35,6 +35,6 @@ const Root = styled.div`
     }
 `;
 
-const GridColumn = styled.div`
-    grid-column: 3 / 23;
+const PageLayoutContent = styled.div`
+    grid-column: 3 / -3;
 `;

@@ -88,9 +88,9 @@ export const HeadingBlock = withPreview(
 
 export const PageContentHeadingBlock = (props: HeadingBlockProps) => (
     <PageLayout grid>
-        <GridColumn>
+        <PageLayoutContent>
             <HeadingBlock {...props} />
-        </GridColumn>
+        </PageLayoutContent>
     </PageLayout>
 );
 
@@ -98,6 +98,6 @@ const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
     text-align: ${({ $textAlign }) => $textAlign};
 `;
 
-const GridColumn = styled.div`
-    grid-column: 3 / 23;
+const PageLayoutContent = styled.div`
+    grid-column: 3 / -3;
 `;
