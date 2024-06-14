@@ -54,7 +54,7 @@ export function App() {
         <ConfigProvider config={config}>
             <ApolloProvider client={apolloClient}>
                 <BuildInformationProvider value={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}>
-                    <SitesConfigProvider<typeof config.sitesConfig>
+                    <SitesConfigProvider
                         value={{
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
