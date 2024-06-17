@@ -107,16 +107,14 @@ export const defaultRichTextRenderers: Renderers = {
      */
     entities: {
         // key is the entity key value from raw
-        LINK: (children, data: LinkBlockData, { key }) => {
-            const isValid = isValidLink(data);
-            return (
+        LINK: (children, data: LinkBlockData, { key }) =>
+            isValidLink(data) ? (
                 <LinkBlock key={key} data={data}>
-                    <InlineLink as={isValid ? "a" : "span"} $isValid={isValid}>
-                        {children}
-                    </InlineLink>
+                    <InlineLink>{children}</InlineLink>
                 </LinkBlock>
-            );
-        },
+            ) : (
+                <span>{children}</span>
+            ),
     },
 };
 
@@ -166,15 +164,11 @@ const OrderedListItem = styled(Text)<{ $depth: number }>`
     list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
 `;
 
-const InlineLink = styled.a<{ $isValid: boolean }>`
-    ${({ $isValid }) =>
-        $isValid &&
-        css`
-            color: ${({ theme }) => theme.palette.primary.main};
-            transition: color 0.3s ease-in-out;
+const InlineLink = styled.a`
+    color: ${({ theme }) => theme.palette.primary.main};
+    transition: color 0.3s ease-in-out;
 
-            &:hover {
-                color: ${({ theme }) => theme.palette.primary.dark};
-            }
-        `}
+    &:hover {
+        color: ${({ theme }) => theme.palette.primary.dark};
+    }
 `;
