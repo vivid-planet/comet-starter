@@ -1,5 +1,5 @@
-import { Field, FinalFormInput, FinalFormSwitch } from "@comet/admin";
-import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
+import { Field, FinalFormSwitch } from "@comet/admin";
+import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeBlockTextField, createCompositeSetting } from "@comet/blocks-admin";
 import { AccordionItemBlockData } from "@src/blocks.generated";
 import { AccordionContentBlock } from "@src/common/blocks/AccordionContentBlock";
 import { FormattedMessage } from "react-intl";
@@ -10,18 +10,9 @@ export const AccordionItemBlock = createCompositeBlock(
         displayName: <FormattedMessage id="accordionBlock.displayName" defaultMessage="Accordion Item" />,
         blocks: {
             title: {
-                block: createCompositeSetting<AccordionItemBlockData["title"]>({
-                    defaultValue: "",
-                    AdminComponent: ({ state, updateState }) => {
-                        return (
-                            <BlocksFinalForm<{ title: typeof state }> onSubmit={({ title }) => updateState(title)} initialValues={{ title: state }}>
-                                <Field name="title" type="text" component={FinalFormInput} fullWidth />
-                            </BlocksFinalForm>
-                        );
-                    },
+                block: createCompositeBlockTextField({
+                    fieldProps: { fullWidth: true, label: <FormattedMessage id="accordionBlock.accordionItem.title" defaultMessage="Title" /> },
                 }),
-                title: <FormattedMessage id="accordionBlock.accordionItem.title" defaultMessage="Title" />,
-                hiddenInSubroute: true,
             },
             content: {
                 block: AccordionContentBlock,
