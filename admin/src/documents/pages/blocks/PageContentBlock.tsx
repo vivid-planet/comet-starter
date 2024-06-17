@@ -4,6 +4,7 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StageBlock } from "@src/common/blocks/StageBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 
 export const PageContentBlock = createBlocksBlock({
@@ -17,6 +18,7 @@ export const PageContentBlock = createBlocksBlock({
         textImage: TextImageBlock,
         damVideo: DamVideoBlock,
         youTubeVideo: YouTubeVideoBlock,
+        stage: StageBlock,
         callToActionList: CallToActionListBlock,
     },
 });
