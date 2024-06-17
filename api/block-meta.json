@@ -594,7 +594,7 @@
                             "blocks": {
                                 "image": "MediaDamImage",
                                 "damVideo": "MediaDamVideo",
-                                "youTubeVideo": "YouTubeVideo"
+                                "youTubeVideo": "MediaYoutubeVideo"
                             },
                             "nullable": false
                         }
@@ -623,7 +623,7 @@
                             "blocks": {
                                 "image": "MediaDamImage",
                                 "damVideo": "MediaDamVideo",
-                                "youTubeVideo": "YouTubeVideo"
+                                "youTubeVideo": "MediaYoutubeVideo"
                             },
                             "nullable": false
                         }
@@ -707,6 +707,12 @@
                     "9x16"
                 ],
                 "nullable": false
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
             }
         ],
         "inputFields": [
@@ -728,6 +734,43 @@
                     "4x5",
                     "9x16"
                 ],
+                "nullable": false
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "MediaYoutubeVideo",
+        "fields": [
+            {
+                "name": "video",
+                "kind": "Block",
+                "block": "YouTubeVideo",
+                "nullable": false
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "video",
+                "kind": "Block",
+                "block": "YouTubeVideo",
+                "nullable": false
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "DamImage",
                 "nullable": false
             }
         ]

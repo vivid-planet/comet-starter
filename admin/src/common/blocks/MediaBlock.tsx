@@ -1,10 +1,11 @@
-import { BlockCategory, BlockInterface, createCompositeBlock, createOneOfBlock, YouTubeVideoBlock } from "@comet/blocks-admin";
+import { BlockCategory, BlockInterface, createCompositeBlock, createOneOfBlock } from "@comet/blocks-admin";
 import { MediaDamImageBlock } from "@src/common/blocks/MediaDamImageBlock";
 import { MediaDamVideoBlock } from "@src/common/blocks/MediaDamVideoBlock";
+import { MediaYoutubeVideoBlock } from "@src/common/blocks/MediaYouTubeVideoBlock";
 import { FormattedMessage } from "react-intl";
 
 const MediaContentBlock: BlockInterface = createOneOfBlock({
-    supportedBlocks: { image: MediaDamImageBlock, damVideo: MediaDamVideoBlock, youTubeVideo: YouTubeVideoBlock },
+    supportedBlocks: { image: MediaDamImageBlock, damVideo: MediaDamVideoBlock, youTubeVideo: MediaYoutubeVideoBlock },
     name: "MediaContent",
     displayName: <FormattedMessage id="mediaContentBlock.displayName" defaultMessage="Media Content" />,
     allowEmpty: false,

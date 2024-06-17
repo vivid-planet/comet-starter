@@ -8,17 +8,17 @@ import {
     createOneOfBlock,
     ExtractBlockInput,
     inputToData,
-    YouTubeVideoBlock,
 } from "@comet/blocks-api";
+import { MediaDamImageBlock } from "@src/common/blocks/media-dam-image.block";
 import { MediaDamVideoBlock } from "@src/common/blocks/media-dam-video.block";
-import { MediaDamImageBlock } from "@src/common/blocks/media-image.block";
+import { MediaYoutubeVideoBlock } from "@src/common/blocks/media-youtube-video.block";
 
 export const MediaContentBlock = createOneOfBlock(
     {
         supportedBlocks: {
             image: MediaDamImageBlock,
             damVideo: MediaDamVideoBlock,
-            youTubeVideo: YouTubeVideoBlock,
+            youTubeVideo: MediaYoutubeVideoBlock,
         },
     },
     "MediaContent",
