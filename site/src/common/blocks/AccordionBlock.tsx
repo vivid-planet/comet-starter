@@ -1,15 +1,15 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
-import { AccordionListBlockData } from "@src/blocks.generated";
+import { AccordionBlockData } from "@src/blocks.generated";
 import { AccordionItemBlock } from "@src/common/blocks/AccordionItemBlock";
 import styled from "styled-components";
 
-export const AccordionListBlock = withPreview(
-    ({ data }: PropsWithData<AccordionListBlockData>) => (
+export const AccordionBlock = withPreview(
+    ({ data }: PropsWithData<AccordionBlockData>) => (
         <Root>
             <ListBlock data={data} block={(block) => <AccordionItemBlock data={block} />} />
         </Root>
     ),
-    { label: "Accordion List" },
+    { label: "Accordion" },
 );
 
 const Root = styled.div`

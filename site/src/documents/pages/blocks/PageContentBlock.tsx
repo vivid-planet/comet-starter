@@ -1,7 +1,7 @@
 "use client";
 import { BlocksBlock, PropsWithData, SupportedBlocks, YouTubeVideoBlock } from "@comet/cms-site";
 import { PageContentBlockData } from "@src/blocks.generated";
-import { AccordionListBlock } from "@src/common/blocks/AccordionListBlock";
+import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
@@ -12,7 +12,7 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 
 const supportedBlocks: SupportedBlocks = {
-    accordionList: (props) => <AccordionListBlock data={props} />,
+    accordion: (props) => <AccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} />,

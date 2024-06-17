@@ -6,8 +6,8 @@ import { FormattedMessage } from "react-intl";
 
 export const AccordionItemBlock = createCompositeBlock(
     {
-        name: "Accordion",
-        displayName: <FormattedMessage id="accordionBlock.displayName" defaultMessage="Accordion" />,
+        name: "AccordionItem",
+        displayName: <FormattedMessage id="accordionBlock.displayName" defaultMessage="Accordion Item" />,
         blocks: {
             title: {
                 block: createCompositeSetting<AccordionItemBlockData["title"]>({
