@@ -21,7 +21,7 @@ export const AccordionItemBlock = withPreview(
                         <MinusIcon />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper>
+                <ContentWrapper aria-hidden={!isExpanded}>
                     <ContentWrapperInner $isExpanded={isExpanded}>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
