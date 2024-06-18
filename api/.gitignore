@@ -41,3 +41,5 @@ junit.xml
 
 # Uploads
 /uploads
+
+src/site-configs.d.ts

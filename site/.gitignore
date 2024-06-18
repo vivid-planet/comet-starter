@@ -46,6 +46,7 @@ block-meta.json
 src/**/*.generated.ts
 preBuild/**/*.generated.ts
 src/comet-config.json
+src/site-configs.d.ts
 
 public/sitemap.xml
 public/robots.txt

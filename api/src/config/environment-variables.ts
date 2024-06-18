@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { BlobStorageConfig } from "@comet/cms-api";
-import type { PrivateSiteConfig } from "@src/../../site-configs.types";
+import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
 import { IsArray, IsBase64, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 

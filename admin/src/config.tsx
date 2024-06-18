@@ -1,8 +1,8 @@
 import { createContext, PropsWithChildren, useContext } from "react";
 
-import { PublicSiteConfig } from "../../site-configs.types";
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
+import { PublicSiteConfig } from "./site-configs";
 
 export function createConfig() {
     const environmentVariables = {} as Record<(typeof environment)[number], string>;

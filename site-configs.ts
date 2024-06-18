@@ -1,5 +1,5 @@
 import fs from "fs";
-import { SiteConfig } from "./site-configs.types";
+import { SiteConfig } from "./site-configs.d";
 
 // Types for files in site-configs/
 type Environment = "local" | "dev" | "test" | "staging" | "prod";
