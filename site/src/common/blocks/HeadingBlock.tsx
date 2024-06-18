@@ -1,7 +1,7 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
-import { PageLayout } from "@src/components/common/PageLayout";
 import { Typography } from "@src/components/common/Typography";
+import { PageLayout } from "@src/layout/PageLayout";
 import { CSSProperties } from "react";
 import { Renderers } from "redraft";
 import styled from "styled-components";

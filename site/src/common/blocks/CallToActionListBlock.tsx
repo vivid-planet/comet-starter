@@ -2,7 +2,7 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
-import { PageLayout } from "@src/components/common/PageLayout";
+import { PageLayout } from "@src/layout/PageLayout";
 import styled from "styled-components";
 
 type CallToActionListBlockProps = PropsWithData<CallToActionListBlockData>;

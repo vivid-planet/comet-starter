@@ -1,7 +1,7 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { ColumnsBlockData } from "@src/blocks.generated";
 import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
-import { PageLayout } from "@src/components/common/PageLayout";
+import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
 const column1Grid = {
