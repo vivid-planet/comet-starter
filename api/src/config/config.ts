@@ -1,4 +1,3 @@
-import type { PrivateSiteConfig } from "@src/../../site-configs.types";
 import cometConfig from "@src/comet-config.json";
 import { plainToClass } from "class-transformer";
 import { validateSync } from "class-validator";
@@ -60,7 +59,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         cdn: {
             originCheckSecret: envVars.CDN_ORIGIN_CHECK_SECRET,
         },
-        siteConfigs: JSON.parse(envVars.PRIVATE_SITE_CONFIGS) as PrivateSiteConfig[],
+        siteConfigs: envVars.PRIVATE_SITE_CONFIGS,
     };
 }
 
