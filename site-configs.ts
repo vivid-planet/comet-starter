@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import { SiteConfig } from "./site-configs.d";
 
 // Types for files in site-configs/
@@ -16,7 +16,7 @@ export type Config = Omit<SiteConfig, "domains"> & {
 const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     const path = `${__dirname}/site-configs`;
 
-    const files = fs.readdirSync(path).filter((file) => !file.startsWith("_"));
+    const files = (await fs.readdir(path)).filter((file) => !file.startsWith("_"));
     const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: Config }[];
     return imports.map((imprt, index) => {
         const { domains, ...site } = imprt.default;
