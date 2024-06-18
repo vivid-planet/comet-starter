@@ -1,7 +1,7 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { Typography } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
-import { Typography } from "@src/components/common/Typography";
 import { PageLayout } from "@src/layout/PageLayout";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
