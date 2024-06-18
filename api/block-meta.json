@@ -150,7 +150,7 @@
             {
                 "name": "openByDefault",
                 "kind": "Boolean",
-                "nullable": true
+                "nullable": false
             }
         ],
         "inputFields": [
@@ -168,7 +168,7 @@
             {
                 "name": "openByDefault",
                 "kind": "Boolean",
-                "nullable": true
+                "nullable": false
             }
         ]
     },

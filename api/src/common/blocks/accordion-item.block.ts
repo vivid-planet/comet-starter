@@ -20,8 +20,8 @@ class AccordionItemBlockData extends BlockData {
     @ChildBlock(AccordionContentBlock)
     content: BlockDataInterface;
 
-    @BlockField({ nullable: true })
-    openByDefault?: boolean;
+    @BlockField()
+    openByDefault: boolean;
 }
 
 class AccordionItemBlockInput extends BlockInput {
@@ -33,10 +33,9 @@ class AccordionItemBlockInput extends BlockInput {
     @ChildBlockInput(AccordionContentBlock)
     content: ExtractBlockInput<typeof AccordionContentBlock>;
 
-    @IsUndefinable()
     @IsBoolean()
-    @BlockField({ nullable: true })
-    openByDefault?: boolean;
+    @BlockField()
+    openByDefault: boolean;
 
     transformToBlockData(): AccordionItemBlockData {
         return inputToData(AccordionItemBlockData, this);

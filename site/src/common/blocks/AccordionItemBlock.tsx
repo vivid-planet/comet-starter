@@ -13,7 +13,7 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData>;
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content, openByDefault } }: AccordionItemBlockProps) => {
         const intl = useIntl();
-        const [isExpanded, setIsExpanded] = React.useState<boolean>(!!openByDefault);
+        const [isExpanded, setIsExpanded] = React.useState<boolean>(openByDefault);
 
         const ariaLabelText = isExpanded
             ? intl.formatMessage({ id: "accordionBlock.ariaLabel.expanded", defaultMessage: "Collapse accordion item" })
