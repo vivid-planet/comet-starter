@@ -13,6 +13,7 @@ export const AccordionItemBlock = createCompositeBlock(
                 block: createCompositeBlockTextField({
                     fieldProps: { fullWidth: true, label: <FormattedMessage id="accordionBlock.accordionItem.title" defaultMessage="Title" /> },
                 }),
+                hiddenInSubroute: true,
             },
             content: {
                 block: AccordionContentBlock,
