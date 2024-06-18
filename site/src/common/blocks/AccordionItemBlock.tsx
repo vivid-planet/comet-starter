@@ -15,10 +15,13 @@ export const AccordionItemBlock = withPreview(
 
         return (
             <>
-                <TitleWrapper onClick={() => setIsExpanded(!isExpanded)}>
+                <TitleWrapper
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    aria-label={isExpanded ? "Collapse accordion item" : "Expand accordion item"}
+                >
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
-                        <AnimatedChevron href={"/icons/chevron-down.svg#chevron-down"} viewBox={"0 0 16 16"} $isExpanded={isExpanded} />
+                        <AnimatedChevron href={"/icons/chevron-down.svg#chevron-down"} $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
                 <ContentWrapper aria-hidden={!isExpanded}>
@@ -32,7 +35,11 @@ export const AccordionItemBlock = withPreview(
     { label: "AccordionItem" },
 );
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.button`
+    appearance: none;
+    border: none;
+    background-color: transparent;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,10 +56,6 @@ const IconWrapper = styled.div`
 `;
 
 const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
-    position: absolute;
-    background-color: yellow;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
