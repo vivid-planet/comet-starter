@@ -21,7 +21,7 @@ export function HiddenIfInvalidLink({ link, children }: HiddenIfInvalidLinkProps
     return children;
 }
 
-const isValidLink = (link: LinkBlockData) => {
+export const isValidLink = (link: LinkBlockData) => {
     return Boolean(
         link.block &&
             ((link.block.type === "internal" && (link.block.props as InternalLinkBlockData).targetPage) ||

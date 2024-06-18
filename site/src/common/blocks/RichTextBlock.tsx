@@ -1,5 +1,6 @@
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
+import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { Typography } from "@src/components/common/Typography";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
@@ -106,11 +107,14 @@ export const defaultRichTextRenderers: Renderers = {
      */
     entities: {
         // key is the entity key value from raw
-        LINK: (children, data: LinkBlockData, { key }) => (
-            <LinkBlock key={key} data={data}>
-                <a>{children}</a>
-            </LinkBlock>
-        ),
+        LINK: (children, data: LinkBlockData, { key }) =>
+            isValidLink(data) ? (
+                <LinkBlock key={key} data={data}>
+                    <InlineLink>{children}</InlineLink>
+                </LinkBlock>
+            ) : (
+                <span>{children}</span>
+            ),
     },
 };
 
@@ -158,4 +162,13 @@ const Text = styled(Typography)`
 
 const OrderedListItem = styled(Text)<{ $depth: number }>`
     list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
+`;
+
+const InlineLink = styled.a`
+    color: ${({ theme }) => theme.palette.primary.main};
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+        color: ${({ theme }) => theme.palette.primary.dark};
+    }
 `;
