@@ -4,6 +4,15 @@ import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
+const columnCountForLayout: Record<ColumnsBlockData["layout"], number> = {
+    "2-20-2": 1,
+    "4-16-4": 1,
+    "6-12-6": 1,
+    "9-9": 2,
+    "12-6": 2,
+    "6-12": 2,
+};
+
 const columnGrid = {
     0: {
         // column layout for one column
@@ -27,14 +36,11 @@ const columnGrid = {
 export const ColumnsBlock = withPreview(
     ({ data: { columns, layout } }: PropsWithData<ColumnsBlockData>) => (
         <PageLayout grid>
-            {columns.map(
-                (column, index) =>
-                    index < Object.keys(columnGrid).length && (
-                        <Column $column={columnGrid[index][layout]} key={index}>
-                            <ColumnsContentBlock data={column.props} />
-                        </Column>
-                    ),
-            )}
+            {columns.map((column, index) => (
+                <Column $column={columnGrid[index % columnCountForLayout[layout]][layout]} key={index}>
+                    <ColumnsContentBlock data={column.props} />
+                </Column>
+            ))}
         </PageLayout>
     ),
     { label: "Columns" },
