@@ -3,6 +3,7 @@ import { AccordionItemBlockData } from "@src/blocks.generated";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
+import { useIntl } from "react-intl";
 import styled, { css } from "styled-components";
 
 import { AccordionContentBlock } from "./AccordionContentBlock";
@@ -11,14 +12,16 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData>;
 
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content, openByDefault } }: AccordionItemBlockProps) => {
+        const intl = useIntl();
         const [isExpanded, setIsExpanded] = React.useState<boolean>(!!openByDefault);
+
+        const ariaLabelText = isExpanded
+            ? intl.formatMessage({ id: "accordionBlock.ariaLabel.expanded", defaultMessage: "Collapse accordion item" })
+            : intl.formatMessage({ id: "accordionBlock.ariaLabel.collapsed", defaultMessage: "Expand accordion item" });
 
         return (
             <>
-                <TitleWrapper
-                    onClick={() => setIsExpanded(!isExpanded)}
-                    aria-label={isExpanded ? "Collapse accordion item" : "Expand accordion item"}
-                >
+                <TitleWrapper onClick={() => setIsExpanded(!isExpanded)} aria-label={ariaLabelText}>
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
                         <AnimatedChevron href={"/icons/chevron-down.svg#chevron-down"} $isExpanded={isExpanded} />
