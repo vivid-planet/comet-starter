@@ -1,5 +1,6 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { AccordionItemBlockData } from "@src/blocks.generated";
+import { SvgUse } from "@src/common/helpers/SvgUse";
 import { Typography } from "@src/components/common/Typography";
 import * as React from "react";
 import styled, { css } from "styled-components";
@@ -17,8 +18,7 @@ export const AccordionItemBlock = withPreview(
                 <TitleWrapper onClick={() => setIsExpanded(!isExpanded)}>
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
-                        <PlusIcon $isExpanded={isExpanded} />
-                        <MinusIcon />
+                        <AnimatedChevron href={"/icons/chevron-down.svg#chevron-down"} viewBox={"0 0 16 16"} $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
                 <ContentWrapper aria-hidden={!isExpanded}>
@@ -41,25 +41,21 @@ const TitleWrapper = styled.div`
     padding: ${({ theme }) => theme.spacing.S300} 0;
 `;
 
-const IconWrapper = styled.span`
+const IconWrapper = styled.div`
     display: inline-block;
     width: 32px;
     height: 32px;
     position: relative;
 `;
 
-const MinusIcon = styled.span`
+const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16px;
-    height: 2px;
-    background-color: ${({ theme }) => theme.palette.text.primary};
-`;
-
-const PlusIcon = styled(MinusIcon)<{ $isExpanded: boolean }>`
-    transform: translate(-50%, -50%) rotate(${({ $isExpanded }) => (!$isExpanded ? "90deg" : "0deg")});
+    background-color: yellow;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
     transition: transform 0.4s ease;
 `;
 

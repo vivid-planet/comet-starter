@@ -1,10 +1,10 @@
-import * as React from "react";
+import { SVGProps } from "react";
 
-interface SvgUseProps extends React.SVGProps<SVGSVGElement> {
+interface SvgUseProps extends SVGProps<SVGSVGElement> {
     href: string;
 }
 
-export const SvgUse: React.FunctionComponent<SvgUseProps> = ({ href, ...props }) => {
+export const SvgUse = ({ href, ...props }: SvgUseProps) => {
     const assetUrl = createAssetUrl(href);
     return (
         <svg {...props}>
