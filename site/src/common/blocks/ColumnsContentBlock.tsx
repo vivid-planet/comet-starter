@@ -18,5 +18,5 @@ export const ColumnsContentBlock = withPreview(
     ({ data }: PropsWithData<ColumnsContentBlockData>) => {
         return <BlocksBlock data={data} supportedBlocks={supportedBlocks} />;
     },
-    { label: "Column" },
+    { label: "Columns" },
 );
