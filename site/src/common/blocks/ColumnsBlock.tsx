@@ -22,12 +22,6 @@ const Column = styled.div<{ $layout: string }>`
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         ${({ $layout }) =>
-            $layout === "3 / 23" &&
-            css`
-                grid-column: 3 / -3;
-            }
-        `};
-        ${({ $layout }) =>
             $layout === "4-16-4" &&
             css`
                 grid-column: 5 / 21;
