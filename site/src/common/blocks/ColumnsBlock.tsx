@@ -24,13 +24,13 @@ const Column = styled.div<{ $layout: string }>`
         ${({ $layout }) =>
             $layout === "4-16-4" &&
             css`
-                grid-column: 5 / 21;
+                grid-column: 5 / -5;
             }
         `};
         ${({ $layout }) =>
             $layout === "6-12-6" &&
             css`
-                grid-column: 7 / 19;
+                grid-column: 7 / -7;
             }
         `};
         ${({ $layout }) =>
