@@ -16,13 +16,14 @@ const GlobalStyle = createGlobalStyle`
         min-width: 0;
     }
 
-    /* Prevent font size adjustments after orientation changes in mobile devices*/
+    /* Prevent font size adjustments after orientation changes in mobile devices */
     html {
-        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
 
     body {
         margin: 0;
+
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -77,7 +78,8 @@ const GlobalStyle = createGlobalStyle`
     }
 
     /* Create a root stacking context: https://www.joshwcomeau.com/css/custom-css-reset/#eight-root-stacking-context-9 */
-    #root,
+    /* stylelint-disable selector-id-pattern */
+    #root, 
     #__next {
         isolation: isolate;
     }
