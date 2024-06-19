@@ -20,17 +20,30 @@ export const ColumnsBlock = withPreview(
 const Column = styled.div<{ $layout: string }>`
     grid-column: 3 / -3;
 
+    ${({ $layout, theme }) =>
+        $layout === "9-6-9" &&
+        css`
+            grid-column: 5 / -5;
+
+            ${theme.breakpoints.xs.mediaQuery} {
+                grid-column: 7 / -7;
+            }
+            ${theme.breakpoints.sm.mediaQuery} {
+                grid-column: 8 / -8;
+            }
+            ${theme.breakpoints.md.mediaQuery} {
+                grid-column: 9 / -9;
+            }
+            ${theme.breakpoints.lg.mediaQuery} {
+                grid-column: 10 / -10;
+            }
+        `};
+
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         ${({ $layout }) =>
             $layout === "4-16-4" &&
             css`
                 grid-column: 5 / -5;
-            }
-        `};
-        ${({ $layout }) =>
-            $layout === "6-12-6" &&
-            css`
-                grid-column: 7 / -7;
             }
         `};
         ${({ $layout }) =>
