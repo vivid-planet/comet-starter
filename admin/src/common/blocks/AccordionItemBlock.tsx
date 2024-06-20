@@ -1,4 +1,4 @@
-import { Field, FinalFormSwitch } from "@comet/admin";
+import { SwitchField } from "@comet/admin";
 import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeBlockTextField, createCompositeSetting } from "@comet/blocks-admin";
 import { AccordionItemBlockData } from "@src/blocks.generated";
 import { AccordionContentBlock } from "@src/common/blocks/AccordionContentBlock";
@@ -28,11 +28,9 @@ export const AccordionItemBlock = createCompositeBlock(
                                 onSubmit={({ openByDefault }) => updateState(openByDefault)}
                                 initialValues={{ openByDefault: state }}
                             >
-                                <Field
+                                <SwitchField
                                     name="openByDefault"
                                     label={<FormattedMessage id="accordionBlock.accordionItem.openByDefault" defaultMessage="Open by default" />}
-                                    type="checkbox"
-                                    component={FinalFormSwitch}
                                 />
                             </BlocksFinalForm>
                         );
