@@ -1,25 +1,26 @@
 import { PixelImageBlock, PreviewSkeleton, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
-import { ImageProps } from "next/image";
+import { ImageProps as NextImageProps } from "next/image";
 import * as React from "react";
 
 import { NextImageBottomPaddingFix } from "../NextImageBottomPaddingFix";
 
-type Props = PropsWithData<DamImageBlockData> &
-    Omit<ImageProps, "src" | "width" | "height"> & {
-        aspectRatio?: string;
-    } & (
-        | { layout?: "fixed" | "intrinsic" }
-        // The sizes prop must be specified for images with layout "fill" or "responsive", as recommended in the next/image documentation
-        // https://nextjs.org/docs/api-reference/next/image#sizes
-        | {
-              layout?: "fill" | "responsive";
-              sizes: string;
-          }
-    );
+interface DynamicLayout {
+    variant: "fill" | "responsive";
+    sizes: string;
+}
+
+interface StaticLayout {
+    variant: "fixed" | "intrinsic";
+}
+
+export type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "layout" | "alt"> & {
+    aspectRatio?: string | "inherit";
+    layout?: DynamicLayout | StaticLayout;
+};
 
 export const DamImageBlock = withPreview(
-    ({ data: { block }, aspectRatio = "16x9", layout = "intrinsic", ...imageProps }: Props) => {
+    ({ data: { block }, aspectRatio = "16x9", layout, ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
         if (!block) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
@@ -27,7 +28,12 @@ export const DamImageBlock = withPreview(
         if (block.type === "pixelImage") {
             return (
                 <NextImageBottomPaddingFix>
-                    <PixelImageBlock data={block.props as PixelImageBlockData} layout={layout} aspectRatio={aspectRatio} {...imageProps} />
+                    <PixelImageBlock
+                        data={block.props as PixelImageBlockData}
+                        layout={layout?.variant ?? "intrinsic"}
+                        aspectRatio={aspectRatio}
+                        {...imageProps}
+                    />
                 </NextImageBottomPaddingFix>
             );
         } else if (block.type === "svgImage") {
@@ -42,3 +48,5 @@ export const DamImageBlock = withPreview(
     },
     { label: "Image" },
 );
+
+// TODO: createSizes

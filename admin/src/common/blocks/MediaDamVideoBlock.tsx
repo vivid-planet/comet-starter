@@ -6,6 +6,7 @@ import { MediaDamVideoBlockData } from "@src/blocks.generated";
 import { FormattedMessage } from "react-intl";
 
 const aspectRatioOptions = [
+    { label: "auto", value: "auto" },
     { label: "1:1", value: "1x1" },
     { label: "3:2", value: "3x2" },
     { label: "4:3", value: "4x3" },
@@ -24,7 +25,7 @@ export const MediaDamVideoBlock = createCompositeBlock({
         },
         aspectRatio: {
             block: createCompositeSetting<MediaDamVideoBlockData["aspectRatio"]>({
-                defaultValue: "16x9",
+                defaultValue: "auto",
                 AdminComponent: ({ state, updateState }) => {
                     return (
                         <BlocksFinalForm<Pick<MediaDamVideoBlockData, "aspectRatio">>

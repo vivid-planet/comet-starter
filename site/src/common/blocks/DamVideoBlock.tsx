@@ -1,99 +1,63 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { DamVideoBlockData } from "@src/blocks.generated";
+import { DamImageBlockData, DamVideoBlockData } from "@src/blocks.generated";
+import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+interface DamVideoProps {
+    aspectRatio?: string | "inherit";
+    previewImage?: DamImageBlockData;
+}
 
 export const DamVideoBlock = withPreview(
-    ({ data: { damFile, autoplay, showControls } }: PropsWithData<DamVideoBlockData>) => {
+    ({ data: { damFile, autoplay, showControls }, aspectRatio = "auto", previewImage }: PropsWithData<DamVideoBlockData> & DamVideoProps) => {
         if (damFile === undefined) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
 
-        const [showPreview, setShowPreview] = React.useState(true);
-
-        const previewImage = (
-            <PreviewImage
-                onClick={() => setShowPreview(false)}
-                src={"https://t4.ftcdn.net/jpg/01/30/32/55/360_F_130325555_gIxLj6dj2NxDILdJEMHMmBsPL4tHCEej.jpg"}
-            />
-        );
+        const [showPreviewImage, setShowPreviewImage] = React.useState(true);
 
         return (
-            <Wrapper>
-                4:3 Aspect Ratio
-                <VideoContainer>
-                    {showPreview && previewImage}
-                    <Video4x3 autoPlay={autoplay} controls={showControls} playsInline muted={autoplay}>
+            <Root>
+                {previewImage && showPreviewImage && (
+                    <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
+                        <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined} />
+                    </PreviewImageWrapper>
+                )}
+                {(!showPreviewImage || !previewImage) && (
+                    <Video
+                        autoPlay={autoplay || (previewImage && !showPreviewImage)}
+                        controls={showControls}
+                        playsInline
+                        muted={autoplay}
+                        aspectRatio={aspectRatio}
+                    >
                         <source src={damFile.fileUrl} type={damFile.mimetype} />
-                    </Video4x3>
-                </VideoContainer>
-                <Spacer />
-                16:9 Aspect Ratio
-                <VideoContainer>
-                    {showPreview && previewImage}
-                    <Video16x9 autoPlay={autoplay} controls={showControls} playsInline muted={autoplay}>
-                        <source src={damFile.fileUrl} type={damFile.mimetype} />
-                    </Video16x9>
-                </VideoContainer>
-                <Spacer />
-                3:2 Aspect Ratio
-                <VideoContainer>
-                    {showPreview && previewImage}
-                    <Video3x2 autoPlay={autoplay} controls={showControls} playsInline muted={autoplay}>
-                        <source src={damFile.fileUrl} type={damFile.mimetype} />
-                    </Video3x2>
-                </VideoContainer>
-            </Wrapper>
+                    </Video>
+                )}
+            </Root>
         );
     },
     { label: "Video" },
 );
 
-const VideoContainer = styled.div`
+const Root = styled.div`
     position: relative;
 `;
 
-const PreviewImage = styled.img`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-    object-fit: cover;
+const PreviewImageWrapper = styled.div`
+    z-index: 1;
+    cursor: pointer;
 `;
 
-const Video4x3 = styled.video`
-    display: block;
+const Video = styled.video<{ aspectRatio?: string }>`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    aspect-ratio: 4 / 3;
-`;
 
-const Spacer = styled.div`
-    height: 50px;
-    width: 100%;
-`;
-
-const Video16x9 = styled.video`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
-`;
-
-const Video3x2 = styled.video`
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 3 / 2;
-`;
-
-const Wrapper = styled.div`
-    width: 80%;
-    margin: auto;
-    background-color: bisque;
+    ${({ aspectRatio }) =>
+        aspectRatio &&
+        css`
+            aspect-ratio: ${aspectRatio.replace("x", " / ")};
+        `}
 `;

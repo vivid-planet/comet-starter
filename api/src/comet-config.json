@@ -6,7 +6,7 @@
     "dam": {
         "additionalMimeTypes": [],
         "uploadsMaxFileSize": 500,
-        "allowedImageAspectRatios": ["16x9", "4x3", "3x2", "3x1", "2x1", "1x1", "1x2", "1x3", "2x3", "3x4", "9x16"]
+        "allowedImageAspectRatios": ["16x9", "4x3", "3x2", "3x1", "2x1", "1x1", "1x2", "1x3", "2x3", "3x4", "9x16", "21x9"]
     },
     "images": {
         "imageSizes": [16, 32, 48, 64, 96, 128, 256, 320, 384],

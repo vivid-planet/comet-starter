@@ -560,25 +560,6 @@
         "name": "Media",
         "fields": [
             {
-                "name": "media",
-                "kind": "Block",
-                "block": "MediaContent",
-                "nullable": false
-            }
-        ],
-        "inputFields": [
-            {
-                "name": "media",
-                "kind": "Block",
-                "block": "MediaContent",
-                "nullable": false
-            }
-        ]
-    },
-    {
-        "name": "MediaContent",
-        "fields": [
-            {
                 "name": "attachedBlocks",
                 "kind": "NestedObjectList",
                 "object": {
@@ -698,6 +679,7 @@
                 "name": "aspectRatio",
                 "kind": "Enum",
                 "enum": [
+                    "auto",
                     "1x1",
                     "16x9",
                     "21x9",
@@ -726,6 +708,7 @@
                 "name": "aspectRatio",
                 "kind": "Enum",
                 "enum": [
+                    "auto",
                     "1x1",
                     "16x9",
                     "21x9",

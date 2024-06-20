@@ -13,6 +13,7 @@ import { DamImageBlock, DamVideoBlock } from "@comet/cms-api";
 import { IsEnum, ValidateNested } from "class-validator";
 
 export enum MediaDamVideoAspectRatio {
+    "auto" = "auto",
     "1x1" = "1x1",
     "16x9" = "16x9",
     "21x9" = "21x9",
