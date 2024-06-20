@@ -15,22 +15,23 @@ export const DamVideoBlock = withPreview(
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
 
+        const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
         const [showPreviewImage, setShowPreviewImage] = React.useState(true);
 
         return (
             <Root>
-                {previewImage && showPreviewImage && (
+                {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
                         <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined} />
                     </PreviewImageWrapper>
                 )}
-                {(!showPreviewImage || !previewImage) && (
+                {(!showPreviewImage || !hasPreviewImage) && (
                     <Video
                         autoPlay={autoplay || (previewImage && !showPreviewImage)}
                         controls={showControls}
                         playsInline
                         muted={autoplay}
-                        aspectRatio={aspectRatio}
+                        $aspectRatio={aspectRatio !== "auto" ? aspectRatio.replace("x", " / ") : undefined}
                     >
                         <source src={damFile.fileUrl} type={damFile.mimetype} />
                     </Video>
@@ -50,14 +51,13 @@ const PreviewImageWrapper = styled.div`
     cursor: pointer;
 `;
 
-const Video = styled.video<{ aspectRatio?: string }>`
+const Video = styled.video<{ $aspectRatio?: string }>`
     width: 100%;
-    height: 100%;
     object-fit: cover;
 
-    ${({ aspectRatio }) =>
-        aspectRatio &&
+    ${({ $aspectRatio }) =>
+        $aspectRatio &&
         css`
-            aspect-ratio: ${aspectRatio.replace("x", " / ")};
+            aspect-ratio: $aspectRatio;
         `}
 `;

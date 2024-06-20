@@ -1,35 +1,6 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { YouTubeVideoBlockData } from "@src/blocks.generated";
-import * as React from "react";
 import styled from "styled-components";
-
-interface VideoContainerProps {
-    heightInPercent: number;
-}
-
-const VideoContainer = styled.div<VideoContainerProps>`
-    height: 0;
-    overflow: hidden;
-    padding-top: ${({ heightInPercent }) => heightInPercent}%;
-    position: relative;
-
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-`;
-
-const getHeightInPercentForAspectRatio = (aspectRatio: YouTubeVideoBlockData["aspectRatio"]) => {
-    switch (aspectRatio) {
-        case "16X9":
-            return 56.25;
-        case "4X3":
-            return 75;
-    }
-};
 
 const EXPECTED_YT_ID_LENGTH = 11;
 
@@ -41,6 +12,15 @@ const parseYoutubeIdentifier = (value: string): string | undefined => {
     const youtubeId = value.length === EXPECTED_YT_ID_LENGTH ? value : match && match[8].length == EXPECTED_YT_ID_LENGTH ? match[8] : null;
 
     return youtubeId ?? undefined;
+};
+
+const getHeightInPercentForAspectRatio = (aspectRatio: YouTubeVideoBlockData["aspectRatio"]) => {
+    switch (aspectRatio) {
+        case "16X9":
+            return 56.25;
+        case "4X3":
+            return 75;
+    }
 };
 
 export const YouTubeVideoBlock = withPreview(
@@ -65,10 +45,25 @@ export const YouTubeVideoBlock = withPreview(
         youtubeUrl.search = searchParams.toString();
 
         return (
-            <VideoContainer heightInPercent={getHeightInPercentForAspectRatio(aspectRatio)}>
+            <VideoContainer $heightInPercent={getHeightInPercentForAspectRatio(aspectRatio)}>
                 <iframe src={youtubeUrl.toString()} style={{ border: 0 }} />
             </VideoContainer>
         );
     },
     { label: "Video" },
 );
+
+const VideoContainer = styled.div<{ $heightInPercent: number }>`
+    height: 0;
+    overflow: hidden;
+    padding-top: ${({ $heightInPercent }) => $heightInPercent}%;
+    position: relative;
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+`;

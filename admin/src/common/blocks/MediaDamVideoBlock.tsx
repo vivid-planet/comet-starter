@@ -18,7 +18,7 @@ const aspectRatioOptions = [
 ];
 
 export const MediaDamVideoBlock = createCompositeBlock({
-    name: "mediaDamVideo",
+    name: "MediaDamVideo",
     displayName: <Video />,
     blocks: {
         video: {
