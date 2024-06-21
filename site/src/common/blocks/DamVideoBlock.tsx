@@ -4,8 +4,12 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
+interface DamVideoBlockProps extends PropsWithData<MediaDamVideoBlockData> {
+    sizes: string;
+}
+
 export const DamVideoBlock = withPreview(
-    ({ data: { video, aspectRatio, previewImage } }: PropsWithData<MediaDamVideoBlockData>) => {
+    ({ data: { video, aspectRatio, previewImage }, sizes }: DamVideoBlockProps) => {
         const { damFile, autoplay, showControls } = video;
 
         if (damFile === undefined) {
@@ -19,7 +23,12 @@ export const DamVideoBlock = withPreview(
             <Root>
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
-                        <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined} />
+                        <DamImageBlock
+                            data={previewImage}
+                            objectFit={"cover"}
+                            aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined}
+                            layout={{ variant: "responsive", sizes: sizes }}
+                        />
                     </PreviewImageWrapper>
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (

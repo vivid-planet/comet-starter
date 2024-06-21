@@ -16,9 +16,13 @@ const parseYoutubeIdentifier = (value: string): string | undefined => {
     return youtubeId ?? undefined;
 };
 
+interface YouTubeVideoBlockProps extends PropsWithData<MediaYoutubeVideoBlockData> {
+    sizes: string;
+}
+
 // TODO: use aspectRatio from MediaBlock ???
 export const YouTubeVideoBlock = withPreview(
-    ({ data: { video, previewImage } }: PropsWithData<MediaYoutubeVideoBlockData>) => {
+    ({ data: { video, previewImage }, sizes }: YouTubeVideoBlockProps) => {
         const { youtubeIdentifier, autoplay, loop, showControls, aspectRatio } = video;
 
         const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
@@ -49,7 +53,12 @@ export const YouTubeVideoBlock = withPreview(
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
                         {/* TODO: Youtube aspect ratio do not fits with damImageBlock aspect ratio, remove toLowerCase */}
-                        <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio.toLowerCase()} />
+                        <DamImageBlock
+                            data={previewImage}
+                            objectFit={"cover"}
+                            aspectRatio={aspectRatio.toLowerCase()}
+                            layout={{ variant: "responsive", sizes: sizes }}
+                        />
                     </PreviewImageWrapper>
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (

@@ -4,17 +4,23 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { YouTubeVideoBlock } from "@src/common/blocks/YouTubeVideoBlock";
 
-const supportedBlocks: SupportedBlocks = {
-    image: ({ image, aspectRatio }) => <DamImageBlock data={image} aspectRatio={aspectRatio} />,
-    damVideo: (data) => <DamVideoBlock data={data} />,
-    youTubeVideo: (data) => <YouTubeVideoBlock data={data} />,
+const getSupportedBlocks = (sizes: string): SupportedBlocks => {
+    return {
+        image: ({ image, aspectRatio }) => <DamImageBlock data={image} aspectRatio={aspectRatio} layout={{ variant: "responsive", sizes: sizes }} />,
+        damVideo: (data) => <DamVideoBlock data={data} />,
+        youTubeVideo: (data) => <YouTubeVideoBlock data={data} />,
+    };
 };
 
+interface MediaBlockProps extends PropsWithData<MediaBlockData> {
+    sizes?: string;
+}
+
 export const MediaBlock = withPreview(
-    ({ data }: PropsWithData<MediaBlockData>) => {
+    ({ data, sizes = "100vw" }: MediaBlockProps) => {
         return (
             <PreviewSkeleton type="media" hasContent={Boolean(data)}>
-                <OneOfBlock data={data} supportedBlocks={supportedBlocks} />
+                <OneOfBlock data={data} supportedBlocks={getSupportedBlocks(sizes)} />
             </PreviewSkeleton>
         );
     },
