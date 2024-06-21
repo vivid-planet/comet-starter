@@ -1,8 +1,8 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { MediaYoutubeVideoBlockData, YouTubeVideoBlockData } from "@src/blocks.generated";
+import { MediaYoutubeVideoBlockData } from "@src/blocks.generated";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const EXPECTED_YT_ID_LENGTH = 11;
 
@@ -16,15 +16,7 @@ const parseYoutubeIdentifier = (value: string): string | undefined => {
     return youtubeId ?? undefined;
 };
 
-const getHeightInPercentForAspectRatio = (aspectRatio: YouTubeVideoBlockData["aspectRatio"]) => {
-    switch (aspectRatio) {
-        case "16X9":
-            return 56.25;
-        case "4X3":
-            return 75;
-    }
-};
-
+// TODO: use aspectRatio from MediaBlock ???
 export const YouTubeVideoBlock = withPreview(
     ({ data: { video, previewImage } }: PropsWithData<MediaYoutubeVideoBlockData>) => {
         const { youtubeIdentifier, autoplay, loop, showControls, aspectRatio } = video;
@@ -56,11 +48,12 @@ export const YouTubeVideoBlock = withPreview(
             <Root>
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
+                        {/* TODO: Youtube aspect ratio do not fits with damImageBlock aspect ratio, remove toLowerCase */}
                         <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio.toLowerCase()} />
                     </PreviewImageWrapper>
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
-                    <VideoContainer $heightInPercent={getHeightInPercentForAspectRatio(aspectRatio)}>
+                    <VideoContainer $aspectRatio={aspectRatio.replace("X", "/")}>
                         <iframe src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
                 )}
@@ -79,11 +72,14 @@ const PreviewImageWrapper = styled.div`
     cursor: pointer;
 `;
 
-const VideoContainer = styled.div<{ $heightInPercent: number }>`
-    height: 0;
+const VideoContainer = styled.div<{ $aspectRatio: string }>`
     overflow: hidden;
-    padding-top: ${({ $heightInPercent }) => $heightInPercent}%;
     position: relative;
+
+    ${({ $aspectRatio }) =>
+        css`
+            aspect-ratio: ${$aspectRatio};
+        `}
 
     iframe {
         position: absolute;

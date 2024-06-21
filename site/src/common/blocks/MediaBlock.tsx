@@ -5,10 +5,8 @@ import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { YouTubeVideoBlock } from "@src/common/blocks/YouTubeVideoBlock";
 
 const supportedBlocks: SupportedBlocks = {
-    image: ({ image, aspectRatio, ...props }) => <DamImageBlock data={image} aspectRatio={aspectRatio} {...props} />,
-    damVideo: ({ video, aspectRatio, previewImage, ...props }) => (
-        <DamVideoBlock data={video} aspectRatio={aspectRatio} previewImage={previewImage} {...props} />
-    ),
+    image: ({ image, aspectRatio }) => <DamImageBlock data={image} aspectRatio={aspectRatio} />,
+    damVideo: (data) => <DamVideoBlock data={data} />,
     youTubeVideo: (data) => <YouTubeVideoBlock data={data} />,
 };
 

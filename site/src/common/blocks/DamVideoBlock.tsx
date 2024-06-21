@@ -1,22 +1,19 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { DamImageBlockData, DamVideoBlockData } from "@src/blocks.generated";
+import { MediaDamVideoBlockData } from "@src/blocks.generated";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
-import * as React from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 
-interface DamVideoProps {
-    aspectRatio?: string | "inherit";
-    previewImage?: DamImageBlockData;
-}
-
 export const DamVideoBlock = withPreview(
-    ({ data: { damFile, autoplay, showControls }, aspectRatio = "auto", previewImage }: PropsWithData<DamVideoBlockData> & DamVideoProps) => {
+    ({ data: { video, aspectRatio, previewImage } }: PropsWithData<MediaDamVideoBlockData>) => {
+        const { damFile, autoplay, showControls } = video;
+
         if (damFile === undefined) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
 
         const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
-        const [showPreviewImage, setShowPreviewImage] = React.useState(true);
+        const [showPreviewImage, setShowPreviewImage] = useState(true);
 
         return (
             <Root>
@@ -58,6 +55,6 @@ const Video = styled.video<{ $aspectRatio?: string }>`
     ${({ $aspectRatio }) =>
         $aspectRatio &&
         css`
-            aspect-ratio: $aspectRatio;
+            aspect-ratio: ${$aspectRatio};
         `}
 `;
