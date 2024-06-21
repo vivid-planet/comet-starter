@@ -16,7 +16,10 @@ import { IsEnum, ValidateNested } from "class-validator";
 enum MediaYoutubeVideoAspectRatio {
     "1x1" = "1x1",
     "16x9" = "16x9",
+    "21x9" = "21x9",
+    "3x2" = "3x2",
     "4x3" = "4x3",
+    "4x5" = "4x5",
     "9x16" = "9x16",
 }
 

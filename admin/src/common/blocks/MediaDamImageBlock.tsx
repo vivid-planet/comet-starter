@@ -1,5 +1,4 @@
 import { Field, FinalFormSelect } from "@comet/admin";
-import { Image } from "@comet/admin-icons";
 import { BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
 import { DamImageBlock } from "@comet/cms-admin";
 import { MenuItem } from "@mui/material";
@@ -17,7 +16,7 @@ const aspectRatioOptions = [
 
 export const MediaDamImageBlock = createCompositeBlock({
     name: "MediaDamImage",
-    displayName: <Image />,
+    displayName: <FormattedMessage id="mediaDamImage.displayName" defaultMessage="Image" />,
     blocks: {
         image: {
             block: DamImageBlock,

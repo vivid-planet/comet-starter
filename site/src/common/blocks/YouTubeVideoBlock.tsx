@@ -17,11 +17,11 @@ const parseYoutubeIdentifier = (value: string): string | undefined => {
 };
 
 interface YouTubeVideoBlockProps extends PropsWithData<MediaYoutubeVideoBlockData> {
-    sizes: string;
+    sizes?: string;
 }
 
 export const YouTubeVideoBlock = withPreview(
-    ({ data: { video, previewImage, aspectRatio }, sizes }: YouTubeVideoBlockProps) => {
+    ({ data: { video, previewImage, aspectRatio }, sizes = "100vw" }: YouTubeVideoBlockProps) => {
         const { youtubeIdentifier, autoplay, loop, showControls } = video;
 
         const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
@@ -48,7 +48,7 @@ export const YouTubeVideoBlock = withPreview(
         youtubeUrl.search = searchParams.toString();
 
         return (
-            <Root>
+            <div>
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
                         <DamImageBlock
@@ -64,18 +64,13 @@ export const YouTubeVideoBlock = withPreview(
                         <iframe src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
                 )}
-            </Root>
+            </div>
         );
     },
     { label: "Video" },
 );
 
-const Root = styled.div`
-    position: relative;
-`;
-
 const PreviewImageWrapper = styled.div`
-    z-index: 1;
     cursor: pointer;
 `;
 

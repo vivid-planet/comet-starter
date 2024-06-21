@@ -1,5 +1,4 @@
 import { Field, FinalFormSelect } from "@comet/admin";
-import { Video } from "@comet/admin-icons";
 import { BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
 import { DamImageBlock, DamVideoBlock } from "@comet/cms-admin";
 import { MenuItem } from "@mui/material";
@@ -19,7 +18,7 @@ const aspectRatioOptions = [
 
 export const MediaDamVideoBlock = createCompositeBlock({
     name: "MediaDamVideo",
-    displayName: <Video />,
+    displayName: <FormattedMessage id="mediaDamVideo.displayName" defaultMessage="Video" />,
     blocks: {
         video: {
             block: DamVideoBlock,

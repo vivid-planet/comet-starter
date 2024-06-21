@@ -5,11 +5,11 @@ import { useState } from "react";
 import styled, { css } from "styled-components";
 
 interface DamVideoBlockProps extends PropsWithData<MediaDamVideoBlockData> {
-    sizes: string;
+    sizes?: string;
 }
 
 export const DamVideoBlock = withPreview(
-    ({ data: { video, aspectRatio, previewImage }, sizes }: DamVideoBlockProps) => {
+    ({ data: { video, aspectRatio, previewImage }, sizes = "100vw" }: DamVideoBlockProps) => {
         const { damFile, autoplay, showControls } = video;
 
         if (damFile === undefined) {
@@ -20,7 +20,7 @@ export const DamVideoBlock = withPreview(
         const [showPreviewImage, setShowPreviewImage] = useState(true);
 
         return (
-            <Root>
+            <div>
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
                         <DamImageBlock
@@ -42,18 +42,13 @@ export const DamVideoBlock = withPreview(
                         <source src={damFile.fileUrl} type={damFile.mimetype} />
                     </Video>
                 )}
-            </Root>
+            </div>
         );
     },
     { label: "Video" },
 );
 
-const Root = styled.div`
-    position: relative;
-`;
-
 const PreviewImageWrapper = styled.div`
-    z-index: 1;
     cursor: pointer;
 `;
 
