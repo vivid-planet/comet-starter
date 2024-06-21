@@ -9,7 +9,7 @@ const supportedBlocks: SupportedBlocks = {
     damVideo: ({ video, aspectRatio, previewImage, ...props }) => (
         <DamVideoBlock data={video} aspectRatio={aspectRatio} previewImage={previewImage} {...props} />
     ),
-    youTubeVideo: ({ video, previewImage, ...props }) => <YouTubeVideoBlock data={video} {...props} />,
+    youTubeVideo: (data) => <YouTubeVideoBlock data={data} />,
 };
 
 export const MediaBlock = withPreview(

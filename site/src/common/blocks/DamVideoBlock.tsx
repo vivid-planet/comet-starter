@@ -27,7 +27,7 @@ export const DamVideoBlock = withPreview(
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
                     <Video
-                        autoPlay={autoplay || (previewImage && !showPreviewImage)}
+                        autoPlay={autoplay || (hasPreviewImage && !showPreviewImage)}
                         controls={showControls}
                         playsInline
                         muted={autoplay}

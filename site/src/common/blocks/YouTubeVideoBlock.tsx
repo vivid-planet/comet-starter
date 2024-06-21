@@ -1,5 +1,7 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { YouTubeVideoBlockData } from "@src/blocks.generated";
+import { MediaYoutubeVideoBlockData, YouTubeVideoBlockData } from "@src/blocks.generated";
+import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
+import { useState } from "react";
 import styled from "styled-components";
 
 const EXPECTED_YT_ID_LENGTH = 11;
@@ -24,19 +26,25 @@ const getHeightInPercentForAspectRatio = (aspectRatio: YouTubeVideoBlockData["as
 };
 
 export const YouTubeVideoBlock = withPreview(
-    ({ data: { youtubeIdentifier, autoplay, loop, showControls, aspectRatio } }: PropsWithData<YouTubeVideoBlockData>) => {
+    ({ data: { video, previewImage } }: PropsWithData<MediaYoutubeVideoBlockData>) => {
+        const { youtubeIdentifier, autoplay, loop, showControls, aspectRatio } = video;
+
+        const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
+        const [showPreviewImage, setShowPreviewImage] = useState(true);
+
         if (!youtubeIdentifier) return <PreviewSkeleton type="media" hasContent={false} />;
         const identifier = parseYoutubeIdentifier(youtubeIdentifier);
 
         const searchParams = new URLSearchParams();
         searchParams.append("modestbranding", "1");
 
-        searchParams.append("autoplay", Number(autoplay).toString());
+        (autoplay !== undefined || (hasPreviewImage && !showPreviewImage)) &&
+            searchParams.append("autoplay", Number(autoplay || (hasPreviewImage && !showPreviewImage)).toString());
         autoplay && searchParams.append("mute", "1");
 
-        searchParams.append("controls", Number(showControls).toString());
+        showControls !== undefined && searchParams.append("controls", Number(showControls).toString());
 
-        searchParams.append("loop", Number(loop).toString());
+        showControls !== undefined && searchParams.append("loop", Number(showControls).toString());
         // the playlist parameter is needed so that the video loops. See https://developers.google.com/youtube/player_parameters#loop
         loop && identifier && searchParams.append("playlist", identifier);
 
@@ -45,13 +53,31 @@ export const YouTubeVideoBlock = withPreview(
         youtubeUrl.search = searchParams.toString();
 
         return (
-            <VideoContainer $heightInPercent={getHeightInPercentForAspectRatio(aspectRatio)}>
-                <iframe src={youtubeUrl.toString()} style={{ border: 0 }} />
-            </VideoContainer>
+            <Root>
+                {hasPreviewImage && showPreviewImage && (
+                    <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
+                        <DamImageBlock data={previewImage} objectFit={"cover"} aspectRatio={aspectRatio.toLowerCase()} />
+                    </PreviewImageWrapper>
+                )}
+                {(!showPreviewImage || !hasPreviewImage) && (
+                    <VideoContainer $heightInPercent={getHeightInPercentForAspectRatio(aspectRatio)}>
+                        <iframe src={youtubeUrl.toString()} allow="autoplay" />
+                    </VideoContainer>
+                )}
+            </Root>
         );
     },
     { label: "Video" },
 );
+
+const Root = styled.div`
+    position: relative;
+`;
+
+const PreviewImageWrapper = styled.div`
+    z-index: 1;
+    cursor: pointer;
+`;
 
 const VideoContainer = styled.div<{ $heightInPercent: number }>`
     height: 0;
@@ -65,5 +91,6 @@ const VideoContainer = styled.div<{ $heightInPercent: number }>`
         left: 0;
         width: 100%;
         height: 100%;
+        border: 0;
     }
 `;
