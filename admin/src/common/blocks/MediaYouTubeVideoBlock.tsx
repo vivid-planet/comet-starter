@@ -1,6 +1,16 @@
-import { createCompositeBlock, YouTubeVideoBlock } from "@comet/blocks-admin";
+import { Field, FinalFormSelect } from "@comet/admin";
+import { BlocksFinalForm, createCompositeBlock, createCompositeSetting, YouTubeVideoBlock } from "@comet/blocks-admin";
 import { DamImageBlock } from "@comet/cms-admin";
+import { MenuItem } from "@mui/material";
+import { MediaYoutubeVideoBlockData } from "@src/blocks.generated";
 import { FormattedMessage } from "react-intl";
+
+const aspectRatioOptions = [
+    { label: "1:1", value: "1x1" },
+    { label: "4:3", value: "4x3" },
+    { label: "9:16", value: "9x16" },
+    { label: "16:9", value: "16x9" },
+];
 
 export const MediaYoutubeVideoBlock = createCompositeBlock({
     name: "mediaYouTubeVideo",
@@ -8,6 +18,31 @@ export const MediaYoutubeVideoBlock = createCompositeBlock({
     blocks: {
         video: {
             block: YouTubeVideoBlock,
+        },
+        aspectRatio: {
+            block: createCompositeSetting<MediaYoutubeVideoBlockData["aspectRatio"]>({
+                defaultValue: "16x9",
+                AdminComponent: ({ state, updateState }) => {
+                    return (
+                        <BlocksFinalForm<Pick<MediaYoutubeVideoBlockData, "aspectRatio">>
+                            onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
+                            initialValues={{ aspectRatio: state }}
+                        >
+                            <Field name="aspectRatio" label={<FormattedMessage id="mediaYouTubeVideo.aspectRatio" defaultMessage="Aspect Ratio" />}>
+                                {(props) => (
+                                    <FinalFormSelect {...props}>
+                                        {aspectRatioOptions.map((option) => (
+                                            <MenuItem value={option.value} key={option.value}>
+                                                {option.label}
+                                            </MenuItem>
+                                        ))}
+                                    </FinalFormSelect>
+                                )}
+                            </Field>
+                        </BlocksFinalForm>
+                    );
+                },
+            }),
         },
         previewImage: {
             block: DamImageBlock,

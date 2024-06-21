@@ -20,10 +20,9 @@ interface YouTubeVideoBlockProps extends PropsWithData<MediaYoutubeVideoBlockDat
     sizes: string;
 }
 
-// TODO: use aspectRatio from MediaBlock ???
 export const YouTubeVideoBlock = withPreview(
-    ({ data: { video, previewImage }, sizes }: YouTubeVideoBlockProps) => {
-        const { youtubeIdentifier, autoplay, loop, showControls, aspectRatio } = video;
+    ({ data: { video, previewImage, aspectRatio }, sizes }: YouTubeVideoBlockProps) => {
+        const { youtubeIdentifier, autoplay, loop, showControls } = video;
 
         const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
         const [showPreviewImage, setShowPreviewImage] = useState(true);
@@ -52,17 +51,16 @@ export const YouTubeVideoBlock = withPreview(
             <Root>
                 {hasPreviewImage && showPreviewImage && (
                     <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
-                        {/* TODO: Youtube aspect ratio do not fits with damImageBlock aspect ratio, remove toLowerCase */}
                         <DamImageBlock
                             data={previewImage}
                             objectFit={"cover"}
-                            aspectRatio={aspectRatio.toLowerCase()}
+                            aspectRatio={aspectRatio}
                             layout={{ variant: "responsive", sizes: sizes }}
                         />
                     </PreviewImageWrapper>
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
-                    <VideoContainer $aspectRatio={aspectRatio.replace("X", "/")}>
+                    <VideoContainer $aspectRatio={aspectRatio.replace("x", "/")}>
                         <iframe src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
                 )}

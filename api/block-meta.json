@@ -737,6 +737,17 @@
                 "nullable": false
             },
             {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "1x1",
+                    "16x9",
+                    "4x3",
+                    "9x16"
+                ],
+                "nullable": false
+            },
+            {
                 "name": "previewImage",
                 "kind": "Block",
                 "block": "DamImage",
@@ -748,6 +759,17 @@
                 "name": "video",
                 "kind": "Block",
                 "block": "YouTubeVideo",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "1x1",
+                    "16x9",
+                    "4x3",
+                    "9x16"
+                ],
                 "nullable": false
             },
             {
