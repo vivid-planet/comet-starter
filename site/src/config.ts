@@ -1,3 +1,4 @@
+// TODO replace with site config
 export let domain = "";
 export const languages = ["en", "de"];
 
