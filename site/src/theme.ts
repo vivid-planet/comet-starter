@@ -5,8 +5,6 @@ const createBreakpoint = (value: number) => {
     };
 };
 
-export const pageLayoutGridTotalColumns = 24;
-
 export const theme = {
     palette: {
         primary: {

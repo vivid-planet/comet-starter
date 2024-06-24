@@ -1,6 +1,7 @@
-import { pageLayoutGridTotalColumns } from "@src/theme";
 import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
+
+const pageLayoutGridTotalColumns = 24;
 
 interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
     grid?: boolean;
