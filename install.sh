@@ -47,6 +47,7 @@ ln -sf ../../site-configs.d.ts ./site/src/
 # Lang install
 sh ./site/intl-update.sh
 sh ./admin/intl-update.sh
+npm run create-site-configs-env
 
 npm --prefix admin install
 npm --prefix api install
