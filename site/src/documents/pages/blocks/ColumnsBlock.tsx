@@ -1,8 +1,27 @@
-import { PropsWithData, withPreview } from "@comet/cms-site";
-import { ColumnsBlockData } from "@src/blocks.generated";
-import { ColumnsContentBlock } from "@src/common/blocks/ColumnsContentBlock";
+import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
+import { ColumnsBlockData, ColumnsContentBlockData } from "@src/blocks.generated";
+import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
+import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
+import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
+
+const supportedBlocks: SupportedBlocks = {
+    anchor: (props) => <AnchorBlock data={props} />,
+    richtext: (props) => <RichTextBlock data={props} />,
+    space: (props) => <SpaceBlock data={props} />,
+    heading: (props) => <HeadingBlock data={props} />,
+    callToActionList: (props) => <CallToActionListBlock data={props} />,
+};
+
+const ColumnsContentBlock = withPreview(
+    ({ data }: PropsWithData<ColumnsContentBlockData>) => {
+        return <BlocksBlock data={data} supportedBlocks={supportedBlocks} />;
+    },
+    { label: "Columns" },
+);
 
 export const ColumnsBlock = withPreview(
     ({ data: { columns, layout } }: PropsWithData<ColumnsBlockData>) => (

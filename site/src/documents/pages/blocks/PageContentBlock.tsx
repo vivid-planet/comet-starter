@@ -3,13 +3,13 @@ import { BlocksBlock, PropsWithData, SupportedBlocks, YouTubeVideoBlock } from "
 import { PageContentBlockData } from "@src/blocks.generated";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { ColumnsBlock } from "@src/common/blocks/ColumnsBlock";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
+import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 
 const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
