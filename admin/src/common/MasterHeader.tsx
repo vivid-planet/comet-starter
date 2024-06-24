@@ -1,6 +1,4 @@
-import { BuildEntry, Header, UserHeaderItem } from "@comet/cms-admin";
-
-import { ContentScopeControls } from "./ContentScopeProvider";
+import { BuildEntry, ContentScopeControls, Header, UserHeaderItem } from "@comet/cms-admin";
 
 export function MasterHeader() {
     return (

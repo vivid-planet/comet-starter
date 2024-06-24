@@ -82,6 +82,7 @@ export class AppModule {
                         availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
                         userService,
                         accessControlService,
+                        systemUsers: ["system"],
                     }),
                     inject: [UserService, AccessControlService],
                     imports: [AuthModule],
@@ -110,7 +111,6 @@ export class AppModule {
                         secret: config.dam.secret,
                         allowedImageSizes: config.dam.allowedImageSizes,
                         allowedAspectRatios: config.dam.allowedImageAspectRatios,
-                        additionalMimeTypes: config.dam.additionalMimeTypes,
                         filesDirectory: `${config.blob.storageDirectoryPrefix}-files`,
                         cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                         maxFileSize: config.dam.uploadsMaxFileSize,
@@ -125,7 +125,7 @@ export class AppModule {
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {
                                   // Ignore system user
-                                  if (user === true) {
+                                  if (user === "system") {
                                       return false;
                                   }
                                   return true;
