@@ -18,7 +18,6 @@
 
 # production
 /build
-/preBuild/build
 
 # misc
 .DS_Store
@@ -44,7 +43,6 @@ schema.gql
 schema.json
 block-meta.json
 src/**/*.generated.ts
-preBuild/**/*.generated.ts
 comet-config.json
 
 public/sitemap.xml
