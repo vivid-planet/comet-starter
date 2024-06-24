@@ -1,7 +1,7 @@
 import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
 import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
-import { GlobalStyle } from "@src/layout/GlobalStyles";
+import { GlobalStyle } from "@src/layout/GlobalStyle";
 import { theme } from "@src/theme";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import App, { AppProps, NextWebVitalsMetric } from "next/app";
