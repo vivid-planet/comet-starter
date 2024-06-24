@@ -1,4 +1,13 @@
 addAssignees: author
 
+addReviewers: true
+
+reviewers:
+  - dkarnutsch
+  - fraxachun
+  - johnnyomair
+  - nsams
+  - thomasdax98
+
 skipKeywords:
   - Merge main into next
