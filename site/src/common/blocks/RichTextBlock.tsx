@@ -110,7 +110,7 @@ export const RichTextBlock = withPreview(
         const rendered = redraft(data.draftContent, renderers);
 
         return (
-            <PreviewSkeleton title={"RichText"} type={"rows"} hasContent={hasRichTextBlockContent(data)}>
+            <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
                 {rendered}
             </PreviewSkeleton>
         );
