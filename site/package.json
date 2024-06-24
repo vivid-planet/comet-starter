@@ -3,7 +3,6 @@
     "private": true,
     "scripts": {
         "dev": "npm run intl:compile && run-s gql:types generate-block-types && NODE_OPTIONS='--inspect=localhost:9230' dotenv -c secrets -- node server.js",
-        "preview-next-build": "next build",
         "build": "npm run intl:compile && run-p gql:types generate-block-types && next build",
         "serve": "NODE_ENV=production node server.js",
         "export": "next export",
