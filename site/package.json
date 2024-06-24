@@ -2,7 +2,7 @@
     "name": "starter-site",
     "private": true,
     "scripts": {
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && npm run build:preBuild && NODE_OPTIONS='--inspect=localhost:9230' dotenv -c secrets -- node server.js",
+        "dev": "npm run intl:compile && run-s gql:types generate-block-types && npm run build:preBuild && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env.secrets -e .env.site-configs -- node server.js",
         "preview-next-build": "next build",
         "next-build": "npm run build:publicGenerated && next build",
         "build": "npm run intl:compile && run-p gql:types generate-block-types && npm run build:preBuild",
