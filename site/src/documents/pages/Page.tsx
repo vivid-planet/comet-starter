@@ -34,9 +34,9 @@ export function Page(props: PropsWithLayout<GQLPageQuery>): JSX.Element {
                 />
             )}
             {document && document.__typename === "Page" ? (
-                <>
-                    <div>{document.content && <PageContentBlock data={document.content} />}</div>
-                </>
+                <main>
+                    <PageContentBlock data={document.content} />
+                </main>
             ) : null}
         </Layout>
     );

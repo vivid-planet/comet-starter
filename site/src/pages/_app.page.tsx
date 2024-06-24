@@ -2,12 +2,14 @@ import { SitePreviewProvider } from "@comet/cms-site";
 import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
 import { defaultLanguage, domain } from "@src/config";
 import { getMessages } from "@src/lang";
+import { theme } from "@src/theme";
+import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import App, { AppProps, NextWebVitalsMetric } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
 import * as React from "react";
 import { IntlProvider } from "react-intl";
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
     /* Fix a problem with Flexbox to avoid overflows: https://defensivecss.dev/tip/flexbox-min-content-size/ */
@@ -138,8 +140,11 @@ export default function CustomApp({ Component, pageProps, scope, messages }: Cus
             )}
             <ContentScopeProvider scope={scope}>
                 <SitePreviewProvider>
-                    <GlobalStyle />
-                    <Component {...pageProps} />
+                    <ThemeProvider theme={theme}>
+                        <GlobalStyle />
+                        <ResponsiveSpacingStyle />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
                 </SitePreviewProvider>
             </ContentScopeProvider>
         </IntlProvider>
