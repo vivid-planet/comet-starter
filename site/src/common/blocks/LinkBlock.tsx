@@ -1,6 +1,6 @@
 import { ExternalLinkBlock, InternalLinkBlock, OneOfBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
 import { LinkBlockData } from "@src/blocks.generated";
-import * as React from "react";
+import { ReactElement } from "react";
 
 const supportedBlocks: SupportedBlocks = {
     internal: ({ children, title, ...props }) => (
@@ -16,7 +16,11 @@ const supportedBlocks: SupportedBlocks = {
 };
 
 interface LinkBlockProps extends PropsWithData<LinkBlockData> {
+<<<<<<< HEAD
     children: React.ReactNode;
+=======
+    children: ReactElement;
+>>>>>>> main
 }
 
 export const LinkBlock = withPreview(

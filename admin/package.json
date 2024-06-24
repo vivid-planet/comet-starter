@@ -26,16 +26,24 @@
     },
     "dependencies": {
         "@apollo/client": "^3.2.5",
+<<<<<<< HEAD
         "@comet/admin": "7.0.0-beta.2",
         "@comet/admin-icons": "7.0.0-beta.2",
         "@comet/admin-rte": "7.0.0-beta.2",
         "@comet/admin-theme": "7.0.0-beta.2",
         "@comet/blocks-admin": "7.0.0-beta.2",
         "@comet/cms-admin": "7.0.0-beta.2",
+=======
+        "@comet/admin": "^6.13.0",
+        "@comet/admin-icons": "^6.13.0",
+        "@comet/admin-rte": "^6.13.0",
+        "@comet/admin-theme": "^6.13.0",
+        "@comet/blocks-admin": "^6.13.0",
+        "@comet/cms-admin": "^6.13.0",
+>>>>>>> main
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@fontsource/roboto": "^4.5.8",
-        "@mui/icons-material": "^5.8.4",
         "@mui/lab": "^5.0.0-alpha.88",
         "@mui/material": "^5.8.6",
         "@mui/system": "^5.8.6",
@@ -62,8 +70,13 @@
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/cli": "7.0.0-beta.2",
         "@comet/eslint-config": "7.0.0-beta.2",
+=======
+        "@comet/cli": "^6.13.0",
+        "@comet/eslint-config": "^6.13.0",
+>>>>>>> main
         "@formatjs/cli": "^6.0.0",
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",

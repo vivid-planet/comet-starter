@@ -1,4 +1,5 @@
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
+import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { gql } from "graphql-request";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -33,7 +34,11 @@ function PageLink({ page, children }: Props): JSX.Element | null {
             return null;
         }
 
-        return <LinkBlock data={page.document.content}>{typeof children === "function" ? children(active) : children}</LinkBlock>;
+        return (
+            <HiddenIfInvalidLink link={page.document.content}>
+                <LinkBlock data={page.document.content}>{typeof children === "function" ? children(active) : children}</LinkBlock>
+            </HiddenIfInvalidLink>
+        );
     } else if (page.documentType === "Page") {
         return (
             <Link href={page.path} passHref>
