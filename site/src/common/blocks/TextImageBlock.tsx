@@ -10,9 +10,13 @@ export const TextImageBlock = withPreview(
     ({ data: { text, image, imageAspectRatio, imagePosition } }: PropsWithData<TextImageBlockData>) => {
         return (
             <Root>
-                {imagePosition === "left" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
+                {imagePosition === "left" && (
+                    <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout={{ variant: "responsive", sizes: "50vw" }} />
+                )}
                 <RichTextBlock data={text} />
-                {imagePosition === "right" && <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout="responsive" sizes="50vw" />}
+                {imagePosition === "right" && (
+                    <DamImageBlock data={image} aspectRatio={imageAspectRatio} layout={{ variant: "responsive", sizes: "50vw" }} />
+                )}
             </Root>
         );
     },
