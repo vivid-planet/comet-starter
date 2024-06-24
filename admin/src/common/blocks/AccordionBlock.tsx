@@ -4,8 +4,8 @@ import { FormattedMessage } from "react-intl";
 
 export const AccordionBlock = createListBlock({
     name: "Accordion",
-    displayName: <FormattedMessage id="accordionListBlock.displayName" defaultMessage="Accordion" />,
+    displayName: <FormattedMessage id="accordionBlock.displayName" defaultMessage="Accordion" />,
     block: AccordionItemBlock,
-    itemName: <FormattedMessage id="accordionListBlock.itemName" defaultMessage="accordion item" />,
-    itemsName: <FormattedMessage id="accordionListBlock.itemsName" defaultMessage="accordion items" />,
+    itemName: <FormattedMessage id="accordionBlock.itemName" defaultMessage="accordion item" />,
+    itemsName: <FormattedMessage id="accordionBlock.itemsName" defaultMessage="accordion items" />,
 });
