@@ -17,8 +17,6 @@
         ]
     },
     {
-<<<<<<< HEAD
-=======
         "name": "CallToAction",
         "fields": [
             {
@@ -115,7 +113,6 @@
         ]
     },
     {
->>>>>>> main
         "name": "DamFileDownloadLink",
         "fields": [
             {

@@ -139,18 +139,13 @@ export default function CustomApp({ Component, pageProps, scope, messages }: Cus
                 </>
             )}
             <ContentScopeProvider scope={scope}>
-<<<<<<< HEAD
                 <SitePreviewProvider>
-                    <GlobalStyle />
-                    <Component {...pageProps} />
+                    <ThemeProvider theme={theme}>
+                        <GlobalStyle />
+                        <ResponsiveSpacingStyle />
+                        <Component {...pageProps} />
+                    </ThemeProvider>
                 </SitePreviewProvider>
-=======
-                <ThemeProvider theme={theme}>
-                    <GlobalStyle />
-                    <ResponsiveSpacingStyle />
-                    <Component {...pageProps} />
-                </ThemeProvider>
->>>>>>> main
             </ContentScopeProvider>
         </IntlProvider>
     );

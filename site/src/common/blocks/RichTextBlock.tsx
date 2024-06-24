@@ -129,11 +129,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-<<<<<<< HEAD
-                {rendered}
-=======
                 <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
->>>>>>> main
             </PreviewSkeleton>
         );
     },

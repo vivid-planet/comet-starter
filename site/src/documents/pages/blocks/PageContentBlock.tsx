@@ -14,13 +14,8 @@ const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} />,
-<<<<<<< HEAD
-    headline: (props) => <HeadlineBlock data={props} />,
-    image: (props) => <DamImageBlock data={props} alt="" />,
-=======
     heading: (props) => <HeadingBlock data={props} />,
-    image: (props) => <DamImageBlock data={props} />,
->>>>>>> main
+    image: (props) => <DamImageBlock data={props} alt="" />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
