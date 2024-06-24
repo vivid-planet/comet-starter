@@ -2,6 +2,7 @@ import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
 const pageLayoutGridTotalColumns = 24;
+const pageLayoutMaxWidth = 1920;
 
 interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
     grid?: boolean;
@@ -10,7 +11,7 @@ interface PageLayoutProps extends HTMLAttributes<HTMLDivElement> {
 export const PageLayout = ({ grid, ...restProps }: PageLayoutProps) => <Root $grid={grid} {...restProps} />;
 
 const Root = styled.div<{ $grid?: boolean }>`
-    max-width: ${({ theme }) => theme.pageLayoutDefaultMaxWidth};
+    max-width: ${pageLayoutMaxWidth}px;
     margin: 0 auto;
 
     ${({ $grid }) =>

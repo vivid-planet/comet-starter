@@ -31,7 +31,6 @@ export const theme = {
         },
     },
     fontFamily: "Arial, sans-serif",
-    pageLayoutDefaultMaxWidth: "1920px",
     breakpoints: {
         xs: createBreakpoint(600),
         sm: createBreakpoint(900),
