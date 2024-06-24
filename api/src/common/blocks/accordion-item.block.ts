@@ -6,12 +6,28 @@ import {
     ChildBlock,
     ChildBlockInput,
     createBlock,
+    createBlocksBlock,
     ExtractBlockInput,
     inputToData,
 } from "@comet/blocks-api";
 import { IsUndefinable } from "@comet/cms-api";
-import { AccordionContentBlock } from "@src/common/blocks/accordion-content.block";
+import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
+import { HeadingBlock } from "@src/common/blocks/heading.block";
+import { RichTextBlock } from "@src/common/blocks/rich-text.block";
+import { SpaceBlock } from "@src/common/blocks/space.block";
 import { IsBoolean, IsString } from "class-validator";
+
+const AccordionContentBlock = createBlocksBlock(
+    {
+        supportedBlocks: {
+            richtext: RichTextBlock,
+            heading: HeadingBlock,
+            space: SpaceBlock,
+            callToActionList: CallToActionListBlock,
+        },
+    },
+    "AccordionContent",
+);
 
 class AccordionItemBlockData extends BlockData {
     @BlockField({ nullable: true })

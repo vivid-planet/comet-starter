@@ -1,12 +1,29 @@
-import { PropsWithData, withPreview } from "@comet/cms-site";
-import { AccordionItemBlockData } from "@src/blocks.generated";
+import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
+import { AccordionContentBlockData, AccordionItemBlockData } from "@src/blocks.generated";
+import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
+import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import * as React from "react";
 import { useIntl } from "react-intl";
 import styled, { css } from "styled-components";
 
 import { Typography } from "../components/Typography";
-import { AccordionContentBlock } from "./AccordionContentBlock";
+
+const supportedBlocks: SupportedBlocks = {
+    richtext: (props) => <RichTextBlock data={props} />,
+    heading: (props) => <HeadingBlock data={props} />,
+    space: (props) => <SpaceBlock data={props} />,
+    callToActionList: (props) => <CallToActionListBlock data={props} />,
+};
+
+const AccordionContentBlock = withPreview(
+    ({ data: { blocks } }: PropsWithData<AccordionContentBlockData>) => {
+        return <BlocksBlock data={{ blocks }} supportedBlocks={supportedBlocks} />;
+    },
+    { label: "Accordion Content" },
+);
 
 type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData>;
 
