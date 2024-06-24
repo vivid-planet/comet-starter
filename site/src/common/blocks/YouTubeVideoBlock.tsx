@@ -1,6 +1,6 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { MediaYoutubeVideoBlockData } from "@src/blocks.generated";
-import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
+import { VideoPreviewImage } from "@src/common/helpers/VideoPreviewImage";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
@@ -48,31 +48,20 @@ export const YouTubeVideoBlock = withPreview(
         youtubeUrl.search = searchParams.toString();
 
         return (
-            <div>
+            <>
                 {hasPreviewImage && showPreviewImage && (
-                    <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
-                        <DamImageBlock
-                            data={previewImage}
-                            objectFit={"cover"}
-                            aspectRatio={aspectRatio}
-                            layout={{ variant: "responsive", sizes: sizes }}
-                        />
-                    </PreviewImageWrapper>
+                    <VideoPreviewImage onClick={() => setShowPreviewImage(false)} image={previewImage} aspectRatio={aspectRatio} sizes={sizes} />
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
                     <VideoContainer $aspectRatio={aspectRatio.replace("x", "/")}>
                         <iframe src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
                 )}
-            </div>
+            </>
         );
     },
     { label: "Video" },
 );
-
-const PreviewImageWrapper = styled.div`
-    cursor: pointer;
-`;
 
 const VideoContainer = styled.div<{ $aspectRatio: string }>`
     overflow: hidden;

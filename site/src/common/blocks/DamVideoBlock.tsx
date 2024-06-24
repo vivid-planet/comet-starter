@@ -1,6 +1,6 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { MediaDamVideoBlockData } from "@src/blocks.generated";
-import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
+import { VideoPreviewImage } from "@src/common/helpers/VideoPreviewImage";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
@@ -20,16 +20,14 @@ export const DamVideoBlock = withPreview(
         const [showPreviewImage, setShowPreviewImage] = useState(true);
 
         return (
-            <div>
+            <>
                 {hasPreviewImage && showPreviewImage && (
-                    <PreviewImageWrapper onClick={() => setShowPreviewImage(false)}>
-                        <DamImageBlock
-                            data={previewImage}
-                            objectFit={"cover"}
-                            aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined}
-                            layout={{ variant: "responsive", sizes: sizes }}
-                        />
-                    </PreviewImageWrapper>
+                    <VideoPreviewImage
+                        onClick={() => setShowPreviewImage(false)}
+                        image={previewImage}
+                        aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined}
+                        sizes={sizes}
+                    />
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
                     <Video
@@ -42,15 +40,11 @@ export const DamVideoBlock = withPreview(
                         <source src={damFile.fileUrl} type={damFile.mimetype} />
                     </Video>
                 )}
-            </div>
+            </>
         );
     },
     { label: "Video" },
 );
-
-const PreviewImageWrapper = styled.div`
-    cursor: pointer;
-`;
 
 const Video = styled.video<{ $aspectRatio?: string }>`
     width: 100%;
