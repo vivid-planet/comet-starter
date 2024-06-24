@@ -1,13 +1,15 @@
-export const dynamic = "force-dynamic"; // don't generate at build time
-
 import { gql } from "@comet/cms-site";
-import { domain, languages } from "@src/config";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { MetadataRoute } from "next";
 
 import { GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables } from "./sitemap.generated";
 
+export const dynamic = "force-dynamic"; // don't generate at build time
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    // TODO replace with site config
+    const { domain, languages } = await import("@src/config");
+
     const sitemap: MetadataRoute.Sitemap = [];
     const graphqlFetch = createGraphQLFetch();
 
