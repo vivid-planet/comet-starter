@@ -5,8 +5,6 @@ const createBreakpoint = (value: number) => {
     };
 };
 
-export const gridTotalColumns = 24;
-
 export const theme = {
     palette: {
         primary: {
@@ -33,7 +31,6 @@ export const theme = {
         },
     },
     fontFamily: "Arial, sans-serif",
-    defaultMaxWidth: "1920px",
     breakpoints: {
         xs: createBreakpoint(600),
         sm: createBreakpoint(900),

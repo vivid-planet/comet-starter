@@ -2,7 +2,6 @@ import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } 
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
-import { PageLayout } from "@src/layout/PageLayout";
 import redraft, { Renderers } from "redraft";
 import styled, { css } from "styled-components";
 
@@ -137,14 +136,6 @@ export const RichTextBlock = withPreview(
     { label: "Rich Text" },
 );
 
-export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
-    <PageLayout grid>
-        <PageLayoutContent>
-            <RichTextBlock {...props} />
-        </PageLayoutContent>
-    </PageLayout>
-);
-
 const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
     ${({ theme, $disableLastBottomSpacing }) =>
         $disableLastBottomSpacing &&
@@ -180,8 +171,4 @@ const InlineLink = styled.a`
     &:hover {
         color: ${({ theme }) => theme.palette.primary.dark};
     }
-`;
-
-const PageLayoutContent = styled.div`
-    grid-column: 3 / -3;
 `;
