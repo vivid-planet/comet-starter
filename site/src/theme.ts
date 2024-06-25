@@ -5,12 +5,12 @@ const createBreakpoint = (value: number) => {
     };
 };
 
-export enum BreakpointValue {
-    sx = 600,
-    sm = 900,
-    md = 1200,
-    lg = 1600,
-}
+export const BreakpointValue = {
+    sx: 600,
+    sm: 900,
+    md: 1200,
+    lg: 1600,
+} as const;
 
 export const theme = {
     palette: {
