@@ -1,4 +1,4 @@
-import { Field, FinalFormSelect } from "@comet/admin";
+import { SelectField } from "@comet/admin";
 import { BlocksFinalForm, createCompositeBlock, createCompositeSetting, YouTubeVideoBlock } from "@comet/blocks-admin";
 import { DamImageBlock } from "@comet/cms-admin";
 import { MenuItem } from "@mui/material";
@@ -31,17 +31,16 @@ export const MediaYoutubeVideoBlock = createCompositeBlock({
                             onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
                             initialValues={{ aspectRatio: state }}
                         >
-                            <Field name="aspectRatio" label={<FormattedMessage id="mediaYouTubeVideo.aspectRatio" defaultMessage="Aspect Ratio" />}>
-                                {(props) => (
-                                    <FinalFormSelect {...props}>
-                                        {aspectRatioOptions.map((option) => (
-                                            <MenuItem value={option.value} key={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </FinalFormSelect>
-                                )}
-                            </Field>
+                            <SelectField
+                                name="aspectRatio"
+                                label={<FormattedMessage id="mediaYouTubeVideo.aspectRatio" defaultMessage="Aspect Ratio" />}
+                            >
+                                {aspectRatioOptions.map((option) => (
+                                    <MenuItem value={option.value} key={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </SelectField>
                         </BlocksFinalForm>
                     );
                 },

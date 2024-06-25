@@ -10,7 +10,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { DamImageBlock, DamVideoBlock } from "@comet/cms-api";
-import { IsEnum, ValidateNested } from "class-validator";
+import { IsEnum } from "class-validator";
 
 enum MediaDamVideoAspectRatio {
     "auto" = "auto",
@@ -35,7 +35,6 @@ class MediaDamVideoBlockData extends BlockData {
 }
 
 class MediaDamVideoBlockInput extends BlockInput {
-    @ValidateNested()
     @ChildBlockInput(DamVideoBlock)
     video: ExtractBlockInput<typeof DamVideoBlock>;
 
@@ -43,7 +42,6 @@ class MediaDamVideoBlockInput extends BlockInput {
     @BlockField({ type: "enum", enum: MediaDamVideoAspectRatio })
     aspectRatio: MediaDamVideoAspectRatio;
 
-    @ValidateNested()
     @ChildBlockInput(DamImageBlock)
     previewImage: ExtractBlockInput<typeof DamImageBlock>;
 

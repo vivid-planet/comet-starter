@@ -11,7 +11,7 @@ import {
     YouTubeVideoBlock,
 } from "@comet/blocks-api";
 import { DamImageBlock } from "@comet/cms-api";
-import { IsEnum, ValidateNested } from "class-validator";
+import { IsEnum } from "class-validator";
 
 enum MediaYoutubeVideoAspectRatio {
     "1x1" = "1x1",
@@ -35,7 +35,6 @@ class MediaYoutubeVideoBlockData extends BlockData {
 }
 
 class MediaYoutubeVideoBlockInput extends BlockInput {
-    @ValidateNested()
     @ChildBlockInput(YouTubeVideoBlock)
     video: ExtractBlockInput<typeof YouTubeVideoBlock>;
 
@@ -43,7 +42,6 @@ class MediaYoutubeVideoBlockInput extends BlockInput {
     @BlockField({ type: "enum", enum: MediaYoutubeVideoAspectRatio })
     aspectRatio: MediaYoutubeVideoAspectRatio;
 
-    @ValidateNested()
     @ChildBlockInput(DamImageBlock)
     previewImage: ExtractBlockInput<typeof DamImageBlock>;
 

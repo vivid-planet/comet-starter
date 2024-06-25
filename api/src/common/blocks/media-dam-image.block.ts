@@ -10,7 +10,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { DamImageBlock } from "@comet/cms-api";
-import { IsEnum, ValidateNested } from "class-validator";
+import { IsEnum } from "class-validator";
 
 export enum MediaDamImageAspectRatio {
     "16x9" = "16x9",
@@ -30,7 +30,6 @@ class MediaDamImageBlockData extends BlockData {
 }
 
 class MediaDamImageBlockInput extends BlockInput {
-    @ValidateNested()
     @ChildBlockInput(DamImageBlock)
     image: ExtractBlockInput<typeof DamImageBlock>;
 

@@ -1,4 +1,4 @@
-import { Field, FinalFormSelect } from "@comet/admin";
+import { SelectField } from "@comet/admin";
 import { BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
 import { DamImageBlock, DamVideoBlock } from "@comet/cms-admin";
 import { MenuItem } from "@mui/material";
@@ -6,7 +6,7 @@ import { MediaDamVideoBlockData } from "@src/blocks.generated";
 import { FormattedMessage } from "react-intl";
 
 const aspectRatioOptions = [
-    { label: "auto", value: "auto" },
+    { label: <FormattedMessage id="mediaDamVideo.aspectRatio.auto" defaultMessage="auto" />, value: "auto" },
     { label: "1:1", value: "1x1" },
     { label: "3:2", value: "3x2" },
     { label: "4:3", value: "4x3" },
@@ -32,17 +32,13 @@ export const MediaDamVideoBlock = createCompositeBlock({
                             onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
                             initialValues={{ aspectRatio: state }}
                         >
-                            <Field name="aspectRatio" label={<FormattedMessage id="mediaDamVideo.aspectRatio" defaultMessage="Aspect Ratio" />}>
-                                {(props) => (
-                                    <FinalFormSelect {...props}>
-                                        {aspectRatioOptions.map((option) => (
-                                            <MenuItem value={option.value} key={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </FinalFormSelect>
-                                )}
-                            </Field>
+                            <SelectField name="aspectRatio" label={<FormattedMessage id="mediaDamVideo.aspectRatio" defaultMessage="Aspect Ratio" />}>
+                                {aspectRatioOptions.map((option) => (
+                                    <MenuItem value={option.value} key={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </SelectField>
                         </BlocksFinalForm>
                     );
                 },
