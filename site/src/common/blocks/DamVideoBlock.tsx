@@ -10,7 +10,7 @@ interface DamVideoBlockProps extends PropsWithData<MediaDamVideoBlockData> {
 
 export const DamVideoBlock = withPreview(
     ({ data: { video, aspectRatio, previewImage }, sizes = "100vw" }: DamVideoBlockProps) => {
-        const { damFile, autoplay, showControls } = video;
+        const { damFile, autoplay, loop, showControls } = video;
 
         if (damFile === undefined) {
             return <PreviewSkeleton type="media" hasContent={false} />;
@@ -33,6 +33,7 @@ export const DamVideoBlock = withPreview(
                     <Video
                         autoPlay={autoplay || (hasPreviewImage && !showPreviewImage)}
                         controls={showControls}
+                        loop={loop}
                         playsInline
                         muted={autoplay}
                         $aspectRatio={aspectRatio !== "auto" ? aspectRatio.replace("x", " / ") : undefined}
