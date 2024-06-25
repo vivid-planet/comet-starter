@@ -153,7 +153,7 @@ const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
 const Text = styled(Typography)`
     white-space: pre-line;
 
-    // Show empty lines as spacing between paragraphs
+    /* Show empty lines as spacing between paragraphs */
     &:empty:not(:first-child:last-child)::before {
         white-space: pre;
         content: " ";
