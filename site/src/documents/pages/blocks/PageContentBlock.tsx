@@ -6,6 +6,7 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { KeyFactsBlock } from "@src/common/blocks/KeyFactsBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
@@ -20,6 +21,7 @@ const supportedBlocks: SupportedBlocks = {
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
     callToActionList: (props) => <CallToActionListBlock data={props} />,
+    keyFacts: (props) => <KeyFactsBlock data={props} />,
 };
 
 export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
