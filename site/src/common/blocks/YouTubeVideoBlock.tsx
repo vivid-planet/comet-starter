@@ -27,21 +27,23 @@ export const YouTubeVideoBlock = withPreview(
         const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
         const [showPreviewImage, setShowPreviewImage] = useState(true);
 
-        if (!youtubeIdentifier) return <PreviewSkeleton type="media" hasContent={false} />;
-        const identifier = parseYoutubeIdentifier(youtubeIdentifier);
+        if (!youtubeIdentifier) {
+            return <PreviewSkeleton type="media" hasContent={false} />;
+        }
 
+        const identifier = parseYoutubeIdentifier(youtubeIdentifier);
         const searchParams = new URLSearchParams();
         searchParams.append("modestbranding", "1");
 
-        (autoplay !== undefined || (hasPreviewImage && !showPreviewImage)) &&
+        if (autoplay !== undefined || (hasPreviewImage && !showPreviewImage))
             searchParams.append("autoplay", Number(autoplay || (hasPreviewImage && !showPreviewImage)).toString());
-        autoplay && searchParams.append("mute", "1");
+        if (autoplay) searchParams.append("mute", "1");
 
-        showControls !== undefined && searchParams.append("controls", Number(showControls).toString());
+        if (showControls !== undefined) searchParams.append("controls", Number(showControls).toString());
 
-        showControls !== undefined && searchParams.append("loop", Number(showControls).toString());
+        if (loop !== undefined) searchParams.append("loop", Number(loop).toString());
         // the playlist parameter is needed so that the video loops. See https://developers.google.com/youtube/player_parameters#loop
-        loop && identifier && searchParams.append("playlist", identifier);
+        if (loop && identifier) searchParams.append("playlist", identifier);
 
         const youtubeBaseUrl = "https://www.youtube-nocookie.com/embed/";
         const youtubeUrl = new URL(`${youtubeBaseUrl}${identifier ?? ""}`);
@@ -54,7 +56,7 @@ export const YouTubeVideoBlock = withPreview(
                 )}
                 {(!showPreviewImage || !hasPreviewImage) && (
                     <VideoContainer $aspectRatio={aspectRatio.replace("x", "/")}>
-                        <iframe src={youtubeUrl.toString()} allow="autoplay" />
+                        <YouTubeContainer src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
                 )}
             </>
@@ -71,13 +73,13 @@ const VideoContainer = styled.div<{ $aspectRatio: string }>`
         css`
             aspect-ratio: ${$aspectRatio};
         `}
+`;
 
-    iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-    }
+const YouTubeContainer = styled.iframe`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 `;
