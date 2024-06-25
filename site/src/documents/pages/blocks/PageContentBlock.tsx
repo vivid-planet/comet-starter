@@ -16,12 +16,14 @@ const supportedBlocks: SupportedBlocks = {
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <PageContentRichTextBlock data={props} />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
+    columns: (props) => <ColumnsBlock data={props} />,
+    callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+
+    // TODO: Outdated blocks! Following blocks needs refactoring to support page layout
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
-    columns: (props) => <ColumnsBlock data={props} />,
-    callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
 };
 
 export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
