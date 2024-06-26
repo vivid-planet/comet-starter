@@ -28,11 +28,12 @@ async function bootstrap(): Promise<void> {
     useContainer(app.select(appModule), { fallbackOnErrors: true });
 
     app.setGlobalPrefix("api");
+
     app.enableCors({
         origin: config.corsAllowedOrigin,
         methods: ["GET", "POST"],
         credentials: false,
-        exposedHeaders: [],
+        maxAge: 600,
     });
 
     app.useGlobalInterceptors(new ExceptionInterceptor(config.debug));
@@ -45,9 +46,34 @@ async function bootstrap(): Promise<void> {
         }),
     );
 
+    app.disable("x-powered-by");
+
     app.use(
         helmet({
-            contentSecurityPolicy: false, // configure this when API returns HTML
+            contentSecurityPolicy: {
+                directives: {
+                    "default-src": ["'none'"],
+                },
+                useDefaults: false,
+            },
+            xXssProtection: false,
+            xFrameOptions: false,
+            strictTransportSecurity: {
+                maxAge: 63072000,
+                includeSubDomains: true,
+                preload: true,
+            },
+            referrerPolicy: {
+                policy: "no-referrer",
+            },
+            xContentTypeOptions: true,
+            xDnsPrefetchControl: false,
+            xDownloadOptions: true,
+            xPermittedCrossDomainPolicies: true,
+            originAgentCluster: true,
+            crossOriginResourcePolicy: {
+                policy: "same-site",
+            },
         }),
     );
     app.use(json({ limit: "1mb" })); // increase default limit of 100kb for saving large pages

@@ -65,7 +65,7 @@ export class AppModule {
                             origin: config.corsAllowedOrigin,
                             methods: ["GET", "POST"],
                             credentials: false,
-                            exposedHeaders: [],
+                            maxAge: 600,
                         },
                         useGlobalPrefix: true,
                         // See https://docs.nestjs.com/graphql/other-features#execute-enhancers-at-the-field-resolver-level
