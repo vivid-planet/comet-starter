@@ -16,24 +16,43 @@ indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
 });
 
 app.use(compression());
+
+app.disable("x-powered-by");
+
 app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                "script-src": ["'self'", "'unsafe-inline'"],
-                "img-src": ["'self'", "https:", "data:"],
-                "default-src": ["'self'", "https:"],
-                "media-src": ["'self'", "https:"],
-                "style-src": ["'self'", "https:", "'unsafe-inline'"],
-                "font-src": ["'self'", "https:", "data:"],
+                "default-src": ["'none'"],
+                "script-src-elem": ["'unsafe-inline'", "'self'"],
+                "style-src-elem": ["'unsafe-inline'", "'self'"],
+                "style-src-attr": ["'unsafe-inline'"],
+                "font-src": ["'self'", "data:"],
+                "connect-src": ["https:"],
+                "img-src": ["'self'", "data:", "https:"],
+                "frame-src": ["https:"],
+                upgradeInsecureRequests: [],
             },
+            upgradeInsecureRequests: true,
+            useDefaults: false,
         },
         xXssProtection: false,
+        xFrameOptions: false,
+        crossOriginResourcePolicy: "same-origin",
+        crossOriginEmbedderPolicy: false,
+        crossOriginOpenerPolicy: true,
         strictTransportSecurity: {
             maxAge: 63072000,
             includeSubDomains: true,
             preload: true,
         },
+        referrerPolicy: {
+            policy: "no-referrer",
+        },
+        xContentTypeOptions: true,
+        xDnsPrefetchControl: false,
+        xDownloadOptions: true,
+        xPermittedCrossDomainPolicies: true,
     }),
 );
 
