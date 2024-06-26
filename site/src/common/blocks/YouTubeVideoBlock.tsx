@@ -52,10 +52,9 @@ export const YouTubeVideoBlock = withPreview(
 
         return (
             <>
-                {hasPreviewImage && showPreviewImage && (
+                {hasPreviewImage && showPreviewImage ? (
                     <VideoPreviewImage onClick={() => setShowPreviewImage(false)} image={previewImage} aspectRatio={aspectRatio} sizes={sizes} />
-                )}
-                {(!showPreviewImage || !hasPreviewImage) && (
+                ) : (
                     <VideoContainer $aspectRatio={aspectRatio.replace("x", "/")}>
                         <YouTubeContainer src={youtubeUrl.toString()} allow="autoplay" />
                     </VideoContainer>
