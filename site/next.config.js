@@ -30,12 +30,35 @@ const nextConfig = {
             source: "/:path*",
             headers: [
                 {
+                    key: "Content-Security-Policy",
+                    value: [
+                        "default-src 'none'",
+                        "script-src-elem 'self'",
+                        "style-src-elem 'unsafe-inline'",
+                        "style-src-attr 'unsafe-inline'",
+                        `img-src 'self' data: ${process.env.API_URL}/`,
+                        "script-src 'unsafe-eval'",
+                        "connect-src 'self'",
+                        "frame-src https://www.youtube-nocookie.com",
+                    ].join("; "),
+                },
+                {
                     key: "Strict-Transport-Security",
                     value: "max-age=63072000; includeSubDomains; preload",
                 },
                 {
                     key: "Cross-Origin-Opener-Policy",
                     value: "same-origin",
+                },
+                {
+                    key: "Cross-Origin-Embedder-Policy",
+                    // This value should be set to "require-corp" as soon as iframe credentialless it is supported by all browsers
+                    // https://developer.mozilla.org/en-US/docs/Web/Security/IFrame_credentialless
+                    value: "unsafe-none",
+                },
+                {
+                    key: "Cross-Origin-Resource-Policy",
+                    value: "same-site",
                 },
                 {
                     key: "Permissions-Policy",
@@ -47,27 +70,7 @@ const nextConfig = {
                 },
                 {
                     key: "Referrer-Policy",
-                    value: "strict-origin-when-cross-origin",
-                },
-                {
-                    key: "Content-Security-Policy",
-                    value: `
-                                default-src 'self';
-                                form-action 'self'; 
-                                object-src 'none';
-                                img-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                media-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                style-src 'self' 'unsafe-inline'; 
-                                font-src 'self' https: data:;
-                                script-src 'self' 'unsafe-inline' https:${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""};
-                                connect-src 'self' https:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                frame-ancestors ${process.env.ADMIN_URL};
-                                upgrade-insecure-requests; 
-                                block-all-mixed-content;
-                                frame-src 'self' https://*.youtube.com https://*.youtube-nocookie.com;
-                            `
-                        .replace(/\s{2,}/g, " ")
-                        .trim(),
+                    value: "same-origin",
                 },
                 ...(process.env.ADMIN_URL
                     ? [
