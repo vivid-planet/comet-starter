@@ -1,5 +1,7 @@
 import { PixelImageBlock, PreviewSkeleton, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import * as CometConfig from "@src/comet-config.json";
 import { BreakpointValue, theme } from "@src/theme";
 import { ImageProps as NextImageProps } from "next/image";
 
@@ -19,7 +21,7 @@ type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "layout" 
     layout?: DynamicLayout | StaticLayout;
 };
 
-const allowedAspectRatios = ["16x9", "4x3", "3x2", "3x1", "2x1", "1x1", "1x2", "1x3", "2x3", "3x4", "9x16", "21x9", "inherit"];
+const allowedAspectRatios = [...CometConfig.dam.allowedImageAspectRatios, "inherit"];
 
 const getAspectRationNearestToAllowed = (aspectRatio: string): string => {
     let aspectRatioNearestToAllowed = aspectRatio;
