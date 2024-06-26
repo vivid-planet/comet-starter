@@ -31,7 +31,7 @@ const PreviewPage: React.FunctionComponent = () => {
 
     return <div>{blockData && <PageContentBlock data={blockData} />}</div>;
 };
-const IFrameBridgePreviewPage = (): JSX.Element => {
+const IFrameBridgePreviewPage = () => {
     return (
         <IFrameBridgeProvider>
             <BlockPreviewProvider>
