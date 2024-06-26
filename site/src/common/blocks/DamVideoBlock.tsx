@@ -22,15 +22,14 @@ export const DamVideoBlock = withPreview(
 
         return (
             <>
-                {hasPreviewImage && showPreviewImage && (
+                {hasPreviewImage && showPreviewImage ? (
                     <VideoPreviewImage
                         onClick={() => setShowPreviewImage(false)}
                         image={previewImage}
                         aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined}
                         sizes={sizes}
                     />
-                )}
-                {(!showPreviewImage || !hasPreviewImage) && (
+                ) : (
                     <Video
                         autoPlay={autoplay || (hasPreviewImage && !showPreviewImage)}
                         controls={showControls}
