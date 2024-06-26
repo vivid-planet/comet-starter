@@ -1,10 +1,10 @@
+"use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { gql } from "graphql-request";
 import * as React from "react";
 import styled from "styled-components";
 
-import { GQLHeaderFragment } from "./Header.generated";
-import { PageLink, pageLinkFragment } from "./PageLink";
+import { GQLHeaderFragment } from "./Header.fragment.generated";
+import { PageLink } from "./PageLink";
 
 interface Props {
     header: GQLHeaderFragment[];
@@ -35,21 +35,6 @@ function Header({ header }: Props): JSX.Element {
         </Root>
     );
 }
-
-const headerFragment = gql`
-    fragment Header on PageTreeNode {
-        id
-        name
-        ...PageLink
-        childNodes {
-            id
-            name
-            ...PageLink
-        }
-    }
-
-    ${pageLinkFragment}
-`;
 
 const Root = styled.header`
     padding: 10px 20px;
@@ -92,4 +77,4 @@ const Link = styled.a<{ $active: boolean }>`
     }
 `;
 
-export { Header, headerFragment };
+export { Header };

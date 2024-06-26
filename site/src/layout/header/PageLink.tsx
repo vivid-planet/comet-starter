@@ -1,24 +1,11 @@
+"use client";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
-import { gql } from "graphql-request";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 
-import { GQLPageLinkFragment } from "./PageLink.generated";
-
-const pageLinkFragment = gql`
-    fragment PageLink on PageTreeNode {
-        path
-        documentType
-        document {
-            __typename
-            ... on Link {
-                content
-            }
-        }
-    }
-`;
+import { GQLPageLinkFragment } from "./PageLink.fragment.generated";
 
 interface Props {
     page: GQLPageLinkFragment;
@@ -26,8 +13,8 @@ interface Props {
 }
 
 function PageLink({ page, children }: Props): JSX.Element | null {
-    const router = useRouter();
-    const active = router.asPath === page.path;
+    const pathname = usePathname();
+    const active = pathname === page.path;
 
     if (page.documentType === "Link") {
         if (page.document === null || page.document.__typename !== "Link") {
@@ -41,7 +28,7 @@ function PageLink({ page, children }: Props): JSX.Element | null {
         );
     } else if (page.documentType === "Page") {
         return (
-            <Link href={page.path} passHref>
+            <Link href={`/${page.scope.language}${page.path}`} passHref legacyBehavior>
                 {typeof children === "function" ? children(active) : children}
             </Link>
         );
@@ -54,4 +41,4 @@ function PageLink({ page, children }: Props): JSX.Element | null {
     }
 }
 
-export { PageLink, pageLinkFragment };
+export { PageLink };
