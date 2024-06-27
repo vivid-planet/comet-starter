@@ -26,7 +26,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
             domains: {
                 main: domains[env] ?? "",
                 preliminary: env === "prod" ? domains["preliminary"] : undefined,
-                preview: "", // TODO Remove once https://github.com/vivid-planet/comet/pull/2163 is available
             },
             preloginEnabled: env === "prod" ? site.preloginEnabled : true,
         };
