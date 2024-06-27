@@ -12,6 +12,7 @@ import {
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
+import { EditFooterPage } from "@src/footers/EditFooterPage";
 import { FormattedMessage } from "react-intl";
 
 import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "./ContentScopeIndicatorStyles";
@@ -76,6 +77,21 @@ export const masterMenuData: MasterMenuData = [
             component: DamPage,
         },
         requiredPermission: "dam",
+    },
+    {
+        primary: <FormattedMessage id="menu.project-snips" defaultMessage="Project Snips" />,
+        icon: <Snips />,
+        submenu: [
+            {
+                primary: <FormattedMessage id="menu.project-snips.footer" defaultMessage="Footer" />,
+                route: {
+                    path: "/project-snips/footer",
+                    component: EditFooterPage,
+                },
+                requiredPermission: "pageTree",
+            },
+        ],
+        requiredPermission: "pageTree",
     },
     {
         primary: <FormattedMessage id="menu.userPermissions" defaultMessage="User Permissions" />,
