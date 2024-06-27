@@ -8,18 +8,8 @@ import { ImageProps as NextImageProps } from "next/image";
 
 import { NextImageBottomPaddingFix } from "../NextImageBottomPaddingFix";
 
-interface DynamicLayout {
-    variant: "fill" | "responsive";
-    sizes: string;
-}
-
-interface StaticLayout {
-    variant: "fixed" | "intrinsic";
-}
-
-type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "layout" | "alt"> & {
+type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & {
     aspectRatio?: string | "inherit";
-    layout?: DynamicLayout | StaticLayout;
 };
 
 const allowedAspectRatios = [...CometConfig.dam.allowedImageAspectRatios, "inherit"];
@@ -54,7 +44,7 @@ const getAspectRationNearestToAllowed = (aspectRatio: string): string => {
 };
 
 export const DamImageBlock = withPreview(
-    ({ data: { block }, aspectRatio = "16x9", layout, ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
+    ({ data: { block }, aspectRatio = "16x9", layout = "intrinsic", ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
         const aspectRatioNearestToAllowed = getAspectRationNearestToAllowed(aspectRatio);
 
         if (!block) {
@@ -66,8 +56,7 @@ export const DamImageBlock = withPreview(
                 <NextImageBottomPaddingFix>
                     <PixelImageBlock
                         data={block.props as PixelImageBlockData}
-                        layout={layout?.variant ?? "intrinsic"}
-                        sizes={layout && "sizes" in layout ? layout.sizes : undefined}
+                        layout={layout}
                         aspectRatio={aspectRatioNearestToAllowed}
                         {...imageProps}
                     />
