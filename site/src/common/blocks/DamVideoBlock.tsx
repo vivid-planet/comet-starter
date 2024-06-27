@@ -1,18 +1,59 @@
 import { PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { DamVideoBlockData } from "@src/blocks.generated";
-import * as React from "react";
+import { MediaDamVideoBlockData } from "@src/blocks.generated";
+import { VideoPreviewImage } from "@src/common/helpers/VideoPreviewImage";
+import { useState } from "react";
+import styled, { css } from "styled-components";
+
+interface DamVideoBlockProps extends PropsWithData<MediaDamVideoBlockData> {
+    sizes?: string;
+}
 
 export const DamVideoBlock = withPreview(
-    ({ data: { damFile, autoplay, showControls } }: PropsWithData<DamVideoBlockData>) => {
+    ({ data: { video, aspectRatio, previewImage }, sizes = "100vw" }: DamVideoBlockProps) => {
+        const { damFile, autoplay, loop, showControls } = video;
+
         if (damFile === undefined) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
 
+        const hasPreviewImage = previewImage && previewImage.block?.props.damFile;
+        const [showPreviewImage, setShowPreviewImage] = useState(true);
+
         return (
-            <video autoPlay={autoplay} controls={showControls} playsInline muted={autoplay}>
-                <source src={damFile.fileUrl} type={damFile.mimetype} />
-            </video>
+            <>
+                {hasPreviewImage && showPreviewImage && (
+                    <VideoPreviewImage
+                        onClick={() => setShowPreviewImage(false)}
+                        image={previewImage}
+                        aspectRatio={aspectRatio !== "auto" ? aspectRatio : undefined}
+                        sizes={sizes}
+                    />
+                )}
+                {(!showPreviewImage || !hasPreviewImage) && (
+                    <Video
+                        autoPlay={autoplay || (hasPreviewImage && !showPreviewImage)}
+                        controls={showControls}
+                        loop={loop}
+                        playsInline
+                        muted={autoplay}
+                        $aspectRatio={aspectRatio !== "auto" ? aspectRatio.replace("x", " / ") : undefined}
+                    >
+                        <source src={damFile.fileUrl} type={damFile.mimetype} />
+                    </Video>
+                )}
+            </>
         );
     },
     { label: "Video" },
 );
+
+const Video = styled.video<{ $aspectRatio?: string }>`
+    width: 100%;
+    object-fit: cover;
+
+    ${({ $aspectRatio }) =>
+        $aspectRatio &&
+        css`
+            aspect-ratio: ${$aspectRatio};
+        `}
+`;
