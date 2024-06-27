@@ -238,6 +238,22 @@ scalar PageContentBlockData @specifiedBy(url: "http://www.ecma-international.org
 """Seo root block data"""
 scalar SeoBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
+type FooterContentScope {
+  domain: String!
+  language: String!
+}
+
+type Footer implements DocumentInterface {
+  id: ID!
+  updatedAt: DateTime!
+  content: FooterContentBlockData!
+  scope: FooterContentScope!
+  createdAt: DateTime!
+}
+
+"""FooterContent root block data"""
+scalar FooterContentBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
 type DamFolder {
   id: ID!
   name: String!
@@ -343,6 +359,11 @@ input PageTreeNodeScopeInput {
   language: String!
 }
 
+input FooterContentScopeInput {
+  domain: String!
+  language: String!
+}
+
 type Query {
   currentUser: CurrentUser!
   userPermissionsUserById(id: String!): User!
@@ -378,6 +399,7 @@ type Query {
   damFolder(id: ID!): DamFolder!
   damFolderByNameAndParentId(scope: DamScopeInput! = {}, name: String!, parentId: ID): DamFolder
   mainMenu(scope: PageTreeNodeScopeInput!): [PageTreeNode!]!
+  footer(scope: FooterContentScopeInput!): Footer
 }
 
 input UserFilter {
@@ -539,6 +561,7 @@ type Mutation {
   updateDamFolder(id: ID!, input: UpdateDamFolderInput!): DamFolder!
   moveDamFolders(folderIds: [ID!]!, targetFolderId: ID, scope: DamScopeInput! = {}): [DamFolder!]!
   deleteDamFolder(id: ID!): Boolean!
+  saveFooter(scope: FooterContentScopeInput!, input: FooterInput!, lastUpdatedAt: DateTime): Footer!
 }
 
 input UserPermissionInput {
@@ -665,3 +688,10 @@ input UpdateDamFolderInput {
   parentId: ID
   archived: Boolean
 }
+
+input FooterInput {
+  content: FooterContentBlockInput!
+}
+
+"""FooterContent root block input"""
+scalar FooterContentBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
