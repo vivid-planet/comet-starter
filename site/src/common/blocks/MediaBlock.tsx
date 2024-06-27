@@ -6,7 +6,7 @@ import { YouTubeVideoBlock } from "@src/common/blocks/YouTubeVideoBlock";
 
 const getSupportedBlocks = (sizes: string): SupportedBlocks => {
     return {
-        image: (data) => <DamImageBlock data={data} layout={{ variant: "responsive", sizes: sizes }} />,
+        image: (data) => <DamImageBlock data={data} layout={"responsive"} sizes={sizes} />,
         damVideo: (data) => <DamVideoBlock data={data} sizes={sizes} />,
         youTubeVideo: (data) => <YouTubeVideoBlock data={data} sizes={sizes} />,
     };

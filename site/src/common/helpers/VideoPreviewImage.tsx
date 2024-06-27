@@ -15,7 +15,7 @@ export const VideoPreviewImage = ({ onClick, image, aspectRatio, sizes = "100vw"
     const intl = useIntl();
     return (
         <Root onClick={onClick} aria-label={intl.formatMessage({ id: "videoPreviewImage.ariaLabel.startVideo", defaultMessage: "Start video" })}>
-            <DamImageBlock data={image} objectFit={"cover"} aspectRatio={aspectRatio} layout={{ variant: "responsive", sizes: sizes }} />
+            <DamImageBlock data={image} objectFit={"cover"} aspectRatio={aspectRatio} layout={"responsive"} sizes={sizes} />
             <IconWrapper>
                 <PlayIcon href={"/icons/play-circle.svg#play-circle"} />
             </IconWrapper>
