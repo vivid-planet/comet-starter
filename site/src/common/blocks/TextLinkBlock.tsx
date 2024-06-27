@@ -1,3 +1,4 @@
+"use client";
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { TextLinkBlockData } from "@src/blocks.generated";
 
