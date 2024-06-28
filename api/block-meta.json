@@ -379,6 +379,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
@@ -417,6 +418,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
