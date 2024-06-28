@@ -6,11 +6,11 @@ import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActio
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { DamVideoBlock } from "@src/common/blocks/DamVideoBlock";
 import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
-import { KeyFactsBlock } from "@src/common/blocks/KeyFactsBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 
 const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,

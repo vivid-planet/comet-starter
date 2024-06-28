@@ -2,9 +2,8 @@ import { Field, FinalFormInput } from "@comet/admin";
 import { BlocksFinalForm, createCompositeBlock, createCompositeSettings } from "@comet/blocks-admin";
 import { createRichTextBlock, SvgImageBlock } from "@comet/cms-admin";
 import { KeyFactsItemBlockData } from "@src/blocks.generated";
+import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { FormattedMessage } from "react-intl";
-
-import { LinkBlock } from "./LinkBlock";
 
 const DescriptionRichTextBlock = createRichTextBlock({
     link: LinkBlock,

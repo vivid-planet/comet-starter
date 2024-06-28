@@ -3,6 +3,7 @@ import { KeyFactsBlockData, KeyFactsItemBlockData } from "@src/blocks.generated"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { defaultRichTextRenderers, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
+import { PageLayout } from "@src/layout/PageLayout";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -30,15 +31,18 @@ const KeyFactItemBlock = withPreview(
 
 export const KeyFactsBlock = withPreview(
     ({ data: { heading, items } }: PropsWithData<KeyFactsBlockData>) => (
-        <Root>
-            {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
-            <ItemWrapper>{items.blocks.map((item) => item.visible && <KeyFactItemBlock data={item.props} key={item.key} />)}</ItemWrapper>
-        </Root>
+        <PageLayout grid>
+            <PageLayoutContent>
+                {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
+                <ItemWrapper>{items.blocks.map((item) => item.visible && <KeyFactItemBlock data={item.props} key={item.key} />)}</ItemWrapper>
+            </PageLayoutContent>
+        </PageLayout>
     ),
     { label: "Key facts" },
 );
 
-const Root = styled.div`
+const PageLayoutContent = styled.div`
+    grid-column: 3 / -3;
     margin: ${({ theme }) => theme.spacing.D300} 0;
 `;
 

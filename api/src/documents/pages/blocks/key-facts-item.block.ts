@@ -10,9 +10,8 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { SvgImageBlock } from "@comet/cms-api";
+import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { IsString } from "class-validator";
-
-import { RichTextBlock } from "./rich-text.block";
 
 class KeyFactsItemBlockData extends BlockData {
     @ChildBlock(SvgImageBlock)

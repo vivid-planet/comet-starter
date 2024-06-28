@@ -1,6 +1,6 @@
 import { BlockCategory, createCompositeBlock, createListBlock } from "@comet/blocks-admin";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
-import { KeyFactsItemBlock } from "@src/common/blocks/KeyFactsItemBlock";
+import { KeyFactsItemBlock } from "@src/documents/pages/blocks/KeyFactsItemBlock";
 import { FormattedMessage } from "react-intl";
 
 const KeyFactsItemsBlock = createListBlock({

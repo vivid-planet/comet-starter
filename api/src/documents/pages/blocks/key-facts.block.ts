@@ -10,7 +10,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { HeadingBlock } from "@src/common/blocks/heading.block";
-import { KeyFactsItemBlock } from "@src/common/blocks/key-facts-item.block";
+import { KeyFactsItemBlock } from "@src/documents/pages/blocks/key-facts-item.block";
 
 const KeyFactsItems = createListBlock({ block: KeyFactsItemBlock }, "KeyFactsItems");
 
