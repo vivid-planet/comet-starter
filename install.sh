@@ -27,6 +27,7 @@ ln -sf ../../site-configs.d.ts ./api/src/
 # create admin symlinks
 ln -sf ../.env ./admin/
 ln -sf ../.env.local ./admin/
+ln -sf ../.env.secrets ./admin/
 ln -sf ../.env.site-configs ./admin/
 ln -sf ../api/schema.gql ./admin/
 ln -sf ../api/block-meta.json ./admin/
