@@ -26,6 +26,7 @@ const GlobalStyle = createGlobalStyle`
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        color: ${({ theme }) => theme.palette.text.primary};
     }
 
     h1,
