@@ -4,7 +4,6 @@ import { SiteConfig } from "./site-configs.d";
 // Types for files in site-configs/
 type Environment = "local" | "dev" | "test" | "staging" | "prod";
 export type Config = Omit<SiteConfig, "domains"> & {
-    preLoginPassword?: string;
     domains: {
         preliminary?: string;
     } & {
