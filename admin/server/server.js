@@ -37,8 +37,8 @@ app.use(
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".html")) {
                 // Don't cache the index.html at all to make sure applications updates are applied
-                // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_caching
-                res.setHeader("cache-control", "no-store, max-age: 0");
+                // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_storing
+                res.setHeader("cache-control", "no-store");
             } else if (path.endsWith(".js")) {
                 // The js file is static and the index.html uses a parameter as cache buster
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#caching_static_assets
