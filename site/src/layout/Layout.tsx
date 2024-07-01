@@ -1,17 +1,26 @@
+import { Footer, footerFragment } from "@src/layout/footer/Footer";
 import { gql, GraphQLClient } from "graphql-request";
 import * as React from "react";
+import styled from "styled-components";
 
 import { Header, headerFragment } from "./header/Header";
 import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./Layout.generated";
 
-function Layout({ children, header }: React.PropsWithChildren<GQLLayoutQuery>): JSX.Element {
+function Layout({ children, header, footer }: React.PropsWithChildren<GQLLayoutQuery>): JSX.Element {
     return (
-        <>
+        <LayoutWrapper>
             <Header header={header} />
             {children}
-        </>
+            {footer && <Footer footer={footer} />}
+        </LayoutWrapper>
     );
 }
+
+const LayoutWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+`;
 
 const layoutCache = new Map<string, GQLLayoutQuery>();
 
@@ -44,9 +53,13 @@ async function fetchLayout(client: GraphQLClient, scope: { domain: string; langu
                 header: mainMenu(scope: { domain: $domain, language: $language }) {
                     ...Header
                 }
+                footer: footer(scope: { domain: $domain, language: $language }) {
+                    ...Footer
+                }
             }
 
             ${headerFragment}
+            ${footerFragment}
         `,
         { ...scope },
     );
