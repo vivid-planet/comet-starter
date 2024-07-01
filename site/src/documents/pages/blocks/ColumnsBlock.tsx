@@ -63,8 +63,7 @@ const Column = styled.div<{ $layout: string }>`
             $layout === "4-16-4" &&
             css`
                 grid-column: 5 / -5;
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "9-9" &&
             css`
@@ -73,8 +72,7 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 14 / 23;
                 }
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "12-6" &&
             css`
@@ -83,8 +81,7 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 17 / 23;
                 }
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "6-12" &&
             css`
@@ -93,7 +90,6 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 11 / 23;
                 }
-            }
-        `};
+            `};
     }
 `;
