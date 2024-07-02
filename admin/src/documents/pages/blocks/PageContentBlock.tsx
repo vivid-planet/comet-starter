@@ -7,6 +7,7 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 
 export const PageContentBlock = createBlocksBlock({
     name: "PageContent",
@@ -22,5 +23,6 @@ export const PageContentBlock = createBlocksBlock({
         youTubeVideo: YouTubeVideoBlock,
         columns: ColumnsBlock,
         callToActionList: CallToActionListBlock,
+        keyFacts: KeyFactsBlock,
     },
 });

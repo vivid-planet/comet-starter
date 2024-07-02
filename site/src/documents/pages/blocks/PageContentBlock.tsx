@@ -11,6 +11,7 @@ import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
@@ -20,8 +21,9 @@ const supportedBlocks: SupportedBlocks = {
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+    keyFacts: (props) => <KeyFactsBlock data={props} />,
 
-    // TODO: Outdated blocks! Following blocks needs refactoring to support page layout
+    // TODO: Outdated blocks! Following blocks need adaptions to support page layout
     image: (props) => <DamImageBlock data={props} />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
