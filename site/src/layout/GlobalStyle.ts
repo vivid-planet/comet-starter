@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+"use client";
+>>>>>>> main
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -5,9 +9,15 @@ export const GlobalStyle = createGlobalStyle`
     * {
         min-width: 0;
     }
+<<<<<<< HEAD
 
     /* Prevent font size adjustments after orientation changes in mobile devices*/
     html {
+=======
+    
+    html {
+        /* Prevent font size adjustments after orientation changes in mobile devices */
+>>>>>>> main
         -webkit-text-size-adjust: 100%;
     }
 
