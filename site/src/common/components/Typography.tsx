@@ -198,25 +198,25 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     children?: ReactNode;
 }
 
-export const Typography = ({ component, variant = "p300", children, ...restProps }: TypographyProps) => (
-    <Text as={component || variantToElementMap[variant]} variant={variant} {...restProps}>
+export const Typography = ({ component, variant = "p300", bottomSpacing, children, ...restProps }: TypographyProps) => (
+    <Text as={component || variantToElementMap[variant]} $variant={variant} $bottomSpacing={bottomSpacing} {...restProps}>
         {children}
     </Text>
 );
 
 interface TextProps {
-    variant: TypographyVariant;
-    bottomSpacing?: boolean;
+    $variant: TypographyVariant;
+    $bottomSpacing?: boolean;
 }
 
 const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme }) => theme.palette.text.primary};
-    ${({ variant }) => typographyVariantStyle[variant]};
+    ${({ $variant }) => typographyVariantStyle[$variant]};
     margin-top: 0;
 
-    ${({ theme, bottomSpacing }) =>
-        !bottomSpacing &&
+    ${({ theme, $bottomSpacing }) =>
+        !$bottomSpacing &&
         css`
             margin-bottom: 0;
 
