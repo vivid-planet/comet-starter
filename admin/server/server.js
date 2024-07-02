@@ -53,7 +53,7 @@ app.use(
 
 // As a fallback, route everything to index.html
 app.get("*", (req, res) => {
-    res.sendFile(`index.html`, { root: `${__dirname}/../build/` });
+    res.sendFile(`index.html`, { root: `${__dirname}/../build/`, headers: { "cache-control": "no-store" } });
 });
 
 app.listen(port, () => {
