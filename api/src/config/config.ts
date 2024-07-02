@@ -59,6 +59,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         cdn: {
             originCheckSecret: envVars.CDN_ORIGIN_CHECK_SECRET,
         },
+        siteConfigs: envVars.PRIVATE_SITE_CONFIGS,
     };
 }
 
