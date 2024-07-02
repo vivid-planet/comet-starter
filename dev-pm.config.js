@@ -29,23 +29,29 @@ module.exports = {
             group: "api",
             waitOn: ["tcp:$POSTGRESQL_PORT", "tcp:$IMGPROXY_PORT"],
         },
+        // {
+        //     name: "site",
+        //     script: "npm --prefix site run dev",
+        //     group: "site",
+        //     waitOn: ["tcp:$API_PORT"],
+        // },
         {
-            name: "site",
-            script: "npm --prefix site run dev",
+            name: "site-react",
+            script: "npm --prefix site-react run dev",
             group: "site",
             waitOn: ["tcp:$API_PORT"],
         },
-        {
-            name: "site-codegen",
-            script: "npm --prefix site run gql:watch",
-            group: "site",
-            waitOn: ["tcp:$SITE_PORT"],
-        },
-        {
-            name: "site-block-codegen",
-            script: "npm --prefix site run generate-block-types:watch",
-            group: "site",
-            waitOn: ["tcp:$SITE_PORT"],
-        },
+        // {
+        //     name: "site-codegen",
+        //     script: "npm --prefix site run gql:watch",
+        //     group: "site",
+        //     waitOn: ["tcp:$SITE_PORT"],
+        // },
+        // {
+        //     name: "site-block-codegen",
+        //     script: "npm --prefix site run generate-block-types:watch",
+        //     group: "site",
+        //     waitOn: ["tcp:$SITE_PORT"],
+        // },
     ],
 };
