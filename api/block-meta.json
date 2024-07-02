@@ -844,7 +844,10 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "internal": "InternalLink",
-                                "external": "ExternalLink"
+                                "external": "ExternalLink",
+                                "damFileDownload": "DamFileDownloadLink",
+                                "email": "EmailLink",
+                                "phone": "PhoneLink"
                             },
                             "nullable": false
                         }
@@ -872,7 +875,10 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "internal": "InternalLink",
-                                "external": "ExternalLink"
+                                "external": "ExternalLink",
+                                "damFileDownload": "DamFileDownloadLink",
+                                "email": "EmailLink",
+                                "phone": "PhoneLink"
                             },
                             "nullable": false
                         }
