@@ -1,5 +1,178 @@
 [
     {
+        "name": "Accordion",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "AccordionItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "AccordionItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "AccordionContent",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "space": "Space",
+                                "callToActionList": "CallToActionList"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "space": "Space",
+                                "callToActionList": "CallToActionList"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "AccordionItem",
+        "fields": [
+            {
+                "name": "title",
+                "kind": "String",
+                "nullable": true
+            },
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "AccordionContent",
+                "nullable": false
+            },
+            {
+                "name": "openByDefault",
+                "kind": "Boolean",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "title",
+                "kind": "String",
+                "nullable": true
+            },
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "AccordionContent",
+                "nullable": false
+            },
+            {
+                "name": "openByDefault",
+                "kind": "Boolean",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "Anchor",
         "fields": [
             {
@@ -206,6 +379,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
@@ -244,6 +418,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
@@ -781,6 +956,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
@@ -824,6 +1000,7 @@
                             "name": "props",
                             "kind": "OneOfBlocks",
                             "blocks": {
+                                "accordion": "Accordion",
                                 "anchor": "Anchor",
                                 "space": "Space",
                                 "richtext": "RichText",
