@@ -1,11 +1,22 @@
-import { SVGProps } from "react";
+import * as React from "react";
 
-interface SvgUseProps extends SVGProps<SVGSVGElement> {
+interface SvgUseProps extends React.SVGProps<SVGSVGElement> {
     href: string;
 }
 
-export const SvgUse = ({ href, ...props }: SvgUseProps) => (
-    <svg {...props}>
-        <use href={href} xlinkHref={href} />
-    </svg>
-);
+export const SvgUse: React.FunctionComponent<SvgUseProps> = ({ href, ...props }) => {
+    const assetUrl = createAssetUrl(href);
+    return (
+        <svg {...props}>
+            <use href={assetUrl} xlinkHref={assetUrl} />
+        </svg>
+    );
+};
+
+function createAssetUrl(url: string): string {
+    if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW !== "true") {
+        return url;
+    } else {
+        return `/site${url}`;
+    }
+}
