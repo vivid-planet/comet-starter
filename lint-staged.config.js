@@ -8,6 +8,7 @@ module.exports = {
     "site/src/**/*.{ts,tsx,js,jsx,json,css,md}": () => "npm --prefix site run lint:eslint",
     "site/**/*.{ts,tsx}": () => "npm --prefix site run lint:tsc",
     "site/**/*.{js,json,md,yml,yaml}": () => "npm --prefix site run lint:prettier",
+    "site/src/**/*.{ts,tsx,css}": () => "npm --prefix site run lint:style",
     "create-app/src/**/*.{ts,tsx,js,jsx,json,css,scss,md}": () => "npm --prefix create-app run lint:eslint",
     "create-app/**/*.{ts,tsx}": () => "npm --prefix create-app run lint:tsc",
     "create-app/**/*.{js,json,md,yml,yaml}": () => "npm --prefix create-app run lint:prettier",
