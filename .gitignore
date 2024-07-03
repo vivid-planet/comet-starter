@@ -3,6 +3,7 @@
 node_modules
 .npm
 .babelCache
+build
 
 .env.local
 .env.secrets
