@@ -1,7 +1,5 @@
-import { Field, FinalFormInput } from "@comet/admin";
-import { BlocksFinalForm, createCompositeBlock, createCompositeSettings } from "@comet/blocks-admin";
+import { createCompositeBlock, createCompositeBlockTextField } from "@comet/blocks-admin";
 import { createRichTextBlock, SvgImageBlock } from "@comet/cms-admin";
-import { KeyFactsItemBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { FormattedMessage } from "react-intl";
 
@@ -23,29 +21,14 @@ export const KeyFactsItemBlock = createCompositeBlock(
                 block: SvgImageBlock,
                 title: <FormattedMessage id="keyFactsItemBlock.icon" defaultMessage="Icon" />,
             },
-            $settings: {
-                block: createCompositeSettings<Pick<KeyFactsItemBlockData, "fact" | "label">>({
-                    defaultValues: { fact: "", label: "" },
-                    AdminComponent: ({ state, updateState }) => {
-                        return (
-                            <BlocksFinalForm onSubmit={updateState} initialValues={state}>
-                                <Field
-                                    name="fact"
-                                    type="text"
-                                    component={FinalFormInput}
-                                    fullWidth
-                                    label={<FormattedMessage id="keyFactsItemBlock.fact" defaultMessage="Fact" />}
-                                />
-                                <Field
-                                    name="label"
-                                    type="text"
-                                    component={FinalFormInput}
-                                    fullWidth
-                                    label={<FormattedMessage id="keyFactsItemBlock.label" defaultMessage="Label" />}
-                                />
-                            </BlocksFinalForm>
-                        );
-                    },
+            fact: {
+                block: createCompositeBlockTextField({
+                    fieldProps: { fullWidth: true, label: <FormattedMessage id="keyFactsItemBlock.fact" defaultMessage="Fact" /> },
+                }),
+            },
+            label: {
+                block: createCompositeBlockTextField({
+                    fieldProps: { fullWidth: true, label: <FormattedMessage id="keyFactsItemBlock.label" defaultMessage="Label" /> },
                 }),
             },
             description: {
