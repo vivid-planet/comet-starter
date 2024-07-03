@@ -23,7 +23,7 @@ export const KeyFactsItemBlock = createCompositeBlock(
                 block: SvgImageBlock,
                 title: <FormattedMessage id="keyFactsItemBlock.icon" defaultMessage="Icon" />,
             },
-            settings: {
+            $settings: {
                 block: createCompositeSettings<Pick<KeyFactsItemBlockData, "fact" | "label">>({
                     defaultValues: { fact: "", label: "" },
                     AdminComponent: ({ state, updateState }) => {

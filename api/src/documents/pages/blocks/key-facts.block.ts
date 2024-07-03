@@ -12,13 +12,13 @@ import {
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { KeyFactsItemBlock } from "@src/documents/pages/blocks/key-facts-item.block";
 
-const KeyFactsItems = createListBlock({ block: KeyFactsItemBlock }, "KeyFactsItems");
+const KeyFactsItemsBlock = createListBlock({ block: KeyFactsItemBlock }, "KeyFactsItems");
 
 class KeyFactsBlockData extends BlockData {
     @ChildBlock(HeadingBlock)
     heading: BlockDataInterface;
 
-    @ChildBlock(KeyFactsItems)
+    @ChildBlock(KeyFactsItemsBlock)
     items: BlockDataInterface;
 }
 
@@ -26,8 +26,8 @@ class KeyFactsBlockInput extends BlockInput {
     @ChildBlockInput(HeadingBlock)
     heading: ExtractBlockInput<typeof HeadingBlock>;
 
-    @ChildBlockInput(KeyFactsItems)
-    items: ExtractBlockInput<typeof KeyFactsItems>;
+    @ChildBlockInput(KeyFactsItemsBlock)
+    items: ExtractBlockInput<typeof KeyFactsItemsBlock>;
 
     transformToBlockData(): KeyFactsBlockData {
         return inputToData(KeyFactsBlockData, this);
