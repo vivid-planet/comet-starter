@@ -1,5 +1,6 @@
 import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
 import { ColumnsBlockData, ColumnsContentBlockData } from "@src/blocks.generated";
+import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
@@ -9,6 +10,7 @@ import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
 const supportedBlocks: SupportedBlocks = {
+    accordion: (props) => <AccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,

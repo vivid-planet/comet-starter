@@ -6,6 +6,7 @@ import {
     createColumnsBlock,
 } from "@comet/blocks-admin";
 import { AnchorBlock } from "@comet/cms-admin";
+import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
@@ -111,6 +112,7 @@ const twoColumnLayouts = [
 const ColumnsContentBlock = createBlocksBlock({
     name: "ColumnsContent",
     supportedBlocks: {
+        accordion: AccordionBlock,
         anchor: AnchorBlock,
         richtext: RichTextBlock,
         space: SpaceBlock,

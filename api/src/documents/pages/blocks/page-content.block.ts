@@ -1,5 +1,6 @@
 import { createBlocksBlock, YouTubeVideoBlock } from "@comet/blocks-api";
 import { AnchorBlock, DamImageBlock, DamVideoBlock } from "@comet/cms-api";
+import { AccordionBlock } from "@src/common/blocks/accordion.block";
 import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
@@ -11,6 +12,7 @@ import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
 export const PageContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
+            accordion: AccordionBlock,
             anchor: AnchorBlock,
             space: SpaceBlock,
             richtext: RichTextBlock,
