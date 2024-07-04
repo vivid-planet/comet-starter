@@ -1,5 +1,5 @@
 import { gql, previewParams } from "@comet/cms-site";
-import { domain, languages } from "@src/config";
+import { getSiteConfig } from "@src/config";
 import { documentTypes } from "@src/documents";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
@@ -17,13 +17,10 @@ const documentTypeQuery = gql`
 `;
 
 export default async function Page({ params }: { params: { path: string[]; lang: string } }) {
-    // TODO support multiple domains, get domain by Host header
-    const { scope, previewData } = (await previewParams()) || { scope: { domain, language: params.lang }, previewData: undefined };
-    const graphqlFetch = createGraphQLFetch(previewData);
+    const scope = (await getSiteConfig()).contentScope;
 
-    if (!languages.includes(params.lang)) {
-        notFound();
-    }
+    const { previewData } = (await previewParams()) || { previewData: undefined };
+    const graphqlFetch = createGraphQLFetch(previewData);
 
     //fetch documentType
     const data = await graphqlFetch<GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables>(documentTypeQuery, {
@@ -39,8 +36,9 @@ export default async function Page({ params }: { params: { path: string[]; lang:
 
     const props = {
         pageTreeNodeId,
-        scope: scope as GQLPageTreeNodeScopeInput, //TODO fix type, the scope from previewParams() is not compatible with GQLPageTreeNodeScopeInput,
+        scope,
     };
+
     const { component: Component } = documentTypes[data.pageTreeNodeByPath.documentType];
 
     return <Component {...props} />;
