@@ -13,12 +13,11 @@ import {
     useSitesConfig,
 } from "@comet/cms-admin";
 import { SitesConfig } from "@src/config";
+import { GQLDomain, GQLLanguage } from "@src/graphql.generated";
 
-type Domain = "main" | "secondary" | string;
-type Language = "en" | string;
 export interface ContentScope {
-    domain: Domain;
-    language: Language;
+    domain: GQLDomain;
+    language: GQLLanguage;
 }
 
 // convenince wrapper for app (Bind Generic)
@@ -56,7 +55,7 @@ export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "chi
         Object.entries(sitesConfig.configs).filter(([siteKey, _siteConfig]) => allowedUserDomains.includes(siteKey)),
     );
     const values: ContentScopeValues<ContentScope> = {
-        domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key })),
+        domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key as GQLDomain })),
         language: [
             { label: "English", value: "en" },
             { label: "German", value: "de" },

@@ -1,5 +1,5 @@
 import { inferContentScopeFromContext } from "@src/common/contentScope/inferContentScopeFromContext";
-import { domain as configuredDomain } from "@src/config";
+import { domain as configuredDomain, languages } from "@src/config";
 import { Page as PageTypePage, pageQuery as PageTypePageQuery } from "@src/documents/pages/Page";
 import { GQLPage } from "@src/graphql.generated";
 import { getLayout } from "@src/layout/Layout";
@@ -121,12 +121,12 @@ const pagesQuery = gql`
     }
 `;
 
-export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
     const paths: Array<{ params: { path: string[] }; locale: string }> = [];
     if (process.env.NEXT_PUBLIC_SITE_IS_PREVIEW !== "true") {
-        for (const locale of locales) {
+        for (const language of languages) {
             const data = await createGraphQLClient().request<GQLPagesQuery, GQLPagesQueryVariables>(pagesQuery, {
-                scope: { domain: configuredDomain, language: locale },
+                scope: { domain: configuredDomain, language },
             });
 
             paths.push(
@@ -135,7 +135,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales = [] }) => {
                     .map((page) => {
                         const path = page.path.split("/");
                         path.shift(); // Remove "" caused by leading slash
-                        return { params: { path }, locale };
+                        return { params: { path }, locale: language };
                     }),
             );
         }

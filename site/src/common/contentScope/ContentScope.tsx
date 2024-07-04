@@ -1,6 +1,7 @@
+import { GQLDomain, GQLLanguage } from "@src/graphql.generated";
 import * as React from "react";
 
-type ContentScope = { domain: string; language: string };
+type ContentScope = { domain: GQLDomain; language: GQLLanguage };
 
 const ContentScopeContext = React.createContext<ContentScope | undefined>(undefined);
 

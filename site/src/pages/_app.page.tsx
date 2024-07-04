@@ -1,5 +1,6 @@
 import { ContentScope, ContentScopeProvider } from "@src/common/contentScope/ContentScope";
 import { defaultLanguage, domain } from "@src/config";
+import { GQLDomain, GQLLanguage } from "@src/graphql.generated";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
@@ -153,10 +154,10 @@ const getInitialProps: typeof App.getInitialProps = async (appContext) => {
 
     if (typeof appContext.router.query.domain === "string" && typeof appContext.router.query.language === "string") {
         // Site preview
-        scope = { domain: appContext.router.query.domain, language: appContext.router.query.language };
+        scope = { domain: appContext.router.query.domain as GQLDomain, language: appContext.router.query.language as GQLLanguage };
     } else {
         // Live site
-        const language = appContext.router.locale ?? defaultLanguage;
+        const language = (appContext.router.locale as GQLLanguage) ?? defaultLanguage;
         scope = { domain, language };
     }
 

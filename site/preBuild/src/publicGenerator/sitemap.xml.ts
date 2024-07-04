@@ -4,6 +4,7 @@ import { resolve } from "path";
 import { SitemapStream } from "sitemap";
 
 import { SeoBlockData } from "../../../src/blocks.generated";
+import { GQLDomain, GQLLanguage } from "../../../src/graphql.generated";
 import { createGraphQLClient } from "../../../src/util/createGraphQLClient";
 import { createPublicGeneratedDirectory } from "./createPublicGeneratedDirectory";
 import { GQLSitemapPageDataQuery, GQLSitemapPageDataQueryVariables } from "./sitemap.xml.generated";
@@ -51,9 +52,9 @@ export const sitemapXml = async () => {
 
     smStream.pipe(createWriteStream(resolve(filePath)));
 
-    const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN ?? "";
-    const languages = process.env.NEXT_PUBLIC_SITE_LANGUAGES?.split(",") ?? [];
-    const defaultLanguage = process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE ?? "";
+    const domain = process.env.NEXT_PUBLIC_SITE_DOMAIN as GQLDomain;
+    const languages = process.env.NEXT_PUBLIC_SITE_LANGUAGES?.split(",") as GQLLanguage[];
+    const defaultLanguage = process.env.NEXT_PUBLIC_SITE_DEFAULT_LANGUAGE as GQLLanguage;
 
     let siteMapEntryCreated = false;
 
