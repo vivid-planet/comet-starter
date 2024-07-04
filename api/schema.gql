@@ -180,8 +180,18 @@ interface DocumentInterface {
 scalar LinkBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 type PageTreeNodeScope {
-  domain: String!
-  language: String!
+  domain: Domain!
+  language: Language!
+}
+
+enum Domain {
+  main
+  secondary
+}
+
+enum Language {
+  en
+  de
 }
 
 type PageTreeNode {
@@ -339,8 +349,8 @@ type PaginatedDamFolders {
 }
 
 input PageTreeNodeScopeInput {
-  domain: String!
-  language: String!
+  domain: Domain!
+  language: Language!
 }
 
 type Query {
