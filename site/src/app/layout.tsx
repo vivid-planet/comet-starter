@@ -3,7 +3,7 @@ import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import { readFile } from "fs/promises";
 import type { Metadata } from "next";
 
-import { IntlProvider } from "./[lang]/IntlProvider";
+import { IntlProvider } from "./IntlProvider";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
