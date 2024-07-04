@@ -1,5 +1,5 @@
 import { gql } from "@comet/cms-site";
-import { domain, languages } from "@src/config";
+import { getSiteConfig } from "@src/config";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { MetadataRoute } from "next";
 
@@ -9,45 +9,44 @@ export const dynamic = "force-dynamic"; // don't generate at build time
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const sitemap: MetadataRoute.Sitemap = [];
+    const siteConfig = await getSiteConfig();
+    const scope = siteConfig.contentScope;
+
     const graphqlFetch = createGraphQLFetch();
 
-    for (const lang of languages) {
-        const scope = { domain, language: lang };
+    let totalCount = 0;
+    let currentCount = 0;
 
-        let totalCount = 0;
-        let currentCount = 0;
+    do {
+        const { paginatedPageTreeNodes } = await graphqlFetch<GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables>(
+            pageDataListQuery,
+            {
+                scope,
+                offset: currentCount,
+                limit: 50,
+            },
+        );
+        totalCount = paginatedPageTreeNodes.totalCount;
+        currentCount += paginatedPageTreeNodes.nodes.length;
 
-        do {
-            const { paginatedPageTreeNodes } = await graphqlFetch<GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables>(
-                pageDataListQuery,
-                {
-                    scope,
-                    offset: currentCount,
-                    limit: 50,
-                },
-            );
-            totalCount = paginatedPageTreeNodes.totalCount;
-            currentCount += paginatedPageTreeNodes.nodes.length;
+        for (const pageTreeNode of paginatedPageTreeNodes.nodes) {
+            if (pageTreeNode) {
+                const path: string = pageTreeNode.path;
 
-            for (const pageTreeNode of paginatedPageTreeNodes.nodes) {
-                if (pageTreeNode) {
-                    const path: string = pageTreeNode.path;
-
-                    if (path && pageTreeNode.document?.__typename === "Page") {
-                        const seoBlock = pageTreeNode.document.seo;
-                        if (!seoBlock.noIndex) {
-                            sitemap.push({
-                                url: `${process.env.SITE_URL}/${lang}${pageTreeNode.path}`, // TODO support multiple site domains
-                                priority: Number(seoBlock.priority.replace("_", ".")),
-                                changeFrequency: seoBlock.changeFrequency,
-                                lastModified: pageTreeNode.document.updatedAt,
-                            });
-                        }
+                if (path && pageTreeNode.document?.__typename === "Page") {
+                    const seoBlock = pageTreeNode.document.seo;
+                    if (!seoBlock.noIndex) {
+                        sitemap.push({
+                            url: siteConfig.url + pageTreeNode.path,
+                            priority: Number(seoBlock.priority.replace("_", ".")),
+                            changeFrequency: seoBlock.changeFrequency,
+                            lastModified: pageTreeNode.document.updatedAt,
+                        });
                     }
                 }
             }
-        } while (totalCount > currentCount);
-    }
+        }
+    } while (totalCount > currentCount);
 
     return sitemap;
 }
