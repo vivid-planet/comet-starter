@@ -43,31 +43,7 @@ export async function middleware(request: NextRequest) {
 
     const response = NextResponse.next({ request: { headers } });
 
-    // TODO check for gtmId in srcipt-src
-    response.headers.set(
-        "Content-Security-Policy",
-        `            default-src 'self' ${process.env.NODE_ENV === "development" ? " http:" : "https:"};
-                     img-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                     media-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                     style-src 'self' 'unsafe-inline' https:;
-                     font-src 'self' https: data:;
-                     script-src 'self' 'unsafe-inline';
-                     connect-src 'self' https:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                     script-src-elem 'self' https: 'unsafe-inline';
-                     frame-ancestors ${process.env.ADMIN_URL};
-                 `
-            .replace(/\s{2,}/g, " ")
-            .trim(),
-    );
-
-    if (process.env.ADMIN_URL) {
-        response.headers.set("Access-Control-Allow-Origin", process.env.ADMIN_URL);
-    }
-
-    // Send this header only for the main domain
-    if (siteConfig.domains.main === host) {
-        response.headers.set("X-Frame-Options", "SAMEORIGIN");
-    }
+    // TODO are there any other headers that need to be set?
 
     return response;
 }
