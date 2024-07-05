@@ -384,7 +384,8 @@
                                 "richtext": "RichText",
                                 "space": "Space",
                                 "heading": "Heading",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "StandaloneMedia"
                             },
                             "nullable": false
                         }
@@ -423,7 +424,8 @@
                                 "richtext": "RichText",
                                 "space": "Space",
                                 "heading": "Heading",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "StandaloneMedia"
                             },
                             "nullable": false
                         }
@@ -1045,7 +1047,7 @@
                                 "heading": "Heading",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
-                                "media": "Media"
+                                "media": "StandaloneMedia"
                             },
                             "nullable": false
                         }
@@ -1086,7 +1088,7 @@
                                 "heading": "Heading",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
-                                "media": "Media"
+                                "media": "StandaloneMedia"
                             },
                             "nullable": false
                         }
@@ -1663,6 +1665,55 @@
                     "S400",
                     "S500",
                     "S600"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "StandaloneMedia",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "1x1",
+                    "2x3",
+                    "3x4",
+                    "4x5",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "1x1",
+                    "2x3",
+                    "3x4",
+                    "4x5",
+                    "9x16"
                 ],
                 "nullable": false
             }
