@@ -2,7 +2,6 @@
 import { PixelImageBlock, PreviewSkeleton, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import * as CometConfig from "@src/comet-config.json";
 import { BreakpointValue, theme } from "@src/theme";
 import { ImageProps as NextImageProps } from "next/image";
 
@@ -12,41 +11,8 @@ type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & 
     aspectRatio?: string | "inherit";
 };
 
-const allowedAspectRatios = [...CometConfig.dam.allowedImageAspectRatios, "inherit"];
-
-const getAspectRationNearestToAllowed = (aspectRatio: string): string => {
-    let aspectRatioNearestToAllowed = aspectRatio;
-    const aspectRatioDifferences: number[] = [];
-    let keyForNearestAspectRatio = 0;
-
-    if (!allowedAspectRatios.includes(aspectRatio)) {
-        aspectRatio.replace("x", "/");
-
-        allowedAspectRatios.forEach((allowedAspectRatio, key) => {
-            if (allowedAspectRatio !== "inherit") {
-                const aspectRatioDivided = eval(aspectRatio.replace("x", "/"));
-                const allowedAspectRatioDivided = eval(allowedAspectRatio.replace("x", "/"));
-                const diff = aspectRatioDivided - allowedAspectRatioDivided;
-
-                aspectRatioDifferences.push(diff < 0 ? diff * -1 : diff);
-            }
-        });
-
-        aspectRatioDifferences.forEach((aspectRatioDifference, key) => {
-            if (aspectRatioDifference === Math.min(...aspectRatioDifferences)) {
-                keyForNearestAspectRatio = key;
-            }
-        });
-
-        aspectRatioNearestToAllowed = allowedAspectRatios[keyForNearestAspectRatio];
-    }
-    return aspectRatioNearestToAllowed;
-};
-
 export const DamImageBlock = withPreview(
     ({ data: { block }, aspectRatio = "16x9", layout = "intrinsic", ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
-        const aspectRatioNearestToAllowed = getAspectRationNearestToAllowed(aspectRatio);
-
         if (!block) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
@@ -54,12 +20,7 @@ export const DamImageBlock = withPreview(
         if (block.type === "pixelImage") {
             return (
                 <NextImageBottomPaddingFix>
-                    <PixelImageBlock
-                        data={block.props as PixelImageBlockData}
-                        layout={layout}
-                        aspectRatio={aspectRatioNearestToAllowed}
-                        {...imageProps}
-                    />
+                    <PixelImageBlock data={block.props as PixelImageBlockData} layout={layout} aspectRatio={aspectRatio} {...imageProps} />
                 </NextImageBottomPaddingFix>
             );
         } else if (block.type === "svgImage") {
