@@ -4,7 +4,7 @@ import { VideoPreviewImage } from "@src/common/helpers/VideoPreviewImage";
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
-// TODO: use aspectRatio and previewImage from the block data when available
+// TODO: remove use DamVideoBlock from lib
 interface DamVideoBlockProps extends PropsWithData<DamVideoBlockData> {
     previewImage?: DamImageBlockData;
     aspectRatio?: string;

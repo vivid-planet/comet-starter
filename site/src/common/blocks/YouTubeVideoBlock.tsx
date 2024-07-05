@@ -16,7 +16,7 @@ const parseYoutubeIdentifier = (value: string): string | undefined => {
     return youtubeId ?? undefined;
 };
 
-// TODO: use aspectRatio and previewImage from the block data when available
+// TODO: remove use DamVideoBlock from lib
 interface YouTubeVideoBlockProps extends PropsWithData<YouTubeVideoBlockData> {
     previewImage?: DamImageBlockData;
     aspectRatio?: string;
