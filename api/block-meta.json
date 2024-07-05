@@ -965,6 +965,7 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
+                                "stage": "Stage",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList"
                             },
@@ -1009,6 +1010,7 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
+                                "stage": "Stage",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList"
                             },
@@ -1588,6 +1590,61 @@
                     "S500",
                     "S600"
                 ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "Stage",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
                 "nullable": false
             }
         ]

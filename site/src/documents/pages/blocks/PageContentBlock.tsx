@@ -11,6 +11,7 @@ import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
@@ -20,6 +21,7 @@ const supportedBlocks: SupportedBlocks = {
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+    stage: (props) => <StageBlock data={props} />,
 
     // TODO: Outdated blocks! Following blocks needs refactoring to support page layout
     image: (props) => <DamImageBlock data={props} />,

@@ -7,6 +7,7 @@ import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
 import { TextImageBlock } from "@src/common/blocks/text-image.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
+import { StageBlock } from "@src/documents/pages/blocks/stage.block";
 
 export const PageContentBlock = createBlocksBlock(
     {
@@ -20,6 +21,7 @@ export const PageContentBlock = createBlocksBlock(
             textImage: TextImageBlock,
             damVideo: DamVideoBlock,
             youTubeVideo: YouTubeVideoBlock,
+            stage: StageBlock,
             columns: ColumnsBlock,
             callToActionList: CallToActionListBlock,
         },
