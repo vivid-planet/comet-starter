@@ -6,6 +6,7 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
@@ -16,6 +17,7 @@ const supportedBlocks: SupportedBlocks = {
     space: (props) => <SpaceBlock data={props} />,
     heading: (props) => <HeadingBlock data={props} />,
     callToActionList: (props) => <CallToActionListBlock data={props} />,
+    media: (props) => <StandaloneMediaBlock data={props} />,
 };
 
 const ColumnsContentBlock = withPreview(

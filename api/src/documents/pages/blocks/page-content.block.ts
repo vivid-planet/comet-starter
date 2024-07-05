@@ -3,9 +3,9 @@ import { AnchorBlock } from "@comet/cms-api";
 import { AccordionBlock } from "@src/common/blocks/accordion.block";
 import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
 import { HeadingBlock } from "@src/common/blocks/heading.block";
-import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
+import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
 
 export const PageContentBlock = createBlocksBlock(
@@ -18,7 +18,7 @@ export const PageContentBlock = createBlocksBlock(
             heading: HeadingBlock,
             columns: ColumnsBlock,
             callToActionList: CallToActionListBlock,
-            media: MediaBlock,
+            media: StandaloneMediaBlock,
         },
     },
     "PageContent",
