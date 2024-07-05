@@ -6,6 +6,7 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
+import { BillboardTeaserBlock } from "@src/documents/pages/blocks/BillboardTeaserBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 
 export const PageContentBlock = createBlocksBlock({
@@ -13,6 +14,7 @@ export const PageContentBlock = createBlocksBlock({
     supportedBlocks: {
         accordion: AccordionBlock,
         anchor: AnchorBlock,
+        billboardTeaser: BillboardTeaserBlock,
         space: SpaceBlock,
         richtext: RichTextBlock,
         heading: HeadingBlock,

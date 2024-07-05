@@ -190,6 +190,61 @@
         ]
     },
     {
+        "name": "BillboardTeaser",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "CallToAction",
         "fields": [
             {
@@ -1042,6 +1097,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "heading": "Heading",
@@ -1083,6 +1139,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "heading": "Heading",

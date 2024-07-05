@@ -8,11 +8,13 @@ import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
+import { BillboardTeaserBlock } from "@src/documents/pages/blocks/BillboardTeaserBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
+    billboardTeaser: (props) => <BillboardTeaserBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     richtext: (props) => <PageContentRichTextBlock data={props} />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
