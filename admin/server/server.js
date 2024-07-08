@@ -41,7 +41,6 @@ app.use(
         },
         xContentTypeOptions: true,
         xDnsPrefetchControl: false,
-        xDownloadOptions: true,
         xPermittedCrossDomainPolicies: true,
     }),
 );
