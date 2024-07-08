@@ -52,8 +52,9 @@ const nextConfig = {
                 },
                 {
                     key: "Cross-Origin-Embedder-Policy",
-                    // This value should be set to "require-corp" as soon as iframe credentialless it is supported by all browsers
+                    // This value should be set to 'require-corp' as soon as iframe credentialless is supported by all browsers
                     // https://developer.mozilla.org/en-US/docs/Web/Security/IFrame_credentialless
+                    // https://caniuse.com/mdn-html_elements_iframe_credentialless
                     value: "unsafe-none",
                 },
                 {
