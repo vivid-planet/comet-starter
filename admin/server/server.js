@@ -31,6 +31,7 @@ app.use(
                 "connect-src": ["https:"],
                 "img-src": ["'self'", "data:", "https:"],
                 "frame-src": ["https:"],
+                "frame-ancestors": ["'self'"],
                 upgradeInsecureRequests: [],
             },
             useDefaults: false,
