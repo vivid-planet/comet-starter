@@ -33,7 +33,6 @@ app.use(
                 "frame-src": ["https:"],
                 upgradeInsecureRequests: [],
             },
-            upgradeInsecureRequests: true,
             useDefaults: false,
         },
         xXssProtection: false,
