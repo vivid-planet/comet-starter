@@ -17,7 +17,7 @@ indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
 
 app.use(compression());
 
-app.disable("x-powered-by");
+app.disable("x-powered-by"); // Disable the X-Powered-By header as it is not needed and can be used to infer the server technology
 
 app.use(
     helmet({
@@ -34,24 +34,24 @@ app.use(
                 "frame-ancestors": ["'self'"],
                 upgradeInsecureRequests: [],
             },
-            useDefaults: false,
+            useDefaults: false, // Avoid default values for not explicitly set directives
         },
-        xXssProtection: false,
-        xFrameOptions: false,
-        crossOriginResourcePolicy: "same-origin",
-        crossOriginEmbedderPolicy: false,
-        crossOriginOpenerPolicy: true,
+        xFrameOptions: false, // Disable deprecated header
+        crossOriginResourcePolicy: "same-origin", // Do not allow cross-origin requests to access the response
+        crossOriginEmbedderPolicy: false, // value=no-corp
+        crossOriginOpenerPolicy: true, // value=same-origin
         strictTransportSecurity: {
-            maxAge: 63072000,
+            // Enable HSTS
+            maxAge: 63072000, // 2 years (recommended when subdomains are included)
             includeSubDomains: true,
             preload: true,
         },
         referrerPolicy: {
-            policy: "no-referrer",
+            policy: "no-referrer", // No referrer information needs to be sent
         },
-        xContentTypeOptions: true,
-        xDnsPrefetchControl: false,
-        xPermittedCrossDomainPolicies: true,
+        xContentTypeOptions: true, // value=nosniff
+        xDnsPrefetchControl: false, // Disable non-standard header as recommended by MDN
+        xPermittedCrossDomainPolicies: true, // value=none (prevent MIME sniffing)
     }),
 );
 
