@@ -54,25 +54,25 @@ async function bootstrap(): Promise<void> {
                 directives: {
                     "default-src": ["'none'"],
                 },
-                useDefaults: false,
+                useDefaults: false, // Disable default directives
             },
-            xXssProtection: false,
-            xFrameOptions: false,
+            xFrameOptions: false, // Disable non-standard header
             strictTransportSecurity: {
-                maxAge: 63072000,
+                // Enable HSTS
+                maxAge: 63072000, // 2 years (recommended when subdomains are included)
                 includeSubDomains: true,
                 preload: true,
             },
             referrerPolicy: {
-                policy: "no-referrer",
+                policy: "no-referrer", // No referrer information is sent along with requests
             },
-            xContentTypeOptions: true,
-            xDnsPrefetchControl: false,
-            xDownloadOptions: true,
-            xPermittedCrossDomainPolicies: true,
-            originAgentCluster: true,
+            xContentTypeOptions: true, // value="nosniff" (prevent MIME sniffing)
+            xDnsPrefetchControl: false, // Disable non-standard header
+            xDownloadOptions: true, // value="noopen" (prevent IE from executing downloads in the context of the site)
+            xPermittedCrossDomainPolicies: true, // value="none" (prevent the browser from MIME sniffing)
+            originAgentCluster: true, // value=?1
             crossOriginResourcePolicy: {
-                policy: "same-site",
+                policy: "same-site", // This allows the resource to be shared with the same site (all subdomains/ports are included)
             },
         }),
     );
