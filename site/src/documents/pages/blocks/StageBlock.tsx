@@ -38,7 +38,7 @@ export const StageBlock = withPreview(
             </AbsoluteContainer>
         </Root>
     ),
-    { label: "Call To Action List" },
+    { label: "Stage" },
 );
 
 const Root = styled.div`

@@ -965,7 +965,6 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "stage": "Stage",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList"
                             },
@@ -1010,7 +1009,6 @@
                                 "textImage": "TextImage",
                                 "damVideo": "DamVideo",
                                 "youTubeVideo": "YouTubeVideo",
-                                "stage": "Stage",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList"
                             },

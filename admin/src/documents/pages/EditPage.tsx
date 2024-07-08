@@ -14,6 +14,7 @@ import {
 } from "@comet/cms-admin";
 import { Button, IconButton, Stack } from "@mui/material";
 import { useContentScope } from "@src/common/ContentScopeProvider";
+import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeCategory } from "@src/graphql.generated";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouteMatch } from "react-router";
@@ -31,6 +32,7 @@ const usePage = createUsePage({
     rootBlocks: {
         content: PageContentBlock,
         seo: SeoBlock,
+        stage: StageBlock,
     },
     pageType: "Page",
 })<GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation["savePage"], GQLUpdatePageMutationVariables>({
@@ -48,6 +50,7 @@ const usePage = createUsePage({
                     ... on Page {
                         content
                         seo
+                        stage
                     }
                 }
             }
@@ -59,13 +62,14 @@ const usePage = createUsePage({
                 id
                 content
                 seo
+                stage
                 updatedAt
             }
         }
     `,
 });
 
-export const EditPage: React.FC<Props> = ({ id, category }) => {
+export const EditPage = ({ id, category }: Props) => {
     const intl = useIntl();
     const { pageState, rootBlocksApi, hasChanges, loading, dialogs, pageSaveButton, handleSavePage } = usePage({
         pageId: id,
@@ -79,20 +83,31 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
 
     const blockContext = useCmsBlockContext();
 
-    let previewState = undefined;
+    const tabRouteMatch = useRouteMatch<{ tab: undefined | "content" | "stage" | "config" }>(`${match.path}/:tab`);
 
-    if (pageState && pageState.document) {
-        previewState = PageContentBlock.createPreviewState(pageState.document.content, {
-            ...blockContext,
-            parentUrl: match.url,
-            showVisibleOnly: previewApi.showOnlyVisible,
-        });
+    if (pageState == null || pageState.document == null) {
+        return null;
     }
-
-    if (!pageState) return <></>;
 
     if (loading) {
         return <Loading behavior="fillPageHeight" />;
+    }
+
+    let previewUrl = `${siteConfig.previewUrl}/admin/page`;
+
+    let previewState: unknown = PageContentBlock.createPreviewState(pageState.document.content, {
+        ...blockContext,
+        parentUrl: match.url,
+        showVisibleOnly: previewApi.showOnlyVisible,
+    });
+
+    if (tabRouteMatch?.params.tab === "stage") {
+        previewUrl = `${siteConfig.previewUrl}/admin/stage`;
+        previewState = StageBlock.createPreviewState(pageState.document.stage, {
+            ...blockContext,
+            parentUrl: `${match.url}/stage`,
+            showVisibleOnly: previewApi.showOnlyVisible,
+        });
     }
 
     return (
@@ -141,7 +156,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                 </ToolbarActions>
             </Toolbar>
             <MainContent disablePaddingBottom>
-                <BlockPreviewWithTabs previewUrl={`${siteConfig.previewUrl}/admin/page`} previewState={previewState} previewApi={previewApi}>
+                <BlockPreviewWithTabs previewUrl={previewUrl} previewState={previewState} previewApi={previewApi}>
                     {[
                         {
                             key: "content",
@@ -159,10 +174,23 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             ),
                         },
                         {
+                            key: "stage",
+                            label: (
+                                <AdminTabLabel isValid={rootBlocksApi.stage.isValid}>
+                                    <FormattedMessage id="pages.page.edit.stage" defaultMessage="Stage" />
+                                </AdminTabLabel>
+                            ),
+                            content: (
+                                <AdminComponentRoot title={intl.formatMessage({ id: "pages.pages.page.edit.stage.title", defaultMessage: "Stage" })}>
+                                    {rootBlocksApi.stage.adminUI}
+                                </AdminComponentRoot>
+                            ),
+                        },
+                        {
                             key: "config",
                             label: (
                                 <AdminTabLabel isValid={rootBlocksApi.seo.isValid}>
-                                    <FormattedMessage id="pages.pages.page.edit.config" defaultMessage="Config" />{" "}
+                                    <FormattedMessage id="pages.pages.page.edit.config" defaultMessage="Config" />
                                 </AdminTabLabel>
                             ),
                             content: rootBlocksApi.seo.adminUI,
