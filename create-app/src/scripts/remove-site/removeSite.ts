@@ -6,7 +6,6 @@ function removeSiteReferences(verbose: boolean) {
     removeReferenceInFile(".vscode/settings.json", /, "site"/g, verbose);
     removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_SITE_IS_PREVIEW=false\n\n/gms, verbose);
     removeReferenceInFile("install.sh", /.*site.*\n/gim, verbose);
-    removeReferenceInFile(".prettierignore", /.*site.*\n/gim, verbose);
     removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("./package.json", / browser:site/g, verbose);
@@ -17,6 +16,6 @@ function removeSiteReferences(verbose: boolean) {
 
 export function removeSite(verbose: boolean) {
     deleteFilesAndFolders(["site"], verbose);
-    removeSiteReferences(verbose);
+     removeSiteReferences(verbose);
     runEslintFix(verbose);
 }
