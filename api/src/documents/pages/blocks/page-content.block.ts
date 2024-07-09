@@ -7,6 +7,7 @@ import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
 import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
+import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
 
 export const PageContentBlock = createBlocksBlock(
     {
@@ -14,6 +15,7 @@ export const PageContentBlock = createBlocksBlock(
             accordion: AccordionBlock,
             anchor: AnchorBlock,
             space: SpaceBlock,
+            teaser: TeaserBlock,
             richtext: RichTextBlock,
             heading: HeadingBlock,
             columns: ColumnsBlock,
