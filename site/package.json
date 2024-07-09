@@ -19,7 +19,7 @@
         "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/"
     },
     "dependencies": {
-        "@comet/cms-site": "7.0.0-beta.2",
+        "@comet/cms-site": "7.0.0-beta.3",
         "@next/bundle-analyzer": "^14.0.0",
         "@opentelemetry/api": "^1.7.0",
         "@opentelemetry/auto-instrumentations-node": "^0.40.0",
@@ -38,8 +38,9 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
-        "@comet/cli": "7.0.0-beta.2",
-        "@comet/eslint-config": "7.0.0-beta.2",
+        "@comet/cli": "7.0.0-beta.3",
+        "@comet/eslint-config": "7.0.0-beta.3",
+        "@comet/eslint-plugin": "7.0.0-beta.3",
         "@formatjs/cli": "^6.0.0",
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",
