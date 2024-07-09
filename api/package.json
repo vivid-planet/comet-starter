@@ -49,8 +49,8 @@
         }
     },
     "dependencies": {
-        "@comet/blocks-api": "7.0.0-beta.2",
-        "@comet/cms-api": "7.0.0-beta.2",
+        "@comet/blocks-api": "7.0.0-beta.3",
+        "@comet/cms-api": "7.0.0-beta.3",
         "@faker-js/faker": "^8.3.1",
         "@hapi/accept": "^5.0.0",
         "@mikro-orm/cli": "^5.0.5",
@@ -95,7 +95,8 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@comet/eslint-config": "7.0.0-beta.2",
+        "@comet/eslint-config": "7.0.0-beta.3",
+        "@comet/eslint-plugin": "7.0.0-beta.3",
         "@nestjs/cli": "^9.0.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",
