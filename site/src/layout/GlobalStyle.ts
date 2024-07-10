@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 "use client";
->>>>>>> main
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -9,25 +6,15 @@ export const GlobalStyle = createGlobalStyle`
     * {
         min-width: 0;
     }
-<<<<<<< HEAD
-
-    /* Prevent font size adjustments after orientation changes in mobile devices*/
-    html {
-        -webkit-text-size-adjust: 100%;
-=======
     
     html {
         /* Prevent font size adjustments after orientation changes in mobile devices */
         text-size-adjust: 100%;
->>>>>>> main
     }
 
     body {
         margin: 0;
-<<<<<<< HEAD
-=======
 
->>>>>>> main
         /* Improve text rendering with font-smoothing */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -82,10 +69,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     /* Create a root stacking context: https://www.joshwcomeau.com/css/custom-css-reset/#eight-root-stacking-context-9 */
-<<<<<<< HEAD
-=======
     /* stylelint-disable selector-id-pattern */
->>>>>>> main
     #root,
     #__next {
         isolation: isolate;

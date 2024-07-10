@@ -26,7 +26,6 @@
     },
     "dependencies": {
         "@apollo/client": "^3.2.5",
-<<<<<<< HEAD
         "@comet/admin": "7.0.0-beta.3",
         "@comet/admin-date-time": "7.0.0-beta.3",
         "@comet/admin-icons": "7.0.0-beta.3",
@@ -34,14 +33,6 @@
         "@comet/admin-theme": "7.0.0-beta.3",
         "@comet/blocks-admin": "7.0.0-beta.3",
         "@comet/cms-admin": "7.0.0-beta.3",
-=======
-        "@comet/admin": "^6.14.1",
-        "@comet/admin-icons": "^6.14.1",
-        "@comet/admin-rte": "^6.14.1",
-        "@comet/admin-theme": "^6.14.1",
-        "@comet/blocks-admin": "^6.14.1",
-        "@comet/cms-admin": "^6.14.1",
->>>>>>> main
         "@emotion/react": "^11.9.3",
         "@emotion/styled": "^11.9.3",
         "@fontsource/roboto": "^4.5.8",
@@ -57,12 +48,7 @@
         "final-form": "^4.16.1",
         "graphql": "^15.4.0",
         "history": "^4.10.0",
-<<<<<<< HEAD
-=======
-        "lodash.isequal": "^4.0.0",
-        "material-design-icons": "^3.0.1",
         "rdndmb-html5-to-touch": "^8.0.3",
->>>>>>> main
         "react": "^17.0.0",
         "react-app-polyfill": "^2.0.0",
         "react-dnd": "^16.0.0",
@@ -75,14 +61,9 @@
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
-<<<<<<< HEAD
         "@comet/cli": "7.0.0-beta.3",
         "@comet/eslint-config": "7.0.0-beta.3",
         "@comet/eslint-plugin": "7.0.0-beta.3",
-=======
-        "@comet/cli": "^6.14.1",
-        "@comet/eslint-config": "^6.14.1",
->>>>>>> main
         "@formatjs/cli": "^6.0.0",
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",

@@ -75,11 +75,10 @@ export function App() {
                                 DamFile: createDamFileDependency(),
                             }}
                         >
-<<<<<<< HEAD
                             <IntlProvider locale="en" messages={getMessages()}>
                                 <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
-                                        <DndProvider backend={HTML5Backend}>
+                                        <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
                                                 <CmsBlockContextProvider
                                                     damConfig={{
@@ -94,31 +93,6 @@ export function App() {
                                                 >
                                                     <ErrorDialogHandler />
                                                     <CurrentUserProvider>
-=======
-                            <DependenciesConfigProvider
-                                entityDependencyMap={{
-                                    Page,
-                                    Link,
-                                    DamFile: createDamFileDependency(),
-                                }}
-                            >
-                                <IntlProvider locale="en" messages={getMessages()}>
-                                    <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
-                                        <MuiThemeProvider theme={theme}>
-                                            <DndProvider options={HTML5toTouch}>
-                                                <SnackbarProvider>
-                                                    <CmsBlockContextProvider
-                                                        damConfig={{
-                                                            apiUrl: config.apiUrl,
-                                                            apiClient,
-                                                            maxFileSize: config.dam.uploadsMaxFileSize,
-                                                            maxSrcResolution: config.imgproxy.maxSrcResolution,
-                                                            allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
-                                                        }}
-                                                        pageTreeCategories={pageTreeCategories}
-                                                        pageTreeDocumentTypes={pageTreeDocumentTypes}
-                                                    >
->>>>>>> main
                                                         <RouterBrowserRouter>
                                                             <GlobalStyle />
                                                             <ContentScopeProvider>

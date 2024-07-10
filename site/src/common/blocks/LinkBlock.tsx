@@ -1,19 +1,14 @@
-<<<<<<< HEAD
 "use client";
-import { ExternalLinkBlock, OneOfBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
-=======
 import {
     DamFileDownloadLinkBlock,
     EmailLinkBlock,
     ExternalLinkBlock,
-    InternalLinkBlock,
     OneOfBlock,
     PhoneLinkBlock,
     PropsWithData,
     SupportedBlocks,
     withPreview,
 } from "@comet/cms-site";
->>>>>>> main
 import { LinkBlockData } from "@src/blocks.generated";
 import { ReactNode } from "react";
 

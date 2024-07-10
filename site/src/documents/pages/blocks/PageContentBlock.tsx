@@ -16,19 +16,13 @@ const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
-<<<<<<< HEAD
-    richtext: (props) => <RichTextBlock data={props} />,
-    heading: (props) => <HeadingBlock data={props} />,
-    image: (props) => <DamImageBlock data={props} alt="" />,
-=======
     richtext: (props) => <PageContentRichTextBlock data={props} />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
 
     // TODO: Outdated blocks! Following blocks needs refactoring to support page layout
-    image: (props) => <DamImageBlock data={props} />,
->>>>>>> main
+    image: (props) => <DamImageBlock data={props} alt="" />,
     textImage: (props) => <TextImageBlock data={props} />,
     damVideo: (props) => <DamVideoBlock data={props} />,
     youTubeVideo: (props) => <YouTubeVideoBlock data={props} />,
