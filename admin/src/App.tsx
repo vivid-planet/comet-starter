@@ -22,8 +22,8 @@ import {
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { HTML5toTouch } from "rdndmb-html5-to-touch";
+import { DndProvider } from "react-dnd-multi-backend";
 import { IntlProvider } from "react-intl";
 import { Route, Switch } from "react-router";
 
@@ -78,7 +78,7 @@ export function App() {
                             <IntlProvider locale="en" messages={getMessages()}>
                                 <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
-                                        <DndProvider backend={HTML5Backend}>
+                                        <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
                                                 <CmsBlockContextProvider
                                                     damConfig={{
