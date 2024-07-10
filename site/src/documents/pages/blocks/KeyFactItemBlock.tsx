@@ -15,7 +15,7 @@ export const KeyFactItemBlock = withPreview(
             <ItemContent>
                 {icon.damFile && <SvgImageBlock data={icon} width={48} height={48} />}
                 <FactTypography variant={"h500"}>{fact}</FactTypography>
-                <LabelTypography variant={"h350"}>{label}</LabelTypography>
+                <Typography variant={"h350"}>{label}</Typography>
                 {hasRichTextBlockContent(description) && (
                     <DescriptionTypography variant={"p200"}>
                         <RichTextBlock data={description} renderers={descriptionRenderers} />
@@ -41,6 +41,7 @@ const ItemContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     max-width: 350px;
 `;
 
@@ -48,14 +49,8 @@ const FactTypography = styled(Typography)`
     margin-top: ${({ theme }) => theme.spacing.S100};
     margin-bottom: ${({ theme }) => theme.spacing.S300};
     color: ${({ theme }) => theme.palette.primary.dark};
-    text-align: center;
-`;
-
-const LabelTypography = styled(Typography)`
-    text-align: center;
 `;
 
 const DescriptionTypography = styled(Typography)`
     margin-top: ${({ theme }) => theme.spacing.S100};
-    text-align: center;
 `;
