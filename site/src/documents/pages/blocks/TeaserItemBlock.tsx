@@ -92,12 +92,10 @@ const TextLinkContainer = styled.div`
 const ArrowIcon = styled(SvgUse)`
     width: 16px;
     height: 16px;
-    color: inherit;
 `;
 
 const LinkText = styled.span`
     font-family: ${({ theme }) => theme.fontFamily};
     font-size: 16px;
     font-weight: 700;
-    color: inherit;
 `;
