@@ -26,8 +26,7 @@ export const PageContentCallToActionListBlock = (props: CallToActionListBlockPro
 
 const Root = styled.div`
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
+    flex-flow: row wrap;
     gap: ${({ theme }) => theme.spacing.S300};
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
