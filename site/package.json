@@ -9,18 +9,28 @@
         "gql:types": "graphql-codegen",
         "gql:watch": "graphql-codegen --watch",
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
-        "lint": "run-p lint:eslint lint:tsc",
+        "lint": "run-p lint:eslint lint:tsc lint:style",
         "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
+<<<<<<< HEAD
+=======
+        "lint:tscPreBuild": "tsc --project tsconfig.preBuild.json",
+        "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",
+>>>>>>> main
         "generate-block-types": "comet generate-block-types",
         "generate-block-types:watch": "chokidar -s \"**/block-meta.json\" -c \"npm run generate-block-types\"",
         "intl:extract": "formatjs extract \"src/**/*.ts*\" --ignore **/*.d.ts --out-file lang-extracted/en.json --format simple",
         "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@comet/cms-site": "7.0.0-beta.3",
         "@next/bundle-analyzer": "^14.0.0",
+=======
+        "@comet/cms-site": "^6.14.1",
+        "@next/bundle-analyzer": "^12.3.4",
+>>>>>>> main
         "@opentelemetry/api": "^1.7.0",
         "@opentelemetry/auto-instrumentations-node": "^0.40.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.46.0",
@@ -37,9 +47,14 @@
         "ts-node": "^10.0.0"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/cli": "7.0.0-beta.3",
         "@comet/eslint-config": "7.0.0-beta.3",
         "@comet/eslint-plugin": "7.0.0-beta.3",
+=======
+        "@comet/cli": "^6.14.1",
+        "@comet/eslint-config": "^6.14.1",
+>>>>>>> main
         "@formatjs/cli": "^6.0.0",
         "@graphql-codegen/add": "^3.0.0",
         "@graphql-codegen/cli": "^2.0.0",
@@ -54,8 +69,11 @@
         "dotenv-cli": "^7.0.0",
         "eslint": "^8.0.0",
         "npm-run-all": "^4.1.5",
+        "postcss-styled-syntax": "^0.6.4",
         "prettier": "^2.0.0",
         "rimraf": "^3.0.0",
+        "stylelint": "^16.6.1",
+        "stylelint-config-standard": "^36.0.0",
         "tsconfig-paths": "^3.0.0",
         "typescript": "~5.1.0"
     }

@@ -22,8 +22,8 @@ import {
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
 import { theme } from "@src/theme";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import { HTML5toTouch } from "rdndmb-html5-to-touch";
+import { DndProvider } from "react-dnd-multi-backend";
 import { IntlProvider } from "react-intl";
 import { Route, Switch } from "react-router";
 
@@ -75,6 +75,7 @@ export function App() {
                                 DamFile: createDamFileDependency(),
                             }}
                         >
+<<<<<<< HEAD
                             <IntlProvider locale="en" messages={getMessages()}>
                                 <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
@@ -93,6 +94,31 @@ export function App() {
                                                 >
                                                     <ErrorDialogHandler />
                                                     <CurrentUserProvider>
+=======
+                            <DependenciesConfigProvider
+                                entityDependencyMap={{
+                                    Page,
+                                    Link,
+                                    DamFile: createDamFileDependency(),
+                                }}
+                            >
+                                <IntlProvider locale="en" messages={getMessages()}>
+                                    <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                        <MuiThemeProvider theme={theme}>
+                                            <DndProvider options={HTML5toTouch}>
+                                                <SnackbarProvider>
+                                                    <CmsBlockContextProvider
+                                                        damConfig={{
+                                                            apiUrl: config.apiUrl,
+                                                            apiClient,
+                                                            maxFileSize: config.dam.uploadsMaxFileSize,
+                                                            maxSrcResolution: config.imgproxy.maxSrcResolution,
+                                                            allowedImageAspectRatios: config.dam.allowedImageAspectRatios,
+                                                        }}
+                                                        pageTreeCategories={pageTreeCategories}
+                                                        pageTreeDocumentTypes={pageTreeDocumentTypes}
+                                                    >
+>>>>>>> main
                                                         <RouterBrowserRouter>
                                                             <GlobalStyle />
                                                             <ContentScopeProvider>
