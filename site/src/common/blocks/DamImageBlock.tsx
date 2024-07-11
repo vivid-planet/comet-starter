@@ -5,24 +5,18 @@ import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/
 import { BreakpointValue, theme } from "@src/theme";
 import { ImageProps as NextImageProps } from "next/image";
 
-import { NextImageBottomPaddingFix } from "../NextImageBottomPaddingFix";
-
 type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & {
     aspectRatio?: string | "inherit";
 };
 
 export const DamImageBlock = withPreview(
-    ({ data: { block }, aspectRatio = "16x9", layout = "intrinsic", ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
+    ({ data: { block }, aspectRatio = "16x9", ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
         if (!block) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
 
         if (block.type === "pixelImage") {
-            return (
-                <NextImageBottomPaddingFix>
-                    <PixelImageBlock data={block.props as PixelImageBlockData} layout={layout} aspectRatio={aspectRatio} {...imageProps} />
-                </NextImageBottomPaddingFix>
-            );
+            return <PixelImageBlock data={block.props as PixelImageBlockData} aspectRatio={aspectRatio} {...imageProps} />;
         } else if (block.type === "svgImage") {
             return <SvgImageBlock data={block.props as SvgImageBlockData} />;
         } else {

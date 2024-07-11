@@ -1,5 +1,5 @@
 import { SelectField } from "@comet/admin";
-import { BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
+import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
 import { MenuItem } from "@mui/material";
 import { StandaloneMediaBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
@@ -16,36 +16,42 @@ const aspectRatioOptions = [
     { label: "9:16", value: "9x16" },
 ];
 
-export const StandaloneMediaBlock = createCompositeBlock({
-    name: "Media",
-    displayName: <FormattedMessage id="standaloneMedia.displayName" defaultMessage="Media" />,
-    blocks: {
-        media: {
-            block: MediaBlock,
-        },
-        aspectRatio: {
-            block: createCompositeSetting<StandaloneMediaBlockData["aspectRatio"]>({
-                defaultValue: "16x9",
-                AdminComponent: ({ state, updateState }) => {
-                    return (
-                        <BlocksFinalForm<Pick<StandaloneMediaBlockData, "aspectRatio">>
-                            onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
-                            initialValues={{ aspectRatio: state }}
-                        >
-                            <SelectField
-                                name="aspectRatio"
-                                label={<FormattedMessage id="standaloneMedia.aspectRatio" defaultMessage="Aspect Ratio" />}
+export const StandaloneMediaBlock = createCompositeBlock(
+    {
+        name: "Media",
+        displayName: <FormattedMessage id="standaloneMedia.displayName" defaultMessage="Media" />,
+        blocks: {
+            media: {
+                block: MediaBlock,
+            },
+            aspectRatio: {
+                block: createCompositeSetting<StandaloneMediaBlockData["aspectRatio"]>({
+                    defaultValue: "16x9",
+                    AdminComponent: ({ state, updateState }) => {
+                        return (
+                            <BlocksFinalForm<Pick<StandaloneMediaBlockData, "aspectRatio">>
+                                onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
+                                initialValues={{ aspectRatio: state }}
                             >
-                                {aspectRatioOptions.map((option) => (
-                                    <MenuItem value={option.value} key={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </SelectField>
-                        </BlocksFinalForm>
-                    );
-                },
-            }),
+                                <SelectField
+                                    name="aspectRatio"
+                                    label={<FormattedMessage id="standaloneMedia.aspectRatio" defaultMessage="Aspect Ratio" />}
+                                >
+                                    {aspectRatioOptions.map((option) => (
+                                        <MenuItem value={option.value} key={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </SelectField>
+                            </BlocksFinalForm>
+                        );
+                    },
+                }),
+            },
         },
     },
-});
+    (block) => {
+        block.category = BlockCategory.Media;
+        return block;
+    },
+);

@@ -2,10 +2,6 @@ import { BlockCategory, BlockInterface, createOneOfBlock } from "@comet/blocks-a
 import { DamImageBlock, DamVideoBlock, YouTubeVideoBlock } from "@comet/cms-admin";
 import { FormattedMessage } from "react-intl";
 
-/*
- * TODO: replace with new implementations with optional aspectRatio and video control options and preview images when available
- */
-
 export const MediaBlock: BlockInterface = createOneOfBlock({
     supportedBlocks: { image: DamImageBlock, damVideo: DamVideoBlock, youTubeVideo: YouTubeVideoBlock },
     name: "Media",
