@@ -130,7 +130,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
+                {disableLastBottomSpacing ? <NoLastBottomSpace>{rendered}</NoLastBottomSpace> : rendered}
             </PreviewSkeleton>
         );
     },
@@ -145,11 +145,8 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const Root = styled.span<{ $disableLastBottomSpacing?: boolean }>`
-    display: block;
-
-    ${({ theme, $disableLastBottomSpacing }) =>
-        $disableLastBottomSpacing &&
+const NoLastBottomSpace = styled.div`
+    ${({ theme }) =>
         css`
             > *:last-child {
                 margin-bottom: 0;
