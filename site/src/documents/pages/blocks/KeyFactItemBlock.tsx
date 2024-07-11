@@ -12,16 +12,14 @@ const descriptionRenderers: Renderers = {
 export const KeyFactItemBlock = withPreview(
     ({ data: { icon, fact, label, description } }: PropsWithData<KeyFactsItemBlockData>) => (
         <Root>
-            <ItemContent>
-                {icon.damFile && <SvgImageBlock data={icon} width={48} height={48} />}
-                <FactTypography variant={"h500"}>{fact}</FactTypography>
-                <Typography variant={"h350"}>{label}</Typography>
-                {hasRichTextBlockContent(description) && (
-                    <DescriptionTypography variant={"p200"}>
-                        <RichTextBlock data={description} renderers={descriptionRenderers} />
-                    </DescriptionTypography>
-                )}
-            </ItemContent>
+            {icon.damFile && <SvgImageBlock data={icon} width={48} height={48} />}
+            <FactTypography variant={"h500"}>{fact}</FactTypography>
+            <Typography variant={"h350"}>{label}</Typography>
+            {hasRichTextBlockContent(description) && (
+                <DescriptionTypography variant={"p200"}>
+                    <RichTextBlock data={description} renderers={descriptionRenderers} />
+                </DescriptionTypography>
+            )}
         </Root>
     ),
     { label: "Key fact" },
@@ -29,20 +27,9 @@ export const KeyFactItemBlock = withPreview(
 
 const Root = styled.div`
     display: flex;
-    flex: 1 0 40%;
-    justify-content: center;
-
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        flex: 1 0 21%;
-    }
-`;
-
-const ItemContent = styled.div`
-    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 350px;
 `;
 
 const FactTypography = styled(Typography)`

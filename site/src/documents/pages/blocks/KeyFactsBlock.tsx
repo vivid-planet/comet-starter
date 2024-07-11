@@ -2,7 +2,7 @@ import { hasRichTextBlockContent, ListBlock, PropsWithData, withPreview } from "
 import { KeyFactsBlockData } from "@src/blocks.generated";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { KeyFactItemBlock } from "./KeyFactItemBlock";
 
@@ -11,7 +11,7 @@ export const KeyFactsBlock = withPreview(
         <PageLayout grid>
             <PageLayoutContent>
                 {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
-                <ItemWrapper>
+                <ItemWrapper $listItemCount={items.blocks.length}>
                     <ListBlock data={items} block={(block) => <KeyFactItemBlock data={block} />} />
                 </ItemWrapper>
             </PageLayoutContent>
@@ -25,9 +25,18 @@ const PageLayoutContent = styled.div`
     margin: ${({ theme }) => theme.spacing.D300} 0;
 `;
 
-const ItemWrapper = styled.div`
+const ItemWrapper = styled.div<{ $listItemCount: number }>`
     margin-top: ${({ theme }) => theme.spacing.D200};
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
     gap: ${({ theme }) => theme.spacing.D100};
+
+    ${({ $listItemCount, theme }) =>
+        $listItemCount > 0 &&
+        css`
+            grid-template-columns: repeat(${Math.min($listItemCount, 2)}, 1fr);
+
+            ${theme.breakpoints.sm.mediaQuery} {
+                grid-template-columns: repeat(${Math.min($listItemCount, 4)}, 1fr);
+            }
+        `}
 `;
