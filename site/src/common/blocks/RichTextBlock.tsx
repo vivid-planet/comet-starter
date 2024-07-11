@@ -145,7 +145,9 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
+const Root = styled.span<{ $disableLastBottomSpacing?: boolean }>`
+    display: block;
+
     ${({ theme, $disableLastBottomSpacing }) =>
         $disableLastBottomSpacing &&
         css`
