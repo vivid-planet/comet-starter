@@ -145,7 +145,7 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const NoLastBottomSpace = styled.div`
+const DisableLastBottomSpacing = styled.div`
     ${({ theme }) =>
         css`
             > *:last-child {
