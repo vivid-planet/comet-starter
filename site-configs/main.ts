@@ -1,12 +1,12 @@
 import { Config } from "../site-configs";
 
 export default {
-    name: "Starter Main EN",
+    name: "Starter Main",
     contentScope: {
         domain: "main",
-        language: "en",
+        languages: ["en", "de"],
     },
     domains: {
-        local: "en.localhost:3000",
+        local: "localhost:3000",
     },
 } satisfies Config;
