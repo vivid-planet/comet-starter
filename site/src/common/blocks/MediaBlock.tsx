@@ -2,7 +2,7 @@ import { DamVideoBlock, OneOfBlock, PreviewSkeleton, PropsWithData, SupportedBlo
 import { MediaBlockData } from "@src/blocks.generated";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 
-const getSupportedBlocks = (sizes: string, aspectRatio?: string): SupportedBlocks => {
+const getSupportedBlocks = (sizes: string, aspectRatio: string): SupportedBlocks => {
     return {
         image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} />,
         damVideo: (data) => <DamVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} />,
@@ -12,7 +12,7 @@ const getSupportedBlocks = (sizes: string, aspectRatio?: string): SupportedBlock
 
 interface MediaBlockProps extends PropsWithData<MediaBlockData> {
     sizes?: string;
-    aspectRatio?: string;
+    aspectRatio: string;
 }
 
 export const MediaBlock = withPreview(

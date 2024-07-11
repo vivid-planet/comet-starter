@@ -4,11 +4,11 @@ import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/
 import { ImageProps as NextImageProps } from "next/image";
 
 type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & {
-    aspectRatio?: string | "inherit";
+    aspectRatio: string | "inherit";
 };
 
 export const DamImageBlock = withPreview(
-    ({ data: { block }, aspectRatio = "16x9", ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
+    ({ data: { block }, aspectRatio, ...imageProps }: PropsWithData<DamImageBlockData> & DamImageProps) => {
         if (!block) {
             return <PreviewSkeleton type="media" hasContent={false} />;
         }
