@@ -52,7 +52,7 @@ export class AppModule {
                     useFactory: (dependencies: Record<string, unknown>) => ({
                         debug: config.debug,
                         playground: config.debug,
-                        autoSchemaFile: "schema.gql",
+                        autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
                             if (process.env.NODE_ENV !== "development") {
