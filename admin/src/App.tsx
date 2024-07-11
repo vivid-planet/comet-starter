@@ -57,7 +57,10 @@ export function App() {
                         value={{
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
-                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                                const siteConfig = configs.find((config) => {
+                                    return config.contentScope.domain === scope.domain && config.contentScope.language === scope.language;
+                                });
+
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,

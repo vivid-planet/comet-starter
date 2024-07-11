@@ -1,12 +1,12 @@
 import { Config } from "../site-configs";
 
 export default {
-    name: "Starter Secondary EN",
+    name: "Starter Secondary",
     contentScope: {
         domain: "secondary",
-        language: "en",
+        languages: ["en", "de"],
     },
     domains: {
-        local: "secondary-en.localhost:3000",
+        local: "secondary.localhost:3000",
     },
 } satisfies Config;
