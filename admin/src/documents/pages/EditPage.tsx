@@ -129,7 +129,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                             startIcon={<Preview />}
                             disabled={!pageState}
                             onClick={() => {
-                                openSitePreviewWindow(pageState.path, contentScopeMatch.url);
+                                openSitePreviewWindow(`/${scope.language}${pageState.path}`, contentScopeMatch.url);
                             }}
                             color="info"
                         >
