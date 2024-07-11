@@ -1,3 +1,4 @@
+"use client";
 import { PixelImageBlock, PreviewSkeleton, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
 // eslint-disable-next-line import/no-extraneous-dependencies

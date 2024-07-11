@@ -3,7 +3,7 @@ import { BlocksBlock, PropsWithData, SupportedBlocks } from "@comet/cms-site";
 import { PageContentBlockData } from "@src/blocks.generated";
 import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
+import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
@@ -17,7 +17,7 @@ const supportedBlocks: SupportedBlocks = {
     richtext: (props) => <PageContentRichTextBlock data={props} />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
-    callToActionList: (props) => <CallToActionListBlock data={props} />,
+    callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
 };
 

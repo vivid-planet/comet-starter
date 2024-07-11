@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { Loading, MainContent, RouterPrompt, RouterTab, RouterTabs, Toolbar, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft } from "@comet/admin-icons";
 import { AdminComponentRoot } from "@comet/blocks-admin";
-import { createUsePage, EditPageLayout, PageName } from "@comet/cms-admin";
+import { createUsePage, PageName } from "@comet/cms-admin";
 import { IconButton } from "@mui/material";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { useIntl } from "react-intl";
@@ -73,7 +73,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
     if (!linkState) return <></>;
 
     return (
-        <EditPageLayout>
+        <>
             {hasChanges && (
                 <RouterPrompt
                     message={(location) => {
@@ -110,6 +110,6 @@ export const EditLink: React.FC<Props> = ({ id }) => {
                 </RouterTabs>
             </MainContent>
             {dialogs}
-        </EditPageLayout>
+        </>
     );
 };

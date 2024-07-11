@@ -1,3 +1,4 @@
+"use client";
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
