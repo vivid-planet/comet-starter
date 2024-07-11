@@ -1,5 +1,5 @@
-import { createBlocksBlock, YouTubeVideoBlock } from "@comet/blocks-admin";
-import { AnchorBlock, DamImageBlock, DamVideoBlock } from "@comet/cms-admin";
+import { createBlocksBlock } from "@comet/blocks-admin";
+import { AnchorBlock, DamImageBlock, DamVideoBlock, YouTubeVideoBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
