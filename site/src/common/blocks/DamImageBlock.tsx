@@ -1,8 +1,6 @@
 "use client";
 import { PixelImageBlock, PreviewSkeleton, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { BreakpointValue, theme } from "@src/theme";
 import { ImageProps as NextImageProps } from "next/image";
 
 type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & {
@@ -29,32 +27,3 @@ export const DamImageBlock = withPreview(
     },
     { label: "Image" },
 );
-
-export const createSizes = (
-    breakpointWidths: Partial<Record<keyof typeof theme.breakpoints, string | number>>,
-    defaultWidth: string | number = "100vw",
-): string => {
-    const sizes: string[] = [];
-
-    Object.keys(theme.breakpoints).forEach((breakpoint) => {
-        const width = breakpointWidths[breakpoint];
-        if (width !== undefined) {
-            sizes.push(`(max-width: ${BreakpointValue[breakpoint]}px) ${typeof width === "string" ? width : `${width}px`}`);
-        }
-    });
-
-    sizes.push(typeof defaultWidth === "string" ? defaultWidth : `${defaultWidth}px`);
-
-    return sizes.join(", ");
-};
-
-export const hasValidImage = (data: DamImageBlockData): boolean => {
-    if (data.block) {
-        if (data.block.type === "pixelImage") {
-            return (data.block.props as PixelImageBlockData).damFile?.image !== undefined;
-        } else if (data.block.type === "svgImage") {
-            return (data.block.props as SvgImageBlockData).damFile !== undefined;
-        }
-    }
-    return false;
-};

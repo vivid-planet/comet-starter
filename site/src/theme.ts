@@ -5,13 +5,6 @@ const createBreakpoint = (value: number) => {
     };
 };
 
-export const BreakpointValue = {
-    sx: 600,
-    sm: 900,
-    md: 1200,
-    lg: 1600,
-} as const;
-
 export const theme = {
     palette: {
         primary: {
@@ -39,10 +32,10 @@ export const theme = {
     },
     fontFamily: "Arial, sans-serif",
     breakpoints: {
-        xs: createBreakpoint(BreakpointValue.sx),
-        sm: createBreakpoint(BreakpointValue.sm),
-        md: createBreakpoint(BreakpointValue.md),
-        lg: createBreakpoint(BreakpointValue.lg),
+        xs: createBreakpoint(600),
+        sm: createBreakpoint(900),
+        md: createBreakpoint(1200),
+        lg: createBreakpoint(1600),
     },
     spacing: {
         D100: "var(--spacing-d100)",
