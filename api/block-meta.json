@@ -918,6 +918,71 @@
         ]
     },
     {
+        "name": "Media",
+        "fields": [
+            {
+                "name": "attachedBlocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "image": "DamImage",
+                                "damVideo": "DamVideo",
+                                "youTubeVideo": "YouTubeVideo"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            },
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
+            },
+            {
+                "name": "block",
+                "kind": "NestedObject",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "image": "DamImage",
+                                "damVideo": "DamVideo",
+                                "youTubeVideo": "YouTubeVideo"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
+            }
+        ]
+    },
+    {
         "name": "OptionalPixelImage",
         "fields": [
             {
@@ -978,12 +1043,9 @@
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "heading": "Heading",
-                                "image": "DamImage",
-                                "textImage": "TextImage",
-                                "damVideo": "DamVideo",
-                                "youTubeVideo": "YouTubeVideo",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "Media"
                             },
                             "nullable": false
                         }
@@ -1022,12 +1084,9 @@
                                 "space": "Space",
                                 "richtext": "RichText",
                                 "heading": "Heading",
-                                "image": "DamImage",
-                                "textImage": "TextImage",
-                                "damVideo": "DamVideo",
-                                "youTubeVideo": "YouTubeVideo",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "CallToActionList",
+                                "media": "Media"
                             },
                             "nullable": false
                         }
@@ -1677,65 +1736,6 @@
                 "name": "damFileId",
                 "kind": "String",
                 "nullable": true
-            }
-        ]
-    },
-    {
-        "name": "TextImage",
-        "fields": [
-            {
-                "name": "text",
-                "kind": "Block",
-                "block": "RichText",
-                "nullable": false
-            },
-            {
-                "name": "image",
-                "kind": "Block",
-                "block": "DamImage",
-                "nullable": false
-            },
-            {
-                "name": "imagePosition",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "right"
-                ],
-                "nullable": false
-            },
-            {
-                "name": "imageAspectRatio",
-                "kind": "String",
-                "nullable": false
-            }
-        ],
-        "inputFields": [
-            {
-                "name": "text",
-                "kind": "Block",
-                "block": "RichText",
-                "nullable": false
-            },
-            {
-                "name": "image",
-                "kind": "Block",
-                "block": "DamImage",
-                "nullable": false
-            },
-            {
-                "name": "imagePosition",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "right"
-                ],
-                "nullable": false
-            },
-            {
-                "name": "imageAspectRatio",
-                "kind": "String",
-                "nullable": false
             }
         ]
     },

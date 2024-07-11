@@ -1,11 +1,11 @@
 import { createBlocksBlock } from "@comet/blocks-admin";
-import { AnchorBlock, DamImageBlock, DamVideoBlock, YouTubeVideoBlock } from "@comet/cms-admin";
+import { AnchorBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
-import { TextImageBlock } from "@src/common/blocks/TextImageBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 
 export const PageContentBlock = createBlocksBlock({
@@ -16,11 +16,8 @@ export const PageContentBlock = createBlocksBlock({
         space: SpaceBlock,
         richtext: RichTextBlock,
         heading: HeadingBlock,
-        image: DamImageBlock,
-        textImage: TextImageBlock,
-        damVideo: DamVideoBlock,
-        youTubeVideo: YouTubeVideoBlock,
         columns: ColumnsBlock,
         callToActionList: CallToActionListBlock,
+        media: MediaBlock,
     },
 });
