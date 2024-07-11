@@ -1,11 +1,13 @@
-import { SelectField } from "@comet/admin";
-import { BlockCategory, BlocksFinalForm, createCompositeBlock, createCompositeSetting } from "@comet/blocks-admin";
-import { MenuItem } from "@mui/material";
+import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField } from "@comet/blocks-admin";
 import { StandaloneMediaBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
+import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-const aspectRatioOptions = [
+const aspectRatioOptions: Array<{
+    value: StandaloneMediaBlockData["aspectRatio"];
+    label: React.ReactNode;
+}> = [
     { label: "16:9", value: "16x9" },
     { label: "4:5", value: "4x5" },
     { label: "4:3", value: "4x3" },
@@ -25,27 +27,10 @@ export const StandaloneMediaBlock = createCompositeBlock(
                 block: MediaBlock,
             },
             aspectRatio: {
-                block: createCompositeSetting<StandaloneMediaBlockData["aspectRatio"]>({
+                block: createCompositeBlockSelectField<StandaloneMediaBlockData["aspectRatio"]>({
                     defaultValue: "16x9",
-                    AdminComponent: ({ state, updateState }) => {
-                        return (
-                            <BlocksFinalForm<Pick<StandaloneMediaBlockData, "aspectRatio">>
-                                onSubmit={({ aspectRatio }) => updateState(aspectRatio)}
-                                initialValues={{ aspectRatio: state }}
-                            >
-                                <SelectField
-                                    name="aspectRatio"
-                                    label={<FormattedMessage id="standaloneMedia.aspectRatio" defaultMessage="Aspect Ratio" />}
-                                >
-                                    {aspectRatioOptions.map((option) => (
-                                        <MenuItem value={option.value} key={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </SelectField>
-                            </BlocksFinalForm>
-                        );
-                    },
+                    options: aspectRatioOptions,
+                    fieldProps: { label: <FormattedMessage id="standaloneMedia.aspectRatio" defaultMessage="Aspect Ratio" />, fullWidth: true },
                 }),
             },
         },
