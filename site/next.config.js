@@ -61,6 +61,7 @@ const nextConfig = {
                                 frame-ancestors ${process.env.ADMIN_URL};
                                 upgrade-insecure-requests; 
                                 block-all-mixed-content;
+                                frame-src 'self' https://*.youtube.com https://*.youtube-nocookie.com;
                             `
                         .replace(/\s{2,}/g, " ")
                         .trim(),
