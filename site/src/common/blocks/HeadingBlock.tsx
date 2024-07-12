@@ -85,7 +85,7 @@ export const HeadingBlock = withPreview(
                     hasContent={hasRichTextBlockContent(headline)}
                     title={
                         <HeadlineSkeleton variant={"h550"} component={"span"}>
-                            Headline lorem Ipsum
+                            Headline
                         </HeadlineSkeleton>
                     }
                 >
