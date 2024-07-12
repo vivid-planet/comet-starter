@@ -8,7 +8,7 @@ interface Props {
     footer: GQLFooterFragment;
 }
 
-function Footer({ footer }: Props): JSX.Element {
+function Footer({ footer }: Props) {
     return <FooterContentBlock data={footer.content} />;
 }
 
