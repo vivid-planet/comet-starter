@@ -87,7 +87,7 @@ export function EditFooterPage(): JSX.Element | null {
                 setReferenceContent(FooterContentBlock.state2Output(state));
             }
         }
-    }, [data, scope]);
+    }, [data]);
 
     React.useEffect(() => {
         const equal = isEqual(referenceContent, footerState ? FooterContentBlock.state2Output(footerState) : null);
