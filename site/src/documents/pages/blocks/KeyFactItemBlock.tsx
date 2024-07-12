@@ -12,7 +12,7 @@ const descriptionRenderers: Renderers = {
 export const KeyFactItemBlock = withPreview(
     ({ data: { icon, fact, label, description } }: PropsWithData<KeyFactsItemBlockData>) => (
         <Root>
-            {icon.damFile && <SvgImageBlock data={icon} width={48} height={48} />}
+            {icon.damFile && <Icon data={icon} width={48} height={48} />}
             <FactTypography variant={"h500"}>{fact}</FactTypography>
             <Typography variant={"h350"}>{label}</Typography>
             {hasRichTextBlockContent(description) && (
@@ -32,8 +32,11 @@ const Root = styled.div`
     text-align: center;
 `;
 
+const Icon = styled(SvgImageBlock)`
+    margin-bottom: ${({ theme }) => theme.spacing.S100};
+`;
+
 const FactTypography = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S100};
     margin-bottom: ${({ theme }) => theme.spacing.S300};
     color: ${({ theme }) => theme.palette.primary.dark};
 `;
