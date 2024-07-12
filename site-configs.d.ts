@@ -11,4 +11,4 @@ export interface SiteConfig extends BaseSiteConfig {
 }
 
 export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig>;
-export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig>;
+export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig> & { public: { previewUrl: string } };

@@ -15,6 +15,10 @@ export type Config = Omit<SiteConfig, "domains" | "contentScope"> & {
     };
 };
 
+const getUrlFromDomain = (domain: string): string => {
+    return domain.includes("localhost") ? `http://${domain}` : `https://${domain}`;
+};
+
 // Called by `npx @comet/cli inject-site-configs`
 const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     const path = `${__dirname}/site-configs`;
@@ -38,6 +42,9 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
                     preliminary: env === "prod" ? `${domains["preliminary"]}/${language}` : undefined,
                 },
                 preloginEnabled: env === "prod" ? site.preloginEnabled : true,
+                public: {
+                    previewUrl: getUrlFromDomain(domains[env] ?? ""),
+                }
             }
         })
 
