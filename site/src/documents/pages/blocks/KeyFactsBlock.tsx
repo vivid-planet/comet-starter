@@ -1,4 +1,4 @@
-import { hasRichTextBlockContent, ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
+import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { KeyFactsBlockData } from "@src/blocks.generated";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageLayout } from "@src/layout/PageLayout";
@@ -10,7 +10,7 @@ export const KeyFactsBlock = withPreview(
     ({ data: { heading, items } }: PropsWithData<KeyFactsBlockData>) => (
         <PageLayout grid>
             <PageLayoutContent>
-                {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
+                <HeadingBlock data={heading} />
                 <ItemWrapper $listItemCount={items.blocks.length}>
                     <ListBlock data={items} block={(block) => <KeyFactItemBlock data={block} />} />
                 </ItemWrapper>
