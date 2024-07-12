@@ -24,9 +24,9 @@ export const FooterContentBlock = withPreview(
                     <LinksBlock>
                         {linkList.blocks.map((block) => (
                             <LinkBlock key={block.key} data={block.props.link}>
-                                <Typography component={"a"} variant={"p200"}>
+                                <LinkText component={"a"} variant={"p200"}>
                                     {block.props.text}
-                                </Typography>
+                                </LinkText>
                             </LinkBlock>
                         ))}
                     </LinksBlock>
@@ -114,6 +114,11 @@ const LinksBlock = styled.div`
 
 const CopyrightNotice = styled(Typography)`
     text-align: center;
+`;
+
+const LinkText = styled(Typography)`
+    color: ${({ theme }) => theme.palette.grey["400"]};
+    text-decoration: underline;
 `;
 
 const HorizontalLine = styled.hr`
