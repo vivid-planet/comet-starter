@@ -1,8 +1,8 @@
-import { hasRichTextBlockContent, PropsWithData, withPreview } from "@comet/cms-site";
+import { PropsWithData, withPreview } from "@comet/cms-site";
 import { BillboardTeaserBlockData, HeadingBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import { CSSProperties } from "react";
@@ -16,28 +16,25 @@ const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["ali
 export const BillboardTeaserBlock = withPreview(
     ({ data: { media, heading, text, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
-            {/*TODO: use media block and check if absolute container is above preview image*/}
             <ImageMobile>
-                <DamImageBlock data={media} aspectRatio="1x1" />
+                <MediaBlock data={media} aspectRatio="1x1" />
             </ImageMobile>
             <ImageTablet>
-                <DamImageBlock data={media} aspectRatio="4x3" />
+                <MediaBlock data={media} aspectRatio="4x3" />
             </ImageTablet>
             <ImageDesktop>
-                <DamImageBlock data={media} aspectRatio="16x9" />
+                <MediaBlock data={media} aspectRatio="16x9" />
             </ImageDesktop>
             <ImageLargeDesktop>
-                <DamImageBlock data={media} aspectRatio="21x9" />
+                <MediaBlock data={media} aspectRatio="3x1" />
             </ImageLargeDesktop>
-            <AbsoluteContainer>
-                <GridRoot grid>
-                    <Content $alignItems={alignmentMap[heading.textAlignment]}>
-                        {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
-                        {hasRichTextBlockContent(text) && <RichTextBlock data={text} />}
-                        {callToActionList.blocks.length > 0 && <CallToActionListBlock data={callToActionList} />}
-                    </Content>
-                </GridRoot>
-            </AbsoluteContainer>
+            <AbsoluteGridRoot grid>
+                <Content $alignItems={alignmentMap[heading.textAlignment]}>
+                    <HeadingBlock data={heading} />
+                    <RichTextBlock data={text} />
+                    {callToActionList.blocks.length > 0 && <CallToActionListBlock data={callToActionList} />}
+                </Content>
+            </AbsoluteGridRoot>
         </Root>
     ),
     { label: "Billboard Teaser" },
@@ -48,11 +45,7 @@ const Root = styled.div`
     overflow: hidden;
 `;
 
-const GridRoot = styled(PageLayout)`
-    height: 100%;
-`;
-
-const AbsoluteContainer = styled.div`
+const AbsoluteGridRoot = styled(PageLayout)`
     position: absolute;
     top: 0;
     left: 0;
@@ -70,19 +63,13 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     align-items: ${({ $alignItems }) => $alignItems};
 `;
 
-const BaseImage = styled.div`
-    img {
-        object-fit: cover;
-    }
-`;
-
-const ImageMobile = styled(BaseImage)`
+const ImageMobile = styled.div`
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         display: none;
     }
 `;
 
-const ImageTablet = styled(BaseImage)`
+const ImageTablet = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
@@ -94,7 +81,7 @@ const ImageTablet = styled(BaseImage)`
     }
 `;
 
-const ImageDesktop = styled(BaseImage)`
+const ImageDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -106,7 +93,7 @@ const ImageDesktop = styled(BaseImage)`
     }
 `;
 
-const ImageLargeDesktop = styled(BaseImage)`
+const ImageLargeDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
