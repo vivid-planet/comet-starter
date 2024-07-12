@@ -9,14 +9,13 @@ import {
     ExtractBlockInput,
     inputToData,
 } from "@comet/blocks-api";
-import { DamImageBlock } from "@comet/cms-api";
 import { CallToActionBlock } from "@src/common/blocks/call-to-action.block";
+import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { IsString } from "class-validator";
 
 class TeaserItemBlockData extends BlockData {
-    // TODO: use media block when available
-    @ChildBlock(DamImageBlock)
+    @ChildBlock(MediaBlock)
     media: BlockDataInterface;
 
     @BlockField()
@@ -30,8 +29,8 @@ class TeaserItemBlockData extends BlockData {
 }
 
 class TeaserItemBlockInput extends BlockInput {
-    @ChildBlockInput(DamImageBlock)
-    media: ExtractBlockInput<typeof DamImageBlock>;
+    @ChildBlockInput(MediaBlock)
+    media: ExtractBlockInput<typeof MediaBlock>;
 
     @BlockField()
     @IsString()

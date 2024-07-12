@@ -1835,7 +1835,7 @@
             {
                 "name": "media",
                 "kind": "Block",
-                "block": "DamImage",
+                "block": "Media",
                 "nullable": false
             },
             {
@@ -1860,7 +1860,7 @@
             {
                 "name": "media",
                 "kind": "Block",
-                "block": "DamImage",
+                "block": "Media",
                 "nullable": false
             },
             {

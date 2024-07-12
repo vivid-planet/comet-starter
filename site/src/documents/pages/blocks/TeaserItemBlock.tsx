@@ -1,7 +1,7 @@
 import { hasRichTextBlockContent, PropsWithData, withPreview } from "@comet/cms-site";
 import { TeaserItemBlockData } from "@src/blocks.generated";
-import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
+import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { defaultRichTextRenderers, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
@@ -18,18 +18,17 @@ export const TeaserItemBlock = withPreview(
             <LinkBlock data={callToAction.textLink.link}>
                 <ItemContent>
                     <ContentContainer>
-                        {/*TODO: use media block when available*/}
-                        <DamImageBlock data={media} aspectRatio={"16x9"} />
+                        <MediaBlock data={media} aspectRatio="16x9" />
                     </ContentContainer>
                     <ContentContainer>
-                        <TitleTypography variant={"h350"}>{title}</TitleTypography>
+                        <TitleTypography variant="h350">{title}</TitleTypography>
                         {hasRichTextBlockContent(description) && (
-                            <Typography variant={"p200"}>
+                            <Typography variant="p200">
                                 <RichTextBlock data={description} renderers={descriptionRenderers} />
                             </Typography>
                         )}
                         <TextLinkContainer>
-                            <ArrowIcon href={"/icons/arrow-right.svg#arrow-right"} />
+                            <ArrowIcon href="/icons/arrow-right.svg#arrow-right" />
                             <LinkText>{callToAction.textLink.text}</LinkText>
                         </TextLinkContainer>
                     </ContentContainer>
