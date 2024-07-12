@@ -1,4 +1,4 @@
-import { hasRichTextBlockContent, PropsWithData, withPreview } from "@comet/cms-site";
+import { PropsWithData, withPreview } from "@comet/cms-site";
 import { TeaserItemBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
@@ -14,43 +14,30 @@ const descriptionRenderers: Renderers = {
 
 export const TeaserItemBlock = withPreview(
     ({ data: { media, title, description, callToAction } }: PropsWithData<TeaserItemBlockData>) => (
-        <Root>
-            <LinkBlock data={callToAction.textLink.link}>
-                <ItemContent>
-                    <ContentContainer>
-                        <MediaBlock data={media} aspectRatio="16x9" />
-                    </ContentContainer>
-                    <ContentContainer>
-                        <TitleTypography variant="h350">{title}</TitleTypography>
-                        {hasRichTextBlockContent(description) && (
-                            <Typography variant="p200">
-                                <RichTextBlock data={description} renderers={descriptionRenderers} />
-                            </Typography>
-                        )}
-                        <TextLinkContainer>
-                            <ArrowIcon href="/icons/arrow-right.svg#arrow-right" />
-                            <LinkText>{callToAction.textLink.text}</LinkText>
-                        </TextLinkContainer>
-                    </ContentContainer>
-                </ItemContent>
-            </LinkBlock>
-        </Root>
+        <LinkBlock data={callToAction.textLink.link}>
+            <ItemContent>
+                <ContentContainer>
+                    <MediaBlock data={media} aspectRatio="16x9" sizes="40vw" />
+                </ContentContainer>
+                <ContentContainer>
+                    <TitleTypography variant="h350">{title}</TitleTypography>
+                    <Typography variant="p200">
+                        <RichTextBlock data={description} renderers={descriptionRenderers} />
+                    </Typography>
+                    <TextLinkContainer>
+                        <ArrowIcon href="/icons/arrow-right.svg#arrow-right" />
+                        <LinkText>{callToAction.textLink.text}</LinkText>
+                    </TextLinkContainer>
+                </ContentContainer>
+            </ItemContent>
+        </LinkBlock>
     ),
     { label: "Teaser Item" },
 );
 
-const Root = styled.div`
-    display: flex;
-    flex: 1 0 80%;
-    justify-content: center;
-
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        flex: 1 0 21%;
-    }
-`;
-
 const ItemContent = styled.a`
     text-decoration: none;
+    cursor: pointer;
     display: flex;
     flex: 1;
     flex-direction: row;
@@ -60,7 +47,6 @@ const ItemContent = styled.a`
         flex: unset;
         gap: ${({ theme }) => theme.spacing.S400};
         flex-direction: column;
-        max-width: 350px;
     }
 `;
 
