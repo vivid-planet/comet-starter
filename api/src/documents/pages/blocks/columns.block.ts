@@ -5,6 +5,7 @@ import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.bl
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
+import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
 
 const ColumnsContentBlock = createBlocksBlock(
     {
@@ -15,6 +16,7 @@ const ColumnsContentBlock = createBlocksBlock(
             space: SpaceBlock,
             heading: HeadingBlock,
             callToActionList: CallToActionListBlock,
+            media: StandaloneMediaBlock,
         },
     },
     {

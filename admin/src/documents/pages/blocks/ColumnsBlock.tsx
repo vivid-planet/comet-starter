@@ -11,6 +11,7 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { FormattedMessage } from "react-intl";
 
 const oneColumnLayouts = [
@@ -118,6 +119,7 @@ const ColumnsContentBlock = createBlocksBlock({
         space: SpaceBlock,
         heading: HeadingBlock,
         callToActionList: CallToActionListBlock,
+        media: StandaloneMediaBlock,
     },
 });
 
