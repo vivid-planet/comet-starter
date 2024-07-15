@@ -1,3 +1,4 @@
+"use client";
 import { createGlobalStyle } from "styled-components";
 
 const ResponsiveSpacingStyle = createGlobalStyle`
