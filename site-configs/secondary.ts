@@ -4,8 +4,8 @@ export default {
     name: "Starter Secondary",
     contentScope: {
         domain: "secondary",
-        languages: ["en", "de"],
     },
+    languages: ["en", "de"],
     domains: {
         local: "secondary.localhost:3000",
     },
