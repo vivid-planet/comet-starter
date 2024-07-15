@@ -13,10 +13,10 @@ export const KeyFactItemBlock = withPreview(
     ({ data: { icon, fact, label, description } }: PropsWithData<KeyFactsItemBlockData>) => (
         <Root>
             {icon.damFile && <Icon data={icon} width={48} height={48} />}
-            <FactTypography variant={"h500"}>{fact}</FactTypography>
-            <Typography variant={"h350"}>{label}</Typography>
+            <FactTypography variant="h500">{fact}</FactTypography>
+            <Typography variant="h350">{label}</Typography>
             {hasRichTextBlockContent(description) && (
-                <DescriptionTypography variant={"p200"}>
+                <DescriptionTypography variant="p200">
                     <RichTextBlock data={description} renderers={descriptionRenderers} />
                 </DescriptionTypography>
             )}
