@@ -4,7 +4,7 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 
 const getSupportedBlocks = (sizes: string, aspectRatio: string): SupportedBlocks => {
     return {
-        image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} />,
+        image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} fill />,
         damVideo: (data) => <DamVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} />,
         youTubeVideo: (data) => <YouTubeVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} />,
     };

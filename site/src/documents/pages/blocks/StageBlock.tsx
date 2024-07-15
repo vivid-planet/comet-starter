@@ -1,5 +1,5 @@
 "use client";
-import { hasRichTextBlockContent, PropsWithData, withPreview } from "@comet/cms-site";
+import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData, StageBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
@@ -17,41 +17,36 @@ const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["ali
 export const StageBlock = withPreview(
     ({ data: { media, heading, text, callToActionList } }: PropsWithData<StageBlockData>) => (
         <Root>
-            {/*TODO: check if absolute container is above preview image*/}
-            {/*TODO: check with UX what aspect ratio should be used or if we should set 100vw - header height*/}
-            <ImageMobile>
-                <MediaBlock data={media} aspectRatio="9x16" />
-            </ImageMobile>
-            <ImageTablet>
+            <MediaPhone>
+                <MediaBlock data={media} aspectRatio="1x2" />
+            </MediaPhone>
+            <MediaTablet>
                 <MediaBlock data={media} aspectRatio="1x1" />
-            </ImageTablet>
-            <ImageDesktop>
-                <MediaBlock data={media} aspectRatio="4x3" />
-            </ImageDesktop>
-            <AbsoluteContainer>
-                <GridRoot grid>
-                    <Content $alignItems={alignmentMap[heading.textAlignment]}>
-                        {(hasRichTextBlockContent(heading.eyebrow) || hasRichTextBlockContent(heading.headline)) && <HeadingBlock data={heading} />}
-                        {hasRichTextBlockContent(text) && <RichTextBlock data={text} />}
-                        {callToActionList.blocks.length > 0 && <CallToActionListBlock data={callToActionList} />}
-                    </Content>
-                </GridRoot>
-            </AbsoluteContainer>
+            </MediaTablet>
+            <MediaTabletLandscape>
+                <MediaBlock data={media} aspectRatio="3x2" />
+            </MediaTabletLandscape>
+            <MediaDesktop>
+                <MediaBlock data={media} aspectRatio="16x9" />
+            </MediaDesktop>
+            <AbsoluteGridRoot grid>
+                <Content $alignItems={alignmentMap[heading.textAlignment]}>
+                    <HeadingBlock data={heading} />
+                    <RichTextBlock data={text} />
+                    {callToActionList.blocks.length > 0 && <CallToActionListBlock data={callToActionList} />}
+                </Content>
+            </AbsoluteGridRoot>
         </Root>
     ),
     { label: "Stage" },
 );
 
-const Root = styled.div`
+const Root = styled(PageLayout)`
     position: relative;
     overflow: hidden;
 `;
 
-const GridRoot = styled(PageLayout)`
-    height: 100%;
-`;
-
-const AbsoluteContainer = styled.div`
+const AbsoluteGridRoot = styled(PageLayout)`
     position: absolute;
     top: 0;
     left: 0;
@@ -69,20 +64,33 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     align-items: ${({ $alignItems }) => $alignItems};
 `;
 
-const BaseImage = styled.div`
+// TODO: should this be default behavior? -> move to library?
+const BaseMedia = styled.div`
     img {
         object-fit: cover;
     }
+
+    video {
+        height: 100%;
+    }
+
+    div {
+        width: 100%;
+        height: 100%;
+    }
 `;
 
-const ImageMobile = styled(BaseImage)`
+const MediaPhone = styled(BaseMedia)`
+    height: 800px;
+
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         display: none;
     }
 `;
 
-const ImageTablet = styled(BaseImage)`
+const MediaTablet = styled(BaseMedia)`
     display: none;
+    height: 700px;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         display: block;
@@ -93,10 +101,28 @@ const ImageTablet = styled(BaseImage)`
     }
 `;
 
-const ImageDesktop = styled(BaseImage)`
+const MediaTabletLandscape = styled(BaseMedia)`
     display: none;
+    height: 650px;
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         display: block;
+    }
+
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        display: none;
+    }
+`;
+
+const MediaDesktop = styled(BaseMedia)`
+    display: none;
+    height: 750px;
+
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        display: block;
+    }
+
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        height: 800px;
     }
 `;
