@@ -5,7 +5,6 @@ import { AdminComponentRoot, AdminTabLabel } from "@comet/blocks-admin";
 import {
     BlockPreviewWithTabs,
     createUsePage,
-    EditPageLayout,
     openSitePreviewWindow,
     PageName,
     useBlockPreview,
@@ -93,7 +92,7 @@ export const EditPage = ({ id, category }: Props) => {
         return <Loading behavior="fillPageHeight" />;
     }
 
-    let previewUrl = `${siteConfig.previewUrl}/admin/page`;
+    let previewUrl = `${siteConfig.blockPreviewBaseUrl}/page`;
 
     let previewState: unknown = PageContentBlock.createPreviewState(pageState.document.content, {
         ...blockContext,
@@ -102,7 +101,7 @@ export const EditPage = ({ id, category }: Props) => {
     });
 
     if (tabRouteMatch?.params.tab === "stage") {
-        previewUrl = `${siteConfig.previewUrl}/admin/stage`;
+        previewUrl = `${siteConfig.blockPreviewBaseUrl}/stage`;
         previewState = StageBlock.createPreviewState(pageState.document.stage, {
             ...blockContext,
             parentUrl: `${match.url}/stage`,
@@ -111,7 +110,7 @@ export const EditPage = ({ id, category }: Props) => {
     }
 
     return (
-        <EditPageLayout>
+        <>
             {hasChanges && (
                 <RouterPrompt
                     message={(location) => {
@@ -199,6 +198,6 @@ export const EditPage = ({ id, category }: Props) => {
                 </BlockPreviewWithTabs>
             </MainContent>
             {dialogs}
-        </EditPageLayout>
+        </>
     );
 };

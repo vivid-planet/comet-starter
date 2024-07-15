@@ -1,7 +1,7 @@
 import { BlockCategory, createCompositeBlock } from "@comet/blocks-admin";
-import { DamImageBlock } from "@comet/cms-admin";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
@@ -12,8 +12,7 @@ export const StageBlock = createCompositeBlock(
         displayName: <FormattedMessage id="stageBlock.displayName" defaultMessage="Stage" />,
         blocks: {
             media: {
-                // TODO: use media block
-                block: DamImageBlock,
+                block: MediaBlock,
                 title: <FormattedMessage id="stageBlock.media" defaultMessage="Media" />,
                 hiddenInSubroute: true,
             },

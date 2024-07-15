@@ -1,8 +1,5 @@
-import { Domain as DomainIcon, Language as LanguageIcon } from "@comet/admin-icons";
 import {
     ContentScopeConfigProps,
-    ContentScopeControls as ContentScopeControlsLibrary,
-    ContentScopeControlsConfig,
     ContentScopeProvider as ContentScopeProviderLibrary,
     ContentScopeProviderProps,
     ContentScopeValues,
@@ -10,36 +7,12 @@ import {
     UseContentScopeApi,
     useContentScopeConfig as useContentScopeConfigLibrary,
     useCurrentUser,
-    useSitesConfig,
 } from "@comet/cms-admin";
-import { SitesConfig } from "@src/config";
-
-type Domain = "main" | "secondary" | string;
-type Language = "en" | string;
-export interface ContentScope {
-    domain: Domain;
-    language: Language;
-}
+import { ContentScope } from "@src/config";
 
 // convenince wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi<ContentScope> {
     return useContentScopeLibrary<ContentScope>();
-}
-
-const controlsConfig: ContentScopeControlsConfig<ContentScope> = {
-    domain: {
-        label: "Domain",
-        icon: DomainIcon,
-    },
-    language: {
-        label: "Language",
-        icon: LanguageIcon,
-    },
-};
-
-// convenince wrapper for app (Bind config and Generic)
-export function ContentScopeControls() {
-    return <ContentScopeControlsLibrary<ContentScope> config={controlsConfig} />;
 }
 
 export function useContentScopeConfig(p: ContentScopeConfigProps): void {
@@ -47,21 +20,17 @@ export function useContentScopeConfig(p: ContentScopeConfigProps): void {
 }
 
 export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
-    const sitesConfig = useSitesConfig<SitesConfig>();
     const user = useCurrentUser();
 
-    const allowedUserDomains = user.allowedContentScopes.map((contentScope) => contentScope.domain);
+    // TODO in COMET: filter already in API, avoid type cast, support labels
+    const userContentScopes = user.allowedContentScopes.filter(
+        (value, index, self) => self.map((x) => JSON.stringify(x)).indexOf(JSON.stringify(value)) == index,
+    ) as ContentScope[];
 
-    const allowedSiteConfigs = Object.fromEntries(
-        Object.entries(sitesConfig.configs).filter(([siteKey, _siteConfig]) => allowedUserDomains.includes(siteKey)),
-    );
-    const values: ContentScopeValues<ContentScope> = {
-        domain: Object.keys(allowedSiteConfigs).map((key) => ({ value: key })),
-        language: [
-            { label: "English", value: "en" },
-            { label: "German", value: "de" },
-        ],
-    };
+    const values: ContentScopeValues<ContentScope> = userContentScopes.map((contentScope) => ({
+        domain: { value: contentScope.domain },
+        language: { value: contentScope.language, label: contentScope.language.toUpperCase() },
+    }));
 
     return (
         <ContentScopeProviderLibrary<ContentScope> values={values} defaultValue={{ domain: "main", language: "en" }}>

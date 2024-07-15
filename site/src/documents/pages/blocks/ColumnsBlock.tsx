@@ -6,6 +6,7 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
@@ -16,6 +17,7 @@ const supportedBlocks: SupportedBlocks = {
     space: (props) => <SpaceBlock data={props} />,
     heading: (props) => <HeadingBlock data={props} />,
     callToActionList: (props) => <CallToActionListBlock data={props} />,
+    media: (props) => <StandaloneMediaBlock data={props} />,
 };
 
 const ColumnsContentBlock = withPreview(
@@ -65,8 +67,7 @@ const Column = styled.div<{ $layout: string }>`
             $layout === "4-16-4" &&
             css`
                 grid-column: 5 / -5;
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "9-9" &&
             css`
@@ -75,8 +76,7 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 14 / 23;
                 }
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "12-6" &&
             css`
@@ -85,8 +85,7 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 17 / 23;
                 }
-            }
-        `};
+            `};
         ${({ $layout }) =>
             $layout === "6-12" &&
             css`
@@ -95,7 +94,6 @@ const Column = styled.div<{ $layout: string }>`
                 &:nth-child(even) {
                     grid-column: 11 / 23;
                 }
-            }
-        `};
+            `};
     }
 `;

@@ -1,8 +1,9 @@
+"use client";
 import { hasRichTextBlockContent, PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData, StageBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import { CSSProperties } from "react";
@@ -16,16 +17,16 @@ const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["ali
 export const StageBlock = withPreview(
     ({ data: { media, heading, text, callToActionList } }: PropsWithData<StageBlockData>) => (
         <Root>
-            {/*TODO: use media block and check if absolute container is above preview image*/}
+            {/*TODO: check if absolute container is above preview image*/}
             {/*TODO: check with UX what aspect ratio should be used or if we should set 100vw - header height*/}
             <ImageMobile>
-                <DamImageBlock data={media} aspectRatio="9x16" />
+                <MediaBlock data={media} aspectRatio="9x16" />
             </ImageMobile>
             <ImageTablet>
-                <DamImageBlock data={media} aspectRatio="1x1" />
+                <MediaBlock data={media} aspectRatio="1x1" />
             </ImageTablet>
             <ImageDesktop>
-                <DamImageBlock data={media} aspectRatio="4x3" />
+                <MediaBlock data={media} aspectRatio="4x3" />
             </ImageDesktop>
             <AbsoluteContainer>
                 <GridRoot grid>
