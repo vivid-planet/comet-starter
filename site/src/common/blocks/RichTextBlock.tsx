@@ -1,3 +1,4 @@
+"use client";
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
@@ -130,7 +131,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
+                {disableLastBottomSpacing ? <DisableLastBottomSpacing>{rendered}</DisableLastBottomSpacing> : rendered}
             </PreviewSkeleton>
         );
     },
@@ -145,9 +146,8 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
-    ${({ theme, $disableLastBottomSpacing }) =>
-        $disableLastBottomSpacing &&
+const DisableLastBottomSpacing = styled.div`
+    ${({ theme }) =>
         css`
             > *:last-child {
                 margin-bottom: 0;

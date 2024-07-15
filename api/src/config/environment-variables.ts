@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { BlobStorageConfig } from "@comet/cms-api";
+import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
-import { IsBase64, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { IsArray, IsBase64, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class EnvironmentVariables {
     @IsString()
@@ -111,4 +112,12 @@ export class EnvironmentVariables {
     @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
     @IsString()
     S3_SECRET_ACCESS_KEY: string;
+
+    @IsString()
+    @ValidateIf(() => process.env.NODE_ENV === "production")
+    CDN_ORIGIN_CHECK_SECRET: string;
+
+    @IsArray()
+    @Transform(({ value }) => JSON.parse(value))
+    PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
 }
