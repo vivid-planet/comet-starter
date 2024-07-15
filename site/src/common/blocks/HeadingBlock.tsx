@@ -1,3 +1,4 @@
+"use client";
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
@@ -17,37 +18,37 @@ const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers =
     blocks: {
         "header-one": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h600"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h600" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-two": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h550"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h550" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-three": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h500"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h500" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-four": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h450"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h450" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-five": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h400"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h400" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
         "header-six": (children, { keys }) =>
             children.map((child, index) => (
-                <Typography variant={"h350"} component={htmlTag} key={keys[index]} bottomSpacing>
+                <Typography variant="h350" component={htmlTag} key={keys[index]} bottomSpacing>
                     {child}
                 </Typography>
             )),
@@ -76,7 +77,7 @@ export const HeadingBlock = withPreview(
 
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
-                <Typography variant={"h400"} component={"h5"} bottomSpacing>
+                <Typography variant="h400" component="h5" bottomSpacing>
                     <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                 </Typography>
                 <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />

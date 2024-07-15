@@ -4,7 +4,7 @@ import { runEslintFix } from "../../util/runEslintFix";
 
 function removeSiteReferences(verbose: boolean) {
     removeReferenceInFile(".vscode/settings.json", /, "site"/g, verbose);
-    removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_SITE_IS_PREVIEW=false\n\n/gms, verbose);
+    removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_API_URL=\$API_URL\n\n/gms, verbose);
     removeReferenceInFile("install.sh", /.*site.*\n/gim, verbose);
     removeReferenceInFile(".prettierignore", /.*site.*\n/gim, verbose);
     removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim, verbose);
