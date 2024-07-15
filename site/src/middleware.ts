@@ -35,6 +35,10 @@ export async function middleware(request: NextRequest) {
         return; // Fallback for Site-Preview
     }
 
+    if (pathname.startsWith("/dam/")) {
+        return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
+    }
+
     const redirects = await createRedirects();
 
     const redirect = redirects.get(pathname);
