@@ -1,4 +1,4 @@
-import { Assets, Dashboard, Domain, PageTree, Snips, Wrench } from "@comet/admin-icons";
+import { Assets, Dashboard, PageTree, Snips, Wrench } from "@comet/admin-icons";
 import {
     AllCategories,
     ContentScopeIndicator,
@@ -13,8 +13,6 @@ import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
 import { FormattedMessage } from "react-intl";
-
-import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "./ContentScopeIndicatorStyles";
 
 export const pageTreeCategories: AllCategories = [
     {
@@ -31,6 +29,7 @@ const RedirectsPage = createRedirectsPage();
 
 export const masterMenuData: MasterMenuData = [
     {
+        type: "route",
         primary: <FormattedMessage id="menu.dashboard" defaultMessage="Dashboard" />,
         icon: <Dashboard />,
         route: {
@@ -39,6 +38,7 @@ export const masterMenuData: MasterMenuData = [
         },
     },
     {
+        type: "route",
         primary: <FormattedMessage id="menu.pageTree" defaultMessage="Page tree" />,
         icon: <PageTree />,
         route: {
@@ -49,26 +49,14 @@ export const masterMenuData: MasterMenuData = [
                     allCategories={pageTreeCategories}
                     documentTypes={pageTreeDocumentTypes}
                     category="MainNavigation"
-                    renderContentScopeIndicator={(scope) => (
-                        <ContentScopeIndicator variant="toolbar">
-                            <ContentScopeIndicatorContent>
-                                <Domain fontSize="small" />
-                                <ContentScopeIndicatorDomain variant="body2" textTransform="uppercase">
-                                    {scope.domain}
-                                </ContentScopeIndicatorDomain>
-                                {" | "}
-                                <ContentScopeIndicatorLanguage variant="body2" textTransform="uppercase">
-                                    {scope.language}
-                                </ContentScopeIndicatorLanguage>
-                            </ContentScopeIndicatorContent>
-                        </ContentScopeIndicator>
-                    )}
+                    renderContentScopeIndicator={(scope) => <ContentScopeIndicator scope={scope} />}
                 />
             ),
         },
         requiredPermission: "pageTree",
     },
     {
+        type: "route",
         primary: <FormattedMessage id="menu.dam" defaultMessage="Assets" />,
         icon: <Assets />,
         route: {
@@ -78,6 +66,7 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "dam",
     },
     {
+        type: "route",
         primary: <FormattedMessage id="menu.userPermissions" defaultMessage="User Permissions" />,
         icon: <Snips />,
         route: {
@@ -87,10 +76,12 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "userPermissions",
     },
     {
+        type: "collapsible",
         primary: <FormattedMessage id="menu.system" defaultMessage="System" />,
         icon: <Wrench />,
-        submenu: [
+        items: [
             {
+                type: "route",
                 primary: <FormattedMessage id="menu.publisher" defaultMessage="Publisher" />,
                 route: {
                     path: "/system/publisher",
@@ -99,6 +90,7 @@ export const masterMenuData: MasterMenuData = [
                 requiredPermission: "builds",
             },
             {
+                type: "route",
                 primary: <FormattedMessage id="menu.redirects" defaultMessage="Redirects" />,
                 route: {
                     path: "/system/redirects",

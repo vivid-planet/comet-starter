@@ -1,8 +1,8 @@
+"use client";
 import {
     DamFileDownloadLinkBlock,
     EmailLinkBlock,
     ExternalLinkBlock,
-    InternalLinkBlock,
     OneOfBlock,
     PhoneLinkBlock,
     PropsWithData,
@@ -10,7 +10,9 @@ import {
     withPreview,
 } from "@comet/cms-site";
 import { LinkBlockData } from "@src/blocks.generated";
-import { ReactElement } from "react";
+import { ReactNode } from "react";
+
+import { InternalLinkBlock } from "./InternalLinkBlock";
 
 const supportedBlocks: SupportedBlocks = {
     internal: ({ children, title, ...props }) => (
@@ -41,7 +43,7 @@ const supportedBlocks: SupportedBlocks = {
 };
 
 interface LinkBlockProps extends PropsWithData<LinkBlockData> {
-    children: ReactElement;
+    children: ReactNode;
 }
 
 export const LinkBlock = withPreview(
