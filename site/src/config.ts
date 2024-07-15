@@ -10,9 +10,8 @@ export type { SiteConfig };
 
 export async function getSiteConfig({ language }: { language: string }) {
     const host = getHost(headers());
-    const domain = `${host}/${language}`;
 
-    let siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === domain || siteConfig.domains.preliminary === domain);
+    let siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
         const preview = await previewParams();
         if (preview && preview.scope) {

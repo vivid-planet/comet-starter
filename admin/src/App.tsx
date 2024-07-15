@@ -58,12 +58,12 @@ export function App() {
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
                                 const siteConfig = configs.find((config) => {
-                                    return config.contentScope.domain === scope.domain && config.contentScope.language === scope.language;
+                                    return config.public.domain === scope.domain;
                                 });
 
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
-                                    url: siteConfig.url,
+                                    url: `${siteConfig.url}/${scope.language}`,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
                                     blockPreviewBaseUrl: `${siteConfig.public.previewUrl}/block-preview`,
                                     sitePreviewApiUrl: `${siteConfig.public.previewUrl}/api/site-preview`,

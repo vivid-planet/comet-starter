@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext } from "react";
 
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
-import { PublicSiteConfig } from "./site-configs";
+import { ContentScope as SiteConfigContentScope, PublicSiteConfig } from "./site-configs";
 
 export function createConfig() {
     const environmentVariables = {} as Record<(typeof environment)[number], string>;
@@ -29,7 +29,7 @@ export function createConfig() {
     };
 }
 
-export type ContentScope = PublicSiteConfig["contentScope"];
+export type ContentScope = SiteConfigContentScope;
 
 export type Config = ReturnType<typeof createConfig>;
 

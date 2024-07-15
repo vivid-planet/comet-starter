@@ -16,17 +16,14 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL("/en", request.url));
     }
 
-    const domain = `${host}/${language}`;
-
     // Site-Preview is handled in getSiteConfigs since draftMode() is not set yet in middleware (https://github.com/vercel/next.js/issues/52080)
 
     // Redirect to Main Host
-    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === domain || siteConfig.domains.preliminary === domain);
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
         const redirectSiteConfig = getSiteConfigs().find(
             (siteConfig) =>
-                siteConfig.domains.additional?.includes(domain) ||
-                (siteConfig.domains.pattern && domain.match(new RegExp(siteConfig.domains.pattern))),
+                siteConfig.domains.additional?.includes(host) || (siteConfig.domains.pattern && host.match(new RegExp(siteConfig.domains.pattern))),
         );
         if (redirectSiteConfig) {
             return NextResponse.redirect(redirectSiteConfig.url);

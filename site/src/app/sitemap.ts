@@ -18,41 +18,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const siteConfigs = getSiteConfigs();
 
     for (const siteConfig of siteConfigs) {
-        const scope = siteConfig.contentScope;
+        for (const language of siteConfig.public.languages) {
+            const domain = siteConfig.public.domain;
+            const scope = { domain, language };
 
-        let totalCount = 0;
-        let currentCount = 0;
+            let totalCount = 0;
+            let currentCount = 0;
 
-        do {
-            const { paginatedPageTreeNodes } = await graphqlFetch<GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables>(
-                pageDataListQuery,
-                {
+            do {
+                const { paginatedPageTreeNodes } = await graphqlFetch<
+                    GQLPrebuildPageDataListSitemapQuery,
+                    GQLPrebuildPageDataListSitemapQueryVariables
+                >(pageDataListQuery, {
                     scope,
                     offset: currentCount,
                     limit: 50,
-                },
-            );
-            totalCount = paginatedPageTreeNodes.totalCount;
-            currentCount += paginatedPageTreeNodes.nodes.length;
+                });
+                totalCount = paginatedPageTreeNodes.totalCount;
+                currentCount += paginatedPageTreeNodes.nodes.length;
 
-            for (const pageTreeNode of paginatedPageTreeNodes.nodes) {
-                if (pageTreeNode) {
-                    const path: string = pageTreeNode.path;
+                for (const pageTreeNode of paginatedPageTreeNodes.nodes) {
+                    if (pageTreeNode) {
+                        const path: string = pageTreeNode.path;
 
-                    if (path && pageTreeNode.document?.__typename === "Page") {
-                        const seoBlock = pageTreeNode.document.seo;
-                        if (!seoBlock.noIndex) {
-                            sitemap.push({
-                                url: `${getUrlFromDomain(siteConfig.domains.main)}/${scope.language}${pageTreeNode.path}`, // TODO support multiple site domains
-                                priority: Number(seoBlock.priority.replace("_", ".")),
-                                changeFrequency: seoBlock.changeFrequency,
-                                lastModified: pageTreeNode.document.updatedAt,
-                            });
+                        if (path && pageTreeNode.document?.__typename === "Page") {
+                            const seoBlock = pageTreeNode.document.seo;
+                            if (!seoBlock.noIndex) {
+                                sitemap.push({
+                                    url: `${getUrlFromDomain(siteConfig.domains.main)}/${scope.language}${pageTreeNode.path}`, // TODO support multiple site domains
+                                    priority: Number(seoBlock.priority.replace("_", ".")),
+                                    changeFrequency: seoBlock.changeFrequency,
+                                    lastModified: pageTreeNode.document.updatedAt,
+                                });
+                            }
                         }
                     }
                 }
-            }
-        } while (totalCount > currentCount);
+            } while (totalCount > currentCount);
+        }
     }
 
     return sitemap;
