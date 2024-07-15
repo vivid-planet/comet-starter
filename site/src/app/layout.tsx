@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import { getSiteConfig } from "@src/config";
-=======
 import { GlobalStyle } from "@src/layout/GlobalStyle";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
->>>>>>> main
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import { readFile } from "fs/promises";
 import type { Metadata } from "next";
-import { ReactNode } from "react";
 
 import { IntlProvider } from "./IntlProvider";
 
@@ -15,7 +11,6 @@ export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-<<<<<<< HEAD
 const messagesCache: Record<string, unknown> = {};
 async function loadMessages(lang: string) {
     if (messagesCache[lang]) return messagesCache[lang];
@@ -49,19 +44,12 @@ export default async function RootLayout({
         <html>
             <body>
                 <IntlProvider locale={siteConfig.contentScope.language} messages={messages}>
-                    <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+                    <StyledComponentsRegistry>
+                        <GlobalStyle />
+                        <ResponsiveSpacingStyle />
+                        {children}
+                    </StyledComponentsRegistry>
                 </IntlProvider>
-=======
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-    return (
-        <html>
-            <body>
-                <StyledComponentsRegistry>
-                    <GlobalStyle />
-                    <ResponsiveSpacingStyle />
-                    {children}
-                </StyledComponentsRegistry>
->>>>>>> main
             </body>
         </html>
     );
