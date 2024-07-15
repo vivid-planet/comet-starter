@@ -7,8 +7,8 @@ const TeaserItemsBlock = createListBlock({
     name: "TeaserItems",
     displayName: <FormattedMessage id="teaserItemsBlock.displayName" defaultMessage="Teaser items" />,
     block: TeaserItemBlock,
-    itemName: <FormattedMessage id="teaserItemsBlock.itemName" defaultMessage="teaser item" />,
-    itemsName: <FormattedMessage id="teaserItemsBlock.itemsName" defaultMessage="teaser items" />,
+    itemName: <FormattedMessage id="teaserItemsBlock.itemName" defaultMessage="item" />,
+    itemsName: <FormattedMessage id="teaserItemsBlock.itemsName" defaultMessage="items" />,
 });
 
 export const TeaserBlock = createCompositeBlock(
@@ -21,7 +21,7 @@ export const TeaserBlock = createCompositeBlock(
             },
             items: {
                 block: TeaserItemsBlock,
-                title: <FormattedMessage id="teaserBlock.items" defaultMessage="Teaser Items" />,
+                title: <FormattedMessage id="teaserBlock.items" defaultMessage="Items" />,
             },
         },
     },
