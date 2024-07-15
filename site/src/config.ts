@@ -8,9 +8,8 @@ import { getSiteConfigFromScope, getSiteConfigs } from "./siteConfigs";
 export type ContentScope = SiteConfig["contentScope"];
 export type { SiteConfig };
 
-export async function getSiteConfig() {
+export async function getSiteConfig({ language }: { language: string }) {
     const host = getHost(headers());
-    const language = headers().get("x-current-language");
     const domain = `${host}/${language}`;
 
     let siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === domain || siteConfig.domains.preliminary === domain);

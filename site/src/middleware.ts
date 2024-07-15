@@ -15,7 +15,6 @@ export async function middleware(request: NextRequest) {
     if (!language) {
         return NextResponse.redirect(new URL("/en", request.url));
     }
-    headers.set("x-current-language", language);
 
     const domain = `${host}/${language}`;
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Layout({ children, params }: PropsWithChildren<{ params: { lang: string } }>) {
-    const scope = (await getSiteConfig()).contentScope;
+    const scope = (await getSiteConfig({ language: params.lang })).contentScope;
 
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);

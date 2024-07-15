@@ -17,7 +17,7 @@ const documentTypeQuery = gql`
 `;
 
 export default async function Page({ params }: { params: { path: string[]; lang: string } }) {
-    const scope = (await getSiteConfig()).contentScope;
+    const scope = (await getSiteConfig({ language: params.lang })).contentScope;
 
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
