@@ -190,6 +190,61 @@
         ]
     },
     {
+        "name": "BasicStage",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "CallToAction",
         "fields": [
             {
@@ -1815,54 +1870,60 @@
         "name": "Stage",
         "fields": [
             {
-                "name": "media",
-                "kind": "Block",
-                "block": "Media",
+                "name": "attachedBlocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "basicStage": "BasicStage"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
                 "nullable": false
             },
             {
-                "name": "heading",
-                "kind": "Block",
-                "block": "Heading",
-                "nullable": false
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
             },
             {
-                "name": "text",
-                "kind": "Block",
-                "block": "RichText",
-                "nullable": false
-            },
-            {
-                "name": "callToActionList",
-                "kind": "Block",
-                "block": "CallToActionList",
-                "nullable": false
+                "name": "block",
+                "kind": "NestedObject",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "basicStage": "BasicStage"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": true
             }
         ],
         "inputFields": [
             {
-                "name": "media",
-                "kind": "Block",
-                "block": "Media",
-                "nullable": false
-            },
-            {
-                "name": "heading",
-                "kind": "Block",
-                "block": "Heading",
-                "nullable": false
-            },
-            {
-                "name": "text",
-                "kind": "Block",
-                "block": "RichText",
-                "nullable": false
-            },
-            {
-                "name": "callToActionList",
-                "kind": "Block",
-                "block": "CallToActionList",
-                "nullable": false
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
             }
         ]
     },

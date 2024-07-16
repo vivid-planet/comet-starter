@@ -10,7 +10,6 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
@@ -20,7 +19,6 @@ const supportedBlocks: SupportedBlocks = {
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
-    stage: (props) => <StageBlock data={props} />,
     keyFacts: (props) => <KeyFactsBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
 };

@@ -1,48 +1,11 @@
-import {
-    BlockData,
-    BlockDataInterface,
-    BlockInput,
-    ChildBlock,
-    ChildBlockInput,
-    createBlock,
-    ExtractBlockInput,
-    inputToData,
-} from "@comet/blocks-api";
-import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
-import { HeadingBlock } from "@src/common/blocks/heading.block";
-import { MediaBlock } from "@src/common/blocks/media.block";
-import { RichTextBlock } from "@src/common/blocks/rich-text.block";
+import { createOneOfBlock } from "@comet/blocks-api";
+import { BasicStageBlock } from "@src/documents/pages/blocks/basic-stage.block";
 
-class StageBlockData extends BlockData {
-    @ChildBlock(MediaBlock)
-    media: BlockDataInterface;
-
-    @ChildBlock(HeadingBlock)
-    heading: BlockDataInterface;
-
-    @ChildBlock(RichTextBlock)
-    text: BlockDataInterface;
-
-    @ChildBlock(CallToActionListBlock)
-    callToActionList: BlockDataInterface;
-}
-
-class StageBlockInput extends BlockInput {
-    @ChildBlockInput(MediaBlock)
-    media: ExtractBlockInput<typeof MediaBlock>;
-
-    @ChildBlockInput(HeadingBlock)
-    heading: ExtractBlockInput<typeof HeadingBlock>;
-
-    @ChildBlockInput(RichTextBlock)
-    text: ExtractBlockInput<typeof RichTextBlock>;
-
-    @ChildBlockInput(CallToActionListBlock)
-    callToActionList: ExtractBlockInput<typeof CallToActionListBlock>;
-
-    transformToBlockData(): StageBlockData {
-        return inputToData(StageBlockData, this);
-    }
-}
-
-export const StageBlock = createBlock(StageBlockData, StageBlockInput, "Stage");
+export const StageBlock = createOneOfBlock(
+    {
+        supportedBlocks: {
+            basicStage: BasicStageBlock,
+        },
+    },
+    "Stage",
+);

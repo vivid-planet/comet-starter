@@ -1,37 +1,10 @@
-import { BlockCategory, createCompositeBlock } from "@comet/blocks-admin";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
-import { MediaBlock } from "@src/common/blocks/MediaBlock";
-import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
-import * as React from "react";
-import { FormattedMessage } from "react-intl";
+import { createOneOfBlock } from "@comet/blocks-admin";
 
-export const StageBlock = createCompositeBlock(
-    {
-        name: "Stage",
-        displayName: <FormattedMessage id="stageBlock.displayName" defaultMessage="Stage" />,
-        blocks: {
-            media: {
-                block: MediaBlock,
-                title: <FormattedMessage id="stageBlock.media" defaultMessage="Media" />,
-                hiddenInSubroute: true,
-            },
-            heading: {
-                block: HeadingBlock,
-            },
-            text: {
-                block: RichTextBlock,
-                title: <FormattedMessage id="stageBlock.text" defaultMessage="Text" />,
-                hiddenInSubroute: true,
-            },
-            callToActionList: {
-                block: CallToActionListBlock,
-                title: <FormattedMessage id="stageBlock.callToActionList" defaultMessage="Call To Action List" />,
-            },
-        },
+import { BasicStageBlock } from "./BasicStageBlock";
+
+export const StageBlock = createOneOfBlock({
+    name: "Stage",
+    supportedBlocks: {
+        basicStage: BasicStageBlock,
     },
-    (block) => {
-        block.category = BlockCategory.Teaser;
-        return block;
-    },
-);
+});
