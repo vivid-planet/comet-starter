@@ -32,7 +32,7 @@ export const BillboardTeaserBlock = withPreview(
                 <Content $alignItems={alignmentMap[heading.textAlignment]}>
                     <HeadingBlock data={heading} />
                     <RichTextBlock data={text} />
-                    {callToActionList.blocks.length > 0 && <CallToActionListBlock data={callToActionList} />}
+                    <CallToActionListBlock data={callToActionList} />
                 </Content>
             </AbsoluteGridRoot>
         </Root>
