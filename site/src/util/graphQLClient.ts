@@ -8,11 +8,14 @@ import {
 const isServerSide = typeof window === "undefined";
 export const graphQLApiUrl = `${isServerSide ? process.env.API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL}/graphql`;
 export function createGraphQLFetch(previewData?: SitePreviewData) {
-    const headers = isServerSide
-        ? {
-              authorization: `Basic ${Buffer.from(`vivid:${process.env.API_PASSWORD}`).toString("base64")}`,
-          }
-        : undefined;
+    const headers: HeadersInit = {
+        "x-relative-dam-urls": "1",
+    };
+
+    if (isServerSide) {
+        headers.authorization = `Basic ${Buffer.from(`vivid:${process.env.API_PASSWORD}`).toString("base64")}`;
+    }
+
     return createGraphQLFetchLibrary(
         createFetchWithDefaults(createFetchWithPreviewHeaders(fetch, previewData), { next: { revalidate: 15 * 60 }, headers }),
         graphQLApiUrl,
