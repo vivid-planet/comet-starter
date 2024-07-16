@@ -841,6 +841,145 @@
         ]
     },
     {
+        "name": "KeyFacts",
+        "fields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "KeyFactsItems",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "KeyFactsItems",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "KeyFactsItem",
+        "fields": [
+            {
+                "name": "icon",
+                "kind": "Block",
+                "block": "SvgImage",
+                "nullable": false
+            },
+            {
+                "name": "fact",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "label",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "description",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "icon",
+                "kind": "Block",
+                "block": "SvgImage",
+                "nullable": false
+            },
+            {
+                "name": "fact",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "label",
+                "kind": "String",
+                "nullable": false
+            },
+            {
+                "name": "description",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "KeyFactsItems",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "KeyFactsItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "KeyFactsItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "Link",
         "fields": [
             {
@@ -1047,6 +1186,7 @@
                                 "heading": "Heading",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia"
                             },
                             "nullable": false
@@ -1088,6 +1228,7 @@
                                 "heading": "Heading",
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia"
                             },
                             "nullable": false
