@@ -40,7 +40,7 @@ export const BillboardTeaserBlock = withPreview(
     { label: "Billboard Teaser" },
 );
 
-const Root = styled.div`
+const Root = styled(PageLayout)`
     position: relative;
     overflow: hidden;
 `;
