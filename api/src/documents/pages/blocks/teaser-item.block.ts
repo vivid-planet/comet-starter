@@ -9,9 +9,9 @@ import {
     ExtractBlockInput,
     inputToData,
 } from "@comet/blocks-api";
-import { CallToActionBlock } from "@src/common/blocks/call-to-action.block";
 import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
+import { TextLinkBlock } from "@src/common/blocks/text-link.block";
 import { IsString } from "class-validator";
 
 class TeaserItemBlockData extends BlockData {
@@ -24,7 +24,7 @@ class TeaserItemBlockData extends BlockData {
     @ChildBlock(RichTextBlock)
     description: BlockDataInterface;
 
-    @ChildBlock(CallToActionBlock)
+    @ChildBlock(TextLinkBlock)
     callToAction: BlockDataInterface;
 }
 
@@ -39,8 +39,8 @@ class TeaserItemBlockInput extends BlockInput {
     @ChildBlockInput(RichTextBlock)
     description: ExtractBlockInput<typeof RichTextBlock>;
 
-    @ChildBlockInput(CallToActionBlock)
-    callToAction: ExtractBlockInput<typeof CallToActionBlock>;
+    @ChildBlockInput(TextLinkBlock)
+    callToAction: ExtractBlockInput<typeof TextLinkBlock>;
 
     transformToBlockData(): TeaserItemBlockData {
         return inputToData(TeaserItemBlockData, this);

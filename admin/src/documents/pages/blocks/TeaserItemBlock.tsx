@@ -1,8 +1,8 @@
-import { createCompositeBlock, createCompositeBlockTextField } from "@comet/blocks-admin";
+import { BlockCategory, createCompositeBlock, createCompositeBlockTextField } from "@comet/blocks-admin";
 import { createRichTextBlock } from "@comet/cms-admin";
-import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
+import { TextLinkBlock } from "@src/common/blocks/TextLinkBlock";
 import { FormattedMessage } from "react-intl";
 
 const DescriptionRichTextBlock = createRichTextBlock({
@@ -33,11 +33,12 @@ export const TeaserItemBlock = createCompositeBlock(
                 title: <FormattedMessage id="teaserItemBlock.description" defaultMessage="Description" />,
             },
             callToAction: {
-                block: CallToActionBlock,
+                block: TextLinkBlock,
             },
         },
     },
     (block) => {
+        block.category = BlockCategory.Teaser;
         block.previewContent = (state) => [{ type: "text", content: state.title }];
         return block;
     },

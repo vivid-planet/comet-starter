@@ -1943,29 +1943,55 @@
         "name": "Teaser",
         "fields": [
             {
-                "name": "heading",
-                "kind": "Block",
-                "block": "Heading",
-                "nullable": false
-            },
-            {
-                "name": "items",
-                "kind": "Block",
-                "block": "TeaserItems",
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TeaserItem",
+                            "nullable": false
+                        }
+                    ]
+                },
                 "nullable": false
             }
         ],
         "inputFields": [
             {
-                "name": "heading",
-                "kind": "Block",
-                "block": "Heading",
-                "nullable": false
-            },
-            {
-                "name": "items",
-                "kind": "Block",
-                "block": "TeaserItems",
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TeaserItem",
+                            "nullable": false
+                        }
+                    ]
+                },
                 "nullable": false
             }
         ]
@@ -1993,7 +2019,7 @@
             {
                 "name": "callToAction",
                 "kind": "Block",
-                "block": "CallToAction",
+                "block": "TextLink",
                 "nullable": false
             }
         ],
@@ -2018,64 +2044,7 @@
             {
                 "name": "callToAction",
                 "kind": "Block",
-                "block": "CallToAction",
-                "nullable": false
-            }
-        ]
-    },
-    {
-        "name": "TeaserItems",
-        "fields": [
-            {
-                "name": "blocks",
-                "kind": "NestedObjectList",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "key",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "visible",
-                            "kind": "Boolean",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "Block",
-                            "block": "TeaserItem",
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": false
-            }
-        ],
-        "inputFields": [
-            {
-                "name": "blocks",
-                "kind": "NestedObjectList",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "key",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "visible",
-                            "kind": "Boolean",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "Block",
-                            "block": "TeaserItem",
-                            "nullable": false
-                        }
-                    ]
-                },
+                "block": "TextLink",
                 "nullable": false
             }
         ]

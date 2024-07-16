@@ -14,11 +14,14 @@ const descriptionRenderers: Renderers = {
 
 export const TeaserItemBlock = withPreview(
     ({ data: { media, title, description, callToAction } }: PropsWithData<TeaserItemBlockData>) => (
-        <LinkBlock data={callToAction.textLink.link}>
+        <LinkBlock data={callToAction.link}>
             <ItemContent>
-                <ContentContainer>
-                    <MediaBlock data={media} aspectRatio="16x9" sizes="40vw" />
-                </ContentContainer>
+                <MediaPhone>
+                    <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
+                </MediaPhone>
+                <MediaTablet>
+                    <MediaBlock data={media} aspectRatio="16x9" sizes="20vw" />
+                </MediaTablet>
                 <ContentContainer>
                     <TitleTypography variant="h350">{title}</TitleTypography>
                     <Typography variant="p200">
@@ -26,7 +29,7 @@ export const TeaserItemBlock = withPreview(
                     </Typography>
                     <TextLinkContainer>
                         <ArrowIcon href="/icons/arrow-right.svg#arrow-right" />
-                        <LinkText>{callToAction.textLink.text}</LinkText>
+                        <LinkText>{callToAction.text}</LinkText>
                     </TextLinkContainer>
                 </ContentContainer>
             </ItemContent>
@@ -50,10 +53,25 @@ const ItemContent = styled.a`
     }
 `;
 
-const ContentContainer = styled.div`
-    display: flex;
+const MediaPhone = styled.div`
     flex: 1;
-    flex-direction: column;
+
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        display: none;
+    }
+`;
+
+const MediaTablet = styled.div`
+    flex: 1;
+    display: none;
+
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        display: block;
+    }
+`;
+
+const ContentContainer = styled.div`
+    flex: 2;
 `;
 
 const TitleTypography = styled(Typography)`
