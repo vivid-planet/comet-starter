@@ -9,6 +9,7 @@ import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
 
 const supportedBlocks: SupportedBlocks = {
@@ -20,6 +21,7 @@ const supportedBlocks: SupportedBlocks = {
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+    keyFacts: (props) => <KeyFactsBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
 };
 

@@ -7,6 +7,7 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
+import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
 
 export const PageContentBlock = createBlocksBlock({
@@ -20,6 +21,7 @@ export const PageContentBlock = createBlocksBlock({
         heading: HeadingBlock,
         columns: ColumnsBlock,
         callToActionList: CallToActionListBlock,
+        keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
     },
 });
