@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithData, withPreview } from "@comet/cms-site";
+import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { HeadingBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
 import { PageLayout } from "@src/layout/PageLayout";
@@ -77,10 +77,21 @@ export const HeadingBlock = withPreview(
 
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
-                <Typography variant="h400" component="h5" bottomSpacing>
-                    <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
-                </Typography>
-                <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
+                {hasRichTextBlockContent(eyebrow) && (
+                    <Typography variant="h400" component="h5" bottomSpacing>
+                        <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
+                    </Typography>
+                )}
+                <PreviewSkeleton
+                    hasContent={hasRichTextBlockContent(headline)}
+                    title={
+                        <HeadlineSkeleton variant="h550" component="span">
+                            Headline
+                        </HeadlineSkeleton>
+                    }
+                >
+                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
+                </PreviewSkeleton>
             </Root>
         );
     },
@@ -101,4 +112,8 @@ const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
 
 const PageLayoutContent = styled.div`
     grid-column: 3 / -3;
+`;
+
+const HeadlineSkeleton = styled(Typography)`
+    color: inherit;
 `;
