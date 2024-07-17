@@ -17,7 +17,7 @@ const documentTypeQuery = gql`
 `;
 
 export default async function Page({ params }: { params: { path: string[]; lang: string } }) {
-    const domain = (await getSiteConfig({ language: params.lang })).public.domain;
+    const domain = (await getSiteConfig()).public.domain;
     const scope = { domain, language: params.lang };
 
     const { previewData } = (await previewParams()) || { previewData: undefined };
