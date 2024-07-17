@@ -211,6 +211,23 @@
                 "nullable": false
             },
             {
+                "name": "backgroundOpacity",
+                "kind": "Enum",
+                "enum": [
+                    "100",
+                    "90",
+                    "80",
+                    "70",
+                    "60",
+                    "50",
+                    "40",
+                    "30",
+                    "20",
+                    "10"
+                ],
+                "nullable": false
+            },
+            {
                 "name": "callToActionList",
                 "kind": "Block",
                 "block": "CallToActionList",
@@ -234,6 +251,23 @@
                 "name": "text",
                 "kind": "Block",
                 "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "backgroundOpacity",
+                "kind": "Enum",
+                "enum": [
+                    "100",
+                    "90",
+                    "80",
+                    "70",
+                    "60",
+                    "50",
+                    "40",
+                    "30",
+                    "20",
+                    "10"
+                ],
                 "nullable": false
             },
             {

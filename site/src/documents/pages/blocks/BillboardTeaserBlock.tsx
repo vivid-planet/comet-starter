@@ -14,24 +14,24 @@ const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["ali
 };
 
 export const BillboardTeaserBlock = withPreview(
-    ({ data: { media, heading, text, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
+    ({ data: { media, heading, text, backgroundOpacity, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
-            <ImageMobile>
+            <ImageMobile $backgroundOpacity={backgroundOpacity}>
                 <MediaBlock data={media} aspectRatio="1x1" />
             </ImageMobile>
-            <ImageTablet>
+            <ImageTablet $backgroundOpacity={backgroundOpacity}>
                 <MediaBlock data={media} aspectRatio="4x3" />
             </ImageTablet>
-            <ImageDesktop>
+            <ImageDesktop $backgroundOpacity={backgroundOpacity}>
                 <MediaBlock data={media} aspectRatio="16x9" />
             </ImageDesktop>
-            <ImageLargeDesktop>
+            <ImageLargeDesktop $backgroundOpacity={backgroundOpacity}>
                 <MediaBlock data={media} aspectRatio="3x1" />
             </ImageLargeDesktop>
             <AbsoluteGridRoot grid>
                 <Content $alignItems={alignmentMap[heading.textAlignment]}>
-                    <HeadingBlock data={heading} />
-                    <RichTextBlock data={text} />
+                    <HeadingBlock data={heading} colorInverted />
+                    <RichTextBlock data={text} colorInverted />
                     <CallToActionListBlock data={callToActionList} />
                 </Content>
             </AbsoluteGridRoot>
@@ -63,13 +63,17 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     align-items: ${({ $alignItems }) => $alignItems};
 `;
 
-const ImageMobile = styled.div`
+const BaseImage = styled.div<{ $backgroundOpacity: string }>`
+    filter: brightness(calc(100% - ${({ $backgroundOpacity }) => $backgroundOpacity}%));
+`;
+
+const ImageMobile = styled(BaseImage)`
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         display: none;
     }
 `;
 
-const ImageTablet = styled.div`
+const ImageTablet = styled(BaseImage)`
     display: none;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
@@ -81,7 +85,7 @@ const ImageTablet = styled.div`
     }
 `;
 
-const ImageDesktop = styled.div`
+const ImageDesktop = styled(BaseImage)`
     display: none;
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -93,7 +97,7 @@ const ImageDesktop = styled.div`
     }
 `;
 
-const ImageLargeDesktop = styled.div`
+const ImageLargeDesktop = styled(BaseImage)`
     display: none;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {

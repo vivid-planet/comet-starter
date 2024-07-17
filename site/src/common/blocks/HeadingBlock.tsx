@@ -7,51 +7,21 @@ import { CSSProperties } from "react";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
-import { defaultRichTextRenderers, RichTextBlock } from "./RichTextBlock";
+import { createTextBlockRenderFn, defaultRichTextInlineStyleMap, RichTextBlock } from "./RichTextBlock";
 
 const eyebrowRenderers: Renderers = {
-    inline: defaultRichTextRenderers.inline,
+    inline: defaultRichTextInlineStyleMap,
 };
 
-const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers => ({
-    inline: defaultRichTextRenderers.inline,
+const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap, colorInverted?: boolean): Renderers => ({
+    inline: defaultRichTextInlineStyleMap,
     blocks: {
-        "header-one": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h600" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
-        "header-two": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h550" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
-        "header-three": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h500" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
-        "header-four": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h450" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
-        "header-five": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h400" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
-        "header-six": (children, { keys }) =>
-            children.map((child, index) => (
-                <Typography variant="h350" component={htmlTag} key={keys[index]} bottomSpacing>
-                    {child}
-                </Typography>
-            )),
+        "header-one": createTextBlockRenderFn({ variant: "h600", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-two": createTextBlockRenderFn({ variant: "h550", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-three": createTextBlockRenderFn({ variant: "h500", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-four": createTextBlockRenderFn({ variant: "h450", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-five": createTextBlockRenderFn({ variant: "h400", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-six": createTextBlockRenderFn({ variant: "h350", component: htmlTag, bottomSpacing: true, colorInverted }),
     },
 });
 
@@ -69,16 +39,18 @@ const textAlignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties[
     Center: "center",
 };
 
-type HeadingBlockProps = PropsWithData<HeadingBlockData>;
+type HeadingBlockProps = PropsWithData<HeadingBlockData> & {
+    colorInverted?: boolean;
+};
 
 export const HeadingBlock = withPreview(
-    ({ data: { eyebrow, headline, htmlTag, textAlignment } }: HeadingBlockProps) => {
+    ({ data: { eyebrow, headline, htmlTag, textAlignment }, colorInverted }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
 
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
                 {hasRichTextBlockContent(eyebrow) && (
-                    <Typography variant="h400" component="h5" bottomSpacing>
+                    <Typography variant="h400" component="h5" bottomSpacing colorInverted={colorInverted}>
                         <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                     </Typography>
                 )}
@@ -90,7 +62,7 @@ export const HeadingBlock = withPreview(
                         </HeadlineSkeleton>
                     }
                 >
-                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
+                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag, colorInverted)} />
                 </PreviewSkeleton>
             </Root>
         );

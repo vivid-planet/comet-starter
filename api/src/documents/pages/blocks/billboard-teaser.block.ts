@@ -1,6 +1,7 @@
 import {
     BlockData,
     BlockDataInterface,
+    BlockField,
     BlockInput,
     ChildBlock,
     ChildBlockInput,
@@ -12,6 +13,20 @@ import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.bl
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
+import { IsEnum } from "class-validator";
+
+enum BackgroundOpacity {
+    percentage100 = "100",
+    percentage90 = "90",
+    percentage80 = "80",
+    percentage70 = "70",
+    percentage60 = "60",
+    percentage50 = "50",
+    percentage40 = "40",
+    percentage30 = "30",
+    percentage20 = "20",
+    percentage10 = "10",
+}
 
 class BillboardTeaserBlockData extends BlockData {
     @ChildBlock(MediaBlock)
@@ -22,6 +37,9 @@ class BillboardTeaserBlockData extends BlockData {
 
     @ChildBlock(RichTextBlock)
     text: BlockDataInterface;
+
+    @BlockField({ type: "enum", enum: BackgroundOpacity })
+    backgroundOpacity: BackgroundOpacity;
 
     @ChildBlock(CallToActionListBlock)
     callToActionList: BlockDataInterface;
@@ -36,6 +54,10 @@ class BillboardTeaserBlockInput extends BlockInput {
 
     @ChildBlockInput(RichTextBlock)
     text: ExtractBlockInput<typeof RichTextBlock>;
+
+    @IsEnum(BackgroundOpacity)
+    @BlockField({ type: "enum", enum: BackgroundOpacity })
+    backgroundOpacity: BackgroundOpacity;
 
     @ChildBlockInput(CallToActionListBlock)
     callToActionList: ExtractBlockInput<typeof CallToActionListBlock>;

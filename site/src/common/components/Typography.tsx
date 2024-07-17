@@ -195,11 +195,18 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
     bottomSpacing?: boolean;
+    colorInverted?: boolean;
     children?: ReactNode;
 }
 
-export const Typography = ({ component, variant = "p300", bottomSpacing, children, ...restProps }: TypographyProps) => (
-    <Text as={component || variantToElementMap[variant]} $variant={variant} $bottomSpacing={bottomSpacing} {...restProps}>
+export const Typography = ({ component, variant = "p300", bottomSpacing, colorInverted, children, ...restProps }: TypographyProps) => (
+    <Text
+        as={component || variantToElementMap[variant]}
+        $variant={variant}
+        $bottomSpacing={bottomSpacing}
+        $colorInverted={colorInverted}
+        {...restProps}
+    >
         {children}
     </Text>
 );
@@ -207,11 +214,12 @@ export const Typography = ({ component, variant = "p300", bottomSpacing, childre
 interface TextProps {
     $variant: TypographyVariant;
     $bottomSpacing?: boolean;
+    $colorInverted?: boolean;
 }
 
 const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
+    color: ${({ theme, $colorInverted }) => ($colorInverted ? theme.palette.text.inverted : theme.palette.text.primary)};
     ${({ $variant }) => typographyVariantStyle[$variant]};
     margin-top: 0;
 
