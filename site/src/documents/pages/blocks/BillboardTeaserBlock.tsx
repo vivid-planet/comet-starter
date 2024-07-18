@@ -11,18 +11,19 @@ import styled from "styled-components";
 export const BillboardTeaserBlock = withPreview(
     ({ data: { media, heading, text, backgroundOpacity, alignment, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
-            <ImageMobile $backgroundOpacity={backgroundOpacity}>
+            <ImageMobile>
                 <MediaBlock data={media} aspectRatio="1x1" />
             </ImageMobile>
-            <ImageTablet $backgroundOpacity={backgroundOpacity}>
+            <ImageTablet>
                 <MediaBlock data={media} aspectRatio="4x3" />
             </ImageTablet>
-            <ImageDesktop $backgroundOpacity={backgroundOpacity}>
+            <ImageDesktop>
                 <MediaBlock data={media} aspectRatio="16x9" />
             </ImageDesktop>
-            <ImageLargeDesktop $backgroundOpacity={backgroundOpacity}>
+            <ImageLargeDesktop>
                 <MediaBlock data={media} aspectRatio="3x1" />
             </ImageLargeDesktop>
+            <ImageOverlay $backgroundOpacity={backgroundOpacity} />
             <AbsoluteGridRoot grid>
                 <Content $alignItems={alignment}>
                     <HeadingBlock data={heading} />
@@ -37,6 +38,16 @@ export const BillboardTeaserBlock = withPreview(
 
 const Root = styled(PageLayout)`
     position: relative;
+`;
+
+const ImageOverlay = styled.div<{ $backgroundOpacity: string }>`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: ${({ $backgroundOpacity }) => $backgroundOpacity}%;
 `;
 
 const AbsoluteGridRoot = styled(PageLayout)`
@@ -58,17 +69,13 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     color: ${({ theme }) => theme.palette.text.inverted};
 `;
 
-const BaseImage = styled.div<{ $backgroundOpacity: string }>`
-    filter: brightness(calc(100% - ${({ $backgroundOpacity }) => $backgroundOpacity}%));
-`;
-
-const ImageMobile = styled(BaseImage)`
+const ImageMobile = styled.div`
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
         display: none;
     }
 `;
 
-const ImageTablet = styled(BaseImage)`
+const ImageTablet = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
@@ -80,7 +87,7 @@ const ImageTablet = styled(BaseImage)`
     }
 `;
 
-const ImageDesktop = styled(BaseImage)`
+const ImageDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
@@ -92,7 +99,7 @@ const ImageDesktop = styled(BaseImage)`
     }
 `;
 
-const ImageLargeDesktop = styled(BaseImage)`
+const ImageLargeDesktop = styled.div`
     display: none;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
