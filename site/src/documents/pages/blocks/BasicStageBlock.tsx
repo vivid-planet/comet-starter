@@ -18,16 +18,16 @@ export const BasicStageBlock = withPreview(
     ({ data: { media, heading, text, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
         <Root>
             <MediaPhone>
-                <MediaBlock data={media} aspectRatio="1x2" />
+                <MediaBlock data={media} aspectRatio="1x2" fill />
             </MediaPhone>
             <MediaTablet>
-                <MediaBlock data={media} aspectRatio="1x1" />
+                <MediaBlock data={media} aspectRatio="1x1" fill />
             </MediaTablet>
             <MediaTabletLandscape>
-                <MediaBlock data={media} aspectRatio="3x2" />
+                <MediaBlock data={media} aspectRatio="3x2" fill />
             </MediaTabletLandscape>
             <MediaDesktop>
-                <MediaBlock data={media} aspectRatio="16x9" />
+                <MediaBlock data={media} aspectRatio="16x9" fill />
             </MediaDesktop>
             <AbsoluteGridRoot grid>
                 <Content $alignItems={alignmentMap[heading.textAlignment]}>
@@ -71,11 +71,6 @@ const BaseMedia = styled.div`
     }
 
     video {
-        height: 100%;
-    }
-
-    div {
-        width: 100%;
         height: 100%;
     }
 `;
