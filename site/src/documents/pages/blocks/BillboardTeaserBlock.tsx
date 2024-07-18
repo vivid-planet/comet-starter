@@ -1,5 +1,5 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
-import { BillboardTeaserBlockData, HeadingBlockData } from "@src/blocks.generated";
+import { BillboardTeaserBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
@@ -8,13 +8,8 @@ import { PageLayout } from "@src/layout/PageLayout";
 import { CSSProperties } from "react";
 import styled from "styled-components";
 
-const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["alignItems"]> = {
-    Left: "left",
-    Center: "center",
-};
-
 export const BillboardTeaserBlock = withPreview(
-    ({ data: { media, heading, text, backgroundOpacity, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
+    ({ data: { media, heading, text, backgroundOpacity, alignment, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
             <ImageMobile $backgroundOpacity={backgroundOpacity}>
                 <MediaBlock data={media} aspectRatio="1x1" />
@@ -29,7 +24,7 @@ export const BillboardTeaserBlock = withPreview(
                 <MediaBlock data={media} aspectRatio="3x1" />
             </ImageLargeDesktop>
             <AbsoluteGridRoot grid>
-                <Content $alignItems={alignmentMap[heading.textAlignment]}>
+                <Content $alignItems={alignment}>
                     <HeadingBlock data={heading} />
                     <RichTextBlock data={text} />
                     <CallToActionListBlock data={callToActionList} />

@@ -47,6 +47,18 @@ export const BillboardTeaserBlock = createCompositeBlock(
                 title: <FormattedMessage id="billboardTeaserBlock.backgroundOpacity" defaultMessage="Background Opacity" />,
                 hiddenInSubroute: true,
             },
+            alignment: {
+                block: createCompositeBlockSelectField<BillboardTeaserBlockData["alignment"]>({
+                    defaultValue: "left",
+                    options: [
+                        { value: "left", label: <FormattedMessage id="billboardTeaserBlock.alignment.left" defaultMessage="left" /> },
+                        { value: "center", label: <FormattedMessage id="billboardTeaserBlock.alignment.center" defaultMessage="center" /> },
+                    ],
+                    fieldProps: { fullWidth: true },
+                }),
+                title: <FormattedMessage id="billboardTeaserBlock.alignment" defaultMessage="Alignment" />,
+                hiddenInSubroute: true,
+            },
             callToActionList: {
                 block: CallToActionListBlock,
                 title: <FormattedMessage id="billboardTeaserBlock.callToActionList" defaultMessage="Call To Action List" />,
