@@ -45,6 +45,7 @@ export const BillboardTeaserBlock = createCompositeBlock(
                     fieldProps: { fullWidth: true },
                 }),
                 title: <FormattedMessage id="billboardTeaserBlock.backgroundOpacity" defaultMessage="Background Opacity" />,
+                hiddenInSubroute: true,
             },
             callToActionList: {
                 block: CallToActionListBlock,

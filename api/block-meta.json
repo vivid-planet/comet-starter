@@ -212,19 +212,7 @@
             },
             {
                 "name": "backgroundOpacity",
-                "kind": "Enum",
-                "enum": [
-                    "100",
-                    "90",
-                    "80",
-                    "70",
-                    "60",
-                    "50",
-                    "40",
-                    "30",
-                    "20",
-                    "10"
-                ],
+                "kind": "String",
                 "nullable": false
             },
             {
@@ -255,19 +243,7 @@
             },
             {
                 "name": "backgroundOpacity",
-                "kind": "Enum",
-                "enum": [
-                    "100",
-                    "90",
-                    "80",
-                    "70",
-                    "60",
-                    "50",
-                    "40",
-                    "30",
-                    "20",
-                    "10"
-                ],
+                "kind": "String",
                 "nullable": false
             },
             {
