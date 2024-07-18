@@ -37,7 +37,6 @@ export const BillboardTeaserBlock = withPreview(
 
 const Root = styled(PageLayout)`
     position: relative;
-    overflow: hidden;
 `;
 
 const AbsoluteGridRoot = styled(PageLayout)`
