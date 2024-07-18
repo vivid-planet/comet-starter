@@ -2017,7 +2017,7 @@
                 "nullable": false
             },
             {
-                "name": "callToAction",
+                "name": "link",
                 "kind": "Block",
                 "block": "TextLink",
                 "nullable": false
@@ -2042,7 +2042,7 @@
                 "nullable": false
             },
             {
-                "name": "callToAction",
+                "name": "link",
                 "kind": "Block",
                 "block": "TextLink",
                 "nullable": false

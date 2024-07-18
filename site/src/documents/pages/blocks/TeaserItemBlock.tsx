@@ -13,8 +13,8 @@ const descriptionRenderers: Renderers = {
 };
 
 export const TeaserItemBlock = withPreview(
-    ({ data: { media, title, description, callToAction } }: PropsWithData<TeaserItemBlockData>) => (
-        <LinkBlock data={callToAction.link}>
+    ({ data: { media, title, description, link } }: PropsWithData<TeaserItemBlockData>) => (
+        <LinkBlock data={link.link}>
             <ItemContent>
                 <MediaPhone>
                     <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
@@ -28,8 +28,8 @@ export const TeaserItemBlock = withPreview(
                         <RichTextBlock data={description} renderers={descriptionRenderers} />
                     </Typography>
                     <TextLinkContainer>
-                        <ArrowIcon href="/icons/arrow-right.svg#arrow-right" />
-                        <LinkText>{callToAction.text}</LinkText>
+                        <SvgUse href="/icons/arrow-right.svg#arrow-right" width={16} height={16} />
+                        <LinkText>{link.text}</LinkText>
                     </TextLinkContainer>
                 </ContentContainer>
             </ItemContent>
@@ -90,11 +90,6 @@ const TextLinkContainer = styled.div`
     &:hover {
         color: ${({ theme }) => theme.palette.primary.dark};
     }
-`;
-
-const ArrowIcon = styled(SvgUse)`
-    width: 16px;
-    height: 16px;
 `;
 
 const LinkText = styled.span`

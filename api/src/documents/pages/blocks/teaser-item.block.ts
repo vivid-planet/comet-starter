@@ -25,7 +25,7 @@ class TeaserItemBlockData extends BlockData {
     description: BlockDataInterface;
 
     @ChildBlock(TextLinkBlock)
-    callToAction: BlockDataInterface;
+    link: BlockDataInterface;
 }
 
 class TeaserItemBlockInput extends BlockInput {
@@ -40,7 +40,7 @@ class TeaserItemBlockInput extends BlockInput {
     description: ExtractBlockInput<typeof RichTextBlock>;
 
     @ChildBlockInput(TextLinkBlock)
-    callToAction: ExtractBlockInput<typeof TextLinkBlock>;
+    link: ExtractBlockInput<typeof TextLinkBlock>;
 
     transformToBlockData(): TeaserItemBlockData {
         return inputToData(TeaserItemBlockData, this);

@@ -28,8 +28,6 @@ const ItemWrapper = styled.div`
 
     ${({ theme }) =>
         css`
-            grid-template-columns: repeat(1, 1fr);
-
             ${theme.breakpoints.sm.mediaQuery} {
                 grid-template-columns: repeat(4, 1fr);
             }

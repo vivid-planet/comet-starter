@@ -32,7 +32,7 @@ export const TeaserItemBlock = createCompositeBlock(
                 block: DescriptionRichTextBlock,
                 title: <FormattedMessage id="teaserItemBlock.description" defaultMessage="Description" />,
             },
-            callToAction: {
+            link: {
                 block: TextLinkBlock,
             },
         },
