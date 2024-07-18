@@ -16,12 +16,12 @@ export const TeaserItemBlock = withPreview(
     ({ data: { media, title, description, link } }: PropsWithData<TeaserItemBlockData>) => (
         <LinkBlock data={link.link}>
             <ItemContent>
-                <MediaPhone>
+                <MediaMobile>
                     <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
-                </MediaPhone>
-                <MediaTablet>
+                </MediaMobile>
+                <MediaDesktop>
                     <MediaBlock data={media} aspectRatio="16x9" sizes="20vw" />
-                </MediaTablet>
+                </MediaDesktop>
                 <ContentContainer>
                     <TitleTypography variant="h350">{title}</TitleTypography>
                     <Typography variant="p200">
@@ -53,7 +53,7 @@ const ItemContent = styled.a`
     }
 `;
 
-const MediaPhone = styled.div`
+const MediaMobile = styled.div`
     flex: 1;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
@@ -61,7 +61,7 @@ const MediaPhone = styled.div`
     }
 `;
 
-const MediaTablet = styled.div`
+const MediaDesktop = styled.div`
     flex: 1;
     display: none;
 
