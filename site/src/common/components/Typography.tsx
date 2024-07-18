@@ -207,7 +207,6 @@ export const Typography = ({ component, variant = "p300", bottomSpacing, childre
 interface TextProps {
     $variant: TypographyVariant;
     $bottomSpacing?: boolean;
-    $colorInverted?: boolean;
 }
 
 const Text = styled.div<TextProps>`
