@@ -27,7 +27,7 @@ const AccordionContentBlock = createBlocksBlock({
 export const AccordionItemBlock = createCompositeBlock(
     {
         name: "AccordionItem",
-        displayName: <FormattedMessage id="accordionBlock.displayName" defaultMessage="Accordion Item" />,
+        displayName: <FormattedMessage id="accordionBlock.accordionItem.displayName" defaultMessage="Accordion Item" />,
         blocks: {
             title: {
                 block: createCompositeBlockTextField({
