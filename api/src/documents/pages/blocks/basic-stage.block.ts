@@ -1,6 +1,7 @@
 import {
     BlockData,
     BlockDataInterface,
+    BlockField,
     BlockInput,
     ChildBlock,
     ChildBlockInput,
@@ -12,6 +13,12 @@ import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.bl
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
+import { IsEnum, IsString } from "class-validator";
+
+enum Alignment {
+    left = "left",
+    center = "center",
+}
 
 class BasicStageBlockData extends BlockData {
     @ChildBlock(MediaBlock)
@@ -22,6 +29,12 @@ class BasicStageBlockData extends BlockData {
 
     @ChildBlock(RichTextBlock)
     text: BlockDataInterface;
+
+    @BlockField()
+    backgroundOpacity: string;
+
+    @BlockField({ type: "enum", enum: Alignment })
+    alignment: Alignment;
 
     @ChildBlock(CallToActionListBlock)
     callToActionList: BlockDataInterface;
@@ -36,6 +49,14 @@ class BasicStageBlockInput extends BlockInput {
 
     @ChildBlockInput(RichTextBlock)
     text: ExtractBlockInput<typeof RichTextBlock>;
+
+    @BlockField()
+    @IsString()
+    backgroundOpacity: string;
+
+    @IsEnum(Alignment)
+    @BlockField({ type: "enum", enum: Alignment })
+    alignment: Alignment;
 
     @ChildBlockInput(CallToActionListBlock)
     callToActionList: ExtractBlockInput<typeof CallToActionListBlock>;

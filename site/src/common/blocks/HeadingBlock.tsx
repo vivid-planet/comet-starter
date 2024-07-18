@@ -64,11 +64,6 @@ const headlineTagMap: Record<HeadingBlockData["htmlTag"], keyof HTMLElementTagNa
     H6: "h6",
 };
 
-const textAlignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["textAlign"]> = {
-    Left: "left",
-    Center: "center",
-};
-
 type HeadingBlockProps = PropsWithData<HeadingBlockData>;
 
 export const HeadingBlock = withPreview(
@@ -76,7 +71,7 @@ export const HeadingBlock = withPreview(
         const headlineTag = headlineTagMap[htmlTag];
 
         return (
-            <Root $textAlign={textAlignmentMap[textAlignment]}>
+            <Root $textAlign={textAlignment}>
                 {hasRichTextBlockContent(eyebrow) && (
                     <Typography variant="h400" component="h5" bottomSpacing>
                         <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />

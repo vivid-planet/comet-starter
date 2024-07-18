@@ -86,10 +86,10 @@ export const HeadingBlock = createCompositeBlock(
             },
             textAlignment: {
                 block: createCompositeBlockSelectField<HeadingBlockData["textAlignment"]>({
-                    defaultValue: "Left",
+                    defaultValue: "left",
                     options: [
-                        { value: "Left", label: <FormattedMessage id="headingBlock.textAlignment.left" defaultMessage="left" /> },
-                        { value: "Center", label: <FormattedMessage id="headingBlock.textAlignment.center" defaultMessage="center" /> },
+                        { value: "left", label: <FormattedMessage id="headingBlock.textAlignment.left" defaultMessage="left" /> },
+                        { value: "center", label: <FormattedMessage id="headingBlock.textAlignment.center" defaultMessage="center" /> },
                     ],
                     fieldProps: { label: <FormattedMessage id="headingBlock.textAlignment" defaultMessage="Text alignment" />, fullWidth: true },
                 }),

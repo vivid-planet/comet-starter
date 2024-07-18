@@ -211,7 +211,6 @@ interface TextProps {
 
 const Text = styled.div<TextProps>`
     font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
     ${({ $variant }) => typographyVariantStyle[$variant]};
     margin-top: 0;
 

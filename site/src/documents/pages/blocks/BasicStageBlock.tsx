@@ -1,6 +1,6 @@
 "use client";
 import { PropsWithData, withPreview } from "@comet/cms-site";
-import { BasicStageBlockData, HeadingBlockData } from "@src/blocks.generated";
+import { BasicStageBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
@@ -9,13 +9,8 @@ import { PageLayout } from "@src/layout/PageLayout";
 import { CSSProperties } from "react";
 import styled from "styled-components";
 
-const alignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties["alignItems"]> = {
-    Left: "left",
-    Center: "center",
-};
-
 export const BasicStageBlock = withPreview(
-    ({ data: { media, heading, text, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
+    ({ data: { media, heading, text, backgroundOpacity, alignment, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
         <Root>
             <MediaPhone>
                 <MediaBlock data={media} aspectRatio="1x2" fill />
@@ -29,8 +24,9 @@ export const BasicStageBlock = withPreview(
             <MediaDesktop>
                 <MediaBlock data={media} aspectRatio="16x9" fill />
             </MediaDesktop>
+            <ImageOverlay $backgroundOpacity={backgroundOpacity} />
             <AbsoluteGridRoot grid>
-                <Content $alignItems={alignmentMap[heading.textAlignment]}>
+                <Content $alignItems={alignment}>
                     <HeadingBlock data={heading} />
                     <RichTextBlock data={text} />
                     <CallToActionListBlock data={callToActionList} />
@@ -44,6 +40,16 @@ export const BasicStageBlock = withPreview(
 const Root = styled(PageLayout)`
     position: relative;
     overflow: hidden;
+`;
+
+const ImageOverlay = styled.div<{ $backgroundOpacity: string }>`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: ${({ $backgroundOpacity }) => $backgroundOpacity}%;
 `;
 
 const AbsoluteGridRoot = styled(PageLayout)`
@@ -62,16 +68,12 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     flex-direction: column;
     justify-content: center;
     align-items: ${({ $alignItems }) => $alignItems};
+    color: ${({ theme }) => theme.palette.text.inverted};
 `;
 
-// TODO: should this be default behavior? -> move to library?
 const BaseMedia = styled.div`
     img {
         object-fit: cover;
-    }
-
-    video {
-        height: 100%;
     }
 `;
 
