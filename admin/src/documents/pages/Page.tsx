@@ -30,6 +30,7 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
                     ... on Page {
                         content
                         seo
+                        stage
                     }
                 }
             }
@@ -41,6 +42,7 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
                 id
                 content
                 seo
+                stage
                 updatedAt
             }
         }
@@ -48,13 +50,14 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
     ...createDocumentRootBlocksMethods({
         content: PageContentBlock,
         seo: SeoBlock,
+        stage: StageBlock,
     }),
     ...createDocumentDependencyMethods({
         rootQueryName: "page",
         rootBlocks: {
             content: PageContentBlock,
             seo: { block: SeoBlock, path: "/config" },
-            stage: StageBlock,
+            stage: { block: StageBlock, path: "/stage" },
         },
         basePath: ({ pageTreeNode }) => `/pages/pagetree/${categoryToUrlParam(pageTreeNode.category)}/${pageTreeNode.id}/edit`,
     }),

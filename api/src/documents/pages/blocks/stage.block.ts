@@ -1,5 +1,6 @@
 import { createOneOfBlock } from "@comet/blocks-api";
-import { BasicStageBlock } from "@src/documents/pages/blocks/basic-stage.block";
+
+import { BasicStageBlock } from "./basic-stage.block";
 
 export const StageBlock = createOneOfBlock(
     {

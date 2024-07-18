@@ -82,7 +82,7 @@ export const EditPage = ({ id, category }: Props) => {
 
     const blockContext = useCmsBlockContext();
 
-    const tabRouteMatch = useRouteMatch<{ tab: undefined | "content" | "stage" | "config" }>(`${match.path}/:tab`);
+    const tabRouteMatch = useRouteMatch<{ tab: string }>(`${match.path}/:tab`);
 
     if (pageState == null || pageState.document == null) {
         return null;
@@ -92,19 +92,21 @@ export const EditPage = ({ id, category }: Props) => {
         return <Loading behavior="fillPageHeight" />;
     }
 
-    let previewUrl = `${siteConfig.blockPreviewBaseUrl}/page`;
-
-    let previewState: unknown = PageContentBlock.createPreviewState(pageState.document.content, {
-        ...blockContext,
-        parentUrl: match.url,
-        showVisibleOnly: previewApi.showOnlyVisible,
-    });
+    let previewUrl: string;
+    let previewState;
 
     if (tabRouteMatch?.params.tab === "stage") {
         previewUrl = `${siteConfig.blockPreviewBaseUrl}/stage`;
         previewState = StageBlock.createPreviewState(pageState.document.stage, {
             ...blockContext,
             parentUrl: `${match.url}/stage`,
+            showVisibleOnly: previewApi.showOnlyVisible,
+        });
+    } else {
+        previewUrl = `${siteConfig.blockPreviewBaseUrl}/page`;
+        previewState = PageContentBlock.createPreviewState(pageState.document.content, {
+            ...blockContext,
+            parentUrl: match.url,
             showVisibleOnly: previewApi.showOnlyVisible,
         });
     }
