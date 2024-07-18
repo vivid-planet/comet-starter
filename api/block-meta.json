@@ -216,15 +216,6 @@
                 "nullable": false
             },
             {
-                "name": "alignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
-                ],
-                "nullable": false
-            },
-            {
                 "name": "callToActionList",
                 "kind": "Block",
                 "block": "CallToActionList",
@@ -253,15 +244,6 @@
             {
                 "name": "backgroundOpacity",
                 "kind": "String",
-                "nullable": false
-            },
-            {
-                "name": "alignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
-                ],
                 "nullable": false
             },
             {

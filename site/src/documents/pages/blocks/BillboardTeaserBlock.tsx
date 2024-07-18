@@ -5,11 +5,10 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { CSSProperties } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const BillboardTeaserBlock = withPreview(
-    ({ data: { media, heading, text, backgroundOpacity, alignment, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
+    ({ data: { media, heading, text, backgroundOpacity, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
             <ImageMobile>
                 <MediaBlock data={media} aspectRatio="1x1" />
@@ -25,7 +24,7 @@ export const BillboardTeaserBlock = withPreview(
             </ImageLargeDesktop>
             <ImageOverlay $backgroundOpacity={backgroundOpacity} />
             <AbsoluteGridRoot grid>
-                <Content $alignItems={alignment}>
+                <Content>
                     <HeadingBlock data={heading} />
                     <RichTextBlock data={text} />
                     <CallToActionListBlock data={callToActionList} />
@@ -58,15 +57,27 @@ const AbsoluteGridRoot = styled(PageLayout)`
     height: 100%;
 `;
 
-const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
-    grid-column: 3 / -3;
+const Content = styled.div`
     padding: ${({ theme }) => theme.spacing.D200} 0;
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    align-items: ${({ $alignItems }) => $alignItems};
+    align-items: center;
     color: ${({ theme }) => theme.palette.text.inverted};
+
+    ${({ theme }) =>
+        css`
+            grid-column: 3 / -3;
+
+            ${theme.breakpoints.xs.mediaQuery} {
+                grid-column: 5 / -5;
+            }
+
+            ${theme.breakpoints.lg.mediaQuery} {
+                grid-column: 7 / -7;
+            }
+        `};
 `;
 
 const ImageMobile = styled.div`
