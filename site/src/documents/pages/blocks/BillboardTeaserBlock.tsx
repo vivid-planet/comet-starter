@@ -30,8 +30,8 @@ export const BillboardTeaserBlock = withPreview(
             </ImageLargeDesktop>
             <AbsoluteGridRoot grid>
                 <Content $alignItems={alignmentMap[heading.textAlignment]}>
-                    <HeadingBlock data={heading} colorInverted />
-                    <RichTextBlock data={text} colorInverted />
+                    <HeadingBlock data={heading} />
+                    <RichTextBlock data={text} />
                     <CallToActionListBlock data={callToActionList} />
                 </Content>
             </AbsoluteGridRoot>
@@ -61,6 +61,7 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     flex-direction: column;
     justify-content: center;
     align-items: ${({ $alignItems }) => $alignItems};
+    color: ${({ theme }) => theme.palette.text.inverted};
 `;
 
 const BaseImage = styled.div<{ $backgroundOpacity: string }>`

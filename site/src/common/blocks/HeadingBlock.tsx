@@ -13,15 +13,15 @@ const eyebrowRenderers: Renderers = {
     inline: defaultRichTextInlineStyleMap,
 };
 
-const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap, colorInverted?: boolean): Renderers => ({
+const getHeadlineRenderers = (htmlTag: keyof HTMLElementTagNameMap): Renderers => ({
     inline: defaultRichTextInlineStyleMap,
     blocks: {
-        "header-one": createTextBlockRenderFn({ variant: "h600", component: htmlTag, bottomSpacing: true, colorInverted }),
-        "header-two": createTextBlockRenderFn({ variant: "h550", component: htmlTag, bottomSpacing: true, colorInverted }),
-        "header-three": createTextBlockRenderFn({ variant: "h500", component: htmlTag, bottomSpacing: true, colorInverted }),
-        "header-four": createTextBlockRenderFn({ variant: "h450", component: htmlTag, bottomSpacing: true, colorInverted }),
-        "header-five": createTextBlockRenderFn({ variant: "h400", component: htmlTag, bottomSpacing: true, colorInverted }),
-        "header-six": createTextBlockRenderFn({ variant: "h350", component: htmlTag, bottomSpacing: true, colorInverted }),
+        "header-one": createTextBlockRenderFn({ variant: "h600", component: htmlTag, bottomSpacing: true }),
+        "header-two": createTextBlockRenderFn({ variant: "h550", component: htmlTag, bottomSpacing: true }),
+        "header-three": createTextBlockRenderFn({ variant: "h500", component: htmlTag, bottomSpacing: true }),
+        "header-four": createTextBlockRenderFn({ variant: "h450", component: htmlTag, bottomSpacing: true }),
+        "header-five": createTextBlockRenderFn({ variant: "h400", component: htmlTag, bottomSpacing: true }),
+        "header-six": createTextBlockRenderFn({ variant: "h350", component: htmlTag, bottomSpacing: true }),
     },
 });
 
@@ -39,18 +39,16 @@ const textAlignmentMap: Record<HeadingBlockData["textAlignment"], CSSProperties[
     Center: "center",
 };
 
-type HeadingBlockProps = PropsWithData<HeadingBlockData> & {
-    colorInverted?: boolean;
-};
+type HeadingBlockProps = PropsWithData<HeadingBlockData>;
 
 export const HeadingBlock = withPreview(
-    ({ data: { eyebrow, headline, htmlTag, textAlignment }, colorInverted }: HeadingBlockProps) => {
+    ({ data: { eyebrow, headline, htmlTag, textAlignment } }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
 
         return (
             <Root $textAlign={textAlignmentMap[textAlignment]}>
                 {hasRichTextBlockContent(eyebrow) && (
-                    <Typography variant="h400" component="h5" bottomSpacing colorInverted={colorInverted}>
+                    <Typography variant="h400" component="h5" bottomSpacing>
                         <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
                     </Typography>
                 )}
@@ -62,7 +60,7 @@ export const HeadingBlock = withPreview(
                         </HeadlineSkeleton>
                     }
                 >
-                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag, colorInverted)} />
+                    <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
                 </PreviewSkeleton>
             </Root>
         );

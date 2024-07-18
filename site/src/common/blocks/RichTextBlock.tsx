@@ -30,7 +30,7 @@ export const defaultRichTextInlineStyleMap = {
 /**
  * Define the renderers
  */
-const getDefaultRenderers = (colorInverted?: boolean): Renderers => ({
+const defaultRichTextRenderers: Renderers = {
     /**
      * Those callbacks will be called recursively to render a nested structure
      */
@@ -40,21 +40,21 @@ const getDefaultRenderers = (colorInverted?: boolean): Renderers => ({
      * Note that children are an array of blocks with same styling,
      */
     blocks: {
-        unstyled: createTextBlockRenderFn({ bottomSpacing: true, colorInverted }),
-        "paragraph-standard": createTextBlockRenderFn({ bottomSpacing: true, colorInverted }),
-        "paragraph-small": createTextBlockRenderFn({ variant: "p200", bottomSpacing: true, colorInverted }),
-        "header-one": createTextBlockRenderFn({ variant: "h600", bottomSpacing: true, colorInverted }),
-        "header-two": createTextBlockRenderFn({ variant: "h550", bottomSpacing: true, colorInverted }),
-        "header-three": createTextBlockRenderFn({ variant: "h500", bottomSpacing: true, colorInverted }),
-        "header-four": createTextBlockRenderFn({ variant: "h450", bottomSpacing: true, colorInverted }),
-        "header-five": createTextBlockRenderFn({ variant: "h400", bottomSpacing: true, colorInverted }),
-        "header-six": createTextBlockRenderFn({ variant: "h350", bottomSpacing: true, colorInverted }),
+        unstyled: createTextBlockRenderFn({ bottomSpacing: true }),
+        "paragraph-standard": createTextBlockRenderFn({ bottomSpacing: true }),
+        "paragraph-small": createTextBlockRenderFn({ variant: "p200", bottomSpacing: true }),
+        "header-one": createTextBlockRenderFn({ variant: "h600", bottomSpacing: true }),
+        "header-two": createTextBlockRenderFn({ variant: "h550", bottomSpacing: true }),
+        "header-three": createTextBlockRenderFn({ variant: "h500", bottomSpacing: true }),
+        "header-four": createTextBlockRenderFn({ variant: "h450", bottomSpacing: true }),
+        "header-five": createTextBlockRenderFn({ variant: "h400", bottomSpacing: true }),
+        "header-six": createTextBlockRenderFn({ variant: "h350", bottomSpacing: true }),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text component="li" key={keys[index]} colorInverted={colorInverted}>
+                    <Text component="li" key={keys[index]}>
                         {child}
                     </Text>
                 ))}
@@ -63,7 +63,7 @@ const getDefaultRenderers = (colorInverted?: boolean): Renderers => ({
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <OrderedListItem $depth={depth} component="li" key={keys[index]} colorInverted={colorInverted}>
+                    <OrderedListItem $depth={depth} component="li" key={keys[index]}>
                         {child}
                     </OrderedListItem>
                 ))}
@@ -84,17 +84,15 @@ const getDefaultRenderers = (colorInverted?: boolean): Renderers => ({
                 <span>{children}</span>
             ),
     },
-});
+};
 
 interface RichTextBlockProps extends PropsWithData<RichTextBlockData> {
     renderers?: Renderers;
     disableLastBottomSpacing?: boolean;
-    colorInverted?: boolean;
 }
 
 export const RichTextBlock = withPreview(
-    ({ data, renderers, disableLastBottomSpacing, colorInverted }: RichTextBlockProps) => {
-        renderers = renderers || getDefaultRenderers(colorInverted);
+    ({ data, renderers = defaultRichTextRenderers, disableLastBottomSpacing }: RichTextBlockProps) => {
         const rendered = redraft(data.draftContent, renderers);
 
         return (
