@@ -1,4 +1,4 @@
-import { sitePreviewRoute } from "@src/temp/site-preview-route";
+import { sitePreviewRoute } from "@comet/cms-site";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { type NextRequest } from "next/server";
 

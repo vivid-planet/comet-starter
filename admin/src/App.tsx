@@ -63,7 +63,7 @@ export function App() {
 
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
-                                    url: `${siteConfig.url}/${scope.language}`,
+                                    url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
                                     blockPreviewBaseUrl: `${siteConfig.public.previewUrl}/block-preview`,
                                     sitePreviewApiUrl: `${siteConfig.public.previewUrl}/${scope.language}/api/site-preview`,
@@ -103,7 +103,14 @@ export function App() {
                                                                     <Switch>
                                                                         <Route
                                                                             path={`${match.path}/preview`}
-                                                                            render={(props) => <SitePreview {...props} />}
+                                                                            render={(props) => (
+                                                                                <SitePreview
+                                                                                    resolvePath={(path: string, scope: ContentScope) => {
+                                                                                        return `/${scope.language}${path}`;
+                                                                                    }}
+                                                                                    {...props}
+                                                                                />
+                                                                            )}
                                                                         />
                                                                         <Route
                                                                             render={() => (
