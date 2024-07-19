@@ -5,7 +5,6 @@ import { SignJWT } from "jose";
 import { cookies, draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 import { type NextRequest } from "next/server";
-import * as path from "path";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Scope = Record<string, any>;
@@ -25,7 +24,11 @@ function getPreviewScopeSigningKey() {
     return process.env.SITE_PREVIEW_SECRET || "secret";
 }
 
-export async function sitePreviewRoute(request: NextRequest, graphQLFetch: GraphQLFetch, options?: { apiRoutePostfix?: string }) {
+function removeSlashes(path: string): string {
+    return path.replace(/^\/+|\/+$/g, "");
+}
+
+export async function sitePreviewRoute(request: NextRequest, graphQLFetch: GraphQLFetch, options?: { apiRouteSuffix?: string }) {
     const previewScopeSigningKey = getPreviewScopeSigningKey();
     const params = request.nextUrl.searchParams;
     const settingsParam = params.get("settings");
@@ -64,8 +67,11 @@ export async function sitePreviewRoute(request: NextRequest, graphQLFetch: Graph
 
     draftMode().enable();
 
-    const apiRoutePostfix = options?.apiRoutePostfix ?? "/api/site-preview";
-    const basePath = request.nextUrl.pathname.split(apiRoutePostfix)[0];
+    const apiRouteSuffix = options?.apiRouteSuffix ?? "/api/site-preview";
+    const basePath = removeSlashes(request.nextUrl.pathname.replace(apiRouteSuffix, ""));
+    const pathParam = removeSlashes(params.get("path") ?? "");
 
-    return redirect(path.join(basePath, params.get("path") ?? "") || "/");
+    const redirectPath = `/${removeSlashes(`${basePath}/${pathParam}`)}`;
+
+    return redirect(redirectPath || "/");
 }
