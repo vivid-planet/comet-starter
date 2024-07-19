@@ -23,11 +23,11 @@ export async function getSiteConfig() {
     return siteConfig;
 }
 
-export function getHost(headers?: Headers) {
-    if (typeof window !== "undefined" && window.location?.host) return window.location.host;
-    if (headers) {
-        const host = headers.get("x-forwarded-host") ?? headers.get("host");
-        if (host) return host;
+export function getHost(headers: Headers) {
+    const host = headers.get("x-forwarded-host") ?? headers.get("host");
+    if (host) {
+        return host;
     }
+
     throw new Error("Could not evaluate host");
 }
