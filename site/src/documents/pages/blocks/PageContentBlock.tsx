@@ -15,7 +15,7 @@ const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
-    richtext: (props) => <PageContentRichTextBlock data={props} />,
+    richtext: (props) => <PageContentRichTextBlock data={props} disableLastBottomSpacing />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
