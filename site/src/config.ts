@@ -2,10 +2,9 @@ import { previewParams } from "@comet/cms-site";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
-import { PublicSiteConfig as SiteConfig } from "../../site-configs.d";
+import { ContentScope, PublicSiteConfig as SiteConfig } from "../../site-configs.d";
 import { getSiteConfigFromScope, getSiteConfigs } from "./siteConfigs";
 
-export type ContentScope = SiteConfig["contentScope"];
 export type { SiteConfig };
 
 export async function getSiteConfig() {

@@ -3,9 +3,7 @@ import { SiteConfig } from "./site-configs.d";
 
 // Types for files in site-configs/
 type Environment = "local" | "dev" | "test" | "staging" | "prod";
-export type Config = Omit<SiteConfig, "domains" | "contentScope"> & {
-    languages: string[];
-    domain: string;
+export type Config = Omit<SiteConfig, "domains" | "public"> & Pick<SiteConfig["public"], "domain" | "languages"> & {
     domains: {
         preliminary?: string;
     } & {
@@ -41,7 +39,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
                 preliminary: env === "prod" ? domains["preliminary"] : undefined,
             },
             preloginEnabled: env === "prod" ? site.preloginEnabled : true,
-            contentScopes,
             public: {
                 previewUrl: getUrlFromDomain(domains[env] ?? ""),
                 domain: site.domain,

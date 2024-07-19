@@ -18,8 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const siteConfigs = getSiteConfigs();
 
     for (const siteConfig of siteConfigs) {
-        for (const language of siteConfig.public.languages) {
-            const domain = siteConfig.public.domain;
+        for (const language of siteConfig.languages) {
+            const domain = siteConfig.domain;
             const scope = { domain, language };
 
             let totalCount = 0;

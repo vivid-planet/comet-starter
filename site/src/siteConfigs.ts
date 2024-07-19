@@ -1,6 +1,7 @@
 import { env } from "next-runtime-env";
 
-import { ContentScope, SiteConfig } from "./config";
+import { ContentScope } from "../../site-configs.d";
+import { SiteConfig } from "./config";
 
 let siteConfigs: SiteConfig[];
 export function getSiteConfigs() {
@@ -13,5 +14,5 @@ export function getSiteConfigs() {
 }
 
 export function getSiteConfigFromScope(scope: ContentScope) {
-    return getSiteConfigs().find((siteConfig) => JSON.stringify(siteConfig.contentScope) === JSON.stringify(scope));
+    return getSiteConfigs().find((siteConfig) => siteConfig.domain === scope.domain);
 }

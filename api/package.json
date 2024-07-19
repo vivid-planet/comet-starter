@@ -5,7 +5,7 @@
         "api-generator": "rimraf 'src/*/generated' && comet-api-generator generate",
         "prebuild": "rimraf dist",
         "build": "nest build",
-        "console": "dotenv -e .env.secrets -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
+        "console": "dotenv -c -e .env.secrets -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
         "console:prod": "node dist/console.js",
         "db:migrate": "npm run console migrate --",
         "db:migrate:prod": "npm run console:prod migrate --",
@@ -20,9 +20,9 @@
         "mikro-orm": "mikro-orm",
         "mikro-orm:drop": "mikro-orm schema:drop -r",
         "mikro-orm:migration:generate": "mikro-orm migration:create",
-        "start": "npm run prebuild && dotenv -e .env.secrets -e .env.site-configs -- nest start",
-        "start:debug": "npm run prebuild && dotenv -e .env.secrets -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
-        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -e .env.secrets -e .env.site-configs -- nest start --watch --preserveWatchOutput",
+        "start": "npm run prebuild && dotenv -c -e .env.secrets -e .env.site-configs -- nest start",
+        "start:debug": "npm run prebuild && dotenv -c -e .env.secrets -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
+        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -c -e .env.secrets -e .env.site-configs -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
@@ -49,8 +49,8 @@
         }
     },
     "dependencies": {
-        "@comet/blocks-api": "7.0.0-beta.4",
-        "@comet/cms-api": "7.0.0-beta.4",
+        "@comet/blocks-api": "7.0.0-beta.6",
+        "@comet/cms-api": "7.0.0-beta.6",
         "@faker-js/faker": "^8.3.1",
         "@mikro-orm/cli": "^5.0.5",
         "@mikro-orm/core": "^5.0.5",
@@ -86,8 +86,8 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@comet/eslint-config": "7.0.0-beta.4",
-        "@comet/eslint-plugin": "7.0.0-beta.4",
+        "@comet/eslint-config": "7.0.0-beta.6",
+        "@comet/eslint-plugin": "7.0.0-beta.6",
         "@nestjs/cli": "^9.0.0",
         "@nestjs/schematics": "^9.0.0",
         "@nestjs/testing": "^9.0.0",

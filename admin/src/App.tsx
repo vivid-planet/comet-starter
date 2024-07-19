@@ -58,15 +58,15 @@ export function App() {
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
                                 const siteConfig = configs.find((config) => {
-                                    return config.public.domain === scope.domain;
+                                    return config.domain === scope.domain;
                                 });
 
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
-                                    blockPreviewBaseUrl: `${siteConfig.public.previewUrl}/block-preview`,
-                                    sitePreviewApiUrl: `${siteConfig.public.previewUrl}/api/site-preview`,
+                                    blockPreviewBaseUrl: `${siteConfig.previewUrl}/block-preview`,
+                                    sitePreviewApiUrl: `${siteConfig.previewUrl}/api/site-preview`,
                                 };
                             },
                         }}

@@ -5,20 +5,15 @@ export type ContentScope = {
     language: string;
 };
 
-export interface SiteConfig extends Omit<BaseSiteConfig, "contentScope"> {
+export interface SiteConfig extends BaseSiteConfig {
     preloginPassword?: string;
-}
-
-export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig> & {
-    domain: string;
-    languages: string[];
-    contentScopes: Array<ContentScope>;
-};
-export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig> & {
     public: {
         previewUrl: string;
         domain: string;
         languages: string[];
         contentScopes: Array<ContentScope>;
     };
-};
+}
+
+export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig> & SiteConfig["public"];
+export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig> & SiteConfig["public"];
