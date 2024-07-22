@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext } from "react";
 
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
-import { ContentScope as SiteConfigContentScope, PublicSiteConfig } from "./site-configs";
+import { PublicSiteConfig } from "./site-configs";
 
 export function createConfig() {
     const environmentVariables = {} as Record<(typeof environment)[number], string>;
@@ -28,8 +28,6 @@ export function createConfig() {
         commitSha: environmentVariables.COMMIT_SHA,
     };
 }
-
-export type ContentScope = SiteConfigContentScope;
 
 export type Config = ReturnType<typeof createConfig>;
 
