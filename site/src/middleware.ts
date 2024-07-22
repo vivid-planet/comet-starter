@@ -11,8 +11,6 @@ export async function middleware(request: NextRequest) {
     const host = getHost(headers);
     const { pathname } = new URL(request.url);
 
-    // Site-Preview is handled in getSiteConfigs since draftMode() is not set yet in middleware (https://github.com/vercel/next.js/issues/52080)
-
     // Redirect to Main Host
     const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
