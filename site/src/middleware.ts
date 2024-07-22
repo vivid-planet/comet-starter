@@ -42,11 +42,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
     }
 
-    const response = NextResponse.next({ request: { headers } });
-
-    // TODO are there any other headers that need to be set?
-
-    return response;
+    return NextResponse.next({ request: { headers } });
 }
 
 type RewritesMap = Map<string, Rewrite>;
