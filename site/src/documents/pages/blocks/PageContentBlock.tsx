@@ -17,7 +17,7 @@ const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     teaser: (props) => <TeaserBlock data={props} />,
-    richtext: (props) => <PageContentRichTextBlock data={props} />,
+    richtext: (props) => <PageContentRichTextBlock data={props} disableLastBottomSpacing />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,

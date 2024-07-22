@@ -6,9 +6,11 @@ export type ContentScope = {
 };
 
 export interface SiteConfig extends BaseSiteConfig {
-    contentScope: ContentScope;
     preloginPassword?: string;
+    public: {
+        contentScope: ContentScope;
+    };
 }
 
-export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig>;
-export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig>;
+export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig> & { contentScope: ContentScope };
+export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig> & { contentScope: ContentScope };
