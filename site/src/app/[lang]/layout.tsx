@@ -1,4 +1,4 @@
-import { IntlProvider } from "@src/app/IntlProvider";
+import { IntlProvider } from "@src/app/[lang]/IntlProvider";
 import { readFile } from "fs/promises";
 
 const messagesCache: Record<string, unknown> = {};
