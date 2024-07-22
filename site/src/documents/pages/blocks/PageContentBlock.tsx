@@ -11,12 +11,14 @@ import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { BillboardTeaserBlock } from "@src/documents/pages/blocks/BillboardTeaserBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
+import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
     anchor: (props) => <AnchorBlock data={props} />,
     billboardTeaser: (props) => <BillboardTeaserBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
+    teaser: (props) => <TeaserBlock data={props} />,
     richtext: (props) => <PageContentRichTextBlock data={props} disableLastBottomSpacing />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,

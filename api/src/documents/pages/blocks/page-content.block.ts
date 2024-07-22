@@ -9,6 +9,7 @@ import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block"
 import { BillboardTeaserBlock } from "@src/documents/pages/blocks/billboard-teaser.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
+import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
 
 export const PageContentBlock = createBlocksBlock(
     {
@@ -17,6 +18,7 @@ export const PageContentBlock = createBlocksBlock(
             anchor: AnchorBlock,
             billboardTeaser: BillboardTeaserBlock,
             space: SpaceBlock,
+            teaser: TeaserBlock,
             richtext: RichTextBlock,
             heading: HeadingBlock,
             columns: ColumnsBlock,
