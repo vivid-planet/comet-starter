@@ -2,13 +2,13 @@ import { Rewrite } from "next/dist/lib/load-custom-routes";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { getHost } from "./config";
+import { getHostFromHeaders } from "./config";
 import { createRedirects } from "./redirects/redirects";
 import { getSiteConfigs } from "./siteConfigs";
 
 export async function middleware(request: NextRequest) {
     const headers = request.headers;
-    const host = getHost(headers);
+    const host = getHostFromHeaders(headers);
     const { pathname } = new URL(request.url);
 
     // Redirect to Main Host

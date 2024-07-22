@@ -8,7 +8,7 @@ import { getSiteConfigFromScope, getSiteConfigs } from "./siteConfigs";
 export type { SiteConfig };
 
 export async function getSiteConfig() {
-    const host = getHost(headers());
+    const host = getHostFromHeaders(headers());
 
     let siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
@@ -22,7 +22,7 @@ export async function getSiteConfig() {
     return siteConfig;
 }
 
-export function getHost(headers: Headers) {
+export function getHostFromHeaders(headers: Headers) {
     const host = headers.get("x-forwarded-host") ?? headers.get("host");
     if (host) {
         return host;
