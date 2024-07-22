@@ -44,8 +44,8 @@ class BillboardTeaserBlockInput extends BlockInput {
 
     @BlockField()
     @IsInt()
-    @Min(10)
-    @Max(100)
+    @Min(0)
+    @Max(90)
     backgroundOpacity: number;
 
     @ChildBlockInput(CallToActionListBlock)

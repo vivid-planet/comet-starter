@@ -8,7 +8,6 @@ import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 const backgroundOpacityOptions: Array<{ value: BillboardTeaserBlockData["backgroundOpacity"]; label: string }> = [
-    { value: 100, label: "100%" },
     { value: 90, label: "90%" },
     { value: 80, label: "80%" },
     { value: 70, label: "70%" },
@@ -18,6 +17,7 @@ const backgroundOpacityOptions: Array<{ value: BillboardTeaserBlockData["backgro
     { value: 30, label: "30%" },
     { value: 20, label: "20%" },
     { value: 10, label: "10%" },
+    { value: 0, label: "0%" },
 ];
 
 export const BillboardTeaserBlock = createCompositeBlock(
