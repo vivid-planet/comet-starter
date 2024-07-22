@@ -26,7 +26,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
 
         return {
             ...site,
-            name: `${site.name}`,
             domains: {
                 main: domains[env] ?? "",
                 preliminary: env === "prod" ? domains["preliminary"] : undefined,
