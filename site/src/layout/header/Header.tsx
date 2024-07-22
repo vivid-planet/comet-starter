@@ -18,12 +18,16 @@ function Header({ header }: Props): JSX.Element {
                 <TopLevelNavigation>
                     {header.map((node) => (
                         <TopLevelLinkContainer key={node.id}>
-                            <PageLink page={node}>{(active) => <Link $active={active}>{node.name}</Link>}</PageLink>
+                            <Link page={node} activeClassName="active">
+                                {node.name}
+                            </Link>
                             {node.childNodes.length > 0 && (
                                 <SubLevelNavigation>
                                     {node.childNodes.map((node) => (
                                         <li key={node.id}>
-                                            <PageLink page={node}>{(active) => <Link $active={active}>{node.name}</Link>}</PageLink>
+                                            <Link page={node} activeClassName="active">
+                                                {node.name}
+                                            </Link>
                                         </li>
                                     ))}
                                 </SubLevelNavigation>
@@ -68,12 +72,16 @@ const TopLevelLinkContainer = styled.li`
     }
 `;
 
-const Link = styled.a<{ $active: boolean }>`
+const Link = styled(PageLink)`
     text-decoration: none;
     padding: 5px 10px;
 
     &:hover {
         text-decoration: underline;
+    }
+
+    &.active {
+        color: ${({ theme }) => theme.palette.primary.main};
     }
 `;
 
