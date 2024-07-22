@@ -52,7 +52,7 @@ export class AppModule {
                         autoSchemaFile: "schema.gql",
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
-                            if (process.env.NODE_ENV !== "development") {
+                            if (!config.debug) {
                                 if (error instanceof ValidationError) {
                                     return new ValidationError("Invalid request.");
                                 }
@@ -120,7 +120,7 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
-                ...(process.env.NODE_ENV === "production"
+                ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {

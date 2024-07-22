@@ -1,18 +1,16 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { KeyFactsBlockData } from "@src/blocks.generated";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
 import { KeyFactItemBlock } from "./KeyFactItemBlock";
 
 export const KeyFactsBlock = withPreview(
-    ({ data: { heading, items } }: PropsWithData<KeyFactsBlockData>) => (
+    ({ data }: PropsWithData<KeyFactsBlockData>) => (
         <PageLayout grid>
             <PageLayoutContent>
-                <HeadingBlock data={heading} />
-                <ItemWrapper $listItemCount={items.blocks.length}>
-                    <ListBlock data={items} block={(block) => <KeyFactItemBlock data={block} />} />
+                <ItemWrapper $listItemCount={data.blocks.length}>
+                    <ListBlock data={data} block={(block) => <KeyFactItemBlock data={block} />} />
                 </ItemWrapper>
             </PageLayoutContent>
         </PageLayout>
@@ -22,11 +20,9 @@ export const KeyFactsBlock = withPreview(
 
 const PageLayoutContent = styled.div`
     grid-column: 3 / -3;
-    margin: ${({ theme }) => theme.spacing.D300} 0;
 `;
 
 const ItemWrapper = styled.div<{ $listItemCount: number }>`
-    margin-top: ${({ theme }) => theme.spacing.D200};
     display: grid;
     gap: ${({ theme }) => theme.spacing.D100};
 
