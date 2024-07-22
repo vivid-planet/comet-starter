@@ -11,7 +11,6 @@ export interface SiteConfig extends BaseSiteConfig {
         previewUrl: string;
         domain: string;
         languages: string[];
-        contentScopes: Array<ContentScope>;
     };
 }
 

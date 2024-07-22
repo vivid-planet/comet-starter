@@ -24,13 +24,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     return imports.map((imprt, index) => {
         const { domains, ...site } = imprt.default;
 
-        const contentScopes = site.languages.map(
-            (language) => ({
-                domain: site.domain,
-                language,
-            })
-        );
-
         return {
             ...site,
             name: `${site.name}`,
@@ -43,7 +36,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
                 previewUrl: getUrlFromDomain(domains[env] ?? ""),
                 domain: site.domain,
                 languages: site.languages,
-                contentScopes,
             }
         }
     });
