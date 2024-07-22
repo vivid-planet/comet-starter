@@ -13,7 +13,7 @@ import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.bl
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
-import { IsString } from "class-validator";
+import { IsInt, Max, Min } from "class-validator";
 
 class BillboardTeaserBlockData extends BlockData {
     @ChildBlock(MediaBlock)
@@ -26,7 +26,7 @@ class BillboardTeaserBlockData extends BlockData {
     text: BlockDataInterface;
 
     @BlockField()
-    backgroundOpacity: string;
+    backgroundOpacity: number;
 
     @ChildBlock(CallToActionListBlock)
     callToActionList: BlockDataInterface;
@@ -43,8 +43,10 @@ class BillboardTeaserBlockInput extends BlockInput {
     text: ExtractBlockInput<typeof RichTextBlock>;
 
     @BlockField()
-    @IsString()
-    backgroundOpacity: string;
+    @IsInt()
+    @Min(10)
+    @Max(100)
+    backgroundOpacity: number;
 
     @ChildBlockInput(CallToActionListBlock)
     callToActionList: ExtractBlockInput<typeof CallToActionListBlock>;

@@ -39,7 +39,7 @@ const Root = styled(PageLayout)`
     position: relative;
 `;
 
-const ImageOverlay = styled.div<{ $backgroundOpacity: string }>`
+const ImageOverlay = styled.div<{ $backgroundOpacity: number }>`
     position: absolute;
     top: 0;
     left: 0;
