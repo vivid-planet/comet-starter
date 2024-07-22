@@ -10,11 +10,6 @@ export async function middleware(request: NextRequest) {
     const headers = request.headers;
     const host = getHost(headers);
     const { pathname } = new URL(request.url);
-    const language = pathname.split("/")?.[1] ?? "";
-
-    if (!language) {
-        return NextResponse.redirect(new URL("/en", request.url));
-    }
 
     // Site-Preview is handled in getSiteConfigs since draftMode() is not set yet in middleware (https://github.com/vercel/next.js/issues/52080)
 
