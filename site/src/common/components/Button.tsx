@@ -18,7 +18,7 @@ export const Button = styled.button<{ variant?: ButtonVariant }>`
     font-weight: 700;
     line-height: 110%;
 
-    ${({ variant = "contained", disabled }) =>
+    ${({ variant = "contained" }) =>
         css`
             ${buttonVariantStyle[variant]}
 
@@ -26,13 +26,6 @@ export const Button = styled.button<{ variant?: ButtonVariant }>`
                 pointer-events: none;
                 ${disabledButtonVariantStyle[variant]};
             }
-
-            /* <a> doesn't support :disabled selector */
-            ${disabled &&
-            css`
-                pointer-events: none;
-                ${disabledButtonVariantStyle[variant]};
-            `}
         `};
 `;
 
