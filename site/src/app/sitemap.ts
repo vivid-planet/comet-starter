@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                         const seoBlock = pageTreeNode.document.seo;
                         if (!seoBlock.noIndex) {
                             sitemap.push({
-                                url: `${getUrlFromDomain(siteConfig.domains.main)}/${scope.language}${pageTreeNode.path}`, // TODO support multiple site domains
+                                url: `${getUrlFromDomain(siteConfig.domains.main)}/${scope.language}${pageTreeNode.path}`,
                                 priority: Number(seoBlock.priority.replace("_", ".")),
                                 changeFrequency: seoBlock.changeFrequency,
                                 lastModified: pageTreeNode.document.updatedAt,
