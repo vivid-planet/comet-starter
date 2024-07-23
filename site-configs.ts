@@ -12,7 +12,7 @@ export type Config = Omit<SiteConfig, "domains" | "public"> & Pick<SiteConfig["p
 };
 
 const isLocalhost = (domain:string) => {
-    return domain.match(/\b(?:[a-zA-Z0-9-]+\.)?localhost:\d{4}\b/);
+    return domain.match(/^([a-zA-Z0-9-]+\.)?localhost:\d{4}$/);
 }
 
 const getUrlFromDomain = (domain: string): string => {
