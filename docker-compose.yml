@@ -35,12 +35,14 @@ services:
       AWS_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
 
   jaeger:
-    image: jaegertracing/all-in-one:1.58
+    image: jaegertracing/all-in-one:1
     ports:
       - ${JAEGER_UI_PORT}:16686
       - ${JAEGER_OLTP_PORT}:4318 #OLTP over HTTP
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
+      COLLECTOR_OTLP_GRPC_HOST_PORT: 0.0.0.0:4317
+      COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
 
 networks:
   postgres:
