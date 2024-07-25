@@ -43,7 +43,7 @@ export function EditFooterPage(): JSX.Element | null {
 
     const { data, refetch } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
         variables: {
-            contentScope: scope,
+            scope,
         },
     });
 
@@ -164,8 +164,8 @@ export function EditFooterPage(): JSX.Element | null {
 }
 
 const footerQuery = gql`
-    query Footer($contentScope: FooterContentScopeInput!) {
-        footer(scope: $contentScope) {
+    query Footer($scope: FooterScopeInput!) {
+        footer(scope: $scope) {
             id
             content
             scope {
@@ -178,7 +178,7 @@ const footerQuery = gql`
 `;
 
 const saveFooterMutation = gql`
-    mutation SaveFooter($lastUpdatedAt: DateTime, $input: FooterInput!, $scope: FooterContentScopeInput!) {
+    mutation SaveFooter($lastUpdatedAt: DateTime, $input: FooterInput!, $scope: FooterScopeInput!) {
         saveFooter(lastUpdatedAt: $lastUpdatedAt, input: $input, scope: $scope) {
             id
             content
@@ -188,7 +188,7 @@ const saveFooterMutation = gql`
 `;
 
 const checkForChangesQuery = gql`
-    query CheckForChangesFooter($scope: FooterContentScopeInput!) {
+    query CheckForChangesFooter($scope: FooterScopeInput!) {
         footer(scope: $scope) {
             updatedAt
         }
