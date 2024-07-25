@@ -1,5 +1,6 @@
+"use client";
+import { gql } from "@comet/cms-site";
 import { FooterContentBlock } from "@src/documents/pages/blocks/FooterContentBlock";
-import { gql } from "graphql-request";
 import * as React from "react";
 
 import { GQLFooterFragment } from "./Footer.generated";

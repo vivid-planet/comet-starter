@@ -6,10 +6,12 @@ import {
     createColumnsBlock,
 } from "@comet/blocks-admin";
 import { AnchorBlock } from "@comet/cms-admin";
+import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { FormattedMessage } from "react-intl";
 
 const oneColumnLayouts = [
@@ -111,11 +113,13 @@ const twoColumnLayouts = [
 const ColumnsContentBlock = createBlocksBlock({
     name: "ColumnsContent",
     supportedBlocks: {
+        accordion: AccordionBlock,
         anchor: AnchorBlock,
         richtext: RichTextBlock,
         space: SpaceBlock,
         heading: HeadingBlock,
         callToActionList: CallToActionListBlock,
+        media: StandaloneMediaBlock,
     },
 });
 

@@ -1,22 +1,19 @@
 import {
     AccessLogModule,
     BlobStorageModule,
-    BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
     BuildsModule,
     DamModule,
     DependenciesModule,
-    FilesService,
-    ImagesService,
     KubernetesModule,
     PageTreeModule,
-    PageTreeService,
     RedirectsModule,
     UserPermissionsModule,
 } from "@comet/cms-api";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
+import { ModuleRef } from "@nestjs/core";
 import { Enhancer, GraphQLModule } from "@nestjs/graphql";
 import { DbModule } from "@src/db/db.module";
 import { Link } from "@src/documents/links/entities/link.entity";
@@ -50,13 +47,13 @@ export class AppModule {
                 GraphQLModule.forRootAsync<ApolloDriverConfig>({
                     driver: ApolloDriver,
                     imports: [BlocksModule],
-                    useFactory: (dependencies: Record<string, unknown>) => ({
+                    useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
                         playground: config.debug,
                         autoSchemaFile: "schema.gql",
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
-                            if (process.env.NODE_ENV !== "development") {
+                            if (!config.debug) {
                                 if (error instanceof ValidationError) {
                                     return new ValidationError("Invalid request.");
                                 }
@@ -74,40 +71,24 @@ export class AppModule {
                         // See https://docs.nestjs.com/graphql/other-features#execute-enhancers-at-the-field-resolver-level
                         fieldResolverEnhancers: ["guards", "interceptors", "filters"] as Enhancer[],
                         buildSchemaOptions: {
-                            fieldMiddleware: [BlocksTransformerMiddlewareFactory.create(dependencies)],
+                            fieldMiddleware: [BlocksTransformerMiddlewareFactory.create(moduleRef)],
                         },
                         persistedQueries: false,
                     }),
-                    inject: [BLOCKS_MODULE_TRANSFORMER_DEPENDENCIES],
+                    inject: [ModuleRef],
                 }),
                 AuthModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
-                        availableContentScopes: [
-                            { domain: "main", language: "de" },
-                            { domain: "main", language: "en" },
-                            { domain: "secondary", language: "de" },
-                            { domain: "secondary", language: "en" },
-                        ],
+                        availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
                         userService,
                         accessControlService,
+                        systemUsers: ["system"],
                     }),
                     inject: [UserService, AccessControlService],
                     imports: [AuthModule],
                 }),
-                BlocksModule.forRoot({
-                    imports: [PageTreeModule, DamModule],
-                    useFactory: (pageTreeService: PageTreeService, filesService: FilesService, imagesService: ImagesService) => {
-                        return {
-                            transformerDependencies: {
-                                pageTreeService,
-                                filesService,
-                                imagesService,
-                            },
-                        };
-                    },
-                    inject: [PageTreeService, FilesService, ImagesService],
-                }),
+                BlocksModule,
                 KubernetesModule.register({
                     helmRelease: config.helmRelease,
                 }),
@@ -127,12 +108,10 @@ export class AppModule {
                     File: DamFile,
                     Folder: DamFolder,
                     damConfig: {
-                        filesBaseUrl: `${config.apiUrl}/dam/files`,
-                        imagesBaseUrl: `${config.apiUrl}/dam/images`,
+                        apiUrl: config.apiUrl,
                         secret: config.dam.secret,
                         allowedImageSizes: config.dam.allowedImageSizes,
                         allowedAspectRatios: config.dam.allowedImageAspectRatios,
-                        additionalMimeTypes: config.dam.additionalMimeTypes,
                         filesDirectory: `${config.blob.storageDirectoryPrefix}-files`,
                         cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                         maxFileSize: config.dam.uploadsMaxFileSize,
@@ -143,12 +122,12 @@ export class AppModule {
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
-                ...(process.env.NODE_ENV === "production"
+                ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {
                                   // Ignore system user
-                                  if (user === true) {
+                                  if (user === "system") {
                                       return false;
                                   }
                                   return true;

@@ -13,7 +13,7 @@ export const FooterContentBlock = withPreview(
             <Root>
                 <ImageTextWrapper>
                     <ImageWrapper>
-                        <DamImageBlock data={image} objectFit={"contain"} />
+                        <DamImageBlock data={image} aspectRatio="inherit" objectFit="contain" />
                     </ImageWrapper>
                     <RichTextWrapper>
                         <RichTextBlock data={text} />
@@ -24,7 +24,7 @@ export const FooterContentBlock = withPreview(
                     <LinksBlock>
                         {linkList.blocks.map((block) => (
                             <LinkBlock key={block.key} data={block.props.link}>
-                                <LinkText component={"a"} variant={"p200"}>
+                                <LinkText component="a" variant="p200">
                                     {block.props.text}
                                 </LinkText>
                             </LinkBlock>
@@ -83,8 +83,7 @@ const RichTextWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-    justify-self: center;
-    align-self: start;
+    place-self: start center;
     max-width: 250px;
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
@@ -127,7 +126,7 @@ const HorizontalLine = styled.hr`
     border: none;
     background-color: ${({ theme }) => theme.palette.grey["600"]};
     color: ${({ theme }) => theme.palette.grey["600"]};
-    margin: 19px 0 35px 0; // 19px since element in RTE has margin bottom of 16px
+    margin: 19px 0 35px; /* 19px since element in RTE has margin bottom of 16px */
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;

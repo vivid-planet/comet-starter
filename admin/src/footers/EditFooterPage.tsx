@@ -1,11 +1,10 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { MainContent, messages, SaveButton, SplitButton, Stack, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarTitleItem } from "@comet/admin";
-import { Domain, Save } from "@comet/admin-icons";
+import { MainContent, messages, SaveButton, Stack, StackToolbar, ToolbarActions, ToolbarFillSpace, ToolbarTitleItem } from "@comet/admin";
+import { Save } from "@comet/admin-icons";
 import { AdminComponentRoot, BlockState } from "@comet/blocks-admin";
 import {
     BlockPreviewWithTabs,
     ContentScopeIndicator,
-    EditPageLayout,
     resolveHasSaveConflict,
     useBlockPreview,
     useCmsBlockContext,
@@ -14,7 +13,6 @@ import {
     useSiteConfig,
 } from "@comet/cms-admin";
 import { FooterContentBlockInput } from "@src/blocks.generated";
-import { ContentScopeIndicatorContent, ContentScopeIndicatorDomain, ContentScopeIndicatorLanguage } from "@src/common/ContentScopeIndicatorStyles";
 import { useContentScope } from "@src/common/ContentScopeProvider";
 import isEqual from "lodash.isequal";
 import * as React from "react";
@@ -136,45 +134,30 @@ export function EditFooterPage(): JSX.Element | null {
 
     return (
         <Stack topLevelTitle={null}>
-            <EditPageLayout>
-                <ContentScopeIndicator variant="toolbar">
-                    <ContentScopeIndicatorContent>
-                        <Domain fontSize="small" />
-                        <ContentScopeIndicatorDomain variant="body2" textTransform="uppercase">
-                            {scope.domain}
-                        </ContentScopeIndicatorDomain>
-                        {" | "}
-                        <ContentScopeIndicatorLanguage variant="body2" textTransform="uppercase">
-                            {scope.language}
-                        </ContentScopeIndicatorLanguage>
-                    </ContentScopeIndicatorContent>
-                </ContentScopeIndicator>
-                <Toolbar>
-                    <ToolbarTitleItem>
-                        <FormattedMessage id="footers.edit.toolbarTitle" defaultMessage="Edit footer" />
-                    </ToolbarTitleItem>
-                    <ToolbarFillSpace />
-                    <ToolbarActions>
-                        <SplitButton disabled={!hasChanges}>
-                            <SaveButton
-                                color="primary"
-                                variant="contained"
-                                saving={saving}
-                                hasErrors={hasSaveErrors != null}
-                                onClick={handleSavePage}
-                                startIcon={<Save />}
-                            >
-                                <FormattedMessage {...messages.save} />
-                            </SaveButton>
-                        </SplitButton>
-                    </ToolbarActions>
-                </Toolbar>
-                <MainContent disablePaddingBottom>
-                    <BlockPreviewWithTabs previewUrl={`${siteConfig.previewUrl}/admin/footer`} previewState={previewState} previewApi={previewApi}>
-                        {tabs}
-                    </BlockPreviewWithTabs>
-                </MainContent>
-            </EditPageLayout>
+            <StackToolbar scopeIndicator={<ContentScopeIndicator />}>
+                <ToolbarTitleItem>
+                    <FormattedMessage id="footers.edit.toolbarTitle" defaultMessage="Edit footer" />
+                </ToolbarTitleItem>
+                <ToolbarFillSpace />
+                <ToolbarActions>
+                    <SaveButton
+                        disabled={!hasChanges}
+                        color="primary"
+                        variant="contained"
+                        saving={saving}
+                        hasErrors={hasSaveErrors != null}
+                        onClick={handleSavePage}
+                        startIcon={<Save />}
+                    >
+                        <FormattedMessage {...messages.save} />
+                    </SaveButton>
+                </ToolbarActions>
+            </StackToolbar>
+            <MainContent disablePaddingBottom>
+                <BlockPreviewWithTabs previewUrl={`${siteConfig.blockPreviewBaseUrl}/footer`} previewState={previewState} previewApi={previewApi}>
+                    {tabs}
+                </BlockPreviewWithTabs>
+            </MainContent>
             {saveConflict.dialogs}
         </Stack>
     );

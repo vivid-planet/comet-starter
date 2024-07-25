@@ -1,10 +1,10 @@
+"use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { gql } from "graphql-request";
 import * as React from "react";
 import styled from "styled-components";
 
-import { GQLHeaderFragment } from "./Header.generated";
-import { PageLink, pageLinkFragment } from "./PageLink";
+import { GQLHeaderFragment } from "./Header.fragment.generated";
+import { PageLink } from "./PageLink";
 
 interface Props {
     header: GQLHeaderFragment[];
@@ -18,12 +18,16 @@ function Header({ header }: Props): JSX.Element {
                 <TopLevelNavigation>
                     {header.map((node) => (
                         <TopLevelLinkContainer key={node.id}>
-                            <PageLink page={node}>{(active) => <Link $active={active}>{node.name}</Link>}</PageLink>
+                            <Link page={node} activeClassName="active">
+                                {node.name}
+                            </Link>
                             {node.childNodes.length > 0 && (
                                 <SubLevelNavigation>
                                     {node.childNodes.map((node) => (
                                         <li key={node.id}>
-                                            <PageLink page={node}>{(active) => <Link $active={active}>{node.name}</Link>}</PageLink>
+                                            <Link page={node} activeClassName="active">
+                                                {node.name}
+                                            </Link>
                                         </li>
                                     ))}
                                 </SubLevelNavigation>
@@ -35,21 +39,6 @@ function Header({ header }: Props): JSX.Element {
         </Root>
     );
 }
-
-const headerFragment = gql`
-    fragment Header on PageTreeNode {
-        id
-        name
-        ...PageLink
-        childNodes {
-            id
-            name
-            ...PageLink
-        }
-    }
-
-    ${pageLinkFragment}
-`;
 
 const Root = styled.header`
     padding: 10px 20px;
@@ -68,7 +57,7 @@ const SubLevelNavigation = styled.ol`
     list-style-type: none;
     padding: 5px;
     background-color: white;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgb(0 0 0 / 10%);
 `;
 
 const TopLevelLinkContainer = styled.li`
@@ -83,13 +72,17 @@ const TopLevelLinkContainer = styled.li`
     }
 `;
 
-const Link = styled.a<{ $active: boolean }>`
+const Link = styled(PageLink)`
     text-decoration: none;
     padding: 5px 10px;
 
     &:hover {
         text-decoration: underline;
     }
+
+    &.active {
+        color: ${({ theme }) => theme.palette.primary.main};
+    }
 `;
 
-export { Header, headerFragment };
+export { Header };

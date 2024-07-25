@@ -5,7 +5,6 @@ import { AdminComponentRoot, AdminTabLabel } from "@comet/blocks-admin";
 import {
     BlockPreviewWithTabs,
     createUsePage,
-    EditPageLayout,
     openSitePreviewWindow,
     PageName,
     useBlockPreview,
@@ -89,14 +88,14 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
         });
     }
 
-    if (!pageState) return <></>;
+    if (!pageState) return null;
 
     if (loading) {
         return <Loading behavior="fillPageHeight" />;
     }
 
     return (
-        <EditPageLayout>
+        <>
             {hasChanges && (
                 <RouterPrompt
                     message={(location) => {
@@ -141,7 +140,7 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                 </ToolbarActions>
             </Toolbar>
             <MainContent disablePaddingBottom>
-                <BlockPreviewWithTabs previewUrl={`${siteConfig.previewUrl}/admin/page`} previewState={previewState} previewApi={previewApi}>
+                <BlockPreviewWithTabs previewUrl={`${siteConfig.blockPreviewBaseUrl}/page`} previewState={previewState} previewApi={previewApi}>
                     {[
                         {
                             key: "content",
@@ -171,6 +170,6 @@ export const EditPage: React.FC<Props> = ({ id, category }) => {
                 </BlockPreviewWithTabs>
             </MainContent>
             {dialogs}
-        </EditPageLayout>
+        </>
     );
 };

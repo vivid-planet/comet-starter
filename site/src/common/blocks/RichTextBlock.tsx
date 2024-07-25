@@ -1,3 +1,4 @@
+"use client";
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
@@ -110,9 +111,9 @@ export const defaultRichTextRenderers: Renderers = {
         // key is the entity key value from raw
         LINK: (children, data: LinkBlockData, { key }) =>
             isValidLink(data) ? (
-                <LinkBlock key={key} data={data}>
-                    <InlineLink>{children}</InlineLink>
-                </LinkBlock>
+                <InlineLink key={key} data={data}>
+                    {children}
+                </InlineLink>
             ) : (
                 <span>{children}</span>
             ),
@@ -130,7 +131,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
+                {disableLastBottomSpacing ? <DisableLastBottomSpacing>{rendered}</DisableLastBottomSpacing> : rendered}
             </PreviewSkeleton>
         );
     },
@@ -145,9 +146,8 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
-    ${({ theme, $disableLastBottomSpacing }) =>
-        $disableLastBottomSpacing &&
+const DisableLastBottomSpacing = styled.div`
+    ${({ theme }) =>
         css`
             > *:last-child {
                 margin-bottom: 0;
@@ -162,8 +162,8 @@ const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
 const Text = styled(Typography)`
     white-space: pre-line;
 
-    // Show empty lines as spacing between paragraphs
-    &:empty:not(:first-child:last-child):before {
+    /* Show empty lines as spacing between paragraphs */
+    &:empty:not(:first-child:last-child)::before {
         white-space: pre;
         content: " ";
     }
@@ -173,7 +173,7 @@ const OrderedListItem = styled(Text)<{ $depth: number }>`
     list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
 `;
 
-const InlineLink = styled.a`
+const InlineLink = styled(LinkBlock)`
     color: ${({ theme }) => theme.palette.primary.main};
     transition: color 0.3s ease-in-out;
 
