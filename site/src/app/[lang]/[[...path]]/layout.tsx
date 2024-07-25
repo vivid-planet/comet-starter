@@ -1,6 +1,7 @@
 import { gql, previewParams } from "@comet/cms-site";
 import { domain } from "@src/config";
-import { Footer, footerFragment } from "@src/layout/footer/Footer";
+import { Footer } from "@src/layout/footer/Footer";
+import { footerFragment } from "@src/layout/footer/Footer.fragment";
 import { Header } from "@src/layout/header/Header";
 import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
