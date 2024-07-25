@@ -13,7 +13,7 @@ export const FooterContentBlock = withPreview(
             <Root>
                 <ImageTextWrapper>
                     <ImageWrapper>
-                        <DamImageBlock data={image} aspectRatio="inherit" objectFit="contain" />
+                        <DamImageBlock data={image} aspectRatio="1/1" objectFit="contain" />
                     </ImageWrapper>
                     <RichTextWrapper>
                         <RichTextBlock data={text} />
@@ -21,15 +21,15 @@ export const FooterContentBlock = withPreview(
                 </ImageTextWrapper>
                 <HorizontalLine />
                 <LinkCopyrightWrapper>
-                    <LinksBlock>
-                        {linkList.blocks.map((block) => (
-                            <LinkBlock key={block.key} data={block.props.link}>
-                                <LinkText component="a" variant="p200">
+                    {!!linkList.blocks.length && (
+                        <LinksBlock>
+                            {linkList.blocks.map((block) => (
+                                <LinkText as={LinkBlock} key={block.key} data={block.props.link} variant="p200">
                                     {block.props.text}
                                 </LinkText>
-                            </LinkBlock>
-                        ))}
-                    </LinksBlock>
+                            ))}
+                        </LinksBlock>
+                    )}
                     {copyrightNotice && <CopyrightNotice variant="p200">{copyrightNotice}</CopyrightNotice>}
                 </LinkCopyrightWrapper>
             </Root>
@@ -67,6 +67,8 @@ const ImageTextWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    flex-shrink: 0;
+    flex-grow: 1;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         gap: 25px;
@@ -84,7 +86,8 @@ const RichTextWrapper = styled.div`
 
 const ImageWrapper = styled.div`
     place-self: start center;
-    max-width: 250px;
+    max-width: 100px;
+    width: 100%;
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         position: absolute;
@@ -118,6 +121,7 @@ const CopyrightNotice = styled(Typography)`
 const LinkText = styled(Typography)`
     color: ${({ theme }) => theme.palette.grey["400"]};
     text-decoration: underline;
+    font-family: ${({ theme }) => theme.fontFamily};
 `;
 
 const HorizontalLine = styled.hr`
