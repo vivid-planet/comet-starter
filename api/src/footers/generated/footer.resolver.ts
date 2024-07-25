@@ -5,7 +5,7 @@ import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityManager, EntityRepository } from "@mikro-orm/postgresql";
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 
-import { FooterContentScope } from "../dto/footer-content-scope";
+import { FooterScope } from "../dto/footer-scope";
 import { Footer } from "../entities/footer.entity";
 import { FooterInput } from "./dto/footer.input";
 import { FootersService } from "./footers.service";
@@ -20,7 +20,7 @@ export class FooterResolver {
     ) {}
 
     @Query(() => Footer, { nullable: true })
-    async footer(@Args("scope", { type: () => FooterContentScope }) scope: FooterContentScope): Promise<Footer | null> {
+    async footer(@Args("scope", { type: () => FooterScope }) scope: FooterScope): Promise<Footer | null> {
         const footers = await this.repository.find({ scope });
         if (footers.length > 1) {
             throw new Error("There must be only one footer");
@@ -31,7 +31,7 @@ export class FooterResolver {
 
     @Mutation(() => Footer)
     async saveFooter(
-        @Args("scope", { type: () => FooterContentScope }) scope: FooterContentScope,
+        @Args("scope", { type: () => FooterScope }) scope: FooterScope,
         @Args("input", { type: () => FooterInput }) input: FooterInput,
         @Args("lastUpdatedAt", { type: () => Date, nullable: true }) lastUpdatedAt?: Date,
     ): Promise<Footer> {
