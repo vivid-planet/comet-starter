@@ -2,7 +2,7 @@
     "name": "starter-site",
     "private": true,
     "scripts": {
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && NODE_OPTIONS='--inspect=localhost:9230' dotenv -c -e .env.secrets -e .env.site-configs -- node server.js",
+        "dev": "npm run intl:compile && run-s gql:types generate-block-types && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- node server.js",
         "build": "npm run intl:compile && run-p gql:types generate-block-types && next build",
         "serve": "NODE_ENV=production node server.js",
         "export": "next export",
