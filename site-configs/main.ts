@@ -1,10 +1,16 @@
-import { Config } from "../site-configs";
+import { GetSiteConfig } from "../site-configs";
 
-export default {
-    name: "Starter Main",
-    domain: "main",
-    languages: ["en", "de"],
-    domains: {
-        local: "localhost:3000",
-    },
-} satisfies Config;
+export default ((env) => {
+    return {
+        name: "Starter Main",
+        domains: {
+            main: "localhost:3000",
+        },
+        preloginEnabled: true,
+        preloginPassword: env === "local" ? undefined : "password",
+        public: {
+            domain: "main",
+            languages: ["en", "de"],
+        },
+    };
+}) satisfies GetSiteConfig;
