@@ -1,32 +1,36 @@
-import { previewParams } from "@comet/cms-site";
-import { headers } from "next/headers";
-import { notFound } from "next/navigation";
+import { env } from "next-runtime-env";
 
 import { ContentScope, PublicSiteConfig as SiteConfig } from "../../site-configs.d";
-import { getSiteConfigFromScope, getSiteConfigs } from "./siteConfigs";
 
 export type { SiteConfig };
 
-export async function getSiteConfig() {
-    const host = getHostFromHeaders(headers());
-
-    let siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
-    if (!siteConfig) {
-        const preview = await previewParams();
-        if (preview && preview.scope) {
-            siteConfig = getSiteConfigFromScope(preview.scope as ContentScope);
-        }
-    }
-
-    if (!siteConfig) notFound();
+export function getSiteConfigForDomain(domainParam: string) {
+    const domain = decodeURIComponent(domainParam);
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === domain || siteConfig.domains.preliminary === domain);
+    if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
     return siteConfig;
 }
 
-export function getHostFromHeaders(headers: Headers) {
-    const host = headers.get("x-forwarded-host") ?? headers.get("host");
-    if (host) {
-        return host;
-    }
+export function getSiteConfigForScope(scope: ContentScope) {
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === scope.domain);
+    if (!siteConfig) throw new Error(`SiteConfig not found for scope ${JSON.stringify(scope)}`);
+    return siteConfig;
+}
 
+let siteConfigs: SiteConfig[];
+export function getSiteConfigs() {
+    if (!siteConfigs) {
+        const json = typeof window === "undefined" ? process.env.NEXT_PUBLIC_SITE_CONFIGS : env("NEXT_PUBLIC_SITE_CONFIGS");
+        if (!json) throw new Error("process.env.NEXT_PUBLIC_SITE_CONFIGS must be set.");
+        siteConfigs = JSON.parse(json) as SiteConfig[];
+    }
+    return siteConfigs;
+}
+
+export function getHost(headers?: Headers) {
+    if (headers) {
+        const host = headers.get("x-forwarded-host") ?? headers.get("host");
+        if (host) return host;
+    }
     throw new Error("Could not evaluate host");
 }

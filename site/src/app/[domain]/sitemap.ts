@@ -1,7 +1,8 @@
 import { gql } from "@comet/cms-site";
-import { getSiteConfig } from "@src/config";
+import { getHost, getSiteConfigForDomain } from "@src/config";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { MetadataRoute } from "next";
+import { headers } from "next/headers";
 
 import { GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables } from "./sitemap.generated";
 
@@ -15,7 +16,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const sitemap: MetadataRoute.Sitemap = [];
     const graphqlFetch = createGraphQLFetch();
 
-    const siteConfig = await getSiteConfig();
+    const siteConfig = getSiteConfigForDomain(getHost(headers())); // https://github.com/vercel/next.js/discussions/43179
 
     for (const language of siteConfig.languages) {
         const domain = siteConfig.domain;

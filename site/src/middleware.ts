@@ -1,19 +1,34 @@
+import { previewParams } from "@comet/cms-site";
+import { getHost, getSiteConfigForScope, getSiteConfigs } from "@src/config";
 import { Rewrite } from "next/dist/lib/load-custom-routes";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { getHostFromHeaders } from "./config";
+import { ContentScope } from "../../site-configs.d";
 import { createRedirects } from "./redirects/redirects";
-import { getSiteConfigs } from "./siteConfigs";
+
+function createRewriteUrl(request: NextRequest, domain: string) {
+    return new URL(
+        `/${domain}${request.nextUrl.pathname}${
+            request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
+        }`,
+        request.url,
+    );
+}
 
 export async function middleware(request: NextRequest) {
     const headers = request.headers;
-    const host = getHostFromHeaders(headers);
+    const host = getHost(headers);
     const { pathname } = new URL(request.url);
 
-    // Redirect to Main Host
+    // Block-Preview
+    if (request.nextUrl.pathname.startsWith("/block-preview/")) {
+        return NextResponse.next({ request: { headers } });
+    }
+
     const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
+        // Redirect to Main Host
         const redirectSiteConfig = getSiteConfigs().find(
             (siteConfig) =>
                 siteConfig.domains.additional?.includes(host) || (siteConfig.domains.pattern && host.match(new RegExp(siteConfig.domains.pattern))),
@@ -21,7 +36,17 @@ export async function middleware(request: NextRequest) {
         if (redirectSiteConfig) {
             return NextResponse.redirect(redirectSiteConfig.url);
         }
-        return; // Fallback for Site-Preview
+
+        // Site-Preview
+        const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
+
+        if (sitePreviewParams?.scope) {
+            const siteConfig = getSiteConfigForScope(sitePreviewParams.scope as ContentScope);
+            headers.set("x-forwarded-host", siteConfig.domains.main);
+            return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domains.main), { request: { headers } });
+        }
+
+        throw new Error(`Cannot get siteConfig for host ${host}`);
     }
 
     if (pathname.startsWith("/dam/")) {
@@ -42,7 +67,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
     }
 
-    return NextResponse.next({ request: { headers } });
+    return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domain), { request: { headers } });
 }
 
 type RewritesMap = Map<string, Rewrite>;

@@ -1,5 +1,4 @@
 import { gql, previewParams } from "@comet/cms-site";
-import { getSiteConfig } from "@src/config";
 import { documentTypes } from "@src/documents";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
@@ -16,9 +15,8 @@ const documentTypeQuery = gql`
     }
 `;
 
-export default async function Page({ params }: { params: { path: string[]; lang: string } }) {
-    const domain = (await getSiteConfig()).domain;
-    const scope = { domain, language: params.lang };
+export default async function Page({ params }: { params: { path: string[]; domain: string; lang: string } }) {
+    const scope = { domain: params.domain, language: params.lang };
 
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);

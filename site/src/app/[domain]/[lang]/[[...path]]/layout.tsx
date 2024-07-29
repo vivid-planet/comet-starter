@@ -1,5 +1,4 @@
 import { gql, previewParams } from "@comet/cms-site";
-import { getSiteConfig } from "@src/config";
 import { Header } from "@src/layout/header/Header";
 import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
@@ -12,9 +11,7 @@ export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function Layout({ children, params }: PropsWithChildren<{ params: { lang: string } }>) {
-    const domain = (await getSiteConfig()).domain;
-
+export default async function Layout({ children, params }: PropsWithChildren<{ params: { domain: string; lang: string } }>) {
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
 
@@ -28,7 +25,7 @@ export default async function Layout({ children, params }: PropsWithChildren<{ p
 
             ${headerFragment}
         `,
-        { domain: domain, language: params.lang },
+        { domain: params.domain, language: params.lang },
     );
 
     return (
