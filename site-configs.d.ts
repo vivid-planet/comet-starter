@@ -8,7 +8,6 @@ export type ContentScope = {
 export interface SiteConfig extends BaseSiteConfig {
     preloginPassword?: string;
     public: {
-        previewUrl: string;
         domain: string;
         languages: string[];
     };

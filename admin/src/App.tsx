@@ -63,11 +63,13 @@ export function App() {
                                 });
 
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
+
+                                const previewUrl = process.env.NODE_ENV === "development" ? siteConfig.url : config.previewUrl;
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
-                                    blockPreviewBaseUrl: `${siteConfig.previewUrl}/block-preview`,
-                                    sitePreviewApiUrl: `${siteConfig.previewUrl}/api/site-preview`,
+                                    blockPreviewBaseUrl: `${previewUrl}/block-preview`,
+                                    sitePreviewApiUrl: `${previewUrl}/api/site-preview`,
                                 };
                             },
                         }}

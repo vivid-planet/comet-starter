@@ -36,7 +36,6 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
             },
             preloginEnabled: env === "prod" ? site.preloginEnabled : true,
             public: {
-                previewUrl: getUrlFromDomain(domains[env] ?? ""),
                 domain: site.domain,
                 languages: site.languages,
             }
