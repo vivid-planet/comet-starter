@@ -4,6 +4,7 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
+    DocumentInterface,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -21,7 +22,8 @@ export const pageTreeCategories: AllCategories = [
     },
 ];
 
-export const pageTreeDocumentTypes = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const pageTreeDocumentTypes: Record<string, DocumentInterface<any, any>> = {
     Page,
     Link,
 };

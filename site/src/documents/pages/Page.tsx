@@ -87,7 +87,7 @@ export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent:
                     if (link.code && link.url) acc[link.code] = link.url;
                     return acc;
                 },
-                { [scope.language]: canonicalUrl },
+                { [scope.language]: canonicalUrl } as Record<string, string>,
             ),
         },
     };
