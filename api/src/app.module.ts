@@ -49,10 +49,11 @@ export class AppModule {
                     useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
                         playground: config.debug,
-                        autoSchemaFile: "schema.gql",
+                        // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
+                        autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
-                            if (process.env.NODE_ENV !== "development") {
+                            if (!config.debug) {
                                 if (error instanceof ValidationError) {
                                     return new ValidationError("Invalid request.");
                                 }
@@ -125,7 +126,7 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
-                ...(process.env.NODE_ENV === "production"
+                ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {
