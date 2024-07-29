@@ -8,10 +8,6 @@ import { GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQuer
 
 export const dynamic = "force-dynamic"; // don't generate at build time
 
-const getUrlFromDomain = (domain: string): string => {
-    return domain.includes("localhost") ? `http://${domain}` : `https://${domain}`;
-};
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const sitemap: MetadataRoute.Sitemap = [];
     const graphqlFetch = createGraphQLFetch();
@@ -45,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                         const seoBlock = pageTreeNode.document.seo;
                         if (!seoBlock.noIndex) {
                             sitemap.push({
-                                url: `${getUrlFromDomain(siteConfig.domains.main)}/${scope.language}${pageTreeNode.path}`,
+                                url: `${siteConfig.url}/${scope.language}${pageTreeNode.path}`,
                                 priority: Number(seoBlock.priority.replace("_", ".")),
                                 changeFrequency: seoBlock.changeFrequency,
                                 lastModified: pageTreeNode.document.updatedAt,
