@@ -1,17 +1,21 @@
+import { domain } from "@src/config";
 import { Rewrite } from "next/dist/lib/load-custom-routes";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+import { GQLRedirectScope } from "./graphql.generated";
 import { createRedirects } from "./redirects/redirects";
 
 export async function middleware(request: NextRequest) {
     const { pathname } = new URL(request.url);
 
+    const scope = { domain };
+
     if (pathname.startsWith("/dam/")) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
     }
 
-    const redirects = await createRedirects();
+    const redirects = await createRedirects(scope);
 
     const redirect = redirects.get(pathname);
     if (redirect) {
@@ -19,7 +23,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
     }
 
-    const rewrites = await createRewrites();
+    const rewrites = await createRewrites(scope);
     const rewrite = rewrites.get(pathname);
     if (rewrite) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
@@ -30,7 +34,7 @@ export async function middleware(request: NextRequest) {
 
 type RewritesMap = Map<string, Rewrite>;
 
-async function createRewrites(): Promise<RewritesMap> {
+async function createRewrites(scope: GQLRedirectScope): Promise<RewritesMap> {
     const rewritesMap = new Map<string, Rewrite>();
     return rewritesMap;
 }
