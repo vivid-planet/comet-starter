@@ -43,7 +43,7 @@ export async function middleware(request: NextRequest) {
         if (sitePreviewParams?.scope) {
             const siteConfig = getSiteConfigForScope(sitePreviewParams.scope as ContentScope);
             headers.set("x-forwarded-host", siteConfig.domains.main);
-            return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domains.main), { request: { headers } });
+            return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domain), { request: { headers } });
         }
 
         throw new Error(`Cannot get siteConfig for host ${host}`);
