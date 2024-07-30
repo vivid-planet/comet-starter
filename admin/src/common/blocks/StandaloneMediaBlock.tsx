@@ -4,7 +4,7 @@ import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-const aspectRatioOptions: Array<{
+export const aspectRatioOptions: Array<{
     value: StandaloneMediaBlockData["aspectRatio"];
     label: React.ReactNode;
 }> = [
