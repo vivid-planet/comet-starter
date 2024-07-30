@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const sitemap: MetadataRoute.Sitemap = [];
     const graphqlFetch = createGraphQLFetch();
 
-    const siteConfig = getSiteConfigForDomain(getHost(headers())); // https://github.com/vercel/next.js/discussions/43179
+    const siteConfig = getSiteConfigForDomain(getHost(headers()));
 
     for (const language of siteConfig.languages) {
         const domain = siteConfig.domain;
