@@ -42,4 +42,4 @@ junit.xml
 # Uploads
 /uploads
 
-src/site-configs.d.ts
+# src/site-configs.d.ts
