@@ -16,7 +16,7 @@ function getHost(headers: Headers) {
 async function getSiteConfigForHost(host: string) {
     const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
     if (sitePreviewParams?.scope) {
-        const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === sitePreviewParams.scope.domain);
+        const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === sitePreviewParams.scope.domain);
         if (siteConfig) return siteConfig;
     }
     return getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
@@ -74,7 +74,7 @@ export async function middleware(request: NextRequest) {
 
     return NextResponse.rewrite(
         new URL(
-            `/${siteConfig.domain}${request.nextUrl.pathname}${
+            `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
                 request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
             }`,
             request.url,

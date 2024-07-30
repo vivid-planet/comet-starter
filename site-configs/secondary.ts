@@ -17,8 +17,10 @@ export default ((env) => {
         preloginEnabled: true,
         preloginPassword: env === "local" ? undefined : "password",
         public: {
-            domain: "secondary",
-            languages: ["en", "de"],
+            scope: {
+                domain: "secondary",
+                languages: ["en", "de"],
+            }
         },
     };
 }) satisfies GetSiteConfig;
