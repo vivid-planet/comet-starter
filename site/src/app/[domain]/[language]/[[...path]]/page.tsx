@@ -15,15 +15,15 @@ const documentTypeQuery = gql`
     }
 `;
 
-export default async function Page({ params }: { params: { path: string[]; domain: string; lang: string } }) {
-    const scope = { domain: params.domain, language: params.lang };
+export default async function Page({ params: { path, domain, language } }: { params: { path: string[]; domain: string; language: string } }) {
+    const scope = { domain, language };
 
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
 
     //fetch documentType
     const data = await graphqlFetch<GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables>(documentTypeQuery, {
-        path: `/${(params.path ?? []).join("/")}`,
+        path: `/${(path ?? []).join("/")}`,
         scope: scope as GQLPageTreeNodeScopeInput, //TODO fix type, the scope from previewParams() is not compatible with GQLPageTreeNodeScopeInput
     });
 

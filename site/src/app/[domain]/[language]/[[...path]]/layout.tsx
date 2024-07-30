@@ -11,7 +11,10 @@ export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function Layout({ children, params }: PropsWithChildren<{ params: { domain: string; lang: string } }>) {
+export default async function Layout({
+    children,
+    params: { domain, language },
+}: PropsWithChildren<{ params: { domain: string; language: string } }>) {
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
 
@@ -25,7 +28,7 @@ export default async function Layout({ children, params }: PropsWithChildren<{ p
 
             ${headerFragment}
         `,
-        { domain: params.domain, language: params.lang },
+        { domain, language },
     );
 
     return (
