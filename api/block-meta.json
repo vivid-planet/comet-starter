@@ -385,7 +385,8 @@
                                 "space": "Space",
                                 "heading": "Heading",
                                 "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -425,7 +426,8 @@
                                 "space": "Space",
                                 "heading": "Heading",
                                 "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
