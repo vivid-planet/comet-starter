@@ -1,4 +1,14 @@
-import { BlockData, BlockDataInterface, BlockField, BlockInput, ChildBlock, createBlock, createListBlock, inputToData } from "@comet/blocks-api";
+import {
+    BlockData,
+    BlockDataInterface,
+    BlockField,
+    BlockInput,
+    ChildBlock,
+    ChildBlockInput,
+    createBlock,
+    createListBlock,
+    inputToData,
+} from "@comet/blocks-api";
 import { MediaGalleryItemBlock } from "@src/common/blocks/media-gallery-item.block";
 import { MediaAspectRatio } from "@src/common/blocks/standalone-media.block";
 import { IsEnum } from "class-validator";
@@ -14,7 +24,7 @@ class MediaGalleryBlockData extends BlockData {
 }
 
 class MediaGalleryBlockInput extends BlockInput {
-    @ChildBlock(MediaGalleryListBlock)
+    @ChildBlockInput(MediaGalleryListBlock)
     items: BlockDataInterface;
 
     @IsEnum(MediaAspectRatio)
