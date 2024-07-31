@@ -15,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const siteConfig = getSiteConfigForDomain(getHost(headers()));
 
     for (const language of siteConfig.languages) {
+        // domain should ideally come from params, but params aren't available in sitemap at the moment, so we use siteConfig
+        // see https://github.com/vercel/next.js/discussions/43179
         const domain = siteConfig.domain;
         const scope = { domain, language };
 
