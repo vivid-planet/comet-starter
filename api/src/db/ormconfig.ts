@@ -12,7 +12,7 @@ export const ormConfig = createOrmConfig({
         .trim(),
     dbName: process.env.POSTGRESQL_DB,
     driverOptions: {
-        connection: { ssl: process.env.POSTGRESQL_USE_SSL === "true" },
+        connection: { ssl: process.env.POSTGRESQL_USE_SSL === "true" ? { ca: process.env.POSTGRESQL_CA_CERT } : undefined },
     },
     namingStrategy: EntityCaseNamingStrategy,
     debug: false,
