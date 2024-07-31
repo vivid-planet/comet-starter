@@ -3,7 +3,6 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
-    BuildsModule,
     DamModule,
     DependenciesModule,
     PageTreeModule,
@@ -88,7 +87,6 @@ export class AppModule {
                     imports: [AuthModule],
                 }),
                 BlocksModule,
-                BuildsModule,
                 LinksModule,
                 PagesModule,
                 PageTreeModule.forRoot({
