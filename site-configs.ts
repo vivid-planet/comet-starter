@@ -11,14 +11,6 @@ export type Config = Omit<SiteConfig, "domains" | "public"> & Pick<SiteConfig["p
     };
 };
 
-const isLocalhost = (domain:string) => {
-    return domain.match(/^([a-zA-Z0-9-]+\.)?localhost:\d{4}$/);
-}
-
-const getUrlFromDomain = (domain: string): string => {
-    return isLocalhost(domain) ? `http://${domain}` : `https://${domain}`;
-};
-
 // Called by `npx @comet/cli inject-site-configs`
 const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     const path = `${__dirname}/site-configs`;
