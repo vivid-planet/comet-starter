@@ -7,7 +7,6 @@ import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
-import * as React from "react";
 
 import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./layout.generated";
 
