@@ -1,19 +1,15 @@
-import { getSiteConfigs } from "@src/config";
+import { getHost, getSiteConfigForDomain } from "@src/config";
 import { MetadataRoute } from "next";
+import { headers } from "next/headers";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-    const siteConfigs = getSiteConfigs();
-
-    const sitemaps: string[] = [];
-    for (const siteConfig of siteConfigs) {
-        sitemaps.push(`${siteConfig.url}/sitemap.xml`);
-    }
+    const siteConfig = getSiteConfigForDomain(getHost(headers()));
 
     return {
         rules: {
             userAgent: "*",
             allow: "/",
         },
-        sitemap: sitemaps,
+        sitemap: `${siteConfig.url}/sitemap.xml`,
     };
 }
