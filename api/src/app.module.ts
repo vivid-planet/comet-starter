@@ -6,7 +6,6 @@ import {
     BuildsModule,
     DamModule,
     DependenciesModule,
-    KubernetesModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
@@ -89,9 +88,6 @@ export class AppModule {
                     imports: [AuthModule],
                 }),
                 BlocksModule,
-                KubernetesModule.register({
-                    helmRelease: config.helmRelease,
-                }),
                 BuildsModule,
                 LinksModule,
                 PagesModule,
