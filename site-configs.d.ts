@@ -13,5 +13,5 @@ export interface SiteConfig extends BaseSiteConfig {
     };
 }
 
-export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig> & SiteConfig["public"];
-export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig> & SiteConfig["public"];
+export type PrivateSiteConfig = ExtractPrivateSiteConfig<SiteConfig>;
+export type PublicSiteConfig = ExtractPublicSiteConfig<SiteConfig>;
