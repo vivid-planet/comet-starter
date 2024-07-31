@@ -1,7 +1,7 @@
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { PropsWithData, usePreview, withPreview } from "@comet/cms-site";
+import { PropsWithData, withPreview } from "@comet/cms-site";
 import { MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { Typography } from "@src/common/components/Typography";
@@ -14,7 +14,6 @@ type MediaGalleryBlockProps = PropsWithData<MediaGalleryBlockData>;
 
 export const MediaGalleryBlock = withPreview(
     ({ data }: MediaGalleryBlockProps) => {
-        const isPreview = usePreview().previewType !== "NoPreview";
         const aspectRatioValues = data.aspectRatio.split("x");
 
         return (
@@ -22,7 +21,7 @@ export const MediaGalleryBlock = withPreview(
                 modules={[Navigation]}
                 slidesPerView={1}
                 slidesPerGroup={1}
-                navigation={!isPreview}
+                navigation
                 longSwipesRatio={0.1}
                 threshold={3}
                 allowTouchMove
