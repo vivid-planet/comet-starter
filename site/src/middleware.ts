@@ -86,8 +86,6 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico, favicon.svg, favicon.png
          * - manifest.json
-         * and ending with
-         * - .svg (SVG files)
          */
         "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets).*)",
     ],
