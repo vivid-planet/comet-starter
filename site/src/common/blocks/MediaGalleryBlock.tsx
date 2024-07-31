@@ -26,7 +26,6 @@ export const MediaGalleryBlock = withPreview(
                 longSwipesRatio={0.1}
                 threshold={3}
                 allowTouchMove
-                autoHeight={true}
                 watchOverflow
                 $aspectRatioHorizontal={aspectRatioValues[0]}
                 $aspectRatioVertical={aspectRatioValues[1]}
