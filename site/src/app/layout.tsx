@@ -4,6 +4,7 @@ import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
+import { PublicEnvScript } from "next-runtime-env";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
@@ -16,6 +17,9 @@ export default async function RootLayout({
 }>) {
     return (
         <html>
+            <head>
+                <PublicEnvScript />
+            </head>
             <body>
                 <StyledComponentsRegistry>
                     <GlobalStyle />
