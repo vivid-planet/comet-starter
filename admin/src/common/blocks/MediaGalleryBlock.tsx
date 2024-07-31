@@ -15,7 +15,7 @@ const MediaGalleryListBlock = createListBlock({
 export const MediaGalleryBlock = createCompositeBlock(
     {
         name: "MediaGallery",
-        displayName: <FormattedMessage id="mediaGalleryBlock.mediaGalleryItem.displayName" defaultMessage="Media Gallery" />,
+        displayName: <FormattedMessage id="mediaGalleryBlock.mediaGallery.displayName" defaultMessage="Media Gallery" />,
         blocks: {
             items: {
                 block: MediaGalleryListBlock,
