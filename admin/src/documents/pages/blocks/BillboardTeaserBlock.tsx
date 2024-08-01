@@ -7,7 +7,7 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-const backgroundOpacityOptions: Array<{ value: BillboardTeaserBlockData["backgroundOpacity"]; label: string }> = [
+const overlayOptions: Array<{ value: BillboardTeaserBlockData["overlay"]; label: string }> = [
     { value: 90, label: "90%" },
     { value: 80, label: "80%" },
     { value: 70, label: "70%" },
@@ -38,13 +38,13 @@ export const BillboardTeaserBlock = createCompositeBlock(
                 title: <FormattedMessage id="billboardTeaserBlock.text" defaultMessage="Text" />,
                 hiddenInSubroute: true,
             },
-            backgroundOpacity: {
-                block: createCompositeBlockSelectField<BillboardTeaserBlockData["backgroundOpacity"]>({
+            overlay: {
+                block: createCompositeBlockSelectField<BillboardTeaserBlockData["overlay"]>({
                     defaultValue: 50,
-                    options: backgroundOpacityOptions,
+                    options: overlayOptions,
                     fieldProps: { fullWidth: true },
                 }),
-                title: <FormattedMessage id="billboardTeaserBlock.backgroundOpacity" defaultMessage="Background Opacity" />,
+                title: <FormattedMessage id="billboardTeaserBlock.overlay" defaultMessage="Overlay" />,
                 hiddenInSubroute: true,
             },
             callToActionList: {

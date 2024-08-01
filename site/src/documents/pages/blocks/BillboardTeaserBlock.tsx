@@ -8,7 +8,7 @@ import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
 
 export const BillboardTeaserBlock = withPreview(
-    ({ data: { media, heading, text, backgroundOpacity, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
+    ({ data: { media, heading, text, overlay, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
         <Root>
             <ImageMobile>
                 <MediaBlock data={media} aspectRatio="1x1" />
@@ -22,7 +22,7 @@ export const BillboardTeaserBlock = withPreview(
             <ImageLargeDesktop>
                 <MediaBlock data={media} aspectRatio="3x1" />
             </ImageLargeDesktop>
-            <ImageOverlay $backgroundOpacity={backgroundOpacity} />
+            <ImageOverlay $overlay={overlay} />
             <AbsoluteGridRoot grid>
                 <Content>
                     <HeadingBlock data={heading} />
@@ -39,14 +39,14 @@ const Root = styled(PageLayout)`
     position: relative;
 `;
 
-const ImageOverlay = styled.div<{ $backgroundOpacity: number }>`
+const ImageOverlay = styled.div<{ $overlay: number }>`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: ${({ $backgroundOpacity }) => $backgroundOpacity}%;
+    opacity: ${({ $overlay }) => $overlay}%;
 `;
 
 const AbsoluteGridRoot = styled(PageLayout)`

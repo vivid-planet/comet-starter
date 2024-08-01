@@ -26,7 +26,7 @@ class BillboardTeaserBlockData extends BlockData {
     text: BlockDataInterface;
 
     @BlockField()
-    backgroundOpacity: number;
+    overlay: number;
 
     @ChildBlock(CallToActionListBlock)
     callToActionList: BlockDataInterface;
@@ -46,7 +46,7 @@ class BillboardTeaserBlockInput extends BlockInput {
     @IsInt()
     @Min(0)
     @Max(90)
-    backgroundOpacity: number;
+    overlay: number;
 
     @ChildBlockInput(CallToActionListBlock)
     callToActionList: ExtractBlockInput<typeof CallToActionListBlock>;
