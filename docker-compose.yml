@@ -1,4 +1,3 @@
-version: "3.5"
 services:
   postgres:
     image: bitnami/postgresql:12
@@ -41,6 +40,7 @@ services:
       - ${JAEGER_OLTP_PORT}:4318 #OLTP over HTTP
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
+      COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
 
 networks:
   postgres:
