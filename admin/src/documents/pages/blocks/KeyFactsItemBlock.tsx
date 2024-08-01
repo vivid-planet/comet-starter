@@ -1,4 +1,4 @@
-import { createCompositeBlock, createCompositeBlockTextField } from "@comet/blocks-admin";
+import { BlockCategory, createCompositeBlock, createCompositeBlockTextField } from "@comet/blocks-admin";
 import { createRichTextBlock, SvgImageBlock } from "@comet/cms-admin";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { FormattedMessage } from "react-intl";
@@ -38,6 +38,7 @@ export const KeyFactsItemBlock = createCompositeBlock(
         },
     },
     (block) => {
+        block.category = BlockCategory.TextAndContent;
         block.previewContent = (state) => [{ type: "text", content: state.fact }];
         return block;
     },
