@@ -13,7 +13,7 @@ import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.bl
 import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { MediaBlock } from "@src/common/blocks/media.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
-import { IsEnum, IsString } from "class-validator";
+import { IsEnum, IsInt, Max, Min } from "class-validator";
 
 enum Alignment {
     left = "left",
@@ -31,7 +31,7 @@ class BasicStageBlockData extends BlockData {
     text: BlockDataInterface;
 
     @BlockField()
-    backgroundOpacity: string;
+    overlay: number;
 
     @BlockField({ type: "enum", enum: Alignment })
     alignment: Alignment;
@@ -51,8 +51,10 @@ class BasicStageBlockInput extends BlockInput {
     text: ExtractBlockInput<typeof RichTextBlock>;
 
     @BlockField()
-    @IsString()
-    backgroundOpacity: string;
+    @IsInt()
+    @Min(0)
+    @Max(90)
+    overlay: number;
 
     @IsEnum(Alignment)
     @BlockField({ type: "enum", enum: Alignment })

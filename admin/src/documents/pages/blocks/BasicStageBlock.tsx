@@ -7,17 +7,17 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-const backgroundOpacityOptions: Array<{ value: BasicStageBlockData["backgroundOpacity"]; label: string }> = [
-    { value: "100", label: "100%" },
-    { value: "90", label: "90%" },
-    { value: "80", label: "80%" },
-    { value: "70", label: "70%" },
-    { value: "60", label: "60%" },
-    { value: "50", label: "50%" },
-    { value: "40", label: "40%" },
-    { value: "30", label: "30%" },
-    { value: "20", label: "20%" },
-    { value: "10", label: "10%" },
+const overlayOptions: Array<{ value: BasicStageBlockData["overlay"]; label: string }> = [
+    { value: 90, label: "90%" },
+    { value: 80, label: "80%" },
+    { value: 70, label: "70%" },
+    { value: 60, label: "60%" },
+    { value: 50, label: "50%" },
+    { value: 40, label: "40%" },
+    { value: 30, label: "30%" },
+    { value: 20, label: "20%" },
+    { value: 10, label: "10%" },
+    { value: 0, label: "0%" },
 ];
 
 export const BasicStageBlock = createCompositeBlock({
@@ -37,13 +37,13 @@ export const BasicStageBlock = createCompositeBlock({
             title: <FormattedMessage id="basicStageBlock.text" defaultMessage="Text" />,
             hiddenInSubroute: true,
         },
-        backgroundOpacity: {
-            block: createCompositeBlockSelectField<BasicStageBlockData["backgroundOpacity"]>({
-                defaultValue: "50",
-                options: backgroundOpacityOptions,
+        overlay: {
+            block: createCompositeBlockSelectField<BasicStageBlockData["overlay"]>({
+                defaultValue: 50,
+                options: overlayOptions,
                 fieldProps: { fullWidth: true },
             }),
-            title: <FormattedMessage id="basicStageBlock.backgroundOpacity" defaultMessage="Background Opacity" />,
+            title: <FormattedMessage id="basicStageBlock.overlay" defaultMessage="Overlay" />,
             hiddenInSubroute: true,
         },
         alignment: {

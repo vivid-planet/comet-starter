@@ -211,8 +211,8 @@
                 "nullable": false
             },
             {
-                "name": "backgroundOpacity",
-                "kind": "String",
+                "name": "overlay",
+                "kind": "Number",
                 "nullable": false
             },
             {
@@ -251,8 +251,8 @@
                 "nullable": false
             },
             {
-                "name": "backgroundOpacity",
-                "kind": "String",
+                "name": "overlay",
+                "kind": "Number",
                 "nullable": false
             },
             {

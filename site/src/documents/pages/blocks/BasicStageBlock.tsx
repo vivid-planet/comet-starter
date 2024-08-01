@@ -10,7 +10,7 @@ import { CSSProperties } from "react";
 import styled from "styled-components";
 
 export const BasicStageBlock = withPreview(
-    ({ data: { media, heading, text, backgroundOpacity, alignment, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
+    ({ data: { media, heading, text, overlay, alignment, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
         <Root>
             <MediaPhone>
                 <MediaBlock data={media} aspectRatio="1x2" fill />
@@ -24,7 +24,7 @@ export const BasicStageBlock = withPreview(
             <MediaDesktop>
                 <MediaBlock data={media} aspectRatio="16x9" fill />
             </MediaDesktop>
-            <ImageOverlay $backgroundOpacity={backgroundOpacity} />
+            <ImageOverlay $overlay={overlay} />
             <AbsoluteGridRoot grid>
                 <Content $alignItems={alignment}>
                     <HeadingBlock data={heading} />
@@ -42,14 +42,14 @@ const Root = styled(PageLayout)`
     overflow: hidden;
 `;
 
-const ImageOverlay = styled.div<{ $backgroundOpacity: string }>`
+const ImageOverlay = styled.div<{ $overlay: number }>`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: black;
-    opacity: ${({ $backgroundOpacity }) => $backgroundOpacity}%;
+    opacity: ${({ $overlay }) => $overlay}%;
 `;
 
 const AbsoluteGridRoot = styled(PageLayout)`
