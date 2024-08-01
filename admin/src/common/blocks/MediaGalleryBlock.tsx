@@ -8,8 +8,8 @@ import { FormattedMessage } from "react-intl";
 const MediaGalleryListBlock = createListBlock({
     name: "MediaGalleryList",
     block: MediaGalleryItemBlock,
-    itemName: <FormattedMessage id="mediaGalleryBlock.mediaGalleryList.itemName" defaultMessage="Item" />,
-    itemsName: <FormattedMessage id="mediaGalleryBlock.mediaGalleryList.itemsName" defaultMessage="Items" />,
+    itemName: <FormattedMessage id="mediaGalleryBlock.mediaGalleryList.itemName" defaultMessage="item" />,
+    itemsName: <FormattedMessage id="mediaGalleryBlock.mediaGalleryList.itemsName" defaultMessage="items" />,
 });
 
 export const MediaGalleryBlock = createCompositeBlock(
