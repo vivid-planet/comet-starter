@@ -10,7 +10,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { MediaGalleryItemBlock } from "@src/common/blocks/media-gallery-item.block";
-import { MediaAspectRatio } from "@src/common/blocks/standalone-media.block";
+import { MediaAspectRatios } from "@src/util/MediaAspectRatios";
 import { IsEnum } from "class-validator";
 
 const MediaGalleryListBlock = createListBlock({ block: MediaGalleryItemBlock }, "MediaGalleryList");
@@ -19,17 +19,17 @@ class MediaGalleryBlockData extends BlockData {
     @ChildBlock(MediaGalleryListBlock)
     items: BlockDataInterface;
 
-    @BlockField({ type: "enum", enum: MediaAspectRatio })
-    aspectRatio: MediaAspectRatio;
+    @BlockField({ type: "enum", enum: MediaAspectRatios })
+    aspectRatio: MediaAspectRatios;
 }
 
 class MediaGalleryBlockInput extends BlockInput {
     @ChildBlockInput(MediaGalleryListBlock)
     items: BlockDataInterface;
 
-    @IsEnum(MediaAspectRatio)
-    @BlockField({ type: "enum", enum: MediaAspectRatio })
-    aspectRatio: MediaAspectRatio;
+    @IsEnum(MediaAspectRatios)
+    @BlockField({ type: "enum", enum: MediaAspectRatios })
+    aspectRatio: MediaAspectRatios;
 
     transformToBlockData(): MediaGalleryBlockData {
         return inputToData(MediaGalleryBlockData, this);

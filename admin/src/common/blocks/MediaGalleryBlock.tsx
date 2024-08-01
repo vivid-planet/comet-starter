@@ -1,7 +1,7 @@
 import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField, createListBlock } from "@comet/blocks-admin";
 import { MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaGalleryItemBlock } from "@src/common/blocks/MediaGalleryItemBlock";
-import { aspectRatioOptions } from "@src/common/blocks/StandaloneMediaBlock";
+import { mediaAspectRatioOptions } from "@src/util/MediaAspectRatios";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
@@ -24,7 +24,7 @@ export const MediaGalleryBlock = createCompositeBlock(
             aspectRatio: {
                 block: createCompositeBlockSelectField<MediaGalleryBlockData["aspectRatio"]>({
                     defaultValue: "16x9",
-                    options: aspectRatioOptions,
+                    options: mediaAspectRatioOptions,
                     fieldProps: {
                         label: <FormattedMessage id="mediaGalleryBlock.mediaGallery.aspectRatio" defaultMessage="Aspect Ratio" />,
                         fullWidth: true,
