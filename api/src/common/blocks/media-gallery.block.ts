@@ -1,5 +1,6 @@
 import {
     BlockData,
+    BlockDataInterface,
     BlockField,
     BlockInput,
     ChildBlock,
@@ -17,7 +18,7 @@ const MediaGalleryListBlock = createListBlock({ block: MediaGalleryItemBlock }, 
 
 class MediaGalleryBlockData extends BlockData {
     @ChildBlock(MediaGalleryListBlock)
-    items: ExtractBlockInput<typeof MediaGalleryListBlock>;
+    items: BlockDataInterface;
 
     @BlockField({ type: "enum", enum: MediaAspectRatios })
     aspectRatio: MediaAspectRatios;
