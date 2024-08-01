@@ -26,6 +26,15 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next({ request: { headers } });
     }
 
+    // Site-Preview
+    const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
+
+    if (sitePreviewParams?.scope) {
+        const siteConfig = getSiteConfigForScope(sitePreviewParams.scope as ContentScope);
+        headers.set("x-forwarded-host", siteConfig.domains.main);
+        return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domain), { request: { headers } });
+    }
+
     const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     if (!siteConfig) {
         // Redirect to Main Host
@@ -35,15 +44,6 @@ export async function middleware(request: NextRequest) {
         );
         if (redirectSiteConfig) {
             return NextResponse.redirect(redirectSiteConfig.url);
-        }
-
-        // Site-Preview
-        const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
-
-        if (sitePreviewParams?.scope) {
-            const siteConfig = getSiteConfigForScope(sitePreviewParams.scope as ContentScope);
-            headers.set("x-forwarded-host", siteConfig.domains.main);
-            return NextResponse.rewrite(createRewriteUrl(request, siteConfig.domain), { request: { headers } });
         }
 
         throw new Error(`Cannot get siteConfig for host ${host}`);
