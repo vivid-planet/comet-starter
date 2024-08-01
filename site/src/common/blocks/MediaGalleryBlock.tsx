@@ -100,6 +100,8 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
             width: inherit;
             height: inherit;
             display: block;
+
+            /* ToDo: change to "/assets/icons/.." when MR https://github.com/vivid-planet/comet-starter/pull/283 is merged */
             mask-image: url("/icons/arrow-right.svg");
             mask-repeat: no-repeat;
             background-color: ${({ theme }) => theme.palette.primary.main};
