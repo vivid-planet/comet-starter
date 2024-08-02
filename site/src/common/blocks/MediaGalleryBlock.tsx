@@ -70,7 +70,7 @@ const PageLayoutContent = styled.div`
 
 const MediaCaption = styled(Typography)`
     margin-top: ${({ theme }) => theme.spacing.S300};
-    padding-right: 60px;
+    padding-right: calc(var(--swiper-button-size) * 2 + ${({ theme }) => theme.spacing.S300} + ${({ theme }) => theme.spacing.S500});
 
     /* min-height to show arrows when no caption */
     min-height: 20px;
@@ -81,9 +81,11 @@ const MediaCaption = styled(Typography)`
 `;
 
 const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRatioVertical: string }>`
+    --swiper-button-size: 16px;
+
     .swiper-button-prev,
     .swiper-button-next {
-        width: 16px;
+        width: var(--swiper-button-size);
         height: 16px;
         position: absolute;
         z-index: 10;
@@ -110,7 +112,7 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
 
     .swiper-button-prev {
         /* Button width plus space */
-        right: 26px;
+        right: calc(var(--swiper-button-size) + ${({ theme }) => theme.spacing.S300});
         left: auto;
 
         &::after {
