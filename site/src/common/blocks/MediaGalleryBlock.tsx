@@ -32,9 +32,7 @@ export const MediaGalleryBlock = withPreview(
                 {data.items.blocks.map((block) => (
                     <SwiperSlide key={block.key}>
                         <MediaBlock data={block.props.media} aspectRatio={data.aspectRatio} />
-                        <MediaCaption variant="p200" component="p">
-                            {block.props.caption}
-                        </MediaCaption>
+                        <MediaCaption variant="p200">{block.props.caption}</MediaCaption>
                     </SwiperSlide>
                 ))}
             </SwiperWrapper>
