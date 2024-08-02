@@ -10,7 +10,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { MediaBlock } from "@src/common/blocks/media.block";
-import { MediaAspectRatios } from "@src/util/MediaAspectRatios";
+import { MediaAspectRatios } from "@src/util/mediaAspectRatios";
 import { IsEnum } from "class-validator";
 
 class StandaloneMediaBlockData extends BlockData {

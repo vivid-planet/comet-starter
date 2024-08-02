@@ -1,7 +1,7 @@
 import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField, createListBlock } from "@comet/blocks-admin";
 import { MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaGalleryItemBlock } from "@src/common/blocks/MediaGalleryItemBlock";
-import { mediaAspectRatioOptions } from "@src/util/MediaAspectRatios";
+import { mediaAspectRatioOptions } from "@src/util/mediaAspectRatios";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 

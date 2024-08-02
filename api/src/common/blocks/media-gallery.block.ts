@@ -11,7 +11,7 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { MediaGalleryItemBlock } from "@src/common/blocks/media-gallery-item.block";
-import { MediaAspectRatios } from "@src/util/MediaAspectRatios";
+import { MediaAspectRatios } from "@src/util/mediaAspectRatios";
 import { IsEnum } from "class-validator";
 
 const MediaGalleryListBlock = createListBlock({ block: MediaGalleryItemBlock }, "MediaGalleryList");
