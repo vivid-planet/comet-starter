@@ -1,19 +1,13 @@
 import { env } from "next-runtime-env";
 
-import { ContentScope, PublicSiteConfig as SiteConfig } from "../../site-configs.d";
+import { PublicSiteConfig as SiteConfig } from "../../site-configs.d";
 
 export type { SiteConfig };
 
 export function getSiteConfigForDomain(domainParam: string) {
     const domain = decodeURIComponent(domainParam);
-    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === domain || siteConfig.domains.preliminary === domain);
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === domain);
     if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
-    return siteConfig;
-}
-
-export function getSiteConfigForScope(scope: ContentScope) {
-    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === scope.domain);
-    if (!siteConfig) throw new Error(`SiteConfig not found for scope ${JSON.stringify(scope)}`);
     return siteConfig;
 }
 
@@ -25,12 +19,4 @@ export function getSiteConfigs() {
         siteConfigs = JSON.parse(json) as SiteConfig[];
     }
     return siteConfigs;
-}
-
-export function getHost(headers?: Headers) {
-    if (headers) {
-        const host = headers.get("x-forwarded-host") ?? headers.get("host");
-        if (host) return host;
-    }
-    throw new Error("Could not evaluate host");
 }
