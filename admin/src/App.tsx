@@ -63,10 +63,6 @@ export function App() {
                                 });
 
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
-
-                                // In a deployed setting, we use one preview URL for all scopes.
-                                // Locally, we use the site URL for each scope because setting the necessary cookies for the preview doesn't work on localhost.
-                                // see https://github.com/vivid-planet/comet-starter/pull/283/files#r1696858091 for more infos
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
