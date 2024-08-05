@@ -1,11 +1,58 @@
+import { previewParams } from "@comet/cms-site";
+import { getSiteConfigs } from "@src/config";
 import { Rewrite } from "next/dist/lib/load-custom-routes";
+import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { createRedirects } from "./redirects/redirects";
 
+function getHost(headers: Headers) {
+    const host = headers.get("x-forwarded-host") ?? headers.get("host");
+    if (!host) throw new Error("Could not evaluate host");
+    return host;
+}
+
+async function getSiteConfigForHost(host: string) {
+    const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
+    if (sitePreviewParams?.scope) {
+        const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === sitePreviewParams.scope.domain);
+        if (siteConfig) return siteConfig;
+    }
+    return getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
+}
+
+// Used for getting SiteConfig in server-components where params is not available (e.g. sitemap, not-found - see https://github.com/vercel/next.js/discussions/43179)
+export async function getSiteConfig() {
+    const host = getHost(headers());
+    const siteConfig = await getSiteConfigForHost(host);
+    if (!siteConfig) throw new Error(`SiteConfig not found for host ${host}`);
+    return siteConfig;
+}
+
 export async function middleware(request: NextRequest) {
+    const headers = request.headers;
+    const host = getHost(headers);
     const { pathname } = new URL(request.url);
+
+    // Block-Preview
+    if (request.nextUrl.pathname.startsWith("/block-preview/")) {
+        return NextResponse.next({ request: { headers } });
+    }
+
+    const siteConfig = await getSiteConfigForHost(host);
+    if (!siteConfig) {
+        // Redirect to Main Host
+        const redirectSiteConfig = getSiteConfigs().find(
+            (siteConfig) =>
+                siteConfig.domains.additional?.includes(host) || (siteConfig.domains.pattern && host.match(new RegExp(siteConfig.domains.pattern))),
+        );
+        if (redirectSiteConfig) {
+            return NextResponse.redirect(redirectSiteConfig.url);
+        }
+
+        throw new Error(`Cannot get siteConfig for host ${host}`);
+    }
 
     if (pathname.startsWith("/dam/")) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
@@ -25,7 +72,15 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
     }
 
-    return NextResponse.next();
+    return NextResponse.rewrite(
+        new URL(
+            `/${siteConfig.domain}${request.nextUrl.pathname}${
+                request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
+            }`,
+            request.url,
+        ),
+        { request: { headers } },
+    );
 }
 
 type RewritesMap = Map<string, Rewrite>;
@@ -44,8 +99,9 @@ export const config = {
          * - _next/image (image optimization files)
          * - favicon.ico, favicon.svg, favicon.png
          * - manifest.json
+         * - assets (assets from /public folder)
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [

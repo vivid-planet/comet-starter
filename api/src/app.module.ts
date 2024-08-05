@@ -80,7 +80,12 @@ export class AppModule {
                 AuthModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
-                        availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
+                        availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
+                            siteConfig.languages.map((language) => ({
+                                domain: siteConfig.domain,
+                                language,
+                            })),
+                        ),
                         userService,
                         accessControlService,
                         systemUsers: ["system"],

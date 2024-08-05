@@ -3,7 +3,7 @@ import { SiteConfig } from "./site-configs.d";
 
 // Types for files in site-configs/
 type Environment = "local" | "dev" | "test" | "staging" | "prod";
-export type Config = Omit<SiteConfig, "domains" | "public"> & SiteConfig["public"] & {
+export type Config = Omit<SiteConfig, "domains" | "public"> & Pick<SiteConfig["public"], "domain" | "languages"> & {
     domains: {
         preliminary?: string;
     } & {
@@ -18,9 +18,9 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
     const files = (await fs.readdir(path)).filter((file) => !file.startsWith("_"));
     const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: Config }[];
     return imports.map((imprt, index) => {
-        const { domains, contentScope, ...site } = imprt.default;
+        const { domains, ...site } = imprt.default;
 
-        const ret: SiteConfig = {
+        return {
             ...site,
             domains: {
                 main: domains[env] ?? "",
@@ -28,11 +28,10 @@ const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
             },
             preloginEnabled: env === "prod" ? site.preloginEnabled : true,
             public: {
-                contentScope,
+                domain: site.domain,
+                languages: site.languages,
             }
-        };
-
-        return ret;
+        }
     });
 };
 export default getSiteConfigs;

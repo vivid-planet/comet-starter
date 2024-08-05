@@ -21,6 +21,7 @@ import {
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
+import { ContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
@@ -31,7 +32,7 @@ import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { ConfigProvider, ContentScope, createConfig } from "./config";
+import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -57,7 +58,10 @@ export function App() {
                         value={{
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope: ContentScope) => {
-                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                                const siteConfig = configs.find((config) => {
+                                    return config.domain === scope.domain;
+                                });
+
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
@@ -100,7 +104,14 @@ export function App() {
                                                                     <Switch>
                                                                         <Route
                                                                             path={`${match.path}/preview`}
-                                                                            render={(props) => <SitePreview {...props} />}
+                                                                            render={(props) => (
+                                                                                <SitePreview
+                                                                                    resolvePath={(path: string, scope: ContentScope) => {
+                                                                                        return `/${scope.language}${path}`;
+                                                                                    }}
+                                                                                    {...props}
+                                                                                />
+                                                                            )}
                                                                         />
                                                                         <Route
                                                                             render={() => (
