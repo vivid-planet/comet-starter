@@ -1,4 +1,4 @@
-import {Environment, GetSiteConfig} from "../site-configs";
+import { Environment, GetSiteConfig } from "../site-configs";
 
 const envToDomainMap: Record<Environment, string> = {
     local: "secondary.localhost:3000",
@@ -20,7 +20,7 @@ export default ((env) => {
             scope: {
                 domain: "secondary",
                 languages: ["en", "de"],
-            }
+            },
         },
     };
 }) satisfies GetSiteConfig;
