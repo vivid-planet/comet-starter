@@ -100,8 +100,9 @@ export const config = {
          * - favicon.ico, favicon.svg, favicon.png
          * - manifest.json
          * - assets (assets from /public folder)
+         * - robots.txt
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets|robots.txt).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [
