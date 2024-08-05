@@ -12,6 +12,7 @@ export interface SiteConfig extends BaseSiteConfig {
             domain: string;
             languages: string[];
         };
+        gtmId?: string;
     };
 }
 
