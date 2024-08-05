@@ -39,7 +39,6 @@ export const BasicStageBlock = withPreview(
 
 const Root = styled(PageLayout)`
     position: relative;
-    overflow: hidden;
 `;
 
 const ImageOverlay = styled.div<{ $overlay: number }>`
