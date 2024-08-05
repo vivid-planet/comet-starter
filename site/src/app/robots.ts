@@ -1,9 +1,8 @@
-import { getHost, getSiteConfigForDomain } from "@src/config";
+import { getSiteConfig } from "@src/middleware";
 import { MetadataRoute } from "next";
-import { headers } from "next/headers";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-    const siteConfig = getSiteConfigForDomain(getHost(headers()));
+    const siteConfig = await getSiteConfig();
 
     return {
         rules: {
