@@ -6,7 +6,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const cometConfig = require("./src/comet-config.json");
-const { type } = require("os");
 
 /**
  * @type {import('next').NextConfig}
