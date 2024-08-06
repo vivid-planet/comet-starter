@@ -6,7 +6,7 @@ export type { SiteConfig };
 
 export function getSiteConfigForDomain(domainParam: string) {
     const domain = decodeURIComponent(domainParam);
-    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domain === domain);
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
     if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
     return siteConfig;
 }
