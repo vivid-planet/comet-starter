@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-export const NotFoundContent = (): React.ReactElement => {
+export function NotFoundContent() {
     const { language } = useParams();
 
     return (
@@ -19,4 +19,4 @@ export const NotFoundContent = (): React.ReactElement => {
             </Link>
         </>
     );
-};
+}
