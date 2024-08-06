@@ -84,7 +84,7 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
     .swiper-button-prev,
     .swiper-button-next {
         width: var(--swiper-button-size);
-        height: 16px;
+        height: var(--swiper-button-size);
         position: absolute;
         z-index: 10;
         top: 0;
