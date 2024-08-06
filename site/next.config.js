@@ -35,7 +35,7 @@ const nextConfig = {
                     key: "Content-Security-Policy",
                     value: [
                         "default-src 'none'",
-                        "script-src-elem 'self'",
+                        "script-src-elem 'self' 'unsafe-inline'",
                         "style-src-elem 'unsafe-inline'",
                         "style-src-attr 'unsafe-inline'",
                         `img-src 'self' data: ${process.env.API_URL}/`,
