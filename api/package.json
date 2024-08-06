@@ -86,6 +86,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
+        "@comet/cli": "^7.0.0",
         "@comet/eslint-config": "^7.0.0",
         "@comet/eslint-plugin": "^7.0.0",
         "@nestjs/cli": "^9.0.0",
