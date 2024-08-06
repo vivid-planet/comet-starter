@@ -12,10 +12,10 @@ export function NotFoundContent() {
     return (
         <>
             <Typography variant="h400" component="h2">
-                <FormattedMessage id="notFound.headline" defaultMessage="Error 404" />
+                <FormattedMessage id="notFound.eyebrow" defaultMessage="Error 404" />
             </Typography>
             <Typography variant="h600" component="h1">
-                <FormattedMessage id="notFound.text" defaultMessage="The requested page does not exist" />
+                <FormattedMessage id="notFound.headline" defaultMessage="The requested page does not exist" />
             </Typography>
             <Typography variant="p200">
                 <FormattedMessage
