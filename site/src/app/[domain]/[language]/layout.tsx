@@ -27,7 +27,7 @@ export default async function Page({
 }) {
     const siteConfig = getSiteConfigForDomain(domain);
 
-    if (!siteConfig.languages.includes(language)) {
+    if (!siteConfig.scope.languages.includes(language)) {
         notFound();
     }
 
