@@ -6,6 +6,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const cometConfig = require("./src/comet-config.json");
+const { type } = require("os");
 
 /**
  * @type {import('next').NextConfig}
@@ -40,8 +41,7 @@ const nextConfig = {
                         `img-src 'self' data: ${process.env.API_URL}/`,
                         "script-src 'unsafe-eval'",
                         "connect-src 'self'",
-                        "frame-src https://www.youtube-nocookie.com",
-                        "upgrade-insecure-requests", // Remove this option when working with the Domain-Setup
+                        `frame-src https://www.youtube-nocookie.com; ${!process.env.DEV_DOMAIN ? "upgrade-insecure-requests" : ""}`, // Don't use upgrade-insecure-requests with the Domain-Setup
                     ].join("; "),
                 },
                 {
