@@ -8,7 +8,7 @@ services:
       - "${POSTGRESQL_PORT}:5432"
     environment:
       POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PWD_DECODED}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
       POSTGRESQL_DATABASE: ${POSTGRESQL_DB}
     networks:
       - postgres
