@@ -1,12 +1,13 @@
 import { gql, previewParams } from "@comet/cms-site";
 import { IntlProvider } from "@src/app/[domain]/[language]/IntlProvider";
-import { GQLLayoutQuery, GQLLayoutQueryVariables } from "@src/app/[domain]/[language]/layout.generated";
 import { getSiteConfigForDomain } from "@src/config";
 import { Header } from "@src/layout/header/Header";
 import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { readFile } from "fs/promises";
 import { notFound } from "next/navigation";
+
+import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./layout.generated";
 
 const messagesCache: Record<string, unknown> = {};
 async function loadMessages(language: string) {
