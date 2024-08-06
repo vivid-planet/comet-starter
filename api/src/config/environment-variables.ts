@@ -2,7 +2,7 @@
 import { BlobStorageConfig } from "@comet/cms-api";
 import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsBase64, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { IsArray, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class EnvironmentVariables {
     @IsString()
@@ -28,8 +28,8 @@ export class EnvironmentVariables {
     @IsString()
     POSTGRESQL_USER?: string;
 
-    @IsBase64()
-    POSTGRESQL_PWD: string;
+    @IsString()
+    POSTGRESQL_PASSWORD: string;
 
     @IsString()
     API_URL: string;
