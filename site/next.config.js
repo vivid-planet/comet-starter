@@ -41,6 +41,7 @@ const nextConfig = {
                         "script-src 'unsafe-eval'",
                         "connect-src 'self'",
                         "frame-src https://www.youtube-nocookie.com",
+                        "upgrade-insecure-requests", // Remove this option when working with the Domain-Setup
                     ].join("; "),
                 },
                 {
