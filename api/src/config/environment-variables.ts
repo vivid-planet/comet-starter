@@ -109,6 +109,10 @@ export class EnvironmentVariables {
     @IsString()
     S3_SECRET_ACCESS_KEY: string;
 
+    @IsString()
+    @IsOptional()
+    CDN_ORIGIN_CHECK_SECRET?: string;
+
     @IsArray()
     @Transform(({ value }) => JSON.parse(value))
     PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
