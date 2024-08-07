@@ -21,6 +21,7 @@ export default ((env) => {
                 domain: "main",
                 languages: ["en", "de"],
             },
+            gtmId: "GTM-XXXX",
         },
     };
 }) satisfies GetSiteConfig;
