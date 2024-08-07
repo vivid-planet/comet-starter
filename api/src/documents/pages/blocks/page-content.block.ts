@@ -8,6 +8,7 @@ import { SpaceBlock } from "@src/common/blocks/space.block";
 import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
 import { BillboardTeaserBlock } from "@src/documents/pages/blocks/billboard-teaser.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
+import { ContentGroupBlock } from "@src/documents/pages/blocks/content-group.block";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
 import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
 
@@ -25,6 +26,7 @@ export const PageContentBlock = createBlocksBlock(
             callToActionList: CallToActionListBlock,
             keyFacts: KeyFactsBlock,
             media: StandaloneMediaBlock,
+            contentGroup: ContentGroupBlock,
         },
     },
     "PageContent",

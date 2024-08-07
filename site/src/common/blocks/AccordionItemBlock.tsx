@@ -59,6 +59,7 @@ const TitleWrapper = styled.button`
     appearance: none;
     border: none;
     background-color: transparent;
+    color: inherit;
 
     display: flex;
     justify-content: space-between;
