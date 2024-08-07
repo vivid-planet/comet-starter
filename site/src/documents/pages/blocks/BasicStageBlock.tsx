@@ -70,13 +70,7 @@ const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     color: ${({ theme }) => theme.palette.text.inverted};
 `;
 
-const BaseMedia = styled.div`
-    img {
-        object-fit: cover;
-    }
-`;
-
-const MediaPhone = styled(BaseMedia)`
+const MediaPhone = styled.div`
     height: 800px;
 
     ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
@@ -84,7 +78,7 @@ const MediaPhone = styled(BaseMedia)`
     }
 `;
 
-const MediaTablet = styled(BaseMedia)`
+const MediaTablet = styled.div`
     display: none;
     height: 700px;
 
@@ -97,7 +91,7 @@ const MediaTablet = styled(BaseMedia)`
     }
 `;
 
-const MediaTabletLandscape = styled(BaseMedia)`
+const MediaTabletLandscape = styled.div`
     display: none;
     height: 650px;
 
@@ -110,7 +104,7 @@ const MediaTabletLandscape = styled(BaseMedia)`
     }
 `;
 
-const MediaDesktop = styled(BaseMedia)`
+const MediaDesktop = styled.div`
     display: none;
     height: 750px;
 
