@@ -107,44 +107,6 @@ type PaginatedDependencies {
   totalCount: Int!
 }
 
-type BuildTemplate {
-  id: ID!
-  name: String!
-
-  """
-  Human readable label provided by comet-dxp.com/label annotation. Use name as fallback if not present
-  """
-  label: String
-}
-
-type AutoBuildStatus {
-  hasChangesSinceLastBuild: Boolean!
-  lastCheck: DateTime
-  nextCheck: DateTime!
-}
-
-type Build {
-  id: ID!
-  status: KubernetesJobStatus!
-  name: String
-
-  """
-  Human readable label provided by comet-dxp.com/label annotation. Use name as fallback if not present
-  """
-  label: String
-  trigger: String
-  startTime: DateTime
-  completionTime: DateTime
-  estimatedCompletionTime: DateTime
-}
-
-enum KubernetesJobStatus {
-  pending
-  active
-  succeeded
-  failed
-}
-
 type FilenameResponse {
   name: String!
   folderId: ID
@@ -351,9 +313,6 @@ type Query {
   userPermissionsAvailablePermissions: [String!]!
   userPermissionsContentScopes(userId: String!, skipManual: Boolean): [JSONObject!]!
   userPermissionsAvailableContentScopes: [JSONObject!]!
-  buildTemplates: [BuildTemplate!]!
-  builds(limit: Float): [Build!]!
-  autoBuildStatus: AutoBuildStatus!
   link(linkId: ID!): Link
   page(id: ID!): Page!
   pageTreeNode(id: ID!): PageTreeNode
@@ -508,7 +467,6 @@ type Mutation {
   userPermissionsDeletePermission(id: ID!): Boolean!
   userPermissionsUpdateOverrideContentScopes(input: UserPermissionOverrideContentScopesInput!): UserPermission!
   userPermissionsUpdateContentScopes(userId: String!, input: UserContentScopesInput!): Boolean!
-  createBuilds(input: CreateBuildsInput!): Boolean!
   saveLink(linkId: ID!, input: LinkInput!, lastUpdatedAt: DateTime, attachedPageTreeNodeId: ID): Link!
   savePage(pageId: ID!, input: PageInput!, lastUpdatedAt: DateTime, attachedPageTreeNodeId: ID): Page!
   updatePageTreeNode(id: ID!, input: PageTreeNodeUpdateInput!): PageTreeNode!
@@ -555,10 +513,6 @@ input UserPermissionOverrideContentScopesInput {
 
 input UserContentScopesInput {
   contentScopes: [JSONObject!]! = []
-}
-
-input CreateBuildsInput {
-  names: [String!]!
 }
 
 input LinkInput {

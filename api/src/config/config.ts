@@ -14,7 +14,6 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
     return {
         ...cometConfig,
         debug: processEnv.NODE_ENV !== "production",
-        helmRelease: envVars.HELM_RELEASE,
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
         corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),

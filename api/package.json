@@ -5,6 +5,7 @@
         "api-generator": "rimraf 'src/*/generated' && comet-api-generator generate",
         "prebuild": "rimraf dist",
         "build": "nest build",
+        "build:digitalocean": "npm install --production=false && npm run build && npm ci",
         "console": "dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
         "console:prod": "node dist/console.js",
         "db:migrate": "npm run console migrate --",
