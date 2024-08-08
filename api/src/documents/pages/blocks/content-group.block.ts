@@ -20,7 +20,7 @@ import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block"
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
 import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
-import { IsEnum, ValidateNested } from "class-validator";
+import { IsEnum } from "class-validator";
 
 const ContentBlock = createBlocksBlock(
     {
@@ -37,7 +37,7 @@ const ContentBlock = createBlocksBlock(
             media: StandaloneMediaBlock,
         },
     },
-    { name: "Content" },
+    { name: "ContentGroupContent" },
 );
 
 enum BackgroundColor {

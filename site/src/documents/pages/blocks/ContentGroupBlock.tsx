@@ -30,7 +30,7 @@ const ContentGroupContentBlock = withPreview(
     ({ data }: PropsWithData<ContentBlockData>) => {
         return <BlocksBlock data={data} supportedBlocks={supportedBlocks} />;
     },
-    { label: "ContentGroup" },
+    { label: "ContentGroupContent" },
 );
 
 export const ContentGroupBlock = withPreview(
