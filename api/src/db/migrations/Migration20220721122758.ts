@@ -19,5 +19,7 @@ export class Migration20220721122758 extends Migration {
             'alter table "PageTreeNode" add constraint "PageTreeNode_parentId_foreign" foreign key ("parentId") references "PageTreeNode" ("id") on update cascade on delete set null;',
         );
         this.addSql('create index "PageTreeNode_parentId_index" on "PageTreeNode" ("parentId");');
+
+        this.addSql('alter table "Redirect" add column "scope_domain" text not null;');
     }
 }

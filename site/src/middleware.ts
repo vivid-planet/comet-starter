@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+import { GQLRedirectScope } from "./graphql.generated";
 import { createRedirects } from "./redirects/redirects";
 
 function getHost(headers: Headers) {
@@ -41,6 +42,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const siteConfig = await getSiteConfigForHost(host);
+    const scope = siteConfig?.scope.domain ? { domain: siteConfig?.scope.domain } : undefined;
     if (!siteConfig) {
         // Redirect to Main Host
         const redirectSiteConfig = getSiteConfigs().find(
@@ -58,18 +60,20 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
     }
 
-    const redirects = await createRedirects();
+    if (scope) {
+        const redirects = await createRedirects(scope);
 
-    const redirect = redirects.get(pathname);
-    if (redirect) {
-        const destination: string = redirect.destination;
-        return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
-    }
+        const redirect = redirects.get(pathname);
+        if (redirect) {
+            const destination: string = redirect.destination;
+            return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
+        }
 
-    const rewrites = await createRewrites();
-    const rewrite = rewrites.get(pathname);
-    if (rewrite) {
-        return NextResponse.rewrite(new URL(rewrite.destination, request.url));
+        const rewrites = await createRewrites(scope);
+        const rewrite = rewrites.get(pathname);
+        if (rewrite) {
+            return NextResponse.rewrite(new URL(rewrite.destination, request.url));
+        }
     }
 
     return NextResponse.rewrite(
@@ -85,7 +89,7 @@ export async function middleware(request: NextRequest) {
 
 type RewritesMap = Map<string, Rewrite>;
 
-async function createRewrites(): Promise<RewritesMap> {
+async function createRewrites(scope: Pick<GQLRedirectScope, "domain">): Promise<RewritesMap> {
     const rewritesMap = new Map<string, Rewrite>();
     return rewritesMap;
 }
