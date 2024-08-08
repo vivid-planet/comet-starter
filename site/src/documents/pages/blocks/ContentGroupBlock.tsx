@@ -44,13 +44,16 @@ export const ContentGroupBlock = withPreview(
 
 const RootPageLayout = styled(PageLayout)<{ $background: ContentGroupBlockData["backgroundColor"] }>`
     ${({ theme, $background }) =>
-        $background === "lightGrey"
-            ? css`
-                  background-color: ${theme.palette.grey[100]};
-              `
-            : $background === "darkGrey" &&
-              css`
-                  background-color: ${theme.palette.grey[900]};
-                  color: ${theme.palette.text.inverted};
-              `};
+        css`
+            ${$background === "lightGrey" &&
+            css`
+                background-color: ${theme.palette.grey[100]};
+            `}
+
+            ${$background === "darkGrey" &&
+            css`
+                background-color: ${theme.palette.grey[900]};
+                color: ${theme.palette.text.inverted};
+            `}
+        `};
 `;
