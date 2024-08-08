@@ -2,14 +2,14 @@ import { PropsWithData, withPreview } from "@comet/cms-site";
 import { TeaserItemBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
-import { defaultRichTextRenderers, RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
 const descriptionRenderers: Renderers = {
-    inline: defaultRichTextRenderers.inline,
+    inline: defaultRichTextInlineStyleMap,
 };
 
 export const TeaserItemBlock = withPreview(
@@ -28,7 +28,7 @@ export const TeaserItemBlock = withPreview(
                         <RichTextBlock data={description} renderers={descriptionRenderers} />
                     </Typography>
                     <TextLinkContainer>
-                        <SvgUse href="/icons/arrow-right.svg#arrow-right" width={16} height={16} />
+                        <SvgUse href="/assets/icons/arrow-right.svg#arrow-right" width={16} height={16} />
                         <LinkText>{link.text}</LinkText>
                     </TextLinkContainer>
                 </ContentContainer>
