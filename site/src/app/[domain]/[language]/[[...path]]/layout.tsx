@@ -1,5 +1,4 @@
 import { gql, previewParams } from "@comet/cms-site";
-import { domain } from "@src/config";
 import { Footer } from "@src/layout/footer/Footer";
 import { footerFragment } from "@src/layout/footer/Footer.fragment";
 import { Header } from "@src/layout/header/Header";
@@ -14,12 +13,14 @@ export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function Layout({ children, params }: PropsWithChildren<{ params: { lang: string } }>) {
-    // TODO support multiple domains, get domain by Host header
-    const { scope, previewData } = (await previewParams()) || { scope: { domain, language: params.lang }, previewData: undefined };
-    const graphQLFetch = createGraphQLFetch(previewData);
+export default async function Layout({
+    children,
+    params: { domain, language },
+}: PropsWithChildren<{ params: { domain: string; language: string } }>) {
+    const { previewData } = (await previewParams()) || { previewData: undefined };
+    const graphqlFetch = createGraphQLFetch(previewData);
 
-    const { header, footer } = await graphQLFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
+    const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
         gql`
             query Layout($domain: String!, $language: String!) {
                 header: mainMenu(scope: { domain: $domain, language: $language }) {
@@ -33,7 +34,7 @@ export default async function Layout({ children, params }: PropsWithChildren<{ p
             ${headerFragment}
             ${footerFragment}
         `,
-        { domain: scope.domain, language: scope.language },
+        { domain, language },
     );
 
     return (

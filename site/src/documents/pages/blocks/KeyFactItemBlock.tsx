@@ -1,12 +1,12 @@
 import { hasRichTextBlockContent, PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
 import { KeyFactsItemBlockData } from "@src/blocks.generated";
-import { defaultRichTextRenderers, RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
 const descriptionRenderers: Renderers = {
-    inline: defaultRichTextRenderers.inline,
+    inline: defaultRichTextInlineStyleMap,
 };
 
 export const KeyFactItemBlock = withPreview(

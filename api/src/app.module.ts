@@ -50,7 +50,8 @@ export class AppModule {
                     useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
                         playground: config.debug,
-                        autoSchemaFile: "schema.gql",
+                        // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
+                        autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
                             if (!config.debug) {
@@ -80,7 +81,12 @@ export class AppModule {
                 AuthModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
-                        availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
+                        availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
+                            siteConfig.scope.languages.map((language) => ({
+                                domain: siteConfig.scope.domain,
+                                language,
+                            })),
+                        ),
                         userService,
                         accessControlService,
                         systemUsers: ["system"],

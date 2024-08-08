@@ -190,6 +190,71 @@
         ]
     },
     {
+        "name": "BillboardTeaser",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "CallToAction",
         "fields": [
             {
@@ -794,8 +859,8 @@
                 "name": "textAlignment",
                 "kind": "Enum",
                 "enum": [
-                    "Left",
-                    "Center"
+                    "left",
+                    "center"
                 ],
                 "nullable": false
             }
@@ -830,8 +895,8 @@
                 "name": "textAlignment",
                 "kind": "Enum",
                 "enum": [
-                    "Left",
-                    "Center"
+                    "left",
+                    "center"
                 ],
                 "nullable": false
             }
@@ -1260,6 +1325,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
@@ -1303,6 +1369,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
