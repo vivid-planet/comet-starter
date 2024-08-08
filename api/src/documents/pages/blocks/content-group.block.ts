@@ -55,7 +55,6 @@ class ContentGroupBlockData extends BlockData {
 }
 
 class ContentGroupBlockInput extends BlockInput {
-    @ValidateNested()
     @ChildBlockInput(ContentBlock)
     content: ExtractBlockInput<typeof ContentBlock>;
 
