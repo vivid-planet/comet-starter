@@ -13,10 +13,10 @@ import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
-const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: string }> = [
-    { value: "Default", label: "Default" },
-    { value: "LightGrey", label: "Light Grey" },
-    { value: "DarkGrey", label: "Dark Grey" },
+const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: React.ReactNode }> = [
+    { value: "default", label: <FormattedMessage id="contentGroupBlock.backgroundColor.default" defaultMessage="Default" /> },
+    { value: "lightGrey", label: <FormattedMessage id="contentGroupBlock.backgroundColor.lightGrey" defaultMessage="Light Grey" /> },
+    { value: "darkGrey", label: <FormattedMessage id="contentGroupBlock.backgroundColor.darkGrey" defaultMessage="Dark Grey" /> },
 ];
 
 const ContentGroupContentBlock = createBlocksBlock({
@@ -46,7 +46,7 @@ export const ContentGroupBlock = createCompositeBlock(
             },
             backgroundColor: {
                 block: createCompositeBlockSelectField<ContentGroupBlockData["backgroundColor"]>({
-                    defaultValue: "Default",
+                    defaultValue: "default",
                     options: backgroundColorOptions,
                     fieldProps: { fullWidth: true },
                 }),
