@@ -21,6 +21,7 @@ export default ((env) => {
                 domain: "secondary",
                 languages: ["en", "de"],
             },
+            gtmId: "GTM-YYYY",
         },
     };
 }) satisfies GetSiteConfig;
