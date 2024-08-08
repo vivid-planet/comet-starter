@@ -40,10 +40,6 @@ export const ContentGroupBlock = createCompositeBlock(
         name: "ContentGroup",
         displayName: <FormattedMessage id="contentGroupBlock.displayName" defaultMessage="Content Group" />,
         blocks: {
-            content: {
-                block: ContentGroupContentBlock,
-                title: <FormattedMessage id="contentGroupBlock.content" defaultMessage="Content" />,
-            },
             backgroundColor: {
                 block: createCompositeBlockSelectField<ContentGroupBlockData["backgroundColor"]>({
                     defaultValue: "default",
@@ -52,6 +48,10 @@ export const ContentGroupBlock = createCompositeBlock(
                 }),
                 title: <FormattedMessage id="contentGroupBlock.overlay" defaultMessage="Background Color" />,
                 hiddenInSubroute: true,
+            },
+            content: {
+                block: ContentGroupContentBlock,
+                title: <FormattedMessage id="contentGroupBlock.content" defaultMessage="Content" />,
             },
         },
     },
