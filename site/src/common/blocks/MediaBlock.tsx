@@ -2,24 +2,25 @@ import { DamVideoBlock, OneOfBlock, PreviewSkeleton, PropsWithData, SupportedBlo
 import { MediaBlockData } from "@src/blocks.generated";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 
-const getSupportedBlocks = (sizes: string, aspectRatio: string): SupportedBlocks => {
+const getSupportedBlocks = (sizes: string, aspectRatio: string, fill?: boolean): SupportedBlocks => {
     return {
-        image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} />,
-        damVideo: (data) => <DamVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} />,
-        youTubeVideo: (data) => <YouTubeVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} />,
+        image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
+        damVideo: (data) => <DamVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
+        youTubeVideo: (data) => <YouTubeVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
     };
 };
 
 interface MediaBlockProps extends PropsWithData<MediaBlockData> {
     sizes?: string;
     aspectRatio: string;
+    fill?: boolean;
 }
 
 export const MediaBlock = withPreview(
-    ({ data, sizes = "100vw", aspectRatio }: MediaBlockProps) => {
+    ({ data, sizes = "100vw", aspectRatio, fill }: MediaBlockProps) => {
         return (
             <PreviewSkeleton type="media" hasContent={Boolean(data)}>
-                <OneOfBlock data={data} supportedBlocks={getSupportedBlocks(sizes, aspectRatio)} />
+                <OneOfBlock data={data} supportedBlocks={getSupportedBlocks(sizes, aspectRatio, fill)} />
             </PreviewSkeleton>
         );
     },
