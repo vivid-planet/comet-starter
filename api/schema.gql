@@ -227,7 +227,7 @@ type Page implements DocumentInterface {
   updatedAt: DateTime!
   content: PageContentBlockData!
   seo: SeoBlockData!
-  stage: StageBlockData!
+  stage: StageListBlockData!
   createdAt: DateTime!
   pageTreeNode: PageTreeNode
 }
@@ -238,8 +238,8 @@ scalar PageContentBlockData @specifiedBy(url: "http://www.ecma-international.org
 """Seo root block data"""
 scalar SeoBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
-"""Stage root block data"""
-scalar StageBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+"""StageList root block data"""
+scalar StageListBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 type DamFolder {
   id: ID!
@@ -575,7 +575,7 @@ scalar LinkBlockInput @specifiedBy(url: "http://www.ecma-international.org/publi
 input PageInput {
   content: PageContentBlockInput!
   seo: SeoBlockInput!
-  stage: StageBlockInput!
+  stage: StageListBlockInput!
 }
 
 """PageContent root block input"""
@@ -584,8 +584,8 @@ scalar PageContentBlockInput @specifiedBy(url: "http://www.ecma-international.or
 """Seo root block input"""
 scalar SeoBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
-"""Stage root block input"""
-scalar StageBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+"""StageList root block input"""
+scalar StageListBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 input PageTreeNodeUpdateInput {
   name: String!

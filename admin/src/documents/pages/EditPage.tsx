@@ -13,13 +13,13 @@ import {
 } from "@comet/cms-admin";
 import { Button, IconButton, Stack } from "@mui/material";
 import { useContentScope } from "@src/common/ContentScopeProvider";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeCategory } from "@src/graphql.generated";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouteMatch } from "react-router";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
+import { StageListBlock } from "./blocks/StageListBlock";
 import { GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation, GQLUpdatePageMutationVariables } from "./EditPage.generated";
 
 interface Props {
@@ -31,7 +31,7 @@ const usePage = createUsePage({
     rootBlocks: {
         content: PageContentBlock,
         seo: SeoBlock,
-        stage: StageBlock,
+        stage: StageListBlock,
     },
     pageType: "Page",
 })<GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation["savePage"], GQLUpdatePageMutationVariables>({
@@ -97,7 +97,7 @@ export const EditPage = ({ id, category }: Props) => {
 
     if (tabRouteMatch?.params.tab === "stage") {
         previewUrl = `${siteConfig.blockPreviewBaseUrl}/stage`;
-        previewState = StageBlock.createPreviewState(pageState.document.stage, {
+        previewState = StageListBlock.createPreviewState(pageState.document.stage, {
             ...blockContext,
             parentUrl: `${match.url}/stage`,
             showVisibleOnly: previewApi.showOnlyVisible,

@@ -1,5 +1,4 @@
 import { generateImageUrl, gql, previewParams } from "@comet/cms-site";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
@@ -8,6 +7,7 @@ import { notFound } from "next/navigation";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
+import { StageListBlock } from "./blocks/StageListBlock";
 import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
 const pageQuery = gql`
@@ -135,7 +135,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
                 <script type="application/ld+json">{document.seo.structuredData}</script>
             )}
             <main>
-                <StageBlock data={document.stage} />
+                <StageListBlock data={document.stage} />
                 <PageContentBlock data={document.content} />
             </main>
         </>
