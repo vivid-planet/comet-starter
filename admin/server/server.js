@@ -7,24 +7,42 @@ const app = express();
 const port = process.env.APP_PORT ?? 3000;
 
 app.use(compression());
+
+app.disable("x-powered-by"); // Disable the X-Powered-By header as it is not needed and can be used to infer the server technology
+
 app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                "script-src": ["'self'", "'unsafe-inline'"],
-                "img-src": ["'self'", "https:", "data:"],
-                "default-src": ["'self'", "https:"],
-                "media-src": ["'self'", "https:"],
-                "style-src": ["'self'", "https:", "'unsafe-inline'"],
-                "font-src": ["'self'", "https:", "data:"],
+                "default-src": ["'none'"],
+                "script-src-elem": ["'unsafe-inline'", "'self'"],
+                "style-src-elem": ["'unsafe-inline'", "'self'"],
+                "style-src-attr": ["'unsafe-inline'"],
+                "font-src": ["'self'", "data:"],
+                "connect-src": ["https:"],
+                "img-src": ["'self'", "data:", "https:"],
+                "frame-src": ["https:"],
+                "frame-ancestors": ["'self'"],
+                upgradeInsecureRequests: [],
             },
+            useDefaults: false, // Avoid default values for not explicitly set directives
         },
-        xXssProtection: false,
+        xFrameOptions: false, // Disable deprecated header
+        crossOriginResourcePolicy: "same-origin", // Do not allow cross-origin requests to access the response
+        crossOriginEmbedderPolicy: false, // value=no-corp
+        crossOriginOpenerPolicy: true, // value=same-origin
         strictTransportSecurity: {
-            maxAge: 63072000,
+            // Enable HSTS
+            maxAge: 63072000, // 2 years (recommended when subdomains are included)
             includeSubDomains: true,
             preload: true,
         },
+        referrerPolicy: {
+            policy: "no-referrer", // No referrer information needs to be sent
+        },
+        xContentTypeOptions: true, // value=nosniff
+        xDnsPrefetchControl: false, // Disable non-standard header as recommended by MDN
+        xPermittedCrossDomainPolicies: true, // value=none (prevent MIME sniffing)
     }),
 );
 
