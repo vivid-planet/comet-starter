@@ -1,5 +1,5 @@
 import { gql } from "@comet/cms-site";
-import { domain, languages } from "@src/config";
+import { getSiteConfig } from "@src/middleware";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { MetadataRoute } from "next";
 
@@ -11,8 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const sitemap: MetadataRoute.Sitemap = [];
     const graphqlFetch = createGraphQLFetch();
 
-    for (const lang of languages) {
-        const scope = { domain, language: lang };
+    const siteConfig = await getSiteConfig();
+
+    for (const language of siteConfig.scope.languages) {
+        const domain = siteConfig.scope.domain;
+        const scope = { domain, language };
 
         let totalCount = 0;
         let currentCount = 0;
@@ -37,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                         const seoBlock = pageTreeNode.document.seo;
                         if (!seoBlock.noIndex) {
                             sitemap.push({
-                                url: `${process.env.SITE_URL}/${lang}${pageTreeNode.path}`, // TODO support multiple site domains
+                                url: `${siteConfig.url}/${scope.language}${pageTreeNode.path}`,
                                 priority: Number(seoBlock.priority.replace("_", ".")),
                                 changeFrequency: seoBlock.changeFrequency,
                                 lastModified: pageTreeNode.document.updatedAt,

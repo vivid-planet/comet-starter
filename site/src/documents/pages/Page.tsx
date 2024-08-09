@@ -1,4 +1,5 @@
 import { generateImageUrl, gql, previewParams } from "@comet/cms-site";
+import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
@@ -12,6 +13,7 @@ import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 const pageQuery = gql`
     query Page($pageTreeNodeId: ID!) {
         pageContent: pageTreeNode(id: $pageTreeNodeId) {
+            id
             name
             path
             document {
@@ -19,6 +21,7 @@ const pageQuery = gql`
                 ... on Page {
                     content
                     seo
+                    stage
                 }
             }
         }
@@ -103,18 +106,24 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
         // no document attached to page
         notFound(); //no return needed
     }
-    if (data.pageContent.document?.__typename != "Page") throw new Error(`invalid document type`);
+    if (document.__typename != "Page") throw new Error(`invalid document type`);
 
-    [data.pageContent.document.content, data.pageContent.document.seo] = await Promise.all([
+    [document.content, document.seo] = await Promise.all([
         recursivelyLoadBlockData({
             blockType: "PageContent",
-            blockData: data.pageContent.document.content,
+            blockData: document.content,
             graphQLFetch,
             fetch,
         }),
         recursivelyLoadBlockData({
             blockType: "Seo",
-            blockData: data.pageContent.document.seo,
+            blockData: document.seo,
+            graphQLFetch,
+            fetch,
+        }),
+        recursivelyLoadBlockData({
+            blockType: "Stage",
+            blockData: document.stage,
             graphQLFetch,
             fetch,
         }),
@@ -126,7 +135,8 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
                 <script type="application/ld+json">{document.seo.structuredData}</script>
             )}
             <main>
-                <PageContentBlock data={data.pageContent.document.content} />
+                <StageBlock data={document.stage} />
+                <PageContentBlock data={document.content} />
             </main>
         </>
     );
