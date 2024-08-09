@@ -70,18 +70,18 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
 const disabledButtonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
     contained: css`
         ${({ theme }) => css`
-            background-color: ${theme.palette.grey["50"]};
-            color: ${theme.palette.grey["400"]};
-            border-color: ${theme.palette.grey["200"]};
+            background-color: ${theme.palette.gray["50"]};
+            color: ${theme.palette.gray["400"]};
+            border-color: ${theme.palette.gray["200"]};
         `}
     `,
     outlined: css`
         ${({ theme }) => css`
-            color: ${theme.palette.grey["300"]};
-            border-color: ${theme.palette.grey["200"]};
+            color: ${theme.palette.gray["300"]};
+            border-color: ${theme.palette.gray["200"]};
         `}
     `,
     text: css`
-        color: ${({ theme }) => theme.palette.grey["300"]};
+        color: ${({ theme }) => theme.palette.gray["300"]};
     `,
 };
