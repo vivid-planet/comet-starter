@@ -10,11 +10,11 @@ import {
 } from "@comet/cms-api";
 import { BaseEntity, Entity, OptionalProps, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { StageBlock } from "@src/documents/pages/blocks/stage.block";
 import { v4 } from "uuid";
 
 import { PageContentBlock } from "../blocks/page-content.block";
 import { SeoBlock } from "../blocks/seo.block";
+import { StageListBlock } from "../blocks/stage-list.block";
 
 @EntityInfo(PageTreeNodeDocumentEntityInfoService)
 @Entity()
@@ -40,9 +40,9 @@ export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     @Field(() => RootBlockDataScalar(SeoBlock))
     seo: BlockDataInterface;
 
-    @RootBlock(StageBlock)
-    @Property({ customType: new RootBlockType(StageBlock) })
-    @Field(() => RootBlockDataScalar(StageBlock))
+    @RootBlock(StageListBlock)
+    @Property({ customType: new RootBlockType(StageListBlock) })
+    @Field(() => RootBlockDataScalar(StageListBlock))
     stage: BlockDataInterface;
 
     @Property({

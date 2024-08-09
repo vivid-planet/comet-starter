@@ -1,10 +1,10 @@
 "use client";
 import { BlockPreviewProvider, IFrameBridgeProvider, useIFrameBridge } from "@comet/cms-site";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
+import { StageListBlock } from "@src/documents/pages/blocks/StageListBlock";
 
 const StagePreview = () => {
     const { block: stage } = useIFrameBridge();
-    return stage ? <StageBlock data={stage} /> : null;
+    return stage ? <StageListBlock data={stage} /> : null;
 };
 
 const StagePreviewPage = () => (

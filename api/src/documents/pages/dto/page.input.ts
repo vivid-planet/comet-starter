@@ -6,7 +6,7 @@ import { ValidateNested } from "class-validator";
 
 import { PageContentBlock } from "../blocks/page-content.block";
 import { SeoBlock } from "../blocks/seo.block";
-import { StageBlock } from "../blocks/stage.block";
+import { StageListBlock } from "../blocks/stage-list.block";
 
 @InputType()
 export class PageInput {
@@ -20,8 +20,8 @@ export class PageInput {
     @ValidateNested()
     seo: BlockInputInterface;
 
-    @Field(() => RootBlockInputScalar(StageBlock))
-    @Transform(({ value }) => StageBlock.blockInputFactory(value), { toClassOnly: true })
+    @Field(() => RootBlockInputScalar(StageListBlock))
+    @Transform(({ value }) => StageListBlock.blockInputFactory(value), { toClassOnly: true })
     @ValidateNested()
     stage: BlockInputInterface;
 }
