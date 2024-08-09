@@ -1,5 +1,5 @@
 import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
-import { ContentBlockData, ContentGroupBlockData } from "@src/blocks.generated";
+import { ContentGroupBlockData, ContentGroupContentBlockData } from "@src/blocks.generated";
 import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
@@ -27,7 +27,7 @@ const supportedBlocks: SupportedBlocks = {
 };
 
 const ContentGroupContentBlock = withPreview(
-    ({ data }: PropsWithData<ContentBlockData>) => {
+    ({ data }: PropsWithData<ContentGroupContentBlockData>) => {
         return <BlocksBlock data={data} supportedBlocks={supportedBlocks} />;
     },
     { label: "ContentGroupContent" },
