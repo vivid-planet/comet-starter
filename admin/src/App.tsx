@@ -66,7 +66,7 @@ export function App() {
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
-                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview`,
+                                    blockPreviewBaseUrl: `${config.previewUrl}/${scope.language}/block-preview`,
                                     sitePreviewApiUrl: `${config.previewUrl}/api/site-preview`,
                                 };
                             },
