@@ -42,8 +42,8 @@ const ContentBlock = createBlocksBlock(
 
 enum BackgroundColor {
     default = "default",
-    lightGrey = "lightGrey",
-    darkGrey = "darkGrey",
+    lightGray = "lightGray",
+    darkGray = "darkGray",
 }
 
 class ContentGroupBlockData extends BlockData {

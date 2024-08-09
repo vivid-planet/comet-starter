@@ -15,8 +15,8 @@ import { FormattedMessage } from "react-intl";
 
 const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: React.ReactNode }> = [
     { value: "default", label: <FormattedMessage id="contentGroupBlock.backgroundColor.default" defaultMessage="Default" /> },
-    { value: "lightGrey", label: <FormattedMessage id="contentGroupBlock.backgroundColor.lightGrey" defaultMessage="Light Grey" /> },
-    { value: "darkGrey", label: <FormattedMessage id="contentGroupBlock.backgroundColor.darkGrey" defaultMessage="Dark Grey" /> },
+    { value: "lightGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.lightGray" defaultMessage="Light Gray" /> },
+    { value: "darkGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.darkGray" defaultMessage="Dark Gray" /> },
 ];
 
 const ContentGroupContentBlock = createBlocksBlock({

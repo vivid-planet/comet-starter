@@ -65,7 +65,7 @@ const TitleWrapper = styled.button`
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border-top: 1px solid ${({ theme }) => theme.palette.grey["300"]};
+    border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
     padding: ${({ theme }) => theme.spacing.S300} 0;
 `;
 
