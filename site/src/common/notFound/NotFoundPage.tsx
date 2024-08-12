@@ -6,11 +6,17 @@ import { useParams } from "next/navigation";
 import React from "react";
 import { FormattedMessage } from "react-intl";
 
-export function NotFoundContent() {
-    const { language } = useParams();
+interface NotFoundPageProps {
+    language?: string;
+}
+
+export function NotFoundPage({ language: passedLanguage }: NotFoundPageProps) {
+    const { language: languageParam } = useParams();
+
+    const language = passedLanguage ?? languageParam;
 
     return (
-        <>
+        <div>
             <Typography variant="h400" component="h2">
                 <FormattedMessage id="notFound.eyebrow" defaultMessage="Error 404" />
             </Typography>
@@ -28,6 +34,6 @@ export function NotFoundContent() {
                     <FormattedMessage id="notFound.link" defaultMessage="Back to Home" />
                 </Link>
             </Typography>
-        </>
+        </div>
     );
 }
