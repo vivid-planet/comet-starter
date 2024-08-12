@@ -6,10 +6,6 @@ import { IsArray, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf 
 
 export class EnvironmentVariables {
     @IsString()
-    @ValidateIf(() => process.env.NODE_ENV === "production")
-    HELM_RELEASE: string;
-
-    @IsString()
     POSTGRESQL_HOST: string;
 
     @IsOptional()
@@ -114,8 +110,8 @@ export class EnvironmentVariables {
     S3_SECRET_ACCESS_KEY: string;
 
     @IsString()
-    @ValidateIf(() => process.env.NODE_ENV === "production")
-    CDN_ORIGIN_CHECK_SECRET: string;
+    @IsOptional()
+    CDN_ORIGIN_CHECK_SECRET?: string;
 
     @IsArray()
     @Transform(({ value }) => JSON.parse(value))
