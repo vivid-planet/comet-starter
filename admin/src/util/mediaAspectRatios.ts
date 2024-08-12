@@ -1,9 +1,8 @@
+import { StandaloneMediaBlockData } from "@src/blocks.generated";
 import { ReactNode } from "react";
 
-type MediaAspectRatios = "16x9" | "4x3" | "3x2" | "3x1" | "2x1" | "1x1" | "1x2" | "1x3" | "2x3" | "3x4" | "9x16";
-
 export const mediaAspectRatioOptions: Array<{
-    value: MediaAspectRatios;
+    value: StandaloneMediaBlockData["aspectRatio"];
     label: ReactNode;
 }> = [
     { label: "16:9", value: "16x9" },
