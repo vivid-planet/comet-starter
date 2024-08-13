@@ -40,7 +40,7 @@ const GlobalStyle = () => (
     <Global
         styles={css`
             body {
-                margin: 1;
+                margin: 0;
             }
         `}
     />
