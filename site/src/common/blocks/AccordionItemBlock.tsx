@@ -41,7 +41,7 @@ export const AccordionItemBlock = withPreview(
                 <TitleWrapper onClick={() => setIsExpanded(!isExpanded)} aria-label={ariaLabelText}>
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
-                        <AnimatedChevron href="/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
+                        <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
                 <ContentWrapper aria-hidden={!isExpanded}>
@@ -59,12 +59,13 @@ const TitleWrapper = styled.button`
     appearance: none;
     border: none;
     background-color: transparent;
+    color: inherit;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border-top: 1px solid ${({ theme }) => theme.palette.grey["300"]};
+    border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
     padding: ${({ theme }) => theme.spacing.S300} 0;
 `;
 

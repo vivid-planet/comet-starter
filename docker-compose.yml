@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: bitnami/postgresql:12
+    image: bitnami/postgresql:15
     tty: true
     volumes:
       - postgres:/bitnami/postgresql
@@ -8,7 +8,7 @@ services:
       - "${POSTGRESQL_PORT}:5432"
     environment:
       POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PWD_DECODED}
+      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
       POSTGRESQL_DATABASE: ${POSTGRESQL_DB}
     networks:
       - postgres
@@ -40,6 +40,7 @@ services:
       - ${JAEGER_OLTP_PORT}:4318 #OLTP over HTTP
     environment:
       COLLECTOR_OTLP_ENABLED: "true"
+      COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
 
 networks:
   postgres:

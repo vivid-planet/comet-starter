@@ -16,8 +16,9 @@ export const theme = {
         text: {
             primary: "#212121",
             secondary: "#757575",
+            inverted: "#ffffff",
         },
-        grey: {
+        gray: {
             50: "#fafafa",
             100: "#f5f5f5",
             200: "#eeeeee",

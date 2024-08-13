@@ -1,21 +1,43 @@
+import { SitePreviewProvider } from "@comet/cms-site";
 import { GlobalStyle } from "@src/layout/GlobalStyle";
+import { getSiteConfig } from "@src/middleware";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
-import { ReactNode } from "react";
+import { draftMode } from "next/headers";
+import { PublicEnvScript } from "next-runtime-env";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    const { gtmId } = await getSiteConfig();
+
     return (
         <html>
+            <head>
+                <PublicEnvScript />
+            </head>
             <body>
+                {gtmId && (
+                    <noscript>
+                        <iframe
+                            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+                            height="0"
+                            width="0"
+                            style={{ display: "none", visibility: "hidden" }}
+                        />
+                    </noscript>
+                )}
                 <StyledComponentsRegistry>
                     <GlobalStyle />
                     <ResponsiveSpacingStyle />
-                    {children}
+                    {draftMode().isEnabled ? <SitePreviewProvider>{children}</SitePreviewProvider> : children}
                 </StyledComponentsRegistry>
             </body>
         </html>

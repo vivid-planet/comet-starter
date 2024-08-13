@@ -1,5 +1,5 @@
 import { MainContent, Stack } from "@comet/admin";
-import { DashboardHeader, LatestBuildsDashboardWidget } from "@comet/cms-admin";
+import { DashboardHeader } from "@comet/cms-admin";
 import { Grid } from "@mui/material";
 import { useIntl } from "react-intl";
 
@@ -21,7 +21,6 @@ export function DashboardPage() {
             <MainContent>
                 <Grid container direction="row" spacing={4}>
                     <LatestContentUpdates />
-                    {import.meta.env.MODE !== "development" && <LatestBuildsDashboardWidget />}
                 </Grid>
             </MainContent>
         </Stack>

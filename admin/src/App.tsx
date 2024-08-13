@@ -57,7 +57,10 @@ export function App() {
                         value={{
                             configs: config.sitesConfig,
                             resolveSiteConfigForScope: (configs, scope) => {
-                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                                const siteConfig = configs.find((config) => {
+                                    return config.scope.domain === scope.domain;
+                                });
+
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
@@ -100,7 +103,14 @@ export function App() {
                                                                     <Switch>
                                                                         <Route
                                                                             path={`${match.path}/preview`}
-                                                                            render={(props) => <SitePreview {...props} />}
+                                                                            render={(props) => (
+                                                                                <SitePreview
+                                                                                    resolvePath={(path: string, scope) => {
+                                                                                        return `/${scope.language}${path}`;
+                                                                                    }}
+                                                                                    {...props}
+                                                                                />
+                                                                            )}
                                                                         />
                                                                         <Route
                                                                             render={() => (

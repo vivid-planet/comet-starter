@@ -8,7 +8,7 @@ import {
     useContentScopeConfig as useContentScopeConfigLibrary,
     useCurrentUser,
 } from "@comet/cms-admin";
-import { ContentScope } from "@src/config";
+import { ContentScope } from "@src/site-configs";
 
 // convenince wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi<ContentScope> {

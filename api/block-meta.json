@@ -190,6 +190,154 @@
         ]
     },
     {
+        "name": "BasicStage",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
+                ],
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
+                ],
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "BillboardTeaser",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "overlay",
+                "kind": "Number",
+                "nullable": false
+            },
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "CallToAction",
         "fields": [
             {
@@ -385,7 +533,8 @@
                                 "space": "Space",
                                 "heading": "Heading",
                                 "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -425,7 +574,138 @@
                                 "space": "Space",
                                 "heading": "Heading",
                                 "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ContentGroup",
+        "fields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ContentGroupContent",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "columns": "Columns",
+                                "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "columns": "Columns",
+                                "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -741,8 +1021,8 @@
                 "name": "textAlignment",
                 "kind": "Enum",
                 "enum": [
-                    "Left",
-                    "Center"
+                    "left",
+                    "center"
                 ],
                 "nullable": false
             }
@@ -777,8 +1057,8 @@
                 "name": "textAlignment",
                 "kind": "Enum",
                 "enum": [
-                    "Left",
-                    "Center"
+                    "left",
+                    "center"
                 ],
                 "nullable": false
             }
@@ -1093,6 +1373,147 @@
         ]
     },
     {
+        "name": "MediaGallery",
+        "fields": [
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "MediaGalleryList",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "3x1",
+                    "2x1",
+                    "1x1",
+                    "1x2",
+                    "1x3",
+                    "2x3",
+                    "3x4",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "MediaGalleryList",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "3x1",
+                    "2x1",
+                    "1x1",
+                    "1x2",
+                    "1x3",
+                    "2x3",
+                    "3x4",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "MediaGalleryItem",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "caption",
+                "kind": "String",
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "caption",
+                "kind": "String",
+                "nullable": true
+            }
+        ]
+    },
+    {
+        "name": "MediaGalleryList",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "MediaGalleryItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "MediaGalleryItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "OptionalPixelImage",
         "fields": [
             {
@@ -1150,6 +1571,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
@@ -1157,7 +1579,9 @@
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -1193,6 +1617,7 @@
                             "blocks": {
                                 "accordion": "Accordion",
                                 "anchor": "Anchor",
+                                "billboardTeaser": "BillboardTeaser",
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
@@ -1200,7 +1625,9 @@
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -1779,6 +2206,67 @@
                     "S600"
                 ],
                 "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "Stage",
+        "fields": [
+            {
+                "name": "attachedBlocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "basicStage": "BasicStage"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            },
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
+            },
+            {
+                "name": "block",
+                "kind": "NestedObject",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "basicStage": "BasicStage"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "activeType",
+                "kind": "String",
+                "nullable": true
             }
         ]
     },

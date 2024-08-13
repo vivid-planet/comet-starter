@@ -23,8 +23,8 @@ enum HeadlineTag {
 }
 
 enum TextAlignment {
-    Left = "Left",
-    Center = "Center",
+    left = "left",
+    center = "center",
 }
 
 class HeadingBlockData extends BlockData {

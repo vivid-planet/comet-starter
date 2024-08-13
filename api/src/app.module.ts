@@ -3,10 +3,8 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
-    BuildsModule,
     DamModule,
     DependenciesModule,
-    KubernetesModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
@@ -80,7 +78,12 @@ export class AppModule {
                 AuthModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
-                        availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
+                        availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
+                            siteConfig.scope.languages.map((language) => ({
+                                domain: siteConfig.scope.domain,
+                                language,
+                            })),
+                        ),
                         userService,
                         accessControlService,
                         systemUsers: ["system"],
@@ -89,10 +92,6 @@ export class AppModule {
                     imports: [AuthModule],
                 }),
                 BlocksModule,
-                KubernetesModule.register({
-                    helmRelease: config.helmRelease,
-                }),
-                BuildsModule,
                 LinksModule,
                 PagesModule,
                 PageTreeModule.forRoot({
