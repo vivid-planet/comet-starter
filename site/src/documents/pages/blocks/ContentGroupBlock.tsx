@@ -4,6 +4,7 @@ import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { PageContentMediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
@@ -24,6 +25,7 @@ const supportedBlocks: SupportedBlocks = {
     callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
     keyFacts: (props) => <KeyFactsBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
+    mediaGallery: (props) => <PageContentMediaGalleryBlock data={props} />,
 };
 
 const ContentGroupContentBlock = withPreview(

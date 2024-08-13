@@ -4,6 +4,7 @@ import { ContentGroupBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
@@ -32,6 +33,7 @@ const ContentGroupContentBlock = createBlocksBlock({
         callToActionList: CallToActionListBlock,
         keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
+        mediaGallery: MediaGalleryBlock,
     },
 });
 

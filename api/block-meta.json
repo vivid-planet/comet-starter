@@ -660,7 +660,8 @@
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -703,7 +704,8 @@
                                 "columns": "Columns",
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
