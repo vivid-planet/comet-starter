@@ -5,7 +5,7 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import * as React from "react";
+import { useState } from "react";
 import { useIntl } from "react-intl";
 import styled, { css } from "styled-components";
 
@@ -30,7 +30,7 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData>;
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content, openByDefault } }: AccordionItemBlockProps) => {
         const intl = useIntl();
-        const [isExpanded, setIsExpanded] = React.useState<boolean>(openByDefault);
+        const [isExpanded, setIsExpanded] = useState<boolean>(openByDefault);
 
         const ariaLabelText = isExpanded
             ? intl.formatMessage({ id: "accordionBlock.ariaLabel.expanded", defaultMessage: "Collapse accordion item" })

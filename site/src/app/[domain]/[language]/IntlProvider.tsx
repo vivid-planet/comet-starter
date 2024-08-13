@@ -1,10 +1,15 @@
 "use client";
-import * as React from "react";
+import { ComponentProps, PropsWithChildren } from "react";
 import { IntlProvider as LibraryIntlProvider } from "react-intl";
 
-type Messages = React.ComponentProps<typeof LibraryIntlProvider>["messages"];
+type Messages = ComponentProps<typeof LibraryIntlProvider>["messages"];
 
-export function IntlProvider({ children, locale, messages }: { children: React.ReactNode; locale: string; messages: Messages }) {
+interface IntlProviderProps extends PropsWithChildren {
+    locale: string;
+    messages: Messages;
+}
+
+export function IntlProvider({ children, locale, messages }: IntlProviderProps) {
     return (
         <LibraryIntlProvider locale={locale} defaultLocale={locale} messages={messages}>
             {children}
