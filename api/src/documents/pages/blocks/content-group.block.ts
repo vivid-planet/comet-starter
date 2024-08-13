@@ -1,4 +1,15 @@
-import { createBlocksBlock } from "@comet/blocks-api";
+import {
+    BlockData,
+    BlockDataInterface,
+    BlockField,
+    BlockInput,
+    ChildBlock,
+    ChildBlockInput,
+    createBlock,
+    createBlocksBlock,
+    ExtractBlockInput,
+    inputToData,
+} from "@comet/blocks-api";
 import { AnchorBlock } from "@comet/cms-api";
 import { AccordionBlock } from "@src/common/blocks/accordion.block";
 import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
@@ -7,18 +18,16 @@ import { MediaGalleryBlock } from "@src/common/blocks/media-gallery.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
 import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
-import { BillboardTeaserBlock } from "@src/documents/pages/blocks/billboard-teaser.block";
 import { ColumnsBlock } from "@src/documents/pages/blocks/columns.block";
-import { ContentGroupBlock } from "@src/documents/pages/blocks/content-group.block";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
 import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
+import { IsEnum } from "class-validator";
 
-export const PageContentBlock = createBlocksBlock(
+const ContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
             accordion: AccordionBlock,
             anchor: AnchorBlock,
-            billboardTeaser: BillboardTeaserBlock,
             space: SpaceBlock,
             teaser: TeaserBlock,
             richtext: RichTextBlock,
@@ -27,9 +36,37 @@ export const PageContentBlock = createBlocksBlock(
             callToActionList: CallToActionListBlock,
             keyFacts: KeyFactsBlock,
             media: StandaloneMediaBlock,
-            contentGroup: ContentGroupBlock,
             mediaGallery: MediaGalleryBlock,
         },
     },
-    "PageContent",
+    { name: "ContentGroupContent" },
 );
+
+enum BackgroundColor {
+    default = "default",
+    lightGray = "lightGray",
+    darkGray = "darkGray",
+}
+
+class ContentGroupBlockData extends BlockData {
+    @ChildBlock(ContentBlock)
+    content: BlockDataInterface;
+
+    @BlockField({ type: "enum", enum: BackgroundColor })
+    backgroundColor: BackgroundColor;
+}
+
+class ContentGroupBlockInput extends BlockInput {
+    @ChildBlockInput(ContentBlock)
+    content: ExtractBlockInput<typeof ContentBlock>;
+
+    @IsEnum(BackgroundColor)
+    @BlockField({ type: "enum", enum: BackgroundColor })
+    backgroundColor: BackgroundColor;
+
+    transformToBlockData(): ContentGroupBlockData {
+        return inputToData(ContentGroupBlockData, this);
+    }
+}
+
+export const ContentGroupBlock = createBlock(ContentGroupBlockData, ContentGroupBlockInput, "ContentGroup");
