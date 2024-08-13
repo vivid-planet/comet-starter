@@ -3,6 +3,7 @@ import { AnchorBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
+import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
@@ -27,5 +28,6 @@ export const PageContentBlock = createBlocksBlock({
         keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
         contentGroup: ContentGroupBlock,
+        mediaGallery: MediaGalleryBlock,
     },
 });
