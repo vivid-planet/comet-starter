@@ -3,11 +3,11 @@ import { BlocksBlock, PropsWithData, SupportedBlocks } from "@comet/cms-site";
 import { PageContentBlockData } from "@src/blocks.generated";
 import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
-import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageContentMediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { PageContentStandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { BillboardTeaserBlock } from "@src/documents/pages/blocks/BillboardTeaserBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
@@ -24,7 +24,7 @@ const supportedBlocks: SupportedBlocks = {
     richtext: (props) => <PageContentRichTextBlock data={props} disableLastBottomSpacing />,
     heading: (props) => <PageContentHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
-    callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+    callToActionList: (props) => <PageContentStandaloneCallToActionListBlock data={props} />,
     keyFacts: (props) => <KeyFactsBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
     contentGroup: (props) => <ContentGroupBlock data={props} />,
