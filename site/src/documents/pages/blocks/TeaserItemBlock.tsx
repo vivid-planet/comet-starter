@@ -76,7 +76,6 @@ const ContentContainer = styled.div`
 
 const TitleTypography = styled(Typography)`
     margin-bottom: ${({ theme }) => theme.spacing.S100};
-    color: ${({ theme }) => theme.palette.text.primary};
 `;
 
 const TextLinkContainer = styled.div`

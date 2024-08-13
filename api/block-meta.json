@@ -586,6 +586,136 @@
         ]
     },
     {
+        "name": "ContentGroup",
+        "fields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ContentGroupContent",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "columns": "Columns",
+                                "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "Heading",
+                                "columns": "Columns",
+                                "callToActionList": "CallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "DamFileDownloadLink",
         "fields": [
             {
@@ -1450,6 +1580,7 @@
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
                                 "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
@@ -1495,6 +1626,7 @@
                                 "callToActionList": "CallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
                                 "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
