@@ -42,7 +42,6 @@ export async function middleware(request: NextRequest) {
     }
 
     const siteConfig = await getSiteConfigForHost(host);
-    const scope = siteConfig?.scope.domain ? { domain: siteConfig?.scope.domain } : undefined;
     if (!siteConfig) {
         // Redirect to Main Host
         const redirectSiteConfig = getSiteConfigs().find(
@@ -55,6 +54,8 @@ export async function middleware(request: NextRequest) {
 
         throw new Error(`Cannot get siteConfig for host ${host}`);
     }
+
+    const scope = { domain: siteConfig.scope.domain };
 
     if (pathname.startsWith("/dam/")) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
