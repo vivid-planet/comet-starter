@@ -14,7 +14,7 @@ import { v4 } from "uuid";
 
 import { PageContentBlock } from "../blocks/page-content.block";
 import { SeoBlock } from "../blocks/seo.block";
-import { StageListBlock } from "../blocks/stage-list.block";
+import { StageBlock } from "../blocks/stage.block";
 
 @EntityInfo(PageTreeNodeDocumentEntityInfoService)
 @Entity()
@@ -40,9 +40,9 @@ export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     @Field(() => RootBlockDataScalar(SeoBlock))
     seo: BlockDataInterface;
 
-    @RootBlock(StageListBlock)
-    @Property({ customType: new RootBlockType(StageListBlock) })
-    @Field(() => RootBlockDataScalar(StageListBlock))
+    @RootBlock(StageBlock)
+    @Property({ customType: new RootBlockType(StageBlock) })
+    @Field(() => RootBlockDataScalar(StageBlock))
     stage: BlockDataInterface;
 
     @Property({

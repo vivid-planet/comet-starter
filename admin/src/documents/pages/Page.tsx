@@ -7,7 +7,7 @@ import { FormattedMessage } from "react-intl";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
-import { StageListBlock } from "./blocks/StageListBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { EditPage } from "./EditPage";
 
 export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageInput> & DependencyInterface = {
@@ -50,14 +50,14 @@ export const Page: DocumentInterface<Pick<GQLPage, "content" | "seo">, GQLPageIn
     ...createDocumentRootBlocksMethods({
         content: PageContentBlock,
         seo: SeoBlock,
-        stage: StageListBlock,
+        stage: StageBlock,
     }),
     ...createDocumentDependencyMethods({
         rootQueryName: "page",
         rootBlocks: {
             content: PageContentBlock,
             seo: { block: SeoBlock, path: "/config" },
-            stage: { block: StageListBlock, path: "/stage" },
+            stage: { block: StageBlock, path: "/stage" },
         },
         basePath: ({ pageTreeNode }) => `/pages/pagetree/${categoryToUrlParam(pageTreeNode.category)}/${pageTreeNode.id}/edit`,
     }),

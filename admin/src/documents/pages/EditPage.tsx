@@ -19,7 +19,7 @@ import { useRouteMatch } from "react-router";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
-import { StageListBlock } from "./blocks/StageListBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation, GQLUpdatePageMutationVariables } from "./EditPage.generated";
 
 interface Props {
@@ -31,7 +31,7 @@ const usePage = createUsePage({
     rootBlocks: {
         content: PageContentBlock,
         seo: SeoBlock,
-        stage: StageListBlock,
+        stage: StageBlock,
     },
     pageType: "Page",
 })<GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation["savePage"], GQLUpdatePageMutationVariables>({
@@ -97,7 +97,7 @@ export const EditPage = ({ id, category }: Props) => {
 
     if (tabRouteMatch?.params.tab === "stage") {
         previewUrl = `${siteConfig.blockPreviewBaseUrl}/stage`;
-        previewState = StageListBlock.createPreviewState(pageState.document.stage, {
+        previewState = StageBlock.createPreviewState(pageState.document.stage, {
             ...blockContext,
             parentUrl: `${match.url}/stage`,
             showVisibleOnly: previewApi.showOnlyVisible,

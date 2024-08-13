@@ -2081,67 +2081,6 @@
         "name": "Stage",
         "fields": [
             {
-                "name": "attachedBlocks",
-                "kind": "NestedObjectList",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "type",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "OneOfBlocks",
-                            "blocks": {
-                                "basicStage": "BasicStage"
-                            },
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": false
-            },
-            {
-                "name": "activeType",
-                "kind": "String",
-                "nullable": true
-            },
-            {
-                "name": "block",
-                "kind": "NestedObject",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "type",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "OneOfBlocks",
-                            "blocks": {
-                                "basicStage": "BasicStage"
-                            },
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": true
-            }
-        ],
-        "inputFields": [
-            {
-                "name": "activeType",
-                "kind": "String",
-                "nullable": true
-            }
-        ]
-    },
-    {
-        "name": "StageList",
-        "fields": [
-            {
                 "name": "blocks",
                 "kind": "NestedObjectList",
                 "object": {
@@ -2159,7 +2098,7 @@
                         {
                             "name": "props",
                             "kind": "Block",
-                            "block": "Stage",
+                            "block": "BasicStage",
                             "nullable": false
                         }
                     ]
@@ -2186,7 +2125,7 @@
                         {
                             "name": "props",
                             "kind": "Block",
-                            "block": "Stage",
+                            "block": "BasicStage",
                             "nullable": false
                         }
                     ]

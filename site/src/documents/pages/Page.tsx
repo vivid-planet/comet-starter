@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
-import { StageListBlock } from "./blocks/StageListBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
 const pageQuery = gql`
@@ -135,7 +135,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
                 <script type="application/ld+json">{document.seo.structuredData}</script>
             )}
             <main>
-                <StageListBlock data={document.stage} />
+                <StageBlock data={document.stage} />
                 <PageContentBlock data={document.content} />
             </main>
         </>

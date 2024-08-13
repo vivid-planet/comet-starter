@@ -1,12 +1,6 @@
-import { createOneOfBlock } from "@comet/blocks-api";
+import { createListBlock } from "@comet/blocks-api";
 
 import { BasicStageBlock } from "./basic-stage.block";
 
-export const StageBlock = createOneOfBlock(
-    {
-        supportedBlocks: {
-            basicStage: BasicStageBlock,
-        },
-    },
-    "Stage",
-);
+/* If you need multiple stage blocks, you should use createBlocksBlock instead of createListBlock */
+export const StageBlock = createListBlock({ block: BasicStageBlock }, "Stage");
