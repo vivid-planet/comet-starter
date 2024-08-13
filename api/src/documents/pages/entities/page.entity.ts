@@ -10,6 +10,7 @@ import {
 } from "@comet/cms-api";
 import { BaseEntity, Entity, OptionalProps, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
+import { StageBlock } from "@src/documents/pages/blocks/stage.block";
 import { v4 } from "uuid";
 
 import { PageContentBlock } from "../blocks/page-content.block";
@@ -38,6 +39,11 @@ export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     @Property({ customType: new RootBlockType(SeoBlock) })
     @Field(() => RootBlockDataScalar(SeoBlock))
     seo: BlockDataInterface;
+
+    @RootBlock(StageBlock)
+    @Property({ customType: new RootBlockType(StageBlock) })
+    @Field(() => RootBlockDataScalar(StageBlock))
+    stage: BlockDataInterface;
 
     @Property({
         columnType: "timestamp with time zone",
