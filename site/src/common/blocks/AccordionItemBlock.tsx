@@ -1,9 +1,9 @@
 import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet/cms-site";
 import { AccordionContentBlockData, AccordionItemBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import * as React from "react";
 import { useIntl } from "react-intl";
@@ -13,7 +13,7 @@ import { Typography } from "../components/Typography";
 
 const supportedBlocks: SupportedBlocks = {
     richtext: (props) => <RichTextBlock data={props} />,
-    heading: (props) => <HeadingBlock data={props} />,
+    heading: (props) => <StandaloneHeadingBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     callToActionList: (props) => <CallToActionListBlock data={props} />,
 };

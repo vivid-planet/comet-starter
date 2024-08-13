@@ -8,10 +8,10 @@ import {
 import { AnchorBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { FormattedMessage } from "react-intl";
 
@@ -118,7 +118,7 @@ const ColumnsContentBlock = createBlocksBlock({
         anchor: AnchorBlock,
         richtext: RichTextBlock,
         space: SpaceBlock,
-        heading: HeadingBlock,
+        heading: StandaloneHeadingBlock,
         callToActionList: CallToActionListBlock,
         media: StandaloneMediaBlock,
         mediaGallery: MediaGalleryBlock,

@@ -9,9 +9,9 @@ import {
 } from "@comet/blocks-admin";
 import { AccordionItemBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { FormattedMessage } from "react-intl";
 
 const AccordionContentBlock = createBlocksBlock({
@@ -19,7 +19,7 @@ const AccordionContentBlock = createBlocksBlock({
     supportedBlocks: {
         richtext: RichTextBlock,
         space: SpaceBlock,
-        heading: HeadingBlock,
+        heading: StandaloneHeadingBlock,
         callToActionList: CallToActionListBlock,
     },
 });
