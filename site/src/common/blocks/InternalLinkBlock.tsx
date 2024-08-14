@@ -4,7 +4,7 @@ import { InternalLinkBlockData } from "@src/blocks.generated";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
 
-interface InternalLinkBlockProps extends PropsWithData<InternalLinkBlockData>, PropsWithChildren {
+interface InternalLinkBlockProps extends PropsWithChildren<PropsWithData<InternalLinkBlockData>> {
     title?: string;
     className?: string;
 }
