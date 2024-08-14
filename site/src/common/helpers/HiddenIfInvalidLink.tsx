@@ -9,11 +9,7 @@ import {
 } from "@src/blocks.generated";
 import { PropsWithChildren } from "react";
 
-interface HiddenIfInvalidLinkProps extends PropsWithChildren {
-    link: LinkBlockData;
-}
-
-export function HiddenIfInvalidLink({ link, children }: HiddenIfInvalidLinkProps) {
+export function HiddenIfInvalidLink({ link, children }: PropsWithChildren<{ link: LinkBlockData }>) {
     const { previewType } = usePreview();
 
     if (previewType === "BlockPreview") {

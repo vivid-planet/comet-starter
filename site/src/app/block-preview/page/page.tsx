@@ -6,7 +6,7 @@ import { graphQLApiUrl } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { useEffect, useState } from "react";
 
-const PreviewPage: React.FunctionComponent = () => {
+const PreviewPage = () => {
     const iFrameBridge = useIFrameBridge();
 
     const { fetch, graphQLFetch } = useBlockPreviewFetch(graphQLApiUrl);

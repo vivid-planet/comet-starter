@@ -11,9 +11,10 @@ import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
+import { ReactNode } from "react";
 import { FormattedMessage } from "react-intl";
 
-const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: React.ReactNode }> = [
+const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: ReactNode }> = [
     { value: "default", label: <FormattedMessage id="contentGroupBlock.backgroundColor.default" defaultMessage="Default" /> },
     { value: "lightGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.lightGray" defaultMessage="Light Gray" /> },
     { value: "darkGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.darkGray" defaultMessage="Dark Gray" /> },

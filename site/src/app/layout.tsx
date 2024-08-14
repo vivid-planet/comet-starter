@@ -6,16 +6,13 @@ import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { PublicEnvScript } from "next-runtime-env";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Readonly<PropsWithChildren>) {
     const { gtmId } = await getSiteConfig();
 
     return (
