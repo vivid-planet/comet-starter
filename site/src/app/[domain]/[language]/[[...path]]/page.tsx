@@ -46,3 +46,5 @@ export default async function Page({ params: { path, domain, language } }: { par
 export async function generateStaticParams() {
     return [];
 }
+
+export const dynamic = "force-dynamic";
