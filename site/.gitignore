@@ -40,12 +40,12 @@ yarn-error.log*
 .vercel
 
 .env
-schema.gql
+# schema.gql
 schema.json
-block-meta.json
+# block-meta.json
 src/**/*.generated.ts
-src/comet-config.json
-src/site-configs.d.ts
+# src/comet-config.json
+# src/site-configs.d.ts
 
 public/sitemap.xml
 public/robots.txt
