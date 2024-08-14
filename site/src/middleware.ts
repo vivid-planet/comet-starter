@@ -97,12 +97,12 @@ export const config = {
          * - api (API routes)
          * - _next/static (static files)
          * - _next/image (image optimization files)
-         * - favicon.ico, favicon.svg, favicon.png
-         * - manifest.json
+         * - favicon.ico, icon.svg, favicon.png, icon-192.png, icon-512.png, apple-icon.png
+         * - manifest.json, manifest.webmanifest
          * - assets (assets from /public folder)
          * - robots.txt
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets|robots.txt).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|icon-192.png|icon-512.png|apple-icon.png|favicon.png|manifest.json|manifest.webmanifest|assets|robots.txt).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [
