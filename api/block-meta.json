@@ -86,7 +86,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "space": "Space",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "StandaloneCallToActionList"
                             },
                             "nullable": false
                         }
@@ -123,7 +123,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "space": "Space",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "StandaloneCallToActionList"
                             },
                             "nullable": false
                         }
@@ -532,7 +532,7 @@
                                 "richtext": "RichText",
                                 "space": "Space",
                                 "heading": "Heading",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
                             },
@@ -573,7 +573,7 @@
                                 "richtext": "RichText",
                                 "space": "Space",
                                 "heading": "Heading",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
                             },
@@ -658,7 +658,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
@@ -702,7 +702,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
@@ -1577,7 +1577,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "contentGroup": "ContentGroup",
@@ -1623,7 +1623,7 @@
                                 "richtext": "RichText",
                                 "heading": "Heading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "contentGroup": "ContentGroup",
@@ -2262,6 +2262,45 @@
                         }
                     ]
                 },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "StandaloneCallToActionList",
+        "fields": [
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center",
+                    "right"
+                ],
                 "nullable": false
             }
         ]
