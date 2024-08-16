@@ -1,10 +1,10 @@
 import { createBlocksBlock } from "@comet/blocks-admin";
 import { AnchorBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { BillboardTeaserBlock } from "@src/documents/pages/blocks/BillboardTeaserBlock";
@@ -24,7 +24,7 @@ export const PageContentBlock = createBlocksBlock({
         richtext: RichTextBlock,
         heading: StandaloneHeadingBlock,
         columns: ColumnsBlock,
-        callToActionList: CallToActionListBlock,
+        callToActionList: StandaloneCallToActionListBlock,
         keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
         contentGroup: ContentGroupBlock,

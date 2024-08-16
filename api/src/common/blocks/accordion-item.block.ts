@@ -11,9 +11,9 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { IsUndefinable } from "@comet/cms-api";
-import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/standalone-call-to-action-list.block";
 import { StandaloneHeadingBlock } from "@src/common/blocks/standalone-heading.block";
 import { IsBoolean, IsString } from "class-validator";
 
@@ -23,7 +23,7 @@ const AccordionContentBlock = createBlocksBlock(
             richtext: RichTextBlock,
             heading: StandaloneHeadingBlock,
             space: SpaceBlock,
-            callToActionList: CallToActionListBlock,
+            callToActionList: StandaloneCallToActionListBlock,
         },
     },
     "AccordionContent",

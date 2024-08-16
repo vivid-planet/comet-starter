@@ -2,10 +2,10 @@ import { BlockCategory, createBlocksBlock, createCompositeBlock, createComposite
 import { AnchorBlock } from "@comet/cms-admin";
 import { ContentGroupBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
@@ -30,7 +30,7 @@ const ContentGroupContentBlock = createBlocksBlock({
         richtext: RichTextBlock,
         heading: StandaloneHeadingBlock,
         columns: ColumnsBlock,
-        callToActionList: CallToActionListBlock,
+        callToActionList: StandaloneCallToActionListBlock,
         keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
         mediaGallery: MediaGalleryBlock,
