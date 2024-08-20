@@ -32,7 +32,7 @@ app.use(
                 "img-src": ["'self'", "data:", "https:"],
                 "frame-src": ["https:"],
                 "frame-ancestors": ["'self'"],
-                upgradeInsecureRequests: [],
+                upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [],
             },
             useDefaults: false, // Avoid default values for not explicitly set directives
         },
