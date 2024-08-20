@@ -84,7 +84,7 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "space": "Space",
                                 "callToActionList": "StandaloneCallToActionList"
                             },
@@ -121,7 +121,7 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "space": "Space",
                                 "callToActionList": "StandaloneCallToActionList"
                             },
@@ -531,7 +531,7 @@
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
@@ -572,7 +572,7 @@
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "media": "StandaloneMedia",
                                 "mediaGallery": "MediaGallery"
@@ -656,7 +656,7 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
@@ -700,7 +700,7 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
@@ -1016,15 +1016,6 @@
                     "H6"
                 ],
                 "nullable": false
-            },
-            {
-                "name": "textAlignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
-                ],
-                "nullable": false
             }
         ],
         "inputFields": [
@@ -1050,15 +1041,6 @@
                     "H4",
                     "H5",
                     "H6"
-                ],
-                "nullable": false
-            },
-            {
-                "name": "textAlignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
                 ],
                 "nullable": false
             }
@@ -1575,7 +1557,7 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
@@ -1621,7 +1603,7 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
                                 "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
@@ -2300,6 +2282,43 @@
                     "left",
                     "center",
                     "right"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "StandaloneHeading",
+        "fields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
                 ],
                 "nullable": false
             }
