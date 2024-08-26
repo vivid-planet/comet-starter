@@ -10,11 +10,11 @@ import {
 } from "@comet/cms-api";
 import { BaseEntity, Entity, OptionalProps, PrimaryKey, Property } from "@mikro-orm/core";
 import { Field, ID, ObjectType } from "@nestjs/graphql";
-import { StageBlock } from "@src/documents/pages/blocks/stage.block";
 import { v4 } from "uuid";
 
 import { PageContentBlock } from "../blocks/page-content.block";
 import { SeoBlock } from "../blocks/seo.block";
+import { StageBlock } from "../blocks/stage.block";
 
 @EntityInfo(PageTreeNodeDocumentEntityInfoService)
 @Entity()

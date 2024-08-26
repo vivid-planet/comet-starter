@@ -2,11 +2,11 @@ import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet
 import { ContentGroupBlockData, ContentGroupContentBlockData } from "@src/blocks.generated";
 import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
-import { PageContentCallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { PageContentHeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageContentMediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { PageContentStandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
+import { PageContentStandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
@@ -20,9 +20,9 @@ const supportedBlocks: SupportedBlocks = {
     space: (props) => <SpaceBlock data={props} />,
     teaser: (props) => <TeaserBlock data={props} />,
     richtext: (props) => <PageContentRichTextBlock data={props} disableLastBottomSpacing />,
-    heading: (props) => <PageContentHeadingBlock data={props} />,
+    heading: (props) => <PageContentStandaloneHeadingBlock data={props} />,
     columns: (props) => <ColumnsBlock data={props} />,
-    callToActionList: (props) => <PageContentCallToActionListBlock data={props} />,
+    callToActionList: (props) => <PageContentStandaloneCallToActionListBlock data={props} />,
     keyFacts: (props) => <KeyFactsBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
     mediaGallery: (props) => <PageContentMediaGalleryBlock data={props} />,

@@ -1,5 +1,4 @@
 import { generateImageUrl, gql, previewParams } from "@comet/cms-site";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
@@ -7,6 +6,7 @@ import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
 const pageQuery = gql`
