@@ -2,17 +2,6 @@
     "extends": "@comet/eslint-config/react",
     "ignorePatterns": ["schema.json", "src/fragmentTypes.json", "src/**/*.generated.ts"],
     "rules": {
-        "react/react-in-jsx-scope": "off",
-        "no-restricted-imports": [
-            "error",
-            {
-                "paths": [
-                    {
-                        "name": "react",
-                        "importNames": ["default"]
-                    }
-                ]
-            }
-        ]
+        "react/react-in-jsx-scope": "off"
     }
 }
