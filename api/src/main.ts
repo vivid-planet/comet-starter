@@ -1,5 +1,3 @@
-import { json } from "express";
-
 if (process.env.TRACING_ENABLED) {
     require("./tracing");
 }
@@ -12,6 +10,7 @@ import { AppModule } from "@src/app.module";
 import { useContainer } from "class-validator";
 import compression from "compression";
 import cookieParser from "cookie-parser";
+import { json } from "express";
 import helmet from "helmet";
 import { resolve } from "path";
 
