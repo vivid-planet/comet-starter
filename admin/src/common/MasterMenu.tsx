@@ -4,7 +4,7 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
-    MasterMenu as CometMasterMenu,
+    MasterMenu,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -104,4 +104,4 @@ export const masterMenuData: MasterMenuData = [
     },
 ];
 
-export const MasterMenu = () => <CometMasterMenu menu={masterMenuData} />;
+export const AppMasterMenu = () => <MasterMenu menu={masterMenuData} />;

@@ -30,7 +30,7 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { MasterMenu, masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { AppMasterMenu, masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
@@ -116,7 +116,7 @@ export function App() {
                                                                             render={() => (
                                                                                 <MasterLayout
                                                                                     headerComponent={MasterHeader}
-                                                                                    menuComponent={MasterMenu}
+                                                                                    menuComponent={AppMasterMenu}
                                                                                 >
                                                                                     <MasterMenuRoutes menu={masterMenuData} />
                                                                                 </MasterLayout>
