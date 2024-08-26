@@ -13,6 +13,10 @@ export class EnvironmentVariables {
     @Transform(({ value }) => value === "true")
     POSTGRESQL_USE_SSL: boolean;
 
+    @IsOptional()
+    @IsString()
+    POSTGRESQL_CA_CERT?: string;
+
     @Type(() => Number)
     @IsInt()
     POSTGRESQL_PORT: number;
