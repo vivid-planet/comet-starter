@@ -4,6 +4,7 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
+    MasterMenu as CometMasterMenu,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -102,3 +103,5 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "pageTree",
     },
 ];
+
+export const MasterMenu = () => <CometMasterMenu menu={masterMenuData} />;
