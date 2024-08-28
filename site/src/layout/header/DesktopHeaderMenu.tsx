@@ -63,11 +63,11 @@ const DesktopHeaderMenu = ({ header }: Props) => {
                         {node.childNodes.length > 0 && (
                             <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
                                 {node.childNodes.map((node) => (
-                                    <SubLevelLinkContainer key={node.id}>
+                                    <li key={node.id}>
                                         <Link page={node} activeClassName="active" aria-label={node.name}>
                                             {node.name}
                                         </Link>
-                                    </SubLevelLinkContainer>
+                                    </li>
                                 ))}
                             </SubLevelNavigation>
                         )}
@@ -130,10 +130,6 @@ const LinkContainer = styled.div`
     height: 100%;
 `;
 
-const SubLevelLinkContainer = styled.li`
-    position: relative;
-`;
-
 const IconButton = styled.button`
     appearance: none;
     border: none;
@@ -142,7 +138,6 @@ const IconButton = styled.button`
     padding: 0;
     width: 20px;
     height: 20px;
-    display: inline-block;
 `;
 
 const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
