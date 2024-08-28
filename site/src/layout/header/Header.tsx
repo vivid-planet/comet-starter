@@ -1,5 +1,6 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { MobileHeaderMenu } from "@src/layout/header/MobileHeaderMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import { useEffect, useState } from "react";
@@ -90,6 +91,8 @@ const Header = ({ header }: Props) => {
                                 ))}
                             </TopLevelNavigation>
                         </DesktopHeaderFullHeightNav>
+
+                        <MobileHeaderMenu header={header} />
                     </Root>
                 </PageLayoutContent>
             </PageLayout>
@@ -106,7 +109,7 @@ const Root = styled.div`
     height: 100px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["50"]};
 `;
 
 const DesktopHeaderFullHeightNav = styled.nav`
