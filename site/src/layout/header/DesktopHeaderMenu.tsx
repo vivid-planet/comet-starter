@@ -101,7 +101,7 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.S200};
     position: absolute;
-    z-index: 10;
+    z-index: 40;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
