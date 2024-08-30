@@ -45,6 +45,10 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    IDP_CLIENT_ID: string;
+
+    @IsString()
+    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
     IDP_JWKS_URI: string;
 
     @IsString()

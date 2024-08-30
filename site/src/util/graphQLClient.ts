@@ -13,7 +13,7 @@ export function createGraphQLFetch(previewData?: SitePreviewData) {
     };
 
     if (isServerSide) {
-        headers.authorization = `Basic ${Buffer.from(`vivid:${process.env.API_PASSWORD}`).toString("base64")}`;
+        headers.authorization = `Basic ${Buffer.from(`system-user:${process.env.API_BASIC_AUTH_PASSWORD}`).toString("base64")}`;
     }
 
     return createGraphQLFetchLibrary(

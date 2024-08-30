@@ -36,6 +36,7 @@ import { StatusModule } from "./status/status.module";
 @Module({})
 export class AppModule {
     static forRoot(config: Config): DynamicModule {
+        const authModule = AuthModule.forRoot(config);
         return {
             module: AppModule,
             imports: [
@@ -75,7 +76,7 @@ export class AppModule {
                     }),
                     inject: [ModuleRef],
                 }),
-                AuthModule,
+                authModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
@@ -86,10 +87,10 @@ export class AppModule {
                         ),
                         userService,
                         accessControlService,
-                        systemUsers: ["system"],
+                        systemUsers: ["system-user"],
                     }),
                     inject: [UserService, AccessControlService],
-                    imports: [AuthModule],
+                    imports: [authModule],
                 }),
                 BlocksModule,
                 LinksModule,

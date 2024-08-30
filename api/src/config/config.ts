@@ -20,6 +20,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         auth: {
             useAuthProxy: envVars.USE_AUTHPROXY,
             basicAuthPassword: envVars.BASIC_AUTH_PASSWORD,
+            idpClientId: envVars.IDP_CLIENT_ID,
             idpJwksUri: envVars.IDP_JWKS_URI,
             idpEndSessionEndpoint: envVars.IDP_END_SESSION_ENDPOINT,
             postLogoutRedirectUri: envVars.POST_LOGOUT_REDIRECT_URI,
