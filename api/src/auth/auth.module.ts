@@ -13,12 +13,14 @@ import { AccessControlService } from "./access-control.service";
 import { staticUsers } from "./static-users";
 import { UserService } from "./user.service";
 
+export const SYSTEM_USER_NAME = "system-user";
+
 @Module({})
 export class AuthModule {
     static forRoot(config: Config): DynamicModule {
         const providers: Provider[] = [
             createStaticCredentialsBasicStrategy({
-                username: "system-user",
+                username: SYSTEM_USER_NAME,
                 password: config.auth.basicAuthPassword,
                 strategyName: "system-user",
             }),

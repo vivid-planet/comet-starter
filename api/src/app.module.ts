@@ -24,7 +24,7 @@ import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
-import { AuthModule } from "./auth/auth.module";
+import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
 import { UserService } from "./auth/user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
@@ -87,7 +87,7 @@ export class AppModule {
                         ),
                         userService,
                         accessControlService,
-                        systemUsers: ["system-user"],
+                        systemUsers: [SYSTEM_USER_NAME],
                     }),
                     inject: [UserService, AccessControlService],
                     imports: [authModule],
@@ -126,7 +126,7 @@ export class AppModule {
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {
                                   // Ignore system user
-                                  if (user === "system") {
+                                  if (user === SYSTEM_USER_NAME) {
                                       return false;
                                   }
                                   return true;
