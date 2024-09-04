@@ -18,7 +18,7 @@ export default async function RootLayout({
     children: React.ReactNode;
     params: { domain: string };
 }>) {
-    const siteConfig = await getSiteConfigForDomain(decodeURIComponent(domain));
+    const siteConfig = await getSiteConfigForDomain(domain);
     const isDraftModeEnabled = draftMode().isEnabled;
 
     return (
