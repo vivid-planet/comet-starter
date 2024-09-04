@@ -3,7 +3,7 @@ import { getSiteConfigs } from "@src/middleware";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 
-import { SiteConfigsProvider } from "./SiteConfigsProvider";
+import { SiteConfigsProvider } from "./[type]/page";
 
 export default async function BlockPreviewLayout({ children }: { children: React.ReactNode }) {
     const siteConfigs = getSiteConfigs();

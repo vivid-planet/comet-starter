@@ -3,12 +3,11 @@ import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIF
 import { PageContentBlockData } from "@src/blocks.generated";
 import { PageContentBlock } from "@src/documents/pages/blocks/PageContentBlock";
 import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
+import type { ContentScope, PublicSiteConfig } from "@src/site-configs";
 import { graphQLApiUrl } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
-import { useEffect, useState } from "react";
-
-import { useBlockPreviewSiteConfig } from "../SiteConfigsProvider";
+import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 const PagePreview: React.FunctionComponent = () => {
     const iFrameBridge = useIFrameBridge();
@@ -47,9 +46,12 @@ const previewComponents = {
 };
 
 const PreviewWrapper = ({ type }: { type: string }) => {
-    const siteConfig = useBlockPreviewSiteConfig((siteConfigs, contentScope) =>
-        siteConfigs.find((siteConfig) => siteConfig.scope.domain === contentScope.domain),
-    );
+    const iFrameBridge = useIFrameBridge();
+    const siteConfigs = useContext(SiteConfigsContext);
+    if (!iFrameBridge.contentScope) return;
+    const contentScope = iFrameBridge.contentScope as ContentScope;
+    const siteConfig = siteConfigs.find((siteConfig) => siteConfig.scope.domain === contentScope.domain);
+
     const PreviewComponent = previewComponents[type];
     return (
         <SiteConfigProvider siteConfig={siteConfig}>
@@ -57,6 +59,12 @@ const PreviewWrapper = ({ type }: { type: string }) => {
         </SiteConfigProvider>
     );
 };
+
+const SiteConfigsContext = createContext<PublicSiteConfig[]>([]);
+
+export function SiteConfigsProvider({ children, siteConfigs }: PropsWithChildren<{ siteConfigs: PublicSiteConfig[] }>) {
+    return <SiteConfigsContext.Provider value={siteConfigs}>{children}</SiteConfigsContext.Provider>;
+}
 
 const PreviewPage = ({ params }: { params: { type: string } }) => {
     return (
