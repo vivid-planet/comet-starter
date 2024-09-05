@@ -31,8 +31,8 @@ async function getSiteConfigForHost(host: string) {
 let siteConfigs: PublicSiteConfig[];
 export function getSiteConfigs() {
     if (!siteConfigs) {
-        const json = process.env.NEXT_PUBLIC_SITE_CONFIGS;
-        if (!json) throw new Error("process.env.NEXT_PUBLIC_SITE_CONFIGS must be set.");
+        const json = process.env.PUBLIC_SITE_CONFIGS;
+        if (!json) throw new Error("process.env.PUBLIC_SITE_CONFIGS must be set.");
         siteConfigs = JSON.parse(json) as PublicSiteConfig[];
     }
     return siteConfigs;
