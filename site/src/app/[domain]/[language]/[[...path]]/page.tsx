@@ -1,5 +1,3 @@
-export const dynamic = "error";
-
 import { gql, previewParams } from "@comet/cms-site";
 import { documentTypes } from "@src/documents";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
