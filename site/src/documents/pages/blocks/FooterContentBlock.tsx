@@ -85,7 +85,6 @@ const RichTextWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-    place-self: start center;
     max-width: 100px;
     width: 100%;
 
@@ -94,6 +93,7 @@ const ImageWrapper = styled.div`
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        place-self: start center;
     }
 `;
 
