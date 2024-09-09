@@ -3,11 +3,11 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { createRedirects } from "./redirects/redirects";
-import { getHost, getSiteConfigForHost, getSiteConfigs } from "./util/SiteConfig";
+import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/SiteConfig";
 
 export async function middleware(request: NextRequest) {
     const headers = request.headers;
-    const host = getHost(headers);
+    const host = getHostByHeaders(headers);
     const { pathname } = new URL(request.url);
 
     // Block-Preview

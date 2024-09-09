@@ -2,7 +2,7 @@ import { previewParams } from "@comet/cms-site";
 import type { PublicSiteConfig } from "@src/site-configs";
 import { headers } from "next/headers";
 
-export function getHost(headers: Headers) {
+export function getHostByHeaders(headers: Headers) {
     const host = headers.get("x-forwarded-host") ?? headers.get("host");
     if (!host) throw new Error("Could not evaluate host");
     return host;
@@ -35,7 +35,7 @@ export function getSiteConfigs() {
 
 // Used for getting SiteConfig in server-components where params is not available (e.g. sitemap, not-found - see https://github.com/vercel/next.js/discussions/43179)
 export async function getSiteConfig() {
-    const host = getHost(headers());
+    const host = getHostByHeaders(headers());
     const siteConfig = await getSiteConfigForHost(host);
     if (!siteConfig) throw new Error(`SiteConfig not found for host ${host}`);
     return siteConfig;
