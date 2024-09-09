@@ -27,6 +27,7 @@ import {
     GQLFooterQueryVariables,
     GQLSaveFooterMutation,
     GQLSaveFooterMutationVariables,
+    namedOperations,
 } from "./EditFooterPage.generated";
 
 export function EditFooterPage(): JSX.Element | null {
@@ -70,6 +71,7 @@ export function EditFooterPage(): JSX.Element | null {
 
     const [update, { loading: saving, error: hasSaveErrors }] = useMutation<GQLSaveFooterMutation, GQLSaveFooterMutationVariables>(
         saveFooterMutation,
+        { refetchQueries: !data?.footer ? [namedOperations.Query.Footer] : [] },
     );
 
     React.useEffect(() => {
