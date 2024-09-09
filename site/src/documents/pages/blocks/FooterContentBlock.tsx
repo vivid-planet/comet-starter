@@ -40,8 +40,8 @@ export const FooterContentBlock = withPreview(
 
 const Root = styled.footer`
     margin-top: auto;
-    background-color: ${({ theme }) => theme.palette.grey["900"]};
-    color: ${({ theme }) => theme.palette.grey["50"]};
+    background-color: ${({ theme }) => theme.palette.gray["900"]};
+    color: ${({ theme }) => theme.palette.gray["50"]};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -92,7 +92,7 @@ const ImageWrapper = styled.div`
 `;
 
 const LinkCopyrightWrapper = styled.div`
-    color: ${({ theme }) => theme.palette.grey["400"]};
+    color: ${({ theme }) => theme.palette.gray["400"]};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +113,7 @@ const CopyrightNotice = styled(Typography)`
 `;
 
 const LinkText = styled(Typography)`
-    color: ${({ theme }) => theme.palette.grey["400"]};
+    color: ${({ theme }) => theme.palette.gray["400"]};
     text-decoration: underline;
     font-family: ${({ theme }) => theme.fontFamily};
 `;
@@ -122,8 +122,8 @@ const HorizontalLine = styled.hr`
     width: 100%;
     height: 1px;
     border: none;
-    background-color: ${({ theme }) => theme.palette.grey["600"]};
-    color: ${({ theme }) => theme.palette.grey["600"]};
+    background-color: ${({ theme }) => theme.palette.gray["600"]};
+    color: ${({ theme }) => theme.palette.gray["600"]};
     margin: 19px 0 35px; /* 19px since element in RTE has margin bottom of 16px */
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {

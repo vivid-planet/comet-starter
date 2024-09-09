@@ -6,16 +6,16 @@ import { IsArray, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf 
 
 export class EnvironmentVariables {
     @IsString()
-    @ValidateIf(() => process.env.NODE_ENV === "production")
-    HELM_RELEASE: string;
-
-    @IsString()
     POSTGRESQL_HOST: string;
 
     @IsOptional()
     @IsBoolean()
     @Transform(({ value }) => value === "true")
     POSTGRESQL_USE_SSL: boolean;
+
+    @IsOptional()
+    @IsString()
+    POSTGRESQL_CA_CERT?: string;
 
     @Type(() => Number)
     @IsInt()

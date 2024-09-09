@@ -3,7 +3,6 @@ import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } 
 import { HeadingBlockData } from "@src/blocks.generated";
 import { Typography } from "@src/common/components/Typography";
 import { PageLayout } from "@src/layout/PageLayout";
-import { CSSProperties } from "react";
 import { Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -37,11 +36,11 @@ const headlineTagMap: Record<HeadingBlockData["htmlTag"], keyof HTMLElementTagNa
 type HeadingBlockProps = PropsWithData<HeadingBlockData>;
 
 export const HeadingBlock = withPreview(
-    ({ data: { eyebrow, headline, htmlTag, textAlignment } }: HeadingBlockProps) => {
+    ({ data: { eyebrow, headline, htmlTag } }: HeadingBlockProps) => {
         const headlineTag = headlineTagMap[htmlTag];
 
         return (
-            <Root $textAlign={textAlignment}>
+            <>
                 {hasRichTextBlockContent(eyebrow) && (
                     <Typography variant="h400" component="h5" bottomSpacing>
                         <RichTextBlock data={eyebrow} renderers={eyebrowRenderers} />
@@ -57,7 +56,7 @@ export const HeadingBlock = withPreview(
                 >
                     <RichTextBlock data={headline} renderers={getHeadlineRenderers(headlineTag)} />
                 </PreviewSkeleton>
-            </Root>
+            </>
         );
     },
     { label: "Heading" },
@@ -70,10 +69,6 @@ export const PageContentHeadingBlock = (props: HeadingBlockProps) => (
         </PageLayoutContent>
     </PageLayout>
 );
-
-const Root = styled.div<{ $textAlign: CSSProperties["textAlign"] }>`
-    text-align: ${({ $textAlign }) => $textAlign};
-`;
 
 const PageLayoutContent = styled.div`
     grid-column: 3 / -3;
