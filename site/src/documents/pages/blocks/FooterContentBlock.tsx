@@ -45,14 +45,9 @@ const Root = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 60px 16px;
-
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        padding: 60px 30px;
-    }
+    padding: ${({ theme }) => `60px ${theme.spacing.D100}`};
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        padding: 60px 45px;
         flex-direction: row;
         justify-content: space-between;
     }
@@ -66,12 +61,11 @@ const ImageTextWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: ${({ theme }) => theme.spacing.D100};
     flex-shrink: 0;
     flex-grow: 1;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        gap: 25px;
         flex-direction: row;
     }
 `;
@@ -102,7 +96,7 @@ const LinkCopyrightWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: ${({ theme }) => theme.spacing.S500};
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         align-items: flex-end;
@@ -111,7 +105,7 @@ const LinkCopyrightWrapper = styled.div`
 
 const LinksBlock = styled.div`
     display: flex;
-    gap: 20px;
+    gap: ${({ theme }) => theme.spacing.S500};
 `;
 
 const CopyrightNotice = styled(Typography)`
