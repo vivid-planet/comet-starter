@@ -1,6 +1,6 @@
 import { GlobalStyle } from "@src/layout/GlobalStyle";
+import { getSiteConfigs } from "@src/middleware";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
-import { getSiteConfigs } from "@src/util/SiteConfig";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 
 import { SiteConfigsProvider } from "./[type]/page";

@@ -1,7 +1,7 @@
 import { SitePreviewProvider } from "@comet/cms-site";
 import { GlobalStyle } from "@src/layout/GlobalStyle";
+import { getSiteConfigForDomain } from "@src/middleware";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
-import { getSiteConfigForDomain } from "@src/util/SiteConfig";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
