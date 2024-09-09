@@ -13,7 +13,7 @@ export const FooterContentBlock = withPreview(
             <Root>
                 <ImageTextWrapper>
                     <ImageWrapper>
-                        <DamImageBlock data={image} aspectRatio="1/1" objectFit="contain" />
+                        <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
                     </ImageWrapper>
                     <RichTextWrapper>
                         <RichTextBlock data={text} />
