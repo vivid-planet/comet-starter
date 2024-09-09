@@ -1,10 +1,14 @@
-import { createOneOfBlock } from "@comet/blocks-admin";
+import { createListBlock } from "@comet/blocks-admin";
+import { FormattedMessage } from "react-intl";
 
 import { BasicStageBlock } from "./BasicStageBlock";
 
-export const StageBlock = createOneOfBlock({
+/* If you need multiple stage blocks, you should use createBlocksBlock instead of createListBlock */
+export const StageBlock = createListBlock({
     name: "Stage",
-    supportedBlocks: {
-        basicStage: BasicStageBlock,
-    },
+    displayName: <FormattedMessage id="stageListBlock.displayName" defaultMessage="Stage List" />,
+    block: BasicStageBlock,
+    maxVisibleBlocks: 1,
+    itemName: <FormattedMessage id="stageListBlock.itemName" defaultMessage="item" />,
+    itemsName: <FormattedMessage id="stageListBlock.itemsName" defaultMessage="items" />,
 });
