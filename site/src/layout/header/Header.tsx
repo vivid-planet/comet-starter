@@ -14,6 +14,8 @@ interface Props {
     header: GQLHeaderFragment[];
 }
 
+const headerHeight = 100;
+
 const Header = ({ header }: Props) => {
     const intl = useIntl();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -206,7 +208,7 @@ const PageLayoutContent = styled.div`
 
 const Root = styled.div`
     display: flex;
-    height: 100px;
+    height: ${headerHeight}px;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid ${({ theme }) => theme.palette.gray["50"]};
@@ -334,7 +336,7 @@ const Icon = styled(SvgUse)`
 const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
     display: block;
     position: fixed;
-    top: 100px;
+    top: ${headerHeight}px;
     left: 0;
     height: 0;
     width: 100vw;
@@ -348,7 +350,7 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
         $isMenuOpen &&
         css`
             visibility: visible;
-            height: calc(100vh - 100px);
+            height: calc(100vh - ${headerHeight}px);
             transition: height 0.25s ease-in;
         `}
 `;
@@ -362,9 +364,9 @@ const MobileTopLevelNavigation = styled.ol`
 const MobileSubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     list-style-type: none;
     position: fixed;
-    top: 100px;
+    top: ${headerHeight}px;
     left: 100vw;
-    height: calc(100vh - 100px);
+    height: calc(100vh - ${headerHeight}px);
     width: 100vw;
     z-index: 41;
     background-color: ${({ theme }) => theme.palette.gray["200"]};
