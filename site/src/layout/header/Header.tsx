@@ -3,6 +3,7 @@ import { SvgUse } from "@src/common/helpers/SvgUse";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import { useEffect, useState } from "react";
+import { useIntl } from "react-intl";
 import styled from "styled-components";
 
 import { GQLHeaderFragment } from "./Header.fragment.generated";
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Header = ({ header }: Props) => {
+    const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
 
     const handleSubLevelNavigationButtonClick = (id: string) => {
@@ -56,7 +58,13 @@ const Header = ({ header }: Props) => {
                                             </Link>
                                             {node.childNodes.length > 0 && (
                                                 <ToggleSubLevelNavigationButton
-                                                    aria-label={`Submenu of ${node.name}`}
+                                                    aria-label={intl.formatMessage(
+                                                        {
+                                                            id: "header.subMenu.arialLabel",
+                                                            defaultMessage: "Submenu of {name}",
+                                                        },
+                                                        { name: node.name },
+                                                    )}
                                                     aria-expanded={expandedSubLevelNavigation === node.id}
                                                     onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                 >
