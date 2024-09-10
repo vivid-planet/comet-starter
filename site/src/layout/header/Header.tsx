@@ -101,7 +101,14 @@ const Header = ({ header }: Props) => {
 
                         <MobileMenuContainer>
                             {isMenuOpen && <DisableBodyScrolling />}
-                            <MenuButton aria-label="Menu" aria-expanded={isMenuOpen} onClick={toggleMenu}>
+                            <MenuButton
+                                aria-label={intl.formatMessage({
+                                    id: "header.menu.arialLabel",
+                                    defaultMessage: "Menu",
+                                })}
+                                aria-expanded={isMenuOpen}
+                                onClick={toggleMenu}
+                            >
                                 <Icon href={isMenuOpen ? "/assets/icons/menu-open.svg#menu-open" : "/assets/icons/menu.svg#menu"} />
                             </MenuButton>
                             <MenuContainer $isMenuOpen={isMenuOpen} aria-hidden={!isMenuOpen}>
@@ -113,7 +120,13 @@ const Header = ({ header }: Props) => {
                                                     <li key={node.id}>
                                                         {node.childNodes.length > 0 ? (
                                                             <ButtonLink
-                                                                aria-label={`Submenu of ${node.name}`}
+                                                                aria-label={intl.formatMessage(
+                                                                    {
+                                                                        id: "header.subMenu.arialLabel",
+                                                                        defaultMessage: "Submenu of {name}",
+                                                                    },
+                                                                    { name: node.name },
+                                                                )}
                                                                 aria-expanded={expandedSubLevelNavigation === node.id}
                                                                 onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                             >
@@ -133,7 +146,10 @@ const Header = ({ header }: Props) => {
                                                                     <PageLayoutContent>
                                                                         <li>
                                                                             <BackButton
-                                                                                aria-label="Go back"
+                                                                                aria-label={intl.formatMessage({
+                                                                                    id: "header.backButton.arialLabel",
+                                                                                    defaultMessage: "Go back",
+                                                                                })}
                                                                                 onClick={() => setExpandedSubLevelNavigation(null)}
                                                                             >
                                                                                 <IconWrapper>
