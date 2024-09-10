@@ -4,7 +4,6 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 const overlayOptions: Array<{ value: BillboardTeaserBlockData["overlay"]; label: string }> = [

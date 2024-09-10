@@ -1,6 +1,5 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import * as React from "react";
 import styled from "styled-components";
 
 import { GQLHeaderFragment } from "./Header.fragment.generated";

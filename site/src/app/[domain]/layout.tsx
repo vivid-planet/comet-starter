@@ -6,18 +6,13 @@ import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function RootLayout({
-    children,
-    params: { domain },
-}: Readonly<{
-    children: React.ReactNode;
-    params: { domain: string };
-}>) {
+export default async function RootLayout({ children, params: { domain } }: Readonly<PropsWithChildren<{ params: { domain: string } }>>) {
     const siteConfig = await getSiteConfigForDomain(domain);
     const isDraftModeEnabled = draftMode().isEnabled;
 

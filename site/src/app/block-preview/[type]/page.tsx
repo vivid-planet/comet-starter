@@ -9,7 +9,7 @@ import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
-const PagePreview: React.FunctionComponent = () => {
+const PagePreview = () => {
     const iFrameBridge = useIFrameBridge();
 
     const { fetch, graphQLFetch } = useBlockPreviewFetch(graphQLApiUrl);
