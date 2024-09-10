@@ -1,4 +1,4 @@
-import { getSiteConfig } from "@src/util/SiteConfig";
+import { getSiteConfig } from "@src/util/siteConfig";
 import { MetadataRoute } from "next";
 
 export default async function robots(): Promise<MetadataRoute.Robots> {

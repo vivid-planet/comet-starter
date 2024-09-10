@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { createRedirects } from "./redirects/redirects";
-import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/SiteConfig";
+import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
 export async function middleware(request: NextRequest) {
     const headers = request.headers;
