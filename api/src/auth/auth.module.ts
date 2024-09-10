@@ -21,7 +21,7 @@ export class AuthModule {
         const providers: Provider[] = [
             createStaticCredentialsBasicStrategy({
                 username: SYSTEM_USER_NAME,
-                password: config.auth.basicAuthPassword,
+                password: config.auth.systemUserPassword,
                 strategyName: "system-user",
             }),
             createAuthResolver({

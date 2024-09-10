@@ -41,7 +41,7 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
-    BASIC_AUTH_PASSWORD: string;
+    BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
