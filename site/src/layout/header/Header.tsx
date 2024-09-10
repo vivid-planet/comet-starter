@@ -136,9 +136,9 @@ const Header = ({ header }: Props) => {
                                                                 </IconWrapper>
                                                             </ButtonLink>
                                                         ) : (
-                                                            <Link page={node} aria-label={node.name}>
+                                                            <MobileLink page={node} aria-label={node.name}>
                                                                 {node.name}
-                                                            </Link>
+                                                            </MobileLink>
                                                         )}
                                                         {node.childNodes.length > 0 && (
                                                             <MobileSubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
