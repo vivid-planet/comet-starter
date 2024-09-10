@@ -3,13 +3,12 @@ import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
 
 import { GQLPageLinkFragment } from "./PageLink.fragment.generated";
 
-interface Props {
+interface Props extends PropsWithChildren {
     page: GQLPageLinkFragment;
-    children: ReactNode;
     className?: string;
     activeClassName?: string;
 }

@@ -2,7 +2,6 @@ import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField, c
 import { MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaGalleryItemBlock } from "@src/common/blocks/MediaGalleryItemBlock";
 import { mediaAspectRatioOptions } from "@src/util/mediaAspectRatios";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 const MediaGalleryListBlock = createListBlock({

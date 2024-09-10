@@ -2,7 +2,6 @@ import { BlockCategory, createCompositeBlock, createCompositeBlockSelectField } 
 import { StandaloneMediaBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { mediaAspectRatioOptions } from "@src/util/mediaAspectRatios";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 export const StandaloneMediaBlock = createCompositeBlock(

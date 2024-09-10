@@ -1,16 +1,22 @@
 import { previewParams } from "@comet/cms-site";
-import { getSiteConfigs } from "@src/config";
 import { Rewrite } from "next/dist/lib/load-custom-routes";
 import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { createRedirects } from "./redirects/redirects";
+import type { PublicSiteConfig } from "./site-configs";
 
 function getHost(headers: Headers) {
     const host = headers.get("x-forwarded-host") ?? headers.get("host");
     if (!host) throw new Error("Could not evaluate host");
     return host;
+}
+
+export function getSiteConfigForDomain(domain: string) {
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
+    if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
+    return siteConfig;
 }
 
 async function getSiteConfigForHost(host: string) {
@@ -20,6 +26,16 @@ async function getSiteConfigForHost(host: string) {
         if (siteConfig) return siteConfig;
     }
     return getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
+}
+
+let siteConfigs: PublicSiteConfig[];
+export function getSiteConfigs() {
+    if (!siteConfigs) {
+        const json = process.env.PUBLIC_SITE_CONFIGS;
+        if (!json) throw new Error("process.env.PUBLIC_SITE_CONFIGS must be set.");
+        siteConfigs = JSON.parse(json) as PublicSiteConfig[];
+    }
+    return siteConfigs;
 }
 
 // Used for getting SiteConfig in server-components where params is not available (e.g. sitemap, not-found - see https://github.com/vercel/next.js/discussions/43179)
