@@ -1,15 +1,6 @@
+import { loadMessages } from "@src/app/[domain]/[language]/layout";
 import { IntlProvider } from "@src/util/IntlProvider";
-import { readFile } from "fs/promises";
 import { PropsWithChildren } from "react";
-
-const messagesCache: Record<string, unknown> = {};
-export async function loadMessages(language: string) {
-    if (messagesCache[language]) return messagesCache[language];
-    const path = `./lang-compiled/${language}.json`;
-    const messages = JSON.parse(await readFile(path, "utf8"));
-    messagesCache[language] = messages;
-    return messages;
-}
 
 export default async function Page({ children, params: { language } }: PropsWithChildren<{ params: { language: string } }>) {
     const messages = await loadMessages(language);
