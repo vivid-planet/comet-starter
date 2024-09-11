@@ -16,7 +16,7 @@ export const FooterContentBlock = withPreview(
                         <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
                     </ImageWrapper>
                     <RichTextWrapper>
-                        <RichTextBlock data={text} />
+                        <RichTextBlock data={text} disableLastBottomSpacing />
                     </RichTextWrapper>
                 </ImageTextWrapper>
                 <HorizontalLine />
@@ -124,7 +124,7 @@ const HorizontalLine = styled.hr`
     border: none;
     background-color: ${({ theme }) => theme.palette.gray["600"]};
     color: ${({ theme }) => theme.palette.gray["600"]};
-    margin: 19px 0 35px; /* 19px since element in RTE has margin bottom of 16px */
+    margin: 35px 0;
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;
