@@ -4,7 +4,6 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
-import * as React from "react";
 import styled from "styled-components";
 
 export const FooterContentBlock = withPreview(
