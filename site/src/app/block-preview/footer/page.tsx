@@ -5,15 +5,15 @@ import { FooterContentBlockData } from "@src/blocks.generated";
 import { FooterContentBlock } from "@src/documents/pages/blocks/FooterContentBlock";
 import { graphQLApiUrl } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
-import * as React from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
-const PreviewPage: React.FunctionComponent = () => {
+const PreviewPage: FunctionComponent = () => {
     const iFrameBridge = useIFrameBridge();
 
     const { fetch, graphQLFetch } = useBlockPreviewFetch(graphQLApiUrl);
 
-    const [blockData, setBlockData] = React.useState<FooterContentBlockData>();
-    React.useEffect(() => {
+    const [blockData, setBlockData] = useState<FooterContentBlockData>();
+    useEffect(() => {
         async function load() {
             if (!iFrameBridge.block) {
                 setBlockData(undefined);
