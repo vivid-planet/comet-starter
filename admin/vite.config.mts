@@ -71,5 +71,6 @@ export default defineConfig(({ mode }) => {
         build: {
             outDir: "build",
         },
+        base: process.env.ADMIN_BASE_PATH,
     };
 });
