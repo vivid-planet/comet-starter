@@ -1,5 +1,6 @@
 import { User, UserPermissions } from "@comet/cms-api";
 import { Test, TestingModule } from "@nestjs/testing";
+import { CONFIG } from "@src/config/config.module";
 
 import { AccessControlService } from "./access-control.service";
 import { staticUsers } from "./static-users";
@@ -9,7 +10,13 @@ describe("AccessControlService", () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [AccessControlService],
+            providers: [
+                AccessControlService,
+                {
+                    provide: CONFIG,
+                    useValue: { appEnv: "local" },
+                },
+            ],
         }).compile();
 
         service = module.get<AccessControlService>(AccessControlService);
