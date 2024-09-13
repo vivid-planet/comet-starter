@@ -1,16 +1,22 @@
 import { AbstractAccessControlService, ContentScopesForUser, PermissionsForUser, User, UserPermissions } from "@comet/cms-api";
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
+import { Config } from "@src/config/config";
+import { CONFIG } from "@src/config/config.module";
 
 import { staticUsers } from "./static-users";
 
 @Injectable()
 export class AccessControlService extends AbstractAccessControlService {
+    constructor(@Inject(CONFIG) private readonly config: Config) {
+        super();
+    }
+
     getPermissionsForUser(user: User): PermissionsForUser {
-        if (user.email.endsWith("@vivid-planet.com")) {
+        if (user.email === staticUsers.admin.email) {
             return UserPermissions.allPermissions;
         }
 
-        if (user.email === staticUsers.admin.email) {
+        if (this.config.appEnv !== "production" && user.email.endsWith("@vivid-planet.com")) {
             return UserPermissions.allPermissions;
         }
 
@@ -20,12 +26,13 @@ export class AccessControlService extends AbstractAccessControlService {
 
         return [];
     }
+
     getContentScopesForUser(user: User): ContentScopesForUser {
-        if (user.email.endsWith("@vivid-planet.com")) {
+        if (user.email === staticUsers.admin.email) {
             return UserPermissions.allContentScopes;
         }
 
-        if (user.email === staticUsers.admin.email) {
+        if (this.config.appEnv !== "production" && user.email.endsWith("@vivid-planet.com")) {
             return UserPermissions.allContentScopes;
         }
 

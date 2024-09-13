@@ -6,6 +6,9 @@ import { IsArray, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf 
 
 export class EnvironmentVariables {
     @IsString()
+    APP_ENV: string;
+
+    @IsString()
     POSTGRESQL_HOST: string;
 
     @IsOptional()
