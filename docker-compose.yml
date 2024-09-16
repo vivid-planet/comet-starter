@@ -1,51 +1,22 @@
 services:
-  postgres:
-    image: bitnami/postgresql:15
-    tty: true
-    volumes:
-      - postgres:/bitnami/postgresql
-    ports:
-      - "${POSTGRESQL_PORT}:5432"
-    environment:
-      POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: ${POSTGRESQL_PASSWORD}
-      POSTGRESQL_DATABASE: ${POSTGRESQL_DB}
-    networks:
-      - postgres
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+      additional_contexts:
+        - site-configs=./site-configs
 
-  imgproxy:
-    image: darthsim/imgproxy:v3
-    volumes:
-      - ./api/uploads:/uploads:ro
-    ports:
-      - ${IMGPROXY_PORT}:8080
-    environment:
-      IMGPROXY_KEY: ${IMGPROXY_KEY}
-      IMGPROXY_SALT: ${IMGPROXY_SALT}
-      IMGPROXY_MAX_SRC_RESOLUTION: 70
-      IMGPROXY_LOCAL_FILESYSTEM_ROOT: "/uploads"
-      IMGPROXY_USE_ABS: ${IMGPROXY_USE_ABS}
-      IMGPROXY_ABS_NAME: ${AZURE_ACCOUNT_NAME}
-      IMGPROXY_ABS_KEY: ${AZURE_ACCOUNT_KEY}
-      IMGPROXY_USE_S3: ${IMGPROXY_USE_S3}
-      IMGPROXY_S3_REGION: ${S3_REGION}
-      IMGPROXY_S3_ENDPOINT: ${S3_ENDPOINT}
-      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_ACCESS_KEY}
+  admin:
+    build:
+      context: admin
+      dockerfile: Dockerfile
+      additional_contexts:
+        - api=./api
 
-  jaeger:
-    image: jaegertracing/all-in-one:1
-    ports:
-      - ${JAEGER_UI_PORT}:16686
-      - ${JAEGER_OLTP_PORT}:4318 #OLTP over HTTP
-    environment:
-      COLLECTOR_OTLP_ENABLED: "true"
-      COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
-
-networks:
-  postgres:
-    driver: bridge
-
-volumes:
-  postgres:
-    driver: local
+  site:
+    build:
+      context: site
+      dockerfile: Dockerfile
+      additional_contexts:
+        - api=./api
+        - site-configs=./site-configs
