@@ -9,7 +9,13 @@ export function getHostByHeaders(headers: Headers) {
 }
 
 export function getSiteConfigForDomain(domain: string) {
-    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
+    let siteConfig;
+    if (domain === "assets") {
+        const host = getHostByHeaders(headers());
+        siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
+    } else {
+        siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
+    }
     if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
     return siteConfig;
 }
