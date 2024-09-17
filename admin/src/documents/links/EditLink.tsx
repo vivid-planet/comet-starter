@@ -50,7 +50,7 @@ interface Props {
     id: string;
 }
 
-export const EditLink: React.FC<Props> = ({ id }) => {
+export const EditLink = ({ id }: Props) => {
     const intl = useIntl();
     const stackApi = useStackApi();
 

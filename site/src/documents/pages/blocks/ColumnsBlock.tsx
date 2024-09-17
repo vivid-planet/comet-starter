@@ -2,11 +2,11 @@ import { BlocksBlock, PropsWithData, SupportedBlocks, withPreview } from "@comet
 import { ColumnsBlockData, ColumnsContentBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
+import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
@@ -16,8 +16,8 @@ const supportedBlocks: SupportedBlocks = {
     anchor: (props) => <AnchorBlock data={props} />,
     richtext: (props) => <RichTextBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
-    heading: (props) => <HeadingBlock data={props} />,
-    callToActionList: (props) => <CallToActionListBlock data={props} />,
+    heading: (props) => <StandaloneHeadingBlock data={props} />,
+    callToActionList: (props) => <StandaloneCallToActionListBlock data={props} />,
     media: (props) => <StandaloneMediaBlock data={props} />,
     mediaGallery: (props) => <MediaGalleryBlock data={props} />,
 };

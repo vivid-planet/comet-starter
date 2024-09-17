@@ -22,11 +22,6 @@ enum HeadlineTag {
     H6 = "H6",
 }
 
-enum TextAlignment {
-    left = "left",
-    center = "center",
-}
-
 class HeadingBlockData extends BlockData {
     @ChildBlock(RichTextBlock)
     eyebrow: BlockDataInterface;
@@ -36,9 +31,6 @@ class HeadingBlockData extends BlockData {
 
     @BlockField({ type: "enum", enum: HeadlineTag })
     htmlTag: HeadlineTag;
-
-    @BlockField({ type: "enum", enum: TextAlignment })
-    textAlignment: TextAlignment;
 }
 
 class HeadingBlockInput extends BlockInput {
@@ -51,10 +43,6 @@ class HeadingBlockInput extends BlockInput {
     @IsEnum(HeadlineTag)
     @BlockField({ type: "enum", enum: HeadlineTag })
     htmlTag: HeadlineTag;
-
-    @IsEnum(TextAlignment)
-    @BlockField({ type: "enum", enum: TextAlignment })
-    textAlignment: TextAlignment;
 
     transformToBlockData(): HeadingBlockData {
         return inputToData(HeadingBlockData, this);

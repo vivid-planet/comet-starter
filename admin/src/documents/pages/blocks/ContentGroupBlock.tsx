@@ -2,19 +2,19 @@ import { BlockCategory, createBlocksBlock, createCompositeBlock, createComposite
 import { AnchorBlock } from "@comet/cms-admin";
 import { ContentGroupBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
-import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
-import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
+import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
-import * as React from "react";
+import { ReactNode } from "react";
 import { FormattedMessage } from "react-intl";
 
-const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: React.ReactNode }> = [
+const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: ReactNode }> = [
     { value: "default", label: <FormattedMessage id="contentGroupBlock.backgroundColor.default" defaultMessage="Default" /> },
     { value: "lightGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.lightGray" defaultMessage="Light Gray" /> },
     { value: "darkGray", label: <FormattedMessage id="contentGroupBlock.backgroundColor.darkGray" defaultMessage="Dark Gray" /> },
@@ -28,9 +28,9 @@ const ContentGroupContentBlock = createBlocksBlock({
         space: SpaceBlock,
         teaser: TeaserBlock,
         richtext: RichTextBlock,
-        heading: HeadingBlock,
+        heading: StandaloneHeadingBlock,
         columns: ColumnsBlock,
-        callToActionList: CallToActionListBlock,
+        callToActionList: StandaloneCallToActionListBlock,
         keyFacts: KeyFactsBlock,
         media: StandaloneMediaBlock,
         mediaGallery: MediaGalleryBlock,

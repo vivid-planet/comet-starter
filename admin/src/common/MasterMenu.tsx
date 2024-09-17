@@ -4,6 +4,7 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
+    MasterMenu,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -102,3 +103,5 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "pageTree",
     },
 ];
+
+export const AppMasterMenu = () => <MasterMenu menu={masterMenuData} />;

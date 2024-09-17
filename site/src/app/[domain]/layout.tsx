@@ -1,33 +1,29 @@
 import { SitePreviewProvider } from "@comet/cms-site";
 import { GlobalStyle } from "@src/layout/GlobalStyle";
-import { getSiteConfig } from "@src/middleware";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
+import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
-import { PublicEnvScript } from "next-runtime-env";
+import { PropsWithChildren } from "react";
 
 export const metadata: Metadata = {
     title: "Comet Starter",
 };
 
-export default async function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    const { gtmId } = await getSiteConfig();
+export default async function RootLayout({ children, params: { domain } }: Readonly<PropsWithChildren<{ params: { domain: string } }>>) {
+    const siteConfig = await getSiteConfigForDomain(domain);
+    const isDraftModeEnabled = draftMode().isEnabled;
 
     return (
         <html>
-            <head>
-                <PublicEnvScript />
-            </head>
+            <head />
             <body>
-                {gtmId && (
+                {siteConfig.gtmId && (
                     <noscript>
                         <iframe
-                            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+                            src={`https://www.googletagmanager.com/ns.html?id=${siteConfig.gtmId}`}
                             height="0"
                             width="0"
                             style={{ display: "none", visibility: "hidden" }}
@@ -37,7 +33,9 @@ export default async function RootLayout({
                 <StyledComponentsRegistry>
                     <GlobalStyle />
                     <ResponsiveSpacingStyle />
-                    {draftMode().isEnabled ? <SitePreviewProvider>{children}</SitePreviewProvider> : children}
+                    <SiteConfigProvider siteConfig={siteConfig}>
+                        {isDraftModeEnabled ? <SitePreviewProvider>{children}</SitePreviewProvider> : children}
+                    </SiteConfigProvider>
                 </StyledComponentsRegistry>
             </body>
         </html>
