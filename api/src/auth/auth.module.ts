@@ -54,7 +54,7 @@ export class AuthModule {
             );
             providers.push({
                 provide: APP_GUARD,
-                useClass: createCometAuthGuard(["static-authed-user", "system-user"]),
+                useClass: createCometAuthGuard(["system-user", "static-authed-user"]),
             });
         }
 
