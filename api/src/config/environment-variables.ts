@@ -13,6 +13,10 @@ export class EnvironmentVariables {
     @Transform(({ value }) => value === "true")
     POSTGRESQL_USE_SSL: boolean;
 
+    @IsOptional()
+    @IsString()
+    POSTGRESQL_CA_CERT?: string;
+
     @Type(() => Number)
     @IsInt()
     POSTGRESQL_PORT: number;
@@ -37,7 +41,11 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
-    BASIC_AUTH_PASSWORD: string;
+    BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
+
+    @IsString()
+    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    IDP_CLIENT_ID: string;
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")

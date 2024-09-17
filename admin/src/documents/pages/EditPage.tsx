@@ -13,12 +13,12 @@ import {
 } from "@comet/cms-admin";
 import { Button, IconButton, Stack } from "@mui/material";
 import { useContentScope } from "@src/common/ContentScopeProvider";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouteMatch } from "react-router";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation, GQLUpdatePageMutationVariables } from "./EditPage.generated";
 
 interface Props {

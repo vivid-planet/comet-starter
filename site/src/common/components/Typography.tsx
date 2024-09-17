@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
 export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p300" | "p200";
@@ -191,11 +191,10 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
     p200: "p",
 };
 
-export interface TypographyProps extends HTMLAttributes<HTMLElement> {
+export interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
     component?: keyof HTMLElementTagNameMap;
     variant?: TypographyVariant;
     bottomSpacing?: boolean;
-    children?: ReactNode;
 }
 
 export const Typography = ({ component, variant = "p300", bottomSpacing, children, ...restProps }: TypographyProps) => (
