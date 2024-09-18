@@ -2,7 +2,6 @@
     "name": "server",
     "private": true,
     "scripts": {
-        "preserve": "envsub --syntax dollar-basic ../build/index.html ../build/index.html",
         "serve": "node server.js"
     },
     "dependencies": {

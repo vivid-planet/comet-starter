@@ -2,9 +2,18 @@
 const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
+const fs = require("fs");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
+
+// Read index.html file
+let indexFile = fs.readFileSync(`${__dirname}/../build/index.html`, 'utf8');
+
+// Replace environment variables
+const envsubIndexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
+    return process.env[p1] || "";
+});
 
 app.use(compression());
 app.use(
@@ -32,8 +41,12 @@ app.get("/status/health", (req, res) => {
     res.send("OK!");
 });
 
+app.get("/", (req, res) => {
+    res.send(envsubIndexFile);
+});
+
 app.use(
-    express.static("../build", {
+    express.static(`${__dirname}/../build`, {
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".html")) {
                 // Don't cache the index.html at all to make sure applications updates are applied
@@ -53,7 +66,7 @@ app.use(
 
 // As a fallback, route everything to index.html
 app.get("*", (req, res) => {
-    res.sendFile(`index.html`, { root: `${__dirname}/../build/`, headers: { "cache-control": "no-store" } });
+    res.send(envsubIndexFile);
 });
 
 app.listen(port, () => {
