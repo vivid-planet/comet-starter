@@ -10,24 +10,22 @@ export const FooterContentBlock = withPreview(
     ({ data: { text, image, linkList, copyrightNotice } }: PropsWithData<FooterContentBlockData>) => {
         return (
             <Root>
-                <ImageTextWrapper>
-                    <ImageWrapper>
-                        <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
-                    </ImageWrapper>
-                    <RichTextWrapper>
-                        <RichTextBlock data={text} disableLastBottomSpacing />
-                    </RichTextWrapper>
-                </ImageTextWrapper>
+                <ImageWrapper>
+                    <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
+                </ImageWrapper>
+                <RichTextWrapper>
+                    <RichTextBlock data={text} disableLastBottomSpacing />
+                </RichTextWrapper>
                 <HorizontalLine />
                 <LinkCopyrightWrapper>
                     {!!linkList.blocks.length && (
-                        <LinksBlock>
+                        <LinksWrapper>
                             {linkList.blocks.map((block) => (
                                 <LinkText as={LinkBlock} key={block.key} data={block.props.link} variant="p200">
                                     {block.props.text}
                                 </LinkText>
                             ))}
-                        </LinksBlock>
+                        </LinksWrapper>
                     )}
                     {copyrightNotice && <CopyrightNotice variant="p200">{copyrightNotice}</CopyrightNotice>}
                 </LinkCopyrightWrapper>
@@ -45,6 +43,7 @@ const Root = styled.footer`
     flex-direction: column;
     align-items: center;
     padding: ${({ theme }) => `60px ${theme.spacing.D100}`};
+    gap: ${({ theme }) => theme.spacing.D100};
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         flex-direction: row;
@@ -56,23 +55,15 @@ const Root = styled.footer`
     }
 `;
 
-const ImageTextWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.D100};
-    flex-shrink: 0;
-    flex-grow: 1;
-
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        flex-direction: row;
-    }
-`;
-
 const RichTextWrapper = styled.div`
     text-align: center;
 
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        max-width: 40%;
+    }
+
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        max-width: 40%;
         text-align: left;
     }
 `;
@@ -86,7 +77,6 @@ const ImageWrapper = styled.div`
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        place-self: start center;
     }
 `;
 
@@ -97,14 +87,20 @@ const LinkCopyrightWrapper = styled.div`
     align-items: center;
     gap: ${({ theme }) => theme.spacing.S500};
 
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        max-width: 40%;
+    }
+
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         align-items: flex-end;
     }
 `;
 
-const LinksBlock = styled.div`
+const LinksWrapper = styled.div`
     display: flex;
     gap: ${({ theme }) => theme.spacing.S500};
+    flex-wrap: wrap;
+    justify-content: center;
 `;
 
 const CopyrightNotice = styled(Typography)`
