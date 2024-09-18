@@ -6,10 +6,12 @@ export const headerFragment = gql`
     fragment Header on PageTreeNode {
         id
         name
+        hideInMenu
         ...PageLink
         childNodes {
             id
             name
+            hideInMenu
             ...PageLink
         }
     }

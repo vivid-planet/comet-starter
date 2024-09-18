@@ -21,9 +21,13 @@ const Header = ({ header }: Props) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
 
-    const toggleMenu = () => {
-        if (isMenuOpen) setExpandedSubLevelNavigation(null);
-        setIsMenuOpen((prev) => !prev);
+    const handleMenuButtonClick = () => {
+        if (isMenuOpen) {
+            setExpandedSubLevelNavigation(null);
+            setIsMenuOpen(false);
+        } else {
+            setIsMenuOpen(true);
+        }
     };
 
     const handleSubLevelNavigationButtonClick = (id: string) => {
@@ -56,48 +60,50 @@ const Header = ({ header }: Props) => {
 
                         <DesktopHeaderFullHeightNav>
                             <TopLevelNavigation>
-                                {header.map((node) => (
-                                    <TopLevelLinkContainer
-                                        key={node.id}
-                                        onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
-                                        onMouseLeave={() => setExpandedSubLevelNavigation(null)}
-                                    >
-                                        <LinkContainer>
-                                            <Link page={node} activeClassName="active" aria-label={node.name}>
-                                                {node.name}
-                                            </Link>
+                                {header
+                                    .filter((node) => !node.hideInMenu)
+                                    .map((node) => (
+                                        <TopLevelLinkContainer
+                                            key={node.id}
+                                            onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
+                                            onMouseLeave={() => setExpandedSubLevelNavigation(null)}
+                                        >
+                                            <LinkContainer>
+                                                <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                    {node.name}
+                                                </Link>
+                                                {node.childNodes.length > 0 && (
+                                                    <ToggleSubLevelNavigationButton
+                                                        aria-label={intl.formatMessage(
+                                                            {
+                                                                id: "header.subMenu.arialLabel",
+                                                                defaultMessage: "Submenu of {name}",
+                                                            },
+                                                            { name: node.name },
+                                                        )}
+                                                        aria-expanded={expandedSubLevelNavigation === node.id}
+                                                        onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                    >
+                                                        <AnimatedChevron
+                                                            href="/assets/icons/chevron-down.svg#chevron-down"
+                                                            $isExpanded={expandedSubLevelNavigation === node.id}
+                                                        />
+                                                    </ToggleSubLevelNavigationButton>
+                                                )}
+                                            </LinkContainer>
                                             {node.childNodes.length > 0 && (
-                                                <ToggleSubLevelNavigationButton
-                                                    aria-label={intl.formatMessage(
-                                                        {
-                                                            id: "header.subMenu.arialLabel",
-                                                            defaultMessage: "Submenu of {name}",
-                                                        },
-                                                        { name: node.name },
-                                                    )}
-                                                    aria-expanded={expandedSubLevelNavigation === node.id}
-                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                                >
-                                                    <AnimatedChevron
-                                                        href="/assets/icons/chevron-down.svg#chevron-down"
-                                                        $isExpanded={expandedSubLevelNavigation === node.id}
-                                                    />
-                                                </ToggleSubLevelNavigationButton>
+                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                    {node.childNodes.map((node) => (
+                                                        <li key={node.id}>
+                                                            <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                                {node.name}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </SubLevelNavigation>
                                             )}
-                                        </LinkContainer>
-                                        {node.childNodes.length > 0 && (
-                                            <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                {node.childNodes.map((node) => (
-                                                    <li key={node.id}>
-                                                        <Link page={node} activeClassName="active" aria-label={node.name}>
-                                                            {node.name}
-                                                        </Link>
-                                                    </li>
-                                                ))}
-                                            </SubLevelNavigation>
-                                        )}
-                                    </TopLevelLinkContainer>
-                                ))}
+                                        </TopLevelLinkContainer>
+                                    ))}
                             </TopLevelNavigation>
                         </DesktopHeaderFullHeightNav>
 
@@ -109,7 +115,7 @@ const Header = ({ header }: Props) => {
                                     defaultMessage: "Menu",
                                 })}
                                 aria-expanded={isMenuOpen}
-                                onClick={toggleMenu}
+                                onClick={handleMenuButtonClick}
                             >
                                 <Icon href={isMenuOpen ? "/assets/icons/menu-open.svg#menu-open" : "/assets/icons/menu.svg#menu"} />
                             </MenuButton>
@@ -118,77 +124,79 @@ const Header = ({ header }: Props) => {
                                     <PageLayoutContent>
                                         <nav>
                                             <MobileTopLevelNavigation>
-                                                {header.map((node) => (
-                                                    <li key={node.id}>
-                                                        {node.childNodes.length > 0 ? (
-                                                            <ButtonLink
-                                                                aria-label={intl.formatMessage(
-                                                                    {
-                                                                        id: "header.subMenu.arialLabel",
-                                                                        defaultMessage: "Submenu of {name}",
-                                                                    },
-                                                                    { name: node.name },
-                                                                )}
-                                                                aria-expanded={expandedSubLevelNavigation === node.id}
-                                                                onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                                            >
-                                                                <Typography>{node.name}</Typography>
-                                                                <IconWrapper>
-                                                                    <Icon href="/assets/icons/arrow-right.svg#arrow-right" />
-                                                                </IconWrapper>
-                                                            </ButtonLink>
-                                                        ) : (
-                                                            <MobileLink page={node} aria-label={node.name}>
-                                                                {node.name}
-                                                            </MobileLink>
-                                                        )}
-                                                        {node.childNodes.length > 0 && (
-                                                            <MobileSubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                                <PageLayout grid>
-                                                                    <PageLayoutContent>
-                                                                        <li>
-                                                                            <BackButton
-                                                                                aria-label={intl.formatMessage({
-                                                                                    id: "header.backButton.arialLabel",
-                                                                                    defaultMessage: "Go back",
-                                                                                })}
-                                                                                onClick={() => setExpandedSubLevelNavigation(null)}
-                                                                            >
-                                                                                <IconWrapper>
-                                                                                    <Icon href="/assets/icons/arrow-left.svg#arrow-left" />
-                                                                                </IconWrapper>
-                                                                                <Typography>
-                                                                                    <FormattedMessage id="header.back" defaultMessage="Back" />
-                                                                                </Typography>
-                                                                            </BackButton>
-                                                                        </li>
-                                                                        <li>
-                                                                            <OverviewButton page={node} aria-label={node.name}>
-                                                                                <IconWrapper>
-                                                                                    <Icon href="/assets/icons/overview.svg#overview" />
-                                                                                </IconWrapper>
-                                                                                <Typography>
-                                                                                    <FormattedMessage
-                                                                                        id="header.overview"
-                                                                                        defaultMessage="Overview"
-                                                                                    />
-                                                                                    {` | ${node.name}`}
-                                                                                </Typography>
-                                                                            </OverviewButton>
-                                                                        </li>
-                                                                        {node.childNodes.map((node) => (
-                                                                            <li key={node.id}>
-                                                                                <MobileLink page={node} aria-label={node.name}>
-                                                                                    {node.name}
-                                                                                </MobileLink>
+                                                {header
+                                                    .filter((node) => !node.hideInMenu)
+                                                    .map((node) => (
+                                                        <li key={node.id}>
+                                                            {node.childNodes.length > 0 ? (
+                                                                <ButtonLink
+                                                                    aria-label={intl.formatMessage(
+                                                                        {
+                                                                            id: "header.subMenu.arialLabel",
+                                                                            defaultMessage: "Submenu of {name}",
+                                                                        },
+                                                                        { name: node.name },
+                                                                    )}
+                                                                    aria-expanded={expandedSubLevelNavigation === node.id}
+                                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                                >
+                                                                    <Typography>{node.name}</Typography>
+                                                                    <IconWrapper>
+                                                                        <Icon href="/assets/icons/arrow-right.svg#arrow-right" />
+                                                                    </IconWrapper>
+                                                                </ButtonLink>
+                                                            ) : (
+                                                                <MobileLink page={node} aria-label={node.name}>
+                                                                    {node.name}
+                                                                </MobileLink>
+                                                            )}
+                                                            {node.childNodes.length > 0 && (
+                                                                <MobileSubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                                    <PageLayout grid>
+                                                                        <PageLayoutContent>
+                                                                            <li>
+                                                                                <BackButton
+                                                                                    aria-label={intl.formatMessage({
+                                                                                        id: "header.backButton.arialLabel",
+                                                                                        defaultMessage: "Go back",
+                                                                                    })}
+                                                                                    onClick={() => setExpandedSubLevelNavigation(null)}
+                                                                                >
+                                                                                    <IconWrapper>
+                                                                                        <Icon href="/assets/icons/arrow-left.svg#arrow-left" />
+                                                                                    </IconWrapper>
+                                                                                    <Typography>
+                                                                                        <FormattedMessage id="header.back" defaultMessage="Back" />
+                                                                                    </Typography>
+                                                                                </BackButton>
                                                                             </li>
-                                                                        ))}
-                                                                    </PageLayoutContent>
-                                                                </PageLayout>
-                                                            </MobileSubLevelNavigation>
-                                                        )}
-                                                    </li>
-                                                ))}
+                                                                            <li>
+                                                                                <OverviewButton page={node} aria-label={node.name}>
+                                                                                    <IconWrapper>
+                                                                                        <Icon href="/assets/icons/overview.svg#overview" />
+                                                                                    </IconWrapper>
+                                                                                    <Typography>
+                                                                                        <FormattedMessage
+                                                                                            id="header.overview"
+                                                                                            defaultMessage="Overview"
+                                                                                        />
+                                                                                        {` | ${node.name}`}
+                                                                                    </Typography>
+                                                                                </OverviewButton>
+                                                                            </li>
+                                                                            {node.childNodes.map((node) => (
+                                                                                <li key={node.id}>
+                                                                                    <MobileLink page={node} aria-label={node.name}>
+                                                                                        {node.name}
+                                                                                    </MobileLink>
+                                                                                </li>
+                                                                            ))}
+                                                                        </PageLayoutContent>
+                                                                    </PageLayout>
+                                                                </MobileSubLevelNavigation>
+                                                            )}
+                                                        </li>
+                                                    ))}
                                             </MobileTopLevelNavigation>
                                         </nav>
                                     </PageLayoutContent>
@@ -211,7 +219,7 @@ const Root = styled.div`
     height: ${headerHeight}px;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["50"]};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
 `;
 
 const DesktopHeaderFullHeightNav = styled.nav`
@@ -324,7 +332,6 @@ const MenuButton = styled.button`
 const IconWrapper = styled.div`
     width: 16px;
     height: 16px;
-    color: inherit;
 `;
 
 const Icon = styled(SvgUse)`
