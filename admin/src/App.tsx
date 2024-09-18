@@ -96,7 +96,7 @@ export function App() {
                                                 >
                                                     <ErrorDialogHandler />
                                                     <CurrentUserProvider>
-                                                        <RouterBrowserRouter basename={config.basename}>
+                                                        <RouterBrowserRouter basename={config.basePath}>
                                                             <GlobalStyle />
                                                             <ContentScopeProvider>
                                                                 {({ match }) => (
