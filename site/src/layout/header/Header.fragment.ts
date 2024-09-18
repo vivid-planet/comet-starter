@@ -1,4 +1,5 @@
 import { gql } from "@comet/cms-site";
+import { mobileMenuFragment } from "@src/layout/header/MobileMenu.fragment";
 
 import { pageLinkFragment } from "./PageLink.fragment";
 
@@ -14,7 +15,9 @@ export const headerFragment = gql`
             hideInMenu
             ...PageLink
         }
+        ...MobileMenu
     }
 
     ${pageLinkFragment}
+    ${mobileMenuFragment}
 `;
