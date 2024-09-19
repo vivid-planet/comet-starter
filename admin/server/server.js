@@ -11,7 +11,7 @@ const port = process.env.APP_PORT ?? 3000;
 let indexFile = fs.readFileSync(`${__dirname}/../build/index.html`, 'utf8');
 
 // Replace environment variables
-const envsubIndexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
+indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
     return process.env[p1] || "";
 });
 
@@ -42,7 +42,7 @@ app.get("/status/health", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    res.send(envsubIndexFile);
+    res.send(indexFile);
 });
 
 app.use(
@@ -66,7 +66,7 @@ app.use(
 
 // As a fallback, route everything to index.html
 app.get("*", (req, res) => {
-    res.send(envsubIndexFile);
+    res.send(indexFile);
 });
 
 app.listen(port, () => {
