@@ -1,1 +1,0 @@
-../../site-configs.d.ts

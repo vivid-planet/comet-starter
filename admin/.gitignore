@@ -12,8 +12,11 @@
 /lang-extracted/
 
 fragmentTypes.json
-/schema.json
+/schema.*
 
 **/*.generated.ts
+/block-meta.json
+src/comet-config.json
+src/site-configs.d.ts
 
 .swc/
