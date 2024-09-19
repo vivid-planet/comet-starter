@@ -42,7 +42,7 @@ export function EditFooterPage(): JSX.Element | null {
 
     useContentScopeConfig({ redirectPathAfterChange: "/project-snips/footer" });
 
-    const { data, refetch } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
+    const { data, refetch, loading } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
         variables: {
             scope,
         },
@@ -94,7 +94,7 @@ export function EditFooterPage(): JSX.Element | null {
         setHasChanges(!equal);
     }, [footerState, referenceContent]);
 
-    if (!footerState) {
+    if (loading) {
         return null;
     }
 
