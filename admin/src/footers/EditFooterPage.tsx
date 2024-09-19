@@ -33,7 +33,7 @@ import {
 export function EditFooterPage(): JSX.Element | null {
     const { scope } = useContentScope();
     const siteConfig = useSiteConfig({ scope });
-    const [footerState, setFooterState] = React.useState<BlockState<typeof FooterContentBlock>>();
+    const [footerState, setFooterState] = React.useState<BlockState<typeof FooterContentBlock>>(FooterContentBlock.defaultValues());
     const [hasChanges, setHasChanges] = React.useState(false);
     const [referenceContent, setReferenceContent] = React.useState<FooterContentBlockInput | null>(null);
     const match = useRouteMatch();
