@@ -19,7 +19,7 @@ export function useContentScopeConfig(p: ContentScopeConfigProps): void {
     return useContentScopeConfigLibrary(p);
 }
 
-export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
+export const ContentScopeProvider = ({ children }: Pick<ContentScopeProviderProps, "children">) => {
     const user = useCurrentUser();
 
     // TODO in COMET: filter already in API, avoid type cast, support labels

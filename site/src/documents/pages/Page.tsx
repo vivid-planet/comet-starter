@@ -4,7 +4,6 @@ import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { StageBlock } from "./blocks/StageBlock";
@@ -90,7 +89,7 @@ export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent:
                     if (link.code && link.url) acc[link.code] = link.url;
                     return acc;
                 },
-                { [scope.language]: canonicalUrl },
+                { [scope.language]: canonicalUrl } as Record<string, string>,
             ),
         },
     };
