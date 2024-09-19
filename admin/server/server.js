@@ -41,10 +41,6 @@ app.get("/status/health", (req, res) => {
     res.send("OK!");
 });
 
-app.get("/", (req, res) => {
-    res.send(indexFile);
-});
-
 app.use(
     express.static(`${__dirname}/../build`, {
         setHeaders: (res, path, stat) => {
