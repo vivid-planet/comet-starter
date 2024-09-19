@@ -40,7 +40,7 @@ yarn-error.log*
 .vercel
 
 .env
-# schema.gql
+schema.gql
 schema.json
 # block-meta.json
 src/**/*.generated.ts
