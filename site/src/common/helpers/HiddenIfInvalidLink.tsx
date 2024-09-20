@@ -7,14 +7,9 @@ import {
     LinkBlockData,
     PhoneLinkBlockData,
 } from "@src/blocks.generated";
-import * as React from "react";
+import { PropsWithChildren } from "react";
 
-interface HiddenIfInvalidLinkProps {
-    link: LinkBlockData;
-    children: React.ReactElement;
-}
-
-export function HiddenIfInvalidLink({ link, children }: HiddenIfInvalidLinkProps) {
+export function HiddenIfInvalidLink({ link, children }: PropsWithChildren<{ link: LinkBlockData }>) {
     const { previewType } = usePreview();
 
     if (previewType === "BlockPreview") {

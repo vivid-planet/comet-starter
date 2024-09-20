@@ -1,7 +1,6 @@
 import { IntlProvider } from "@src/common/intl/IntlProvider";
 import { loadMessages } from "@src/common/intl/loadMessages";
 import { NotFoundPage } from "@src/common/notFound/NotFoundPage";
-import * as React from "react";
 
 export default async function NotFound() {
     const language = "en";

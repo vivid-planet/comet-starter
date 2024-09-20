@@ -1,13 +1,12 @@
 import { generateImageUrl, gql, previewParams } from "@comet/cms-site";
-import { StageBlock } from "@src/documents/pages/blocks/StageBlock";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import * as React from "react";
 
 import { PageContentBlock } from "./blocks/PageContentBlock";
+import { StageBlock } from "./blocks/StageBlock";
 import { GQLPageQuery, GQLPageQueryVariables } from "./Page.generated";
 
 const pageQuery = gql`
@@ -90,7 +89,7 @@ export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent:
                     if (link.code && link.url) acc[link.code] = link.url;
                     return acc;
                 },
-                { [scope.language]: canonicalUrl },
+                { [scope.language]: canonicalUrl } as Record<string, string>,
             ),
         },
     };

@@ -24,7 +24,7 @@ import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
-import { AuthModule } from "./auth/auth.module";
+import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
 import { UserService } from "./auth/user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
@@ -36,6 +36,7 @@ import { StatusModule } from "./status/status.module";
 @Module({})
 export class AppModule {
     static forRoot(config: Config): DynamicModule {
+        const authModule = AuthModule.forRoot(config);
         return {
             module: AppModule,
             imports: [
@@ -75,7 +76,7 @@ export class AppModule {
                     }),
                     inject: [ModuleRef],
                 }),
-                AuthModule,
+                authModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
@@ -86,10 +87,10 @@ export class AppModule {
                         ),
                         userService,
                         accessControlService,
-                        systemUsers: ["system"],
+                        systemUsers: [SYSTEM_USER_NAME],
                     }),
                     inject: [UserService, AccessControlService],
-                    imports: [AuthModule],
+                    imports: [authModule],
                 }),
                 BlocksModule,
                 LinksModule,
@@ -125,7 +126,7 @@ export class AppModule {
                           AccessLogModule.forRoot({
                               shouldLogRequest: ({ user }) => {
                                   // Ignore system user
-                                  if (user === "system") {
+                                  if (user === SYSTEM_USER_NAME) {
                                       return false;
                                   }
                                   return true;

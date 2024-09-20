@@ -84,9 +84,9 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "space": "Space",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "StandaloneCallToActionList"
                             },
                             "nullable": false
                         }
@@ -121,9 +121,9 @@
                             "kind": "OneOfBlocks",
                             "blocks": {
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "space": "Space",
-                                "callToActionList": "CallToActionList"
+                                "callToActionList": "StandaloneCallToActionList"
                             },
                             "nullable": false
                         }
@@ -531,9 +531,10 @@
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading",
-                                "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "heading": "StandaloneHeading",
+                                "callToActionList": "StandaloneCallToActionList",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -571,9 +572,140 @@
                                 "anchor": "Anchor",
                                 "richtext": "RichText",
                                 "space": "Space",
-                                "heading": "Heading",
-                                "callToActionList": "CallToActionList",
-                                "media": "StandaloneMedia"
+                                "heading": "StandaloneHeading",
+                                "callToActionList": "StandaloneCallToActionList",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ContentGroup",
+        "fields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "content",
+                "kind": "Block",
+                "block": "ContentGroupContent",
+                "nullable": false
+            },
+            {
+                "name": "backgroundColor",
+                "kind": "Enum",
+                "enum": [
+                    "default",
+                    "lightGray",
+                    "darkGray"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "ContentGroupContent",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "StandaloneHeading",
+                                "columns": "Columns",
+                                "callToActionList": "StandaloneCallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
+                            },
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "type",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "OneOfBlocks",
+                            "blocks": {
+                                "accordion": "Accordion",
+                                "anchor": "Anchor",
+                                "space": "Space",
+                                "teaser": "Teaser",
+                                "richtext": "RichText",
+                                "heading": "StandaloneHeading",
+                                "columns": "Columns",
+                                "callToActionList": "StandaloneCallToActionList",
+                                "keyFacts": "KeyFacts",
+                                "media": "StandaloneMedia",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -884,15 +1016,6 @@
                     "H6"
                 ],
                 "nullable": false
-            },
-            {
-                "name": "textAlignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
-                ],
-                "nullable": false
             }
         ],
         "inputFields": [
@@ -918,15 +1041,6 @@
                     "H4",
                     "H5",
                     "H6"
-                ],
-                "nullable": false
-            },
-            {
-                "name": "textAlignment",
-                "kind": "Enum",
-                "enum": [
-                    "left",
-                    "center"
                 ],
                 "nullable": false
             }
@@ -1241,6 +1355,147 @@
         ]
     },
     {
+        "name": "MediaGallery",
+        "fields": [
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "MediaGalleryList",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "3x1",
+                    "2x1",
+                    "1x1",
+                    "1x2",
+                    "1x3",
+                    "2x3",
+                    "3x4",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "items",
+                "kind": "Block",
+                "block": "MediaGalleryList",
+                "nullable": false
+            },
+            {
+                "name": "aspectRatio",
+                "kind": "Enum",
+                "enum": [
+                    "16x9",
+                    "4x3",
+                    "3x2",
+                    "3x1",
+                    "2x1",
+                    "1x1",
+                    "1x2",
+                    "1x3",
+                    "2x3",
+                    "3x4",
+                    "9x16"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "MediaGalleryItem",
+        "fields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "caption",
+                "kind": "String",
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "media",
+                "kind": "Block",
+                "block": "Media",
+                "nullable": false
+            },
+            {
+                "name": "caption",
+                "kind": "String",
+                "nullable": true
+            }
+        ]
+    },
+    {
+        "name": "MediaGalleryList",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "MediaGalleryItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "MediaGalleryItem",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "OptionalPixelImage",
         "fields": [
             {
@@ -1302,11 +1557,13 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -1346,11 +1603,13 @@
                                 "space": "Space",
                                 "teaser": "Teaser",
                                 "richtext": "RichText",
-                                "heading": "Heading",
+                                "heading": "StandaloneHeading",
                                 "columns": "Columns",
-                                "callToActionList": "CallToActionList",
+                                "callToActionList": "StandaloneCallToActionList",
                                 "keyFacts": "KeyFacts",
-                                "media": "StandaloneMedia"
+                                "media": "StandaloneMedia",
+                                "contentGroup": "ContentGroup",
+                                "mediaGallery": "MediaGallery"
                             },
                             "nullable": false
                         }
@@ -1936,60 +2195,132 @@
         "name": "Stage",
         "fields": [
             {
-                "name": "attachedBlocks",
+                "name": "blocks",
                 "kind": "NestedObjectList",
                 "object": {
                     "fields": [
                         {
-                            "name": "type",
+                            "name": "key",
                             "kind": "String",
                             "nullable": false
                         },
                         {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
                             "name": "props",
-                            "kind": "OneOfBlocks",
-                            "blocks": {
-                                "basicStage": "BasicStage"
-                            },
+                            "kind": "Block",
+                            "block": "BasicStage",
                             "nullable": false
                         }
                     ]
                 },
                 "nullable": false
-            },
-            {
-                "name": "activeType",
-                "kind": "String",
-                "nullable": true
-            },
-            {
-                "name": "block",
-                "kind": "NestedObject",
-                "object": {
-                    "fields": [
-                        {
-                            "name": "type",
-                            "kind": "String",
-                            "nullable": false
-                        },
-                        {
-                            "name": "props",
-                            "kind": "OneOfBlocks",
-                            "blocks": {
-                                "basicStage": "BasicStage"
-                            },
-                            "nullable": false
-                        }
-                    ]
-                },
-                "nullable": true
             }
         ],
         "inputFields": [
             {
-                "name": "activeType",
-                "kind": "String",
-                "nullable": true
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "BasicStage",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "StandaloneCallToActionList",
+        "fields": [
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "callToActionList",
+                "kind": "Block",
+                "block": "CallToActionList",
+                "nullable": false
+            },
+            {
+                "name": "alignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center",
+                    "right"
+                ],
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "StandaloneHeading",
+        "fields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
+                ],
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "heading",
+                "kind": "Block",
+                "block": "Heading",
+                "nullable": false
+            },
+            {
+                "name": "textAlignment",
+                "kind": "Enum",
+                "enum": [
+                    "left",
+                    "center"
+                ],
+                "nullable": false
             }
         ]
     },

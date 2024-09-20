@@ -4,6 +4,8 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
+    DocumentInterface,
+    MasterMenu,
     MasterMenuData,
     PagesPage,
     PublisherPage,
@@ -21,7 +23,8 @@ export const pageTreeCategories: AllCategories = [
     },
 ];
 
-export const pageTreeDocumentTypes = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const pageTreeDocumentTypes: Record<string, DocumentInterface<any, any>> = {
     Page,
     Link,
 };
@@ -102,3 +105,5 @@ export const masterMenuData: MasterMenuData = [
         requiredPermission: "pageTree",
     },
 ];
+
+export const AppMasterMenu = () => <MasterMenu menu={masterMenuData} />;

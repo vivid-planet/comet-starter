@@ -1,21 +1,15 @@
 import { gql, previewParams } from "@comet/cms-site";
+import { GQLLayoutQuery, GQLLayoutQueryVariables } from "@src/app/[domain]/[language]/layout.generated";
 import { IntlProvider } from "@src/common/intl/IntlProvider";
 import { loadMessages } from "@src/common/intl/loadMessages";
-import { getSiteConfigForDomain } from "@src/config";
 import { Header } from "@src/layout/header/Header";
 import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { notFound } from "next/navigation";
+import { PropsWithChildren } from "react";
 
-import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./layout.generated";
-
-export default async function Page({
-    children,
-    params: { domain, language },
-}: {
-    children: React.ReactNode;
-    params: { domain: string; language: string };
-}) {
+export default async function Page({ children, params: { language, domain } }: PropsWithChildren<{ params: { language: string; domain: string } }>) {
     const siteConfig = getSiteConfigForDomain(domain);
 
     if (!siteConfig.scope.languages.includes(language)) {
@@ -34,7 +28,6 @@ export default async function Page({
                     ...Header
                 }
             }
-
             ${headerFragment}
         `,
         { domain, language },

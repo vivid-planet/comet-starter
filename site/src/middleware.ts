@@ -1,38 +1,13 @@
-import { previewParams } from "@comet/cms-site";
-import { getSiteConfigs } from "@src/config";
 import { Rewrite } from "next/dist/lib/load-custom-routes";
-import { headers } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 import { createRedirects } from "./redirects/redirects";
-
-function getHost(headers: Headers) {
-    const host = headers.get("x-forwarded-host") ?? headers.get("host");
-    if (!host) throw new Error("Could not evaluate host");
-    return host;
-}
-
-async function getSiteConfigForHost(host: string) {
-    const sitePreviewParams = await previewParams({ skipDraftModeCheck: true });
-    if (sitePreviewParams?.scope) {
-        const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === sitePreviewParams.scope.domain);
-        if (siteConfig) return siteConfig;
-    }
-    return getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
-}
-
-// Used for getting SiteConfig in server-components where params is not available (e.g. sitemap, not-found - see https://github.com/vercel/next.js/discussions/43179)
-export async function getSiteConfig() {
-    const host = getHost(headers());
-    const siteConfig = await getSiteConfigForHost(host);
-    if (!siteConfig) throw new Error(`SiteConfig not found for host ${host}`);
-    return siteConfig;
-}
+import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
 export async function middleware(request: NextRequest) {
     const headers = request.headers;
-    const host = getHost(headers);
+    const host = getHostByHeaders(headers);
     const { pathname } = new URL(request.url);
 
     // Block-Preview

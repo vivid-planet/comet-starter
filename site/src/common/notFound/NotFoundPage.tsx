@@ -3,7 +3,6 @@
 import { Typography } from "@src/common/components/Typography";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React from "react";
 import { FormattedMessage } from "react-intl";
 
 interface NotFoundPageProps {

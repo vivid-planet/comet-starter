@@ -14,14 +14,12 @@ import {
     CurrentUserProvider,
     DependenciesConfigProvider,
     LocaleProvider,
-    MasterMenu,
     MasterMenuRoutes,
     SitePreview,
     SitesConfigProvider,
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
-import { ContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
@@ -31,7 +29,7 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
+import { AppMasterMenu, masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
@@ -57,7 +55,7 @@ export function App() {
                     <SitesConfigProvider
                         value={{
                             configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs, scope: ContentScope) => {
+                            resolveSiteConfigForScope: (configs, scope) => {
                                 const siteConfig = configs.find((config) => {
                                     return config.scope.domain === scope.domain;
                                 });
@@ -80,7 +78,7 @@ export function App() {
                             }}
                         >
                             <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                <LocaleProvider resolveLocaleForScope={(scope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
                                         <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
@@ -106,7 +104,7 @@ export function App() {
                                                                             path={`${match.path}/preview`}
                                                                             render={(props) => (
                                                                                 <SitePreview
-                                                                                    resolvePath={(path: string, scope: ContentScope) => {
+                                                                                    resolvePath={(path: string, scope) => {
                                                                                         return `/${scope.language}${path}`;
                                                                                     }}
                                                                                     {...props}
@@ -117,7 +115,7 @@ export function App() {
                                                                             render={() => (
                                                                                 <MasterLayout
                                                                                     headerComponent={MasterHeader}
-                                                                                    menuComponent={() => <MasterMenu menu={masterMenuData} />}
+                                                                                    menuComponent={AppMasterMenu}
                                                                                 >
                                                                                     <MasterMenuRoutes menu={masterMenuData} />
                                                                                 </MasterLayout>
