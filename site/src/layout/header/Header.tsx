@@ -47,50 +47,48 @@ const Header = ({ header }: Props) => {
 
                         <DesktopHeaderFullHeightNav>
                             <TopLevelNavigation>
-                                {header
-                                    .filter((node) => !node.hideInMenu)
-                                    .map((node) => (
-                                        <TopLevelLinkContainer
-                                            key={node.id}
-                                            onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
-                                            onMouseLeave={() => setExpandedSubLevelNavigation(null)}
-                                        >
-                                            <LinkContainer>
-                                                <Link page={node} activeClassName="active" aria-label={node.name}>
-                                                    {node.name}
-                                                </Link>
-                                                {node.childNodes.length > 0 && (
-                                                    <ToggleSubLevelNavigationButton
-                                                        aria-label={intl.formatMessage(
-                                                            {
-                                                                id: "header.subMenu.arialLabel",
-                                                                defaultMessage: "Submenu of {name}",
-                                                            },
-                                                            { name: node.name },
-                                                        )}
-                                                        aria-expanded={expandedSubLevelNavigation === node.id}
-                                                        onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                                    >
-                                                        <AnimatedChevron
-                                                            href="/assets/icons/chevron-down.svg#chevron-down"
-                                                            $isExpanded={expandedSubLevelNavigation === node.id}
-                                                        />
-                                                    </ToggleSubLevelNavigationButton>
-                                                )}
-                                            </LinkContainer>
+                                {header.map((node) => (
+                                    <TopLevelLinkContainer
+                                        key={node.id}
+                                        onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
+                                        onMouseLeave={() => setExpandedSubLevelNavigation(null)}
+                                    >
+                                        <LinkContainer>
+                                            <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                {node.name}
+                                            </Link>
                                             {node.childNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                    {node.childNodes.map((node) => (
-                                                        <li key={node.id}>
-                                                            <Link page={node} activeClassName="active" aria-label={node.name}>
-                                                                {node.name}
-                                                            </Link>
-                                                        </li>
-                                                    ))}
-                                                </SubLevelNavigation>
+                                                <ToggleSubLevelNavigationButton
+                                                    aria-label={intl.formatMessage(
+                                                        {
+                                                            id: "header.subMenu.arialLabel",
+                                                            defaultMessage: "Submenu of {name}",
+                                                        },
+                                                        { name: node.name },
+                                                    )}
+                                                    aria-expanded={expandedSubLevelNavigation === node.id}
+                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                >
+                                                    <AnimatedChevron
+                                                        href="/assets/icons/chevron-down.svg#chevron-down"
+                                                        $isExpanded={expandedSubLevelNavigation === node.id}
+                                                    />
+                                                </ToggleSubLevelNavigationButton>
                                             )}
-                                        </TopLevelLinkContainer>
-                                    ))}
+                                        </LinkContainer>
+                                        {node.childNodes.length > 0 && (
+                                            <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                {node.childNodes.map((node) => (
+                                                    <li key={node.id}>
+                                                        <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                            {node.name}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </SubLevelNavigation>
+                                        )}
+                                    </TopLevelLinkContainer>
+                                ))}
                             </TopLevelNavigation>
                         </DesktopHeaderFullHeightNav>
 
