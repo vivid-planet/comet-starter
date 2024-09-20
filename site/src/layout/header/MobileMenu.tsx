@@ -189,7 +189,7 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
     width: 100vw;
     z-index: 40;
     background-color: ${({ theme }) => theme.palette.gray["200"]};
-    overflow: hidden;
+    overflow: auto;
     visibility: hidden;
     transition: height 0.15s ease-out, visibility 0s linear 0.15s;
 
@@ -218,7 +218,7 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     z-index: 41;
     background-color: ${({ theme }) => theme.palette.gray["200"]};
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
     visibility: hidden;
     transition: left 0.15s ease-out, visibility 0s linear 0.15s;
 
