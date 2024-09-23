@@ -6,7 +6,6 @@
     },
     "dependencies": {
         "compression": "^1.7.4",
-        "envsub": "^4.1.0",
         "express": "^4.17.1",
         "helmet": "^7.0.0"
     },
