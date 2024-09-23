@@ -44,11 +44,7 @@ app.get("/status/health", (req, res) => {
 app.use(
     express.static(`${process.cwd()}/build`, {
         setHeaders: (res, path, stat) => {
-            if (path.endsWith(".html")) {
-                // Don't cache the index.html at all to make sure applications updates are applied
-                // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_storing
-                res.setHeader("cache-control", "no-store");
-            } else if (path.endsWith(".js")) {
+            if (path.endsWith(".js")) {
                 // The js file is static and the index.html uses a parameter as cache buster
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#caching_static_assets
                 res.setHeader("cache-control", "public, max-age=31536000, immutable");
