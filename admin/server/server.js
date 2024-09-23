@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.APP_PORT ?? 3000;
 
 // Read index.html file
-let indexFile = fs.readFileSync(`${__dirname}/../build/index.html`, 'utf8');
+let indexFile = fs.readFileSync(`${process.cwd()}/build/index.html`, 'utf8');
 
 // Replace environment variables
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
@@ -42,7 +42,7 @@ app.get("/status/health", (req, res) => {
 });
 
 app.use(
-    express.static(`${__dirname}/../build`, {
+    express.static(`${process.cwd()}/build`, {
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".html")) {
                 // Don't cache the index.html at all to make sure applications updates are applied
