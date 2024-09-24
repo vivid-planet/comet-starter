@@ -11,7 +11,7 @@ export function getHostByHeaders(headers: Headers) {
 export function getSiteConfigForDomain(domain: string) {
     let siteConfig;
     if (domain === "assets") {
-        // /assets paths they are not handled by middleware.ts, therefore no rewriting has taken place and we cannot rely on params.domain
+        // /assets paths are not handled by the middleware, therefore no rewriting has taken place and we cannot rely on params.domain
         const host = getHostByHeaders(headers());
         siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
     } else {
