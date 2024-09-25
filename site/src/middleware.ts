@@ -104,7 +104,7 @@ export async function middleware(request: NextRequest) {
 
 type RewritesMap = Map<string, Rewrite>;
 
-async function createRewrites(scope: Pick<GQLRedirectScope, "domain">): Promise<RewritesMap> {
+async function createRewrites(scope: GQLRedirectScope): Promise<RewritesMap> {
     const rewritesMap = new Map<string, Rewrite>();
     return rewritesMap;
 }
