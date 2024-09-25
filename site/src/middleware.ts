@@ -77,20 +77,18 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
     }
 
-    if (scope) {
-        const redirects = await createRedirects(scope);
+    const redirects = await createRedirects(scope);
 
-        const redirect = redirects.get(pathname);
-        if (redirect) {
-            const destination: string = redirect.destination;
-            return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
-        }
+    const redirect = redirects.get(pathname);
+    if (redirect) {
+        const destination: string = redirect.destination;
+        return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
+    }
 
-        const rewrites = await createRewrites(scope);
-        const rewrite = rewrites.get(pathname);
-        if (rewrite) {
-            return NextResponse.rewrite(new URL(rewrite.destination, request.url));
-        }
+    const rewrites = await createRewrites(scope);
+    const rewrite = rewrites.get(pathname);
+    if (rewrite) {
+        return NextResponse.rewrite(new URL(rewrite.destination, request.url));
     }
 
     return NextResponse.rewrite(
