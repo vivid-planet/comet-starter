@@ -10,7 +10,7 @@ import {
 } from "@comet/cms-admin";
 import { ContentScope } from "@src/site-configs";
 
-// convenince wrapper for app (Bind Generic)
+// convenience wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi<ContentScope> {
     return useContentScopeLibrary<ContentScope>();
 }

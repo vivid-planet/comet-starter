@@ -14,7 +14,7 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
 ### Installation
 
     // Optionally set domain to use instead of localhost (add to ~/.bashrc)
-    export DEV_DOMAIN=myname.dev.vivid-planet.cloud // Vivid Planet network
+    export DEV_DOMAIN=my-name.dev.vivid-planet.cloud // Vivid Planet network
 
     // Execute following script
     ./install.sh
