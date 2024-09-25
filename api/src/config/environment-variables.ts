@@ -124,4 +124,8 @@ export class EnvironmentVariables {
     @IsArray()
     @Transform(({ value }) => JSON.parse(value))
     PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
+
+    @IsString()
+    @MinLength(16)
+    SITE_PREVIEW_SECRET: string;
 }
