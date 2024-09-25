@@ -18,7 +18,7 @@ export const FooterContentBlock = withPreview(
                 </RichTextWrapper>
                 <HorizontalLine />
                 <LinkCopyrightWrapper>
-                    {!!linkList.blocks.length && (
+                    {linkList.blocks.length > 0 && (
                         <LinksWrapper>
                             {linkList.blocks.map((block) => (
                                 <LinkText as={LinkBlock} key={block.key} data={block.props.link} variant="p200">
