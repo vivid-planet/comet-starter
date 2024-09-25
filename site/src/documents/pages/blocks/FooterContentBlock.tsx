@@ -110,7 +110,6 @@ const CopyrightNotice = styled(Typography)`
 const LinkText = styled(Typography)`
     color: ${({ theme }) => theme.palette.gray["400"]};
     text-decoration: underline;
-    font-family: ${({ theme }) => theme.fontFamily};
 `;
 
 const HorizontalLine = styled.hr`
