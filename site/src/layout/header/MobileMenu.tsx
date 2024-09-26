@@ -10,8 +10,6 @@ import styled, { css } from "styled-components";
 
 import { GQLMobileMenuFragment } from "./MobileMenu.fragment.generated";
 
-export const HEADER_HEIGHT = 100;
-
 interface Props {
     header: GQLMobileMenuFragment[];
 }
@@ -182,7 +180,7 @@ const Icon = styled(SvgUse)`
 const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
     display: block;
     position: fixed;
-    top: ${HEADER_HEIGHT}px;
+    top: var(--header-height);
     left: 0;
     height: 0;
     width: 100vw;
@@ -196,7 +194,7 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
         $isMenuOpen &&
         css`
             visibility: visible;
-            height: calc(100vh - ${HEADER_HEIGHT}px);
+            height: calc(100vh - var(--header-height));
             transition: height 0.25s ease-in;
         `}
 `;
@@ -210,9 +208,9 @@ const TopLevelNavigation = styled.ol`
 const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     list-style-type: none;
     position: fixed;
-    top: ${HEADER_HEIGHT}px;
+    top: var(--header-height);
     left: 100vw;
-    height: calc(100vh - ${HEADER_HEIGHT}px);
+    height: calc(100vh - var(--header-height));
     width: 100vw;
     z-index: 41;
     background-color: ${({ theme }) => theme.palette.gray["200"]};

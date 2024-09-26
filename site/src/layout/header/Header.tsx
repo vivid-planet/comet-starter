@@ -1,6 +1,6 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { HEADER_HEIGHT, MobileMenu } from "@src/layout/header/MobileMenu";
+import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import { useEffect, useState } from "react";
@@ -106,7 +106,7 @@ const PageLayoutContent = styled.div`
 
 const Root = styled.div`
     display: flex;
-    height: ${HEADER_HEIGHT}px;
+    height: var(--header-height);
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
