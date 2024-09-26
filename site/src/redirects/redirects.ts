@@ -118,9 +118,6 @@ type Redirect = { destination: string; permanent: boolean; has?: RouteHas[] | un
 export const createRedirects = async (scope: GQLRedirectScope) => {
     const key = `redirects-${JSON.stringify(scope)}`;
     return memoryCache.wrap(key, async () => {
-        return new Map<string, Redirect>([
-            ...Array.from(await createApiRedirects(scope)),
-            ...Array.from(await createInternalRedirects()),
-        ]);
+        return new Map<string, Redirect>([...Array.from(await createApiRedirects(scope)), ...Array.from(await createInternalRedirects())]);
     });
 };
