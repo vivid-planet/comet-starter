@@ -1,16 +1,19 @@
 import { createMigrationsList, createOrmConfig } from "@comet/cms-api";
 import { EntityCaseNamingStrategy } from "@mikro-orm/core";
+import { createConfig } from "@src/config/config";
 import path from "path";
+
+const config = createConfig(process.env);
 
 export const ormConfig = createOrmConfig({
     type: "postgresql",
-    host: process.env.POSTGRESQL_HOST,
-    port: Number(process.env.POSTGRESQL_PORT),
-    user: process.env.POSTGRESQL_USER,
-    password: process.env.POSTGRESQL_PASSWORD,
-    dbName: process.env.POSTGRESQL_DB,
+    host: config.db.host,
+    port: config.db.port,
+    user: config.db.user,
+    password: config.db.password,
+    dbName: config.db.database,
     driverOptions: {
-        connection: { ssl: process.env.POSTGRESQL_USE_SSL === "true" ? { rejectUnauthorized: true, ca: process.env.POSTGRESQL_CA_CERT } : false },
+        connection: { ssl: config.db.ssl ? { rejectUnauthorized: true, ca: config.db.caCert } : false },
     },
     namingStrategy: EntityCaseNamingStrategy,
     debug: false,

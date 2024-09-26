@@ -17,6 +17,15 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
         corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),
+        db: {
+            host: envVars.POSTGRESQL_HOST,
+            port: envVars.POSTGRESQL_PORT,
+            user: envVars.POSTGRESQL_USER,
+            password: envVars.POSTGRESQL_PASSWORD,
+            database: envVars.POSTGRESQL_DB,
+            ssl: envVars.POSTGRESQL_USE_SSL,
+            caCert: envVars.POSTGRESQL_CA_CERT,
+        },
         auth: {
             useAuthProxy: envVars.USE_AUTHPROXY,
             systemUserPassword: envVars.BASIC_AUTH_SYSTEM_USER_PASSWORD,
