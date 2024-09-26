@@ -251,6 +251,7 @@ const ButtonLinkBase = styled.button`
     flex-direction: row;
     width: 100%;
     padding: ${({ theme }) => theme.spacing.S500} 0;
+    gap: ${({ theme }) => theme.spacing.S200};
 
     &:hover {
         color: ${({ theme }) => theme.palette.primary.main};
