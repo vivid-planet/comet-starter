@@ -1,13 +1,14 @@
 "use client";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { GQLMobileMenuFragment } from "@src/layout/header/MobileMenu.fragment.generated";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import { DisableBodyScrolling } from "@src/util/DisableBodyScrolling";
 import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import styled, { css } from "styled-components";
+
+import { GQLMobileMenuFragment } from "./MobileMenu.fragment.generated";
 
 export const HEADER_HEIGHT = 100;
 
@@ -40,14 +41,14 @@ const MobileMenu = ({ header }: Props) => {
     useEffect(() => {
         if (!expandedSubLevelNavigation) return;
 
-        const keyDownHandler = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
-                e.preventDefault();
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
                 setExpandedSubLevelNavigation(null);
             }
         };
-        document.addEventListener("keydown", keyDownHandler);
-        return () => document.removeEventListener("keydown", keyDownHandler);
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [expandedSubLevelNavigation]);
 
     return (
