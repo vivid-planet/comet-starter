@@ -28,14 +28,14 @@ const Header = ({ header }: Props) => {
     useEffect(() => {
         if (!expandedSubLevelNavigation) return;
 
-        const keyDownHandler = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
-                e.preventDefault();
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
                 setExpandedSubLevelNavigation(null);
             }
         };
-        document.addEventListener("keydown", keyDownHandler);
-        return () => document.removeEventListener("keydown", keyDownHandler);
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [expandedSubLevelNavigation]);
 
     return (
