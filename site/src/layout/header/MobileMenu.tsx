@@ -14,7 +14,7 @@ interface Props {
     header: GQLMobileMenuFragment[];
 }
 
-const MobileMenu = ({ header }: Props) => {
+export const MobileMenu = ({ header }: Props) => {
     const intl = useIntl();
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
@@ -281,5 +281,3 @@ const OverviewButton = styled(PageLink)`
         color: ${({ theme }) => theme.palette.primary.main};
     }
 `;
-
-export { MobileMenu };

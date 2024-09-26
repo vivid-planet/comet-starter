@@ -13,7 +13,7 @@ interface Props {
     header: GQLHeaderFragment[];
 }
 
-const Header = ({ header }: Props) => {
+export const Header = ({ header }: Props) => {
     const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
 
@@ -198,5 +198,3 @@ const Link = styled(PageLink)`
         text-underline-offset: 8px;
     }
 `;
-
-export { Header };
