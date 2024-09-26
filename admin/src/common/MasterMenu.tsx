@@ -29,7 +29,7 @@ export const pageTreeDocumentTypes: Record<string, DocumentInterface<any, any>> 
     Page,
     Link,
 };
-const RedirectsPage = createRedirectsPage();
+const RedirectsPage = createRedirectsPage({ scopeParts: ["domain"] });
 
 export const masterMenuData: MasterMenuData = [
     {
