@@ -209,22 +209,22 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     list-style-type: none;
     position: fixed;
     top: var(--header-height);
-    left: 100vw;
+    left: 0;
     height: calc(100vh - var(--header-height));
     width: 100vw;
-    z-index: 41;
     background-color: ${({ theme }) => theme.palette.gray["200"]};
     padding: 0;
     overflow: auto;
     visibility: hidden;
-    transition: left 0.15s ease-out, visibility 0s linear 0.15s;
+    transform: translateX(100%);
+    transition: transform 0.2s ease-out, visibility 0s linear 0.2s;
 
     ${({ $isExpanded }) =>
         $isExpanded &&
         css`
             visibility: visible;
-            left: 0;
-            transition: left 0.25s ease-in;
+            transform: translateX(0);
+            transition: transform 0.2s ease-in;
         `}
 `;
 
