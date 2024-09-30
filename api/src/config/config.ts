@@ -25,6 +25,12 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
             idpEndSessionEndpoint: envVars.IDP_END_SESSION_ENDPOINT,
             postLogoutRedirectUri: envVars.POST_LOGOUT_REDIRECT_URI,
         },
+        acl: {
+            adminEmails: envVars.ACL_ADMIN_EMAILS,
+            adminEmailDomains: envVars.ACL_ADMIN_EMAIL_DOMAINS,
+            userEmails: envVars.ACL_USER_EMAILS,
+            userEmailDomains: envVars.ACL_USER_EMAIL_DOMAINS,
+        },
         imgproxy: {
             ...cometConfig.imgproxy,
             salt: envVars.IMGPROXY_SALT,
