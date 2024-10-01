@@ -58,7 +58,9 @@ app.use(
 
 // As a fallback, route everything to index.html
 app.get("*", (req, res) => {
-    res.send(indexFile);
+    // Don't cache the index.html at all to make sure applications updates are applied
+    // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_storing
+    res.send(indexFile, { headers: { "cache-control": "no-store" } });
 });
 
 app.listen(port, () => {
