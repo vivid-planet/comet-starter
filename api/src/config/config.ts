@@ -28,8 +28,8 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         acl: {
             adminEmails: envVars.ACL_ADMIN_EMAILS,
             adminEmailDomains: envVars.ACL_ADMIN_EMAIL_DOMAINS,
-            userEmails: envVars.ACL_SUPERUSER_EMAILS,
-            userEmailDomains: envVars.ACL_SUPERUSER_EMAIL_DOMAINS,
+            superuserEmails: envVars.ACL_SUPERUSER_EMAILS,
+            superuserEmailDomains: envVars.ACL_SUPERUSER_EMAIL_DOMAINS,
         },
         imgproxy: {
             ...cometConfig.imgproxy,

@@ -14,7 +14,7 @@ export class AccessControlService extends AbstractAccessControlService {
             return UserPermissions.allPermissions;
         }
 
-        if (this.isUser(user)) {
+        if (this.isSuperUser(user)) {
             return [{ permission: "pageTree" }];
         }
 
@@ -26,7 +26,7 @@ export class AccessControlService extends AbstractAccessControlService {
             return UserPermissions.allContentScopes;
         }
 
-        if (this.isUser(user)) {
+        if (this.isSuperUser(user)) {
             return [
                 { domain: "main", language: "de" },
                 { domain: "secondary", language: "de" },
@@ -40,7 +40,7 @@ export class AccessControlService extends AbstractAccessControlService {
         return this.config.acl.adminEmails.includes(user.email) || this.config.acl.adminEmailDomains.includes(user.email.split("@")[1]);
     }
 
-    private isUser(user: User) {
-        return this.config.acl.userEmails.includes(user.email) || this.config.acl.userEmailDomains.includes(user.email.split("@")[1]);
+    private isSuperUser(user: User) {
+        return this.config.acl.superuserEmails.includes(user.email) || this.config.acl.superuserEmailDomains.includes(user.email.split("@")[1]);
     }
 }
