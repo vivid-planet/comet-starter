@@ -26,7 +26,7 @@ import { StageBlock } from "../blocks/stage.block";
 export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     [OptionalProps]?: "createdAt" | "updatedAt";
 
-    @PrimaryKey({ columnType: "uuid" })
+    @PrimaryKey({ type: "uuid" })
     @Field(() => ID)
     id: string = v4();
 
