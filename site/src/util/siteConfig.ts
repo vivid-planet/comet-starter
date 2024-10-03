@@ -9,14 +9,7 @@ export function getHostByHeaders(headers: Headers) {
 }
 
 export function getSiteConfigForDomain(domain: string) {
-    let siteConfig;
-    if (domain === "assets") {
-        // /assets paths are not handled by the middleware, therefore no rewriting has taken place and we cannot rely on params.domain
-        const host = getHostByHeaders(headers());
-        siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.domains.main === host || siteConfig.domains.preliminary === host);
-    } else {
-        siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
-    }
+    const siteConfig = getSiteConfigs().find((siteConfig) => siteConfig.scope.domain === domain);
     if (!siteConfig) throw new Error(`SiteConfig not found for domain ${domain}`);
     return siteConfig;
 }
