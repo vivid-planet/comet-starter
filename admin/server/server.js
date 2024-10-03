@@ -42,7 +42,7 @@ app.get("/status/health", (req, res) => {
 });
 
 app.use(
-    express.static(`${process.cwd()}/build`, {
+    express.static("./build", {
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".js")) {
                 // The js file is static and the index.html uses a parameter as cache buster
