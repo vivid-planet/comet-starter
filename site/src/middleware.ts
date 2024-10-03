@@ -2,6 +2,7 @@ import { Rewrite } from "next/dist/lib/load-custom-routes";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
+import { GQLRedirectScope } from "./graphql.generated";
 import { createRedirects } from "./redirects/redirects";
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
@@ -29,11 +30,13 @@ export async function middleware(request: NextRequest) {
         throw new Error(`Cannot get siteConfig for host ${host}`);
     }
 
+    const scope = { domain: siteConfig.scope.domain };
+
     if (pathname.startsWith("/dam/")) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
     }
 
-    const redirects = await createRedirects();
+    const redirects = await createRedirects(scope);
 
     const redirect = redirects.get(pathname);
     if (redirect) {
@@ -41,7 +44,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
     }
 
-    const rewrites = await createRewrites();
+    const rewrites = await createRewrites(scope);
     const rewrite = rewrites.get(pathname);
     if (rewrite) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
@@ -60,7 +63,7 @@ export async function middleware(request: NextRequest) {
 
 type RewritesMap = Map<string, Rewrite>;
 
-async function createRewrites(): Promise<RewritesMap> {
+async function createRewrites(scope: GQLRedirectScope): Promise<RewritesMap> {
     const rewritesMap = new Map<string, Rewrite>();
     return rewritesMap;
 }
@@ -72,12 +75,12 @@ export const config = {
          * - api (API routes)
          * - _next/static (static files)
          * - _next/image (image optimization files)
-         * - favicon.ico, favicon.svg, favicon.png
+         * - favicon.ico, icon.svg, apple-icon.png
          * - manifest.json
          * - assets (assets from /public folder)
          * - robots.txt
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|favicon.svg|favicon.png|manifest.json|assets|robots.txt).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets|robots.txt).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [

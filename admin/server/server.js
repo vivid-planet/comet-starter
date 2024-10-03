@@ -2,9 +2,18 @@
 const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
+const fs = require("fs");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
+
+// Read index.html file
+let indexFile = fs.readFileSync("build/index.html", "utf8");
+
+// Replace environment variables
+indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
+    return process.env[p1] || "";
+});
 
 app.use(compression());
 app.use(
@@ -33,13 +42,9 @@ app.get("/status/health", (req, res) => {
 });
 
 app.use(
-    express.static("../build", {
+    express.static("./build", {
         setHeaders: (res, path, stat) => {
-            if (path.endsWith(".html")) {
-                // Don't cache the index.html at all to make sure applications updates are applied
-                // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_storing
-                res.setHeader("cache-control", "no-store");
-            } else if (path.endsWith(".js")) {
+            if (path.endsWith(".js")) {
                 // The js file is static and the index.html uses a parameter as cache buster
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#caching_static_assets
                 res.setHeader("cache-control", "public, max-age=31536000, immutable");
@@ -53,7 +58,9 @@ app.use(
 
 // As a fallback, route everything to index.html
 app.get("*", (req, res) => {
-    res.sendFile(`index.html`, { root: `${__dirname}/../build/`, headers: { "cache-control": "no-store" } });
+    // Don't cache the index.html at all to make sure applications updates are applied
+    // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#preventing_storing
+    res.send(indexFile, { headers: { "cache-control": "no-store" } });
 });
 
 app.listen(port, () => {

@@ -1,4 +1,5 @@
 import { IntlProvider } from "@src/util/IntlProvider";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { readFile } from "fs/promises";
 import { PropsWithChildren } from "react";
 
@@ -11,7 +12,12 @@ export async function loadMessages(language: string) {
     return messages;
 }
 
-export default async function Page({ children, params: { language } }: PropsWithChildren<{ params: { language: string } }>) {
+export default async function Page({ children, params: { domain, language } }: PropsWithChildren<{ params: { domain: string; language: string } }>) {
+    const siteConfig = getSiteConfigForDomain(domain);
+    if (!siteConfig.scope.languages.includes(language)) {
+        language = "en";
+    }
+
     const messages = await loadMessages(language);
     return (
         <IntlProvider locale={language} messages={messages}>

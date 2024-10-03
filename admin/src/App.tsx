@@ -20,7 +20,6 @@ import {
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
-import { ContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
@@ -56,7 +55,7 @@ export function App() {
                     <SitesConfigProvider
                         value={{
                             configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs, scope: ContentScope) => {
+                            resolveSiteConfigForScope: (configs, scope) => {
                                 const siteConfig = configs.find((config) => {
                                     return config.scope.domain === scope.domain;
                                 });
@@ -79,7 +78,7 @@ export function App() {
                             }}
                         >
                             <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                <LocaleProvider resolveLocaleForScope={(scope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
                                         <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
@@ -105,7 +104,7 @@ export function App() {
                                                                             path={`${match.path}/preview`}
                                                                             render={(props) => (
                                                                                 <SitePreview
-                                                                                    resolvePath={(path: string, scope: ContentScope) => {
+                                                                                    resolvePath={(path: string, scope) => {
                                                                                         return `/${scope.language}${path}`;
                                                                                     }}
                                                                                     {...props}
