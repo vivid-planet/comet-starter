@@ -125,23 +125,7 @@ services:
           -----END CERTIFICATE-----
       - key: PRIVATE_SITE_CONFIGS
         scope: RUN_AND_BUILD_TIME
-        value: |-
-          [
-              {
-                "scope": { "domain": "main", "languages": ["en", "de"] },
-                "name": "Starter Main",
-                "domains": { "main": "comet-starter-site-tyqqf.ondigitalocean.app" },
-                "preloginEnabled": true,
-                "url": "https://comet-starter-site-tyqqf.ondigitalocean.app"
-              },
-              {
-                "scope": { "domain": "secondary", "languages": ["en", "de"] },
-                "name": "Starter Secondary",
-                "domains": { "main": "secondary.localhost:3000" },
-                "preloginEnabled": true,
-                "url": "http://secondary.localhost:3000"
-              }
-            ]
+        value: "{{ site://configs/private/dev }}"
       - key: POSTGRESQL_USE_SSL
         scope: RUN_AND_BUILD_TIME
         value: "true"
@@ -276,12 +260,10 @@ services:
         value: https://comet-starter-cms-64wfr.ondigitalocean.app/
       - key: PUBLIC_SITE_CONFIGS
         scope: RUN_AND_BUILD_TIME
-        value:
-          '[{"scope":{"domain":"main","languages":["en","de"]},"name":"Starter Main","domains":{"main":"comet-starter-site-tyqqf.ondigitalocean.app"},"preloginEnabled":true,"urls":"https://comet-starter-site-tyqqf.ondigitalocean.app"},{"scope":{"domain":"secondary","languages":["en","de"]},"name":"Starter
-          Secondary","domains":{"main":"secondary.localhost:3000"},"preloginEnabled":true,"url":"http://secondary.localhost:3000"}]'
+        value: "{{ site://configs/public/dev }}"
       - key: PREVIEW_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-site-preview-jespg.ondigitalocean.app
+        value: https://comet-starter-site-preview-jespg.ondigitalocean.app # TODO
     github:
       branch: main
       deploy_on_push: false

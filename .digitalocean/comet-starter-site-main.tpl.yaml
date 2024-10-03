@@ -6,11 +6,11 @@ features:
 ingress:
   rules:
     - component:
-        name: comet-starter-site
+        name: comet-starter-site-main
       match:
         path:
           prefix: /
-name: comet-starter-site
+name: comet-starter-site-main
 region: fra
 services:
   - build_command: |-
@@ -41,23 +41,7 @@ services:
         value: EV[1:/Nf0VXO5XP5SJY9Y/JAFyZttB4Z1B6po:xL4pWQaF02cU4y1QCahqXdvD94A+QOJxXVVGDea4TYFVPQ==]
       - key: PUBLIC_SITE_CONFIGS
         scope: RUN_AND_BUILD_TIME
-        value: |-
-          [
-              {
-                "scope": { "domain": "main", "languages": ["en", "de"] },
-                "name": "Starter Main",
-                "domains": { "main": "comet-starter-site-tyqqf.ondigitalocean.app" },
-                "preloginEnabled": true,
-                "url": "https://comet-starter-site-tyqqf.ondigitalocean.app"
-              },
-              {
-                "scope": { "domain": "secondary", "languages": ["en", "de"] },
-                "name": "Starter Secondary",
-                "domains": { "main": "secondary.localhost:3000" },
-                "preloginEnabled": true,
-                "url": "http://secondary.localhost:3000"
-              }
-            ]
+        value: "{{ site://configs/public/dev }}"
       - key: API_BASIC_AUTH_SYSTEM_USER_PASSWORD
         scope: RUN_AND_BUILD_TIME
         type: SECRET
@@ -69,6 +53,6 @@ services:
     http_port: 3000
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
-    name: comet-starter-site
+    name: comet-starter-site-main
     run_command: npm run serve
     source_dir: site
