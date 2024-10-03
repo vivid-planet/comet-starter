@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.APP_PORT ?? 3000;
 
 // Read index.html file
-let indexFile = fs.readFileSync(`${process.cwd()}/build/index.html`, "utf8");
+let indexFile = fs.readFileSync("build/index.html", "utf8");
 
 // Replace environment variables
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
