@@ -26,10 +26,8 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
             postLogoutRedirectUri: envVars.POST_LOGOUT_REDIRECT_URI,
         },
         acl: {
-            adminEmails: envVars.ACL_ADMIN_EMAILS,
-            adminEmailDomains: envVars.ACL_ADMIN_EMAIL_DOMAINS,
-            superuserEmails: envVars.ACL_SUPERUSER_EMAILS,
-            superuserEmailDomains: envVars.ACL_SUPERUSER_EMAIL_DOMAINS,
+            allPermissionsEmails: envVars.ACL_ALL_PERMISSIONS_EMAILS,
+            allPermissionsDomains: envVars.ACL_ALL_PERMISSIONS_DOMAINS,
         },
         imgproxy: {
             ...cometConfig.imgproxy,

@@ -17,10 +17,8 @@ describe("AccessControlService", () => {
                     provide: CONFIG,
                     useValue: {
                         acl: {
-                            adminEmails: ["admin@customer.com"],
-                            adminEmailDomains: ["vivid-planet.com"],
-                            superuserEmails: ["german-editor@customer.com"],
-                            superuserEmailDomains: [],
+                            allPermissionsEmails: ["admin@customer.com"],
+                            allPermissionsDomains: ["vivid-planet.com"],
                         } satisfies Config["acl"],
                     },
                 },
