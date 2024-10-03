@@ -31,12 +31,12 @@
         "start": "tsc --watch --project tsconfig.json"
     },
     "dependencies": {
-        "commander": "^11.0.0",
+        "commander": "^12.0.0",
         "eslint": "^8.0.0",
-        "glob": "^10.3.3",
+        "glob": "^11.0.0",
         "kleur": "^4.1.5",
         "nanospinner": "^1.1.0",
-        "rimraf": "^5.0.1"
+        "rimraf": "^6.0.0"
     },
     "devDependencies": {
         "@comet/eslint-config": "^7.5.0",
