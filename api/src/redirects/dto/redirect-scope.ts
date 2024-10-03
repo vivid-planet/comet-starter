@@ -6,7 +6,7 @@ import { IsString } from "class-validator";
 @ObjectType("RedirectScope") // name must not be changed in the app
 @InputType("RedirectScopeInput") // name must not be changed in the app
 export class RedirectScope {
-    @Property({ columnType: "text" })
+    @Property({ type: "text" })
     @Field()
     @IsString()
     domain: string;
