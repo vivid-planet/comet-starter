@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { ReactNode } from "react";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function AssetsLayout() {
+    // Do not present a dedicated 404 page, just send the notfound-header without content
     notFound();
 }
