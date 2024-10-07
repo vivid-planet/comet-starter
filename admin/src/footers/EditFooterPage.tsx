@@ -15,7 +15,7 @@ import {
 import { FooterContentBlockInput } from "@src/blocks.generated";
 import { useContentScope } from "@src/common/ContentScopeProvider";
 import isEqual from "lodash.isequal";
-import * as React from "react";
+import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useRouteMatch } from "react-router";
 
@@ -33,9 +33,9 @@ import {
 export function EditFooterPage(): JSX.Element | null {
     const { scope } = useContentScope();
     const siteConfig = useSiteConfig({ scope });
-    const [footerState, setFooterState] = React.useState<BlockState<typeof FooterContentBlock>>(FooterContentBlock.defaultValues());
-    const [hasChanges, setHasChanges] = React.useState(false);
-    const [referenceContent, setReferenceContent] = React.useState<FooterContentBlockInput | null>(null);
+    const [footerState, setFooterState] = useState<BlockState<typeof FooterContentBlock>>(FooterContentBlock.defaultValues());
+    const [hasChanges, setHasChanges] = useState(false);
+    const [referenceContent, setReferenceContent] = useState<FooterContentBlockInput | null>(null);
     const match = useRouteMatch();
     const previewApi = useBlockPreview();
     const blockContext = useCmsBlockContext();
@@ -74,7 +74,7 @@ export function EditFooterPage(): JSX.Element | null {
         { refetchQueries: !data?.footer ? [namedOperations.Query.Footer] : [] },
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (data) {
             if (data.footer) {
                 // @ts-expect-error type mismatch between createCompositeBlock and FooterContentBlockData, needs to be fixed in Comet
@@ -89,7 +89,7 @@ export function EditFooterPage(): JSX.Element | null {
         }
     }, [data]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const equal = isEqual(referenceContent, footerState ? FooterContentBlock.state2Output(footerState) : null);
         setHasChanges(!equal);
     }, [footerState, referenceContent]);

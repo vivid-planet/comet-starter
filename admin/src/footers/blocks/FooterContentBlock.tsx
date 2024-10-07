@@ -2,7 +2,6 @@ import { createCompositeBlock, createCompositeBlockTextField } from "@comet/bloc
 import { DamImageBlock } from "@comet/cms-admin";
 import { LinkListBlock } from "@src/common/blocks/LinkListBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
-import * as React from "react";
 import { FormattedMessage } from "react-intl";
 
 export const FooterContentBlock = createCompositeBlock({
