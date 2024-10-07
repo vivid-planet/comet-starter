@@ -1,5 +1,6 @@
 import { gql } from "@comet/cms-site";
 import { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
+import { GQLRedirectScope } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { RouteHas } from "next/dist/lib/load-custom-routes";
 
@@ -7,8 +8,8 @@ import { memoryCache } from "./cache";
 import { GQLRedirectsQuery, GQLRedirectsQueryVariables } from "./redirects.generated";
 
 const redirectsQuery = gql`
-    query Redirects($filter: RedirectFilter, $sort: [RedirectSort!], $offset: Int!, $limit: Int!) {
-        paginatedRedirects(filter: $filter, sort: $sort, offset: $offset, limit: $limit) {
+    query Redirects($scope: RedirectScopeInput!, $filter: RedirectFilter, $sort: [RedirectSort!], $offset: Int!, $limit: Int!) {
+        paginatedRedirects(scope: $scope, filter: $filter, sort: $sort, offset: $offset, limit: $limit) {
             nodes {
                 sourceType
                 source
@@ -33,7 +34,7 @@ const createInternalRedirects = async (): Promise<Map<string, Redirect>> => {
     return redirectsMap;
 };
 
-async function* fetchApiRedirects() {
+async function* fetchApiRedirects(scope: GQLRedirectScope) {
     let offset = 0;
     const limit = 100;
 
@@ -43,6 +44,7 @@ async function* fetchApiRedirects() {
             sort: { field: "createdAt", direction: "DESC" },
             offset,
             limit,
+            scope,
         });
 
         yield* paginatedRedirects.nodes;
@@ -55,14 +57,14 @@ async function* fetchApiRedirects() {
     }
 }
 
-const createApiRedirects = async (): Promise<Map<string, Redirect>> => {
+const createApiRedirects = async (scope: GQLRedirectScope): Promise<Map<string, Redirect>> => {
     const redirects = new Map<string, Redirect>();
     function replaceRegexCharacters(value: string): string {
         // escape ":" and "?", otherwise it is used for next.js regex path matching  (https://nextjs.org/docs/pages/api-reference/next-config-js/redirects#regex-path-matching)
         return value.replace(/[:?]/g, "\\$&");
     }
 
-    for await (const redirect of fetchApiRedirects()) {
+    for await (const redirect of fetchApiRedirects(scope)) {
         let source: string | undefined;
         let destination: string | undefined;
         let has: Redirect["has"];
@@ -113,9 +115,9 @@ const createApiRedirects = async (): Promise<Map<string, Redirect>> => {
 
 type Redirect = { destination: string; permanent: boolean; has?: RouteHas[] | undefined };
 
-export const createRedirects = async () => {
-    const key = `redirects`;
+export const createRedirects = async (scope: GQLRedirectScope) => {
+    const key = `redirects-${JSON.stringify(scope)}`;
     return memoryCache.wrap(key, async () => {
-        return new Map<string, Redirect>([...Array.from(await createApiRedirects()), ...Array.from(await createInternalRedirects())]);
+        return new Map<string, Redirect>([...Array.from(await createApiRedirects(scope)), ...Array.from(await createInternalRedirects())]);
     });
 };
