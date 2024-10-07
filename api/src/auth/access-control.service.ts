@@ -3,7 +3,7 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
 
-const allPermissionEmails: string[] = [];
+const allPermissionsEmails: string[] = [];
 
 @Injectable()
 export class AccessControlService extends AbstractAccessControlService {
@@ -31,7 +31,7 @@ export class AccessControlService extends AbstractAccessControlService {
         return (
             this.config.acl.allPermissionsEmails.includes(user.email) ||
             this.config.acl.allPermissionsDomains.includes(user.email.split("@")[1]) ||
-            allPermissionEmails.includes(user.email)
+            allPermissionsEmails.includes(user.email)
         );
     }
 }
