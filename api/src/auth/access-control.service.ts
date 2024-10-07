@@ -3,6 +3,8 @@ import { Inject, Injectable } from "@nestjs/common";
 import { Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
 
+const allPermissionUsers: string[] = [];
+
 @Injectable()
 export class AccessControlService extends AbstractAccessControlService {
     constructor(@Inject(CONFIG) private readonly config: Config) {
@@ -26,6 +28,10 @@ export class AccessControlService extends AbstractAccessControlService {
     }
 
     private hasAllPermissions(user: User) {
-        return this.config.acl.allPermissionsEmails.includes(user.email) || this.config.acl.allPermissionsDomains.includes(user.email.split("@")[1]);
+        return (
+            this.config.acl.allPermissionsEmails.includes(user.email) ||
+            this.config.acl.allPermissionsDomains.includes(user.email.split("@")[1]) ||
+            allPermissionUsers.includes(user.email)
+        );
     }
 }
