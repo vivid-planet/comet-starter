@@ -1,10 +1,10 @@
-import { IntlProvider } from "@src/app/[domain]/[language]/IntlProvider";
+import { IntlProvider } from "@src/util/IntlProvider";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { readFile } from "fs/promises";
 import { PropsWithChildren } from "react";
 
 const messagesCache: Record<string, unknown> = {};
-async function loadMessages(language: string) {
+export async function loadMessages(language: string) {
     if (messagesCache[language]) return messagesCache[language];
     const path = `./lang-compiled/${language}.json`;
     const messages = JSON.parse(await readFile(path, "utf8"));
