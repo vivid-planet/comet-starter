@@ -43,6 +43,7 @@ app.get("/status/health", (req, res) => {
 
 app.use(
     express.static("../build", {
+        index: false, // Don't send index.html for requests to "/" as it will be handled by the fallback route (with replaced environment variables)
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".js")) {
                 // The js file is static and the index.html uses a parameter as cache buster
