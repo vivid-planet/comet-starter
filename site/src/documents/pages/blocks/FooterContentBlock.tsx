@@ -21,9 +21,11 @@ export const FooterContentBlock = withPreview(
                     {linkList.blocks.length > 0 && (
                         <LinksWrapper>
                             {linkList.blocks.map((block) => (
-                                <LinkText as={LinkBlock} key={block.key} data={block.props.link} variant="p200">
-                                    {block.props.text}
-                                </LinkText>
+                                <LinkBlock key={block.key} data={block.props.link}>
+                                    <LinkText component="span" variant="p200">
+                                        {block.props.text}
+                                    </LinkText>
+                                </LinkBlock>
                             ))}
                         </LinksWrapper>
                     )}
@@ -108,7 +110,7 @@ const CopyrightNotice = styled(Typography)`
 `;
 
 const LinkText = styled(Typography)`
-    color: ${({ theme }) => theme.palette.gray["400"]};
+    color: ${({ theme }) => theme.palette.primary.main};
     text-decoration: underline;
 `;
 
