@@ -34,22 +34,24 @@ const nextConfig = {
                     key: "Content-Security-Policy",
                     value: [
                         "default-src 'none'",
-                        "script-src-elem 'self' 'unsafe-inline'",
-                        "style-src-elem 'unsafe-inline'",
+                        "style-src-elem 'self' 'unsafe-inline'",
                         "style-src-attr 'unsafe-inline'",
-                        `img-src 'self' data: ${process.env.API_URL}/`,
+                        "script-src-elem 'self' 'unsafe-inline'",
                         "script-src 'unsafe-eval'",
-                        "connect-src 'self'",
-                        `frame-src https://www.youtube-nocookie.com; ${process.env.NODE_ENV === "development" ? "" : "upgrade-insecure-requests"}`, // Don't use upgrade-insecure-requests with the Domain-Setup
+                        `${process.env.NODE_ENV === "development" ? "connect-src ws:" : ""}`, // Used for hot reloading in local development
+                        "font-src data:",
+                        "frame-src https://www.youtube-nocookie.com/",
+                        `img-src data: 'self' ${process.env.NODE_ENV === "development" ? process.env.API_URL + "/" : ""}`,
+                        `${process.env.NODE_ENV === "development" ? "" : "upgrade-insecure-requests"}`, // Don't use upgrade-insecure-requests with the Domain-Setup
                     ].join("; "),
                 },
                 {
-                    key: "Strict-Transport-Security",
-                    value: "max-age=63072000; includeSubDomains; preload",
+                    key: "Strict-Transport-Security", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
+                    value: "max-age=63072000; includeSubDomains; preload", // 2 years (recommended when subdomains are included)
                 },
                 {
-                    key: "Cross-Origin-Opener-Policy",
-                    value: "same-origin",
+                    key: "Cross-Origin-Opener-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Opener-Policy
+                    value: "same-origin", // Only allow the same origin to open the page in a browsing context
                 },
                 {
                     key: "Cross-Origin-Embedder-Policy",
@@ -59,20 +61,22 @@ const nextConfig = {
                     value: "unsafe-none",
                 },
                 {
-                    key: "Cross-Origin-Resource-Policy",
-                    value: "same-site",
+                    key: "Cross-Origin-Resource-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cross-Origin-Resource-Policy
+                    value: "same-site", // Do not allow cross-origin requests to access the response
                 },
                 {
-                    key: "Permissions-Policy",
+                    //
+                    key: "Permissions-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Permissions_Policy
                     value: "",
                 },
                 {
-                    key: "X-Content-Type-Options",
-                    value: "nosniff",
+                    key: "X-Content-Type-Options", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
+                    value: "nosniff", // Prevent MIME sniffing
                 },
                 {
-                    key: "Referrer-Policy",
-                    value: "same-origin",
+                    // This should be changed when using web analytics tools. For example, use "strict-origin-when-cross-origin" for Google Analytics
+                    key: "Referrer-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
+                    value: "same-origin", // Only use referer on own domain.
                 },
                 ...(process.env.ADMIN_URL
                     ? [
