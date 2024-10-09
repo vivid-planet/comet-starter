@@ -1,4 +1,6 @@
 import { gql, previewParams } from "@comet/cms-site";
+import { Footer } from "@src/layout/footer/Footer";
+import { footerFragment } from "@src/layout/footer/Footer.fragment";
 import { Header } from "@src/layout/header/Header";
 import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
@@ -18,15 +20,19 @@ export default async function Layout({
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
 
-    const { header } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
+    const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
         gql`
             query Layout($domain: String!, $language: String!) {
                 header: mainMenu(scope: { domain: $domain, language: $language }) {
                     ...Header
                 }
+                footer: footer(scope: { domain: $domain, language: $language }) {
+                    ...Footer
+                }
             }
 
             ${headerFragment}
+            ${footerFragment}
         `,
         { domain, language },
     );
@@ -35,6 +41,7 @@ export default async function Layout({
         <>
             <Header header={header} />
             {children}
+            {footer && <Footer footer={footer} />}
         </>
     );
 }
