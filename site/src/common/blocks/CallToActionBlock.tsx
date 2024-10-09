@@ -2,9 +2,9 @@
 import { PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
-import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 
 import { Button, ButtonVariant } from "../components/Button";
+import { HiddenIfInvalidLink } from "../helpers/HiddenIfInvalidLink";
 
 const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> = {
     Contained: "contained",
@@ -15,9 +15,9 @@ const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> 
 export const CallToActionBlock = withPreview(
     ({ data: { textLink, variant } }: PropsWithData<CallToActionBlockData>) => (
         <HiddenIfInvalidLink link={textLink.link}>
-            <LinkBlock data={textLink.link}>
-                <Button variant={buttonVariantMap[variant]}>{textLink.text}</Button>
-            </LinkBlock>
+            <Button as={LinkBlock} data={textLink.link} variant={buttonVariantMap[variant]}>
+                {textLink.text}
+            </Button>
         </HiddenIfInvalidLink>
     ),
     { label: "Call To Action" },

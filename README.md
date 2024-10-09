@@ -19,13 +19,6 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
     // Execute following script
     ./install.sh
 
-### Uninstallation
-
-    // Removes docker volumes and all files and folder which are not managed in the repo (node_modules, lib,...)
-    // If you want to reset your development environment totally, run this command and ./install.sh afterwards.
-
-    ./uninstall.sh
-
 ### Run Services
 
     // use correct npm version https://github.com/nvm-sh/nvm#deeper-shell-integration

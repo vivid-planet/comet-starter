@@ -11,19 +11,19 @@ import {
     inputToData,
 } from "@comet/blocks-api";
 import { IsUndefinable } from "@comet/cms-api";
-import { CallToActionListBlock } from "@src/common/blocks/call-to-action-list.block";
-import { HeadingBlock } from "@src/common/blocks/heading.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
+import { StandaloneCallToActionListBlock } from "@src/common/blocks/standalone-call-to-action-list.block";
+import { StandaloneHeadingBlock } from "@src/common/blocks/standalone-heading.block";
 import { IsBoolean, IsString } from "class-validator";
 
 const AccordionContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
             richtext: RichTextBlock,
-            heading: HeadingBlock,
+            heading: StandaloneHeadingBlock,
             space: SpaceBlock,
-            callToActionList: CallToActionListBlock,
+            callToActionList: StandaloneCallToActionListBlock,
         },
     },
     "AccordionContent",

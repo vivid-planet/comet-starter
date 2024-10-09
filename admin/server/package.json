@@ -2,12 +2,10 @@
     "name": "server",
     "private": true,
     "scripts": {
-        "preserve": "envsub --syntax dollar-basic ../build/index.html ../build/index.html",
         "serve": "node server.js"
     },
     "dependencies": {
         "compression": "^1.7.4",
-        "envsub": "^4.1.0",
         "express": "^4.17.1",
         "helmet": "^7.0.0"
     },

@@ -14,7 +14,6 @@ import {
     CurrentUserProvider,
     DependenciesConfigProvider,
     LocaleProvider,
-    MasterMenu,
     MasterMenuRoutes,
     SitePreview,
     SitesConfigProvider,
@@ -30,8 +29,8 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { ConfigProvider, ContentScope, createConfig } from "./config";
+import { AppMasterMenu, masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -56,13 +55,16 @@ export function App() {
                     <SitesConfigProvider
                         value={{
                             configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs, scope: ContentScope) => {
-                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                            resolveSiteConfigForScope: (configs, scope) => {
+                                const siteConfig = configs.find((config) => {
+                                    return config.scope.domain === scope.domain;
+                                });
+
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
-                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview`,
+                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview/${scope.domain}/${scope.language}`,
                                     sitePreviewApiUrl: `${config.previewUrl}/api/site-preview`,
                                 };
                             },
@@ -76,7 +78,7 @@ export function App() {
                             }}
                         >
                             <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                <LocaleProvider resolveLocaleForScope={(scope) => scope.domain}>
                                     <MuiThemeProvider theme={theme}>
                                         <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
@@ -100,13 +102,20 @@ export function App() {
                                                                     <Switch>
                                                                         <Route
                                                                             path={`${match.path}/preview`}
-                                                                            render={(props) => <SitePreview {...props} />}
+                                                                            render={(props) => (
+                                                                                <SitePreview
+                                                                                    resolvePath={(path: string, scope) => {
+                                                                                        return `/${scope.language}${path}`;
+                                                                                    }}
+                                                                                    {...props}
+                                                                                />
+                                                                            )}
                                                                         />
                                                                         <Route
                                                                             render={() => (
                                                                                 <MasterLayout
                                                                                     headerComponent={MasterHeader}
-                                                                                    menuComponent={() => <MasterMenu menu={masterMenuData} />}
+                                                                                    menuComponent={AppMasterMenu}
                                                                                 >
                                                                                     <MasterMenuRoutes menu={masterMenuData} />
                                                                                 </MasterLayout>

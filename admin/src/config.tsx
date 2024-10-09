@@ -29,8 +29,6 @@ export function createConfig() {
     };
 }
 
-export type ContentScope = PublicSiteConfig["contentScope"];
-
 export type Config = ReturnType<typeof createConfig>;
 
 const ConfigContext = createContext<Config | undefined>(undefined);

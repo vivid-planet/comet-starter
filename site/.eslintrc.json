@@ -1,4 +1,17 @@
 {
     "extends": "@comet/eslint-config/nextjs",
-    "ignorePatterns": ["**/**/*.generated.ts"]
+    "ignorePatterns": ["**/**/*.generated.ts"],
+    "rules": {
+        "no-restricted-imports": [
+            "error",
+            {
+                "paths": [
+                    {
+                        "name": "react",
+                        "importNames": ["default"]
+                    }
+                ]
+            }
+        ]
+    }
 }

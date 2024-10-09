@@ -8,7 +8,7 @@ import {
     useContentScopeConfig as useContentScopeConfigLibrary,
     useCurrentUser,
 } from "@comet/cms-admin";
-import { ContentScope } from "@src/config";
+import { ContentScope } from "@src/site-configs";
 
 // convenince wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi<ContentScope> {
@@ -19,7 +19,7 @@ export function useContentScopeConfig(p: ContentScopeConfigProps): void {
     return useContentScopeConfigLibrary(p);
 }
 
-export const ContentScopeProvider: React.FC<Pick<ContentScopeProviderProps, "children">> = ({ children }) => {
+export const ContentScopeProvider = ({ children }: Pick<ContentScopeProviderProps, "children">) => {
     const user = useCurrentUser();
 
     // TODO in COMET: filter already in API, avoid type cast, support labels

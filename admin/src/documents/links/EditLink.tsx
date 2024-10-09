@@ -50,7 +50,7 @@ interface Props {
     id: string;
 }
 
-export const EditLink: React.FC<Props> = ({ id }) => {
+export const EditLink = ({ id }: Props) => {
     const intl = useIntl();
     const stackApi = useStackApi();
 
@@ -70,7 +70,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
         return <Loading behavior="fillPageHeight" />;
     }
 
-    if (!linkState) return <></>;
+    if (!linkState) return null;
 
     return (
         <>
