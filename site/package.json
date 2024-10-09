@@ -9,7 +9,7 @@
         "gql:watch": "graphql-codegen --watch",
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "run-p lint:eslint lint:tsc lint:style intl:extract",
-        "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
+        "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md .",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
         "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",

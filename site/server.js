@@ -38,6 +38,7 @@ app.prepare()
             }
         }).listen(port, (err) => {
             if (err) throw err;
+            // eslint-disable-next-line no-console
             console.log(`> Ready on http://${hostname}:${port}`);
         });
     })
