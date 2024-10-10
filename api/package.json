@@ -18,7 +18,6 @@
         "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
         "lint:tsc": "tsc --project ./tsconfig.lint.json",
         "mikro-orm": "mikro-orm",
-        "mikro-orm:drop": "mikro-orm schema:drop -r",
         "mikro-orm:migration:generate": "mikro-orm migration:create",
         "start": "npm run prebuild && dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- nest start",
         "start:debug": "npm run prebuild && dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
