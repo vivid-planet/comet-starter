@@ -128,10 +128,10 @@ export class EnvironmentVariables {
     @IsArray()
     @IsEmail({}, { each: true })
     @Transform(({ value }: { value: string }) => value.split(",").filter((v) => v))
-    ACL_ALL_PERMISSIONS_EMAILS: string[] = [];
+    ACL_ALL_PERMISSIONS_EMAILS: string[];
 
     @IsArray()
     @IsFQDN({}, { each: true })
     @Transform(({ value }: { value: string }) => value.split(",").filter((v) => v))
-    ACL_ALL_PERMISSIONS_DOMAINS: string[] = [];
+    ACL_ALL_PERMISSIONS_DOMAINS: string[];
 }
