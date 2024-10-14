@@ -67,74 +67,77 @@ export const MobileMenu = ({ header }: Props) => {
                     <PageLayoutContent>
                         <nav>
                             <TopLevelNavigation>
-                                {header.map((node) => (
-                                    <li key={node.id}>
-                                        {node.childNodes.length > 0 ? (
-                                            <ButtonLink
-                                                aria-label={intl.formatMessage(
-                                                    {
-                                                        id: "header.subMenu.arialLabel",
-                                                        defaultMessage: "Submenu of {name}",
-                                                    },
-                                                    { name: node.name },
-                                                )}
-                                                aria-expanded={expandedSubLevelNavigation === node.id}
-                                                onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                            >
-                                                <Typography>{node.name}</Typography>
-                                                <IconWrapper>
-                                                    <Icon href="/assets/icons/arrow-right.svg#arrow-right" />
-                                                </IconWrapper>
-                                            </ButtonLink>
-                                        ) : (
-                                            <Link page={node} aria-label={node.name}>
-                                                {node.name}
-                                            </Link>
-                                        )}
-                                        {node.childNodes.length > 0 && (
-                                            <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                <PageLayout grid>
-                                                    <PageLayoutContent>
-                                                        <li>
-                                                            <BackButton
-                                                                aria-label={intl.formatMessage({
-                                                                    id: "header.backButton.arialLabel",
-                                                                    defaultMessage: "Go back",
-                                                                })}
-                                                                onClick={() => setExpandedSubLevelNavigation(null)}
-                                                            >
-                                                                <IconWrapper>
-                                                                    <Icon href="/assets/icons/arrow-left.svg#arrow-left" />
-                                                                </IconWrapper>
-                                                                <Typography>
-                                                                    <FormattedMessage id="header.back" defaultMessage="Back" />
-                                                                </Typography>
-                                                            </BackButton>
-                                                        </li>
-                                                        <li>
-                                                            <OverviewButton page={node} aria-label={node.name}>
-                                                                <IconWrapper>
-                                                                    <Icon href="/assets/icons/overview.svg#overview" />
-                                                                </IconWrapper>
-                                                                <Typography>
-                                                                    <FormattedMessage id="header.overview" defaultMessage="Overview" />
-                                                                    {` | ${node.name}`}
-                                                                </Typography>
-                                                            </OverviewButton>
-                                                        </li>
-                                                        {node.childNodes.map((node) => (
-                                                            <li key={node.id}>
-                                                                <Link page={node} aria-label={node.name}>
-                                                                    {node.name}
-                                                                </Link>
+                                {header.map((node) => {
+                                    const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
+                                    return (
+                                        <li key={node.id}>
+                                            {visibleChildNodes.length > 0 ? (
+                                                <ButtonLink
+                                                    aria-label={intl.formatMessage(
+                                                        {
+                                                            id: "header.subMenu.arialLabel",
+                                                            defaultMessage: "Submenu of {name}",
+                                                        },
+                                                        { name: node.name },
+                                                    )}
+                                                    aria-expanded={expandedSubLevelNavigation === node.id}
+                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                >
+                                                    <Typography>{node.name}</Typography>
+                                                    <IconWrapper>
+                                                        <Icon href="/assets/icons/arrow-right.svg#arrow-right" />
+                                                    </IconWrapper>
+                                                </ButtonLink>
+                                            ) : (
+                                                <Link page={node} aria-label={node.name}>
+                                                    {node.name}
+                                                </Link>
+                                            )}
+                                            {visibleChildNodes.length > 0 && (
+                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                    <PageLayout grid>
+                                                        <PageLayoutContent>
+                                                            <li>
+                                                                <BackButton
+                                                                    aria-label={intl.formatMessage({
+                                                                        id: "header.backButton.arialLabel",
+                                                                        defaultMessage: "Go back",
+                                                                    })}
+                                                                    onClick={() => setExpandedSubLevelNavigation(null)}
+                                                                >
+                                                                    <IconWrapper>
+                                                                        <Icon href="/assets/icons/arrow-left.svg#arrow-left" />
+                                                                    </IconWrapper>
+                                                                    <Typography>
+                                                                        <FormattedMessage id="header.back" defaultMessage="Back" />
+                                                                    </Typography>
+                                                                </BackButton>
                                                             </li>
-                                                        ))}
-                                                    </PageLayoutContent>
-                                                </PageLayout>
-                                            </SubLevelNavigation>
-                                        )}
-                                    </li>
-                                ))}
+                                                            <li>
+                                                                <OverviewButton page={node} aria-label={node.name}>
+                                                                    <IconWrapper>
+                                                                        <Icon href="/assets/icons/overview.svg#overview" />
+                                                                    </IconWrapper>
+                                                                    <Typography>
+                                                                        <FormattedMessage id="header.overview" defaultMessage="Overview" />
+                                                                        {` | ${node.name}`}
+                                                                    </Typography>
+                                                                </OverviewButton>
+                                                            </li>
+                                                            {visibleChildNodes.map((node) => (
+                                                                <li key={node.id}>
+                                                                    <Link page={node} aria-label={node.name}>
+                                                                        {node.name}
+                                                                    </Link>
+                                                                </li>
+                                                            ))}
+                                                        </PageLayoutContent>
+                                                    </PageLayout>
+                                                </SubLevelNavigation>
+                                            )}
+                                        </li>
+                                    );
+                                })}
                             </TopLevelNavigation>
                         </nav>
                     </PageLayoutContent>
