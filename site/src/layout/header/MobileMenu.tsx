@@ -197,7 +197,7 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
         $isMenuOpen &&
         css`
             visibility: visible;
-            height: calc(100vh - var(--header-height));
+            height: calc(var(--full-viewport-height) - var(--header-height));
             transition: height 0.25s ease-in;
         `}
 `;
@@ -213,7 +213,7 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     position: fixed;
     top: var(--header-height);
     left: 0;
-    height: calc(100vh - var(--header-height));
+    height: calc(var(--full-viewport-height) - var(--header-height));
     width: 100vw;
     background-color: ${({ theme }) => theme.palette.gray["200"]};
     padding: 0;

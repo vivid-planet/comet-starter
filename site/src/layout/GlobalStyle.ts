@@ -12,6 +12,11 @@ export const GlobalStyle = createGlobalStyle`
         text-size-adjust: 100%;
 
         --header-height: 100px;
+        --full-viewport-height: 100vh;
+
+        @supports (height: 100dvh) {
+            --full-viewport-height: 100dvh;
+        }
     }
 
     body {
