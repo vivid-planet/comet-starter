@@ -15,7 +15,7 @@ import { v4 } from "uuid";
 export class Footer extends BaseEntity<Footer, "id"> implements DocumentInterface {
     [OptionalProps]?: "createdAt" | "updatedAt";
 
-    @PrimaryKey({ columnType: "uuid" })
+    @PrimaryKey({ type: "uuid" })
     @Field(() => ID)
     id: string = v4();
 
