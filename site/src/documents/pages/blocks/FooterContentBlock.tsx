@@ -4,31 +4,38 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
+import { PageLayout } from "@src/layout/PageLayout";
 import styled from "styled-components";
 
 export const FooterContentBlock = withPreview(
     ({ data: { text, image, linkList, copyrightNotice } }: PropsWithData<FooterContentBlockData>) => {
         return (
             <Root>
-                <ImageWrapper>
-                    <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
-                </ImageWrapper>
-                <RichTextWrapper>
-                    <RichTextBlock data={text} disableLastBottomSpacing />
-                </RichTextWrapper>
-                <HorizontalLine />
-                <LinkCopyrightWrapper>
-                    {linkList.blocks.length > 0 && (
-                        <LinksWrapper>
-                            {linkList.blocks.map((block) => (
-                                <LinkText key={block.key} as={LinkBlock} data={block.props.link} variant="p200">
-                                    {block.props.text}
-                                </LinkText>
-                            ))}
-                        </LinksWrapper>
-                    )}
-                    {copyrightNotice && <CopyrightNotice variant="p200">{copyrightNotice}</CopyrightNotice>}
-                </LinkCopyrightWrapper>
+                <PageLayout grid>
+                    <PageLayoutContent>
+                        <TopContainer>
+                            <ImageWrapper>
+                                <DamImageBlock data={image} aspectRatio="1/1" style={{ objectFit: "contain" }} />
+                            </ImageWrapper>
+                            <RichTextWrapper>
+                                <RichTextBlock data={text} disableLastBottomSpacing />
+                            </RichTextWrapper>
+                        </TopContainer>
+                        <HorizontalLine />
+                        <LinkCopyrightWrapper>
+                            {linkList.blocks.length > 0 && (
+                                <LinksWrapper>
+                                    {linkList.blocks.map((block) => (
+                                        <LinkText key={block.key} as={LinkBlock} data={block.props.link} variant="p200">
+                                            {block.props.text}
+                                        </LinkText>
+                                    ))}
+                                </LinksWrapper>
+                            )}
+                            {copyrightNotice && <CopyrightNotice variant="p200">{copyrightNotice}</CopyrightNotice>}
+                        </LinkCopyrightWrapper>
+                    </PageLayoutContent>
+                </PageLayout>
             </Root>
         );
     },
@@ -39,41 +46,61 @@ const Root = styled.footer`
     margin-top: auto;
     background-color: ${({ theme }) => theme.palette.gray["900"]};
     color: ${({ theme }) => theme.palette.gray["50"]};
+`;
+
+const PageLayoutContent = styled.div`
+    grid-column: 2 / -2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: ${({ theme }) => `60px ${theme.spacing.D100}`};
-    gap: ${({ theme }) => theme.spacing.D100};
+    padding: ${({ theme }) => `${theme.spacing.D400} 0`};
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        position: relative;
+        gap: ${({ theme }) => theme.spacing.D100};
         flex-direction: row;
         justify-content: space-between;
     }
+`;
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
-        position: relative;
+const TopContainer = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.D100};
+
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        align-self: stretch;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        flex-direction: row;
     }
 `;
 
 const RichTextWrapper = styled.div`
+    width: 100%;
     text-align: center;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        max-width: 40%;
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        text-align: left;
     }
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        max-width: 40%;
-        text-align: left;
+        max-width: 80%;
     }
 `;
 
 const ImageWrapper = styled.div`
-    max-width: 100px;
-    width: 100%;
+    width: 100px;
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         position: absolute;
+        width: 100%;
+        max-width: 100px;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -87,11 +114,8 @@ const LinkCopyrightWrapper = styled.div`
     align-items: center;
     gap: ${({ theme }) => theme.spacing.S500};
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        max-width: 40%;
-    }
-
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        width: 80%;
         align-items: flex-end;
     }
 `;
@@ -105,6 +129,10 @@ const LinksWrapper = styled.div`
 
 const CopyrightNotice = styled(Typography)`
     text-align: center;
+
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        text-align: right;
+    }
 `;
 
 const LinkText = styled(Typography)`
@@ -118,7 +146,7 @@ const HorizontalLine = styled.hr`
     border: none;
     background-color: ${({ theme }) => theme.palette.gray["600"]};
     color: ${({ theme }) => theme.palette.gray["600"]};
-    margin: 35px 0;
+    margin: ${({ theme }) => `${theme.spacing.D300} 0`};
 
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;
