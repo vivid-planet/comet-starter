@@ -21,11 +21,9 @@ export const FooterContentBlock = withPreview(
                     {linkList.blocks.length > 0 && (
                         <LinksWrapper>
                             {linkList.blocks.map((block) => (
-                                <LinkBlock key={block.key} data={block.props.link}>
-                                    <LinkText component="span" variant="p200">
-                                        {block.props.text}
-                                    </LinkText>
-                                </LinkBlock>
+                                <LinkText key={block.key} as={LinkBlock} data={block.props.link} variant="p200">
+                                    {block.props.text}
+                                </LinkText>
                             ))}
                         </LinksWrapper>
                     )}
