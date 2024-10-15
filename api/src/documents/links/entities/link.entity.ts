@@ -12,7 +12,7 @@ import { v4 } from "uuid";
 export class Link extends BaseEntity<Link, "id"> implements DocumentInterface {
     [OptionalProps]?: "createdAt" | "updatedAt";
 
-    @PrimaryKey({ columnType: "uuid" })
+    @PrimaryKey({ type: "uuid" })
     @Field(() => ID)
     id: string = v4();
 

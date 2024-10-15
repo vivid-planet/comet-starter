@@ -5,8 +5,16 @@ import { SiteConfig } from "./site-configs.d";
 export type Environment = "local" | "dev" | "test" | "staging" | "prod";
 export type GetSiteConfig = (env: Environment) => SiteConfig;
 
+const isValidEnvironment = (env: string): env is Environment => {
+    return ["local", "dev", "test", "staging", "prod"].includes(env);
+}
+
 // Called by `npx @comet/cli inject-site-configs`
-const getSiteConfigs = async (env: Environment): Promise<SiteConfig[]> => {
+const getSiteConfigs = async (env: string): Promise<SiteConfig[]> => {
+    if(!isValidEnvironment(env)) {
+        throw new Error(`Invalid environment: ${env}`);
+    }
+    
     const path = `${__dirname}/site-configs`;
 
     const files = (await fs.readdir(path)).filter((file) => !file.startsWith("_"));

@@ -1,4 +1,4 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
+import { ComponentProps } from "react";
 import styled, { css } from "styled-components";
 
 export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p300" | "p200";
@@ -180,7 +180,7 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
     `,
 };
 
-const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap> = {
+const variantToElementMap: Record<TypographyVariant, "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p"> = {
     h600: "h1",
     h550: "h2",
     h500: "h3",
@@ -191,30 +191,17 @@ const variantToElementMap: Record<TypographyVariant, keyof HTMLElementTagNameMap
     p200: "p",
 };
 
-export interface TypographyProps extends PropsWithChildren<HTMLAttributes<HTMLElement>> {
-    component?: keyof HTMLElementTagNameMap;
+export const Typography = styled.div.attrs<{
+    as?: unknown;
     variant?: TypographyVariant;
     bottomSpacing?: boolean;
-}
-
-export const Typography = ({ component, variant = "p300", bottomSpacing, children, ...restProps }: TypographyProps) => (
-    <Text as={component || variantToElementMap[variant]} $variant={variant} $bottomSpacing={bottomSpacing} {...restProps}>
-        {children}
-    </Text>
-);
-
-interface TextProps {
-    $variant: TypographyVariant;
-    $bottomSpacing?: boolean;
-}
-
-const Text = styled.div<TextProps>`
+}>((props) => ({ as: props.as ?? variantToElementMap[props.variant ?? "p300"] }))`
     font-family: ${({ theme }) => theme.fontFamily};
-    ${({ $variant }) => typographyVariantStyle[$variant]};
+    ${({ variant = "p300" }) => typographyVariantStyle[variant]};
     margin-top: 0;
 
-    ${({ theme, $bottomSpacing }) =>
-        !$bottomSpacing &&
+    ${({ theme, bottomSpacing }) =>
+        !bottomSpacing &&
         css`
             margin-bottom: 0;
 
@@ -223,3 +210,5 @@ const Text = styled.div<TextProps>`
             }
         `};
 `;
+
+export type TypographyProps = ComponentProps<typeof Typography>;
