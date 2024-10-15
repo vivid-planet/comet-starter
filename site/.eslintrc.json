@@ -1,6 +1,6 @@
 {
-    "extends": "@comet/eslint-config/nextjs",
-    "ignorePatterns": ["**/**/*.generated.ts"],
+    "extends": ["@comet/eslint-config/nextjs", "plugin:@cspell/recommended"],
+    "ignorePatterns": ["**/**/*.generated.ts", "src/site-configs.d.ts"],
     "rules": {
         "no-restricted-imports": [
             "error",

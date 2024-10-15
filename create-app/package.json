@@ -26,7 +26,6 @@
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
-        "lint:spelling": "npx cspell 'src/**'",
         "prepublishOnly": "npm run lint && npm run build",
         "prestart": "npm run clean",
         "start": "tsc --watch --project tsconfig.json"
@@ -42,6 +41,7 @@
     "devDependencies": {
         "@comet/eslint-config": "^7.3.2",
         "@comet/eslint-plugin": "^7.3.2",
+        "@cspell/eslint-plugin": "^8.15.2",
         "@tsconfig/node20": "^20.1.2",
         "@types/node": "^20.0.0",
         "cspell": "^8.14.4",
