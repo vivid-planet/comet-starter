@@ -5,3 +5,6 @@ imgproxy
 jaegertracing
 oltp
 prelogin
+HSTS
+nosniff
+noopen
