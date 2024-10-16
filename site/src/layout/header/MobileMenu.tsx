@@ -148,11 +148,9 @@ export const MobileMenu = ({ header }: Props) => {
 };
 
 const Root = styled.div`
-    ${({ theme }) => css`
-        ${theme.breakpoints.sm.mediaQuery} {
-            display: none;
-        }
-    `}
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        display: none;
+    }
 `;
 
 const PageLayoutContent = styled.div`
@@ -239,8 +237,10 @@ const Link = styled(PageLink)`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme }) => theme.palette.text.primary};
 
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        &:hover {
+            color: ${({ theme }) => theme.palette.primary.main};
+        }
     }
 `;
 
@@ -256,8 +256,10 @@ const ButtonLinkBase = styled.button`
     padding: ${({ theme }) => theme.spacing.S500} 0;
     gap: ${({ theme }) => theme.spacing.S200};
 
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        &:hover {
+            color: ${({ theme }) => theme.palette.primary.main};
+        }
     }
 `;
 
@@ -280,7 +282,9 @@ const OverviewButton = styled(PageLink)`
     text-decoration: none;
     color: ${({ theme }) => theme.palette.text.primary};
 
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
+    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+        &:hover {
+            color: ${({ theme }) => theme.palette.primary.main};
+        }
     }
 `;
