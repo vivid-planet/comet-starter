@@ -17,8 +17,6 @@ if (!REDIS_PASSWORD) {
 
 const REDIS_KEY_PREFIX = process.env.REDIS_KEY_PREFIX || "";
 
-const CACHE_HANDLER_DEBUG = process.env.CACHE_HANDLER_DEBUG === "true";
-
 const CACHE_TTL_IN_S = 24 * 60 * 60; // 1 day
 
 const redis = new Redis({
@@ -54,10 +52,6 @@ export default class CacheHandler {
     async get(key: string): ReturnType<NextCacheHandler["get"]> {
         if (redis.status === "ready") {
             try {
-                if (CACHE_HANDLER_DEBUG) {
-                    console.log("CacheHandler.get redis", key);
-                }
-
                 const redisResponse = await redis.get(key);
                 if (isFallbackInUse) {
                     isFallbackInUse = false;
@@ -70,10 +64,6 @@ export default class CacheHandler {
             } catch (e) {
                 console.error("CacheHandler.get error", e);
             }
-        }
-
-        if (CACHE_HANDLER_DEBUG) {
-            console.log("CacheHandler.get fallbackCache", key);
         }
 
         // fallback to in-memory cache
@@ -102,16 +92,10 @@ export default class CacheHandler {
 
         if (redis.status === "ready") {
             try {
-                if (CACHE_HANDLER_DEBUG) {
-                    console.log("CacheHandler.set redis", key);
-                }
                 await redis.set(key, stringData, "EX", CACHE_TTL_IN_S);
             } catch (e) {
                 console.error("CacheHandler.set error", e);
             }
-        }
-        if (CACHE_HANDLER_DEBUG) {
-            console.log("CacheHandler.set fallbackCache", key);
         }
         fallbackCache.set(key, value, { size: stringData.length });
     }
