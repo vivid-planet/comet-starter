@@ -33,11 +33,11 @@ const nextConfig = {
                 {
                     key: "Content-Security-Policy",
                     value: [
-                        "default-src 'none'",
+                        "default-src 'self'", // Needed for svgs to work in Firefox (other browsers load svgs with img-src)
                         "style-src-elem 'self' 'unsafe-inline'",
                         "style-src-attr 'unsafe-inline'",
                         "script-src-elem 'self' 'unsafe-inline'",
-                        "script-src 'unsafe-eval'",
+                        `${process.env.NODE_ENV === "development" ? "script-src 'unsafe-eval'" : ""}`, // Needed in local development
                         `${process.env.NODE_ENV === "development" ? "connect-src ws:" : ""}`, // Used for hot reloading in local development
                         "font-src data:",
                         "frame-src https://www.youtube-nocookie.com/",
