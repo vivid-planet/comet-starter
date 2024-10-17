@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Needed to also fetch next branch
 
       - name: Install doctl package
         run: sudo snap install doctl
