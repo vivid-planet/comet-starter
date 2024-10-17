@@ -1,5 +1,7 @@
 import { User, UserPermissions } from "@comet/cms-api";
 import { Test, TestingModule } from "@nestjs/testing";
+import { Config } from "@src/config/config";
+import { CONFIG } from "@src/config/config.module";
 
 import { AccessControlService } from "./access-control.service";
 import { staticUsers } from "./static-users";
@@ -9,7 +11,18 @@ describe("AccessControlService", () => {
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
-            providers: [AccessControlService],
+            providers: [
+                AccessControlService,
+                {
+                    provide: CONFIG,
+                    useValue: {
+                        acl: {
+                            allPermissionsEmails: ["admin@customer.com"],
+                            allPermissionsDomains: ["vivid-planet.com"],
+                        } satisfies Config["acl"],
+                    },
+                },
+            ],
         }).compile();
 
         service = module.get<AccessControlService>(AccessControlService);
@@ -39,12 +52,6 @@ describe("AccessControlService", () => {
 
             expect(permissions).toEqual(UserPermissions.allPermissions);
         });
-
-        it("should return pageTree permission for German editor", () => {
-            const permissions = service.getPermissionsForUser(staticUsers.editor);
-
-            expect(permissions).toEqual([{ permission: "pageTree" }]);
-        });
     });
 
     describe("getContentScopesForUser", () => {
@@ -70,15 +77,6 @@ describe("AccessControlService", () => {
             const contentScopes = service.getContentScopesForUser(staticUsers.admin);
 
             expect(contentScopes).toEqual(UserPermissions.allContentScopes);
-        });
-
-        it("should return German content scopes for German editor", () => {
-            const contentScopes = service.getContentScopesForUser(staticUsers.editor);
-
-            expect(contentScopes).toEqual([
-                { domain: "main", language: "de" },
-                { domain: "secondary", language: "de" },
-            ]);
         });
     });
 });

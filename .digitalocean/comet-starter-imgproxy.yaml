@@ -1,0 +1,50 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: darthsim-imgproxy
+      match:
+        path:
+          prefix: /
+name: comet-starter-imgproxy
+region: fra
+services:
+  - envs:
+      - key: IMGPROXY_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:caLHr/u1NkMWvW8NG5nn0+JvpBW+NMNu:yhmQi6RpvAt58666wyk3IzIMFg7ALTeIhruXpPFabcQgSkmAaBXzj08oAYuhv6u0tnWabUIHDkvzyY0CnoYpHD3vE1R5tWLUQwOoEgzGKHqiO7f5zdeuTzFUxG7ctCFfsXedzL2e4R7+u3FmLox0woPk0DhbiYiA8+qSNnVEKWMXJTkAkfQkwdtovgskqdz5]
+      - key: IMGPROXY_SALT
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:yCE1f0mZPV+uFFs96/SmFsbvWXH3pfDn:1dt+Waq2vALvR7qXaC3Lh2VONtDjgmBzSuPyn+6kpk3DN9xzmbSPhV3G1pCZ+NRA16TOL3jhfiIgWD4QbCAs5y2JM2EOcptDQKpuQ6YYGvB9Gb2dBgrJS7WG5pKqSIuI3g+YKKa/ns5HWzH/CdIsieVdvmlb4PFasdhdCIMOHCIhwNONChz0yIO7XsV8vLJl]
+      - key: IMGPROXY_USE_S3
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: IMGPROXY_S3_REGION
+        scope: RUN_AND_BUILD_TIME
+        value: fra1
+      - key: IMGPROXY_S3_ENDPOINT
+        scope: RUN_AND_BUILD_TIME
+        value: https://comet-starter.fra1.digitaloceanspaces.com
+      - key: AWS_ACCESS_KEY_ID
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:utFAK7Ej0e07tb6cQhWCCLlRUSKJy6DU:rGoIItdercf5JSs2oSEanA11liimnDjdLxwmhcBjO9UCeHaM]
+      - key: AWS_SECRET_ACCESS_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:xupjwXwlpZv8VeQyLx9nKJTrw1BipI3a:Lkws9OWy+b5a20BNHCHiFv8H2M99aYNirhY+eGBZsCoUkLvCYoJvKDaVpHLz7N+CCC3Hfgycd4Ix008=]
+    http_port: 8080
+    image:
+      registry: darthsim
+      registry_type: DOCKER_HUB
+      repository: imgproxy
+      tag: v3
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: darthsim-imgproxy
