@@ -1,2 +1,5 @@
 Flexbox
 Codegen
+HSTS
+nosniff
+noopen
