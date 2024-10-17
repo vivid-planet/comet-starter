@@ -15,9 +15,9 @@ const getSiteConfigs = async (env: string): Promise<SiteConfig[]> => {
         throw new Error(`Invalid environment: ${env}`);
     }
     
-    const path = `${__dirname}/site-configs`;
+    const path = `${process.cwd()}/site-configs`;
 
-    const files = (await fs.readdir(path)).filter((file) => !file.startsWith("_"));
+    const files = (await fs.readdir(path)).filter((file) => (!file.startsWith("_") && !["site-configs.d.ts", "site-configs.ts"].includes(file)));
     const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: GetSiteConfig }[];
     return imports.map((module) => {
         const getSiteConfig = module.default;
