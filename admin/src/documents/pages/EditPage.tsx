@@ -4,6 +4,7 @@ import { ArrowLeft, Preview } from "@comet/admin-icons";
 import { AdminComponentRoot, AdminTabLabel } from "@comet/blocks-admin";
 import {
     BlockPreviewWithTabs,
+    ContentScopeIndicator,
     createUsePage,
     openSitePreviewWindow,
     PageName,
@@ -130,7 +131,7 @@ export const EditPage = ({ id }: Props) => {
                     }}
                 />
             )}
-            <Toolbar>
+            <Toolbar scopeIndicator={<ContentScopeIndicator />}>
                 <ToolbarItem>
                     <IconButton onClick={stackApi?.goBack} size="large">
                         <ArrowLeft />

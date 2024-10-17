@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { Loading, MainContent, RouterPrompt, RouterTab, RouterTabs, Toolbar, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft } from "@comet/admin-icons";
 import { AdminComponentRoot } from "@comet/blocks-admin";
-import { createUsePage, PageName } from "@comet/cms-admin";
+import { ContentScopeIndicator, createUsePage, PageName } from "@comet/cms-admin";
 import { IconButton } from "@mui/material";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { useIntl } from "react-intl";
@@ -92,7 +92,7 @@ export const EditLink = ({ id }: Props) => {
                     }}
                 />
             )}
-            <Toolbar>
+            <Toolbar scopeIndicator={<ContentScopeIndicator />}>
                 <ToolbarItem>
                     <IconButton onClick={stackApi?.goBack} size="large">
                         <ArrowLeft />
