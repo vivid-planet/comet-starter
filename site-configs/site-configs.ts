@@ -1,5 +1,6 @@
-import fs from "fs/promises";
 import { SiteConfig } from "./site-configs.d";
+import main from "./main";
+import secondary from "./secondary";
 
 // Types for files in site-configs/
 export type Environment = "local" | "dev" | "test" | "staging" | "prod";
@@ -15,12 +16,8 @@ const getSiteConfigs = async (env: string): Promise<SiteConfig[]> => {
         throw new Error(`Invalid environment: ${env}`);
     }
     
-    const path = `${process.cwd()}/site-configs`;
-
-    const files = (await fs.readdir(path)).filter((file) => (!file.startsWith("_") && !["site-configs.d.ts", "site-configs.ts"].includes(file)));
-    const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: GetSiteConfig }[];
-    return imports.map((module) => {
-        const getSiteConfig = module.default;
+    const imports = [main, secondary];
+    return imports.map((getSiteConfig) => {
         return getSiteConfig(env);
     });
 };
