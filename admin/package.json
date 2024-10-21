@@ -4,7 +4,7 @@
     "scripts": {
         "postinstall": "cd server && npm install",
         "serve": "cd server && npm run serve",
-        "start": "npm run intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -c -- vite",
+        "start": "npm run intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite",
         "build": "npm run intl:compile && run-p gql:types generate-block-types && NODE_ENV=production vite build",
         "preview": "npm run build && vite preview",
         "gql:types": "graphql-codegen",
