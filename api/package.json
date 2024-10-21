@@ -27,26 +27,6 @@
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
         "test:watch": "npm run test -- --watch"
     },
-    "jest": {
-        "collectCoverageFrom": [
-            "**/*.(t|j)s"
-        ],
-        "coverageDirectory": "../coverage",
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "ts"
-        ],
-        "moduleNameMapper": {
-            "@src/(.*)": "<rootDir>/$1"
-        },
-        "rootDir": "src",
-        "testEnvironment": "node",
-        "testRegex": ".*\\.spec\\.ts$",
-        "transform": {
-            "^.+\\.(t|j)s$": "ts-jest"
-        }
-    },
     "dependencies": {
         "@comet/blocks-api": "^7.5.0",
         "@comet/cms-api": "^7.5.0",
