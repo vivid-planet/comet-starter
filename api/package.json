@@ -5,7 +5,7 @@
         "api-generator": "rimraf 'src/*/generated' && comet-api-generator generate",
         "prebuild": "rimraf dist",
         "build": "nest build",
-        "console": "dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
+        "console": "dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
         "console:prod": "node dist/console.js",
         "db:migrate": "npm run console migrate --",
         "db:migrate:prod": "npm run console:prod migrate --",
@@ -17,33 +17,13 @@
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
         "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
         "lint:tsc": "tsc --project ./tsconfig.lint.json",
-        "start": "npm run prebuild && dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- nest start",
-        "start:debug": "npm run prebuild && dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
-        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -e .env -e .env.local -e .env.secrets -e .env.site-configs -- nest start --watch --preserveWatchOutput",
+        "start": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start",
+        "start:debug": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
+        "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
         "test:watch": "npm run test -- --watch"
-    },
-    "jest": {
-        "collectCoverageFrom": [
-            "**/*.(t|j)s"
-        ],
-        "coverageDirectory": "../coverage",
-        "moduleFileExtensions": [
-            "js",
-            "json",
-            "ts"
-        ],
-        "moduleNameMapper": {
-            "@src/(.*)": "<rootDir>/$1"
-        },
-        "rootDir": "src",
-        "testEnvironment": "node",
-        "testRegex": ".*\\.spec\\.ts$",
-        "transform": {
-            "^.+\\.(t|j)s$": "ts-jest"
-        }
     },
     "dependencies": {
         "@comet/blocks-api": "^7.5.0",
