@@ -2,7 +2,7 @@ name: Update DigitalOcean Deployment
 on:
   push:
     branches:
-      - test-do-action
+      - main
 jobs:
   update-deployment:
     name: Update DigitalOcean Deployment
