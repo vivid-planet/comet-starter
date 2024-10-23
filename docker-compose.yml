@@ -53,8 +53,8 @@ services:
 networks:
   postgres:
     driver: bridge
-#  redis:
-#    driver: bridge
+  # redis:
+  #   driver: bridge
 
 volumes:
   postgres:
