@@ -54,12 +54,17 @@ export class PagesResolver {
                 validateNotModified(page, lastUpdatedAt);
             }
 
-            page.assign({ content: input.content.transformToBlockData(), seo: input.seo.transformToBlockData() });
+            page.assign({
+                content: input.content.transformToBlockData(),
+                seo: input.seo.transformToBlockData(),
+                stage: input.stage.transformToBlockData(),
+            });
         } else {
             page = this.repository.create({
                 id: pageId,
                 content: input.content.transformToBlockData(),
                 seo: input.seo.transformToBlockData(),
+                stage: input.stage.transformToBlockData(),
             });
 
             this.repository.persist(page);

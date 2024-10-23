@@ -14,6 +14,7 @@ import { v4 } from "uuid";
 
 import { PageContentBlock } from "../blocks/page-content.block";
 import { SeoBlock } from "../blocks/seo.block";
+import { StageBlock } from "../blocks/stage.block";
 
 @EntityInfo(PageTreeNodeDocumentEntityInfoService)
 @Entity()
@@ -25,7 +26,7 @@ import { SeoBlock } from "../blocks/seo.block";
 export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     [OptionalProps]?: "createdAt" | "updatedAt";
 
-    @PrimaryKey({ columnType: "uuid" })
+    @PrimaryKey({ type: "uuid" })
     @Field(() => ID)
     id: string = v4();
 
@@ -38,6 +39,11 @@ export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     @Property({ customType: new RootBlockType(SeoBlock) })
     @Field(() => RootBlockDataScalar(SeoBlock))
     seo: BlockDataInterface;
+
+    @RootBlock(StageBlock)
+    @Property({ customType: new RootBlockType(StageBlock) })
+    @Field(() => RootBlockDataScalar(StageBlock))
+    stage: BlockDataInterface;
 
     @Property({
         columnType: "timestamp with time zone",
