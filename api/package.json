@@ -23,7 +23,8 @@
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
-        "test:watch": "npm run test -- --watch"
+        "test:watch": "npm run test -- --watch",
+        "repl": "npm run start -- --watch --entryFile repl"
     },
     "dependencies": {
         "@comet/blocks-api": "^7.6.0",
