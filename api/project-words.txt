@@ -6,3 +6,6 @@ ormconfig
 pkey
 schemaname
 tablename
+HSTS
+nosniff
+noopen
