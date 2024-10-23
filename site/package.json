@@ -2,7 +2,7 @@
     "name": "starter-site",
     "private": true,
     "scripts": {
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- ts-node --project tsconfig.server.json server.ts",
+        "dev": "npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node dist/server.js",
         "build": "npm run intl:compile && run-p gql:types generate-block-types && tsc --project tsconfig.server.json && next build",
         "serve": "NODE_ENV=production node dist/server.js",
         "gql:types": "graphql-codegen",
@@ -27,6 +27,8 @@
         "@opentelemetry/sdk-node": "^0.53.0",
         "cache-manager": "^5.6.1",
         "graphql": "^15.0.0",
+        "ioredis": "^5.4.1",
+        "lru-cache": "^11.0.1",
         "next": "^14.2.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
