@@ -995,6 +995,59 @@
         ]
     },
     {
+        "name": "FooterContent",
+        "fields": [
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "linkList",
+                "kind": "Block",
+                "block": "LinkList",
+                "nullable": false
+            },
+            {
+                "name": "copyrightNotice",
+                "kind": "String",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "linkList",
+                "kind": "Block",
+                "block": "LinkList",
+                "nullable": false
+            },
+            {
+                "name": "copyrightNotice",
+                "kind": "String",
+                "nullable": false
+            }
+        ]
+    },
+    {
         "name": "Heading",
         "fields": [
             {
@@ -1291,6 +1344,63 @@
                 "name": "title",
                 "kind": "String",
                 "nullable": true
+            }
+        ]
+    },
+    {
+        "name": "LinkList",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TextLink",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TextLink",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
             }
         ]
     },
