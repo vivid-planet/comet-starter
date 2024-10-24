@@ -10,6 +10,13 @@ export const GlobalStyle = createGlobalStyle`
     html {
         /* Prevent font size adjustments after orientation changes in mobile devices */
         text-size-adjust: 100%;
+
+        --header-height: 100px;
+        --full-viewport-height: 100vh;
+
+        @supports (height: 100dvh) {
+            --full-viewport-height: 100dvh;
+        }
     }
 
     body {

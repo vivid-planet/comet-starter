@@ -19,8 +19,8 @@ const getSiteConfigs = async (env: string): Promise<SiteConfig[]> => {
 
     const files = (await fs.readdir(path)).filter((file) => !file.startsWith("_"));
     const imports = (await Promise.all(files.map((file) => import(`${path}/${file}`)))) as { default: GetSiteConfig }[];
-    return imports.map((imprt, index) => {
-        const getSiteConfig = imprt.default;
+    return imports.map((module) => {
+        const getSiteConfig = module.default;
         return getSiteConfig(env);
     });
 };
