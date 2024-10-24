@@ -1018,7 +1018,7 @@
             {
                 "name": "copyrightNotice",
                 "kind": "String",
-                "nullable": true
+                "nullable": false
             }
         ],
         "inputFields": [
@@ -1043,7 +1043,7 @@
             {
                 "name": "copyrightNotice",
                 "kind": "String",
-                "nullable": true
+                "nullable": false
             }
         ]
     },

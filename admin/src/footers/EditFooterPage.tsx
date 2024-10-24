@@ -77,7 +77,6 @@ export function EditFooterPage(): JSX.Element | null {
     useEffect(() => {
         if (data) {
             if (data.footer) {
-                // @ts-expect-error type mismatch between createCompositeBlock and FooterContentBlockData, needs to be fixed in Comet
                 const content = FooterContentBlock.input2State(data.footer.content);
                 setFooterState(content);
                 setReferenceContent(FooterContentBlock.state2Output(content));

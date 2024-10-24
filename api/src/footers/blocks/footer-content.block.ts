@@ -25,7 +25,7 @@ class FooterContentBlockData extends BlockData {
     linkList: BlockDataInterface;
 
     @BlockField({ nullable: true })
-    copyrightNotice?: string;
+    copyrightNotice: string;
 }
 
 class FooterContentBlockInput extends BlockInput {
@@ -41,7 +41,7 @@ class FooterContentBlockInput extends BlockInput {
     @BlockField({ nullable: true })
     @IsUndefinable()
     @IsString()
-    copyrightNotice?: string;
+    copyrightNotice: string;
 
     transformToBlockData(): FooterContentBlockData {
         return inputToData(FooterContentBlockData, this);
