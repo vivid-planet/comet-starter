@@ -34,3 +34,6 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
 
     // import fixtures
     npm run --prefix api fixtures
+
+    // start repl
+    npm run --prefix api repl
