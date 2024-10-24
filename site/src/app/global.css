@@ -1,0 +1,14 @@
+:root {
+    --palette-primary-main: #1e88e5;
+    --palette-primary-dark: #155fa0;
+    --palette-primary-contrast-text: #ffffff;
+
+    --palette-gray-50: #fafafa;
+    --palette-gray-200: #eeeeee;
+    --palette-gray-400: #bdbdbd;
+
+    --spacing-s400: 16px;
+    --spacing-s500: 24px;
+
+    --font-family: Arial, sans-serif;
+}

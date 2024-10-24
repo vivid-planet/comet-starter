@@ -1,3 +1,5 @@
+import "./global.css";
+
 import { GlobalStyle } from "@src/layout/GlobalStyle";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";

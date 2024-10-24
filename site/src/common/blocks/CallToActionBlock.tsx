@@ -15,6 +15,7 @@ const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> 
 export const CallToActionBlock = withPreview(
     ({ data: { textLink, variant } }: PropsWithData<CallToActionBlockData>) => (
         <HiddenIfInvalidLink link={textLink.link}>
+            {/* @ts-expect-error as needs to be fixed */}
             <Button as={LinkBlock} data={textLink.link} variant={buttonVariantMap[variant]}>
                 {textLink.text}
             </Button>
