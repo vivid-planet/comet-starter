@@ -80,6 +80,8 @@ const nextConfig = {
             ],
         },
     ],
+    cacheHandler: process.env.REDIS_ENABLED === "true" ? require.resolve("./dist/cache-handler.js") : undefined,
+    cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
