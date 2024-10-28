@@ -5,6 +5,31 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
     enabled: process.env.ANALYZE === "true",
 });
 
+function generateCSP() {
+    const cspRules = {
+        "default-src": "'self'", // Needed for SVGs in Firefox (other browsers load SVGs with img-src)
+        "style-src-elem": "'self' 'unsafe-inline'",
+        "style-src-attr": "'unsafe-inline'",
+        "script-src-elem": "'self' 'unsafe-inline'",
+        "font-src": "data:",
+        "frame-src": "https://www.youtube-nocookie.com/",
+        "img-src": `data: 'self' ${process.env.API_URL}`,
+        "frame-ancestors": process.env.ADMIN_URL,
+    };
+
+    // Conditionally add environment-specific rules
+    if (process.env.NODE_ENV === "development") {
+        cspRules["script-src"] = "'unsafe-eval'"; // Needed in local development
+        cspRules["connect-src"] = "ws:"; // Used for hot reloading in local development
+    } else {
+        cspRules["upgrade-insecure-requests"] = ""; // Don't use upgrade-insecure-requests with Domain-Setup
+    }
+
+    return Object.entries(cspRules)
+        .map(([key, value]) => `${key} ${value}`.trim())
+        .join("; ");
+}
+
 const cometConfig = require("./src/comet-config.json");
 
 /**
@@ -32,19 +57,7 @@ const nextConfig = {
             headers: [
                 {
                     key: "Content-Security-Policy",
-                    value: [
-                        "default-src 'self'", // Needed for svgs to work in Firefox (other browsers load svgs with img-src)
-                        "style-src-elem 'self' 'unsafe-inline'",
-                        "style-src-attr 'unsafe-inline'",
-                        "script-src-elem 'self' 'unsafe-inline'",
-                        `${process.env.NODE_ENV === "development" ? "script-src 'unsafe-eval'" : ""}`, // Needed in local development
-                        `${process.env.NODE_ENV === "development" ? "connect-src ws:" : ""}`, // Used for hot reloading in local development
-                        "font-src data:",
-                        "frame-src https://www.youtube-nocookie.com/",
-                        `img-src data: 'self' ${process.env.NODE_ENV === "development" ? process.env.API_URL + "/" : ""}`,
-                        `${process.env.NODE_ENV === "development" ? "" : "upgrade-insecure-requests"}`, // Don't use upgrade-insecure-requests with the Domain-Setup
-                        `frame-ancestors ${process.env.ADMIN_URL}`,
-                    ].join("; "),
+                    value: generateCSP(),
                 },
                 {
                     key: "Strict-Transport-Security", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
