@@ -21,7 +21,7 @@ async function bootstrap() {
         }
     });
 
-    // MikroORM setup
+    // Get the MikroORM instance from the app
     const orm = app.get(MikroORM);
 
     // Context shortcuts
