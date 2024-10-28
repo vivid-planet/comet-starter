@@ -43,6 +43,7 @@ const nextConfig = {
                         "frame-src https://www.youtube-nocookie.com/",
                         `img-src data: 'self' ${process.env.NODE_ENV === "development" ? process.env.API_URL + "/" : ""}`,
                         `${process.env.NODE_ENV === "development" ? "" : "upgrade-insecure-requests"}`, // Don't use upgrade-insecure-requests with the Domain-Setup
+                        `frame-ancestors ${process.env.ADMIN_URL}`,
                     ].join("; "),
                 },
                 {
