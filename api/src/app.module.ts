@@ -18,6 +18,7 @@ import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
+import { FootersModule } from "@src/footers/footers.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 import { RedirectScope } from "@src/redirects/dto/redirect-scope";
@@ -122,6 +123,7 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
+                FootersModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
