@@ -31,7 +31,7 @@ export const theme = {
             900: "#212121",
         },
     },
-    fontFamily: "Roboto",
+    fontFamily: "Roboto, sans-serif",
     breakpoints: {
         xs: createBreakpoint(600),
         sm: createBreakpoint(900),
