@@ -5,8 +5,12 @@
 
     --palette-gray-50: #fafafa;
     --palette-gray-200: #eeeeee;
+    --palette-gray-300: #e0e0e0;
     --palette-gray-400: #bdbdbd;
 
+    --spacing-s100: 4px;
+    --spacing-s200: 8px;
+    --spacing-s300: 12px;
     --spacing-s400: 16px;
     --spacing-s500: 24px;
 
