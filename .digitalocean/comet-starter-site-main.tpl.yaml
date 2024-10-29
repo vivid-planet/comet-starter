@@ -18,7 +18,7 @@ services:
       cp ../api/schema.gql schema.gql &&
       cp ../api/block-meta.json block-meta.json &&
       cp ../api/src/comet-config.json src/comet-config.json &&
-      cp ../site-configs.d.ts src/site-configs.d.ts &&
+      cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
       npm run build &&
       npm prune --omit=dev
     environment_slug: node-js
