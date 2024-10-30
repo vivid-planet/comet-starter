@@ -116,23 +116,7 @@ services:
         bamtaNx6H7l4QlXegUXaxxAmeW2FR5nBUb2tiFBF70KA+rl4hRa7FuxcPmkNOtRO
         EokFG4nQ9lh/mN5vpkdxCA438Ur3yBqzaSI1NvGpb8/8gBG0Gg==
         -----END CERTIFICATE-----
-      PRIVATE_SITE_CONFIGS: |-
-        [
-            {
-              "scope": { "domain": "main", "languages": ["en", "de"] },
-              "name": "Starter Main",
-              "domains": { "main": "cometdxp.com" },
-              "preloginEnabled": true,
-              "url": "https://cometdxp.com"
-            },
-            {
-              "scope": { "domain": "secondary", "languages": ["en", "de"] },
-              "name": "Starter Secondary",
-              "domains": { "main": "secondary.localhost:3000" },
-              "preloginEnabled": true,
-              "url": "http://secondary.localhost:3000"
-            }
-          ]
+      PRIVATE_SITE_CONFIGS: "{{ site://configs/private/dev }}"
       POSTGRESQL_USE_SSL: "true"
       USE_AUTHPROXY: "true"
       IDP_CLIENT_ID: 59e44de5-0431-4413-b50b-7e52740a6d7b
@@ -151,7 +135,7 @@ services:
       NODE_ENV: production
       API_URL: https://admin.cometdxp.com/api
       ADMIN_URL: https://admin.cometdxp.com
-      PUBLIC_SITE_CONFIGS: '[{"scope": { "domain": "main", "languages": ["en", "de"] },"name": "Starter Main","domains": { "main": "cometdxp.com" },"preloginEnabled": true,"url": "https://cometdxp.com"},{"scope": { "domain": "secondary", "languages": ["en", "de"] },"name": "Starter Secondary","domains": { "main": "secondary.localhost:3000" },"preloginEnabled": true,"url": "http://secondary.localhost:3000"}]'
+      PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
       PREVIEW_URL: https://comet-starter-site-preview-jespg.ondigitalocean.app
 
   site:
@@ -166,23 +150,7 @@ services:
       ADMIN_URL: https://admin.cometdxp.com/
       NEXT_PUBLIC_API_URL: "TODO"
       API_URL_INTERNAL: http://api:4000/api
-      PUBLIC_SITE_CONFIGS: |-
-        [
-            {
-              "scope": { "domain": "main", "languages": ["en", "de"] },
-              "name": "Starter Main",
-              "domains": { "main": "cometdxp.com" },
-              "preloginEnabled": true,
-              "url": "https://cometdxp.com"
-            },
-            {
-              "scope": { "domain": "secondary", "languages": ["en", "de"] },
-              "name": "Starter Secondary",
-              "domains": { "main": "secondary.localhost:3000" },
-              "preloginEnabled": true,
-              "url": "http://secondary.localhost:3000"
-            }
-          ]
+      PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
     env_file: "site.secrets.env"
     labels:
       - "traefik.enable=true"
