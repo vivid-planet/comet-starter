@@ -49,3 +49,5 @@ public/sitemap.xml
 public/robots.txt
 
 tsconfig.tsbuildinfo
+
+/dist/

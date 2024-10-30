@@ -1,20 +1,23 @@
-export const dynamic = "force-dynamic";
+import "@fontsource/roboto";
+import "@fontsource/roboto/700.css";
 
 import { GlobalStyle } from "@src/layout/GlobalStyle";
-import { SiteConfigsProvider } from "@src/util/blockPreview";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
-import { getSiteConfigs } from "@src/util/siteConfig";
 import StyledComponentsRegistry from "@src/util/StyledComponentsRegistry";
 
-export default async function BlockPreviewLayout({ children }: { children: React.ReactNode }) {
-    const siteConfigs = getSiteConfigs();
+export default async function RootLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
     return (
         <html>
+            <head />
             <body>
                 <StyledComponentsRegistry>
                     <GlobalStyle />
                     <ResponsiveSpacingStyle />
-                    <SiteConfigsProvider siteConfigs={siteConfigs}>{children}</SiteConfigsProvider>
+                    {children}
                 </StyledComponentsRegistry>
             </body>
         </html>

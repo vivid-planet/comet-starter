@@ -1,17 +1,14 @@
-import { IntlProvider } from "@src/app/[domain]/[language]/IntlProvider";
-import { readFile } from "fs/promises";
+import { IntlProvider } from "@src/util/IntlProvider";
+import { loadMessages } from "@src/util/loadMessages";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { PropsWithChildren } from "react";
 
-const messagesCache: Record<string, unknown> = {};
-async function loadMessages(language: string) {
-    if (messagesCache[language]) return messagesCache[language];
-    const path = `./lang-compiled/${language}.json`;
-    const messages = JSON.parse(await readFile(path, "utf8"));
-    messagesCache[language] = messages;
-    return messages;
-}
+export default async function Page({ children, params: { domain, language } }: PropsWithChildren<{ params: { domain: string; language: string } }>) {
+    const siteConfig = getSiteConfigForDomain(domain);
+    if (!siteConfig.scope.languages.includes(language)) {
+        language = "en";
+    }
 
-export default async function Page({ children, params: { language } }: PropsWithChildren<{ params: { language: string } }>) {
     const messages = await loadMessages(language);
     return (
         <IntlProvider locale={language} messages={messages}>

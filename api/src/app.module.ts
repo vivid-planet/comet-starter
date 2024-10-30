@@ -18,8 +18,10 @@ import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
+import { FootersModule } from "@src/footers/footers.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
+import { RedirectScope } from "@src/redirects/dto/redirect-scope";
 import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
@@ -100,7 +102,7 @@ export class AppModule {
                     Documents: [Page, Link],
                     Scope: PageTreeNodeScope,
                 }),
-                RedirectsModule.register(),
+                RedirectsModule.register({ Scope: RedirectScope }),
                 BlobStorageModule.register({
                     backend: config.blob.storage,
                 }),
@@ -121,6 +123,7 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
+                FootersModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({

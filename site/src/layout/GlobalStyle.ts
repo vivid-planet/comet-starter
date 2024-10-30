@@ -10,6 +10,13 @@ export const GlobalStyle = createGlobalStyle`
     html {
         /* Prevent font size adjustments after orientation changes in mobile devices */
         text-size-adjust: 100%;
+
+        --header-height: 100px;
+        --full-viewport-height: 100vh;
+
+        @supports (height: 100dvh) {
+            --full-viewport-height: 100dvh;
+        }
     }
 
     body {
@@ -19,6 +26,11 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: ${({ theme }) => theme.palette.text.primary};
+        
+        /* Make body take the height of the viewport to put footer at the bottom  */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     h1,

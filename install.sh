@@ -22,7 +22,7 @@ ln -sf ../.env ./api/
 ln -sf ../.env.local ./api/
 ln -sf ../.env.secrets ./api/
 ln -sf ../.env.site-configs ./api/
-ln -sf ../../site-configs.d.ts ./api/src/
+ln -sf ../../site-configs/site-configs.d.ts ./api/src/
 
 # create admin symlinks
 ln -sf ../.env ./admin/
@@ -32,7 +32,7 @@ ln -sf ../.env.site-configs ./admin/
 ln -sf ../api/schema.gql ./admin/
 ln -sf ../api/block-meta.json ./admin/
 ln -sf ../../api/src/comet-config.json ./admin/src/
-ln -sf ../../site-configs.d.ts ./admin/src/
+ln -sf ../../site-configs/site-configs.d.ts ./admin/src/
 
 # create site symlinks
 ln -sf ../.env ./site/
@@ -42,7 +42,7 @@ ln -sf ../.env.site-configs ./site/
 ln -sf ../api/schema.gql ./site/
 ln -sf ../api/block-meta.json ./site/
 ln -sf ../../api/src/comet-config.json ./site/src/
-ln -sf ../../site-configs.d.ts ./site/src/
+ln -sf ../../site-configs/site-configs.d.ts ./site/src/
 
 # Lang install
 sh ./site/intl-update.sh

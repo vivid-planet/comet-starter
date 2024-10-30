@@ -737,6 +737,11 @@
                             "name": "fileUrl",
                             "kind": "String",
                             "nullable": false
+                        },
+                        {
+                            "name": "size",
+                            "kind": "Number",
+                            "nullable": false
                         }
                     ]
                 },
@@ -985,6 +990,59 @@
             {
                 "name": "openInNewWindow",
                 "kind": "Boolean",
+                "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "FooterContent",
+        "fields": [
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "linkList",
+                "kind": "Block",
+                "block": "LinkList",
+                "nullable": false
+            },
+            {
+                "name": "copyrightNotice",
+                "kind": "String",
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "text",
+                "kind": "Block",
+                "block": "RichText",
+                "nullable": false
+            },
+            {
+                "name": "image",
+                "kind": "Block",
+                "block": "DamImage",
+                "nullable": false
+            },
+            {
+                "name": "linkList",
+                "kind": "Block",
+                "block": "LinkList",
+                "nullable": false
+            },
+            {
+                "name": "copyrightNotice",
+                "kind": "String",
                 "nullable": false
             }
         ]
@@ -1286,6 +1344,63 @@
                 "name": "title",
                 "kind": "String",
                 "nullable": true
+            }
+        ]
+    },
+    {
+        "name": "LinkList",
+        "fields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TextLink",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "blocks",
+                "kind": "NestedObjectList",
+                "object": {
+                    "fields": [
+                        {
+                            "name": "key",
+                            "kind": "String",
+                            "nullable": false
+                        },
+                        {
+                            "name": "visible",
+                            "kind": "Boolean",
+                            "nullable": false
+                        },
+                        {
+                            "name": "props",
+                            "kind": "Block",
+                            "block": "TextLink",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "nullable": false
             }
         ]
     },
@@ -2586,6 +2701,65 @@
                 "kind": "Block",
                 "block": "Link",
                 "nullable": false
+            }
+        ]
+    },
+    {
+        "name": "VimeoVideo",
+        "fields": [
+            {
+                "name": "autoplay",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "showControls",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "loop",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "PixelImage",
+                "nullable": false
+            },
+            {
+                "name": "vimeoIdentifier",
+                "kind": "String",
+                "nullable": true
+            }
+        ],
+        "inputFields": [
+            {
+                "name": "autoplay",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "showControls",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "loop",
+                "kind": "Boolean",
+                "nullable": true
+            },
+            {
+                "name": "previewImage",
+                "kind": "Block",
+                "block": "PixelImage",
+                "nullable": false
+            },
+            {
+                "name": "vimeoIdentifier",
+                "kind": "String",
+                "nullable": true
             }
         ]
     },
