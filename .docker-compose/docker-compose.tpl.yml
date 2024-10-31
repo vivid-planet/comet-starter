@@ -123,6 +123,7 @@ services:
       IDP_JWKS_URI: https://auth-sso.vivid-planet.cloud/.well-known/jwks.json
       IDP_END_SESSION_ENDPOINT: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
       POST_LOGOUT_REDIRECT_URI: https://admin.cometdxp.com/oauth2/sign_out?rd=%2F
+      ACL_ALL_PERMISSIONS_DOMAINS: "vivid-planet.com"
     env_file: "api.secrets.env"
 
   admin:
