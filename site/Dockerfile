@@ -13,4 +13,4 @@ RUN ./intl-update.sh && \
     npm run build && \
     npm prune --omit=dev
 
-CMD "node" "server"
+CMD "node" "dist/server"
