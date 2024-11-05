@@ -5,15 +5,9 @@ services:
     command:
       # - "--log.level=TRACE"
       - "--accessLog=true"
-      - "--accessLog.fields.defaultMode=keep"
-      - "--accessLog.fields.headers.defaultMode=keep"
-      - "--accessLog.fields.names.defaultMode=keep"
-      - "--accesslog.fields.headers.names.Cookie=keep"
-      - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.exposedbydefault=false" # services need to be exposed by setting traefik.enable=true
       - "--entryPoints.websecure.address=:443"
-      - "--entryPoints.websecure.forwardedHeaders.insecure"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # used for cert debugging
       - "--certificatesresolvers.myresolver.acme.email=postmaster@cometdxp.com"
@@ -137,7 +131,7 @@ services:
       API_URL: https://admin.cometdxp.com/api
       ADMIN_URL: https://admin.cometdxp.com
       PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
-      PREVIEW_URL: https://comet-starter-site-preview-jespg.ondigitalocean.app
+      PREVIEW_URL: https://comet-starter-site-preview-jespg.ondigitalocean.app # TODO
 
   site:
     build:
