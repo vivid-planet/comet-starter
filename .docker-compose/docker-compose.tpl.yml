@@ -2,6 +2,7 @@ services:
   traefik:
     image: "traefik:v3.1"
     container_name: "traefik"
+    restart: "on-failure"
     command:
       # - "--log.level=TRACE"
       - "--accessLog=true"
@@ -21,6 +22,7 @@ services:
 
   imgproxy:
     image: darthsim/imgproxy:v3
+    restart: "on-failure"
     ports:
       - 8080:8080
     environment:
@@ -30,6 +32,7 @@ services:
 
   oauthproxy:
     image: "dkarnutsch/oauth2-proxy:latest"
+    restart: "on-failure"
     ports:
       - 4180:4180
     environment:
@@ -69,6 +72,7 @@ services:
       dockerfile: Dockerfile
       additional_contexts:
         - site-configs=../site-configs
+    restart: "on-failure"
     environment:
       NODE_ENV: production
       POSTGRESQL_HOST: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
@@ -126,6 +130,7 @@ services:
       dockerfile: Dockerfile
       additional_contexts:
         - api=../api
+    restart: "on-failure"
     environment:
       NODE_ENV: production
       API_URL: https://admin.cometdxp.com/api
@@ -140,6 +145,7 @@ services:
       additional_contexts:
         - api=../api
         - site-configs=../site-configs
+    restart: "on-failure"
     environment:
       NODE_ENV: production
       ADMIN_URL: https://admin.cometdxp.com/
