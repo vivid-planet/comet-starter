@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-20:latest
+FROM registry.access.redhat.com/ubi9/nodejs-20-minimal:latest
 
 USER 1001
 
