@@ -5,9 +5,9 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Typography } from "../components/Typography";
 
@@ -30,11 +30,25 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData>;
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content, openByDefault } }: AccordionItemBlockProps) => {
         const intl = useIntl();
+        const innerContentRef = useRef<HTMLDivElement>(null);
         const [isExpanded, setIsExpanded] = useState<boolean>(openByDefault);
+        const [elementHeight, setElementHeight] = useState<number>(0);
 
         const ariaLabelText = isExpanded
             ? intl.formatMessage({ id: "accordionBlock.ariaLabel.expanded", defaultMessage: "Collapse accordion item" })
             : intl.formatMessage({ id: "accordionBlock.ariaLabel.collapsed", defaultMessage: "Expand accordion item" });
+
+        useEffect(() => {
+            const updateElementHeight = () => {
+                const height = isExpanded && innerContentRef.current ? innerContentRef.current.clientHeight : 0;
+                setElementHeight(height);
+            };
+
+            updateElementHeight();
+
+            window.addEventListener("resize", updateElementHeight);
+            return () => window.removeEventListener("resize", updateElementHeight);
+        }, [isExpanded]);
 
         return (
             <>
@@ -44,8 +58,8 @@ export const AccordionItemBlock = withPreview(
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper aria-hidden={!isExpanded}>
-                    <ContentWrapperInner $isExpanded={isExpanded}>
+                <ContentWrapper $isExpanded={isExpanded} $height={elementHeight}>
+                    <ContentWrapperInner ref={innerContentRef}>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
                 </ContentWrapper>
@@ -83,21 +97,17 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     transition: transform 0.4s ease;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ $isExpanded: boolean; $height: number }>`
     overflow: hidden;
+    height: ${({ $height }) => $height}px;
+    transition: height 300ms, margin-bottom 300ms;
 `;
 
-const ContentWrapperInner = styled.div<{ $isExpanded: boolean }>`
-    padding-bottom: ${({ theme }) => theme.spacing.S300};
-    margin-top: -100%;
-    opacity: 0;
-    transition: margin-top 0.8s ease-out 0.3s, opacity 0.3s linear;
+const ContentWrapperInner = styled.div`
+    padding: ${({ theme }) => theme.spacing.S500} 0;
+    border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
 
-    ${({ $isExpanded }) =>
-        $isExpanded &&
-        css`
-            margin-top: 0;
-            opacity: 1;
-            transition: margin-top 0.5s ease-out, opacity 0.3s linear 0.4s;
-        `}
+    > *:last-child {
+        margin-bottom: 0;
+    }
 `;
