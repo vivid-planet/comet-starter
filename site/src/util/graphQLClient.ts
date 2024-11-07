@@ -5,19 +5,18 @@ import {
     SitePreviewData,
 } from "@comet/cms-site";
 
-const isServerSide = typeof window === "undefined";
-export const graphQLApiUrl = `${isServerSide ? process.env.API_URL_INTERNAL : process.env.NEXT_PUBLIC_API_URL}/graphql`;
 export function createGraphQLFetch(previewData?: SitePreviewData) {
+    if (typeof window !== "undefined") {
+        throw new Error("createGraphQLFetch: cannot use on client side.");
+    }
+
     const headers: HeadersInit = {
+        authorization: `Basic ${Buffer.from(`system-user:${process.env.API_BASIC_AUTH_SYSTEM_USER_PASSWORD}`).toString("base64")}`,
         "x-relative-dam-urls": "1",
     };
 
-    if (isServerSide) {
-        headers.authorization = `Basic ${Buffer.from(`system-user:${process.env.API_BASIC_AUTH_SYSTEM_USER_PASSWORD}`).toString("base64")}`;
-    }
-
     return createGraphQLFetchLibrary(
         createFetchWithDefaults(createFetchWithPreviewHeaders(fetch, previewData), { next: { revalidate: 15 * 60 }, headers }),
-        graphQLApiUrl,
+        `${process.env.API_URL_INTERNAL}/graphql`,
     );
 }

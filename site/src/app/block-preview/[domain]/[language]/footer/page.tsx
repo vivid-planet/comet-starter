@@ -3,14 +3,14 @@
 import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIFrameBridge } from "@comet/cms-site";
 import { FooterContentBlockData } from "@src/blocks.generated";
 import { FooterContentBlock } from "@src/documents/pages/blocks/FooterContentBlock";
-import { graphQLApiUrl } from "@src/util/graphQLClient";
+import { useNextPublic } from "@src/util/NextPublicProvider";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { FunctionComponent, useEffect, useState } from "react";
 
 const PreviewPage: FunctionComponent = () => {
     const iFrameBridge = useIFrameBridge();
 
-    const { fetch, graphQLFetch } = useBlockPreviewFetch(graphQLApiUrl);
+    const { fetch, graphQLFetch } = useBlockPreviewFetch(`${useNextPublic("API_URL")}/graphql`);
 
     const [blockData, setBlockData] = useState<FooterContentBlockData>();
     useEffect(() => {
