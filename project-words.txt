@@ -9,3 +9,6 @@ maxmemory
 allkeys
 loglevel
 requirepass
+mikro
+Mikro
+nestjs
