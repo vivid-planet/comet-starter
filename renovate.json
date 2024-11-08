@@ -1,0 +1,59 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended"],
+    "packageRules": [
+        {
+            "matchPackagePatterns": ["@comet/*"],
+            "groupName": "comet",
+            "prPriority": 6
+        },
+        {
+            "matchPackagePatterns": ["@types/*"],
+            "groupName": "types"
+        },
+        {
+            "matchPackagePatterns": ["eslint", "prettier"],
+            "groupName": "linters"
+        },
+        {
+            "matchPackagePatterns": ["typescript"],
+            "groupName": "typescript"
+        },
+        {
+            "matchPackagePatterns": ["^@storybook", "^storybook"],
+            "groupName": "Storybook"
+        },
+        {
+            "matchPackagePatterns": ["^@mui/x"],
+            "groupName": "Mui-X"
+        },
+        {
+            "matchPackagePatterns": ["@mui/material", "@mui/system", "@mui/utils", "@mui/lab"],
+            "groupName": "Mui"
+        },
+        {
+            "matchPackagePatterns": ["@emotion/*"],
+            "groupName": "emotion"
+        },
+        {
+            "matchPackagePatterns": ["^react-router"],
+            "groupName": "React Router"
+        },
+        {
+            "matchPackageNames": ["@graphql-codegen/*"],
+            "groupName": "GraphQL Codegen"
+        },
+        {
+            "matchPackagePatterns": ["^@mikro-orm/*"],
+            "groupName": "Mikro-ORM"
+        },
+        {
+            "matchPackagePatterns": ["^@nestjs/*"],
+            "groupName": "NestJS"
+        },
+        {
+            "matchPackagePatterns": ["^open-telemetry/*"],
+            "groupName": "OpenTelemetry"
+        }
+    ]
+}
