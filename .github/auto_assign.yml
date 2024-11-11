@@ -8,6 +8,7 @@ reviewers:
   - johnnyomair
   - nsams
   - thomasdax98
+  - manuelblum
 
 skipKeywords:
   - Merge main into next
