@@ -37,7 +37,7 @@
         "redraft": "^0.10.2",
         "styled-components": "^6.1.13",
         "swiper": "^11.1.14",
-        "ts-node": "^10.0.0"
+        "ts-node": "^10.9.2"
     },
     "devDependencies": {
         "@comet/cli": "^7.6.0",
