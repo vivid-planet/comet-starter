@@ -29,4 +29,3 @@ jobs:
           reviewGroup: "default"
           addReviewers: true
           addAssignees: false
- 
