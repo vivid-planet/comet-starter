@@ -54,7 +54,7 @@
         "compression": "^1.7.5",
         "cookie-parser": "^1.4.7",
         "express": "^4.21.1",
-        "graphql": "^15.5.0",
+        "graphql": "^15.9.0",
         "helmet": "^4.6.0",
         "nestjs-console": "^8.0.0",
         "reflect-metadata": "^0.1.13",
