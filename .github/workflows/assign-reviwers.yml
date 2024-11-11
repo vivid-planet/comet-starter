@@ -16,8 +16,8 @@ jobs:
         if: github.actor == 'renovate[bot]'
         uses: kentaro-m/auto-assign-action@v2.0.0
         with:
-          config: '.github/auto_assign.yml'
-          reviewGroup: 'dependencyUpdates'
+          config: ".github/auto_assign.yml"
+          reviewGroup: "dependencyUpdates"
           addReviewers: true
           addAssignees: false
 
@@ -25,7 +25,7 @@ jobs:
         if: github.actor != 'renovate[bot]'
         uses: kentaro-m/auto-assign-action@v2.0.0
         with:
-          config: '.github/auto_assign.yml'
-          reviewGroup: 'default'
+          config: ".github/auto_assign.yml"
+          reviewGroup: "default"
           addReviewers: true
           addAssignees: false
