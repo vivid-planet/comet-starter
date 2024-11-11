@@ -29,7 +29,7 @@
         "cache-manager": "^5.7.6",
         "graphql": "^15.9.0",
         "ioredis": "^5.4.1",
-        "lru-cache": "^11.0.1",
+        "lru-cache": "^11.0.2",
         "next": "^14.2.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
