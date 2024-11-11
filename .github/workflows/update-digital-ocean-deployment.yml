@@ -22,8 +22,8 @@ jobs:
       - name: Inject Site Configurations
         run: |
           sed -i 's/dev\.comet\-dxp\.com/comet-starter-site-tyqqf.ondigitalocean.app/g' site-configs/main.ts
-          APP_ENV=dev npx -y @comet/cli inject-site-configs -f ../../../../../site-configs/site-configs.ts -i .digitalocean/comet-starter-cms.tpl.yaml -o .digitalocean/comet-starter-cms.yaml
-          APP_ENV=dev npx -y @comet/cli inject-site-configs -f ../../../../../site-configs/site-configs.ts -i .digitalocean/comet-starter-site-main.tpl.yaml -o .digitalocean/comet-starter-site-main.yaml
+          APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .digitalocean/comet-starter-cms.tpl.yaml -o .digitalocean/comet-starter-cms.yaml
+          APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .digitalocean/comet-starter-site-main.tpl.yaml -o .digitalocean/comet-starter-site-main.yaml
 
       - name: Update DigitalOcean comet-starter-imgproxy Deployment
         uses: digitalocean/app_action/deploy@v2
