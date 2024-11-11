@@ -55,5 +55,6 @@
             "matchPackagePatterns": ["^open-telemetry/*"],
             "groupName": "OpenTelemetry"
         }
-    ]
+    ],
+    "rangeStrategy": "bump"
 }
