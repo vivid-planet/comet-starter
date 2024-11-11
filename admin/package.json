@@ -44,7 +44,7 @@
         "change-case": "^5.4.4",
         "date-fns": "^2.30.0",
         "exceljs": "^3.4.0",
-        "file-saver": "^2.0.2",
+        "file-saver": "^2.0.5",
         "final-form": "^4.16.1",
         "graphql": "^15.4.0",
         "history": "^4.10.0",
