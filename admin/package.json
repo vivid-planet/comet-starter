@@ -45,7 +45,7 @@
         "date-fns": "^2.30.0",
         "exceljs": "^3.4.0",
         "file-saver": "^2.0.5",
-        "final-form": "^4.16.1",
+        "final-form": "^4.20.10",
         "graphql": "^15.9.0",
         "history": "^4.10.0",
         "lodash.isequal": "^4.5.0",
