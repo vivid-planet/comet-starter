@@ -14,7 +14,7 @@ jobs:
 
       - name: Assign reviewers for Renovate bot
         if: github.actor == 'renovate[bot]'
-        uses: kentaro-m/auto-assign-action@v2
+        uses: kentaro-m/auto-assign-action@v2.0.0
         with:
           config: '.github/auto_assign.yml'
           reviewGroup: 'dependencyUpdates'
@@ -23,7 +23,7 @@ jobs:
 
       - name: Assign default reviewers
         if: github.actor != 'renovate[bot]'
-        uses: kentaro-m/auto-assign-action@v2
+        uses: kentaro-m/auto-assign-action@v2.0.0
         with:
           config: '.github/auto_assign.yml'
           reviewGroup: 'default'
