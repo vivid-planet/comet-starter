@@ -58,7 +58,7 @@
         "helmet": "^4.6.0",
         "nestjs-console": "^8.0.0",
         "reflect-metadata": "^0.1.13",
-        "rimraf": "^6.0.0",
+        "rimraf": "^6.0.1",
         "rxjs": "^7.2.0",
         "uuid": "^8.3.2"
     },
