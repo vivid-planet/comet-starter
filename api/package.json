@@ -86,7 +86,7 @@
         "ts-jest": "^29.2.5",
         "ts-loader": "^8.4.0",
         "ts-node": "^10.0.0",
-        "tsconfig-paths": "^3.9.0",
+        "tsconfig-paths": "^3.15.0",
         "typescript": "~5.1.0"
     },
     "mikro-orm": {
