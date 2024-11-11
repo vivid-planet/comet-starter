@@ -58,7 +58,7 @@
         "cspell": "^8.14.4",
         "dotenv-cli": "^7.4.2",
         "eslint": "^8.0.0",
-        "npm-run-all2": "^5.0.0",
+        "npm-run-all2": "^5.0.2",
         "postcss-styled-syntax": "^0.6.4",
         "prettier": "^2.0.0",
         "stylelint": "^16.6.1",
