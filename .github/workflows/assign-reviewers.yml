@@ -16,10 +16,10 @@ jobs:
         if: github.actor == 'renovate[bot]'
         uses: kentaro-m/auto-assign-action@v2.0.0
         with:
-          config: ".github/auto_assign_dependency_updates.yml"
+          configuration-path: ".github/auto_assign_dependency_updates.yml"
 
       - name: Assign default reviewers
         if: github.actor != 'renovate[bot]'
         uses: kentaro-m/auto-assign-action@v2.0.0
         with:
-          config: ".github/auto_assign.yml"
+          configuration-path: ".github/auto_assign.yml"
