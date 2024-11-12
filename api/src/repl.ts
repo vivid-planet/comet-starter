@@ -9,6 +9,10 @@ import { AppModule } from "./app.module";
 import { createConfig } from "./config/config";
 
 async function bootstrap() {
+    if (process.env.NODE_ENV === "production") {
+        throw new Error("Can't use REPL in production");
+    }
+
     const config = createConfig(process.env);
     const appModule = AppModule.forRoot(config);
     const app = await NestFactory.create<NestExpressApplication>(appModule);
