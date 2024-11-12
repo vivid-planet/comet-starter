@@ -17,14 +17,14 @@
         "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.lint.json",
+        "repl": "npm run start -- --watch --entryFile repl",
         "start": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start",
         "start:debug": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
         "start:dev": "npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "jest --passWithNoTests",
         "test:ci": "npm run test -- --ci --reporters=default --reporters=jest-junit",
-        "test:watch": "npm run test -- --watch",
-        "repl": "npm run start -- --watch --entryFile repl"
+        "test:watch": "npm run test -- --watch"
     },
     "dependencies": {
         "@comet/blocks-api": "^7.6.0",
