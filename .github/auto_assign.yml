@@ -2,13 +2,22 @@ addAssignees: author
 
 addReviewers: true
 
-reviewers:
-  - dkarnutsch
-  - fraxachun
-  - johnnyomair
-  - nsams
-  - thomasdax98
-  - manuelblum
+useReviewGroups: true
+
+reviewGroups:
+  default:
+    - dkarnutsch
+    - fraxachun
+    - johnnyomair
+    - nsams
+    - thomasdax98
+    - manuelblum
+  dependencyUpdates:
+    - johnnyomair
+    - thomasdax98
+    - manuelblum
+
+useAssigneeGroups: false
 
 skipKeywords:
   - Merge main into next
