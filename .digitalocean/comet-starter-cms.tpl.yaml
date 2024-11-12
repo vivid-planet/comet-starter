@@ -236,7 +236,7 @@ services:
       - key: SITE_PREVIEW_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:1HOIP9hv4UVZSbC1N3Z7wJLx8Uwkw0EY:Vh8xNJWCAjnfxlndXycettRO07NIm18271j+z5ocF40=] # This secret got created and encrypted in Digital Ocean Web Application
+        value: EV[1:A4X6zGCPT5FxJeeVfJN6/+qMheIJiRR4:rVkXdx0O7CoYtL9DgiFI2JNtntbOYIvgP+wR1B9un+s=] # This secret got created and encrypted in Digital Ocean Web Application
     http_port: 4180
     image:
       registry: dkarnutsch
