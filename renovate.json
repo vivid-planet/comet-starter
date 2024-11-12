@@ -3,57 +3,62 @@
     "extends": ["config:recommended"],
     "packageRules": [
         {
-            "matchPackagePatterns": ["@comet/*"],
             "groupName": "comet",
-            "prPriority": 6
+            "prPriority": 6,
+            "matchPackageNames": ["/@comet/*/"]
         },
         {
-            "matchPackagePatterns": ["@types/*"],
-            "groupName": "types"
+            "groupName": "types",
+            "matchPackageNames": ["/@types/*/"]
         },
         {
-            "matchPackagePatterns": ["^eslint", "^prettier"],
-            "groupName": "linters"
+            "groupName": "linters",
+            "matchPackageNames": ["/^eslint/", "/^prettier/"]
         },
         {
-            "matchPackagePatterns": ["typescript"],
-            "groupName": "typescript"
+            "groupName": "typescript",
+            "matchPackageNames": ["/typescript/"]
         },
         {
-            "matchPackagePatterns": ["^@storybook", "^storybook"],
-            "groupName": "Storybook"
+            "groupName": "Storybook",
+            "matchPackageNames": ["/^@storybook/", "/^storybook/"]
         },
         {
-            "matchPackagePatterns": ["^@mui/x"],
-            "groupName": "Mui-X"
+            "groupName": "Mui-X",
+            "matchPackageNames": ["/^@mui/x/"]
         },
         {
-            "matchPackagePatterns": ["@mui/material", "@mui/system", "@mui/utils", "@mui/lab"],
-            "groupName": "Mui"
+            "groupName": "Mui",
+            "matchPackageNames": [
+                "/@mui/material/",
+                "/@mui/system/",
+                "/@mui/utils/",
+                "/@mui/lab/"
+            ]
         },
         {
-            "matchPackagePatterns": ["@emotion/*"],
-            "groupName": "emotion"
+            "groupName": "emotion",
+            "matchPackageNames": ["/@emotion/*/"]
         },
         {
-            "matchPackagePatterns": ["^react-router"],
-            "groupName": "React Router"
+            "groupName": "React Router",
+            "matchPackageNames": ["/^react-router/"]
         },
         {
             "matchPackageNames": ["@graphql-codegen/*"],
             "groupName": "GraphQL Codegen"
         },
         {
-            "matchPackagePatterns": ["^@mikro-orm/*"],
-            "groupName": "Mikro-ORM"
+            "groupName": "Mikro-ORM",
+            "matchPackageNames": ["/^@mikro-orm/*/"]
         },
         {
-            "matchPackagePatterns": ["^@nestjs/*"],
-            "groupName": "NestJS"
+            "groupName": "NestJS",
+            "matchPackageNames": ["/^@nestjs/*/"]
         },
         {
-            "matchPackagePatterns": ["^open-telemetry/*"],
-            "groupName": "OpenTelemetry"
+            "groupName": "OpenTelemetry",
+            "matchPackageNames": ["/^open-telemetry/*/"]
         }
     ],
     "rangeStrategy": "bump"
