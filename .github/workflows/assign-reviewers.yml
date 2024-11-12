@@ -1,0 +1,25 @@
+name: Assign Reviewers Based on Author
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  assign_reviewers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Assign reviewers for Renovate bot
+        if: github.actor == 'renovate[bot]'
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          configuration-path: ".github/auto_assign_dependency_updates.yml"
+
+      - name: Assign default reviewers
+        if: github.actor != 'renovate[bot]'
+        uses: kentaro-m/auto-assign-action@v2.0.0
+        with:
+          configuration-path: ".github/auto_assign.yml"
