@@ -36,5 +36,5 @@
         "ts-node": "^10.9.2",
         "typescript": "~5.5.0"
     },
-    "packageManager": "npm@10.8.2"
+    "packageManager": "npm@10.9.0"
 }
