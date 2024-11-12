@@ -44,7 +44,7 @@ services:
       - key: POSTGRESQL_PASSWORD
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:VJWKcWvicy4ClCPNzpPOSwiZB0p8/gZq:SZK9hwGdXBqcCEApIdFWuSLWS//rvY/VEfyJ2WWwM/agjP+BLUOiew==]
+        value: EV[1:VJWKcWvicy4ClCPNzpPOSwiZB0p8/gZq:SZK9hwGdXBqcCEApIdFWuSLWS//rvY/VEfyJ2WWwM/agjP+BLUOiew==] # This secret got created and encrypted in Digital Ocean Web Application
       - key: POSTGRESQL_USER
         scope: RUN_AND_BUILD_TIME
         value: starter
@@ -60,18 +60,18 @@ services:
       - key: IMGPROXY_SALT
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:DpbiOlcKj5C5taV+27VGP0Wc2GFFu0Cu:I8RNxsSOqaGk12doCtjeIT9hUNWTM6rAr7kMX6X+JlE4VyYH5kd1XFZ9SozGmADqFKEkI//BIJQ00XAq6dkXr6amsH7AtVJSxkl4WjBBs24sW/jnSIjebEYDq4n9oQbptdhrQcNwTYaAy/VZm1KzgzxdXaQHDsLmbtYWXLKUue/VldiCajnRExZjiTdk/x8Y]
+        value: EV[1:DpbiOlcKj5C5taV+27VGP0Wc2GFFu0Cu:I8RNxsSOqaGk12doCtjeIT9hUNWTM6rAr7kMX6X+JlE4VyYH5kd1XFZ9SozGmADqFKEkI//BIJQ00XAq6dkXr6amsH7AtVJSxkl4WjBBs24sW/jnSIjebEYDq4n9oQbptdhrQcNwTYaAy/VZm1KzgzxdXaQHDsLmbtYWXLKUue/VldiCajnRExZjiTdk/x8Y] # This secret got created and encrypted in Digital Ocean Web Application
       - key: IMGPROXY_URL
         scope: RUN_AND_BUILD_TIME
         value: https://comet-starter-imgproxy-ovgzu.ondigitalocean.app
       - key: IMGPROXY_KEY
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:wD77N9Aop33RXd8qv/pUCyIyItqY877u:DeExUMZXlI96dabfE09kuc/Kj54FZmVrjuTb2VMLajK1B+fxuNIHecelUdFX1wo1lrYm+jRFBotC8nWh4uhEYfC4KVS6QdjeKIXAxhuZ7cGI848/VAzkWKoEgYoSUYTXNTbpETptNFWQ1XFzJxDKZiYFaW8LmknvxUixuaxULsobxjFhH/S+fTlHt6j9DN9K]
+        value: EV[1:wD77N9Aop33RXd8qv/pUCyIyItqY877u:DeExUMZXlI96dabfE09kuc/Kj54FZmVrjuTb2VMLajK1B+fxuNIHecelUdFX1wo1lrYm+jRFBotC8nWh4uhEYfC4KVS6QdjeKIXAxhuZ7cGI848/VAzkWKoEgYoSUYTXNTbpETptNFWQ1XFzJxDKZiYFaW8LmknvxUixuaxULsobxjFhH/S+fTlHt6j9DN9K] # This secret got created and encrypted in Digital Ocean Web Application
       - key: DAM_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:cN8JQAPIBnJqXpO8RGBqx9tvzArnSMFz:tQ2EW+BE5XWg2rPUvXqCjbXKNxIYLRGLdsAKk+CVhaDRWhc=]
+        value: EV[1:cN8JQAPIBnJqXpO8RGBqx9tvzArnSMFz:tQ2EW+BE5XWg2rPUvXqCjbXKNxIYLRGLdsAKk+CVhaDRWhc=] # This secret got created and encrypted in Digital Ocean Web Application
       - key: BLOB_STORAGE_DRIVER
         scope: RUN_AND_BUILD_TIME
         value: s3
@@ -90,11 +90,11 @@ services:
       - key: S3_ACCESS_KEY_ID
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:MoPtts0J/3qbPVcLpNbJDQncPsvQBWmG:sseL7FpcEps7IV5v/uqBctUwp+tSMBAzJl3XkZjMCLZ69PUt]
+        value: EV[1:MoPtts0J/3qbPVcLpNbJDQncPsvQBWmG:sseL7FpcEps7IV5v/uqBctUwp+tSMBAzJl3XkZjMCLZ69PUt] # This secret got created and encrypted in Digital Ocean Web Application
       - key: S3_SECRET_ACCESS_KEY
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:GNjlve0WqXUtZr2TVaxvI9UTcv6a0Mta:zK4fpoWTpwDHO6MfYEWLoOsw3Kq3W3N9FvGAIuHRc1I6FF6zeZOULOIxzOXgLJPb6xIIiUKB8dAOu7Y=]
+        value: EV[1:GNjlve0WqXUtZr2TVaxvI9UTcv6a0Mta:zK4fpoWTpwDHO6MfYEWLoOsw3Kq3W3N9FvGAIuHRc1I6FF6zeZOULOIxzOXgLJPb6xIIiUKB8dAOu7Y=] # This secret got created and encrypted in Digital Ocean Web Application
       - key: POSTGRESQL_CA_CERT
         scope: RUN_AND_BUILD_TIME
         value: |-
@@ -135,7 +135,7 @@ services:
       - key: BASIC_AUTH_SYSTEM_USER_PASSWORD
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:RRBCV3yOi07TjXxGcad36RGJAJ2DnHbw:mmzqyMwl9gtfoiNigjj/0GrZTduEp6LtgJKV/5a3geMwKSk=]
+        value: EV[1:RRBCV3yOi07TjXxGcad36RGJAJ2DnHbw:mmzqyMwl9gtfoiNigjj/0GrZTduEp6LtgJKV/5a3geMwKSk=] # This secret got created and encrypted in Digital Ocean Web Application
       - key: IDP_CLIENT_ID
         scope: RUN_AND_BUILD_TIME
         value: 59e44de5-0431-4413-b50b-7e52740a6d7b
@@ -204,14 +204,14 @@ services:
       - key: OAUTH2_PROXY_CLIENT_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:uQi0YzdSCPn4w2obTTkdFOiUmYC0onNR:NEwKBNspvye4T0NkL6QpCP5PiTduvpyfnF/JjvKbX8Aec0s=]
+        value: EV[1:uQi0YzdSCPn4w2obTTkdFOiUmYC0onNR:NEwKBNspvye4T0NkL6QpCP5PiTduvpyfnF/JjvKbX8Aec0s=] # This secret got created and encrypted in Digital Ocean Web Application
       - key: OAUTH2_PROXY_CLIENT_ID
         scope: RUN_AND_BUILD_TIME
         value: 59e44de5-0431-4413-b50b-7e52740a6d7b
       - key: OAUTH2_PROXY_COOKIE_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:nG0XBGrISwLqRYdFFELwYeszfQ0vMCjC:XBISzF+YWffV1LA25rTvp4v6iLhjVL4a3VGkd2v7Iiw=]
+        value: EV[1:nG0XBGrISwLqRYdFFELwYeszfQ0vMCjC:XBISzF+YWffV1LA25rTvp4v6iLhjVL4a3VGkd2v7Iiw=] # This secret got created and encrypted in Digital Ocean Web Application
       - key: OAUTH2_PROXY_PROVIDER
         scope: RUN_AND_BUILD_TIME
         value: oidc
@@ -233,6 +233,10 @@ services:
       - key: OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT
         scope: RUN_AND_BUILD_TIME
         value: "true"
+      - key: SITE_PREVIEW_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:1HOIP9hv4UVZSbC1N3Z7wJLx8Uwkw0EY:Vh8xNJWCAjnfxlndXycettRO07NIm18271j+z5ocF40=] # This secret got created and encrypted in Digital Ocean Web Application
     http_port: 4180
     image:
       registry: dkarnutsch
@@ -266,7 +270,7 @@ services:
         value: "{{ site://configs/public/dev }}"
       - key: PREVIEW_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-site-preview-jespg.ondigitalocean.app # TODO
+        value: https://comet-starter-site-preview-jespg.ondigitalocean.app
     github:
       branch: main
       deploy_on_push: false
