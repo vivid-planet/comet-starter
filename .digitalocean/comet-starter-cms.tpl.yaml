@@ -233,6 +233,10 @@ services:
       - key: OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT
         scope: RUN_AND_BUILD_TIME
         value: "true"
+      - key: SITE_PREVIEW_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: EV[1:1HOIP9hv4UVZSbC1N3Z7wJLx8Uwkw0EY:Vh8xNJWCAjnfxlndXycettRO07NIm18271j+z5ocF40=] #
     http_port: 4180
     image:
       registry: dkarnutsch
