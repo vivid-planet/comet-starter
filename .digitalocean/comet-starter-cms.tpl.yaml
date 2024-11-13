@@ -279,5 +279,5 @@ services:
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
     name: admin
-    run_command: npm run serve
+    run_command: cd server && npm i && node server.js # Workaround for missing node_modules in cache (only parent node_mdoules are cached)
     source_dir: admin
