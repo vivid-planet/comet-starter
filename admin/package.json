@@ -35,7 +35,7 @@
         "@comet/cms-admin": "^7.6.0",
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
-        "@fontsource/roboto": "^4.5.8",
+        "@fontsource/roboto": "^5.1.0",
         "@mui/lab": "^5.0.0-alpha.173",
         "@mui/material": "^5.16.7",
         "@mui/system": "^5.16.7",
