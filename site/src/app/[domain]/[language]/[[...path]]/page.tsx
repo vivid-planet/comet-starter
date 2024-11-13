@@ -1,33 +1,71 @@
 import { gql, previewParams } from "@comet/cms-site";
+import { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
 import { documentTypes } from "@src/documents";
-import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
+import { GQLPageTreeNodeScope } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
-import { notFound } from "next/navigation";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
+import { notFound, redirect } from "next/navigation";
 
 import { GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables } from "./page.generated";
 
 const documentTypeQuery = gql`
-    query DocumentType($path: String!, $scope: PageTreeNodeScopeInput!) {
-        pageTreeNodeByPath(path: $path, scope: $scope) {
+    query DocumentType(
+        $skipPage: Boolean!
+        $path: String!
+        $scope: PageTreeNodeScopeInput!
+        $redirectSource: String!
+        $redirectScope: RedirectScopeInput!
+    ) {
+        pageTreeNodeByPath(path: $path, scope: $scope) @skip(if: $skipPage) {
             id
             documentType
+        }
+        redirectBySource(source: $redirectSource, sourceType: path, scope: $redirectScope) {
+            target
         }
     }
 `;
 
-export default async function Page({ params: { path, domain, language } }: { params: { path: string[]; domain: string; language: string } }) {
-    const scope = { domain, language };
-
+export default async function Page({ params }: { params: { path: string[]; domain: string; language: string } }) {
     const { previewData } = (await previewParams()) || { previewData: undefined };
     const graphqlFetch = createGraphQLFetch(previewData);
+    const siteConfig = getSiteConfigForDomain(params.domain);
+
+    const skipPage = !siteConfig.scope.languages.includes(params.language);
+    const path = `/${(params.path ?? []).join("/")}`;
+    const scope = { domain: params.domain, language: params.language };
 
     //fetch documentType
     const data = await graphqlFetch<GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables>(documentTypeQuery, {
-        path: `/${(path ?? []).join("/")}`,
-        scope: scope as GQLPageTreeNodeScopeInput, //TODO fix type, the scope from previewParams() is not compatible with GQLPageTreeNodeScopeInput
+        skipPage,
+        path,
+        scope,
+        redirectSource: `/${params.language}${path !== "/" ? path : ""}`,
+        redirectScope: { domain: scope.domain },
     });
 
     if (!data.pageTreeNodeByPath?.documentType) {
+        if (data.redirectBySource?.target) {
+            const target = data.redirectBySource?.target as RedirectsLinkBlockData;
+            let destination: string | undefined;
+            if (target.block !== undefined) {
+                switch (target.block.type) {
+                    case "internal": {
+                        const internalLink = target.block.props as InternalLinkBlockData;
+                        if (internalLink.targetPage) {
+                            destination = `${(internalLink.targetPage.scope as GQLPageTreeNodeScope).language}/${internalLink.targetPage.path}`;
+                        }
+                        break;
+                    }
+                    case "external":
+                        destination = (target.block.props as ExternalLinkBlockData).targetUrl;
+                        break;
+                }
+            }
+            if (destination) {
+                redirect(destination);
+            }
+        }
         notFound();
     }
 
