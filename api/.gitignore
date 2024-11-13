@@ -44,5 +44,4 @@ junit.xml
 
 src/site-configs.d.ts
 
-# Repl history
 .nestjs_repl_history
