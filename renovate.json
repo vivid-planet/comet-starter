@@ -60,6 +60,10 @@
         {
             "groupName": "OpenTelemetry",
             "matchPackageNames": ["/^open-telemetry/*/"]
+        },
+        {
+            "matchUpdateTypes": ["major"],
+            "labels": ["major"]
         }
     ],
     "rangeStrategy": "bump",
