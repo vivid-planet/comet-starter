@@ -52,12 +52,12 @@ sh ./admin/intl-update.sh
 npm run create-site-configs-env
 
 echo -e "\033[34m\nInstalling dependencies for admin\033[0m"
-npm ci --prefix admin install
+npm --prefix admin install
 echo -e "\033[34m\nInstalling dependencies for api\033[0m"
-npm ci --prefix api install
+npm --prefix api install
 echo -e "\033[34m\nInstalling dependencies for site\033[0m"
-npm ci --prefix site install
+npm --prefix site install
 echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
-npm ci --prefix create-app install
+npm --prefix create-app install
 
 mkdir -p ./api/uploads
