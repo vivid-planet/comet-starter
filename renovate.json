@@ -5,7 +5,8 @@
         {
             "groupName": "comet",
             "prPriority": 6,
-            "matchPackageNames": ["/@comet/*/"]
+            "matchPackageNames": ["/@comet/*/"],
+            "labels": ["comet", "dependencies"]
         },
         {
             "groupName": "types",
@@ -59,7 +60,12 @@
         {
             "groupName": "OpenTelemetry",
             "matchPackageNames": ["/^open-telemetry/*/"]
+        },
+        {
+            "matchUpdateTypes": ["major"],
+            "labels": ["major"]
         }
     ],
-    "rangeStrategy": "bump"
+    "rangeStrategy": "bump",
+    "labels": ["dependencies"]
 }
