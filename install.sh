@@ -14,6 +14,8 @@ fi
 # use correct npm and install dependencies
 nvm install
 nvm use
+
+echo -e "\033[34m\nInstalling dependencies for root package\033[0m"
 npm install
 
 
@@ -50,12 +52,12 @@ sh ./admin/intl-update.sh
 npm run create-site-configs-env
 
 echo -e "\033[34m\nInstalling dependencies for admin\033[0m"
-npm --prefix admin install
+npm ci --prefix admin install
 echo -e "\033[34m\nInstalling dependencies for api\033[0m"
-npm --prefix api install
+npm ci --prefix api install
 echo -e "\033[34m\nInstalling dependencies for site\033[0m"
-npm --prefix site install
+npm ci --prefix site install
 echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
-npm --prefix create-app install
+npm ci --prefix create-app install
 
 mkdir -p ./api/uploads
