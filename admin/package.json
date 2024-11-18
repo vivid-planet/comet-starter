@@ -57,7 +57,7 @@
         "react-dnd-multi-backend": "^8.0.3",
         "react-dom": "^17.0.2",
         "react-final-form": "^6.5.9",
-        "react-intl": "^6.8.7",
+        "react-intl": "^6.8.9",
         "react-router": "^5.3.4",
         "react-router-dom": "^5.3.4"
     },
@@ -66,7 +66,7 @@
         "@comet/eslint-config": "^7.7.0",
         "@comet/eslint-plugin": "^7.7.0",
         "@cspell/eslint-plugin": "^8.16.0",
-        "@formatjs/cli": "^6.3.8",
+        "@formatjs/cli": "^6.3.11",
         "@graphql-codegen/add": "^3.2.3",
         "@graphql-codegen/cli": "^2.16.5",
         "@graphql-codegen/fragment-matcher": "^2.0.1",
