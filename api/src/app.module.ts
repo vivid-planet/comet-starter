@@ -128,13 +128,7 @@ export class AppModule {
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
-                              shouldLogRequest: ({ user }) => {
-                                  // Ignore system user
-                                  if (user === SYSTEM_USER_NAME) {
-                                      return false;
-                                  }
-                                  return true;
-                              },
+                              shouldLogRequest: ({ user, req }) => user !== SYSTEM_USER_NAME && !req.route.path.startsWith("/api/status/"),
                           }),
                       ]
                     : []),
