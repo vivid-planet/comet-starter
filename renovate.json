@@ -30,12 +30,7 @@
         },
         {
             "groupName": "Mui",
-            "matchPackageNames": [
-                "/@mui/material/",
-                "/@mui/system/",
-                "/@mui/utils/",
-                "/@mui/lab/"
-            ]
+            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/", "/@mui/lab/"]
         },
         {
             "groupName": "emotion",
@@ -66,6 +61,7 @@
             "labels": ["major", "dependencies"]
         }
     ],
+    "lockFileMaintenance": { "enabled": true },
     "rangeStrategy": "bump",
     "labels": ["dependencies"]
 }
