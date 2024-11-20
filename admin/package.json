@@ -77,7 +77,7 @@
         "@graphql-codegen/typescript-operations": "^4.3.1",
         "@swc/plugin-emotion": "^3.0.13",
         "@types/lodash.isequal": "^4.5.8",
-        "@types/node": "^22.9.0",
+        "@types/node": "^22.9.1",
         "@types/react": "^17.0.83",
         "@types/react-dom": "^17.0.25",
         "@types/react-router": "^5.1.20",
