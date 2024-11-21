@@ -53,3 +53,7 @@ public/robots.txt
 tsconfig.tsbuildinfo
 
 /dist
+
+## Panda
+styled-system
+styled-system-studio
