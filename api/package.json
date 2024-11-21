@@ -90,6 +90,9 @@
         "tsconfig-paths": "^3.15.0",
         "typescript": "~5.1.0"
     },
+    "engines": {
+        "node": "22"
+    },
     "mikro-orm": {
         "useTsNode": true,
         "configPaths": [
