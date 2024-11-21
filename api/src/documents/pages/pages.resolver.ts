@@ -67,14 +67,14 @@ export class PagesResolver {
                 stage: input.stage.transformToBlockData(),
             });
 
-            this.repository.persist(page);
+            this.repository.getEntityManager().persist(page);
         }
 
         if (attachedPageTreeNodeId) {
             await this.pageTreeService.attachDocument({ id: pageId, type: "Page" }, attachedPageTreeNodeId);
         }
 
-        await this.repository.flush();
+        await this.repository.getEntityManager().flush();
 
         return page;
     }

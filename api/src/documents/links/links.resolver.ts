@@ -60,14 +60,14 @@ export class LinksResolver {
                 content: input.content.transformToBlockData(),
             });
 
-            this.repository.persist(link);
+            this.repository.getEntityManager().persist(link);
         }
 
         if (attachedPageTreeNodeId) {
             await this.pageTreeService.attachDocument({ id: linkId, type: "Link" }, attachedPageTreeNodeId);
         }
 
-        await this.repository.flush();
+        await this.repository.getEntityManager().flush();
 
         return link;
     }
