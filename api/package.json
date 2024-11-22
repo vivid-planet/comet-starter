@@ -37,7 +37,6 @@
         "@mikro-orm/postgresql": "^5.9.8",
         "@nestjs/apollo": "^10.2.1",
         "@nestjs/common": "^9.4.3",
-        "@nestjs/config": "^2.3.4",
         "@nestjs/core": "^9.4.3",
         "@nestjs/graphql": "^10.2.1",
         "@nestjs/passport": "^9.0.3",
