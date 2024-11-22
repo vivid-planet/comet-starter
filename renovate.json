@@ -9,10 +9,6 @@
             "labels": ["comet", "dependencies"]
         },
         {
-            "groupName": "types",
-            "matchPackageNames": ["/@types/*/"]
-        },
-        {
             "groupName": "linters",
             "matchPackageNames": ["/^eslint/", "/^prettier/"]
         },
@@ -30,12 +26,7 @@
         },
         {
             "groupName": "Mui",
-            "matchPackageNames": [
-                "/@mui/material/",
-                "/@mui/system/",
-                "/@mui/utils/",
-                "/@mui/lab/"
-            ]
+            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/", "/@mui/lab/"]
         },
         {
             "groupName": "emotion",
