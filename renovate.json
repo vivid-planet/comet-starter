@@ -30,12 +30,7 @@
         },
         {
             "groupName": "Mui",
-            "matchPackageNames": [
-                "/@mui/material/",
-                "/@mui/system/",
-                "/@mui/utils/",
-                "/@mui/lab/"
-            ]
+            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/", "/@mui/lab/"]
         },
         {
             "groupName": "emotion",
@@ -60,6 +55,11 @@
         {
             "groupName": "OpenTelemetry",
             "matchPackageNames": ["/^open-telemetry/*/"]
+        },
+        {
+            "groupName": "node",
+            "matchPackageNames": ["node"],
+            "rangeStrategy": "widen"
         },
         {
             "matchUpdateTypes": ["major"],
