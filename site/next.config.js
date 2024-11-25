@@ -24,7 +24,7 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ["@comet/cms-site"],
     },
-    // https://nextjs.org/docs/advanced-features/security-headers
+    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts)
     headers: async () => [
         {
             source: "/:path*",
@@ -49,34 +49,6 @@ const nextConfig = {
                     key: "Referrer-Policy",
                     value: "strict-origin-when-cross-origin",
                 },
-                {
-                    key: "Content-Security-Policy",
-                    value: `
-                                default-src 'self';
-                                form-action 'self'; 
-                                object-src 'none';
-                                img-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                media-src 'self' https: data:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                style-src 'self' 'unsafe-inline'; 
-                                font-src 'self' https: data:;
-                                script-src 'self' 'unsafe-inline' https:${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""};
-                                connect-src 'self' https:${process.env.NODE_ENV === "development" ? " http:" : ""};
-                                frame-ancestors ${process.env.ADMIN_URL};
-                                upgrade-insecure-requests; 
-                                block-all-mixed-content;
-                                frame-src 'self' https://*.youtube.com https://*.youtube-nocookie.com;
-                            `
-                        .replace(/\s{2,}/g, " ")
-                        .trim(),
-                },
-                ...(process.env.ADMIN_URL
-                    ? [
-                          {
-                              key: "Access-Control-Allow-Origin",
-                              value: process.env.ADMIN_URL,
-                          },
-                      ]
-                    : []),
             ],
         },
     ],
