@@ -62,6 +62,7 @@
             "labels": ["major", "dependencies"]
         }
     ],
+    "lockFileMaintenance": { "enabled": true },
     "rangeStrategy": "bump",
     "labels": ["dependencies"]
 }
