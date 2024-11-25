@@ -103,15 +103,9 @@ export function EditFooterPage(): JSX.Element | null {
             return; // dialogs open for the user to handle the conflict
         }
 
-        const input = {
-            content: FooterContentBlock.state2Output(footerState),
-        };
+        const input = { content: FooterContentBlock.state2Output(footerState) };
         return update({
-            variables: {
-                input,
-                scope,
-                lastUpdatedAt: data?.footer?.updatedAt ?? "",
-            },
+            variables: { input, scope },
         });
     };
 
@@ -179,8 +173,8 @@ const footerQuery = gql`
 `;
 
 const saveFooterMutation = gql`
-    mutation SaveFooter($lastUpdatedAt: DateTime, $input: FooterInput!, $scope: FooterScopeInput!) {
-        saveFooter(lastUpdatedAt: $lastUpdatedAt, input: $input, scope: $scope) {
+    mutation SaveFooter($input: FooterInput!, $scope: FooterScopeInput!) {
+        saveFooter(input: $input, scope: $scope) {
             id
             content
             updatedAt

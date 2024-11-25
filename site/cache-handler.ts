@@ -48,8 +48,16 @@ function parseBodyForGqlError(body: string) {
     }
 }
 
+function isCacheKeyFullRoute(key: string) {
+    //full-route-cache keys are the page url (and start with /), data caches are a hash
+    return key.startsWith("/");
+}
+
 export default class CacheHandler {
     async get(key: string): ReturnType<NextCacheHandler["get"]> {
+        if (isCacheKeyFullRoute(key)) {
+            return null;
+        }
         if (redis.status === "ready") {
             try {
                 const redisResponse = await redis.get(key);
@@ -76,6 +84,10 @@ export default class CacheHandler {
     }
 
     async set(key: string, value: Parameters<NextCacheHandler["set"]>[1]): Promise<void> {
+        if (isCacheKeyFullRoute(key)) {
+            return;
+        }
+
         if (value?.kind === "FETCH") {
             const responseBody = parseBodyForGqlError(value.data.body);
             if (responseBody?.errors) {
