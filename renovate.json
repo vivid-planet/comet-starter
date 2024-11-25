@@ -53,6 +53,11 @@
             "matchPackageNames": ["/^open-telemetry/*/"]
         },
         {
+            "groupName": "node",
+            "matchPackageNames": ["node"],
+            "rangeStrategy": "widen"
+        },
+        {
             "matchUpdateTypes": ["major"],
             "labels": ["major", "dependencies"]
         }
