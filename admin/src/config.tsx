@@ -29,7 +29,7 @@ export function createConfig() {
     };
 }
 
-export type Config = ReturnType<typeof createConfig>;
+type Config = ReturnType<typeof createConfig>;
 
 const ConfigContext = createContext<Config | undefined>(undefined);
 
