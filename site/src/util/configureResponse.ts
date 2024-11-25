@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export function configureResponse(response: NextResponse) {
     response.headers.set(
-        "Content-Security-Policy1",
+        "Content-Security-Policy",
         `
             default-src 'self';
             form-action 'self'; 
