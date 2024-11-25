@@ -1,6 +1,6 @@
 {
-    "extends": "@comet/eslint-config/react",
-    "ignorePatterns": ["schema.json", "src/fragmentTypes.json", "src/**/*.generated.ts"],
+    "extends": ["@comet/eslint-config/react", "plugin:@cspell/recommended"],
+    "ignorePatterns": ["schema.json", "src/fragmentTypes.json", "src/**/*.generated.ts", "src/site-configs.d.ts"],
     "rules": {
         "react/react-in-jsx-scope": "off"
     }

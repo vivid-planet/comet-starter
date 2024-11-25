@@ -2,11 +2,11 @@
     "name": "starter",
     "private": true,
     "scripts": {
-        "create-site-configs-env": "npx @comet/cli inject-site-configs -i .env.site-configs.tpl -o .env.site-configs",
+        "create-site-configs-env": "npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs",
         "dev": "npm run create-site-configs-env && dev-pm start",
         "copy-schema-files": "node copy-schema-files.js",
         "lint": "run-p lint:*",
-        "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}'",
+        "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}' && npx cspell '**'",
         "lint:api": "npm --prefix api run lint",
         "lint:admin": "npm --prefix admin run lint",
         "lint:site": "npm --prefix site run lint",
@@ -24,15 +24,20 @@
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'"
     },
     "devDependencies": {
-        "@comet/cli": "^7.3.2",
-        "@comet/dev-process-manager": "^2.0.0",
-        "dotenv-cli": "^7.0.0",
-        "husky": "^9.0.0",
-        "lint-staged": "^15.0.0",
-        "npm-run-all": "^4.1.5",
+        "@comet/cli": "^7.7.0",
+        "@comet/dev-process-manager": "^2.7.0",
+        "cspell": "^8.16.0",
+        "dotenv-cli": "^7.4.4",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.10",
+        "npm-run-all2": "^5.0.2",
         "open-cli": "^8.0.0",
-        "prettier": "^2.3.2",
-        "typescript": "~5.5.0",
-        "ts-node": "^10.5.0"
+        "prettier": "^2.8.8",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.2"
+    },
+    "packageManager": "npm@10.9.1",
+    "engines": {
+        "node": "22"
     }
 }

@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: String!
+  name: String!
+  email: String!
+  permissionsCount: Int!
+  contentScopesCount: Int!
+}
+
 type CurrentUserPermission {
   permission: String!
   contentScopes: [JSONObject!]!
@@ -17,6 +25,8 @@ type CurrentUser {
   name: String!
   email: String!
   permissions: [CurrentUserPermission!]!
+  impersonated: Boolean
+  authenticatedUser: User
   permissionsForScope(scope: JSONObject!): [String!]!
 }
 
@@ -42,6 +52,23 @@ enum UserPermissionSource {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type Dependency {
+  rootId: String!
+  rootGraphqlObjectType: String!
+  rootColumnName: String!
+  jsonPath: String!
+  visible: Boolean!
+  targetGraphqlObjectType: String!
+  targetId: String!
+  name: String
+  secondaryInformation: String
+}
+
+type PaginatedDependencies {
+  nodes: [Dependency!]!
+  totalCount: Int!
+}
 
 type ImageCropArea {
   focalPoint: FocalPoint!
@@ -90,33 +117,10 @@ enum LicenseType {
   RIGHTS_MANAGED
 }
 
-type Dependency {
-  rootId: String!
-  rootGraphqlObjectType: String!
-  rootColumnName: String!
-  jsonPath: String!
-  visible: Boolean!
-  targetGraphqlObjectType: String!
-  targetId: String!
-  name: String
-  secondaryInformation: String
-}
-
-type PaginatedDependencies {
-  nodes: [Dependency!]!
-  totalCount: Int!
-}
-
 type FilenameResponse {
   name: String!
   folderId: ID
   isOccupied: Boolean!
-}
-
-type User {
-  id: String!
-  name: String!
-  email: String!
 }
 
 type PaginatedUserList {
@@ -203,6 +207,26 @@ scalar SeoBlockData @specifiedBy(url: "http://www.ecma-international.org/publica
 """Stage root block data"""
 scalar StageBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
+type FooterScope {
+  domain: String!
+  language: String!
+}
+
+type Footer implements DocumentInterface {
+  id: ID!
+  updatedAt: DateTime!
+  content: FooterContentBlockData!
+  scope: FooterScope!
+  createdAt: DateTime!
+}
+
+"""FooterContent root block data"""
+scalar FooterContentBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type RedirectScope {
+  domain: String!
+}
+
 type DamFolder {
   id: ID!
   name: String!
@@ -254,6 +278,7 @@ type Redirect {
   generationType: RedirectGenerationType!
   createdAt: DateTime!
   updatedAt: DateTime!
+  scope: RedirectScope!
   dependencies(offset: Int! = 0, limit: Int! = 25, filter: DependencyFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
 }
 
@@ -308,6 +333,15 @@ input PageTreeNodeScopeInput {
   language: String!
 }
 
+input FooterScopeInput {
+  domain: String!
+  language: String!
+}
+
+input RedirectScopeInput {
+  domain: String!
+}
+
 type Query {
   currentUser: CurrentUser!
   userPermissionsUserById(id: String!): User!
@@ -322,12 +356,14 @@ type Query {
   pageTreeNode(id: ID!): PageTreeNode
   pageTreeNodeByPath(path: String!, scope: PageTreeNodeScopeInput!): PageTreeNode
   pageTreeNodeList(scope: PageTreeNodeScopeInput!, category: String): [PageTreeNode!]!
-  paginatedPageTreeNodes(scope: PageTreeNodeScopeInput!, category: String, sort: [PageTreeNodeSort!], offset: Int! = 0, limit: Int! = 25): PaginatedPageTreeNodes!
+  paginatedPageTreeNodes(scope: PageTreeNodeScopeInput!, category: String, sort: [PageTreeNodeSort!], documentType: String, offset: Int! = 0, limit: Int! = 25): PaginatedPageTreeNodes!
   pageTreeNodeSlugAvailable(scope: PageTreeNodeScopeInput!, parentId: ID, slug: String!): SlugAvailability!
-  redirects(scope: RedirectScopeInput! = {}, query: String, type: RedirectGenerationType, active: Boolean, sortColumnName: String, sortDirection: SortDirection! = ASC): [Redirect!]! @deprecated(reason: "Use paginatedRedirects instead. Will be removed in the next version.")
-  paginatedRedirects(scope: RedirectScopeInput! = {}, search: String, filter: RedirectFilter, sort: [RedirectSort!], offset: Int! = 0, limit: Int! = 25): PaginatedRedirects!
+  sitePreviewJwt(scope: JSONObject!, path: String!, includeInvisible: Boolean!): String!
+  redirects(scope: RedirectScopeInput!, query: String, type: RedirectGenerationType, active: Boolean, sortColumnName: String, sortDirection: SortDirection! = ASC): [Redirect!]! @deprecated(reason: "Use paginatedRedirects instead. Will be removed in the next version.")
+  paginatedRedirects(scope: RedirectScopeInput!, search: String, filter: RedirectFilter, sort: [RedirectSort!], offset: Int! = 0, limit: Int! = 25): PaginatedRedirects!
   redirect(id: ID!): Redirect!
-  redirectSourceAvailable(scope: RedirectScopeInput! = {}, source: String!): Boolean!
+  redirectBySource(scope: RedirectScopeInput!, source: String!, sourceType: RedirectSourceTypeValues!): Redirect
+  redirectSourceAvailable(scope: RedirectScopeInput!, source: String!): Boolean!
   damItemsList(offset: Int! = 0, limit: Int! = 25, sortColumnName: String, sortDirection: SortDirection! = ASC, scope: DamScopeInput! = {}, folderId: ID, includeArchived: Boolean, filter: DamItemFilterInput): PaginatedDamItems!
   damItemListPosition(sortColumnName: String, sortDirection: SortDirection! = ASC, scope: DamScopeInput! = {}, id: ID!, type: DamItemType!, folderId: ID, includeArchived: Boolean, filter: DamItemFilterInput): Int!
   damFilesList(offset: Int! = 0, limit: Int! = 25, sortColumnName: String, sortDirection: SortDirection! = ASC, scope: DamScopeInput! = {}, folderId: ID, includeArchived: Boolean = false, filter: FileFilterInput): PaginatedDamFiles!
@@ -340,6 +376,7 @@ type Query {
   damFolder(id: ID!): DamFolder!
   damFolderByNameAndParentId(scope: DamScopeInput! = {}, name: String!, parentId: ID): DamFolder
   mainMenu(scope: PageTreeNodeScopeInput!): [PageTreeNode!]!
+  footer(scope: FooterScopeInput!): Footer
 }
 
 input UserFilter {
@@ -388,10 +425,6 @@ enum SlugAvailability {
   Available
   Taken
   Reserved
-}
-
-input RedirectScopeInput {
-  thisScopeHasNoFields____: String
 }
 
 input RedirectFilter {
@@ -481,7 +514,7 @@ type Mutation {
   movePageTreeNodesByNeighbour(ids: [ID!]!, input: MovePageTreeNodesByNeighbourInput!): [PageTreeNode!]!
   updatePageTreeNodeCategory(id: ID!, category: String!): PageTreeNode!
   createPageTreeNode(input: PageTreeNodeCreateInput!, scope: PageTreeNodeScopeInput!, category: String!): PageTreeNode!
-  createRedirect(scope: RedirectScopeInput! = {}, input: RedirectInput!): Redirect!
+  createRedirect(scope: RedirectScopeInput!, input: RedirectInput!): Redirect!
   updateRedirect(id: ID!, input: RedirectInput!, lastUpdatedAt: DateTime): Redirect!
   updateRedirectActiveness(id: ID!, input: RedirectUpdateActivenessInput!): Redirect!
   deleteRedirect(id: ID!): Boolean!
@@ -498,6 +531,7 @@ type Mutation {
   updateDamFolder(id: ID!, input: UpdateDamFolderInput!): DamFolder!
   moveDamFolders(folderIds: [ID!]!, targetFolderId: ID, scope: DamScopeInput! = {}): [DamFolder!]!
   deleteDamFolder(id: ID!): Boolean!
+  saveFooter(scope: FooterScopeInput!, input: FooterInput!): Footer!
 }
 
 input UserPermissionInput {
@@ -624,3 +658,10 @@ input UpdateDamFolderInput {
   parentId: ID
   archived: Boolean
 }
+
+input FooterInput {
+  content: FooterContentBlockInput!
+}
+
+"""FooterContent root block input"""
+scalar FooterContentBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")

@@ -25,6 +25,10 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
             idpEndSessionEndpoint: envVars.IDP_END_SESSION_ENDPOINT,
             postLogoutRedirectUri: envVars.POST_LOGOUT_REDIRECT_URI,
         },
+        acl: {
+            allPermissionsEmails: envVars.ACL_ALL_PERMISSIONS_EMAILS,
+            allPermissionsDomains: envVars.ACL_ALL_PERMISSIONS_DOMAINS,
+        },
         imgproxy: {
             ...cometConfig.imgproxy,
             salt: envVars.IMGPROXY_SALT,
@@ -60,6 +64,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
             originCheckSecret: envVars.CDN_ORIGIN_CHECK_SECRET,
         },
         siteConfigs: envVars.PRIVATE_SITE_CONFIGS,
+        sitePreviewSecret: envVars.SITE_PREVIEW_SECRET,
     };
 }
 

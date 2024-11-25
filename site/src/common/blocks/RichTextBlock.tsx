@@ -18,7 +18,7 @@ export const createTextBlockRenderFn =
             </Text>
         ));
 
-export const defaultRichTextInlineStyleMap = {
+export const defaultRichTextInlineStyleMap: Renderers["inline"] = {
     // The key passed here is just an index based on rendering order inside a block
     BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
     ITALIC: (children, { key }) => <em key={key}>{children}</em>,
@@ -54,7 +54,7 @@ const defaultRichTextRenderers: Renderers = {
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text component="li" key={keys[index]}>
+                    <Text as="li" key={keys[index]}>
                         {child}
                     </Text>
                 ))}
@@ -63,7 +63,7 @@ const defaultRichTextRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <OrderedListItem $depth={depth} component="li" key={keys[index]}>
+                    <OrderedListItem $depth={depth} as="li" key={keys[index]}>
                         {child}
                     </OrderedListItem>
                 ))}
