@@ -3,6 +3,7 @@
     "private": true,
     "scripts": {
         "create-site-configs-env": "npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs",
+        "build-and-run-site": "./build-and-run-site.sh; npx dev-pm start site",
         "dev": "npm run create-site-configs-env && dev-pm start",
         "copy-schema-files": "node copy-schema-files.js",
         "lint": "run-p lint:*",
