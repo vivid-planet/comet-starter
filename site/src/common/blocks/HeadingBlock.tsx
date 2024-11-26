@@ -62,18 +62,6 @@ export const HeadingBlock = withPreview(
     { label: "Heading" },
 );
 
-export const PageContentHeadingBlock = (props: HeadingBlockProps) => (
-    <PageLayout grid>
-        <PageLayoutContent>
-            <HeadingBlock {...props} />
-        </PageLayoutContent>
-    </PageLayout>
-);
-
-const PageLayoutContent = styled.div`
-    grid-column: 3 / -3;
-`;
-
 const HeadlineSkeleton = styled(Typography)`
     color: inherit;
 `;
