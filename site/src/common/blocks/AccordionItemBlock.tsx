@@ -58,7 +58,7 @@ export const AccordionItemBlock = withPreview(
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper $isExpanded={isExpanded} $height={elementHeight}>
+                <ContentWrapper $height={elementHeight}>
                     <ContentWrapperInner ref={innerContentRef}>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
@@ -97,7 +97,7 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     transition: transform 0.4s ease;
 `;
 
-const ContentWrapper = styled.div<{ $isExpanded: boolean; $height: number }>`
+const ContentWrapper = styled.div<{ $height: number }>`
     overflow: hidden;
     height: ${({ $height }) => $height}px;
     transition: height 300ms;
