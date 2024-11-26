@@ -100,7 +100,7 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
 const ContentWrapper = styled.div<{ $isExpanded: boolean; $height: number }>`
     overflow: hidden;
     height: ${({ $height }) => $height}px;
-    transition: height 300ms, margin-bottom 300ms;
+    transition: height 300ms;
 `;
 
 const ContentWrapperInner = styled.div`
