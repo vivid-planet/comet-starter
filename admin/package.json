@@ -18,7 +18,7 @@
         "lint:ci": "npm run lint && npm run lint:generated-files-not-modified",
         "lint:eslint": "eslint --max-warnings 0 --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
         "lint:generated-files-not-modified": "npm run admin-generator && git diff --exit-code HEAD --",
-        "lint:knip": "knip --exports --files --dependencies",
+        "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
         "preview": "npm run build && vite preview",

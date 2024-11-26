@@ -13,7 +13,7 @@
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "run-p lint:eslint lint:tsc lint:style intl:extract",
         "lint:ci": "npm run lint",
-        "lint:knip": "knip --exports --files --dependencies",
+        "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md .",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",
@@ -65,7 +65,6 @@
         "prettier": "^2.8.8",
         "stylelint": "^16.11.0",
         "stylelint-config-standard": "^36.0.1",
-        "tsconfig-paths": "^3.15.0",
         "typescript": "^5.7.2"
     },
     "engines": {

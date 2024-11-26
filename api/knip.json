@@ -1,7 +1,10 @@
 {
     "$schema": "https://unpkg.com/knip@5/schema.json",
-    "entry": ["./src/main.ts", "./src/console.ts"],
-    "project": ["./src/**/*.{js,ts,tsx}"],
-    "ignore": ["./src/db/migrations/**/*.{ts,js}"],
-    "ignoreDependencies": ["@mikro-orm/cli"]
+    "entry": ["./src/main.ts", "./src/console.ts", "./src/content-scope/content-scope.interface.ts", "./src/repl.ts", "./src/db/ormconfig.cli.ts"],
+    "project": ["./src/**/*.{ts,tsx}"],
+    "ignore": ["./src/db/migrations/**/*.ts"],
+    "ignoreDependencies": ["@mikro-orm/cli"],
+    "rules": {
+        "enumMembers": "off"
+    }
 }
