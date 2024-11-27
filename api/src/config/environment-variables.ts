@@ -123,6 +123,7 @@ export class EnvironmentVariables {
 
     @IsArray()
     @Transform(({ value }) => JSON.parse(value))
+    @IsOptional()
     PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
 
     @IsArray()
