@@ -83,7 +83,7 @@
         "@types/react-dom": "^17.0.25",
         "@types/react-router": "^5.1.20",
         "@types/react-router-dom": "^5.3.3",
-        "@vitejs/plugin-react-swc": "^3.7.1",
+        "@vitejs/plugin-react-swc": "^3.7.2",
         "chokidar-cli": "^3.0.0",
         "cspell": "^8.16.1",
         "dotenv-cli": "^7.4.4",
