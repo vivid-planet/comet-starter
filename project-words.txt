@@ -23,3 +23,6 @@ rdndmb
 requirepass
 schemaname
 tablename
+Mikro
+nestjs
+knipignore
