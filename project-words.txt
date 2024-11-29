@@ -24,3 +24,6 @@ requirepass
 schemaname
 tablename
 timestamptz
+Mikro
+nestjs
+knipignore
