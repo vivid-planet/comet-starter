@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren } from "react";
+import { createContext, PropsWithChildren, useContext } from "react";
 
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
@@ -35,4 +35,14 @@ const ConfigContext = createContext<Config | undefined>(undefined);
 
 export function ConfigProvider({ config, children }: PropsWithChildren<{ config: Config }>) {
     return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
+}
+/** @knipignore */
+export function useConfig(): Config {
+    const config = useContext(ConfigContext);
+
+    if (config === undefined) {
+        throw new Error("useConfig must be used within a ConfigProvider");
+    }
+
+    return config;
 }
