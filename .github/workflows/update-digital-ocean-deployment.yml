@@ -11,10 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js 20.x
+      - name: Setup Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Install dependencies
         run: npm install
@@ -22,11 +22,16 @@ jobs:
       - name: Inject Site Configurations
         run: |
           sed -i 's/dev\.comet\-dxp\.com/comet-starter-site-tyqqf.ondigitalocean.app/g' site-configs/main.ts
-          APP_ENV=dev npx -y @comet/cli inject-site-configs -f ../../../../../site-configs/site-configs.ts -i .digitalocean/comet-starter-cms.tpl.yaml -o .digitalocean/comet-starter-cms.yaml
-          APP_ENV=dev npx -y @comet/cli inject-site-configs -f ../../../../../site-configs/site-configs.ts -i .digitalocean/comet-starter-site-main.tpl.yaml -o .digitalocean/comet-starter-site-main.yaml
+          APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .digitalocean/comet-starter-cms.tpl.yaml -o .digitalocean/comet-starter-cms.yaml
+          APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .digitalocean/comet-starter-site-main.tpl.yaml -o .digitalocean/comet-starter-site-main.yaml
 
       - name: Update DigitalOcean comet-starter-imgproxy Deployment
         uses: digitalocean/app_action/deploy@v2
+        env:
+          IMGPROXY_KEY: ${{ secrets.IMGPROXY_KEY }}
+          IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
+          S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
         with:
           token: ${{ secrets.DIGITALOCEAN_API_KEY }}
           print_deploy_logs: true
@@ -35,6 +40,17 @@ jobs:
 
       - name: Update DigitalOcean comet-starter-cms Deployment
         uses: digitalocean/app_action/deploy@v2
+        env:
+          POSTGRESQL_PASSWORD: ${{ secrets.POSTGRESQL_PASSWORD }}
+          IMGPROXY_SALT: ${{ secrets.IMGPROXY_SALT }}
+          IMGPROXY_KEY: ${{ secrets.IMGPROXY_KEY }}
+          DAM_SECRET: ${{ secrets.DAM_SECRET }}
+          S3_ACCESS_KEY_ID: ${{ secrets.S3_ACCESS_KEY_ID }}
+          S3_SECRET_ACCESS_KEY: ${{ secrets.S3_SECRET_ACCESS_KEY }}
+          API_BASIC_AUTH_SYSTEM_USER_PASSWORD: ${{ secrets.API_BASIC_AUTH_SYSTEM_USER_PASSWORD }}
+          OAUTH2_PROXY_CLIENT_SECRET: ${{ secrets.OAUTH2_PROXY_CLIENT_SECRET }}
+          OAUTH2_PROXY_COOKIE_SECRET: ${{ secrets.OAUTH2_PROXY_COOKIE_SECRET }}
+          SITE_PREVIEW_SECRET: ${{ secrets.SITE_PREVIEW_SECRET }}
         with:
           token: ${{ secrets.DIGITALOCEAN_API_KEY }}
           print_deploy_logs: true
@@ -43,6 +59,9 @@ jobs:
 
       - name: Update DigitalOcean comet-starter-site-main Deployment
         uses: digitalocean/app_action/deploy@v2
+        env:
+          SITE_PREVIEW_SECRET: ${{ secrets.SITE_PREVIEW_SECRET }}
+          API_BASIC_AUTH_SYSTEM_USER_PASSWORD: ${{ secrets.API_BASIC_AUTH_SYSTEM_USER_PASSWORD }}
         with:
           token: ${{ secrets.DIGITALOCEAN_API_KEY }}
           print_deploy_logs: true

@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 import { GQLRedirectScope } from "./graphql.generated";
 import { createRedirects } from "./redirects/redirects";
+import { configureResponse } from "./util/configureResponse";
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
 export async function middleware(request: NextRequest) {
@@ -50,14 +51,16 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL(rewrite.destination, request.url));
     }
 
-    return NextResponse.rewrite(
-        new URL(
-            `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
-                request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
-            }`,
-            request.url,
+    return configureResponse(
+        NextResponse.rewrite(
+            new URL(
+                `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
+                    request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
+                }`,
+                request.url,
+            ),
+            { request: { headers } },
         ),
-        { request: { headers } },
     );
 }
 
