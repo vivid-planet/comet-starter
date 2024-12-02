@@ -14,6 +14,7 @@ services:
       - "--certificatesresolvers.myresolver.acme.email=postmaster@cometdxp.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
+      - "80:80"
       - "443:443"
       - "8088:8080"
     volumes:
