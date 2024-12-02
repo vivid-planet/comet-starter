@@ -12,7 +12,7 @@ import styled from "styled-components";
 import { Typography } from "../components/Typography";
 
 const supportedBlocks: SupportedBlocks = {
-    richtext: (props) => <RichTextBlock data={props} />,
+    richtext: (props) => <RichTextBlock data={props} disableLastBottomSpacing />,
     heading: (props) => <StandaloneHeadingBlock data={props} />,
     space: (props) => <SpaceBlock data={props} />,
     callToActionList: (props) => <StandaloneCallToActionListBlock data={props} />,
@@ -106,8 +106,4 @@ const ContentWrapper = styled.div<{ $height: number }>`
 const ContentWrapperInner = styled.div`
     padding: ${({ theme }) => theme.spacing.S500} 0;
     border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
-
-    > *:last-child {
-        margin-bottom: 0;
-    }
 `;
