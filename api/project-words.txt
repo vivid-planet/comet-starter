@@ -1,8 +1,0 @@
-authproxy
-imgproxy
-mikro
-nowait
-ormconfig
-pkey
-schemaname
-tablename
