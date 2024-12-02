@@ -64,7 +64,7 @@ jobs:
         run: npm run copy-schema-files
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint:ci
 
       - name: Build
         run: npm run build
