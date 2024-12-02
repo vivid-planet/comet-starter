@@ -7,7 +7,7 @@ import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBloc
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Typography } from "../components/Typography";
 
@@ -58,7 +58,7 @@ export const AccordionItemBlock = withPreview(
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper $height={elementHeight}>
+                <ContentWrapper $height={elementHeight} $isExpanded={isExpanded}>
                     <ContentWrapperInner ref={innerContentRef}>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
@@ -97,10 +97,18 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     transition: transform 0.4s ease;
 `;
 
-const ContentWrapper = styled.div<{ $height: number }>`
+const ContentWrapper = styled.div<{ $height: number; $isExpanded: boolean }>`
     overflow: hidden;
     height: ${({ $height }) => $height}px;
-    transition: height 300ms;
+    opacity: 0;
+    transition: height 0.2s ease-out 0.2s, opacity 0.3s linear;
+
+    ${({ $isExpanded }) =>
+        $isExpanded &&
+        css`
+            opacity: 1;
+            transition: height 0.2s ease-out, opacity 0.3s linear 0.2s;
+        `}
 `;
 
 const ContentWrapperInner = styled.div`
