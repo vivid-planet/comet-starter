@@ -1,3 +1,14 @@
+# Execute this script via `npm run build-and-run-site`
+#
+# This script builds the site like in the CI and starts it. After cancelling the dev-server will 
+# start again (if invoked via npm).
+#
+# Reasons why you want to do this:
+# - Check if it builds without warnings
+# - Check if there are suggestions from next build
+# - Check if it behaves in the same way like the dev-server
+# - Check caching behaviour, e.g. Cache-Control header (which is always no-cache in dev-server)
+
 #!/usr/bin/env bash
 
 echo "[1/3] Stop site if running..."
