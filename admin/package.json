@@ -32,7 +32,7 @@
         "@comet/admin-rte": "^7.8.0",
         "@comet/admin-theme": "^7.8.0",
         "@comet/blocks-admin": "^7.8.0",
-        "@comet/cms-admin": "^7.8.0",
+        "@comet/cms-admin": "^7.9.0-canary-20241203145831",
         "@emotion/react": "^11.13.5",
         "@emotion/styled": "^11.13.5",
         "@fontsource/roboto": "^5.1.0",
