@@ -81,7 +81,7 @@
         "dotenv-cli": "^7.4.4",
         "eslint": "^8.57.1",
         "jest-junit": "^16.0.0",
-        "npm-run-all2": "^5.0.2",
+        "npm-run-all2": "^7.0.1",
         "prettier": "^2.8.8",
         "ts-jest": "^29.2.5",
         "ts-loader": "^8.4.0",
