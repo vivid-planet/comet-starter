@@ -3,12 +3,6 @@
     "extends": ["config:recommended", ":semanticCommitsDisabled"],
     "packageRules": [
         {
-            "groupName": "comet",
-            "prPriority": 6,
-            "matchPackageNames": ["/@comet/*/"],
-            "labels": ["comet", "dependencies"]
-        },
-        {
             "groupName": "linters",
             "matchPackageNames": ["/^eslint/", "/^prettier/"]
         },
