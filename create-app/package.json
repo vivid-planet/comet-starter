@@ -31,7 +31,7 @@
         "start": "tsc --watch --project tsconfig.json"
     },
     "dependencies": {
-        "commander": "^12.0.0",
+        "commander": "^12.1.0",
         "eslint": "^8.57.1",
         "glob": "^11.0.0",
         "kleur": "^4.1.5",
