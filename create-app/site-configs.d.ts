@@ -1,4 +1,4 @@
-// This file meant to be deleted in the process of creating a data-driven application
+// This file is meant to be deleted in the process of creating a data-driven application
 
 export type ContentScope = {
     domain: string;
