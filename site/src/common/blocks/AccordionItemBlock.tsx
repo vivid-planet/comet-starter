@@ -58,7 +58,7 @@ export const AccordionItemBlock = withPreview(
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper $height={elementHeight} $isExpanded={isExpanded}>
+                <ContentWrapper aria-hidden={!isExpanded} $height={elementHeight} $isExpanded={isExpanded}>
                     <ContentWrapperInner ref={innerContentRef}>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
