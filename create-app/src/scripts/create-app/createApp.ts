@@ -17,6 +17,7 @@ export interface CreateAppCommandOptions {
     install: boolean;
     repository?: string;
     branch?: string;
+    commit: boolean;
 }
 
 export async function createApp(commandOptions: CreateAppCommandOptions) {
@@ -25,7 +26,9 @@ export async function createApp(commandOptions: CreateAppCommandOptions) {
     cleanupReadme(commandOptions.verbose);
     cleanupWorkingDirectory(commandOptions.verbose);
     replacePlaceholder(commandOptions.projectName, commandOptions.verbose);
-    createInitialGitCommit(commandOptions.verbose);
+    if (commandOptions.commit) {
+        createInitialGitCommit(commandOptions.verbose);
+    }
     if (commandOptions.install) {
         const spinner = createSpinner("Installing project...").spin();
         try {
@@ -39,7 +42,9 @@ export async function createApp(commandOptions: CreateAppCommandOptions) {
             if (commandOptions.verbose) console.log(kleur.grey(`${error}`));
         }
     }
-    amendCommitChanges();
+    if (commandOptions.commit) {
+        amendCommitChanges();
+    }
     console.log(`\nSuccess! Created '${commandOptions.projectName}' at '${process.cwd()}'.`);
     console.log(`Inside that directory, you can run several commands:\n`);
     console.log(kleur.cyan(`nvm use`));
