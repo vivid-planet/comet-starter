@@ -173,8 +173,8 @@ const footerQuery = gql`
 `;
 
 const saveFooterMutation = gql`
-    mutation SaveFooter($input: FooterInput!, $scope: FooterScopeInput!) {
-        saveFooter(input: $input, scope: $scope) {
+    mutation SaveFooter($input: FooterInput!, $scope: FooterScopeInput!,$lastUpdatedAt: DateTime) {
+        saveFooter(input: $input, scope: $scope, lastUpdatedAt: $lastUpdatedAt,) {
             id
             content
             updatedAt
