@@ -3,12 +3,12 @@ const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
 const fs = require("fs");
+const path = require("path");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
 
-// Read index.html file
-let indexFile = fs.readFileSync("../build/index.html", "utf8");
+let indexFile = fs.readFileSync(path.join(__dirname, "../build/index.html"), "utf8");
 
 // Replace environment variables
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
@@ -42,7 +42,7 @@ app.get("/status/health", (req, res) => {
 });
 
 app.use(
-    express.static("../build", {
+    express.static(path.join(__dirname, "../build"), {
         index: false, // Don't send index.html for requests to "/" as it will be handled by the fallback route (with replaced environment variables)
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".js")) {

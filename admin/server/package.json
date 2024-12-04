@@ -2,7 +2,7 @@
     "name": "server",
     "private": true,
     "scripts": {
-        "serve": "node server.js"
+        "serve": "node index.js"
     },
     "dependencies": {
         "compression": "^1.7.5",
