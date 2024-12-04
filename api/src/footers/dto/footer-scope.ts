@@ -6,12 +6,12 @@ import { IsString } from "class-validator";
 @ObjectType()
 @InputType("FooterScopeInput")
 export class FooterScope {
-    @Property({ columnType: "text" })
+    @Property({ type: "text" })
     @Field()
     @IsString()
     domain: string;
 
-    @Property({ columnType: "text" })
+    @Property({ type: "text" })
     @Field()
     @IsString()
     language: string;

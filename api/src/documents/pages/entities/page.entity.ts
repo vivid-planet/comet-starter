@@ -46,13 +46,13 @@ export class Page extends BaseEntity<Page, "id"> implements DocumentInterface {
     stage: BlockDataInterface;
 
     @Property({
-        columnType: "timestamp with time zone",
+        type: "timestamp with time zone",
     })
     @Field()
     createdAt: Date = new Date();
 
     @Property({
-        columnType: "timestamp with time zone",
+        type: "timestamp with time zone",
         onUpdate: () => new Date(),
     })
     @Field()
