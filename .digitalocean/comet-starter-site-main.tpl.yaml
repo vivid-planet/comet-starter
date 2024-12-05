@@ -1,6 +1,11 @@
 alerts:
   - rule: DEPLOYMENT_FAILED
   - rule: DOMAIN_FAILED
+domains:
+  - domain: digitalocean.comet-dxp.com
+    type: PRIMARY
+  - domain: preview.digitalocean.comet-dxp.com
+    type: ALIAS
 features:
   - buildpack-stack=ubuntu-22
 ingress:
@@ -28,13 +33,13 @@ services:
         value: production
       - key: ADMIN_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/
+        value: https://admin.digitalocean.comet-dxp.com/
       - key: NEXT_PUBLIC_API_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/public-api/api
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
       - key: API_URL_INTERNAL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/public-api/api
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
       - key: SITE_PREVIEW_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET

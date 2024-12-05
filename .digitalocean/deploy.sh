@@ -4,7 +4,7 @@
 
 doctl apps update <imgproxy-app-id> --spec .digitalocean/comet-starter-imgproxy.yaml
 
-sed -i '' 's/dev\.comet\-dxp\.com/comet-starter-site-tyqqf.ondigitalocean.app/g' site-configs/main.ts
+sed -i '' 's/dev\.comet\-dxp\.com/digitalocean.comet-dxp.com/g' site-configs/main.ts
 
 APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .digitalocean/comet-starter-cms.tpl.yaml -o .digitalocean/comet-starter-cms.yaml
 doctl apps update <cms-app-id> --spec .digitalocean/comet-starter-cms.yaml # configuration changes
