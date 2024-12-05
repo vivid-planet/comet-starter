@@ -108,6 +108,7 @@ export default class CacheHandler {
             } catch (e) {
                 console.error("CacheHandler.set error", e);
             }
+            return;
         }
         fallbackCache.set(key, value, { size: stringData.length });
     }
