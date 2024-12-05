@@ -1,6 +1,7 @@
 import { SitePreviewProvider } from "@comet/cms-site";
 import { IntlProvider } from "@src/util/IntlProvider";
 import { loadMessages } from "@src/util/loadMessages";
+import { setNotFoundContext } from "@src/util/NotFoundContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import { draftMode } from "next/headers";
@@ -11,6 +12,7 @@ export default async function Page({ children, params: { domain, language } }: P
     if (!siteConfig.scope.languages.includes(language)) {
         language = "en";
     }
+    setNotFoundContext({ domain, language });
 
     const isDraftModeEnabled = draftMode().isEnabled;
 
