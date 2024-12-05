@@ -2,8 +2,6 @@ import { Command } from "commander";
 import kleur from "kleur";
 
 import { createApp } from "./scripts/create-app/createApp";
-import { removeSite } from "./scripts/remove-site/removeSite";
-import { cwdIsCometProject } from "./util/cwdIsCometProject";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { isValidProjectName } from "./util/isValidProjectName";
 
@@ -39,15 +37,5 @@ void (async () => {
         })
         .configureOutput({ outputError: (str, write) => write(kleur.bgRed(str)) });
 
-    program.addCommand(
-        new Command("remove-site").option("-v, --verbose", "Enables extra console logs for verbose output.").action((options) => {
-            if (!cwdIsCometProject()) {
-                program.error(`This command must be run from the root of a Comet project.`);
-            }
-
-            console.log("Removing site from project...");
-            removeSite(options.verbose);
-        }),
-    );
     program.parse();
 })();
