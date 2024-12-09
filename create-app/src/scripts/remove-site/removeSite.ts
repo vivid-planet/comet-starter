@@ -1,3 +1,5 @@
+import * as fs from "fs";
+
 import { deleteFilesAndFolders } from "../../util/deleteFilesAndFolders";
 import { removeReferenceInFile } from "../../util/removeReferenceInFile";
 import { runEslintFix } from "../../util/runEslintFix";
@@ -16,7 +18,9 @@ function removeSiteReferences(verbose: boolean) {
 }
 
 export function removeSite(verbose: boolean) {
-    deleteFilesAndFolders(["site"], verbose);
+    deleteFilesAndFolders(["site", "site-configs", ".env.site-configs.tpl"], verbose);
+    fs.copyFile("./create-app/site-configs.d.ts", "./admin/src/site-configs.d.ts", (err) => console.log);
+    fs.copyFile("./create-app/site-configs.d.ts", "./api/src/site-configs.d.ts", (err) => console.log);
     removeSiteReferences(verbose);
     runEslintFix(verbose);
 }
