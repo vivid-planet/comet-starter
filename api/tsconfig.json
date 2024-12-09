@@ -14,13 +14,13 @@
         "esModuleInterop": true,
         "strict": true,
         "strictPropertyInitialization": false,
-        "strictNullChecks": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "paths": {
             "@src/*": ["src/*"]
         }
     },
+    "include": ["src"],
     "exclude": ["dist"],
     "watchOptions": {
         "excludeDirectories": ["node_modules", "dist", "uploads"],

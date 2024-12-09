@@ -1,14 +1,12 @@
 "use client";
-import * as React from "react";
+import { SVGProps } from "react";
 
-interface SvgUseProps extends React.SVGProps<SVGSVGElement> {
+interface SvgUseProps extends SVGProps<SVGSVGElement> {
     href: string;
 }
 
-export const SvgUse: React.FunctionComponent<SvgUseProps> = ({ href, ...props }) => {
-    return (
-        <svg {...props}>
-            <use href={href} xlinkHref={href} />
-        </svg>
-    );
-};
+export const SvgUse = ({ href, ...props }: SvgUseProps) => (
+    <svg {...props}>
+        <use href={href} xlinkHref={href} />
+    </svg>
+);
