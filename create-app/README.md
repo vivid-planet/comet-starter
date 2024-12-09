@@ -37,18 +37,6 @@ Create a new Comet app with a different repository and branch:
 npx @comet/create-app my-project -r https://github.com/my-company/comet-starter.git -b next
 ```
 
-### Commands
-
-The following commands can be used to customize the project setup:
-
--   `remove-site`: Removes the site from the project.
-
-Example usage:
-
-```bash
-npx @comet/create-app remove-site
-```
-
 ## For developers
 
 ### Development
