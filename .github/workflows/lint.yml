@@ -64,7 +64,7 @@ jobs:
         run: npm run copy-schema-files
 
       - name: Lint
-        run: npm run lint:root & npm --prefix api run lint:ci & npm --prefix admin run lint:ci & npm --prefix site run lint & wait
+        run: npm run lint:root & npm --prefix api run lint:ci & npm --prefix admin run lint:ci & npm --prefix site run lint:ci & wait
 
       - name: Build
         run: npm run build
