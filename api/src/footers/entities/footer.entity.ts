@@ -28,11 +28,11 @@ export class Footer extends BaseEntity<Footer, "id"> implements DocumentInterfac
     @Field(() => FooterScope)
     scope: FooterScope;
 
-    @Property({ columnType: "timestamp with time zone" })
+    @Property({ type: "timestamp with time zone" })
     @Field()
     createdAt: Date = new Date();
 
-    @Property({ columnType: "timestamp with time zone", onUpdate: () => new Date() })
+    @Property({ type: "timestamp with time zone", onUpdate: () => new Date() })
     @Field()
     updatedAt: Date = new Date();
 }
