@@ -11,7 +11,7 @@
         "db:migrate:prod": "npm run console:prod migrate --",
         "fixtures": "npm run console fixtures --",
         "fixtures:prod": "npm run console:prod fixtures --",
-        "lint": "run-p lint:eslint lint:tsc lint:prettier",
+        "lint": "run-p lint:eslint lint:tsc lint:prettier lint:knip",
         "lint:ci": "npm run lint && npm run lint:generated-files-not-modified",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
         "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
@@ -61,7 +61,6 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@comet/cli": "^7.10.0",
         "@comet/eslint-config": "^7.10.0",
         "@cspell/eslint-plugin": "^8.16.1",
         "@jest/types": "^29.6.3",
