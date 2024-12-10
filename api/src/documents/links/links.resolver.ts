@@ -25,8 +25,9 @@ export class LinksResolver {
     ) {}
 
     @Query(() => Link, { nullable: true })
-    async link(@Args("linkId", { type: () => ID }) linkId: string): Promise<Link | null> {
-        return this.repository.findOne(linkId);
+    @AffectedEntity(Link)
+    async link(@Args("id", { type: () => ID }) id: string): Promise<Link | null> {
+        return this.repository.findOne(id);
     }
 
     @ResolveField(() => PageTreeNode, { nullable: true })
