@@ -37,7 +37,7 @@
         "@emotion/styled": "^11.13.5",
         "@fontsource/roboto": "^5.1.0",
         "@mui/lab": "^5.0.0-alpha.174",
-        "@mui/material": "^5.16.8",
+        "@mui/material": "^5.16.9",
         "@mui/system": "^5.16.8",
         "@mui/x-data-grid": "^5.17.26",
         "@mui/x-data-grid-pro": "^5.17.26",
