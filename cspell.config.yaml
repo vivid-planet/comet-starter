@@ -14,3 +14,4 @@ ignorePaths:
   - "api"
   - "create-app"
   - "site"
+  - "/build-and-run-site.sh"

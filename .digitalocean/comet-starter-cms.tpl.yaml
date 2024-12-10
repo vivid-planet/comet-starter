@@ -1,6 +1,9 @@
 alerts:
   - rule: DEPLOYMENT_FAILED
   - rule: DOMAIN_FAILED
+domains:
+  - domain: admin.digitalocean.comet-dxp.com
+    type: PRIMARY
 features:
   - buildpack-stack=ubuntu-22
 ingress:
@@ -50,7 +53,7 @@ services:
         value: starter
       - key: API_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/public-api/api
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
       - key: API_PORT
         scope: RUN_AND_BUILD_TIME
         value: "4000"
@@ -147,7 +150,7 @@ services:
         value: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
       - key: POST_LOGOUT_REDIRECT_URI
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/oauth2/sign_out?rd=%2F
+        value: https://admin.digitalocean.comet-dxp.com/oauth2/sign_out?rd=%2F
       - key: ACL_ALL_PERMISSIONS_DOMAINS
         scope: RUN_AND_BUILD_TIME
         value: "vivid-planet.com"
@@ -261,16 +264,16 @@ services:
         value: production
       - key: API_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/api
+        value: https://admin.digitalocean.comet-dxp.com/api
       - key: ADMIN_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/
+        value: https://admin.digitalocean.comet-dxp.com/
       - key: PUBLIC_SITE_CONFIGS
         scope: RUN_AND_BUILD_TIME
         value: "{{ site://configs/public/dev }}"
       - key: PREVIEW_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-site-preview-jespg.ondigitalocean.app
+        value: https://preview.digitalocean.comet-dxp.com
     github:
       branch: main
       deploy_on_push: false
