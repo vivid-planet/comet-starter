@@ -3,8 +3,6 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-imports
-    ContentScope,
     DamModule,
     DependenciesModule,
     PageTreeModule,
