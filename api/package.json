@@ -27,8 +27,8 @@
         "test:watch": "npm run test -- --watch"
     },
     "dependencies": {
-        "@comet/blocks-api": "^7.9.0",
-        "@comet/cms-api": "^7.9.0",
+        "@comet/blocks-api": "^7.10.0",
+        "@comet/cms-api": "^7.10.0",
         "@faker-js/faker": "^9.2.0",
         "@mikro-orm/cli": "^5.9.8",
         "@mikro-orm/core": "^5.9.8",
@@ -63,9 +63,9 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "@comet/cli": "^7.9.0",
-        "@comet/eslint-config": "^7.9.0",
-        "@comet/eslint-plugin": "^7.9.0",
+        "@comet/cli": "^7.10.0",
+        "@comet/eslint-config": "^7.10.0",
+        "@comet/eslint-plugin": "^7.10.0",
         "@cspell/eslint-plugin": "^8.16.1",
         "@nestjs/cli": "^9.5.0",
         "@nestjs/schematics": "^9.2.0",
