@@ -3,6 +3,8 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, unused-imports/no-unused-imports
+    ContentScope,
     DamModule,
     DependenciesModule,
     PageTreeModule,
@@ -22,6 +24,7 @@ import { FootersModule } from "@src/footers/footers.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 import { RedirectScope } from "@src/redirects/dto/redirect-scope";
+import { ContentScope as BaseContentScope } from "@src/site-configs";
 import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
@@ -135,4 +138,9 @@ export class AppModule {
             ],
         };
     }
+}
+
+declare module "@comet/cms-api" {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface ContentScope extends BaseContentScope {}
 }
