@@ -22,6 +22,7 @@ void (async () => {
         .argument("<projectName>", "Sets the name of the project.")
         .option("-v, --verbose", "Enables extra console logs for verbose output.")
         .option("-ni, --no-install", "Disables the automatic installation of dependencies.")
+        .option("-nc, --no-commit", "Disables the initial commit.")
         .option("-r, --repository <repository>", "Repository to clone from.")
         .option("-b, --branch <branch>", "Branch to checkout.")
         .action((projectName: string, options) => {
@@ -32,6 +33,7 @@ void (async () => {
                     install: options.install,
                     repository: options.repository,
                     branch: options.branch,
+                    commit: options.commit,
                 });
             } else {
                 program.error("Please provide a valid project name.");
