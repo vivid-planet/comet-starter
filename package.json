@@ -30,7 +30,7 @@
         "dotenv-cli": "^7.4.4",
         "husky": "^9.1.7",
         "knip": "^5.36.7",
-        "lint-staged": "^15.2.10",
+        "lint-staged": "^15.2.11",
         "npm-run-all2": "^5.0.2",
         "open-cli": "^8.0.0",
         "prettier": "^2.8.8",
