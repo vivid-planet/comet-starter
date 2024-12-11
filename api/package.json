@@ -61,6 +61,7 @@
         "uuid": "^8.3.2"
     },
     "devDependencies": {
+        "@comet/cli": "^7.10.0",
         "@comet/eslint-config": "^7.10.0",
         "@cspell/eslint-plugin": "^8.16.1",
         "@jest/types": "^29.6.3",
