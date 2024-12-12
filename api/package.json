@@ -14,7 +14,7 @@
         "lint": "run-p lint:eslint lint:tsc lint:prettier lint:knip",
         "lint:ci": "npm run lint && npm run lint:generated-files-not-modified",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
-        "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD --",
+        "lint:generated-files-not-modified": "npm run api-generator && git diff --exit-code HEAD -- src/**/generated",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.lint.json",
