@@ -1,5 +1,5 @@
-import { MainContent, Stack } from "@comet/admin";
-import { DashboardHeader, LatestBuildsDashboardWidget } from "@comet/cms-admin";
+import { MainContent, Stack, Toolbar } from "@comet/admin";
+import { ContentScopeIndicator, DashboardHeader } from "@comet/cms-admin";
 import { Grid } from "@mui/material";
 import { useIntl } from "react-intl";
 
@@ -18,10 +18,10 @@ export function DashboardPage() {
                     "2x": backgroundImage2x,
                 }}
             />
+            <Toolbar scopeIndicator={<ContentScopeIndicator />} />
             <MainContent>
                 <Grid container direction="row" spacing={4}>
                     <LatestContentUpdates />
-                    {import.meta.env.MODE !== "development" && <LatestBuildsDashboardWidget />}
                 </Grid>
             </MainContent>
         </Stack>

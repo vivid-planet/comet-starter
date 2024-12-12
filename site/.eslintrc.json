@@ -1,4 +1,26 @@
 {
-    "extends": "@comet/eslint-config/nextjs",
-    "ignorePatterns": ["**/**/*.generated.ts"]
+    "extends": ["@comet/eslint-config/nextjs", "plugin:@cspell/recommended"],
+    "ignorePatterns": [
+        "**/**/*.generated.ts",
+        "dist/**",
+        "lang/**",
+        "lang-compiled/**",
+        "lang-extracted/**",
+        ".next/**",
+        "public/**",
+        "src/site-configs.d.ts"
+    ],
+    "rules": {
+        "no-restricted-imports": [
+            "error",
+            {
+                "paths": [
+                    {
+                        "name": "react",
+                        "importNames": ["default"]
+                    }
+                ]
+            }
+        ]
+    }
 }

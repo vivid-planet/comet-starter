@@ -1,6 +1,6 @@
 import { BlockLoader, BlockLoaderDependencies, recursivelyLoadBlockData as cometRecursivelyLoadBlockData } from "@comet/cms-site";
 
-export const blockLoaders: Record<string, BlockLoader> = {
+const blockLoaders: Record<string, BlockLoader> = {
     // Add your block loaders here
 };
 
