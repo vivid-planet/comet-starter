@@ -15,8 +15,8 @@ on:
       - next
 
 jobs:
-  lint:
-    name: Lint
+  lint-starter:
+    name: Starter
     runs-on: ubuntu-latest
     steps:
       - run: echo "${{ github.actor }}"
@@ -68,3 +68,31 @@ jobs:
 
       - name: Build
         run: npm run build
+  lint-create-app:
+    name: "@comet/create-app"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+          cache-dependency-path: "create-app/package-lock.json"
+
+      - name: Install dependencies
+        run: npm --prefix create-app ci
+
+      - name: Lint
+        run: npm --prefix create-app run lint
+
+      - name: Build
+        run: npm --prefix create-app run build
+
+      - name: Create a new application
+        run: cd create-app/ && node bin/index.js test --no-install --no-commit
+
+      - name: Remove the site
+        run: cd create-app/test && node ../bin/index.js remove-site
