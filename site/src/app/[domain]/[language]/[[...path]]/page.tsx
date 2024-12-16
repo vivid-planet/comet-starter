@@ -31,6 +31,9 @@ export default async function Page({ params }: { params: { path: string[]; domai
     const graphqlFetch = createGraphQLFetch(previewData);
     const siteConfig = getSiteConfigForDomain(params.domain);
 
+    // Redirects are scoped by domain only, not by language.
+    // If the language param isn't a valid language, it may still be the first segment of a redirect source.
+    // In that case we skip resolving page and only check if the path is a redirect source.
     const skipPage = !siteConfig.scope.languages.includes(params.language);
     const path = `/${(params.path ?? []).join("/")}`;
     const scope = { domain: params.domain, language: params.language };
