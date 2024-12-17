@@ -1,12 +1,7 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-<<<<<<< HEAD
-=======
-import { GQLRedirectScope } from "./graphql.generated";
-import { createRedirects } from "./redirects/redirects";
 import { configureResponse } from "./util/configureResponse";
->>>>>>> main
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
 export async function middleware(request: NextRequest) {

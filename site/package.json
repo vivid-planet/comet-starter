@@ -25,16 +25,10 @@
         "@fontsource/roboto": "^5.1.0",
         "@next/bundle-analyzer": "^14.2.18",
         "@opentelemetry/api": "^1.9.0",
-<<<<<<< HEAD
-        "@opentelemetry/auto-instrumentations-node": "^0.52.1",
-        "@opentelemetry/exporter-trace-otlp-http": "^0.54.2",
-        "@opentelemetry/sdk-node": "^0.54.2",
-=======
         "@opentelemetry/auto-instrumentations-node": "^0.53.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.55.0",
         "@opentelemetry/sdk-node": "^0.55.0",
         "cache-manager": "^5.7.6",
->>>>>>> main
         "graphql": "^15.9.0",
         "ioredis": "^5.4.1",
         "lru-cache": "^11.0.2",
