@@ -6,10 +6,10 @@
     },
     "dependencies": {
         "compression": "^1.7.5",
-        "express": "^4.21.1",
+        "express": "^4.21.2",
         "helmet": "^7.2.0"
     },
     "engines": {
-        "node": "20.18.0"
+        "node": "22"
     }
 }

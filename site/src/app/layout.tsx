@@ -11,15 +11,10 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html>
-            <head />
-            <body>
-                <StyledComponentsRegistry>
-                    <GlobalStyle />
-                    <ResponsiveSpacingStyle />
-                    {children}
-                </StyledComponentsRegistry>
-            </body>
-        </html>
+        <StyledComponentsRegistry>
+            <GlobalStyle />
+            <ResponsiveSpacingStyle />
+            {children}
+        </StyledComponentsRegistry>
     );
 }
