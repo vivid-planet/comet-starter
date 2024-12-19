@@ -26,7 +26,7 @@ export const PageContentAccordionBlock = (props: AccordionBlockProps) => (
 const Root = styled.div`
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.grey["300"]};
+    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["300"]};
 `;
 
 const PageLayoutContent = styled.div`

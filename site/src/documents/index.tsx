@@ -1,11 +1,12 @@
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { Metadata, ResolvingMetadata } from "next";
+import { ComponentType } from "react";
 
 import { Link } from "./links/Link";
 import { generateMetadata as generateMetadataPage, Page } from "./pages/Page";
 
 type DocumentType = {
-    component: React.ComponentType<{ pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }>;
+    component: ComponentType<{ pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }>;
     generateMetadata?: (props: { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }, parent: ResolvingMetadata) => Promise<Metadata>;
 };
 
