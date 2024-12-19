@@ -1,11 +1,12 @@
 "use client";
 
 import { Typography } from "@src/common/components/Typography";
+import { colors, font, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
 import type { ContentScope } from "@src/site-configs";
 import Link from "next/link";
+import { styled } from "next-yak";
 import { FormattedMessage } from "react-intl";
-import styled from "styled-components";
 
 export default function NotFoundContent({ scope }: { scope: ContentScope }) {
     return (
@@ -27,23 +28,23 @@ const PageLayoutContent = styled.div`
 `;
 
 const NotFoundTypography = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S300};
-    margin-bottom: ${({ theme }) => theme.spacing.S300};
+    margin-top: ${spacing.S300};
+    margin-bottom: ${spacing.S300};
 `;
 
 const HomeLink = styled(Link)`
     text-decoration: none;
     display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S100} 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
+    padding: ${spacing.S100} 0;
+    font-family: ${font.fontFamily};
+    color: ${colors.text.primary};
 
     &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
+        color: ${colors.primary.main};
     }
 
     &.active {
-        text-decoration: underline ${({ theme }) => theme.palette.primary.main};
+        text-decoration: underline ${colors.primary.main};
         text-underline-offset: 8px;
     }
 `;

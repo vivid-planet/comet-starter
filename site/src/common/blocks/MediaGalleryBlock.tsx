@@ -5,8 +5,9 @@ import { PropsWithData, withPreview } from "@comet/cms-site";
 import { MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { Typography } from "@src/common/components/Typography";
+import { breakpoints, colors, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled from "styled-components";
+import { styled } from "next-yak";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -53,27 +54,27 @@ const PageLayoutContent = styled.div`
     grid-column: 2 / -2;
     position: relative;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         grid-column: 5 / -5;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         grid-column: 6 / -6;
     }
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${breakpoints.lg} {
         grid-column: 7 / -7;
     }
 `;
 
 const MediaCaption = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S300};
-    padding-right: calc(var(--swiper-button-size) * 2 + ${({ theme }) => theme.spacing.S300} + ${({ theme }) => theme.spacing.S500});
+    margin-top: ${spacing.S300};
+    padding-right: calc(var(--swiper-button-size) * 2 + ${spacing.S300} + ${spacing.S500});
 
     /* min-height to show arrows when no caption */
     min-height: 20px;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         min-height: 22px;
     }
 `;
@@ -92,7 +93,7 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
         cursor: pointer;
 
         /* Move buttons just below the image height, calculated with aspectRatio. not possible with top: 100% because this moves them down the whole slider height which is variable because of caption text */
-        padding-top: ${({ theme }) => theme.spacing.S300};
+        padding-top: ${spacing.S300};
         margin-top: calc(${({ $aspectRatioVertical }) => $aspectRatioVertical} / ${({ $aspectRatioHorizontal }) => $aspectRatioHorizontal} * 100%);
 
         &::after {
@@ -103,13 +104,13 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
 
             mask-image: url("/assets/icons/arrow-right.svg");
             mask-repeat: no-repeat;
-            background-color: ${({ theme }) => theme.palette.primary.main};
+            background-color: ${colors.primary.main};
         }
     }
 
     .swiper-button-prev {
         /* Button width plus space */
-        right: calc(var(--swiper-button-size) + ${({ theme }) => theme.spacing.S300});
+        right: calc(var(--swiper-button-size) + ${spacing.S300});
         left: auto;
 
         &::after {

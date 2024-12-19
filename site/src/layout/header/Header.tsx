@@ -1,12 +1,13 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { breakpoints, colors, font, spacing } from "@src/constants.yak";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
+import { styled } from "next-yak";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import styled from "styled-components";
 
 import { GQLHeaderFragment } from "./Header.fragment.generated";
 
@@ -115,14 +116,14 @@ const Root = styled.div`
     height: var(--header-height);
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
+    border-bottom: 1px solid ${colors.gray["200"]};
 `;
 
 const DesktopHeaderFullHeightNav = styled.nav`
     height: 100%;
     display: none;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: block;
     }
 `;
@@ -132,25 +133,25 @@ const TopLevelNavigation = styled.ol`
     list-style-type: none;
     padding: 0;
     margin: 0;
-    gap: ${({ theme }) => theme.spacing.S600};
+    gap: ${spacing.S600};
     height: 100%;
 `;
 
 const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     display: ${({ $isExpanded }) => ($isExpanded ? "flex" : "none")};
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.S200};
+    gap: ${spacing.S200};
     position: absolute;
     z-index: 40;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
     list-style-type: none;
-    padding: ${({ theme }) => theme.spacing.D100};
+    padding: ${spacing.D100};
     background-color: white;
-    border-left: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-right: 1px solid ${({ theme }) => theme.palette.gray["200"]};
+    border-left: 1px solid ${colors.gray["200"]};
+    border-bottom: 1px solid ${colors.gray["200"]};
+    border-right: 1px solid ${colors.gray["200"]};
 `;
 
 const TopLevelLinkContainer = styled.li`
@@ -166,7 +167,7 @@ const TopLevelLinkContainer = styled.li`
 const LinkContainer = styled.div`
     display: flex;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S100};
+    gap: ${spacing.S100};
     height: 100%;
 `;
 
@@ -183,7 +184,7 @@ const ToggleSubLevelNavigationButton = styled.button`
 const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     width: 100%;
     height: 100%;
-    color: ${({ theme, $isExpanded }) => ($isExpanded ? theme.palette.primary.main : theme.palette.text.primary)};
+    color: ${({ theme, $isExpanded }) => ($isExpanded ? colors.primary.main : colors.text.primary)};
     transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
     transition: transform 0.4s ease;
 `;
@@ -191,16 +192,16 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
 const MenuPageLink = styled(PageLink)`
     text-decoration: none;
     display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S100} 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
+    padding: ${spacing.S100} 0;
+    font-family: ${font.fontFamily};
+    color: ${colors.text.primary};
 
     &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
+        color: ${colors.primary.main};
     }
 
     &.active {
-        text-decoration: underline ${({ theme }) => theme.palette.primary.main};
+        text-decoration: underline ${colors.primary.main};
         text-underline-offset: 8px;
     }
 `;

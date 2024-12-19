@@ -2,8 +2,9 @@ import { hasRichTextBlockContent, PropsWithData, SvgImageBlock, withPreview } fr
 import { KeyFactsItemBlockData } from "@src/blocks.generated";
 import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
+import { colors, spacing } from "@src/constants.yak";
+import { styled } from "next-yak";
 import { Renderers } from "redraft";
-import styled from "styled-components";
 
 const descriptionRenderers: Renderers = {
     inline: defaultRichTextInlineStyleMap,
@@ -33,14 +34,14 @@ const Root = styled.div`
 `;
 
 const Icon = styled(SvgImageBlock)`
-    margin-bottom: ${({ theme }) => theme.spacing.S100};
+    margin-bottom: ${spacing.S100};
 `;
 
 const FactTypography = styled(Typography)`
-    margin-bottom: ${({ theme }) => theme.spacing.S300};
-    color: ${({ theme }) => theme.palette.primary.dark};
+    margin-bottom: ${spacing.S300};
+    color: ${colors.primary.dark};
 `;
 
 const DescriptionTypography = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S100};
+    margin-top: ${spacing.S100};
 `;

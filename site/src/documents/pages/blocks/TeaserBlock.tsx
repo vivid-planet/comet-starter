@@ -1,7 +1,8 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { TeaserBlockData } from "@src/blocks.generated";
+import { breakpoints, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled, { css } from "styled-components";
+import { styled } from "next-yak";
 
 import { TeaserItemBlock } from "./TeaserItemBlock";
 
@@ -24,12 +25,9 @@ const PageLayoutContent = styled.div`
 
 const ItemWrapper = styled.div`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${spacing.D100};
 
-    ${({ theme }) =>
-        css`
-            ${theme.breakpoints.sm.mediaQuery} {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        `}
+    ${breakpoints.sm} {
+        grid-template-columns: repeat(4, 1fr);
+    }
 `;

@@ -5,9 +5,10 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { breakpoints, colors, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
+import { styled } from "next-yak";
 import { CSSProperties } from "react";
-import styled from "styled-components";
 
 export const BasicStageBlock = withPreview(
     ({ data: { media, heading, text, overlay, alignment, callToActionList } }: PropsWithData<BasicStageBlockData>) => (
@@ -61,19 +62,19 @@ const AbsoluteGridRoot = styled(PageLayout)`
 
 const Content = styled.div<{ $alignItems: CSSProperties["alignItems"] }>`
     grid-column: 3 / -3;
-    padding: ${({ theme }) => theme.spacing.D200} 0;
+    padding: ${spacing.D200} 0;
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: ${({ $alignItems }) => $alignItems};
-    color: ${({ theme }) => theme.palette.text.inverted};
+    color: ${colors.text.inverted};
 `;
 
 const MediaPhone = styled.div`
     height: 800px;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: none;
     }
 `;
@@ -82,11 +83,11 @@ const MediaTablet = styled.div`
     display: none;
     height: 700px;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: none;
     }
 `;
@@ -95,11 +96,11 @@ const MediaTabletLandscape = styled.div`
     display: none;
     height: 650px;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         display: none;
     }
 `;
@@ -108,11 +109,11 @@ const MediaDesktop = styled.div`
     display: none;
     height: 750px;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${breakpoints.lg} {
         height: 800px;
     }
 `;

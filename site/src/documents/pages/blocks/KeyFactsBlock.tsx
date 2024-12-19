@@ -1,7 +1,8 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { KeyFactsBlockData } from "@src/blocks.generated";
+import { breakpoints, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled, { css } from "styled-components";
+import { css, styled } from "next-yak";
 
 import { KeyFactItemBlock } from "./KeyFactItemBlock";
 
@@ -24,14 +25,14 @@ const PageLayoutContent = styled.div`
 
 const ItemWrapper = styled.div<{ $listItemCount: number }>`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${spacing.D100};
 
-    ${({ $listItemCount, theme }) =>
+    ${({ $listItemCount }) =>
         $listItemCount > 0 &&
         css`
             grid-template-columns: repeat(${Math.min($listItemCount, 2)}, 1fr);
 
-            ${theme.breakpoints.sm.mediaQuery} {
+            ${breakpoints.sm} {
                 grid-template-columns: repeat(${Math.min($listItemCount, 4)}, 1fr);
             }
         `}

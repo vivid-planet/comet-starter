@@ -1,6 +1,7 @@
 // @ts-check
 
 import nextBundleAnalyzer from "@next/bundle-analyzer";
+import { withYak } from "next-yak/withYak";
 
 import cometConfig from "./src/comet-config.json" with { type: "json" };
 
@@ -57,4 +58,4 @@ const nextConfig = {
     cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withYak(withBundleAnalyzer(nextConfig));

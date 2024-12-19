@@ -3,8 +3,8 @@ import { PropsWithData, withPreview } from "@comet/cms-site";
 import { StandaloneHeadingBlockData } from "@src/blocks.generated";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageLayout } from "@src/layout/PageLayout";
+import { styled } from "next-yak";
 import { CSSProperties } from "react";
-import styled from "styled-components";
 
 type StandaloneHeadingBlockProps = PropsWithData<StandaloneHeadingBlockData>;
 

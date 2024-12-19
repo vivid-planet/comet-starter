@@ -15,6 +15,8 @@ const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> 
 export const CallToActionBlock = withPreview(
     ({ data: { textLink, variant } }: PropsWithData<CallToActionBlockData>) => (
         <HiddenIfInvalidLink link={textLink.link}>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
             <Button as={LinkBlock} data={textLink.link} variant={buttonVariantMap[variant]}>
                 {textLink.text}
             </Button>

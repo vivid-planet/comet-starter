@@ -4,8 +4,9 @@ import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock"
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
+import { breakpoints, colors, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled, { css } from "styled-components";
+import { styled } from "next-yak";
 
 export const BillboardTeaserBlock = withPreview(
     ({ data: { media, heading, text, overlay, callToActionList } }: PropsWithData<BillboardTeaserBlockData>) => (
@@ -58,30 +59,26 @@ const AbsoluteGridRoot = styled(PageLayout)`
 `;
 
 const Content = styled.div`
-    padding: ${({ theme }) => theme.spacing.D200} 0;
+    padding: ${spacing.D200} 0;
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: ${({ theme }) => theme.palette.text.inverted};
+    color: ${colors.text.inverted};
+    grid-column: 3 / -3;
 
-    ${({ theme }) =>
-        css`
-            grid-column: 3 / -3;
+    ${breakpoints.xs} {
+        grid-column: 5 / -5;
+    }
 
-            ${theme.breakpoints.xs.mediaQuery} {
-                grid-column: 5 / -5;
-            }
-
-            ${theme.breakpoints.lg.mediaQuery} {
-                grid-column: 7 / -7;
-            }
-        `};
+    ${breakpoints.lg} {
+        grid-column: 7 / -7;
+    }
 `;
 
 const ImageMobile = styled.div`
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: none;
     }
 `;
@@ -89,11 +86,11 @@ const ImageMobile = styled.div`
 const ImageTablet = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: none;
     }
 `;
@@ -101,11 +98,11 @@ const ImageTablet = styled.div`
 const ImageDesktop = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         display: none;
     }
 `;
@@ -113,7 +110,7 @@ const ImageDesktop = styled.div`
 const ImageLargeDesktop = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         display: block;
     }
 `;

@@ -1,5 +1,5 @@
+import { css, styled } from "next-yak";
 import { HTMLAttributes } from "react";
-import styled, { css } from "styled-components";
 
 const pageLayoutGridTotalColumns = 24;
 const pageLayoutMaxWidth = 1920;

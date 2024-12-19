@@ -8,8 +8,9 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
+import { breakpoints } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled, { css } from "styled-components";
+import { css, styled } from "next-yak";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <AccordionBlock data={props} />,
@@ -45,26 +46,26 @@ export const ColumnsBlock = withPreview(
 const Column = styled.div<{ $layout: string }>`
     grid-column: 3 / -3;
 
-    ${({ $layout, theme }) =>
+    ${({ $layout }) =>
         $layout === "9-6-9" &&
         css`
             grid-column: 5 / -5;
 
-            ${theme.breakpoints.xs.mediaQuery} {
+            ${breakpoints.xs} {
                 grid-column: 7 / -7;
             }
-            ${theme.breakpoints.sm.mediaQuery} {
+            ${breakpoints.sm} {
                 grid-column: 8 / -8;
             }
-            ${theme.breakpoints.md.mediaQuery} {
+            ${breakpoints.md} {
                 grid-column: 9 / -9;
             }
-            ${theme.breakpoints.lg.mediaQuery} {
+            ${breakpoints.lg} {
                 grid-column: 10 / -10;
             }
         `};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         ${({ $layout }) =>
             $layout === "4-16-4" &&
             css`
