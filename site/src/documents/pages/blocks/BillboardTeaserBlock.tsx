@@ -26,7 +26,9 @@ export const BillboardTeaserBlock = withPreview(
             <AbsoluteGridRoot grid>
                 <Content>
                     <HeadingBlock data={heading} />
-                    <RichTextBlock data={text} />
+                    <RichTextWrapper>
+                        <RichTextBlock data={text} />
+                    </RichTextWrapper>
                     <CallToActionListBlock data={callToActionList} />
                 </Content>
             </AbsoluteGridRoot>
@@ -116,4 +118,8 @@ const ImageLargeDesktop = styled.div`
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: block;
     }
+`;
+
+const RichTextWrapper = styled.div`
+    text-align: center;
 `;
