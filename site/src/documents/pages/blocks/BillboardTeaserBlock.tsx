@@ -64,6 +64,7 @@ const Content = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: ${({ theme }) => theme.palette.text.inverted};
 
     ${({ theme }) =>
