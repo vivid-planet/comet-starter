@@ -26,9 +26,7 @@ export const BillboardTeaserBlock = withPreview(
             <AbsoluteGridRoot grid>
                 <Content>
                     <HeadingBlock data={heading} />
-                    <RichTextWrapper>
-                        <RichTextBlock data={text} />
-                    </RichTextWrapper>
+                    <RichTextBlock data={text} />
                     <CallToActionListBlock data={callToActionList} />
                 </Content>
             </AbsoluteGridRoot>
@@ -66,6 +64,7 @@ const Content = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: ${({ theme }) => theme.palette.text.inverted};
 
     ${({ theme }) =>
@@ -118,8 +117,4 @@ const ImageLargeDesktop = styled.div`
     ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: block;
     }
-`;
-
-const RichTextWrapper = styled.div`
-    text-align: center;
 `;
