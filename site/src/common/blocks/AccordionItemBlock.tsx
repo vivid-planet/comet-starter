@@ -5,9 +5,10 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { colors, spacing } from "@src/constants.yak";
+import { css, styled } from "next-yak";
 import { useState } from "react";
 import { useIntl } from "react-intl";
-import styled, { css } from "styled-components";
 
 import { Typography } from "../components/Typography";
 
@@ -65,8 +66,8 @@ const TitleWrapper = styled.button`
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
-    padding: ${({ theme }) => theme.spacing.S300} 0;
+    border-top: 1px solid ${colors.gray["300"]};
+    padding: ${spacing.S300} 0;
 `;
 
 const IconWrapper = styled.div`
@@ -88,7 +89,7 @@ const ContentWrapper = styled.div`
 `;
 
 const ContentWrapperInner = styled.div<{ $isExpanded: boolean }>`
-    padding-bottom: ${({ theme }) => theme.spacing.S300};
+    padding-bottom: ${spacing.S300};
     margin-top: -100%;
     opacity: 0;
     transition: margin-top 0.8s ease-out 0.3s, opacity 0.3s linear;

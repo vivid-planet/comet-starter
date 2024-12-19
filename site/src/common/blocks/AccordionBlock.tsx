@@ -1,8 +1,9 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { AccordionBlockData } from "@src/blocks.generated";
 import { AccordionItemBlock } from "@src/common/blocks/AccordionItemBlock";
+import { colors } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled from "styled-components";
+import { styled } from "next-yak";
 
 type AccordionBlockProps = PropsWithData<AccordionBlockData>;
 
@@ -26,7 +27,7 @@ export const PageContentAccordionBlock = (props: AccordionBlockProps) => (
 const Root = styled.div`
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["300"]};
+    border-bottom: 1px solid ${colors.gray["300"]};
 `;
 
 const PageLayoutContent = styled.div`

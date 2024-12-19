@@ -5,8 +5,9 @@ import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { breakpoints, colors, font, spacing } from "@src/constants.yak";
+import { styled } from "next-yak";
 import { Renderers } from "redraft";
-import styled from "styled-components";
 
 const descriptionRenderers: Renderers = {
     inline: defaultRichTextInlineStyleMap,
@@ -44,11 +45,11 @@ const ItemContent = styled.a`
     display: flex;
     flex: 1;
     flex-direction: row;
-    gap: ${({ theme }) => theme.spacing.S300};
+    gap: ${spacing.S300};
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         flex: unset;
-        gap: ${({ theme }) => theme.spacing.S400};
+        gap: ${spacing.S400};
         flex-direction: column;
     }
 `;
@@ -56,7 +57,7 @@ const ItemContent = styled.a`
 const MediaMobile = styled.div`
     flex: 1;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: none;
     }
 `;
@@ -65,7 +66,7 @@ const MediaDesktop = styled.div`
     flex: 1;
     display: none;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         display: block;
     }
 `;
@@ -75,24 +76,24 @@ const ContentContainer = styled.div`
 `;
 
 const TitleTypography = styled(Typography)`
-    margin-bottom: ${({ theme }) => theme.spacing.S100};
+    margin-bottom: ${spacing.S100};
 `;
 
 const TextLinkContainer = styled.div`
-    margin-top: ${({ theme }) => theme.spacing.S300};
+    margin-top: ${spacing.S300};
     display: flex;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S200};
-    color: ${({ theme }) => theme.palette.primary.main};
+    gap: ${spacing.S200};
+    color: ${colors.primary.main};
     transition: color 0.3s ease-in-out;
 
     &:hover {
-        color: ${({ theme }) => theme.palette.primary.dark};
+        color: ${colors.primary.dark};
     }
 `;
 
 const LinkText = styled.span`
-    font-family: ${({ theme }) => theme.fontFamily};
+    font-family: ${font.fontFamily};
     font-size: 16px;
     font-weight: 700;
 `;

@@ -8,11 +8,12 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { PageContentStandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { PageContentStandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
+import { colors } from "@src/constants.yak";
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled, { css } from "styled-components";
+import { css, styled } from "next-yak";
 
 const supportedBlocks: SupportedBlocks = {
     accordion: (props) => <PageContentAccordionBlock data={props} />,
@@ -49,13 +50,13 @@ const RootPageLayout = styled(PageLayout)<{ $background: ContentGroupBlockData["
         css`
             ${$background === "lightGray" &&
             css`
-                background-color: ${theme.palette.gray["100"]};
+                background-color: ${colors.gray["100"]};
             `}
 
             ${$background === "darkGray" &&
             css`
-                background-color: ${theme.palette.gray["900"]};
-                color: ${theme.palette.text.inverted};
+                background-color: ${colors.gray["900"]};
+                color: ${colors.text.inverted};
             `}
         `};
 `;

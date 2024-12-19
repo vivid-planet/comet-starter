@@ -2,7 +2,8 @@
 import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
 import { CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
-import styled from "styled-components";
+import { breakpoints, spacing } from "@src/constants.yak";
+import { styled } from "next-yak";
 
 type CallToActionListBlockProps = PropsWithData<CallToActionListBlockData>;
 
@@ -19,9 +20,9 @@ export const CallToActionListBlock = withPreview(
 const Root = styled.div`
     display: flex;
     flex-flow: row wrap;
-    gap: ${({ theme }) => theme.spacing.S300};
+    gap: ${spacing.S300};
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        gap: ${({ theme }) => theme.spacing.S400};
+    ${breakpoints.sm} {
+        gap: ${spacing.S400};
     }
 `;

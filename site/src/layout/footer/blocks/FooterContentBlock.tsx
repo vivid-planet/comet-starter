@@ -4,8 +4,9 @@ import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
+import { breakpoints, colors, spacing } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
-import styled from "styled-components";
+import { styled } from "next-yak";
 
 export const FooterContentBlock = withPreview(
     ({ data: { text, image, linkList, copyrightNotice } }: PropsWithData<FooterContentBlockData>) => {
@@ -26,9 +27,13 @@ export const FooterContentBlock = withPreview(
                             {linkList.blocks.length > 0 && (
                                 <LinksWrapper>
                                     {linkList.blocks.map((block) => (
-                                        <LinkText key={block.key} as={LinkBlock} data={block.props.link} variant="p200">
-                                            {block.props.text}
-                                        </LinkText>
+                                        <>
+                                            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                                            {/* @ts-ignore */}
+                                            <LinkText key={block.key} as={LinkBlock} data={block.props.link} variant="p200">
+                                                {block.props.text}
+                                            </LinkText>
+                                        </>
                                     ))}
                                 </LinksWrapper>
                             )}
@@ -44,8 +49,8 @@ export const FooterContentBlock = withPreview(
 
 const Root = styled.footer`
     margin-top: auto;
-    background-color: ${({ theme }) => theme.palette.gray["900"]};
-    color: ${({ theme }) => theme.palette.gray["50"]};
+    background-color: ${colors.gray["900"]};
+    color: ${colors.gray["50"]};
 `;
 
 const PageLayoutContent = styled.div`
@@ -53,11 +58,11 @@ const PageLayoutContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: ${({ theme }) => `${theme.spacing.D400} 0`};
+    padding: ${spacing.D400} 0;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         position: relative;
-        gap: ${({ theme }) => theme.spacing.D100};
+        gap: ${spacing.D100};
         flex-direction: row;
         justify-content: space-between;
     }
@@ -68,15 +73,15 @@ const TopContainer = styled.div`
     width: 100%;
     flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${spacing.D100};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         align-self: stretch;
         flex-direction: row-reverse;
         justify-content: space-between;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         flex-direction: row;
     }
 `;
@@ -85,11 +90,11 @@ const RichTextWrapper = styled.div`
     width: 100%;
     text-align: center;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         text-align: left;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         max-width: 80%;
     }
 `;
@@ -97,7 +102,7 @@ const RichTextWrapper = styled.div`
 const ImageWrapper = styled.div`
     width: 100px;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         position: absolute;
         width: 100%;
         max-width: 100px;
@@ -108,13 +113,13 @@ const ImageWrapper = styled.div`
 `;
 
 const LinkCopyrightWrapper = styled.div`
-    color: ${({ theme }) => theme.palette.gray["400"]};
+    color: ${colors.gray["400"]};
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S500};
+    gap: ${spacing.S500};
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         width: 80%;
         align-items: flex-end;
     }
@@ -122,7 +127,7 @@ const LinkCopyrightWrapper = styled.div`
 
 const LinksWrapper = styled.div`
     display: flex;
-    gap: ${({ theme }) => theme.spacing.S500};
+    gap: ${spacing.S500};
     flex-wrap: wrap;
     justify-content: center;
 `;
@@ -130,13 +135,13 @@ const LinksWrapper = styled.div`
 const CopyrightNotice = styled(Typography)`
     text-align: center;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         text-align: right;
     }
 `;
 
 const LinkText = styled(Typography)`
-    color: ${({ theme }) => theme.palette.primary.main};
+    color: ${colors.primary.main};
     text-decoration: underline;
 `;
 
@@ -144,11 +149,11 @@ const HorizontalLine = styled.hr`
     width: 100%;
     height: 1px;
     border: none;
-    background-color: ${({ theme }) => theme.palette.gray["600"]};
-    color: ${({ theme }) => theme.palette.gray["600"]};
-    margin: ${({ theme }) => `${theme.spacing.D300} 0`};
+    background-color: ${colors.gray["600"]};
+    color: ${colors.gray["600"]};
+    margin: ${spacing.D300} 0;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${breakpoints.md} {
         display: none;
     }
 `;

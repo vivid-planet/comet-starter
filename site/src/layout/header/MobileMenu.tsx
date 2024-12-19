@@ -1,12 +1,12 @@
 "use client";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { breakpoints, colors, font, spacing } from "@src/constants.yak";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
-import { DisableBodyScrolling } from "@src/util/DisableBodyScrolling";
+import { css, styled } from "next-yak";
 import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import styled, { css } from "styled-components";
 
 import { GQLMobileMenuFragment } from "./MobileMenu.fragment.generated";
 
@@ -51,7 +51,6 @@ export const MobileMenu = ({ header }: Props) => {
 
     return (
         <Root>
-            {isMenuOpen && <DisableBodyScrolling />}
             <MenuButton
                 aria-label={intl.formatMessage({
                     id: "header.menu.arialLabel",
@@ -148,7 +147,7 @@ export const MobileMenu = ({ header }: Props) => {
 };
 
 const Root = styled.div`
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${breakpoints.sm} {
         display: none;
     }
 `;
@@ -186,7 +185,7 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
     height: 0;
     width: 100vw;
     z-index: 40;
-    background-color: ${({ theme }) => theme.palette.gray["200"]};
+    background-color: ${colors.gray["200"]};
     overflow: auto;
     visibility: hidden;
     transition: height 0.15s ease-out, visibility 0s linear 0.15s;
@@ -213,7 +212,7 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     left: 0;
     height: calc(var(--full-viewport-height) - var(--header-height));
     width: 100vw;
-    background-color: ${({ theme }) => theme.palette.gray["200"]};
+    background-color: ${colors.gray["200"]};
     padding: 0;
     overflow: auto;
     visibility: hidden;
@@ -233,13 +232,13 @@ const Link = styled(PageLink)`
     width: 100%;
     text-decoration: none;
     display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
+    padding: ${spacing.S500} 0;
+    font-family: ${font.fontFamily};
+    color: ${colors.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         &:hover {
-            color: ${({ theme }) => theme.palette.primary.main};
+            color: ${colors.primary.main};
         }
     }
 `;
@@ -253,12 +252,12 @@ const ButtonLinkBase = styled.button`
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
-    gap: ${({ theme }) => theme.spacing.S200};
+    padding: ${spacing.S500} 0;
+    gap: ${spacing.S200};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         &:hover {
-            color: ${({ theme }) => theme.palette.primary.main};
+            color: ${colors.primary.main};
         }
     }
 `;
@@ -269,22 +268,22 @@ const ButtonLink = styled(ButtonLinkBase)`
 
 const BackButton = styled(ButtonLinkBase)`
     align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["300"]};
+    border-bottom: 1px solid ${colors.gray["300"]};
 `;
 
 const OverviewButton = styled(PageLink)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S200};
+    gap: ${spacing.S200};
     width: 100%;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
+    padding: ${spacing.S500} 0;
     text-decoration: none;
-    color: ${({ theme }) => theme.palette.text.primary};
+    color: ${colors.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${breakpoints.xs} {
         &:hover {
-            color: ${({ theme }) => theme.palette.primary.main};
+            color: ${colors.primary.main};
         }
     }
 `;

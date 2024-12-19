@@ -3,9 +3,10 @@ import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } 
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography, TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
+import { breakpoints, colors } from "@src/constants.yak";
 import { PageLayout } from "@src/layout/PageLayout";
+import { styled } from "next-yak";
 import redraft, { Renderers, TextBlockRenderFn } from "redraft";
-import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
@@ -113,16 +114,13 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
 );
 
 const DisableLastBottomSpacing = styled.div`
-    ${({ theme }) =>
-        css`
-            > *:last-child {
-                margin-bottom: 0;
+    & > *:last-child {
+        margin-bottom: 0;
 
-                ${theme.breakpoints.xs.mediaQuery} {
-                    margin-bottom: 0;
-                }
-            }
-        `};
+        ${breakpoints.xs} {
+            margin-bottom: 0;
+        }
+    }
 `;
 
 const Text = styled(Typography)`
@@ -140,11 +138,11 @@ const OrderedListItem = styled(Text)<{ $depth: number }>`
 `;
 
 const InlineLink = styled(LinkBlock)`
-    color: ${({ theme }) => theme.palette.primary.main};
+    color: ${colors.primary.main};
     transition: color 0.3s ease-in-out;
 
     &:hover {
-        color: ${({ theme }) => theme.palette.primary.dark};
+        color: ${colors.primary.dark};
     }
 `;
 
