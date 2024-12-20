@@ -44,7 +44,7 @@
         "graphql": "^15.9.0",
         "history": "^4.10.1",
         "lodash.isequal": "^4.5.0",
-        "rdndmb-html5-to-touch": "^8.0.3",
+        "rdndmb-html5-to-touch": "^8.1.2",
         "react": "^17.0.2",
         "react-app-polyfill": "^2.0.0",
         "react-dnd": "^16.0.1",
