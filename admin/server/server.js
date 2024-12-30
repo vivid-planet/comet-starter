@@ -23,35 +23,35 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                "default-src": ["'none'"],
-                "script-src-elem": ["'unsafe-inline'", "'self'"],
-                "style-src-elem": ["'unsafe-inline'", "'self'"],
+                "default-src": ["'none'"], // Don't allow any content to be loaded if not explicitly allowed
+                "script-src": [process.env.NODE_ENV === "development" ? "'self' 'unsafe-eval'" : "'self'"], // Unsafe eval is needed for the preview in local development
+                "script-src-elem": ["'self'", "'unsafe-inline'"],
+                "style-src-elem": ["'self'", "'unsafe-inline'", process.env.PREVIEW_URL],
                 "style-src-attr": ["'unsafe-inline'"],
                 "font-src": ["'self'", "data:"],
-                "connect-src": ["https:"],
-                "img-src": ["'self'", "data:", "https:"],
-                "frame-src": ["https:"],
-                "frame-ancestors": ["'self'"],
-                upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [],
+                "connect-src": ["'self'"],
+                "img-src": ["'self'", "data:"],
+                "frame-src": [process.env.PREVIEW_URL],
+                upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [], // Upgrade all requests to HTTPS on production
             },
             useDefaults: false, // Avoid default values for not explicitly set directives
         },
-        xFrameOptions: false, // Disable deprecated header
+        xFrameOptions: false, // Disable deprecated X-Frame-Options header
         crossOriginResourcePolicy: "same-origin", // Do not allow cross-origin requests to access the response
-        crossOriginEmbedderPolicy: false, // value=no-corp
-        crossOriginOpenerPolicy: true, // value=same-origin
+        crossOriginEmbedderPolicy: false, // Disable Cross-Origin-Embedder-Policy as it is not needed (value=no-corp)
+        crossOriginOpenerPolicy: true, // Enable Cross-Origin-Opener-Policy (value=same-origin)
         strictTransportSecurity: {
-            // Enable HSTS
+            // Enable Strict-Transport-Security
             maxAge: 63072000, // 2 years (recommended when subdomains are included)
             includeSubDomains: true,
-            preload: true,
+            preload: true, // Enable preload list (recommended if subdomains are included)
         },
         referrerPolicy: {
             policy: "no-referrer", // No referrer information needs to be sent
         },
-        xContentTypeOptions: true, // value=nosniff
-        xDnsPrefetchControl: false, // Disable non-standard header as recommended by MDN
-        xPermittedCrossDomainPolicies: true, // value=none (prevent MIME sniffing)
+        xContentTypeOptions: true, // Enable X-Content-Type-Options (value=nosniff)
+        xDnsPrefetchControl: false, // Disable this non-standard header as recommended by MDN
+        xPermittedCrossDomainPolicies: true, // Enable X-Permitted-Cross-Domain-Policies (value=none)
     }),
 );
 
