@@ -3,6 +3,7 @@ import { SvgUse } from "@src/common/helpers/SvgUse";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
@@ -43,7 +44,9 @@ export const Header = ({ header }: Props) => {
             <PageLayout grid>
                 <PageLayoutContent>
                     <Root>
-                        <SvgUse href="/assets/comet-logo.svg#logo" />
+                        <Link href="/">
+                            <SvgUse href="/assets/comet-logo.svg#logo" />
+                        </Link>
 
                         <DesktopHeaderFullHeightNav>
                             <TopLevelNavigation>
@@ -56,9 +59,9 @@ export const Header = ({ header }: Props) => {
                                             onMouseLeave={() => setExpandedSubLevelNavigation(null)}
                                         >
                                             <LinkContainer>
-                                                <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
                                                     {node.name}
-                                                </Link>
+                                                </MenuPageLink>
                                                 {visibleChildNodes.length > 0 && (
                                                     <ToggleSubLevelNavigationButton
                                                         aria-label={intl.formatMessage(
@@ -82,9 +85,9 @@ export const Header = ({ header }: Props) => {
                                                 <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
                                                     {visibleChildNodes.map((node) => (
                                                         <li key={node.id}>
-                                                            <Link page={node} activeClassName="active" aria-label={node.name}>
+                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
                                                                 {node.name}
-                                                            </Link>
+                                                            </MenuPageLink>
                                                         </li>
                                                     ))}
                                                 </SubLevelNavigation>
@@ -185,7 +188,7 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     transition: transform 0.4s ease;
 `;
 
-const Link = styled(PageLink)`
+const MenuPageLink = styled(PageLink)`
     text-decoration: none;
     display: inline-block;
     padding: ${({ theme }) => theme.spacing.S100} 0;

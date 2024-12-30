@@ -1,7 +1,4 @@
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource-variable/roboto-flex/full.css";
 import "@src/polyfills";
 
 import { ApolloProvider } from "@apollo/client";
@@ -20,6 +17,7 @@ import {
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
+import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { theme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
@@ -29,7 +27,7 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { AppMasterMenu, masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { AppMasterMenu, masterMenuData, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";

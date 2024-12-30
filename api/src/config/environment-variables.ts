@@ -134,4 +134,8 @@ export class EnvironmentVariables {
     @IsFQDN({}, { each: true })
     @Transform(({ value }: { value: string }) => value.split(",").filter((v) => v))
     ACL_ALL_PERMISSIONS_DOMAINS: string[] = [];
+
+    @IsString()
+    @MinLength(16)
+    SITE_PREVIEW_SECRET: string;
 }

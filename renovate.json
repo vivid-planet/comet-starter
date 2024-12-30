@@ -1,0 +1,68 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", ":semanticCommitsDisabled"],
+    "packageRules": [
+        {
+            "groupName": "comet",
+            "prPriority": 6,
+            "matchPackageNames": ["/@comet/*/"],
+            "labels": ["comet", "dependencies"]
+        },
+        {
+            "groupName": "linters",
+            "matchPackageNames": ["/^eslint/", "/^prettier/"]
+        },
+        {
+            "groupName": "typescript",
+            "matchPackageNames": ["/typescript/"]
+        },
+        {
+            "groupName": "Storybook",
+            "matchPackageNames": ["/^@storybook/", "/^storybook/"]
+        },
+        {
+            "groupName": "Mui-X",
+            "matchPackageNames": ["/^@mui/x/"]
+        },
+        {
+            "groupName": "Mui",
+            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/", "/@mui/lab/"]
+        },
+        {
+            "groupName": "emotion",
+            "matchPackageNames": ["/@emotion/*/"]
+        },
+        {
+            "groupName": "React Router",
+            "matchPackageNames": ["/^react-router/"]
+        },
+        {
+            "matchPackageNames": ["@graphql-codegen/*"],
+            "groupName": "GraphQL Codegen"
+        },
+        {
+            "groupName": "Mikro-ORM",
+            "matchPackageNames": ["/^@mikro-orm/*/"]
+        },
+        {
+            "groupName": "NestJS",
+            "matchPackageNames": ["/^@nestjs/*/"]
+        },
+        {
+            "groupName": "OpenTelemetry",
+            "matchPackageNames": ["/^@opentelemetry/*/"]
+        },
+        {
+            "groupName": "node",
+            "matchPackageNames": ["node"],
+            "rangeStrategy": "widen"
+        },
+        {
+            "matchUpdateTypes": ["major"],
+            "labels": ["major", "dependencies"]
+        }
+    ],
+    "lockFileMaintenance": { "enabled": true },
+    "rangeStrategy": "bump",
+    "labels": ["dependencies"]
+}

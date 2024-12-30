@@ -1,6 +1,11 @@
 alerts:
   - rule: DEPLOYMENT_FAILED
   - rule: DOMAIN_FAILED
+domains:
+  - domain: digitalocean.comet-dxp.com
+    type: PRIMARY
+  - domain: preview.digitalocean.comet-dxp.com
+    type: ALIAS
 features:
   - buildpack-stack=ubuntu-22
 ingress:
@@ -18,7 +23,7 @@ services:
       cp ../api/schema.gql schema.gql &&
       cp ../api/block-meta.json block-meta.json &&
       cp ../api/src/comet-config.json src/comet-config.json &&
-      cp ../site-configs.d.ts src/site-configs.d.ts &&
+      cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
       npm run build &&
       npm prune --omit=dev
     environment_slug: node-js
@@ -28,24 +33,24 @@ services:
         value: production
       - key: ADMIN_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/
+        value: https://admin.digitalocean.comet-dxp.com/
       - key: NEXT_PUBLIC_API_URL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/public-api/api
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
       - key: API_URL_INTERNAL
         scope: RUN_AND_BUILD_TIME
-        value: https://comet-starter-cms-64wfr.ondigitalocean.app/public-api/api
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
       - key: SITE_PREVIEW_SECRET
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:/Nf0VXO5XP5SJY9Y/JAFyZttB4Z1B6po:xL4pWQaF02cU4y1QCahqXdvD94A+QOJxXVVGDea4TYFVPQ==]
+        value: ${SITE_PREVIEW_SECRET}
       - key: PUBLIC_SITE_CONFIGS
         scope: RUN_AND_BUILD_TIME
         value: "{{ site://configs/public/dev }}"
       - key: API_BASIC_AUTH_SYSTEM_USER_PASSWORD
         scope: RUN_AND_BUILD_TIME
         type: SECRET
-        value: EV[1:qkU44a+IP3BfIT4YvfGdrOj505b+mdu2:aD7wKJCkMvTng/HGtOjuXg2QjP2KGUn8FHghsVmZpptr4JA=]
+        value: ${API_BASIC_AUTH_SYSTEM_USER_PASSWORD}
     github:
       branch: main
       deploy_on_push: false

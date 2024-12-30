@@ -1,9 +1,7 @@
-import { Rewrite } from "next/dist/lib/load-custom-routes";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { GQLRedirectScope } from "./graphql.generated";
-import { createRedirects } from "./redirects/redirects";
+import { configureResponse } from "./util/configureResponse";
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "./util/siteConfig";
 
 export async function middleware(request: NextRequest) {
@@ -30,42 +28,25 @@ export async function middleware(request: NextRequest) {
         throw new Error(`Cannot get siteConfig for host ${host}`);
     }
 
-    const scope = { domain: siteConfig.scope.domain };
-
     if (pathname.startsWith("/dam/")) {
         return NextResponse.rewrite(new URL(`${process.env.API_URL_INTERNAL}${request.nextUrl.pathname}`));
     }
 
-    const redirects = await createRedirects(scope);
-
-    const redirect = redirects.get(pathname);
-    if (redirect) {
-        const destination: string = redirect.destination;
-        return NextResponse.redirect(new URL(destination, request.url), redirect.permanent ? 308 : 307);
+    if (request.nextUrl.pathname === "/admin" && process.env.ADMIN_URL) {
+        return NextResponse.redirect(new URL(process.env.ADMIN_URL));
     }
 
-    const rewrites = await createRewrites(scope);
-    const rewrite = rewrites.get(pathname);
-    if (rewrite) {
-        return NextResponse.rewrite(new URL(rewrite.destination, request.url));
-    }
-
-    return NextResponse.rewrite(
-        new URL(
-            `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
-                request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
-            }`,
-            request.url,
+    return configureResponse(
+        NextResponse.rewrite(
+            new URL(
+                `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
+                    request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
+                }`,
+                request.url,
+            ),
+            { request: { headers } },
         ),
-        { request: { headers } },
     );
-}
-
-type RewritesMap = Map<string, Rewrite>;
-
-async function createRewrites(scope: GQLRedirectScope): Promise<RewritesMap> {
-    const rewritesMap = new Map<string, Rewrite>();
-    return rewritesMap;
 }
 
 export const config = {

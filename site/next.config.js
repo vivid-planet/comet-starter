@@ -50,7 +50,7 @@ const nextConfig = {
         optimizePackageImports: ["@comet/cms-site"],
     },
     poweredByHeader: false,
-    // https://nextjs.org/docs/advanced-features/security-headers
+    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts)
     headers: async () => [
         {
             source: "/:path*",
@@ -103,6 +103,8 @@ const nextConfig = {
             ],
         },
     ],
+    cacheHandler: process.env.REDIS_ENABLED === "true" ? require.resolve("./dist/cache-handler.js") : undefined,
+    cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
 };
 
 module.exports = withBundleAnalyzer(nextConfig);

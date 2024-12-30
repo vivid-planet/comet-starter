@@ -1,4 +1,4 @@
-import { Environment, GetSiteConfig } from "../site-configs";
+import { Environment, GetSiteConfig } from "./site-configs";
 
 const envToDomainMap: Record<Environment, string> = {
     local: "localhost:3000",
@@ -15,7 +15,7 @@ export default ((env) => {
             main: envToDomainMap[env],
         },
         preloginEnabled: true,
-        preloginPassword: env === "local" ? undefined : "password",
+        preloginPassword: undefined,
         public: {
             scope: {
                 domain: "main",

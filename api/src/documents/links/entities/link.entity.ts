@@ -21,13 +21,13 @@ export class Link extends BaseEntity<Link, "id"> implements DocumentInterface {
     content: BlockDataInterface;
 
     @Property({
-        columnType: "timestamp with time zone",
+        type: "timestamp with time zone",
     })
     @Field()
     createdAt: Date = new Date();
 
     @Property({
-        columnType: "timestamp with time zone",
+        type: "timestamp with time zone",
         onUpdate: () => new Date(),
     })
     @Field()
