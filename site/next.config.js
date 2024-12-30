@@ -50,15 +50,11 @@ const nextConfig = {
         optimizePackageImports: ["@comet/cms-site"],
     },
     poweredByHeader: false,
-    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts)
+    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts/configureResponse.ts)
     headers: async () => [
         {
             source: "/:path*",
             headers: [
-                {
-                    key: "Content-Security-Policy",
-                    value: generateCSP(),
-                },
                 {
                     key: "Strict-Transport-Security", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
                     value: "max-age=63072000; includeSubDomains; preload", // 2 years (recommended when subdomains are included)
@@ -92,14 +88,6 @@ const nextConfig = {
                     key: "Referrer-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
                     value: "same-origin", // Only use referer on own domain.
                 },
-                ...(process.env.ADMIN_URL
-                    ? [
-                          {
-                              key: "Access-Control-Allow-Origin",
-                              value: process.env.ADMIN_URL,
-                          },
-                      ]
-                    : []),
             ],
         },
     ],
