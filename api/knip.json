@@ -1,0 +1,10 @@
+{
+    "$schema": "https://unpkg.com/knip@5/schema.json",
+    "entry": ["./src/main.ts", "./src/console.ts", "./src/repl.ts", "./src/db/ormconfig.cli.ts", "./src/site-configs.d.ts"],
+    "project": ["./src/**/*.{ts,tsx}"],
+    "ignore": ["./src/db/migrations/**/*.ts"],
+    "ignoreDependencies": ["@mikro-orm/cli", "jest-junit"],
+    "rules": {
+        "enumMembers": "off"
+    }
+}
