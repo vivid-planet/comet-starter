@@ -7,7 +7,6 @@ import {
     MasterMenu,
     MasterMenuData,
     PagesPage,
-    PublisherPage,
     UserPermissionsPage,
 } from "@comet/cms-admin";
 import { DashboardPage } from "@src/dashboard/DashboardPage";
@@ -94,15 +93,6 @@ export const masterMenuData: MasterMenuData = [
         primary: <FormattedMessage id="menu.system" defaultMessage="System" />,
         icon: <Wrench />,
         items: [
-            {
-                type: "route",
-                primary: <FormattedMessage id="menu.publisher" defaultMessage="Publisher" />,
-                route: {
-                    path: "/system/publisher",
-                    component: PublisherPage,
-                },
-                requiredPermission: "builds",
-            },
             {
                 type: "route",
                 primary: <FormattedMessage id="menu.redirects" defaultMessage="Redirects" />,
