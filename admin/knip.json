@@ -2,6 +2,6 @@
     "$schema": "https://unpkg.com/knip@5/schema.json",
     "entry": ["./src/loader.ts"],
     "project": ["./src/**/*.{ts,tsx}"],
-    "ignore": ["./codegen.ts", "./schema.gql"],
+    "ignore": ["./codegen.ts", "./schema.gql", "./src/**/generated/**/*.{ts,tsx}", "./src/**/*.cometGen.ts"],
     "ignoreDependencies": ["@swc/plugin-emotion"]
 }
