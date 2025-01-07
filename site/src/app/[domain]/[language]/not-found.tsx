@@ -1,11 +1,28 @@
-import Link from "next/link";
+import NotFoundContent from "@src/documents/NotFound";
+import { IntlProvider } from "@src/util/IntlProvider";
+import { loadMessages } from "@src/util/loadMessages";
+import { getNotFoundContext } from "@src/util/NotFoundContext";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
+import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 
-export default async function NotFound404() {
+import Layout from "./[[...path]]/layout";
+
+export default async function NotFound() {
+    const { domain, language } = getNotFoundContext() || { domain: "main", language: "en" };
+    const messages = await loadMessages(language);
+
     return (
-        <html>
+        <html lang={language}>
             <body>
-                <p>Page not found.</p>
-                <Link href="/">Return Home</Link>
+                <IntlProvider locale={language} messages={messages}>
+                    <SiteConfigProvider siteConfig={getSiteConfigForDomain(domain)}>
+                        <Layout params={{ domain, language }}>
+                            <main>
+                                <NotFoundContent scope={{ domain, language }} />
+                            </main>
+                        </Layout>
+                    </SiteConfigProvider>
+                </IntlProvider>
             </body>
         </html>
     );

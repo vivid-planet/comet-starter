@@ -23,3 +23,5 @@ rdndmb
 requirepass
 schemaname
 tablename
+timestamptz
+knipignore

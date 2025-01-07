@@ -2,7 +2,7 @@
 
 import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIFrameBridge } from "@comet/cms-site";
 import { FooterContentBlockData } from "@src/blocks.generated";
-import { FooterContentBlock } from "@src/documents/pages/blocks/FooterContentBlock";
+import { FooterContentBlock } from "@src/layout/footer/blocks/FooterContentBlock";
 import { graphQLApiUrl } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { FunctionComponent, useEffect, useState } from "react";

@@ -50,7 +50,7 @@
         },
         {
             "groupName": "OpenTelemetry",
-            "matchPackageNames": ["/^open-telemetry/*/"]
+            "matchPackageNames": ["/^@opentelemetry/*/"]
         },
         {
             "groupName": "node",
