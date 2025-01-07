@@ -4,11 +4,14 @@ const compression = require("compression");
 const helmet = require("helmet");
 const fs = require("fs");
 const path = require("path");
+const { cwd } = require("process");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
 
-let indexFile = fs.readFileSync(path.join(__dirname, "../build/index.html"), "utf8");
+const currentWorkingDirectory = cwd();
+
+let indexFile = fs.readFileSync(path.join(currentWorkingDirectory, "./build/index.html"), "utf8");
 
 // Replace environment variables
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
@@ -42,7 +45,7 @@ app.get("/status/health", (req, res) => {
 });
 
 app.use(
-    express.static(path.join(__dirname, "../build"), {
+    express.static(path.join(currentWorkingDirectory, "./build"), {
         index: false, // Don't send index.html for requests to "/" as it will be handled by the fallback route (with replaced environment variables)
         setHeaders: (res, path, stat) => {
             if (path.endsWith(".js")) {
