@@ -2,6 +2,7 @@ allkeys
 authproxy
 Autopurge
 bitnami
+clsx
 codegen
 darthsim
 Flexbox

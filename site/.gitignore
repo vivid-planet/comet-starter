@@ -53,3 +53,5 @@ public/robots.txt
 tsconfig.tsbuildinfo
 
 /dist
+
+src/**/*.scss.d.ts

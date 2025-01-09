@@ -1,3 +1,4 @@
+import "./global.scss";
 import "@fontsource/roboto";
 import "@fontsource/roboto/700.css";
 
