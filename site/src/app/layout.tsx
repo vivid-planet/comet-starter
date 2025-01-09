@@ -1,4 +1,6 @@
 import "./global.css";
+import "@fontsource/roboto";
+import "@fontsource/roboto/700.css";
 
 import { GlobalStyle } from "@src/layout/GlobalStyle";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";
@@ -10,15 +12,10 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html>
-            <head />
-            <body>
-                <StyledComponentsRegistry>
-                    <GlobalStyle />
-                    <ResponsiveSpacingStyle />
-                    {children}
-                </StyledComponentsRegistry>
-            </body>
-        </html>
+        <StyledComponentsRegistry>
+            <GlobalStyle />
+            <ResponsiveSpacingStyle />
+            {children}
+        </StyledComponentsRegistry>
     );
 }

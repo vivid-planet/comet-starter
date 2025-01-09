@@ -49,22 +49,22 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: "site/lang/starter-lang"
 
-      - name: Use Node.js 20.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "npm"
           cache-dependency-path: "**/package-lock.json"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
+        run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix site ci
 
       - name: Copy schema files
         run: npm run copy-schema-files
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint:root && npm --prefix api run lint:ci && npm --prefix admin run lint:ci && npm --prefix site run lint:ci
 
       - name: Build
         run: npm run build

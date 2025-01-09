@@ -26,6 +26,11 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         color: ${({ theme }) => theme.palette.text.primary};
+        
+        /* Make body take the height of the viewport to put footer at the bottom  */
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
     h1,
