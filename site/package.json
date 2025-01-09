@@ -3,7 +3,9 @@
     "private": true,
     "scripts": {
         "build": "npm run intl:compile && run-p gql:types generate-block-types && tsc --project tsconfig.server.json && next build",
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node dist/server.js",
+        "dev": "run-p dev:*",
+        "dev:next": "npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && NODE_OPTIONS='--inspect=localhost:9230' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node dist/server.js",
+        "dev:css": "tcm -p 'src/**/*.scss'",
         "generate-block-types": "comet generate-block-types",
         "generate-block-types:watch": "chokidar -s \"**/block-meta.json\" -c \"npm run generate-block-types\"",
         "gql:types": "graphql-codegen",
@@ -66,6 +68,7 @@
         "sass": "^1.83.1",
         "stylelint": "^16.12.0",
         "stylelint-config-standard": "^36.0.1",
+        "typed-css-modules": "^0.9.1",
         "typescript": "^5.7.2"
     },
     "engines": {
