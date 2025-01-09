@@ -7,7 +7,7 @@ import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { Renderers } from "redraft";
 
-import styles from "./TeaserItemBlock.module.css";
+import styles from "./TeaserItemBlock.module.scss";
 
 const descriptionRenderers: Renderers = {
     inline: defaultRichTextInlineStyleMap,

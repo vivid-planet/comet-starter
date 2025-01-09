@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ButtonHTMLAttributes, ComponentType } from "react";
 
-import styles from "./Button.module.css";
+import styles from "./Button.module.scss";
 
 export type ButtonVariant = "contained" | "outlined" | "text";
 

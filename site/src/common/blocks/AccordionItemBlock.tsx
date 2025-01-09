@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useIntl } from "react-intl";
 
 import { Typography } from "../components/Typography";
-import styles from "./AccordionItemBlock.module.css";
+import styles from "./AccordionItemBlock.module.scss";
 
 const supportedBlocks: SupportedBlocks = {
     richtext: (props) => <RichTextBlock data={props} />,
