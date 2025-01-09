@@ -4,12 +4,12 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
-import { SvgUse } from "@src/common/helpers/SvgUse";
+import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
 import { useIntl } from "react-intl";
-import styled, { css } from "styled-components";
 
 import { Typography } from "../components/Typography";
+import { globalTokens } from "./../../tokens.stylex";
 
 const supportedBlocks: SupportedBlocks = {
     richtext: (props) => <RichTextBlock data={props} />,
@@ -38,66 +38,68 @@ export const AccordionItemBlock = withPreview(
 
         return (
             <>
-                <TitleWrapper onClick={() => setIsExpanded(!isExpanded)} aria-label={ariaLabelText}>
+                <button {...stylex.props(styles.titleBase, styles.title)} onClick={() => setIsExpanded(!isExpanded)} aria-label={ariaLabelText}>
                     <Typography variant="h350">{title}</Typography>
-                    <IconWrapper>
-                        <AnimatedChevron href="/assets/icons/chevron-down.svg#chevron-down" $isExpanded={isExpanded} />
-                    </IconWrapper>
-                </TitleWrapper>
-                <ContentWrapper aria-hidden={!isExpanded}>
-                    <ContentWrapperInner $isExpanded={isExpanded}>
+                    <div {...stylex.props(styles.iconContainer)}>
+                        <svg {...stylex.props(styles.animatedChevron, isExpanded && styles.animatedChevronOpen)}>
+                            <use href="/assets/icons/chevron-down.svg#chevron-down" xlinkHref="/assets/icons/chevron-down.svg#chevron-down" />
+                        </svg>
+                    </div>
+                </button>
+                <div aria-hidden={!isExpanded}>
+                    <div {...stylex.props(styles.contentWrapperInner, isExpanded && styles.contentWrapperInnerOpen)}>
                         <AccordionContentBlock data={content} />
-                    </ContentWrapperInner>
-                </ContentWrapper>
+                    </div>
+                </div>
             </>
         );
     },
     { label: "AccordionItem" },
 );
 
-const TitleWrapper = styled.button`
-    appearance: none;
-    border: none;
-    background-color: transparent;
-    color: inherit;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
-    padding: ${({ theme }) => theme.spacing.S300} 0;
-`;
-
-const IconWrapper = styled.div`
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    position: relative;
-`;
-
-const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
-    width: 100%;
-    height: 100%;
-    transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
-    transition: transform 0.4s ease;
-`;
-
-const ContentWrapper = styled.div`
-    overflow: hidden;
-`;
-
-const ContentWrapperInner = styled.div<{ $isExpanded: boolean }>`
-    padding-bottom: ${({ theme }) => theme.spacing.S300};
-    margin-top: -100%;
-    opacity: 0;
-    transition: margin-top 0.8s ease-out 0.3s, opacity 0.3s linear;
-
-    ${({ $isExpanded }) =>
-        $isExpanded &&
-        css`
-            margin-top: 0;
-            opacity: 1;
-            transition: margin-top 0.5s ease-out, opacity 0.3s linear 0.4s;
-        `}
-`;
+const styles = stylex.create({
+    titleBase: {
+        borderWidth: 0,
+    },
+    title: {
+        appearance: "none",
+        backgroundColor: "transparent",
+        color: "inherit",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        cursor: "pointer",
+        borderTopWidth: 1,
+        borderTopStyle: "solid",
+        borderTopColor: globalTokens.gray300,
+        padding: `${globalTokens.spacingS300} 0`,
+    },
+    iconContainer: {
+        display: "inline-block",
+        width: 32,
+        height: 32,
+        position: "relative",
+    },
+    animatedChevron: {
+        width: "100%",
+        height: "100%",
+        transition: "transform 0.4s ease",
+    },
+    animatedChevronOpen: {
+        transform: "rotate(-180deg)",
+    },
+    contentWrapper: {
+        overflow: "hidden",
+    },
+    contentWrapperInnerOpen: {
+        marginTop: 0,
+        opacity: 1,
+        transition: "margin-top 0.5s ease-out, opacity 0.3s linear 0.4s",
+    },
+    contentWrapperInner: {
+        paddingBottom: globalTokens.spacingS300,
+        marginTop: "-100%",
+        opacity: 0,
+        transition: "margin-top 0.8s ease-out 0.3s, opacity 0.3s linear",
+    },
+});

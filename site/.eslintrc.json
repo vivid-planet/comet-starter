@@ -21,6 +21,8 @@
                     }
                 ]
             }
-        ]
-    }
+        ],
+		"@stylexjs/valid-styles": "error"
+	},
+	"plugins": ["@stylexjs"]
 }

@@ -1,5 +1,6 @@
 import "@fontsource/roboto";
 import "@fontsource/roboto/700.css";
+import "./layout.css";
 
 import { GlobalStyle } from "@src/layout/GlobalStyle";
 import { ResponsiveSpacingStyle } from "@src/util/ResponsiveSpacingStyle";

@@ -5,8 +5,10 @@ import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import stylex from "@stylexjs/stylex";
 import { Renderers } from "redraft";
-import styled from "styled-components";
+
+import { globalTokens } from "./../../../tokens.stylex";
 
 const descriptionRenderers: Renderers = {
     inline: defaultRichTextInlineStyleMap,
@@ -14,85 +16,84 @@ const descriptionRenderers: Renderers = {
 
 export const TeaserItemBlock = withPreview(
     ({ data: { media, title, description, link } }: PropsWithData<TeaserItemBlockData>) => (
-        <LinkBlock data={link.link}>
-            <ItemContent>
-                <MediaMobile>
-                    <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
-                </MediaMobile>
-                <MediaDesktop>
-                    <MediaBlock data={media} aspectRatio="16x9" sizes="20vw" />
-                </MediaDesktop>
-                <ContentContainer>
-                    <TitleTypography variant="h350">{title}</TitleTypography>
-                    <Typography variant="p200">
-                        <RichTextBlock data={description} renderers={descriptionRenderers} />
-                    </Typography>
-                    <TextLinkContainer>
-                        <SvgUse href="/assets/icons/arrow-right.svg#arrow-right" width={16} height={16} />
-                        <LinkText>{link.text}</LinkText>
-                    </TextLinkContainer>
-                </ContentContainer>
-            </ItemContent>
+        <LinkBlock data={link.link} className={stylex.props(styles.root).className}>
+            <div {...stylex.props(styles.mediaMobile)}>
+                <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
+            </div>
+            <div {...stylex.props(styles.mediaDesktop)}>
+                <MediaBlock data={media} aspectRatio="16x9" sizes="20vw" />
+            </div>
+            <div {...stylex.props(styles.contentContainer)}>
+                <Typography variant="h350" className={stylex.props(styles.titleTypography).className}>
+                    {title}
+                </Typography>
+                <Typography variant="p200">
+                    <RichTextBlock data={description} renderers={descriptionRenderers} />
+                </Typography>
+                <div {...stylex.props(styles.textLinkContainer)}>
+                    <SvgUse href="/assets/icons/arrow-right.svg#arrow-right" width={16} height={16} />
+                    <span {...stylex.props(styles.linkText)}>{link.text}</span>
+                </div>
+            </div>
         </LinkBlock>
     ),
     { label: "Teaser Item" },
 );
 
-const ItemContent = styled.a`
-    text-decoration: none;
-    cursor: pointer;
-    display: flex;
-    flex: 1;
-    flex-direction: row;
-    gap: ${({ theme }) => theme.spacing.S300};
-
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
-        flex: unset;
-        gap: ${({ theme }) => theme.spacing.S400};
-        flex-direction: column;
-    }
-`;
-
-const MediaMobile = styled.div`
-    flex: 1;
-
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
-        display: none;
-    }
-`;
-
-const MediaDesktop = styled.div`
-    flex: 1;
-    display: none;
-
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
-        display: block;
-    }
-`;
-
-const ContentContainer = styled.div`
-    flex: 2;
-`;
-
-const TitleTypography = styled(Typography)`
-    margin-bottom: ${({ theme }) => theme.spacing.S100};
-`;
-
-const TextLinkContainer = styled.div`
-    margin-top: ${({ theme }) => theme.spacing.S300};
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.S200};
-    color: ${({ theme }) => theme.palette.primary.main};
-    transition: color 0.3s ease-in-out;
-
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.dark};
-    }
-`;
-
-const LinkText = styled.span`
-    font-family: ${({ theme }) => theme.fontFamily};
-    font-size: 16px;
-    font-weight: 700;
-`;
+const styles = stylex.create({
+    root: {
+        textDecoration: "none",
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: {
+            default: "row",
+            "@media (min-width: 900px)": "column",
+        },
+        gap: { default: globalTokens.spacingS300, "@media (min-width: 900px)": globalTokens.spacingS400 },
+        flexGrow: {
+            default: 1,
+            "@media (min-width: 900px)": "unset",
+        },
+        flexShrink: {
+            default: 1,
+            "@media (min-width: 900px)": "unset",
+        },
+        flexBasis: {
+            default: 0,
+            "@media (min-width: 900px)": "unset",
+        },
+    },
+    mediaMobile: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 0,
+        display: { default: "block", "@media (min-width: 600px)": "none" },
+    },
+    mediaDesktop: {
+        flexGrow: 1,
+        flexShrink: 1,
+        flexBasis: 0,
+        display: { default: "none", "@media (min-width: 600px)": "block" },
+    },
+    contentContainer: {
+        flexGrow: 2,
+        flexShrink: 2,
+        flexBasis: 0,
+    },
+    titleTypography: {
+        marginBottom: globalTokens.spacingS100,
+    },
+    textLinkContainer: {
+        marginTop: globalTokens.spacingS300,
+        display: "flex",
+        alignItems: "center",
+        gap: globalTokens.spacingS200,
+        color: { default: globalTokens.primaryMain, ":hover": globalTokens.primaryDark },
+        transition: "color 0.3s ease-in-out",
+    },
+    linkText: {
+        fontFamily: globalTokens.fontFamily,
+        fontSize: 16,
+        fontWeight: 700,
+    },
+});

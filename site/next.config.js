@@ -54,6 +54,7 @@ const nextConfig = {
     ],
     cacheHandler: process.env.REDIS_ENABLED === "true" ? require.resolve("./dist/cache-handler.js") : undefined,
     cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
+	transpilePackages: ["@stylexjs/open-props"],
 };
 
 module.exports = withBundleAnalyzer(nextConfig);
