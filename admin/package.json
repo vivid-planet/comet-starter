@@ -27,11 +27,11 @@
     },
     "dependencies": {
         "@apollo/client": "^3.11.9",
-        "@comet/admin": "^7.10.0",
-        "@comet/admin-icons": "^7.10.0",
-        "@comet/admin-theme": "^7.10.0",
-        "@comet/blocks-admin": "^7.10.0",
-        "@comet/cms-admin": "^7.10.0",
+        "@comet/admin": "^7.11.0",
+        "@comet/admin-icons": "^7.11.0",
+        "@comet/admin-theme": "^7.11.0",
+        "@comet/blocks-admin": "^7.11.0",
+        "@comet/cms-admin": "^7.11.0",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
         "@fontsource-variable/roboto-flex": "^5.1.1",
@@ -57,8 +57,8 @@
         "react-router-dom": "^5.3.4"
     },
     "devDependencies": {
-        "@comet/cli": "^7.10.0",
-        "@comet/eslint-config": "^7.10.0",
+        "@comet/cli": "^7.11.0",
+        "@comet/eslint-config": "^7.11.0",
         "@cspell/eslint-plugin": "^8.17.1",
         "@formatjs/cli": "^6.3.15",
         "@graphql-codegen/add": "^5.0.3",
