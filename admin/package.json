@@ -41,7 +41,7 @@
         "@mui/x-data-grid-pro": "^5.17.26",
         "change-case": "^5.4.4",
         "final-form": "^4.20.10",
-        "graphql": "^15.9.0",
+        "graphql": "^15.10.1",
         "history": "^4.10.1",
         "lodash.isequal": "^4.5.0",
         "rdndmb-html5-to-touch": "^8.1.2",

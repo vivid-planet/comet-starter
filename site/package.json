@@ -28,7 +28,7 @@
         "@opentelemetry/auto-instrumentations-node": "^0.55.1",
         "@opentelemetry/exporter-trace-otlp-http": "^0.57.0",
         "@opentelemetry/sdk-node": "^0.57.0",
-        "graphql": "^15.9.0",
+        "graphql": "^15.10.1",
         "ioredis": "^5.4.2",
         "lru-cache": "^11.0.2",
         "next": "^14.2.23",
