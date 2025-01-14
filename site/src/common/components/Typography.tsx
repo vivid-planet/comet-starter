@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 import styled, { css } from "styled-components";
 
-export type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p300" | "p200";
+type TypographyVariant = "h600" | "h550" | "h500" | "h450" | "h400" | "h350" | "p300" | "p200";
 
 const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> = {
     h600: css`
@@ -191,11 +191,15 @@ const variantToElementMap: Record<TypographyVariant, "h1" | "h2" | "h3" | "h4" |
     p200: "p",
 };
 
-export const Typography = styled.div.attrs<{
-    as?: unknown;
-    variant?: TypographyVariant;
-    bottomSpacing?: boolean;
-}>((props) => ({ as: props.as ?? variantToElementMap[props.variant ?? "p300"] }))`
+export const Typography = styled.div
+    .withConfig({
+        shouldForwardProp: (prop) => !["variant", "bottomSpacing"].includes(prop),
+    })
+    .attrs<{
+        as?: unknown;
+        variant?: TypographyVariant;
+        bottomSpacing?: boolean;
+    }>((props) => ({ as: props.as ?? variantToElementMap[props.variant ?? "p300"] }))`
     font-family: ${({ theme }) => theme.fontFamily};
     ${({ variant = "p300" }) => typographyVariantStyle[variant]};
     margin-top: 0;

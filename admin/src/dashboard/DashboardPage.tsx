@@ -1,5 +1,5 @@
-import { MainContent, Stack } from "@comet/admin";
-import { DashboardHeader } from "@comet/cms-admin";
+import { MainContent, Stack, Toolbar } from "@comet/admin";
+import { ContentScopeIndicator, DashboardHeader, useUserPermissionCheck } from "@comet/cms-admin";
 import { Grid } from "@mui/material";
 import { useIntl } from "react-intl";
 
@@ -9,6 +9,7 @@ import { LatestContentUpdates } from "./LatestContentUpdates";
 
 export function DashboardPage() {
     const intl = useIntl();
+    const isAllowed = useUserPermissionCheck();
 
     return (
         <Stack topLevelTitle={intl.formatMessage({ id: "dashboard", defaultMessage: "Dashboard" })}>
@@ -18,9 +19,10 @@ export function DashboardPage() {
                     "2x": backgroundImage2x,
                 }}
             />
+            <Toolbar scopeIndicator={<ContentScopeIndicator />} />
             <MainContent>
                 <Grid container direction="row" spacing={4}>
-                    <LatestContentUpdates />
+                    {isAllowed("pageTree") && <LatestContentUpdates />}
                 </Grid>
             </MainContent>
         </Stack>
