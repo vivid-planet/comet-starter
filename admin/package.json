@@ -22,7 +22,7 @@
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
         "preview": "npm run build && vite preview",
-        "serve": "cd server && npm run serve",
+        "serve": "node server",
         "start": "npm run intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
