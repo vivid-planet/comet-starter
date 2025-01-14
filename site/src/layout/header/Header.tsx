@@ -45,7 +45,7 @@ export const Header = ({ header }: Props) => {
                 <PageLayoutContent>
                     <Root>
                         <Link href="/">
-                            <SvgUse href="/assets/comet-logo.svg#logo" />
+                            <SvgUse href="/assets/comet-logo.svg#root" />
                         </Link>
 
                         <DesktopHeaderFullHeightNav>
@@ -75,7 +75,7 @@ export const Header = ({ header }: Props) => {
                                                         onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                     >
                                                         <AnimatedChevron
-                                                            href="/assets/icons/chevron-down.svg#chevron-down"
+                                                            href="/assets/icons/chevron-down.svg#root"
                                                             $isExpanded={expandedSubLevelNavigation === node.id}
                                                         />
                                                     </ToggleSubLevelNavigationButton>
