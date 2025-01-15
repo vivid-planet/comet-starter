@@ -11,7 +11,7 @@ services:
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # used for cert debugging
-      - "--certificatesresolvers.myresolver.acme.email=postmaster@cometdxp.com"
+      - "--certificatesresolvers.myresolver.acme.email=postmaster@docker.comet-dxp.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     ports:
       - "80:80"
@@ -62,7 +62,7 @@ services:
     env_file: "oauthproxy.secrets.env"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.oauthproxy.rule=Host(`admin.cometdxp.com`)"
+      - "traefik.http.routers.oauthproxy.rule=Host(`admin.docker.comet-dxp.com`)"
       - "traefik.http.routers.oauthproxy.entrypoints=websecure"
       - "traefik.http.routers.oauthproxy.tls.certresolver=myresolver"
       - "traefik.http.services.oauthproxy.loadbalancer.server.port=4180"
@@ -80,7 +80,7 @@ services:
       POSTGRESQL_PORT: "25060"
       POSTGRESQL_DB: db_starter
       POSTGRESQL_USER: starter
-      API_URL: https://admin.cometdxp.com/api
+      API_URL: https://admin.docker.comet-dxp.com/api
       API_PORT: "4000"
       CORS_ALLOWED_ORIGIN: cometdxp\.com
       IMGPROXY_URL: http://imgproxy:8080
@@ -121,7 +121,7 @@ services:
       IDP_CLIENT_ID: 59e44de5-0431-4413-b50b-7e52740a6d7b
       IDP_JWKS_URI: https://auth-sso.vivid-planet.cloud/.well-known/jwks.json
       IDP_END_SESSION_ENDPOINT: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
-      POST_LOGOUT_REDIRECT_URI: https://admin.cometdxp.com/oauth2/sign_out?rd=%2F
+      POST_LOGOUT_REDIRECT_URI: https://admin.docker.comet-dxp.com/oauth2/sign_out?rd=%2F
       ACL_ALL_PERMISSIONS_DOMAINS: "vivid-planet.com"
     env_file: "api.secrets.env"
 
@@ -134,10 +134,10 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
-      API_URL: https://admin.cometdxp.com/api
-      ADMIN_URL: https://admin.cometdxp.com
+      API_URL: https://admin.docker.comet-dxp.com/api
+      ADMIN_URL: https://admin.docker.comet-dxp.com
       PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
-      PREVIEW_URL: https://preview.cometdxp.com
+      PREVIEW_URL: https://preview.docker.comet-dxp.com
 
   site:
     build:
@@ -149,14 +149,14 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
-      ADMIN_URL: https://admin.cometdxp.com/
+      ADMIN_URL: https://admin.docker.comet-dxp.com/
       NEXT_PUBLIC_API_URL: "TODO"
       API_URL_INTERNAL: http://api:4000/api
       PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
     env_file: "site.secrets.env"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.site.rule=Host(`cometdxp.com`) || Host(`preview.cometdxp.com`)"
+      - "traefik.http.routers.site.rule=Host(`docker.comet-dxp.com`) || Host(`preview.docker.comet-dxp.com`)"
       - "traefik.http.routers.site.entrypoints=websecure"
       - "traefik.http.routers.site.tls.certresolver=myresolver"
       - "traefik.http.services.site.loadbalancer.server.port=3000"
