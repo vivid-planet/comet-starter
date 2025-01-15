@@ -156,7 +156,7 @@ services:
     env_file: "site.secrets.env"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.site.rule=Host(`cometdxp.com`)"
+      - "traefik.http.routers.site.rule=Host(`cometdxp.com`) || Host(`preview.cometdxp.com`)"
       - "traefik.http.routers.site.entrypoints=websecure"
       - "traefik.http.routers.site.tls.certresolver=myresolver"
       - "traefik.http.services.site.loadbalancer.server.port=3000"
