@@ -38,7 +38,7 @@ export const Link: DocumentInterface<Pick<GQLLink, "content">, GQLLinkInput> & D
     `,
     updateMutation: gql`
         mutation UpdateLink($pageId: ID!, $input: LinkInput!, $lastUpdatedAt: DateTime, $attachedPageTreeNodeId: ID) {
-            saveLink(linkId: $pageId, input: $input, lastUpdatedAt: $lastUpdatedAt, attachedPageTreeNodeId: $attachedPageTreeNodeId) {
+            saveLink(id: $pageId, input: $input, lastUpdatedAt: $lastUpdatedAt, attachedPageTreeNodeId: $attachedPageTreeNodeId) {
                 id
                 content
                 updatedAt

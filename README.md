@@ -14,17 +14,10 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
 ### Installation
 
     // Optionally set domain to use instead of localhost (add to ~/.bashrc)
-    export DEV_DOMAIN=myname.dev.vivid-planet.cloud // Vivid Planet network
+    export DEV_DOMAIN=my-name.dev.vivid-planet.cloud // Vivid Planet network
 
     // Execute following script
     ./install.sh
-
-### Uninstallation
-
-    // Removes docker volumes and all files and folder which are not managed in the repo (node_modules, lib,...)
-    // If you want to reset your development environment totally, run this command and ./install.sh afterwards.
-
-    ./uninstall.sh
 
 ### Run Services
 
@@ -41,3 +34,6 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
 
     // import fixtures
     npm run --prefix api fixtures
+
+    // start repl
+    npm run --prefix api repl

@@ -1,0 +1,286 @@
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+domains:
+  - domain: admin.digitalocean.comet-dxp.com
+    type: PRIMARY
+features:
+  - buildpack-stack=ubuntu-22
+ingress:
+  rules:
+    - component:
+        name: admin
+      match:
+        path:
+          prefix: /admin-do-not-use
+    - component:
+        name: oauth2-proxy
+      match:
+        path:
+          prefix: /
+    - component:
+        name: api
+      match:
+        path:
+          prefix: /public-api
+name: comet-starter-cms
+region: fra
+services:
+  - build_command: |-
+      cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
+      npm run build &&
+      npm prune --omit=dev
+    environment_slug: node-js
+    envs:
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
+      - key: POSTGRESQL_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
+      - key: POSTGRESQL_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "25060"
+      - key: POSTGRESQL_DB
+        scope: RUN_AND_BUILD_TIME
+        value: db_starter
+      - key: POSTGRESQL_PASSWORD
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${POSTGRESQL_PASSWORD}
+      - key: POSTGRESQL_USER
+        scope: RUN_AND_BUILD_TIME
+        value: starter
+      - key: API_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://admin.digitalocean.comet-dxp.com/public-api/api
+      - key: API_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "4000"
+      - key: CORS_ALLOWED_ORIGIN
+        scope: RUN_AND_BUILD_TIME
+        value: comet-starter-site-tyqqf\.ondigitalocean\.app
+      - key: IMGPROXY_SALT
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${IMGPROXY_SALT}
+      - key: IMGPROXY_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://comet-starter-imgproxy-ovgzu.ondigitalocean.app
+      - key: IMGPROXY_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${IMGPROXY_KEY}
+      - key: DAM_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${DAM_SECRET}
+      - key: BLOB_STORAGE_DRIVER
+        scope: RUN_AND_BUILD_TIME
+        value: s3
+      - key: BLOB_STORAGE_DIRECTORY_PREFIX
+        scope: RUN_AND_BUILD_TIME
+        value: starter
+      - key: S3_REGION
+        scope: RUN_AND_BUILD_TIME
+        value: fra1
+      - key: S3_ENDPOINT
+        scope: RUN_AND_BUILD_TIME
+        value: https://fra1.digitaloceanspaces.com
+      - key: S3_BUCKET
+        scope: RUN_AND_BUILD_TIME
+        value: comet-starter
+      - key: S3_ACCESS_KEY_ID
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${S3_ACCESS_KEY_ID}
+      - key: S3_SECRET_ACCESS_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${S3_SECRET_ACCESS_KEY}
+      - key: POSTGRESQL_CA_CERT
+        scope: RUN_AND_BUILD_TIME
+        value: |-
+          -----BEGIN CERTIFICATE-----
+          MIIEQTCCAqmgAwIBAgIUFbJ/dvvfKgsSSRZ1WB3LZ5OiEWQwDQYJKoZIhvcNAQEM
+          BQAwOjE4MDYGA1UEAwwvYjNjZTRjMWYtZWUyOS00MDQ4LWE2ZmItZTFlNDU0MTIy
+          MTk1IFByb2plY3QgQ0EwHhcNMjMxMjA0MTQ1NDIxWhcNMzMxMjAxMTQ1NDIxWjA6
+          MTgwNgYDVQQDDC9iM2NlNGMxZi1lZTI5LTQwNDgtYTZmYi1lMWU0NTQxMjIxOTUg
+          UHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAKRtK5Ud
+          nFGKdoyjGssagR9vMRQw73tpuNeZG4OmewPwKdgDhsjH+ZLfgJOI2wSoclBkWFQj
+          dIg0GuXkFVwO4SZ0a/7uBtJLYh9z8U4N14pOa+xrBISE7zshGjJjKjHhbCT7VYhc
+          l6OK2CZZzXZk+xoh5o1JwLxkc1l2rzG5l3CrZnL43L93h6KEGY4VWe8QBoxqUCxG
+          2aDuyYpqjlHJhS4imRxbJ9R++t3UBPVpaebU4jwWw91DujYD86LMmq9WEVNfnrno
+          8SNNYRS6ojay/WUphKTfK3VqwUw7OGAIHxAzQPc6nx8mdNa++Y51J6IOL4O7bBp5
+          gxb46TVlHeH0GXZEu+m2AUnPT8tmPgzHzDAI7UQ2NN2kTxrUGZ2aV/f1lxIhij6o
+          sfwoSJZzt98dvp02Cg9zqgXxxyv04YUeK7PDoS9aP7uXrj81dLl84MIdbqJOZNd1
+          XwfIhu0hKlAi2H5PuPBwn++aJ9Htjhbte4Bp2QJF6hcqfW0chpZPupQOmwIDAQAB
+          oz8wPTAdBgNVHQ4EFgQUZm7RuycpRchnPp3PzsK3vPORT4AwDwYDVR0TBAgwBgEB
+          /wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBABmGDsdgEKDGS4wU
+          v+170Nl3JFDySE3DwcYEUFQCm9/gLW6dpHV5S5Vghiq3oTtmUAB/atXYjS6FlFTx
+          lWkyW4j9m9YbbzW+SX5rPiO01Hu3sUae0s2kjRWpFnoZWirphCS4JZ24wLtWBkyl
+          1pthVhUg4qh4zOfeWvVmd8MENkieFf0mhWyY2gvbcvPgYRrsVoNDzm72vvRnhjtG
+          81+MMudCLUKtYg+oNIbBwzu2JZ2tdr6lrxTCwlnepyPAQfxF3oC7FbxfMirf/Rp+
+          eibIi9DYfjschlTe0BW1afYn1cradTsH0uFrSV6UCYjhN7aYCLYBJoL+c/raEA0u
+          avwdD47sHsIhse+1HjF2VRVPDP+ZGTvqkAuiLAXEi4eht0rluX/j/Rnc+peq21al
+          bamtaNx6H7l4QlXegUXaxxAmeW2FR5nBUb2tiFBF70KA+rl4hRa7FuxcPmkNOtRO
+          EokFG4nQ9lh/mN5vpkdxCA438Ur3yBqzaSI1NvGpb8/8gBG0Gg==
+          -----END CERTIFICATE-----
+      - key: PRIVATE_SITE_CONFIGS
+        scope: RUN_AND_BUILD_TIME
+        value: "{{ site://configs/private/dev }}"
+      - key: POSTGRESQL_USE_SSL
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: USE_AUTHPROXY
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: BASIC_AUTH_SYSTEM_USER_PASSWORD
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${API_BASIC_AUTH_SYSTEM_USER_PASSWORD}
+      - key: IDP_CLIENT_ID
+        scope: RUN_AND_BUILD_TIME
+        value: 59e44de5-0431-4413-b50b-7e52740a6d7b
+      - key: IDP_JWKS_URI
+        scope: RUN_AND_BUILD_TIME
+        value: https://auth-sso.vivid-planet.cloud/.well-known/jwks.json
+      - key: IDP_END_SESSION_ENDPOINT
+        scope: RUN_AND_BUILD_TIME
+        value: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
+      - key: POST_LOGOUT_REDIRECT_URI
+        scope: RUN_AND_BUILD_TIME
+        value: https://admin.digitalocean.comet-dxp.com/oauth2/sign_out?rd=%2F
+      - key: ACL_ALL_PERMISSIONS_DOMAINS
+        scope: RUN_AND_BUILD_TIME
+        value: "vivid-planet.com"
+      - key: SITE_PREVIEW_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${SITE_PREVIEW_SECRET}
+    github:
+      branch: main
+      deploy_on_push: false
+      repo: vivid-planet/comet-starter
+    http_port: 4000
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: api
+    run_command: npm run db:migrate:prod && npm run start:prod
+    source_dir: /api
+  - envs:
+      - key: OAUTH2_PROXY_API_ROUTES
+        scope: RUN_AND_BUILD_TIME
+        value: /api
+      - key: OAUTH2_PROXY_CODE_CHALLENGE_METHOD
+        scope: RUN_AND_BUILD_TIME
+        value: S256
+      - key: OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_PASS_ACCESS_TOKEN
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_COOKIE_SECURE
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_COOKIE_SAMESITE
+        scope: RUN_AND_BUILD_TIME
+        value: lax
+      - key: OAUTH2_PROXY_COOKIE_HTTPONLY
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_SILENCE_PING_LOGGING_true
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_REQUEST_LOGGING
+        scope: RUN_AND_BUILD_TIME
+        value: "false"
+      - key: OAUTH2_PROXY_AUTH_LOGGING
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_COOKIE_REFRESH
+        scope: RUN_AND_BUILD_TIME
+        value: 23h
+      - key: OAUTH2_PROXY_EMAIL_DOMAINS
+        scope: RUN_AND_BUILD_TIME
+        value: "*"
+      - key: OAUTH2_PROXY_CLIENT_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${OAUTH2_PROXY_CLIENT_SECRET}
+      - key: OAUTH2_PROXY_CLIENT_ID
+        scope: RUN_AND_BUILD_TIME
+        value: 59e44de5-0431-4413-b50b-7e52740a6d7b
+      - key: OAUTH2_PROXY_COOKIE_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${OAUTH2_PROXY_COOKIE_SECRET}
+      - key: OAUTH2_PROXY_PROVIDER
+        scope: RUN_AND_BUILD_TIME
+        value: oidc
+      - key: OAUTH2_PROXY_OIDC_ISSUER_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://auth-sso.vivid-planet.cloud
+      - key: OAUTH2_PROXY_UPSTREAMS
+        scope: RUN_AND_BUILD_TIME
+        value: http://admin:80,http://api:80/api/
+      - key: OAUTH2_PROXY_WHITELIST_DOMAIN
+        scope: RUN_AND_BUILD_TIME
+        value: auth-sso.vivid-planet.cloud
+      - key: OAUTH2_PROXY_SCOPE
+        scope: RUN_AND_BUILD_TIME
+        value: openid profile email offline_access
+      - key: OAUTH2_PROXY_HTTP_ADDRESS
+        scope: RUN_AND_BUILD_TIME
+        value: 0.0.0.0:4180
+      - key: OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+    http_port: 4180
+    image:
+      registry: dkarnutsch
+      registry_type: DOCKER_HUB
+      repository: oauth2-proxy
+      tag: latest
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: oauth2-proxy
+  - build_command: |-
+      ./intl-update.sh &&
+      cp ../api/schema.gql schema.gql &&
+      cp ../api/block-meta.json block-meta.json &&
+      cp ../api/src/comet-config.json src/comet-config.json &&
+      cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
+      npm run build &&
+      rm -rf ./node_modules
+    environment_slug: node-js
+    envs:
+      - key: NODE_ENV
+        scope: RUN_TIME
+        value: production
+      - key: API_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://admin.digitalocean.comet-dxp.com/api
+      - key: ADMIN_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://admin.digitalocean.comet-dxp.com/
+      - key: PUBLIC_SITE_CONFIGS
+        scope: RUN_AND_BUILD_TIME
+        value: "{{ site://configs/public/dev }}"
+      - key: PREVIEW_URL
+        scope: RUN_AND_BUILD_TIME
+        value: https://preview.digitalocean.comet-dxp.com
+    github:
+      branch: main
+      deploy_on_push: false
+      repo: vivid-planet/comet-starter
+    http_port: 3000
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    name: admin
+    run_command: cd server && npm i && cd .. && node server # Workaround for missing node_modules in cache (only parent node_mdoules are cached)
+    source_dir: admin
