@@ -137,7 +137,7 @@ services:
       API_URL: https://admin.cometdxp.com/api
       ADMIN_URL: https://admin.cometdxp.com
       PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
-      PREVIEW_URL: https://comet-starter-site-preview-jespg.ondigitalocean.app # TODO
+      PREVIEW_URL: https://preview.cometdxp.com
 
   site:
     build:
