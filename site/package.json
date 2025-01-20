@@ -60,7 +60,7 @@
         "eslint": "^8.57.1",
         "knip": "^5.42.2",
         "npm-run-all2": "^7.0.2",
-        "postcss-styled-syntax": "^0.7.0",
+        "postcss-styled-syntax": "^0.7.1",
         "prettier": "^2.8.8",
         "stylelint": "^16.13.2",
         "stylelint-config-standard": "^36.0.1",
