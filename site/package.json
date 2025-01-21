@@ -44,7 +44,7 @@
         "@comet/cli": "^7.11.0",
         "@comet/eslint-config": "^7.11.0",
         "@cspell/eslint-plugin": "^8.17.2",
-        "@formatjs/cli": "^6.5.0",
+        "@formatjs/cli": "^6.5.1",
         "@graphql-codegen/add": "^5.0.3",
         "@graphql-codegen/cli": "^5.0.3",
         "@graphql-codegen/named-operations-object": "^3.1.0",
