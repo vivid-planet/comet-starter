@@ -2,7 +2,7 @@ if (process.env.TRACING_ENABLED) {
     require("./tracing");
 }
 
-import { CdnGuard, ExceptionInterceptor, ValidationExceptionFactory } from "@comet/cms-api";
+import { CdnGuard, ExceptionFilter, ValidationExceptionFactory } from "@comet/cms-api";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
@@ -35,7 +35,7 @@ async function bootstrap(): Promise<void> {
         exposedHeaders: [],
     });
 
-    app.useGlobalInterceptors(new ExceptionInterceptor(config.debug));
+    app.useGlobalFilters(new ExceptionFilter(config.debug));
     app.useGlobalPipes(
         new ValidationPipe({
             exceptionFactory: ValidationExceptionFactory,
