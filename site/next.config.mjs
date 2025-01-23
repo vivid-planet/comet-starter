@@ -1,36 +1,12 @@
-/* eslint-disable */
-
 // @ts-check
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+
+import nextBundleAnalyzer from "@next/bundle-analyzer";
+
+import cometConfig from "./src/comet-config.json" with { type: "json" };
+
+const withBundleAnalyzer = nextBundleAnalyzer({
     enabled: process.env.ANALYZE === "true",
 });
-
-function generateCSP() {
-    const cspRules = {
-        "default-src": "'self'", // Needed for SVGs in Firefox (other browsers load SVGs with img-src)
-        "style-src-elem": "'self' 'unsafe-inline'",
-        "style-src-attr": "'unsafe-inline'",
-        "script-src-elem": "'self' 'unsafe-inline'",
-        "font-src": "data:",
-        "frame-src": "https://www.youtube-nocookie.com/",
-        "img-src": `data: 'self' ${process.env.API_URL}`,
-        "frame-ancestors": process.env.ADMIN_URL,
-    };
-
-    // Conditionally add environment-specific rules
-    if (process.env.NODE_ENV === "development") {
-        cspRules["script-src"] = "'unsafe-eval'"; // Needed in local development
-        cspRules["connect-src"] = "ws:"; // Used for hot reloading in local development
-    } else {
-        cspRules["upgrade-insecure-requests"] = ""; // Don't use upgrade-insecure-requests with Domain-Setup
-    }
-
-    return Object.entries(cspRules)
-        .map(([key, value]) => `${key} ${value}`.trim())
-        .join("; ");
-}
-
-const cometConfig = require("./src/comet-config.json");
 
 /**
  * @type {import('next').NextConfig}
@@ -95,4 +71,4 @@ const nextConfig = {
     cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+export default withBundleAnalyzer(nextConfig);
