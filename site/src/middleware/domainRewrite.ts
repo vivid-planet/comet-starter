@@ -3,6 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CustomMiddleware } from "./chain";
 
+/**
+ * Rewrite request to include the matching domain (from http host) in the path, so the route can have [domain] as parameter.
+ *
+ * Doing this matching in the middleware makes it possible to keep static rendering, as the page doesn't need headers() to get the domain.
+ */
 export function withDomainRewriteMiddleware(middleware: CustomMiddleware) {
     return async (request: NextRequest) => {
         const headers = request.headers;

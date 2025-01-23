@@ -3,6 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CustomMiddleware } from "./chain";
 
+/**
+ * Verify when on site preview domain, a siteConfig exists (by scope set as cookie)
+ */
 export function withSitePreviewMiddleware(middleware: CustomMiddleware) {
     return async (request: NextRequest) => {
         const host = getHostByHeaders(request.headers);
