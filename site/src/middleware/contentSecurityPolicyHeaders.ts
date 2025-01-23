@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 
 import { CustomMiddleware } from "./chain";
 
-export function withCspHeadersMiddleware(middleware: CustomMiddleware) {
+export function withContentSecurityPolicyHeadersMiddleware(middleware: CustomMiddleware) {
     return async (request: NextRequest) => {
         const response = await middleware(request);
         response.headers.set(

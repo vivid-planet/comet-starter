@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export type CustomMiddleware = (request: NextRequest) => NextResponse | Response | Promise<NextResponse | Response>;
 
 type MiddlewareFactory = (middleware: CustomMiddleware) => CustomMiddleware;
+// Utility function to chain multiple middlewares together
 export function chain(functions: MiddlewareFactory[], index = 0): CustomMiddleware {
     const current = functions[index];
 
