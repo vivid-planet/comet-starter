@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import * as process from "process";
 
 export function configureResponse(response: NextResponse) {
     setContentSecurityPolicy(response);
