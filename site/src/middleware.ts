@@ -61,7 +61,7 @@ export const config = {
          * - assets (assets from /public folder)
          * - robots.txt
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets|robots.txt).*)",
+        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets/|robots.txt).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [
