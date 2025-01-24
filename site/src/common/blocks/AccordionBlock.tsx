@@ -1,23 +1,57 @@
-import { PropsWithData, withPreview } from "@comet/cms-site";
+import { isWithPreviewPropsData, PropsWithData, usePreview, withPreview } from "@comet/cms-site";
 import { AccordionBlockData } from "@src/blocks.generated";
 import { AccordionItemBlock } from "@src/common/blocks/AccordionItemBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 
 type AccordionBlockProps = PropsWithData<AccordionBlockData>;
 
 export const AccordionBlock = withPreview(
     ({ data }: AccordionBlockProps) => {
+        const openByDefaultBlockKeys = useMemo(
+            () => data.blocks.filter((block) => block.props.openByDefault).map((block) => block.key),
+            [data.blocks],
+        );
+
         const [expandedItems, setExpandedItems] = useState<Set<string>>(() => {
             // Create a Set containing the keys of blocks where openByDefault is set to true
-
-            const defaultExpandedItems = data.blocks.filter((block) => block.props.openByDefault).map((block) => block.key);
-
-            return new Set(defaultExpandedItems);
+            return new Set(openByDefaultBlockKeys);
         });
 
-        const handleItemClick = (itemKey: string) => {
+        const { showPreviewSkeletons, isSelected, isHovered } = usePreview();
+
+        useEffect(() => {
+            if (showPreviewSkeletons) {
+                const getFocusedBlockKey = () => {
+                    const focusedBlock = data.blocks.find((block) => {
+                        if (!isWithPreviewPropsData(block)) {
+                            return false;
+                        }
+
+                        const url = block.adminMeta?.route;
+                        const childBlockIsFocused = block.props.content.blocks.some((childBlock) =>
+                            isSelected((childBlock as unknown as { adminRoute: string }).adminRoute),
+                        );
+
+                        return (url && (isSelected(url) || isHovered(url))) || childBlockIsFocused;
+                    });
+
+                    return focusedBlock?.key;
+                };
+
+                const expandedItemsInPreview = new Set<string>(openByDefaultBlockKeys);
+                const focusedBlockKey = getFocusedBlockKey();
+
+                if (focusedBlockKey) {
+                    expandedItemsInPreview.add(focusedBlockKey);
+                }
+
+                setExpandedItems(expandedItemsInPreview);
+            }
+        }, [isSelected, isHovered, showPreviewSkeletons, data.blocks, openByDefaultBlockKeys]);
+
+        const handleChange = (itemKey: string) => {
             const newExpandedItems = new Set(expandedItems);
 
             newExpandedItems.has(itemKey) ? newExpandedItems.delete(itemKey) : newExpandedItems.add(itemKey);
@@ -31,7 +65,7 @@ export const AccordionBlock = withPreview(
                     <AccordionItemBlock
                         key={block.key}
                         data={block.props}
-                        onItemClick={() => handleItemClick(block.key)}
+                        onChange={() => handleChange(block.key)}
                         isExpanded={expandedItems.has(block.key)}
                     />
                 ))}
