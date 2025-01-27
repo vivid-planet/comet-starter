@@ -13,7 +13,7 @@ export default ((env) => {
         name: "Starter Main",
         domains: {
             main: envToDomainMap[env],
-            preliminary: env === "prod" ? "preliminary.comet-dxp.com" : undefined,
+            preliminary: env === "prod" ? "preliminary.comet-dxp.com" : undefined, // preliminary domain activates prelogin automatically
         },
         preloginEnabled: env !== "local" && env !== "prod",
         preloginPassword: undefined,
