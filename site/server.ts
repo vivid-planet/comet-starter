@@ -50,6 +50,16 @@ app.prepare().then(() => {
                 };
             }
 
+            const originalWriteHead = res.writeHead;
+            res.writeHead = function (statusCode: number, ...args: unknown[]) {
+                const statusCodeClass = getStatusCodeClass(statusCode);
+                if (statusCodeClass === "client_error" || statusCodeClass === "server_error") {
+                    // set no-store, max-age=0 to prevent caching of error responses
+                    res.setHeader("Cache-Control", "no-store, max-age=0");
+                }
+                return originalWriteHead.apply(this, [statusCode, ...args]);
+            };
+
             await handle(req, res, parsedUrl);
         } catch (err) {
             console.error("Error occurred handling", req.url, err);
@@ -66,3 +76,11 @@ app.prepare().then(() => {
             console.log(`> Ready on http://localhost:${port}`);
         });
 });
+
+function getStatusCodeClass(code: number): "info" | "success" | "redirect" | "client_error" | "server_error" {
+    if (code < 200) return "info";
+    if (code < 300) return "success";
+    if (code < 400) return "redirect";
+    if (code < 500) return "client_error";
+    return "server_error";
+}
