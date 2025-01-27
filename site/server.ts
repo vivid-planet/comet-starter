@@ -57,6 +57,11 @@ app.prepare().then(() => {
                     // set no-store, max-age=0 to prevent caching of error responses
                     res.setHeader("Cache-Control", "no-store, max-age=0");
                 }
+
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                // Reason: TS complains about passing unknown[] to writeHead, however explicit typing is complicated
+                // because writeHead can be overloaded and has two signatures
                 return originalWriteHead.apply(this, [statusCode, ...args]);
             };
 
