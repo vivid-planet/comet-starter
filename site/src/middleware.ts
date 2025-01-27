@@ -9,8 +9,8 @@ export async function middleware(request: NextRequest) {
     const host = getHostByHeaders(headers);
     const { pathname } = new URL(request.url);
 
-    // Block-Preview
-    if (request.nextUrl.pathname.startsWith("/block-preview/")) {
+    // Preview
+    if (request.nextUrl.pathname.startsWith("/block-preview/") || request.nextUrl.pathname === "/site-preview") {
         return NextResponse.next({ request: { headers } });
     }
 
@@ -53,7 +53,6 @@ export const config = {
     matcher: [
         /*
          * Match all request paths except for the ones starting with:
-         * - api (API routes)
          * - _next/static (static files)
          * - _next/image (image optimization files)
          * - favicon.ico, icon.svg, apple-icon.png
@@ -61,7 +60,7 @@ export const config = {
          * - assets (assets from /public folder)
          * - robots.txt
          */
-        "/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets/|robots.txt).*)",
+        "/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets/|robots.txt).*)",
     ],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [
