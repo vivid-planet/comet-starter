@@ -70,7 +70,7 @@ services:
   api:
     build:
       context: ../api
-      dockerfile: Dockerfile
+      dockerfile: ../.docker-compose/Api.Dockerfile
       additional_contexts:
         - site-configs=../site-configs
     restart: "on-failure"
@@ -128,7 +128,7 @@ services:
   admin:
     build:
       context: ../admin
-      dockerfile: Dockerfile
+      dockerfile: ../.docker-compose/Admin.Dockerfile
       additional_contexts:
         - api=../api
     restart: "on-failure"
@@ -142,7 +142,7 @@ services:
   site:
     build:
       context: ../site
-      dockerfile: Dockerfile
+      dockerfile: ../.docker-compose/Site.Dockerfile
       additional_contexts:
         - api=../api
         - site-configs=../site-configs

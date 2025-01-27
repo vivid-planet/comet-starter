@@ -29,6 +29,27 @@ app.prepare().then(() => {
                     return;
                 }
             }
+            if (
+                parsedUrl.pathname?.startsWith("/assets/") ||
+                parsedUrl.pathname === "/favicon.ico" ||
+                parsedUrl.pathname === "/apple-icon.png" ||
+                parsedUrl.pathname === "/icon.svg" ||
+                parsedUrl.pathname === "/robots.txt" ||
+                parsedUrl.pathname === "/sitemap.xml"
+            ) {
+                const originalSetHeader = res.setHeader;
+
+                res.setHeader = function (name: string, value: string | number | readonly string[]) {
+                    if (name === "cache-control" || name === "Cache-Control") {
+                        // Next.js applies a default cache-control header of "public, max-age=0" for assets in the public/ folder
+                        // (see https://nextjs.org/docs/app/building-your-application/optimizing/static-assets#caching).
+                        // We want to cache these assets for 15 minutes.
+                        return originalSetHeader.call(this, name, "public, max-age=900");
+                    }
+                    return originalSetHeader.call(this, name, value);
+                };
+            }
+
             await handle(req, res, parsedUrl);
         } catch (err) {
             console.error("Error occurred handling", req.url, err);
