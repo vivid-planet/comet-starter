@@ -41,10 +41,10 @@
     "devDependencies": {
         "@comet/eslint-config": "^7.12.0",
         "@comet/eslint-plugin": "^7.12.0",
-        "@cspell/eslint-plugin": "^8.17.2",
+        "@cspell/eslint-plugin": "^8.17.3",
         "@tsconfig/node20": "^20.1.4",
         "@types/node": "^22.12.0",
-        "cspell": "^8.17.2",
+        "cspell": "^8.17.3",
         "npm-run-all2": "^7.0.2",
         "prettier": "^2.8.8",
         "typescript": "5.1.6"
