@@ -25,7 +25,7 @@ const nextConfig = {
     experimental: {
         optimizePackageImports: ["@comet/cms-site"],
     },
-    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts)
+    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware/cspHeaders.ts)
     headers: async () => [
         {
             source: "/:path*",
