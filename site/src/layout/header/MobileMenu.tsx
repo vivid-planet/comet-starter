@@ -60,7 +60,7 @@ export const MobileMenu = ({ header }: Props) => {
                 aria-expanded={isMenuOpen}
                 onClick={handleMenuButtonClick}
             >
-                <Icon href={isMenuOpen ? "/assets/icons/menu-open.svg#menu-open" : "/assets/icons/menu.svg#menu"} />
+                <Icon href={isMenuOpen ? "/assets/icons/menu-open.svg#root" : "/assets/icons/menu.svg#root"} />
             </MenuButton>
             <MenuContainer $isMenuOpen={isMenuOpen} aria-hidden={!isMenuOpen}>
                 <PageLayout grid>
@@ -85,7 +85,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                 >
                                                     <Typography>{node.name}</Typography>
                                                     <IconWrapper>
-                                                        <Icon href="/assets/icons/arrow-right.svg#arrow-right" />
+                                                        <Icon href="/assets/icons/arrow-right.svg#root" />
                                                     </IconWrapper>
                                                 </ButtonLink>
                                             ) : (
@@ -106,7 +106,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                                     onClick={() => setExpandedSubLevelNavigation(null)}
                                                                 >
                                                                     <IconWrapper>
-                                                                        <Icon href="/assets/icons/arrow-left.svg#arrow-left" />
+                                                                        <Icon href="/assets/icons/arrow-left.svg#root" />
                                                                     </IconWrapper>
                                                                     <Typography>
                                                                         <FormattedMessage id="header.back" defaultMessage="Back" />
@@ -116,7 +116,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                             <li>
                                                                 <OverviewButton page={node} aria-label={node.name}>
                                                                     <IconWrapper>
-                                                                        <Icon href="/assets/icons/overview.svg#overview" />
+                                                                        <Icon href="/assets/icons/overview.svg#root" />
                                                                     </IconWrapper>
                                                                     <Typography>
                                                                         <FormattedMessage id="header.overview" defaultMessage="Overview" />

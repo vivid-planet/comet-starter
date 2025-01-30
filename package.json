@@ -24,13 +24,13 @@
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'"
     },
     "devDependencies": {
-        "@comet/cli": "^7.11.0",
+        "@comet/cli": "^7.12.0",
         "@comet/dev-process-manager": "^2.7.0",
-        "cspell": "^8.17.2",
+        "cspell": "^8.17.3",
         "dotenv-cli": "^7.4.4",
         "husky": "^9.1.7",
-        "knip": "^5.42.0",
-        "lint-staged": "^15.3.0",
+        "knip": "^5.43.6",
+        "lint-staged": "^15.4.3",
         "npm-run-all2": "^7.0.2",
         "open-cli": "^8.0.0",
         "prettier": "^2.8.8",
