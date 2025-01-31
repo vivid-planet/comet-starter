@@ -6,8 +6,10 @@ import { withDomainRewriteMiddleware } from "./middleware/domainRewrite";
 import { withPreviewMiddleware } from "./middleware/preview";
 import { withRedirectToMainHostMiddleware } from "./middleware/redirectToMainHost";
 import { withSitePreviewMiddleware } from "./middleware/sitePreview";
+import { withStatusMiddleware } from "./middleware/status";
 
 export default chain([
+    withStatusMiddleware,
     withSitePreviewMiddleware,
     withRedirectToMainHostMiddleware,
     withAdminRedirectMiddleware,
