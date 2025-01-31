@@ -23,7 +23,7 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                 return NextResponse.redirect(redirectSiteConfig.url);
             }
 
-            return NextResponse.next({ status: 404 });
+            return NextResponse.rewrite(new URL(`/main/en/404`, request.url));
         }
         return middleware(request);
     };
