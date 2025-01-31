@@ -22,8 +22,7 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
             if (redirectSiteConfig) {
                 return NextResponse.redirect(redirectSiteConfig.url);
             }
-
-            throw new Error(`Cannot get siteConfig for host ${host}`);
+            return NextResponse.rewrite(new URL(`/404`, request.url));
         }
         return middleware(request);
     };
