@@ -128,6 +128,18 @@ type UserPermissionPaginatedUserList {
   totalCount: Int!
 }
 
+type Customer {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  updatedAt: DateTime!
+}
+
+type PaginatedCustomers {
+  nodes: [Customer!]!
+  totalCount: Int!
+}
+
 type Link implements DocumentInterface {
   id: ID!
   updatedAt: DateTime!
@@ -377,6 +389,8 @@ type Query {
   damFolderByNameAndParentId(scope: DamScopeInput! = {}, name: String!, parentId: ID): DamFolder
   mainMenu(scope: PageTreeNodeScopeInput!): [PageTreeNode!]!
   footer(scope: FooterScopeInput!): Footer
+  customer(id: ID!): Customer!
+  customers(offset: Int! = 0, limit: Int! = 25, search: String, filter: CustomerFilter, sort: [CustomerSort!]): PaginatedCustomers!
 }
 
 input UserPermissionsUserFilter {
@@ -497,6 +511,21 @@ input FolderFilterInput {
   searchText: String
 }
 
+input CustomerFilter {
+  id: StringFilter
+  and: [CustomerFilter!]
+  or: [CustomerFilter!]
+}
+
+input CustomerSort {
+  field: CustomerSortField!
+  direction: SortDirection! = ASC
+}
+
+enum CustomerSortField {
+  id
+}
+
 type Mutation {
   currentUserSignOut: String!
   userPermissionsCreatePermission(userId: String!, input: UserPermissionInput!): UserPermission!
@@ -532,6 +561,9 @@ type Mutation {
   moveDamFolders(folderIds: [ID!]!, targetFolderId: ID, scope: DamScopeInput! = {}): [DamFolder!]!
   deleteDamFolder(id: ID!): Boolean!
   saveFooter(scope: FooterScopeInput!, input: FooterInput!): Footer!
+  createCustomer(input: CustomerInput!): Customer!
+  updateCustomer(id: ID!, input: CustomerUpdateInput!): Customer!
+  deleteCustomer(id: ID!): Boolean!
 }
 
 input UserPermissionInput {
@@ -665,3 +697,13 @@ input FooterInput {
 
 """FooterContent root block input"""
 scalar FooterContentBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+input CustomerInput {
+  firstname: String!
+  lastname: String!
+}
+
+input CustomerUpdateInput {
+  firstname: String
+  lastname: String
+}

@@ -1,6 +1,8 @@
 import { DependenciesService } from "@comet/cms-api";
 import { MikroORM, UseRequestContext } from "@mikro-orm/core";
 import { Injectable, Logger } from "@nestjs/common";
+import { Customer } from "@src/customer/entities/customer.entity";
+import { generateCustomers } from "@src/db/fixtures/generators/customers-fixture.service";
 import { MultiBar, Options, Presets } from "cli-progress";
 import { Command, Console } from "nestjs-console";
 
@@ -38,7 +40,10 @@ export class FixturesConsole {
         await migrator.up();
 
         const multiBar = new MultiBar(this.barOptions, Presets.shades_classic);
+
         // Add your fixtures here
+        await Promise.all([generateCustomers({ repository: this.orm.em.getRepository(Customer), bar: multiBar.create(total, 0), total })]);
+
         multiBar.stop();
 
         await this.dependenciesService.createViews();

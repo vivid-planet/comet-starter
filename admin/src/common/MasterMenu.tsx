@@ -9,6 +9,7 @@ import {
     PagesPage,
     UserPermissionsPage,
 } from "@comet/cms-admin";
+import { CustomerPage } from "@src/customers/CustomerPage";
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
@@ -104,6 +105,15 @@ export const masterMenuData: MasterMenuData = [
             },
         ],
         requiredPermission: "pageTree",
+    },
+    {
+        type: "route",
+        primary: <FormattedMessage id="menu.customerPage" defaultMessage="CustomerPage" />,
+        icon: <Wrench />,
+        route: {
+            path: "/customers",
+            component: CustomerPage,
+        },
     },
 ];
 

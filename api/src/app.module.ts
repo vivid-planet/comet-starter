@@ -13,6 +13,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Enhancer, GraphQLModule } from "@nestjs/graphql";
+import { CustomerModule } from "@src/customer/customer.module";
 import { DbModule } from "@src/db/db.module";
 import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
@@ -133,6 +134,7 @@ export class AppModule {
                           }),
                       ]
                     : []),
+                CustomerModule,
             ],
         };
     }
