@@ -10,8 +10,10 @@ export function runEslintFix(verbose: boolean) {
     for (const microservice of microservices) {
         if (!fs.existsSync(microservice)) {
             continue;
-        } else if (!hasDependenciesInstalled(microservice) && verbose) {
-            console.log(kleur.grey(`Skipping ESLint fix in ${microservice} because dependencies are not installed.`));
+        } else if (!hasDependenciesInstalled(microservice)) {
+            if (verbose) {
+                console.log(kleur.grey(`Skipping ESLint fix in ${microservice} because dependencies are not installed.`));
+            }
             continue;
         }
 
