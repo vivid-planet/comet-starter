@@ -30,11 +30,8 @@ export const AccordionBlock = withPreview(
                         }
 
                         const url = block.adminMeta?.route;
-                        const childBlockIsFocused = block.props.content.blocks.some((childBlock) =>
-                            isSelected((childBlock as unknown as { adminRoute: string }).adminRoute),
-                        );
 
-                        return (url && (isSelected(url) || isHovered(url))) || childBlockIsFocused;
+                        return url && (isSelected(url, { exactMatch: false }) || isHovered(url, { exactMatch: false }));
                     });
 
                     return focusedBlock?.key;
@@ -49,7 +46,7 @@ export const AccordionBlock = withPreview(
 
                 setExpandedItems(expandedItemsInPreview);
             }
-        }, [isSelected, isHovered, showPreviewSkeletons, data.blocks, openByDefaultBlockKeys]);
+        }, [showPreviewSkeletons, data.blocks, isSelected, isHovered, openByDefaultBlockKeys]);
 
         const handleChange = (itemKey: string) => {
             const newExpandedItems = new Set(expandedItems);
