@@ -23,7 +23,7 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                 return NextResponse.redirect(redirectSiteConfig.url);
             }
 
-            return NextResponse.json({ error: "Cannot resolve domain" }, { status: 404 })
+            return NextResponse.json({ error: `Cannot resolve domain: ${host}` }, { status: 404 });
         }
         return middleware(request);
     };
