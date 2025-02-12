@@ -23,7 +23,7 @@
     "dependencies": {
         "@comet/cms-site": "7.13.0",
         "@fontsource/roboto": "^5.1.1",
-        "@next/bundle-analyzer": "^14.2.23",
+        "@next/bundle-analyzer": "^14.2.24",
         "@opentelemetry/api": "^1.9.0",
         "@opentelemetry/auto-instrumentations-node": "^0.56.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.57.1",
@@ -31,7 +31,7 @@
         "graphql": "^15.10.1",
         "ioredis": "^5.5.0",
         "lru-cache": "^11.0.2",
-        "next": "^14.2.23",
+        "next": "^14.2.24",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-intl": "^6.8.9",
