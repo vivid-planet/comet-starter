@@ -14,8 +14,8 @@ export default ((env) => {
         domains: {
             main: envToDomainMap[env],
         },
-        preloginEnabled: true,
-        preloginPassword: env === "local" ? undefined : "password",
+        preloginEnabled: env !== "local" && env !== "prod",
+        preloginPassword: undefined,
         public: {
             scope: {
                 domain: "secondary",
