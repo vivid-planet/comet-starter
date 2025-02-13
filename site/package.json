@@ -46,7 +46,7 @@
         "@cspell/eslint-plugin": "^8.17.3",
         "@formatjs/cli": "^6.6.1",
         "@graphql-codegen/add": "^5.0.3",
-        "@graphql-codegen/cli": "^5.0.4",
+        "@graphql-codegen/cli": "^5.0.5",
         "@graphql-codegen/named-operations-object": "^3.1.0",
         "@graphql-codegen/near-operation-file-preset": "^3.0.0",
         "@graphql-codegen/typescript": "^4.1.3",
