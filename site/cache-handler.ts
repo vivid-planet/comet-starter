@@ -114,7 +114,7 @@ export default class CacheHandler {
     }
 
     async revalidateTag(tags: string | string[]): Promise<void> {
-        console.log("CacheHandler.revalidateTag", tags);
-        throw new Error("unsupported");
+        if (tags.length === 0) return;
+        console.warn("CacheHandler.revalidateTag", tags);
     }
 }
