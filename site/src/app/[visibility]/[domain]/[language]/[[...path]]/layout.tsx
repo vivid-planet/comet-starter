@@ -1,5 +1,4 @@
-import { gql, previewParams } from "@comet/cms-site";
-import { GQLLayoutQuery, GQLLayoutQueryVariables } from "@src/app/[domain]/[language]/[[...path]]/layout.generated";
+import { gql } from "@comet/cms-site";
 import { Footer } from "@src/layout/footer/Footer";
 import { footerFragment } from "@src/layout/footer/Footer.fragment";
 import { Header } from "@src/layout/header/Header";
@@ -9,13 +8,14 @@ import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import type { Metadata } from "next";
 import { PropsWithChildren } from "react";
 
+import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./layout.generated";
+
 interface LayoutProps {
     params: { domain: string; language: string };
 }
 
 export default async function Layout({ children, params: { domain, language } }: PropsWithChildren<LayoutProps>) {
-    const { previewData } = (await previewParams()) || { previewData: undefined };
-    const graphqlFetch = createGraphQLFetch(previewData);
+    const graphqlFetch = createGraphQLFetch();
 
     const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
         gql`

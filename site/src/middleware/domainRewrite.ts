@@ -1,7 +1,10 @@
+import { previewParams } from "@comet/cms-site";
 import { getHostByHeaders, getSiteConfigForHost } from "@src/util/siteConfig";
 import { NextRequest, NextResponse } from "next/server";
 
 import { CustomMiddleware } from "./chain";
+
+export type VisibilityParam = "default" | "invisiblePages" | "invisibleBlocks";
 
 /**
  * Rewrite request to include the matching domain (from http host) in the path, so the route can have [domain] as parameter.
@@ -16,9 +19,16 @@ export function withDomainRewriteMiddleware(middleware: CustomMiddleware) {
         if (!siteConfig) {
             throw new Error(`Cannot get siteConfig for host ${host}`);
         }
+
+        const preview = await previewParams({ skipDraftModeCheck: true });
+        let visibilityParam: VisibilityParam = "default";
+        if (preview?.previewData) {
+            visibilityParam = preview.previewData.includeInvisible ? "invisibleBlocks" : "invisiblePages";
+        }
+
         return NextResponse.rewrite(
             new URL(
-                `/${siteConfig.scope.domain}${request.nextUrl.pathname}${
+                `/${visibilityParam}/${siteConfig.scope.domain}${request.nextUrl.pathname}${
                     request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
                 }`,
                 request.url,
