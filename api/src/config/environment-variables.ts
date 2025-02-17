@@ -122,7 +122,7 @@ export class EnvironmentVariables {
     CDN_ORIGIN_CHECK_SECRET?: string;
 
     @IsArray()
-    @Transform(({ value }) => JSON.parse(value))
+    @Transform(({ value }) => JSON.parse(Buffer.from(value, "base64").toString()))
     PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
 
     @IsArray()
