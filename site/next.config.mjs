@@ -51,7 +51,6 @@ const nextConfig = {
                     value: "same-site", // Do not allow cross-origin requests to access the response
                 },
                 {
-                    //
                     key: "Permissions-Policy", // https://developer.mozilla.org/en-US/docs/Web/HTTP/Permissions_Policy
                     value: "",
                 },
