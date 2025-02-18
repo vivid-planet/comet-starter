@@ -1,4 +1,4 @@
-import { generateImageUrl, gql, previewParams } from "@comet/cms-site";
+import { generateImageUrl, gql } from "@comet/cms-site";
 import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
@@ -29,9 +29,8 @@ const pageQuery = gql`
 
 type Props = { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput };
 
-async function fetchData({ pageTreeNodeId, scope }: Props) {
-    const { previewData } = (await previewParams()) || { previewData: undefined };
-    const graphQLFetch = createGraphQLFetch(previewData);
+async function fetchData({ pageTreeNodeId }: Props) {
+    const graphQLFetch = createGraphQLFetch();
 
     const props = await graphQLFetch<GQLPageQuery, GQLPageQueryVariables>(
         pageQuery,
@@ -96,8 +95,7 @@ export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent:
 }
 
 export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }) {
-    const { previewData } = (await previewParams()) || { previewData: undefined };
-    const graphQLFetch = createGraphQLFetch(previewData);
+    const graphQLFetch = createGraphQLFetch();
 
     const data = await fetchData({ pageTreeNodeId, scope });
     const document = data?.pageContent?.document;
@@ -131,7 +129,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
     return (
         <>
             {document.seo.structuredData && document.seo.structuredData.length > 0 && (
-                <script type="application/ld+json">{document.seo.structuredData}</script>
+                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: document.seo.structuredData }} />
             )}
             <main>
                 <StageBlock data={document.stage} />

@@ -1,7 +1,7 @@
 import { SitePreviewProvider } from "@comet/cms-site";
 import { IntlProvider } from "@src/util/IntlProvider";
 import { loadMessages } from "@src/util/loadMessages";
-import { setNotFoundContext } from "@src/util/NotFoundContext";
+import { setNotFoundContext } from "@src/util/ServerContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import { draftMode } from "next/headers";

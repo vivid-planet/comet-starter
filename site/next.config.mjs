@@ -26,7 +26,7 @@ const nextConfig = {
         optimizePackageImports: ["@comet/cms-site"],
     },
     poweredByHeader: false,
-    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware.ts/configureResponse.ts)
+    // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware/cspHeaders.ts)
     headers: async () => [
         {
             source: "/:path*",
@@ -66,7 +66,7 @@ const nextConfig = {
             ],
         },
     ],
-    cacheHandler: process.env.REDIS_ENABLED === "true" ? require.resolve("./dist/cache-handler.js") : undefined,
+    cacheHandler: process.env.REDIS_ENABLED === "true" ? import.meta.resolve("./dist/cache-handler.js").replace("file://", "") : undefined,
     cacheMaxMemorySize: process.env.REDIS_ENABLED === "true" ? 0 : undefined, // disable default in-memory caching
 };
 

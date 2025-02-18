@@ -1,7 +1,7 @@
 import NotFoundContent from "@src/documents/NotFound";
 import { IntlProvider } from "@src/util/IntlProvider";
 import { loadMessages } from "@src/util/loadMessages";
-import { getNotFoundContext } from "@src/util/NotFoundContext";
+import { getNotFoundContext } from "@src/util/ServerContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 
