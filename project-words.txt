@@ -25,3 +25,6 @@ schemaname
 tablename
 timestamptz
 knipignore
+HSTS
+nosniff
+noopen
