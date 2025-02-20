@@ -76,7 +76,7 @@ export function App() {
                             }}
                         >
                             <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope) => scope.domain}>
+                                <LocaleProvider resolveLocaleForScope={(scope) => scope.language}>
                                     <MuiThemeProvider theme={theme}>
                                         <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
