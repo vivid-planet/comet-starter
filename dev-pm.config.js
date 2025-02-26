@@ -1,4 +1,9 @@
-module.exports = {
+// @ts-check
+
+/**
+ * @type {import('@comet/dev-process-manager').Config}
+ **/
+const config = {
     scripts: [
         {
             name: "docker",
@@ -49,3 +54,5 @@ module.exports = {
         },
     ],
 };
+
+module.exports = config;
