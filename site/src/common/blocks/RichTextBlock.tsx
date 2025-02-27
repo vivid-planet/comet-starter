@@ -1,94 +1,60 @@
 "use client";
 import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
 import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { Typography } from "@src/common/components/Typography";
+import { Typography, TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { PageLayout } from "@src/layout/PageLayout";
-import redraft, { Renderers } from "redraft";
+import redraft, { Renderers, TextBlockRenderFn } from "redraft";
 import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
 
+export const createTextBlockRenderFn =
+    (props: TypographyProps): TextBlockRenderFn =>
+    (children, { keys }) =>
+        children.map((child, index) => (
+            <Text key={keys[index]} {...props}>
+                {child}
+            </Text>
+        ));
+
+export const defaultRichTextInlineStyleMap: Renderers["inline"] = {
+    // The key passed here is just an index based on rendering order inside a block
+    BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
+    ITALIC: (children, { key }) => <em key={key}>{children}</em>,
+    SUB: (children, { key }) => <sub key={key}>{children}</sub>,
+    SUP: (children, { key }) => <sup key={key}>{children}</sup>,
+    STRIKETHROUGH: (children, { key }) => <s key={key}>{children}</s>,
+};
+
 /**
  * Define the renderers
  */
-export const defaultRichTextRenderers: Renderers = {
+const defaultRichTextRenderers: Renderers = {
     /**
      * Those callbacks will be called recursively to render a nested structure
      */
-    inline: {
-        // The key passed here is just an index based on rendering order inside a block
-        BOLD: (children, { key }) => <strong key={key}>{children}</strong>,
-        ITALIC: (children, { key }) => <em key={key}>{children}</em>,
-        SUB: (children, { key }) => <sub key={key}>{children}</sub>,
-        SUP: (children, { key }) => <sup key={key}>{children}</sup>,
-        STRIKETHROUGH: (children, { key }) => <s key={key}>{children}</s>,
-    },
+    inline: defaultRichTextInlineStyleMap,
     /**
      * Blocks receive children and depth
      * Note that children are an array of blocks with same styling,
      */
     blocks: {
-        unstyled: (children, { keys }) =>
-            children.map((child, index) => (
-                <Text key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "paragraph-standard": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "paragraph-small": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="p200" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-one": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h600" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-two": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h550" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-three": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h500" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-four": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h450" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-five": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h400" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
-        "header-six": (children, { keys }) =>
-            children.map((child, index) => (
-                <Text variant="h350" key={keys[index]} bottomSpacing>
-                    {child}
-                </Text>
-            )),
+        unstyled: createTextBlockRenderFn({ bottomSpacing: true }),
+        "paragraph-standard": createTextBlockRenderFn({ bottomSpacing: true }),
+        "paragraph-small": createTextBlockRenderFn({ variant: "p200", bottomSpacing: true }),
+        "header-one": createTextBlockRenderFn({ variant: "h600", bottomSpacing: true }),
+        "header-two": createTextBlockRenderFn({ variant: "h550", bottomSpacing: true }),
+        "header-three": createTextBlockRenderFn({ variant: "h500", bottomSpacing: true }),
+        "header-four": createTextBlockRenderFn({ variant: "h450", bottomSpacing: true }),
+        "header-five": createTextBlockRenderFn({ variant: "h400", bottomSpacing: true }),
+        "header-six": createTextBlockRenderFn({ variant: "h350", bottomSpacing: true }),
         // List
         // or depth for nested lists
         "unordered-list-item": (children, { depth, keys }) => (
             <ul key={keys[keys.length - 1]} className={`ul-level-${depth}`}>
                 {children.map((child, index) => (
-                    <Text component="li" key={keys[index]}>
+                    <Text as="li" key={keys[index]}>
                         {child}
                     </Text>
                 ))}
@@ -97,7 +63,7 @@ export const defaultRichTextRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol key={keys.join("|")} className={`ol-level-${depth}`}>
                 {children.map((child, index) => (
-                    <OrderedListItem $depth={depth} component="li" key={keys[index]}>
+                    <OrderedListItem $depth={depth} as="li" key={keys[index]}>
                         {child}
                     </OrderedListItem>
                 ))}
@@ -111,9 +77,9 @@ export const defaultRichTextRenderers: Renderers = {
         // key is the entity key value from raw
         LINK: (children, data: LinkBlockData, { key }) =>
             isValidLink(data) ? (
-                <LinkBlock key={key} data={data}>
-                    <InlineLink>{children}</InlineLink>
-                </LinkBlock>
+                <InlineLink key={key} data={data}>
+                    {children}
+                </InlineLink>
             ) : (
                 <span>{children}</span>
             ),
@@ -131,7 +97,7 @@ export const RichTextBlock = withPreview(
 
         return (
             <PreviewSkeleton title="RichText" type="rows" hasContent={hasRichTextBlockContent(data)}>
-                <Root $disableLastBottomSpacing={disableLastBottomSpacing}>{rendered}</Root>
+                {disableLastBottomSpacing ? <DisableLastBottomSpacing>{rendered}</DisableLastBottomSpacing> : rendered}
             </PreviewSkeleton>
         );
     },
@@ -146,9 +112,8 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
     </PageLayout>
 );
 
-const Root = styled.div<{ $disableLastBottomSpacing?: boolean }>`
-    ${({ theme, $disableLastBottomSpacing }) =>
-        $disableLastBottomSpacing &&
+const DisableLastBottomSpacing = styled.div`
+    ${({ theme }) =>
         css`
             > *:last-child {
                 margin-bottom: 0;
@@ -174,7 +139,7 @@ const OrderedListItem = styled(Text)<{ $depth: number }>`
     list-style-type: ${({ $depth }) => ($depth % 3 === 1 ? "lower-alpha" : $depth % 3 === 2 ? "lower-roman" : "decimal")};
 `;
 
-const InlineLink = styled.a`
+const InlineLink = styled(LinkBlock)`
     color: ${({ theme }) => theme.palette.primary.main};
     transition: color 0.3s ease-in-out;
 

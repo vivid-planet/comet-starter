@@ -3,10 +3,8 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
-    BuildsModule,
     DamModule,
     DependenciesModule,
-    KubernetesModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
@@ -20,13 +18,16 @@ import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
+import { FootersModule } from "@src/footers/footers.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
+import { RedirectScope } from "@src/redirects/dto/redirect-scope";
+import { ContentScope as BaseContentScope } from "@src/site-configs";
 import { ValidationError } from "apollo-server-express";
 import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
-import { AuthModule } from "./auth/auth.module";
+import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
 import { UserService } from "./auth/user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
@@ -38,6 +39,7 @@ import { StatusModule } from "./status/status.module";
 @Module({})
 export class AppModule {
     static forRoot(config: Config): DynamicModule {
+        const authModule = AuthModule.forRoot(config);
         return {
             module: AppModule,
             imports: [
@@ -49,10 +51,11 @@ export class AppModule {
                     useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
                         playground: config.debug,
-                        autoSchemaFile: "schema.gql",
+                        // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
+                        autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
-                            if (process.env.NODE_ENV !== "development") {
+                            if (!config.debug) {
                                 if (error instanceof ValidationError) {
                                     return new ValidationError("Invalid request.");
                                 }
@@ -64,7 +67,7 @@ export class AppModule {
                             origin: config.corsAllowedOrigin,
                             methods: ["GET", "POST"],
                             credentials: false,
-                            exposedHeaders: [],
+                            maxAge: 600,
                         },
                         useGlobalPrefix: true,
                         // See https://docs.nestjs.com/graphql/other-features#execute-enhancers-at-the-field-resolver-level
@@ -76,30 +79,32 @@ export class AppModule {
                     }),
                     inject: [ModuleRef],
                 }),
-                AuthModule,
+                authModule,
                 UserPermissionsModule.forRootAsync({
                     useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
-                        availableContentScopes: config.siteConfigs.map((siteConfig) => siteConfig.contentScope),
+                        availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
+                            siteConfig.scope.languages.map((language) => ({
+                                domain: siteConfig.scope.domain,
+                                language,
+                            })),
+                        ),
                         userService,
                         accessControlService,
-                        systemUsers: ["system"],
+                        systemUsers: [SYSTEM_USER_NAME],
                     }),
                     inject: [UserService, AccessControlService],
-                    imports: [AuthModule],
+                    imports: [authModule],
                 }),
                 BlocksModule,
-                KubernetesModule.register({
-                    helmRelease: config.helmRelease,
-                }),
-                BuildsModule,
                 LinksModule,
                 PagesModule,
                 PageTreeModule.forRoot({
                     PageTreeNode: PageTreeNode,
                     Documents: [Page, Link],
                     Scope: PageTreeNodeScope,
+                    sitePreviewSecret: config.sitePreviewSecret,
                 }),
-                RedirectsModule.register(),
+                RedirectsModule.register({ Scope: RedirectScope }),
                 BlobStorageModule.register({
                     backend: config.blob.storage,
                 }),
@@ -120,20 +125,20 @@ export class AppModule {
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
-                ...(process.env.NODE_ENV === "production"
+                FootersModule,
+                ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
-                              shouldLogRequest: ({ user }) => {
-                                  // Ignore system user
-                                  if (user === "system") {
-                                      return false;
-                                  }
-                                  return true;
-                              },
+                              shouldLogRequest: ({ user, req }) => user !== SYSTEM_USER_NAME && !req.route.path.startsWith("/api/status/"),
                           }),
                       ]
                     : []),
             ],
         };
     }
+}
+
+declare module "@comet/cms-api" {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface ContentScope extends BaseContentScope {}
 }

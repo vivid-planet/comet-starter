@@ -1,7 +1,4 @@
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource-variable/roboto-flex/full.css";
 import "@src/polyfills";
 
 import { ApolloProvider } from "@apollo/client";
@@ -14,13 +11,13 @@ import {
     CurrentUserProvider,
     DependenciesConfigProvider,
     LocaleProvider,
-    MasterMenu,
     MasterMenuRoutes,
     SitePreview,
     SitesConfigProvider,
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { getMessages } from "@src/lang";
+import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { theme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
@@ -30,8 +27,8 @@ import { Route, Switch } from "react-router";
 import { createApolloClient } from "./common/apollo/createApolloClient";
 import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
-import { masterMenuData, pageTreeCategories, pageTreeDocumentTypes } from "./common/masterMenuData";
-import { ConfigProvider, ContentScope, createConfig } from "./config";
+import { AppMasterMenu, masterMenuData, pageTreeDocumentTypes } from "./common/MasterMenu";
+import { ConfigProvider, createConfig } from "./config";
 import { Link } from "./documents/links/Link";
 import { Page } from "./documents/pages/Page";
 
@@ -56,14 +53,17 @@ export function App() {
                     <SitesConfigProvider
                         value={{
                             configs: config.sitesConfig,
-                            resolveSiteConfigForScope: (configs, scope: ContentScope) => {
-                                const siteConfig = configs.find((config) => config.contentScope.domain === scope.domain);
+                            resolveSiteConfigForScope: (configs, scope) => {
+                                const siteConfig = configs.find((config) => {
+                                    return config.scope.domain === scope.domain;
+                                });
+
                                 if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
                                 return {
                                     url: siteConfig.url,
                                     preloginEnabled: siteConfig.preloginEnabled || false,
-                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview`,
-                                    sitePreviewApiUrl: `${config.previewUrl}/api/site-preview`,
+                                    blockPreviewBaseUrl: `${config.previewUrl}/block-preview/${scope.domain}/${scope.language}`,
+                                    sitePreviewApiUrl: `${config.previewUrl}/site-preview`,
                                 };
                             },
                         }}
@@ -76,7 +76,7 @@ export function App() {
                             }}
                         >
                             <IntlProvider locale="en" messages={getMessages()}>
-                                <LocaleProvider resolveLocaleForScope={(scope: ContentScope) => scope.domain}>
+                                <LocaleProvider resolveLocaleForScope={(scope) => scope.language}>
                                     <MuiThemeProvider theme={theme}>
                                         <DndProvider options={HTML5toTouch}>
                                             <SnackbarProvider>
@@ -100,13 +100,20 @@ export function App() {
                                                                     <Switch>
                                                                         <Route
                                                                             path={`${match.path}/preview`}
-                                                                            render={(props) => <SitePreview {...props} />}
+                                                                            render={(props) => (
+                                                                                <SitePreview
+                                                                                    resolvePath={(path: string, scope) => {
+                                                                                        return `/${scope.language}${path}`;
+                                                                                    }}
+                                                                                    {...props}
+                                                                                />
+                                                                            )}
                                                                         />
                                                                         <Route
                                                                             render={() => (
                                                                                 <MasterLayout
                                                                                     headerComponent={MasterHeader}
-                                                                                    menuComponent={() => <MasterMenu menu={masterMenuData} />}
+                                                                                    menuComponent={AppMasterMenu}
                                                                                 >
                                                                                     <MasterMenuRoutes menu={masterMenuData} />
                                                                                 </MasterLayout>

@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { Loading, MainContent, RouterPrompt, RouterTab, RouterTabs, Toolbar, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft } from "@comet/admin-icons";
 import { AdminComponentRoot } from "@comet/blocks-admin";
-import { createUsePage, PageName } from "@comet/cms-admin";
+import { ContentScopeIndicator, createUsePage, PageName } from "@comet/cms-admin";
 import { IconButton } from "@mui/material";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { useIntl } from "react-intl";
@@ -37,7 +37,7 @@ const usePage = createUsePage({
     `,
     updateMutation: gql`
         mutation UpdateLink($pageId: ID!, $input: LinkInput!, $lastUpdatedAt: DateTime, $attachedPageTreeNodeId: ID) {
-            saveLink(linkId: $pageId, input: $input, lastUpdatedAt: $lastUpdatedAt, attachedPageTreeNodeId: $attachedPageTreeNodeId) {
+            saveLink(id: $pageId, input: $input, lastUpdatedAt: $lastUpdatedAt, attachedPageTreeNodeId: $attachedPageTreeNodeId) {
                 id
                 content
                 updatedAt
@@ -50,7 +50,7 @@ interface Props {
     id: string;
 }
 
-export const EditLink: React.FC<Props> = ({ id }) => {
+export const EditLink = ({ id }: Props) => {
     const intl = useIntl();
     const stackApi = useStackApi();
 
@@ -70,7 +70,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
         return <Loading behavior="fillPageHeight" />;
     }
 
-    if (!linkState) return <></>;
+    if (!linkState) return null;
 
     return (
         <>
@@ -92,7 +92,7 @@ export const EditLink: React.FC<Props> = ({ id }) => {
                     }}
                 />
             )}
-            <Toolbar>
+            <Toolbar scopeIndicator={<ContentScopeIndicator />}>
                 <ToolbarItem>
                     <IconButton onClick={stackApi?.goBack} size="large">
                         <ArrowLeft />

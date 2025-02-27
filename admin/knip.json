@@ -1,0 +1,15 @@
+{
+    "$schema": "https://unpkg.com/knip@5/schema.json",
+    "workspaces": {
+        ".": {
+            "entry": ["./src/loader.ts"],
+            "project": ["./src/**/*.{ts,tsx}"],
+            "ignore": ["./codegen.ts", "./schema.gql", "./src/**/generated/**/*.{ts,tsx}", "./src/**/*.cometGen.ts"],
+            "ignoreDependencies": ["@swc/plugin-emotion", "server"]
+        },
+        "server": {
+            "entry": ["index.js"],
+            "project": ["**/*.js"]
+        }
+    }
+}
