@@ -3,18 +3,25 @@ import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import * as React from "react";
+import { PropsWithChildren } from "react";
 
 import { GQLPageLinkFragment } from "./PageLink.fragment.generated";
 
-interface Props {
+interface Props extends PropsWithChildren {
     page: GQLPageLinkFragment;
-    children: ((active: boolean) => React.ReactNode) | React.ReactNode;
+    className?: string;
+    activeClassName?: string;
 }
 
-function PageLink({ page, children }: Props): JSX.Element | null {
+function PageLink({ page, children, className: passedClassName, activeClassName }: Props): JSX.Element | null {
     const pathname = usePathname();
-    const active = pathname === page.path;
+    const active = pathname && (pathname.substring(3) || "/") === page.path; // Remove language prefix
+
+    let className = passedClassName;
+
+    if (active) {
+        className = className ? `${className} ${activeClassName}` : activeClassName;
+    }
 
     if (page.documentType === "Link") {
         if (page.document === null || page.document.__typename !== "Link") {
@@ -23,13 +30,15 @@ function PageLink({ page, children }: Props): JSX.Element | null {
 
         return (
             <HiddenIfInvalidLink link={page.document.content}>
-                <LinkBlock data={page.document.content}>{typeof children === "function" ? children(active) : children}</LinkBlock>
+                <LinkBlock data={page.document.content} className={className}>
+                    {children}
+                </LinkBlock>
             </HiddenIfInvalidLink>
         );
     } else if (page.documentType === "Page") {
         return (
-            <Link href={`/${page.scope.language}${page.path}`} passHref legacyBehavior>
-                {typeof children === "function" ? children(active) : children}
+            <Link href={`/${page.scope.language}${page.path}`} className={className}>
+                {children}
             </Link>
         );
     } else {

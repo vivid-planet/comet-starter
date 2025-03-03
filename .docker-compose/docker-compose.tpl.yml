@@ -1,0 +1,162 @@
+services:
+  traefik:
+    image: "traefik:v3.3"
+    container_name: "traefik"
+    restart: "on-failure"
+    command:
+      # - "--log.level=TRACE"
+      - "--accessLog=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false" # services need to be exposed by setting traefik.enable=true
+      - "--entryPoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # used for cert debugging
+      - "--certificatesresolvers.myresolver.acme.email=postmaster@docker.comet-dxp.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8088:8080"
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  imgproxy:
+    image: darthsim/imgproxy:v3
+    restart: "on-failure"
+    ports:
+      - 8080:8080
+    environment:
+      IMGPROXY_USE_S3: "true"
+      IMGPROXY_S3_REGION: fra1
+      IMGPROXY_S3_ENDPOINT: https://comet-starter.fra1.digitaloceanspaces.com
+
+  oauthproxy:
+    image: "dkarnutsch/oauth2-proxy:latest"
+    restart: "on-failure"
+    ports:
+      - 4180:4180
+    environment:
+      OAUTH2_PROXY_API_ROUTES: "/api"
+      OAUTH2_PROXY_CODE_CHALLENGE_METHOD: "S256"
+      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
+      OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
+      OAUTH2_PROXY_COOKIE_SECURE: "true"
+      OAUTH2_PROXY_COOKIE_SAMESITE: "lax"
+      OAUTH2_PROXY_COOKIE_HTTPONLY: "true"
+      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+      OAUTH2_PROXY_SILENCE_PING_LOGGING_true: "true"
+      OAUTH2_PROXY_REQUEST_LOGGING: "true"
+      OAUTH2_PROXY_AUTH_LOGGING: "true"
+      OAUTH2_PROXY_COOKIE_REFRESH: "23h"
+      OAUTH2_PROXY_EMAIL_DOMAINS: "*"
+      OAUTH2_PROXY_CLIENT_ID: "59e44de5-0431-4413-b50b-7e52740a6d7b"
+      OAUTH2_PROXY_PROVIDER: "oidc"
+      OAUTH2_PROXY_OIDC_ISSUER_URL: "https://auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_UPSTREAMS: "http://admin:3000,http://api:4000/api/"
+      OAUTH2_PROXY_WHITELIST_DOMAIN: "auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_SCOPE: "openid profile email offline_access"
+      OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180"
+      OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT: "true"
+      # OAUTH2_PROXY_SHOW_DEBUG_ON_ERROR: "true"
+    env_file: "oauthproxy.secrets.env"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.oauthproxy.rule=Host(`admin.docker.comet-dxp.com`)"
+      - "traefik.http.routers.oauthproxy.entrypoints=websecure"
+      - "traefik.http.routers.oauthproxy.tls.certresolver=myresolver"
+      - "traefik.http.services.oauthproxy.loadbalancer.server.port=4180"
+
+  api:
+    build:
+      context: ../api
+      dockerfile: ../.docker-compose/Api.Dockerfile
+      additional_contexts:
+        - site-configs=../site-configs
+    restart: "on-failure"
+    environment:
+      NODE_ENV: production
+      POSTGRESQL_HOST: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
+      POSTGRESQL_PORT: "25060"
+      POSTGRESQL_DB: db_starter
+      POSTGRESQL_USER: starter
+      API_URL: https://admin.docker.comet-dxp.com/api
+      API_PORT: "4000"
+      CORS_ALLOWED_ORIGIN: cometdxp\.com
+      IMGPROXY_URL: http://imgproxy:8080
+      BLOB_STORAGE_DRIVER: s3
+      BLOB_STORAGE_DIRECTORY_PREFIX: starter
+      S3_REGION: fra1
+      S3_ENDPOINT: https://fra1.digitaloceanspaces.com
+      S3_BUCKET: comet-starter
+      POSTGRESQL_CA_CERT: |-
+        -----BEGIN CERTIFICATE-----
+        MIIEQTCCAqmgAwIBAgIUFbJ/dvvfKgsSSRZ1WB3LZ5OiEWQwDQYJKoZIhvcNAQEM
+        BQAwOjE4MDYGA1UEAwwvYjNjZTRjMWYtZWUyOS00MDQ4LWE2ZmItZTFlNDU0MTIy
+        MTk1IFByb2plY3QgQ0EwHhcNMjMxMjA0MTQ1NDIxWhcNMzMxMjAxMTQ1NDIxWjA6
+        MTgwNgYDVQQDDC9iM2NlNGMxZi1lZTI5LTQwNDgtYTZmYi1lMWU0NTQxMjIxOTUg
+        UHJvamVjdCBDQTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBAKRtK5Ud
+        nFGKdoyjGssagR9vMRQw73tpuNeZG4OmewPwKdgDhsjH+ZLfgJOI2wSoclBkWFQj
+        dIg0GuXkFVwO4SZ0a/7uBtJLYh9z8U4N14pOa+xrBISE7zshGjJjKjHhbCT7VYhc
+        l6OK2CZZzXZk+xoh5o1JwLxkc1l2rzG5l3CrZnL43L93h6KEGY4VWe8QBoxqUCxG
+        2aDuyYpqjlHJhS4imRxbJ9R++t3UBPVpaebU4jwWw91DujYD86LMmq9WEVNfnrno
+        8SNNYRS6ojay/WUphKTfK3VqwUw7OGAIHxAzQPc6nx8mdNa++Y51J6IOL4O7bBp5
+        gxb46TVlHeH0GXZEu+m2AUnPT8tmPgzHzDAI7UQ2NN2kTxrUGZ2aV/f1lxIhij6o
+        sfwoSJZzt98dvp02Cg9zqgXxxyv04YUeK7PDoS9aP7uXrj81dLl84MIdbqJOZNd1
+        XwfIhu0hKlAi2H5PuPBwn++aJ9Htjhbte4Bp2QJF6hcqfW0chpZPupQOmwIDAQAB
+        oz8wPTAdBgNVHQ4EFgQUZm7RuycpRchnPp3PzsK3vPORT4AwDwYDVR0TBAgwBgEB
+        /wIBADALBgNVHQ8EBAMCAQYwDQYJKoZIhvcNAQEMBQADggGBABmGDsdgEKDGS4wU
+        v+170Nl3JFDySE3DwcYEUFQCm9/gLW6dpHV5S5Vghiq3oTtmUAB/atXYjS6FlFTx
+        lWkyW4j9m9YbbzW+SX5rPiO01Hu3sUae0s2kjRWpFnoZWirphCS4JZ24wLtWBkyl
+        1pthVhUg4qh4zOfeWvVmd8MENkieFf0mhWyY2gvbcvPgYRrsVoNDzm72vvRnhjtG
+        81+MMudCLUKtYg+oNIbBwzu2JZ2tdr6lrxTCwlnepyPAQfxF3oC7FbxfMirf/Rp+
+        eibIi9DYfjschlTe0BW1afYn1cradTsH0uFrSV6UCYjhN7aYCLYBJoL+c/raEA0u
+        avwdD47sHsIhse+1HjF2VRVPDP+ZGTvqkAuiLAXEi4eht0rluX/j/Rnc+peq21al
+        bamtaNx6H7l4QlXegUXaxxAmeW2FR5nBUb2tiFBF70KA+rl4hRa7FuxcPmkNOtRO
+        EokFG4nQ9lh/mN5vpkdxCA438Ur3yBqzaSI1NvGpb8/8gBG0Gg==
+        -----END CERTIFICATE-----
+      PRIVATE_SITE_CONFIGS: "{{ site://configs/private/dev }}"
+      POSTGRESQL_USE_SSL: "true"
+      USE_AUTHPROXY: "true"
+      IDP_CLIENT_ID: 59e44de5-0431-4413-b50b-7e52740a6d7b
+      IDP_JWKS_URI: https://auth-sso.vivid-planet.cloud/.well-known/jwks.json
+      IDP_END_SESSION_ENDPOINT: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
+      POST_LOGOUT_REDIRECT_URI: https://admin.docker.comet-dxp.com/oauth2/sign_out?rd=%2F
+      ACL_ALL_PERMISSIONS_DOMAINS: "vivid-planet.com"
+    env_file: "api.secrets.env"
+
+  admin:
+    build:
+      context: ../admin
+      dockerfile: ../.docker-compose/Admin.Dockerfile
+      additional_contexts:
+        - api=../api
+    restart: "on-failure"
+    environment:
+      NODE_ENV: production
+      API_URL: https://admin.docker.comet-dxp.com/api
+      ADMIN_URL: https://admin.docker.comet-dxp.com
+      PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
+      PREVIEW_URL: https://preview.docker.comet-dxp.com
+
+  site:
+    build:
+      context: ../site
+      dockerfile: ../.docker-compose/Site.Dockerfile
+      additional_contexts:
+        - api=../api
+        - site-configs=../site-configs
+    restart: "on-failure"
+    environment:
+      NODE_ENV: production
+      ADMIN_URL: https://admin.docker.comet-dxp.com/
+      NEXT_PUBLIC_API_URL: "TODO"
+      API_URL_INTERNAL: http://api:4000/api
+      PUBLIC_SITE_CONFIGS: "{{ site://configs/public/dev }}"
+    env_file: "site.secrets.env"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.site.rule=Host(`docker.comet-dxp.com`) || Host(`preview.docker.comet-dxp.com`)"
+      - "traefik.http.routers.site.entrypoints=websecure"
+      - "traefik.http.routers.site.tls.certresolver=myresolver"
+      - "traefik.http.services.site.loadbalancer.server.port=3000"

@@ -14,16 +14,20 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
     return {
         ...cometConfig,
         debug: processEnv.NODE_ENV !== "production",
-        helmRelease: envVars.HELM_RELEASE,
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
         corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),
         auth: {
             useAuthProxy: envVars.USE_AUTHPROXY,
-            basicAuthPassword: envVars.BASIC_AUTH_PASSWORD,
+            systemUserPassword: envVars.BASIC_AUTH_SYSTEM_USER_PASSWORD,
+            idpClientId: envVars.IDP_CLIENT_ID,
             idpJwksUri: envVars.IDP_JWKS_URI,
             idpEndSessionEndpoint: envVars.IDP_END_SESSION_ENDPOINT,
             postLogoutRedirectUri: envVars.POST_LOGOUT_REDIRECT_URI,
+        },
+        acl: {
+            allPermissionsEmails: envVars.ACL_ALL_PERMISSIONS_EMAILS,
+            allPermissionsDomains: envVars.ACL_ALL_PERMISSIONS_DOMAINS,
         },
         imgproxy: {
             ...cometConfig.imgproxy,
@@ -60,6 +64,7 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
             originCheckSecret: envVars.CDN_ORIGIN_CHECK_SECRET,
         },
         siteConfigs: envVars.PRIVATE_SITE_CONFIGS,
+        sitePreviewSecret: envVars.SITE_PREVIEW_SECRET,
     };
 }
 

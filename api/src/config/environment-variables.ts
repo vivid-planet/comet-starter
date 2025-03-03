@@ -2,13 +2,9 @@
 import { BlobStorageConfig } from "@comet/cms-api";
 import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsBase64, IsBoolean, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { IsArray, IsBoolean, IsEmail, IsFQDN, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class EnvironmentVariables {
-    @IsString()
-    @ValidateIf(() => process.env.NODE_ENV === "production")
-    HELM_RELEASE: string;
-
     @IsString()
     POSTGRESQL_HOST: string;
 
@@ -16,6 +12,10 @@ export class EnvironmentVariables {
     @IsBoolean()
     @Transform(({ value }) => value === "true")
     POSTGRESQL_USE_SSL: boolean;
+
+    @IsOptional()
+    @IsString()
+    POSTGRESQL_CA_CERT?: string;
 
     @Type(() => Number)
     @IsInt()
@@ -28,8 +28,8 @@ export class EnvironmentVariables {
     @IsString()
     POSTGRESQL_USER?: string;
 
-    @IsBase64()
-    POSTGRESQL_PWD: string;
+    @IsString()
+    POSTGRESQL_PASSWORD: string;
 
     @IsString()
     API_URL: string;
@@ -41,7 +41,11 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
-    BASIC_AUTH_PASSWORD: string;
+    BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
+
+    @IsString()
+    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    IDP_CLIENT_ID: string;
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
@@ -114,10 +118,24 @@ export class EnvironmentVariables {
     S3_SECRET_ACCESS_KEY: string;
 
     @IsString()
-    @ValidateIf(() => process.env.NODE_ENV === "production")
-    CDN_ORIGIN_CHECK_SECRET: string;
+    @IsOptional()
+    CDN_ORIGIN_CHECK_SECRET?: string;
 
     @IsArray()
-    @Transform(({ value }) => JSON.parse(value))
+    @Transform(({ value }) => JSON.parse(Buffer.from(value, "base64").toString()))
     PRIVATE_SITE_CONFIGS: PrivateSiteConfig[];
+
+    @IsArray()
+    @IsEmail({}, { each: true })
+    @Transform(({ value }: { value: string }) => value.split(",").filter((v) => v))
+    ACL_ALL_PERMISSIONS_EMAILS: string[] = [];
+
+    @IsArray()
+    @IsFQDN({}, { each: true })
+    @Transform(({ value }: { value: string }) => value.split(",").filter((v) => v))
+    ACL_ALL_PERMISSIONS_DOMAINS: string[] = [];
+
+    @IsString()
+    @MinLength(16)
+    SITE_PREVIEW_SECRET: string;
 }

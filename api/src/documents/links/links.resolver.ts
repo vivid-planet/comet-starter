@@ -7,7 +7,7 @@ import {
     validateNotModified,
 } from "@comet/cms-api";
 import { InjectRepository } from "@mikro-orm/nestjs";
-import { EntityRepository } from "@mikro-orm/postgresql";
+import { EntityManager, EntityRepository } from "@mikro-orm/postgresql";
 import { UnauthorizedException } from "@nestjs/common";
 import { Args, ID, Mutation, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
@@ -18,11 +18,16 @@ import { Link } from "./entities/link.entity";
 @Resolver(() => Link)
 @RequiredPermission(["pageTree"])
 export class LinksResolver {
-    constructor(@InjectRepository(Link) readonly repository: EntityRepository<Link>, private readonly pageTreeService: PageTreeService) {}
+    constructor(
+        @InjectRepository(Link) readonly repository: EntityRepository<Link>,
+        private readonly pageTreeService: PageTreeService,
+        private readonly entityManager: EntityManager,
+    ) {}
 
     @Query(() => Link, { nullable: true })
-    async link(@Args("linkId", { type: () => ID }) linkId: string): Promise<Link | null> {
-        return this.repository.findOne(linkId);
+    @AffectedEntity(Link)
+    async link(@Args("id", { type: () => ID }) id: string): Promise<Link | null> {
+        return this.repository.findOne(id);
     }
 
     @ResolveField(() => PageTreeNode, { nullable: true })
@@ -33,7 +38,7 @@ export class LinksResolver {
     @Mutation(() => Link)
     @AffectedEntity(Link, { pageTreeNodeIdArg: "attachedPageTreeNodeId" })
     async saveLink(
-        @Args("linkId", { type: () => ID }) linkId: string,
+        @Args("id", { type: () => ID }) id: string,
         @Args("input", { type: () => LinkInput }) input: LinkInput,
         @Args("lastUpdatedAt", { type: () => Date, nullable: true }) lastUpdatedAt?: Date,
         @Args("attachedPageTreeNodeId", { nullable: true, type: () => ID }) attachedPageTreeNodeId?: string,
@@ -46,7 +51,7 @@ export class LinksResolver {
             }
         }
 
-        let link = await this.repository.findOne(linkId);
+        let link = await this.repository.findOne(id);
 
         if (link) {
             if (lastUpdatedAt) {
@@ -56,18 +61,18 @@ export class LinksResolver {
             link.assign({ content: input.content.transformToBlockData() });
         } else {
             link = this.repository.create({
-                id: linkId,
+                id,
                 content: input.content.transformToBlockData(),
             });
 
-            this.repository.persist(link);
+            this.entityManager.persist(link);
         }
 
         if (attachedPageTreeNodeId) {
-            await this.pageTreeService.attachDocument({ id: linkId, type: "Link" }, attachedPageTreeNodeId);
+            await this.pageTreeService.attachDocument({ id, type: "Link" }, attachedPageTreeNodeId);
         }
 
-        await this.repository.flush();
+        await this.entityManager.flush();
 
         return link;
     }

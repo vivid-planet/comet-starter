@@ -22,23 +22,21 @@ export function createConfig() {
         apiUrl: environmentVariables.API_URL,
         adminUrl: environmentVariables.ADMIN_URL,
         previewUrl: environmentVariables.PREVIEW_URL,
-        sitesConfig: JSON.parse(environmentVariables.PUBLIC_SITE_CONFIGS) as PublicSiteConfig[],
+        sitesConfig: JSON.parse(atob(environmentVariables.PUBLIC_SITE_CONFIGS)) as PublicSiteConfig[],
         buildDate: environmentVariables.BUILD_DATE,
         buildNumber: environmentVariables.BUILD_NUMBER,
         commitSha: environmentVariables.COMMIT_SHA,
     };
 }
 
-export type ContentScope = PublicSiteConfig["contentScope"];
-
-export type Config = ReturnType<typeof createConfig>;
+type Config = ReturnType<typeof createConfig>;
 
 const ConfigContext = createContext<Config | undefined>(undefined);
 
 export function ConfigProvider({ config, children }: PropsWithChildren<{ config: Config }>) {
     return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
 }
-
+/** @knipignore */
 export function useConfig(): Config {
     const config = useContext(ConfigContext);
 

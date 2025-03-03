@@ -45,6 +45,9 @@ const config: CodegenConfig = {
                 namingConvention: "keep",
                 scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string" }),
                 typesPrefix: "GQL",
+                skipDocumentsValidation: {
+                    ignoreRules: ["KnownFragmentNamesRule"],
+                },
             },
             plugins: [
                 { add: { content: `import { ${rootBlocks.sort().join(", ")} } from "@src/blocks.generated";` } },
@@ -53,6 +56,7 @@ const config: CodegenConfig = {
             ],
         },
     },
+    ignoreNoDocuments: true,
 };
 
 export default config;
