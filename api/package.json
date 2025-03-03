@@ -2,7 +2,7 @@
     "name": "starter-api",
     "private": true,
     "scripts": {
-        "api-generator": "rimraf 'src/*/generated' && comet-api-generator generate",
+        "api-generator": "rimraf -g 'src/**/generated' && comet-api-generator generate",
         "prebuild": "rimraf dist",
         "build": "nest build",
         "console": "dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
