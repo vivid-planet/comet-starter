@@ -1,4 +1,4 @@
-import { ResolvedIntlConfig } from "react-intl";
+import { type ResolvedIntlConfig } from "react-intl";
 
 import comet_messages_de from "../lang-compiled/comet-lang/de.json";
 import comet_messages_en from "../lang-compiled/comet-lang/en.json";

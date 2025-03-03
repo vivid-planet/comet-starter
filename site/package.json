@@ -13,15 +13,15 @@
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "run-p lint:eslint lint:tsc lint:style intl:extract lint:knip",
         "lint:ci": "npm run lint",
-        "lint:eslint": "eslint --max-warnings 0 --config ./.eslintrc.cli.js --ext .ts,.tsx,.js,.jsx,.json,.md .",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",
         "lint:tsc": "tsc --project .",
-        "serve": "NODE_ENV=production node dist/server.js"
+        "serve": "NODE_ENV=production node dist/server.js",
+        "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored"
     },
     "dependencies": {
-        "@comet/cms-site": "7.13.0",
+        "@comet/cms-site": "8.0.0-beta.1",
         "@fontsource/roboto": "^5.2.5",
         "@next/bundle-analyzer": "^14.2.24",
         "@opentelemetry/api": "^1.9.0",
@@ -41,8 +41,8 @@
         "ts-node": "^10.9.2"
     },
     "devDependencies": {
-        "@comet/cli": "7.13.0",
-        "@comet/eslint-config": "7.13.0",
+        "@comet/cli": "8.0.0-beta.1",
+        "@comet/eslint-config": "8.0.0-beta.1",
         "@cspell/eslint-plugin": "^8.17.5",
         "@formatjs/cli": "^6.6.1",
         "@graphql-codegen/add": "^5.0.3",
@@ -57,11 +57,11 @@
         "@types/react-dom": "^18.3.5",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
-        "eslint": "^8.57.1",
+        "eslint": "^9.18.0",
         "knip": "^5.45.0",
         "npm-run-all2": "^7.0.2",
         "postcss-styled-syntax": "^0.7.1",
-        "prettier": "^2.8.8",
+        "prettier": "^3.4.2",
         "stylelint": "^16.15.0",
         "stylelint-config-standard": "^36.0.1",
         "typescript": "5.8.2"

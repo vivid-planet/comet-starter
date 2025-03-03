@@ -9,7 +9,10 @@ import { Command, Console } from "nestjs-console";
 export class FixturesConsole {
     private readonly logger = new Logger(FixturesConsole.name);
 
-    constructor(private readonly orm: MikroORM, private readonly dependenciesService: DependenciesService) {}
+    constructor(
+        private readonly orm: MikroORM,
+        private readonly dependenciesService: DependenciesService,
+    ) {}
 
     barOptions: Options = {
         format: `{bar} {percentage}% | {value}/{total} {title} | ETA: {eta_formatted} | Duration: {duration_formatted}`,

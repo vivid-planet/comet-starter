@@ -1,7 +1,7 @@
 import { getHostByHeaders, getSiteConfigForHost } from "@src/util/siteConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { CustomMiddleware } from "./chain";
+import { type CustomMiddleware } from "./chain";
 
 /**
  * Verify when on site preview domain, a siteConfig exists (by scope set as cookie)

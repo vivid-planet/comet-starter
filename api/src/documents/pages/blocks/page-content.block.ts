@@ -1,5 +1,4 @@
-import { createBlocksBlock } from "@comet/blocks-api";
-import { AnchorBlock } from "@comet/cms-api";
+import { AnchorBlock, createBlocksBlock } from "@comet/cms-api";
 import { AccordionBlock } from "@src/common/blocks/accordion.block";
 import { MediaGalleryBlock } from "@src/common/blocks/media-gallery.block";
 import { RichTextBlock } from "@src/common/blocks/rich-text.block";

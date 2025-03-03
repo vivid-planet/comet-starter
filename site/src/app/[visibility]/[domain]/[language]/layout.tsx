@@ -5,7 +5,7 @@ import { setNotFoundContext } from "@src/util/ServerContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { SiteConfigProvider } from "@src/util/SiteConfigProvider";
 import { draftMode } from "next/headers";
-import { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
 export default async function Page({ children, params: { domain, language } }: PropsWithChildren<{ params: { domain: string; language: string } }>) {
     const siteConfig = getSiteConfigForDomain(domain);
