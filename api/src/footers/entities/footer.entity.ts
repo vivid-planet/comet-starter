@@ -1,7 +1,7 @@
 import {
+    BlockDataInterface,
     CrudSingleGenerator,
     DocumentInterface,
-    ExtractBlockData,
     RootBlock,
     RootBlockDataScalar,
     RootBlockEntity,
@@ -29,7 +29,7 @@ export class Footer extends BaseEntity implements DocumentInterface {
     @RootBlock(FooterContentBlock)
     @Property({ type: new RootBlockType(FooterContentBlock) })
     @Field(() => RootBlockDataScalar(FooterContentBlock))
-    content: ExtractBlockData<typeof FooterContentBlock>;
+    content: BlockDataInterface;
 
     @Embedded(() => FooterScope)
     @Field(() => FooterScope)
