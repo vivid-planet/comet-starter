@@ -8,7 +8,7 @@ import { type GQLLatestContentUpdatesQuery } from "./LatestContentUpdates.genera
 
 export const LatestContentUpdates = () => {
     const contentScope = useContentScope();
-    const { data, loading, error } = useQuery<GQLLatestContentUpdatesQuery, GQLLatestContentUpdatesQueryVariables>(LATEST_CONTENT_UPDATES_QUERY, {
+    const { data, loading } = useQuery<GQLLatestContentUpdatesQuery, GQLLatestContentUpdatesQueryVariables>(LATEST_CONTENT_UPDATES_QUERY, {
         variables: {
             scope: contentScope.scope,
         },
@@ -19,7 +19,7 @@ export const LatestContentUpdates = () => {
         editUrl: `${contentScope.match.url}/pages/pagetree/${categoryToUrlParam(node.category)}/${node.id}/edit`,
     }));
 
-    return <LatestContentUpdatesDashboardWidget rows={rows} loading={loading} error={error} />;
+    return <LatestContentUpdatesDashboardWidget rows={rows} loading={loading} />;
 };
 
 const LATEST_CONTENT_UPDATES_QUERY = gql`
