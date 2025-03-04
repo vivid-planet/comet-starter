@@ -31,10 +31,10 @@ export class MigrateCommand extends CommandRunner {
             );
 
             let lockTries = 0;
-            let lockAquired = false;
-            while (!lockAquired) {
+            let lockAcquired = false;
+            while (!lockAcquired) {
                 try {
-                    // we lock in exclusive mode, so any other transactions fails immediatly (NOWAIT)
+                    // we lock in exclusive mode, so any other transactions fails immediately (NOWAIT)
                     // lock gets automatically released on commit or rollback
                     await connection.execute(
                         `LOCK TABLE "migrations_lock" IN EXCLUSIVE MODE NOWAIT`,
@@ -42,14 +42,14 @@ export class MigrateCommand extends CommandRunner {
                         undefined,
                         em.getTransactionContext(),
                     );
-                    lockAquired = true;
+                    lockAcquired = true;
                 } catch (error) {
                     await em.rollback();
                     console.warn(error);
-                    console.warn(`Cannot aquire lock for table migrations_lock (try ${++lockTries})`);
+                    console.warn(`Cannot acquire lock for table migrations_lock (try ${++lockTries})`);
                     if (lockTries > 3600) {
                         console.error(`Giving up...`);
-                        throw new Error("Could not aquire lock for table migrations_locks");
+                        throw new Error("Could not acquire lock for table migrations_locks");
                     }
                     await this.sleep(1);
                     await em.begin(em.getTransactionContext());
@@ -68,7 +68,7 @@ export class MigrateCommand extends CommandRunner {
             console.error(error);
             await em.rollback();
 
-            // we need to fail with non-zero exit-code, so migrations will be retried by kubernetes with exponantial back-off
+            // we need to fail with non-zero exit-code, so migrations will be retried by kubernetes with exponential back-off
             process.exit(-1);
         }
     }

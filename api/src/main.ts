@@ -1,5 +1,5 @@
 if (process.env.TRACING_ENABLED) {
-    require("./tracing");
+    import("./tracing");
 }
 
 import { CdnGuard, ExceptionFilter, ValidationExceptionFactory } from "@comet/cms-api";

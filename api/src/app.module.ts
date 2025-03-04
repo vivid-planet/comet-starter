@@ -138,5 +138,6 @@ export class AppModule {
 }
 
 declare module "@comet/cms-api" {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface ContentScope extends BaseContentScope {}
 }
