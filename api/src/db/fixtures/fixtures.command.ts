@@ -1,32 +1,33 @@
 import { DependenciesService } from "@comet/cms-api";
-import { MikroORM, UseRequestContext } from "@mikro-orm/core";
-import { Injectable, Logger } from "@nestjs/common";
+import { CreateRequestContext, MikroORM } from "@mikro-orm/core";
+import { Inject, Logger } from "@nestjs/common";
+import { Config } from "@src/config/config";
+import { CONFIG } from "@src/config/config.module";
 import { MultiBar, Options, Presets } from "cli-progress";
-import { Command, Console } from "nestjs-console";
+import { Command, CommandRunner } from "nest-commander";
 
-@Injectable()
-@Console()
-export class FixturesConsole {
-    private readonly logger = new Logger(FixturesConsole.name);
-
-    constructor(
-        private readonly orm: MikroORM,
-        private readonly dependenciesService: DependenciesService,
-    ) {}
+@Command({
+    name: "fixtures",
+    description: "Create fixtures with faker.js",
+})
+export class FixturesCommand extends CommandRunner {
+    private readonly logger = new Logger(FixturesCommand.name);
 
     barOptions: Options = {
         format: `{bar} {percentage}% | {value}/{total} {title} | ETA: {eta_formatted} | Duration: {duration_formatted}`,
         noTTYOutput: true,
     };
 
-    @Command({
-        command: "fixtures [total]",
-        description: "Create fixtures with faker.js",
-    })
-    @UseRequestContext()
-    async execute(total?: string | number): Promise<void> {
-        total = total === undefined ? 10 : Number(total);
+    constructor(
+        @Inject(CONFIG) private readonly config: Config,
+        private readonly dependenciesService: DependenciesService,
+        private readonly orm: MikroORM,
+    ) {
+        super();
+    }
 
+    @CreateRequestContext()
+    async run(): Promise<void> {
         this.logger.log(`Drop tables...`);
         const connection = this.orm.em.getConnection();
 
