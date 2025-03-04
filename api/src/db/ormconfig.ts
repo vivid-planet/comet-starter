@@ -5,7 +5,6 @@ import path from "path";
 
 export const ormConfig = createOrmConfig(
     defineConfig({
-        type: "postgresql",
         host: process.env.POSTGRESQL_HOST,
         port: Number(process.env.POSTGRESQL_PORT),
         user: process.env.POSTGRESQL_USER,
