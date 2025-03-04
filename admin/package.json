@@ -1,5 +1,6 @@
 {
     "name": "starter-admin",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "admin-generator": "rimraf 'src/*/generated' && comet-admin-generator generate crud-generator-config.ts && comet-admin-generator future-generate",
