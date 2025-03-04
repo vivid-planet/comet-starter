@@ -1,5 +1,6 @@
 {
     "name": "starter-api",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
         "api-generator": "rimraf 'src/*/generated' && comet-api-generator generate",
