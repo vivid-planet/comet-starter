@@ -58,6 +58,7 @@
         "react-router-dom": "^5.3.4"
     },
     "devDependencies": {
+        "@comet/admin-generator": "^8.0.0-beta.1",
         "@comet/cli": "8.0.0-beta.1",
         "@comet/eslint-config": "8.0.0-beta.1",
         "@cspell/eslint-plugin": "^8.17.5",
