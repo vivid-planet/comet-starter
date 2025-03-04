@@ -1,12 +1,15 @@
 import {
-    createAuthProxyJwtStrategy,
+    AuthServiceInterface,
+    CometAuthGuard,
+    createAuthGuardProviders,
     createAuthResolver,
-    createCometAuthGuard,
-    createStaticAuthedUserStrategy,
-    createStaticCredentialsBasicStrategy,
+    createBasicAuthService,
+    createJwtAuthService,
+    createStaticUserAuthService,
 } from "@comet/cms-api";
-import { DynamicModule, Module, Provider } from "@nestjs/common";
+import { DynamicModule, Module, Provider, type Type } from "@nestjs/common";
 import { APP_GUARD } from "@nestjs/core";
+import { JwtModule } from "@nestjs/jwt";
 import { Config } from "@src/config/config";
 
 import { AccessControlService } from "./access-control.service";
@@ -18,12 +21,14 @@ export const SYSTEM_USER_NAME = "system-user";
 @Module({})
 export class AuthModule {
     static forRoot(config: Config): DynamicModule {
-        const providers: Provider[] = [
-            createStaticCredentialsBasicStrategy({
+        const authServices: Type<AuthServiceInterface>[] = [
+            createBasicAuthService({
                 username: SYSTEM_USER_NAME,
                 password: config.auth.systemUserPassword,
-                strategyName: "system-user",
             }),
+        ];
+
+        const providers: Provider[] = [
             createAuthResolver({
                 postLogoutRedirectUri: config.auth.postLogoutRedirectUri,
                 endSessionEndpoint: config.auth.idpEndSessionEndpoint,
@@ -33,35 +38,35 @@ export class AuthModule {
         ];
 
         if (config.auth.useAuthProxy) {
-            providers.push(
-                createAuthProxyJwtStrategy({
-                    audience: config.auth.idpClientId,
-                    jwksUri: config.auth.idpJwksUri,
-                }),
+            authServices.push(
+                createJwtAuthService({ verifyOptions: { audience: config.auth.idpClientId }, jwksOptions: { jwksUri: config.auth.idpJwksUri } }),
             );
             providers.push({
                 provide: APP_GUARD,
-                useClass: createCometAuthGuard(["auth-proxy-jwt", "system-user"]),
+                useClass: CometAuthGuard,
             });
         } else {
             if (process.env.NODE_ENV !== "development") {
                 throw new Error("config.auth.useAuthproxy must only be false in development");
             }
-            providers.push(
-                createStaticAuthedUserStrategy({
-                    staticAuthedUser: staticUsers.vividPlanetEmployee.id,
+            authServices.push(
+                createStaticUserAuthService({
+                    staticUser: staticUsers.vividPlanetEmployee.id,
                 }),
             );
             providers.push({
                 provide: APP_GUARD,
-                useClass: createCometAuthGuard(["system-user", "static-authed-user"]),
+                useClass: CometAuthGuard,
             });
         }
+
+        providers.push(...createAuthGuardProviders(...authServices));
 
         return {
             module: AuthModule,
             providers,
             exports: [AccessControlService, UserService],
+            imports: [JwtModule],
         };
     }
 }
