@@ -3,9 +3,9 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
-    DocumentInterface,
+    type DocumentInterface,
     MasterMenu,
-    MasterMenuData,
+    type MasterMenuData,
     PagesPage,
     UserPermissionsPage,
 } from "@comet/cms-admin";

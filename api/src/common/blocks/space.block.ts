@@ -1,4 +1,4 @@
-import { createSpaceBlock } from "@comet/blocks-api";
+import { createSpaceBlock } from "@comet/cms-api";
 
 enum Spacing {
     D100 = "D100",

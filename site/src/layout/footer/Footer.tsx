@@ -1,6 +1,6 @@
 "use client";
 import { FooterContentBlock } from "@src/layout/footer/blocks/FooterContentBlock";
-import { GQLFooterFragment } from "@src/layout/footer/Footer.fragment.generated";
+import { type GQLFooterFragment } from "@src/layout/footer/Footer.fragment.generated";
 
 interface Props {
     footer: GQLFooterFragment;

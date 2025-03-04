@@ -2,7 +2,7 @@ import {
     convertPreviewDataToHeaders,
     createFetchWithDefaults,
     createGraphQLFetch as createGraphQLFetchLibrary,
-    SitePreviewData,
+    type SitePreviewData,
 } from "@comet/cms-site";
 
 import { getVisibilityParam } from "./ServerContext";

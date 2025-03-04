@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { CustomMiddleware } from "./chain";
+import { type CustomMiddleware } from "./chain";
 
 /**
  * /block-preview/* and /site-preview must not use the domain rewrite, because we don't have a active domain. This middleware exists the chain in that case.
