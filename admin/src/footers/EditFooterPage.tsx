@@ -9,7 +9,6 @@ import {
     resolveHasSaveConflict,
     useBlockPreview,
     useCmsBlockContext,
-    useContentScopeConfig,
     useSaveConflictQuery,
     useSiteConfig,
 } from "@comet/cms-admin";
@@ -40,8 +39,6 @@ export function EditFooterPage(): JSX.Element | null {
     const match = useRouteMatch();
     const previewApi = useBlockPreview();
     const blockContext = useCmsBlockContext();
-
-    useContentScopeConfig({ redirectPathAfterChange: "/project-snips/footer" });
 
     const { data, refetch, loading } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
         variables: {
