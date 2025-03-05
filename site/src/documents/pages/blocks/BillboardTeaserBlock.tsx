@@ -1,5 +1,5 @@
-import { PropsWithData, withPreview } from "@comet/cms-site";
-import { BillboardTeaserBlockData } from "@src/blocks.generated";
+import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type BillboardTeaserBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
@@ -67,18 +67,17 @@ const Content = styled.div`
     text-align: center;
     color: ${({ theme }) => theme.palette.text.inverted};
 
-    ${({ theme }) =>
-        css`
-            grid-column: 3 / -3;
+    ${({ theme }) => css`
+        grid-column: 3 / -3;
 
-            ${theme.breakpoints.xs.mediaQuery} {
-                grid-column: 5 / -5;
-            }
+        ${theme.breakpoints.xs.mediaQuery} {
+            grid-column: 5 / -5;
+        }
 
-            ${theme.breakpoints.lg.mediaQuery} {
-                grid-column: 7 / -7;
-            }
-        `};
+        ${theme.breakpoints.lg.mediaQuery} {
+            grid-column: 7 / -7;
+        }
+    `};
 `;
 
 const ImageMobile = styled.div`

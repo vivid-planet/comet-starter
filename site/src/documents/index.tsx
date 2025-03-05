@@ -1,6 +1,6 @@
-import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
-import { Metadata, ResolvingMetadata } from "next";
-import { ComponentType } from "react";
+import { type GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
+import { type Metadata, type ResolvingMetadata } from "next";
+import { type ComponentType } from "react";
 
 import { Link } from "./links/Link";
 import { generateMetadata as generateMetadataPage, Page } from "./pages/Page";

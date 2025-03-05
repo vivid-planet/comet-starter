@@ -1,18 +1,18 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { MainContent, messages, SaveButton, Stack, StackToolbar, ToolbarActions, ToolbarFillSpace, ToolbarTitleItem } from "@comet/admin";
 import { Save } from "@comet/admin-icons";
-import { AdminComponentRoot, BlockState } from "@comet/blocks-admin";
 import {
+    BlockAdminComponentRoot,
     BlockPreviewWithTabs,
+    type BlockState,
     ContentScopeIndicator,
     resolveHasSaveConflict,
     useBlockPreview,
     useCmsBlockContext,
-    useContentScopeConfig,
     useSaveConflictQuery,
     useSiteConfig,
 } from "@comet/cms-admin";
-import { FooterContentBlockInput } from "@src/blocks.generated";
+import { type FooterContentBlockInput } from "@src/blocks.generated";
 import { useContentScope } from "@src/common/ContentScopeProvider";
 import isEqual from "lodash.isequal";
 import { useEffect, useState } from "react";
@@ -21,12 +21,12 @@ import { useRouteMatch } from "react-router";
 
 import { FooterContentBlock } from "./blocks/FooterContentBlock";
 import {
-    GQLCheckForChangesFooterQuery,
-    GQLCheckForChangesFooterQueryVariables,
-    GQLFooterQuery,
-    GQLFooterQueryVariables,
-    GQLSaveFooterMutation,
-    GQLSaveFooterMutationVariables,
+    type GQLCheckForChangesFooterQuery,
+    type GQLCheckForChangesFooterQueryVariables,
+    type GQLFooterQuery,
+    type GQLFooterQueryVariables,
+    type GQLSaveFooterMutation,
+    type GQLSaveFooterMutationVariables,
     namedOperations,
 } from "./EditFooterPage.generated";
 
@@ -39,8 +39,6 @@ export function EditFooterPage(): JSX.Element | null {
     const match = useRouteMatch();
     const previewApi = useBlockPreview();
     const blockContext = useCmsBlockContext();
-
-    useContentScopeConfig({ redirectPathAfterChange: "/project-snips/footer" });
 
     const { data, refetch, loading } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
         variables: {
@@ -114,9 +112,9 @@ export function EditFooterPage(): JSX.Element | null {
             key: "content",
             label: <FormattedMessage {...messages.content} />,
             content: (
-                <AdminComponentRoot>
+                <BlockAdminComponentRoot>
                     <FooterContentBlock.AdminComponent state={footerState} updateState={setFooterState} />
-                </AdminComponentRoot>
+                </BlockAdminComponentRoot>
             ),
         },
     ];

@@ -1,10 +1,10 @@
 "use client";
-import { hasRichTextBlockContent, PreviewSkeleton, PropsWithData, withPreview } from "@comet/cms-site";
-import { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
-import { Typography, TypographyProps } from "@src/common/components/Typography";
+import { hasRichTextBlockContent, PreviewSkeleton, type PropsWithData, withPreview } from "@comet/cms-site";
+import { type LinkBlockData, type RichTextBlockData } from "@src/blocks.generated";
+import { Typography, type TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { PageLayout } from "@src/layout/PageLayout";
-import redraft, { Renderers, TextBlockRenderFn } from "redraft";
+import redraft, { type Renderers, type TextBlockRenderFn } from "redraft";
 import styled, { css } from "styled-components";
 
 import { LinkBlock } from "./LinkBlock";
@@ -113,16 +113,15 @@ export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
 );
 
 const DisableLastBottomSpacing = styled.div`
-    ${({ theme }) =>
-        css`
-            > *:last-child {
-                margin-bottom: 0;
+    ${({ theme }) => css`
+        > *:last-child {
+            margin-bottom: 0;
 
-                ${theme.breakpoints.xs.mediaQuery} {
-                    margin-bottom: 0;
-                }
+            ${theme.breakpoints.xs.mediaQuery} {
+                margin-bottom: 0;
             }
-        `};
+        }
+    `};
 `;
 
 const Text = styled(Typography)`

@@ -1,9 +1,9 @@
 "use client";
-import { PropsWithData, withPreview } from "@comet/cms-site";
-import { CallToActionBlockData } from "@src/blocks.generated";
+import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type CallToActionBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 
-import { Button, ButtonVariant } from "../components/Button";
+import { Button, type ButtonVariant } from "../components/Button";
 import { HiddenIfInvalidLink } from "../helpers/HiddenIfInvalidLink";
 
 const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> = {

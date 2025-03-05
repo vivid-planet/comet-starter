@@ -1,31 +1,24 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let tracing: any;
-if (process.env.TRACING_ENABLED) {
-    tracing = require("./tracing");
-}
-
 import opentelemetry from "@opentelemetry/api";
 import { AppModule } from "@src/app.module";
-import { BootstrapConsole } from "nestjs-console";
+import { CommandFactory } from "nest-commander";
 
 import { createConfig } from "./config/config";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let tracing: any;
+if (process.env.TRACING_ENABLED) {
+    tracing = import("./tracing");
+}
+
 const tracer = opentelemetry.trace.getTracer("console");
 const config = createConfig(process.env);
-const bootstrap = new BootstrapConsole({
-    module: AppModule.forRoot(config),
-    useDecorators: true,
-    contextOptions: {
-        logger: ["error", "warn", "log"],
-    },
-});
-bootstrap.init().then(async (app) => {
+
+async function bootstrap() {
     tracer.startActiveSpan(process.argv.slice(2).join(" "), async (span) => {
         try {
-            // init your app
-            await app.init();
-            // boot the cli
-            await bootstrap.boot();
+            await CommandFactory.run(AppModule.forRoot(config), {
+                logger: ["error", "warn", "log"],
+            });
             span.end();
             await tracing?.sdk?.shutdown();
             process.exit(0);
@@ -36,4 +29,6 @@ bootstrap.init().then(async (app) => {
             process.exit(1);
         }
     });
-});
+}
+
+bootstrap();

@@ -28,3 +28,4 @@ requirepass
 schemaname
 tablename
 timestamptz
+formatjs

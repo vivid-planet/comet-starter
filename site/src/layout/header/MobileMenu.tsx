@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import styled, { css } from "styled-components";
 
-import { GQLMobileMenuFragment } from "./MobileMenu.fragment.generated";
+import { type GQLMobileMenuFragment } from "./MobileMenu.fragment.generated";
 
 interface Props {
     header: GQLMobileMenuFragment[];
@@ -189,7 +189,9 @@ const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
     background-color: ${({ theme }) => theme.palette.gray["200"]};
     overflow: auto;
     visibility: hidden;
-    transition: height 0.15s ease-out, visibility 0s linear 0.15s;
+    transition:
+        height 0.15s ease-out,
+        visibility 0s linear 0.15s;
 
     ${({ $isMenuOpen }) =>
         $isMenuOpen &&
@@ -218,7 +220,9 @@ const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
     overflow: auto;
     visibility: hidden;
     transform: translateX(100%);
-    transition: transform 0.2s ease-out, visibility 0s linear 0.2s;
+    transition:
+        transform 0.2s ease-out,
+        visibility 0s linear 0.2s;
 
     ${({ $isExpanded }) =>
         $isExpanded &&
