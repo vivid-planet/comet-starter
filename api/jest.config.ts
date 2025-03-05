@@ -1,6 +1,7 @@
 import type { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
+    setupFilesAfterEnv: ["../jest.setup.ts"],
     collectCoverageFrom: ["**/*.(t|j)s"],
     coverageDirectory: "../coverage",
     moduleFileExtensions: ["js", "json", "ts"],
