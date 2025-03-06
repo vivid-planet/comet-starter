@@ -47,7 +47,7 @@ app.prepare().then(() => {
                     res.setHeader("Cache-Control", "public, max-age=900");
                 }
 
-                return originalWriteHead.apply(this, [statusCode, ...args]);
+                return (originalWriteHead as any).apply(this, [statusCode, ...args]);
             };
 
             await handle(req, res, parsedUrl);
