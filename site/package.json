@@ -21,8 +21,8 @@
         "serve": "NODE_ENV=production node dist/server.js"
     },
     "dependencies": {
-        "@comet/cms-site": "7.13.0",
-        "@fontsource/roboto": "^5.1.1",
+        "@comet/cms-site": "7.15.0",
+        "@fontsource/roboto": "^5.2.5",
         "@next/bundle-analyzer": "^14.2.24",
         "@opentelemetry/api": "^1.9.0",
         "@opentelemetry/auto-instrumentations-node": "^0.56.1",
@@ -41,8 +41,8 @@
         "ts-node": "^10.9.2"
     },
     "devDependencies": {
-        "@comet/cli": "7.13.0",
-        "@comet/eslint-config": "7.13.0",
+        "@comet/cli": "7.15.0",
+        "@comet/eslint-config": "7.15.0",
         "@cspell/eslint-plugin": "^8.17.5",
         "@formatjs/cli": "^6.6.1",
         "@graphql-codegen/add": "^5.0.3",
@@ -52,19 +52,19 @@
         "@graphql-codegen/typescript": "^4.1.5",
         "@graphql-codegen/typescript-operations": "^4.5.1",
         "@parcel/watcher": "^2.5.1",
-        "@types/node": "^22.13.5",
+        "@types/node": "^22.13.8",
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
         "eslint": "^8.57.1",
-        "knip": "^5.44.5",
+        "knip": "^5.45.0",
         "npm-run-all2": "^7.0.2",
         "postcss-styled-syntax": "^0.7.1",
         "prettier": "^2.8.8",
-        "stylelint": "^16.14.1",
+        "stylelint": "^16.15.0",
         "stylelint-config-standard": "^36.0.1",
-        "typescript": "5.1.6"
+        "typescript": "5.8.2"
     },
     "engines": {
         "node": "22"
