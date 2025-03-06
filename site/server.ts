@@ -47,6 +47,7 @@ app.prepare().then(() => {
                     res.setHeader("Cache-Control", "public, max-age=900");
                 }
 
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 return (originalWriteHead as any).apply(this, [statusCode, ...args]);
             };
 
