@@ -47,8 +47,6 @@ app.prepare().then(() => {
                     res.setHeader("Cache-Control", "public, max-age=900");
                 }
 
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore -> TS complains about passing unknown[] to writeHead, however explicit typing is complicated because writeHead can be overloaded and has two signatures
                 return originalWriteHead.apply(this, [statusCode, ...args]);
             };
 
