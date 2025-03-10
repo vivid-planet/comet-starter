@@ -6,9 +6,9 @@ import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import type { Metadata } from "next";
-import { PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 
-import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./layout.generated";
+import { type GQLLayoutQuery, type GQLLayoutQueryVariables } from "./layout.generated";
 
 interface LayoutProps {
     params: { domain: string; language: string };

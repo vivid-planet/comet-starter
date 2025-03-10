@@ -1,13 +1,14 @@
-import { MikroORM } from "@mikro-orm/core";
-import { Injectable, Logger } from "@nestjs/common";
-import { Command, Console } from "nestjs-console";
+import { MikroORM } from "@mikro-orm/postgresql";
+import { Logger } from "@nestjs/common";
+import { Command, CommandRunner } from "nest-commander";
 
-@Injectable()
-@Console()
-export class MigrateConsole {
-    private readonly logger = new Logger(MigrateConsole.name);
+@Command({ name: "migrate", description: "Runs all migrations" })
+export class MigrateCommand extends CommandRunner {
+    private readonly logger = new Logger(MigrateCommand.name);
 
-    constructor(private readonly orm: MikroORM) {}
+    constructor(private readonly orm: MikroORM) {
+        super();
+    }
 
     private async sleep(s: number): Promise<unknown> {
         return new Promise((resolve) => {
@@ -15,11 +16,7 @@ export class MigrateConsole {
         });
     }
 
-    @Command({
-        command: "migrate",
-        description: "Runs all migrations",
-    })
-    async migrate(): Promise<void> {
+    async run(): Promise<void> {
         this.logger.log("Running migrations...");
         const em = this.orm.em.fork();
 
@@ -55,7 +52,7 @@ export class MigrateConsole {
                     this.logger.warn(`Cannot acquire lock for table MigrationsLock (try ${++lockTries})`);
                     if (lockTries > 3600) {
                         this.logger.error(`Giving up...`);
-                        throw new Error("Could not acquire lock for table MigrationsLocks");
+                        throw new Error("Could not acquire lock for table MigrationsLock");
                     }
                     await this.sleep(1);
                     await em.begin(em.getTransactionContext());

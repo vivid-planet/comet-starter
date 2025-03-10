@@ -31,3 +31,6 @@ const sdk = new opentelemetry.NodeSDK({
 });
 
 sdk.start();
+
+/** @knipignore */
+export { sdk };

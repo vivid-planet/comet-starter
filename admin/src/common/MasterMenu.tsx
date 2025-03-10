@@ -3,9 +3,9 @@ import {
     ContentScopeIndicator,
     createRedirectsPage,
     DamPage,
-    DocumentInterface,
+    type DocumentInterface,
     MasterMenu,
-    MasterMenuData,
+    type MasterMenuData,
     PagesPage,
     UserPermissionsPage,
 } from "@comet/cms-admin";
@@ -41,7 +41,6 @@ export const masterMenuData: MasterMenuData = [
             path: "/pages/pagetree/main-navigation",
             render: () => (
                 <PagesPage
-                    path="/pages/pagetree/main-navigation"
                     allCategories={pageTreeCategories}
                     documentTypes={pageTreeDocumentTypes}
                     category="MainNavigation"
@@ -98,7 +97,7 @@ export const masterMenuData: MasterMenuData = [
                 primary: <FormattedMessage id="menu.redirects" defaultMessage="Redirects" />,
                 route: {
                     path: "/system/redirects",
-                    render: () => <RedirectsPage redirectPathAfterChange="/system/redirects" />,
+                    component: RedirectsPage,
                 },
                 requiredPermission: "pageTree",
             },
