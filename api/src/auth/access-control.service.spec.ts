@@ -1,6 +1,6 @@
-import { User, UserPermissions } from "@comet/cms-api";
-import { Test, TestingModule } from "@nestjs/testing";
-import { Config } from "@src/config/config";
+import { type User, UserPermissions } from "@comet/cms-api";
+import { Test, type TestingModule } from "@nestjs/testing";
+import { type Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
 
 import { AccessControlService } from "./access-control.service";

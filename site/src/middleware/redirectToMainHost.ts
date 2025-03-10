@@ -1,7 +1,7 @@
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "@src/util/siteConfig";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
-import { CustomMiddleware } from "./chain";
+import { type CustomMiddleware } from "./chain";
 
 /**
  * When http host isn't siteConfig.domains.main (instead .pattern or .additional match), redirect to main host.

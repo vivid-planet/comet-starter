@@ -1,11 +1,11 @@
 if (process.env.TRACING_ENABLED) {
-    require("./tracing");
+    import("./tracing");
 }
 
 import { CdnGuard, ExceptionFilter, ValidationExceptionFactory } from "@comet/cms-api";
 import { Logger, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { NestExpressApplication } from "@nestjs/platform-express";
+import { type NestExpressApplication } from "@nestjs/platform-express";
 import { AppModule } from "@src/app.module";
 import { useContainer } from "class-validator";
 import compression from "compression";

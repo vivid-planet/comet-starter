@@ -1,9 +1,9 @@
 "use client";
-import { PropsWithData, withPreview } from "@comet/cms-site";
-import { StandaloneCallToActionListBlockData } from "@src/blocks.generated";
+import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type StandaloneCallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { CSSProperties } from "react";
+import { type CSSProperties } from "react";
 import styled from "styled-components";
 
 type StandaloneCallToActionListBlockProps = PropsWithData<StandaloneCallToActionListBlockData>;

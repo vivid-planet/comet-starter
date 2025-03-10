@@ -1,10 +1,10 @@
 "use client";
 
 import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIFrameBridge } from "@comet/cms-site";
-import { FooterContentBlockData } from "@src/blocks.generated";
+import { type FooterContentBlockData } from "@src/blocks.generated";
 import { FooterContentBlock } from "@src/layout/footer/blocks/FooterContentBlock";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
-import { FunctionComponent, useEffect, useState } from "react";
+import { type FunctionComponent, useEffect, useState } from "react";
 
 const PreviewPage: FunctionComponent = () => {
     const iFrameBridge = useIFrameBridge();
