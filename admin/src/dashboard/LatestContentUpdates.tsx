@@ -8,7 +8,7 @@ import { type GQLLatestContentUpdatesQuery } from "./LatestContentUpdates.genera
 
 export const LatestContentUpdates = () => {
     const contentScope = useContentScope();
-    const { data, loading } = useQuery<GQLLatestContentUpdatesQuery, GQLLatestContentUpdatesQueryVariables>(LATEST_CONTENT_UPDATES_QUERY, {
+    const { data, loading } = useQuery<GQLLatestContentUpdatesQuery, GQLLatestContentUpdatesQueryVariables>(latestContentUpdatesQuery, {
         variables: {
             scope: contentScope.scope,
         },
@@ -22,7 +22,7 @@ export const LatestContentUpdates = () => {
     return <LatestContentUpdatesDashboardWidget rows={rows} loading={loading} />;
 };
 
-const LATEST_CONTENT_UPDATES_QUERY = gql`
+const latestContentUpdatesQuery = gql`
     query LatestContentUpdates($scope: PageTreeNodeScopeInput!) {
         paginatedPageTreeNodes(offset: 0, limit: 5, scope: $scope, sort: [{ field: updatedAt, direction: DESC }]) {
             nodes {
