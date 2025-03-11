@@ -1,0 +1,94 @@
+--
+export const prerender = false;
+---
+import { gql } from "@comet/cms-site";
+import { documentTypes } from "@src/documents";
+import { createGraphQLFetch } from "@src/util/createGraphQLFetch";
+import { getSiteConfigForRequest } from "@src/util/siteConfig";
+import { previewParams } from "@src/util/sitePreview";
+import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
+import type { GQLPageTreeNodeScope } from "@src/graphql.generated";
+import { ThemeProvider } from "styled-components";
+import { theme } from "@src/theme";
+
+export const documentTypeQuery = gql`
+    query DocumentType($path: String!, $scope: PageTreeNodeScopeInput!, $redirectSource: String!, $redirectScope: RedirectScopeInput!) {
+        pageTreeNodeByPath(path: $path, scope: $scope) {
+            id
+            documentType
+        }
+        redirectBySource(source: $redirectSource, sourceType: path, scope: $redirectScope) {
+            target
+        }
+    }
+`;
+
+const siteConfig = await getSiteConfigForRequest(Astro.request);
+if (!siteConfig) throw new Error("SiteConfig not found");
+const preview = await previewParams(Astro.request);
+
+
+const language = Astro.params.language;
+if (!language) throw new Error("language is not defined");
+const scope = { domain: siteConfig.scope.domain, language };
+const pathname = "/" + (Astro.params.path || "");
+
+const graphQLFetch = createGraphQLFetch(preview?.previewData);
+const documentTypeData = await graphQLFetch<any, any>(
+    documentTypeQuery,
+    {
+        path: pathname,
+        redirectScope: { domain: siteConfig.scope.domain },
+        redirectSource: `${language}/${pathname}`,
+        scope,
+    },
+    { method: "GET" }, //for request memoization
+);
+
+
+if (!documentTypeData.pageTreeNodeByPath?.documentType) {
+  if (documentTypeData.redirectBySource?.target) {
+      const target = documentTypeData.redirectBySource?.target as RedirectsLinkBlockData;
+      let destination: string | undefined;
+      if (target.block !== undefined) {
+          switch (target.block.type) {
+              case "internal": {
+                  const internalLink = target.block.props as InternalLinkBlockData;
+                  if (internalLink.targetPage) {
+                      destination = `/${(internalLink.targetPage.scope as GQLPageTreeNodeScope).language}/${internalLink.targetPage.path}`;
+                  }
+                  break;
+              }
+              case "external":
+                  destination = (target.block.props as ExternalLinkBlockData).targetUrl;
+                  break;
+          }
+      }
+      if (destination) {
+          //return redirect(destination);
+          throw new Error("redirect");
+      }
+  }
+  //throw data(null, { status: 404 });
+  throw new Error("notfound");
+}
+
+const documentType = documentTypeData.pageTreeNodeByPath.documentType;
+const pageTreeNodeId = documentTypeData.pageTreeNodeByPath.id;
+
+const { loader: documentLoader, component: PageComponent } = documentTypes[documentType];
+const documentLoaderData = documentLoader ? await documentLoader({ pageTreeNodeId, scope, request: Astro.request }) : undefined
+
+---
+<html>
+  <head>
+    <title>xxxx</title>
+  </head>
+  <body>
+    <h1>{documentType}</h1>
+    <p>{pageTreeNodeId}</p>
+    <ThemeProvider theme={theme}>
+      <PageComponent loaderData={documentLoaderData} />
+    </ThemeProvider>
+  </body>
+</html>

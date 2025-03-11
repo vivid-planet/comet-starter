@@ -1,0 +1,16 @@
+"use client";
+import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type StandaloneMediaBlockData } from "@app/blocks.generated";
+import { MediaBlock } from "@app/common/blocks/MediaBlock";
+import { PageLayout } from "@app/layout/PageLayout";
+
+export const StandaloneMediaBlock = withPreview(
+    ({ data: { media, aspectRatio } }: PropsWithData<StandaloneMediaBlockData>) => {
+        return (
+            <PageLayout>
+                <MediaBlock data={media} aspectRatio={aspectRatio} />
+            </PageLayout>
+        );
+    },
+    { label: "Media" },
+);
