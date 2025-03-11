@@ -30,7 +30,7 @@
         "test:watch": "npm run test -- --watch"
     },
     "dependencies": {
-        "@apollo/server": "^4.0.0",
+        "@apollo/server": "^4.11.3",
         "@comet/cms-api": "8.0.0-beta.1",
         "@mikro-orm/cli": "^6.0.0",
         "@mikro-orm/core": "^6.0.0",
