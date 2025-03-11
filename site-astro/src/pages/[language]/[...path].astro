@@ -1,0 +1,96 @@
+---
+import { gql } from "@comet/cms-site";
+import { documentTypes } from "@src/documents";
+import { createGraphQLFetch } from "@src/util/createGraphQLFetch";
+import { getSiteConfigForRequest } from "@src/util/siteConfig";
+import { previewParams } from "@src/util/sitePreview";
+import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
+import type { GQLPageTreeNodeScope } from "@src/graphql.generated";
+import { ThemeProvider } from "styled-components";
+import { theme } from "@src/theme";
+import Layout from "@src/layouts/Layout.astro";
+import { IntlProvider } from "@src/util/IntlProvider";
+import { loadMessages } from "@src/util/loadMessages";
+
+export const documentTypeQuery = gql`
+    query DocumentType($path: String!, $scope: PageTreeNodeScopeInput!, $redirectSource: String!, $redirectScope: RedirectScopeInput!) {
+        pageTreeNodeByPath(path: $path, scope: $scope) {
+            id
+            documentType
+        }
+        redirectBySource(source: $redirectSource, sourceType: path, scope: $redirectScope) {
+            target
+        }
+    }
+`;
+
+const siteConfig = await getSiteConfigForRequest(Astro.request);
+if (!siteConfig) throw new Error("SiteConfig not found");
+const preview = await previewParams(Astro.request);
+
+
+const language = Astro.params.language;
+const domain = siteConfig.scope.domain;
+if (!language) throw new Error("language is not defined"); // TODO we should redirect to /en - better: a index page should do this
+
+if (!siteConfig.scope.languages.includes(language)) {
+    return new Response(null, {
+        status: 404,
+        statusText: 'Not Found',
+    });
+}
+
+const scope = { domain, language };
+const pathname = "/" + (Astro.params.path || "");
+
+const graphQLFetch = createGraphQLFetch(preview?.previewData);
+const documentTypeData = await graphQLFetch<any, any>(
+    documentTypeQuery,
+    {
+        path: pathname,
+        redirectScope: { domain },
+        redirectSource: `${language}/${pathname}`,
+        scope,
+    },
+    { method: "GET" }, //for request memoization
+);
+
+
+if (!documentTypeData.pageTreeNodeByPath?.documentType) {
+  if (documentTypeData.redirectBySource?.target) {
+      const target = documentTypeData.redirectBySource?.target as RedirectsLinkBlockData;
+      let destination: string | undefined;
+      if (target.block !== undefined) {
+          switch (target.block.type) {
+              case "internal": {
+                  const internalLink = target.block.props as InternalLinkBlockData;
+                  if (internalLink.targetPage) {
+                      destination = `/${(internalLink.targetPage.scope as GQLPageTreeNodeScope).language}/${internalLink.targetPage.path}`;
+                  }
+                  break;
+              }
+              case "external":
+                  destination = (target.block.props as ExternalLinkBlockData).targetUrl;
+                  break;
+          }
+      }
+      if (destination) {
+          //return redirect(destination);
+          throw new Error("redirect");
+      }
+  }
+  return new Response(null, {
+        status: 404,
+        statusText: 'Not Found',
+    });
+}
+
+const documentType = documentTypeData.pageTreeNodeByPath.documentType;
+const pageTreeNodeId = documentTypeData.pageTreeNodeByPath.id;
+
+const { component: PageComponent } = documentTypes[documentType];
+
+---
+<Layout domain={domain}  language={language}>
+    <PageComponent pageTreeNodeId={pageTreeNodeId} />
+</Layout>

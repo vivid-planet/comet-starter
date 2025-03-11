@@ -1,0 +1,47 @@
+{
+  "name": "site-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "generate-block-types": "comet generate-block-types --output-file ./src/blocks.generated.ts",
+    "generate-block-types:watch": "chokidar -s \"block-meta.json\" -c \"npm run generate-block-types\"",
+    "gql:types": "graphql-codegen-esm --config codegen.cjs",
+    "gql:watch": "graphql-codegen-esm --watch  --config codegen.cjs",
+    "intl:compile": "formatjs compile-folder --format simple --ast lang/starter-lang/site lang-compiled/",
+    "intl:extract": "formatjs extract \"src/**/*.ts*\" --ignore **/*.d.ts --out-file lang-extracted/en.json --format simple --throws"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.1.2",
+    "@astrojs/react": "^4.2.1",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "astro": "^5.4.2",
+    "lodash.isequal": "^4.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-intl": "^7.1.6",
+    "redraft": "^0.10.2",
+    "scroll-into-view-if-needed": "^3.1.0",
+    "sitemap": "^8.0.0",
+    "styled-components": "^6.1.15",
+    "swiper": "^11.2.4",
+    "usehooks-ts": "^3.1.1"
+  },
+  "devDependencies": {
+    "@comet/cli": "7.13.0",
+    "@formatjs/cli": "^6.6.1",
+    "@graphql-codegen/add": "^3.0.0",
+    "@graphql-codegen/cli": "^2.0.0",
+    "@graphql-codegen/import-types-preset": "^2.0.0",
+    "@graphql-codegen/named-operations-object": "^2.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^2.5.0",
+    "@graphql-codegen/typescript": "^2.0.0",
+    "@graphql-codegen/typescript-operations": "^2.0.0",
+    "@types/draft-js": "^0.11.18",
+    "sass": "^1.86.3"
+  }
+}

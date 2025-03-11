@@ -18,6 +18,8 @@ import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
+import { PredefinedPage } from "@src/documents/predefined-pages/entities/predefined-page.entity";
+import { PredefinedPagesModule } from "@src/documents/predefined-pages/predefined-pages.module";
 import { FootersModule } from "@src/footers/footers.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
@@ -34,6 +36,7 @@ import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
 import { DamFolder } from "./dam/entities/dam-folder.entity";
 import { MenusModule } from "./menus/menus.module";
+import { NewsModule } from "./news/news.module";
 import { StatusModule } from "./status/status.module";
 
 @Module({})
@@ -100,7 +103,7 @@ export class AppModule {
                 PagesModule,
                 PageTreeModule.forRoot({
                     PageTreeNode: PageTreeNode,
-                    Documents: [Page, Link],
+                    Documents: [Page, Link, PredefinedPage],
                     Scope: PageTreeNodeScope,
                     sitePreviewSecret: config.sitePreviewSecret,
                 }),
@@ -126,6 +129,8 @@ export class AppModule {
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                PredefinedPagesModule,
+                NewsModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({

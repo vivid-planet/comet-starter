@@ -1,0 +1,54 @@
+---
+import { gql } from "@comet/cms-site";
+import { Footer } from "@src/layout/footer/Footer";
+import { footerFragment } from "@src/layout/footer/Footer.fragment";
+import { HeaderContextsWrapper } from "@src/layout/header/Header";
+import { headerFragment } from "@src/layout/header/Header.fragment";
+import { getSiteConfigForRequest } from "@src/util/siteConfig";
+
+import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./Layout.generated";
+import { previewParams } from "@src/util/sitePreview";
+import { createGraphQLFetch } from "@src/util/createGraphQLFetch";
+import { loadMessages } from "@src/util/loadMessages";
+import "@src/styles/global.scss";
+
+interface Props {
+    domain: string;
+    language: string;
+}
+
+const siteConfig = await getSiteConfigForRequest(Astro.request);
+if (!siteConfig) throw new Error("SiteConfig not found");
+const preview = await previewParams(Astro.request);
+const graphQLFetch = createGraphQLFetch(preview?.previewData);
+
+const { header, footer } = await graphQLFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
+    gql`
+        query Layout($domain: String!, $language: String!) {
+            header: mainMenu(scope: { domain: $domain, language: $language }) {
+                ...Header
+            }
+            footer: footer(scope: { domain: $domain, language: $language }) {
+                ...Footer
+            }
+        }
+        ${headerFragment}
+        ${footerFragment}
+    `,
+    Astro.props,
+);
+
+const messages = await loadMessages(Astro.props.language);
+
+
+---
+<html>
+    <head>
+        <title>xxxx</title>
+    </head>
+    <body>
+        <HeaderContextsWrapper client:load header={header} language={Astro.props.language} messages={messages} />
+        <slot />
+        {footer && <Footer footer={footer} />}
+    </body>
+</html>

@@ -41,6 +41,12 @@ function PageLink({ page, children, className: passedClassName, activeClassName 
                 {children}
             </Link>
         );
+    } else if (page.documentType === "PredefinedPage") {
+        return (
+            <Link href={`/${page.scope.language}${page.path}`} className={className}>
+                {children}
+            </Link>
+        );
     } else {
         if (process.env.NODE_ENV === "development") {
             throw new Error(`Unknown documentType "${page.documentType}"`);

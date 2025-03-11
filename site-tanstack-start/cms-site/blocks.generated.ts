@@ -1,0 +1,1 @@
+../src/blocks.generated.ts

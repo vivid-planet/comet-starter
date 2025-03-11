@@ -12,7 +12,9 @@ import {
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
+import { PredefinedPage } from "@src/documents/predefinedPages/PredefinedPage";
 import { EditFooterPage } from "@src/footers/EditFooterPage";
+import { NewsPage } from "@src/news/NewsPage";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { FormattedMessage } from "react-intl";
 
@@ -20,6 +22,7 @@ import { FormattedMessage } from "react-intl";
 export const pageTreeDocumentTypes: Record<string, DocumentInterface<any, any>> = {
     Page,
     Link,
+    PredefinedPage,
 };
 const RedirectsPage = createRedirectsPage({ scopeParts: ["domain"] });
 
@@ -77,6 +80,16 @@ export const masterMenuData: MasterMenuData = [
             },
         ],
         requiredPermission: "pageTree",
+    },
+    {
+        type: "route",
+        primary: <FormattedMessage id="menu.news" defaultMessage="News" />,
+        icon: <Assets />,
+        route: {
+            path: "/news",
+            component: NewsPage,
+        },
+        requiredPermission: "news",
     },
     {
         type: "route",

@@ -7,7 +7,7 @@ const config = {
     scripts: [
         {
             name: "docker",
-            script: "docker compose up",
+            script: "docker-compose up",
             group: "api",
         },
         {
