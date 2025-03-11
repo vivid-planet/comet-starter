@@ -1,6 +1,6 @@
 "use client";
-import { ListBlock, PropsWithData, withPreview } from "@comet/cms-site";
-import { CallToActionListBlockData } from "@src/blocks.generated";
+import { ListBlock, type PropsWithData, withPreview } from "@comet/cms-site";
+import { type CallToActionListBlockData } from "@src/blocks.generated";
 import { CallToActionBlock } from "@src/common/blocks/CallToActionBlock";
 import styled from "styled-components";
 

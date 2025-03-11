@@ -1,9 +1,9 @@
 import { gql } from "@comet/cms-site";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { getSiteConfig } from "@src/util/siteConfig";
-import { MetadataRoute } from "next";
+import { type MetadataRoute } from "next";
 
-import { GQLPrebuildPageDataListSitemapQuery, GQLPrebuildPageDataListSitemapQueryVariables } from "./sitemap.generated";
+import { type GQLPrebuildPageDataListSitemapQuery, type GQLPrebuildPageDataListSitemapQueryVariables } from "./sitemap.generated";
 
 export const dynamic = "force-dynamic"; // don't generate at build time
 

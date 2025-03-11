@@ -1,8 +1,9 @@
 import { gql } from "@apollo/client";
 import { Loading, MainContent, RouterPrompt, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft, Preview } from "@comet/admin-icons";
-import { AdminComponentRoot, AdminTabLabel } from "@comet/blocks-admin";
 import {
+    BlockAdminComponentRoot,
+    BlockAdminTabLabel,
     BlockPreviewWithTabs,
     ContentScopeIndicator,
     createUsePage,
@@ -20,7 +21,12 @@ import { useRouteMatch } from "react-router";
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
 import { StageBlock } from "./blocks/StageBlock";
-import { GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation, GQLUpdatePageMutationVariables } from "./EditPage.generated";
+import {
+    type GQLEditPageQuery,
+    type GQLEditPageQueryVariables,
+    type GQLUpdatePageMutation,
+    type GQLUpdatePageMutationVariables,
+} from "./EditPage.generated";
 
 interface Props {
     id: string;
@@ -161,37 +167,39 @@ export const EditPage = ({ id }: Props) => {
                         {
                             key: "content",
                             label: (
-                                <AdminTabLabel isValid={rootBlocksApi.content.isValid}>
+                                <BlockAdminTabLabel isValid={rootBlocksApi.content.isValid}>
                                     <FormattedMessage id="generic.blocks" defaultMessage="Blocks" />
-                                </AdminTabLabel>
+                                </BlockAdminTabLabel>
                             ),
                             content: (
-                                <AdminComponentRoot
+                                <BlockAdminComponentRoot
                                     title={intl.formatMessage({ id: "pages.pages.page.edit.pageBlocks.title", defaultMessage: "Page" })}
                                 >
                                     {rootBlocksApi.content.adminUI}
-                                </AdminComponentRoot>
+                                </BlockAdminComponentRoot>
                             ),
                         },
                         {
                             key: "stage",
                             label: (
-                                <AdminTabLabel isValid={rootBlocksApi.stage.isValid}>
+                                <BlockAdminTabLabel isValid={rootBlocksApi.stage.isValid}>
                                     <FormattedMessage id="pages.page.edit.stage" defaultMessage="Stage" />
-                                </AdminTabLabel>
+                                </BlockAdminTabLabel>
                             ),
                             content: (
-                                <AdminComponentRoot title={intl.formatMessage({ id: "pages.pages.page.edit.stage.title", defaultMessage: "Stage" })}>
+                                <BlockAdminComponentRoot
+                                    title={intl.formatMessage({ id: "pages.pages.page.edit.stage.title", defaultMessage: "Stage" })}
+                                >
                                     {rootBlocksApi.stage.adminUI}
-                                </AdminComponentRoot>
+                                </BlockAdminComponentRoot>
                             ),
                         },
                         {
                             key: "config",
                             label: (
-                                <AdminTabLabel isValid={rootBlocksApi.seo.isValid}>
+                                <BlockAdminTabLabel isValid={rootBlocksApi.seo.isValid}>
                                     <FormattedMessage id="pages.pages.page.edit.config" defaultMessage="Config" />
-                                </AdminTabLabel>
+                                </BlockAdminTabLabel>
                             ),
                             content: rootBlocksApi.seo.adminUI,
                         },
