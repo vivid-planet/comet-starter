@@ -1,5 +1,3 @@
-import { createContext, type PropsWithChildren, useContext } from "react";
-
 import cometConfig from "./comet-config.json";
 import { environment } from "./environment";
 import { type PublicSiteConfig } from "./site-configs";
@@ -21,27 +19,11 @@ export function createConfig() {
         apiUrl: environmentVariables.API_URL,
         adminUrl: environmentVariables.ADMIN_URL,
         previewUrl: environmentVariables.PREVIEW_URL,
-        sitesConfig: JSON.parse(atob(environmentVariables.PUBLIC_SITE_CONFIGS)) as PublicSiteConfig[],
+        siteConfigs: JSON.parse(atob(environmentVariables.PUBLIC_SITE_CONFIGS)) as PublicSiteConfig[],
         buildDate: environmentVariables.BUILD_DATE,
         buildNumber: environmentVariables.BUILD_NUMBER,
         commitSha: environmentVariables.COMMIT_SHA,
+        // TODO: Remove the following line in v8.0.0-beta.3
+        dam: { ...cometConfig.dam, allowedImageSizes: [...cometConfig.images.imageSizes, ...cometConfig.images.deviceSizes] },
     };
-}
-
-type Config = ReturnType<typeof createConfig>;
-
-const ConfigContext = createContext<Config | undefined>(undefined);
-
-export function ConfigProvider({ config, children }: PropsWithChildren<{ config: Config }>) {
-    return <ConfigContext.Provider value={config}>{children}</ConfigContext.Provider>;
-}
-/** @knipignore */
-export function useConfig(): Config {
-    const config = useContext(ConfigContext);
-
-    if (config === undefined) {
-        throw new Error("useConfig must be used within a ConfigProvider");
-    }
-
-    return config;
 }

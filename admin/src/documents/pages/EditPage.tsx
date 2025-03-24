@@ -9,8 +9,8 @@ import {
     createUsePage,
     openSitePreviewWindow,
     PageName,
+    useBlockContext,
     useBlockPreview,
-    useCmsBlockContext,
     useSiteConfig,
 } from "@comet/cms-admin";
 import { Button, IconButton, Stack } from "@mui/material";
@@ -85,7 +85,7 @@ export const EditPage = ({ id }: Props) => {
     const siteConfig = useSiteConfig({ scope });
     const previewApi = useBlockPreview();
 
-    const blockContext = useCmsBlockContext();
+    const blockContext = useBlockContext();
 
     const tabRouteMatch = useRouteMatch<{ tab: string }>(`${match.path}/:tab`);
 
