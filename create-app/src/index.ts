@@ -9,7 +9,7 @@ import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { isValidProjectName } from "./util/isValidProjectName";
 
 if (!isValidNodeVersion()) {
-    console.error("Invalid Node Version (your Node.js version is prior to v20).");
+    console.error("Invalid Node Version (your Node.js version is prior to v22).");
     process.exit(1);
 }
 
