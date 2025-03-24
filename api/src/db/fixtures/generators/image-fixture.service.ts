@@ -3,7 +3,6 @@ import { faker } from "@faker-js/faker";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityManager, EntityRepository } from "@mikro-orm/postgresql";
 import { Injectable } from "@nestjs/common";
-import { DamScope } from "@src/dam/dto/dam-scope";
 import { DamFile } from "@src/dam/entities/dam-file.entity";
 import * as fs from "fs/promises";
 import path from "path";
