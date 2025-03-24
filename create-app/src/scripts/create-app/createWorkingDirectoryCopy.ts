@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import kleur from "kleur";
 import process from "process";
 
-import { CreateAppCommandOptions } from "./createApp";
+import { type CreateAppCommandOptions } from "./createApp";
 
 export function createWorkingDirectoryCopy({
     projectName,

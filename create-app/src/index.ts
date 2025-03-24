@@ -1,14 +1,12 @@
 import { Command } from "commander";
 import kleur from "kleur";
 
+import { name, version } from "../package.json";
 import { createApp } from "./scripts/create-app/createApp";
 import { removeSite } from "./scripts/remove-site/removeSite";
 import { cwdIsCometProject } from "./util/cwdIsCometProject";
 import { isValidNodeVersion } from "./util/isValidNodeVersion";
 import { isValidProjectName } from "./util/isValidProjectName";
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { name, version } = require("../package.json");
 
 if (!isValidNodeVersion()) {
     console.error("Invalid Node Version (your Node.js version is prior to v20).");
