@@ -23,7 +23,5 @@ export function createConfig() {
         buildDate: environmentVariables.BUILD_DATE,
         buildNumber: environmentVariables.BUILD_NUMBER,
         commitSha: environmentVariables.COMMIT_SHA,
-        // TODO: Remove the following line in v8.0.0-beta.3
-        dam: { ...cometConfig.dam, allowedImageSizes: [...cometConfig.images.imageSizes, ...cometConfig.images.deviceSizes] },
     };
 }
