@@ -43,7 +43,7 @@ export class ImageFixtureService {
 
         for (const image of images) {
             const file = await createFileUploadInputFromUrl(path.resolve(`${directory}/${image}`));
-            const pixelImage = await this.filesService.upload(file);
+            const pixelImage = await this.filesService.upload(file, {});
 
             this.pixelImageFiles.push(pixelImage);
         }
@@ -59,7 +59,7 @@ export class ImageFixtureService {
         for (const svg of files) {
             const file = await createFileUploadInputFromUrl(path.resolve(`${svgDirectoryPath}/${svg}`));
             file.mimetype = "image/svg+xml"; // mime type is undefined for svg files and wrongly typed in download function (a possible undefined type is typed as string)
-            this.svgImageFiles.push(await this.filesService.upload(file));
+            this.svgImageFiles.push(await this.filesService.upload(file, {}));
             count++;
 
             if (count === maximumImageCount) break;
