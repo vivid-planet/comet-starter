@@ -1,6 +1,0 @@
-{
-    "extends": ["@comet/eslint-config/nestjs", "plugin:@cspell/recommended"],
-    "rules": {
-        "@comet/no-other-module-relative-import": "off"
-    }
-}
