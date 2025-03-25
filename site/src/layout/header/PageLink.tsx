@@ -1,6 +1,7 @@
 "use client";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
+import { createSitePath } from "@src/util/createSitePath";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type PropsWithChildren } from "react";
@@ -37,7 +38,7 @@ function PageLink({ page, children, className: passedClassName, activeClassName 
         );
     } else if (page.documentType === "Page") {
         return (
-            <Link href={`/${page.scope.language}${page.path}`} className={className}>
+            <Link href={createSitePath({ scope: page.scope, path: page.path })} className={className}>
                 {children}
             </Link>
         );
