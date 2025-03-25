@@ -57,7 +57,7 @@
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
         "eslint": "^9.18.0",
-        "knip": "^5.46.0",
+        "knip": "^5.46.1",
         "npm-run-all2": "^7.0.2",
         "postcss-styled-syntax": "^0.7.1",
         "prettier": "^3.4.2",
