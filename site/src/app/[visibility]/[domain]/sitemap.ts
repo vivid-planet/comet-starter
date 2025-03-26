@@ -1,4 +1,5 @@
 import { gql } from "@comet/cms-site";
+import { createSitePath } from "@src/util/createSitePath";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { getSiteConfig } from "@src/util/siteConfig";
 import { type MetadataRoute } from "next";
@@ -40,7 +41,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
                         const seoBlock = pageTreeNode.document.seo;
                         if (!seoBlock.noIndex) {
                             sitemap.push({
-                                url: `${siteConfig.url}/${scope.language}${pageTreeNode.path}`,
+                                url: `${siteConfig.url}${createSitePath({
+                                    scope: {
+                                        language: language,
+                                    },
+                                    path: pageTreeNode.path,
+                                })}`,
                                 priority: Number(seoBlock.priority.replace("_", ".")),
                                 changeFrequency: seoBlock.changeFrequency,
                                 lastModified: pageTreeNode.document.updatedAt,
