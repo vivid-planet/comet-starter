@@ -10,7 +10,7 @@ type CreateSitePathOptions = {
  *
  * @return {string} The resolved URL: /{scope.language}/path
  */
-export const createSitePath = ({ path, scope }: CreateSitePathOptions) => {
+export const createSitePath = ({ path, scope }: CreateSitePathOptions): string => {
     if (!path.startsWith("/")) {
         throw new Error("Path must start with a `/`.");
     }
