@@ -3,6 +3,7 @@
 import { Typography } from "@src/common/components/Typography";
 import { PageLayout } from "@src/layout/PageLayout";
 import type { ContentScope } from "@src/site-configs";
+import { createSitePath } from "@src/util/createSitePath";
 import Link from "next/link";
 import { FormattedMessage } from "react-intl";
 import styled from "styled-components";
@@ -14,7 +15,12 @@ export default function NotFoundContent({ scope }: { scope: ContentScope }) {
                 <NotFoundTypography variant="h350">
                     <FormattedMessage id="notFound.pageNotFound" defaultMessage="Page not found." />
                 </NotFoundTypography>
-                <HomeLink href={`/${scope.language}`}>
+                <HomeLink
+                    href={createSitePath({
+                        scope: scope,
+                        path: "/",
+                    })}
+                >
                     <FormattedMessage id="notFound.returnHome" defaultMessage="Return home" />
                 </HomeLink>
             </PageLayoutContent>
