@@ -7,4 +7,4 @@ RUN npm ci && \
     npm run build && \
     npm prune --omit=dev
 
-CMD "node" "dist/main"
+CMD node dist/console.js migrate && node dist/main
