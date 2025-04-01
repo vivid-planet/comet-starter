@@ -169,77 +169,86 @@ services:
     run_command: npm run db:migrate:prod && npm run start:prod
     source_dir: /api
   - envs:
-      - key: OAUTH2_PROXY_API_ROUTES
+      - key: OAUTH2_PROXY_CLIENT_ID
         scope: RUN_AND_BUILD_TIME
-        value: /api
+        value: 59e44de5-0431-4413-b50b-7e52740a6d7b
+      - key: OAUTH2_PROXY_CLIENT_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${OAUTH2_PROXY_CLIENT_SECRET}
+      - key: OAUTH2_PROXY_COOKIE_SECRET
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+        value: ${OAUTH2_PROXY_COOKIE_SECRET}
+      # Provider
       - key: OAUTH2_PROXY_CODE_CHALLENGE_METHOD
         scope: RUN_AND_BUILD_TIME
         value: S256
-      - key: OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER
+      - key: OAUTH2_PROXY_OIDC_ISSUER_URL
         scope: RUN_AND_BUILD_TIME
-        value: "true"
-      - key: OAUTH2_PROXY_PASS_ACCESS_TOKEN
+        value: https://auth-sso.vivid-planet.cloud
+      - key: OAUTH2_PROXY_PROVIDER
         scope: RUN_AND_BUILD_TIME
-        value: "true"
-      - key: OAUTH2_PROXY_COOKIE_SECURE
+        value: oidc
+      - key: OAUTH2_PROXY_SCOPE
         scope: RUN_AND_BUILD_TIME
-        value: "true"
+        value: openid profile email offline_access
+      # Cookie
       - key: OAUTH2_PROXY_COOKIE_SAMESITE
         scope: RUN_AND_BUILD_TIME
         value: lax
-      - key: OAUTH2_PROXY_COOKIE_HTTPONLY
+      - key: OAUTH2_PROXY_COOKIE_REFRESH
+        scope: RUN_AND_BUILD_TIME
+        value: 55m
+      # Header
+      - key: OAUTH2_PROXY_PASS_ACCESS_TOKEN
         scope: RUN_AND_BUILD_TIME
         value: "true"
-      - key: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
+      - key: OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER
         scope: RUN_AND_BUILD_TIME
         value: "true"
-      - key: OAUTH2_PROXY_SILENCE_PING_LOGGING_true
+      # Logging
+      - key: OAUTH2_PROXY_AUTH_LOGGING
         scope: RUN_AND_BUILD_TIME
         value: "true"
       - key: OAUTH2_PROXY_REQUEST_LOGGING
         scope: RUN_AND_BUILD_TIME
         value: "false"
-      - key: OAUTH2_PROXY_AUTH_LOGGING
+      - key: OAUTH2_PROXY_SILENCE_PING_LOGGING
         scope: RUN_AND_BUILD_TIME
         value: "true"
-      - key: OAUTH2_PROXY_COOKIE_REFRESH
+      - key: OAUTH2_PROXY_STANDARD_LOGGING
         scope: RUN_AND_BUILD_TIME
-        value: 23h
+        value: "false"
+      # Proxy
+      - key: OAUTH2_PROXY_API_ROUTES
+        scope: RUN_AND_BUILD_TIME
+        value: /api
       - key: OAUTH2_PROXY_EMAIL_DOMAINS
         scope: RUN_AND_BUILD_TIME
         value: "*"
-      - key: OAUTH2_PROXY_CLIENT_SECRET
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: ${OAUTH2_PROXY_CLIENT_SECRET}
-      - key: OAUTH2_PROXY_CLIENT_ID
-        scope: RUN_AND_BUILD_TIME
-        value: 59e44de5-0431-4413-b50b-7e52740a6d7b
-      - key: OAUTH2_PROXY_COOKIE_SECRET
-        scope: RUN_AND_BUILD_TIME
-        type: SECRET
-        value: ${OAUTH2_PROXY_COOKIE_SECRET}
-      - key: OAUTH2_PROXY_PROVIDER
-        scope: RUN_AND_BUILD_TIME
-        value: oidc
-      - key: OAUTH2_PROXY_OIDC_ISSUER_URL
-        scope: RUN_AND_BUILD_TIME
-        value: https://auth-sso.vivid-planet.cloud
-      - key: OAUTH2_PROXY_UPSTREAMS
-        scope: RUN_AND_BUILD_TIME
-        value: http://admin:80,http://api:80/api/
-      - key: OAUTH2_PROXY_WHITELIST_DOMAIN
-        scope: RUN_AND_BUILD_TIME
-        value: auth-sso.vivid-planet.cloud
-      - key: OAUTH2_PROXY_SCOPE
-        scope: RUN_AND_BUILD_TIME
-        value: openid profile email offline_access
-      - key: OAUTH2_PROXY_HTTP_ADDRESS
-        scope: RUN_AND_BUILD_TIME
-        value: 0.0.0.0:4180
       - key: OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT
         scope: RUN_AND_BUILD_TIME
         value: "true"
+      - key: OAUTH2_PROXY_SKIP_AUTH_ROUTE
+        scope: RUN_AND_BUILD_TIME
+        value: "^(/api)?/status/"
+      - key: OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
+        scope: RUN_AND_BUILD_TIME
+        value: "true"
+      - key: OAUTH2_PROXY_WHITELIST_DOMAIN
+        scope: RUN_AND_BUILD_TIME
+        value: auth-sso.vivid-planet.cloud
+      - key: OAUTH2_PROXY_HTTP_ADDRESS
+        scope: RUN_AND_BUILD_TIME
+        value: 0.0.0.0:4180 # allow non-localhost access
+      # Upstream
+      - key: OAUTH2_PROXY_UPSTREAMS
+        scope: RUN_AND_BUILD_TIME
+        value: http://admin:80,http://api:80/api/
     http_port: 4180
     image:
       registry: dkarnutsch
