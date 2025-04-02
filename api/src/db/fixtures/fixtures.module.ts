@@ -7,7 +7,6 @@ import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
-import { ConsoleModule } from "nestjs-console";
 
 import { AccordionBlockFixtureService } from "./generators/blocks/layout/accordion-block-fixture.service";
 import { ColumnsBlockFixtureService } from "./generators/blocks/layout/columns-block-fixture.service";
@@ -45,7 +44,7 @@ import { VideoFixtureService } from "./generators/video-fixture.service";
 import { FixturesCommand } from "./fixtures.command";
 
 @Module({
-    imports: [ConfigModule, ConsoleModule, PagesModule, LinksModule, DependenciesModule, MikroOrmModule.forFeature([DamFile, Page, Link])],
+    imports: [ConfigModule, PagesModule, LinksModule, DependenciesModule, MikroOrmModule.forFeature([DamFile, Page, Link])],
     providers: [
         AccordionBlockFixtureService,
         AnchorBlockFixtureService,

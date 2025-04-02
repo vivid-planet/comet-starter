@@ -18,7 +18,7 @@ export class MediaBlockFixtureService {
     ) {}
 
     async generateBlockInput(): Promise<ExtractBlockInputFactoryProps<typeof MediaBlock>> {
-        const types = ["image", "damVideo", "youTubeVideo"] as const;
+        const types = ["image", "damVideo", "youTubeVideo", "vimeoVideo"] as const;
         const type = faker.helpers.arrayElement(types);
 
         return {
@@ -34,6 +34,10 @@ export class MediaBlockFixtureService {
                 {
                     type: "youTubeVideo",
                     props: await this.youtubeVideoBlockFixtureService.generateBlockInput(),
+                },
+                {
+                    type: "vimeoVideo",
+                    props: await this.vimeoVideoBlockFixtureService.generateBlockInput(),
                 },
             ],
             activeType: type,

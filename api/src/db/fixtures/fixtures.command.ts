@@ -49,18 +49,10 @@ export class FixturesCommand extends CommandRunner {
         const migrator = this.orm.getMigrator();
         await migrator.up();
 
-        const scope = { domain: "main", language: "en" };
-        await this.initiateDependencies(scope);
-
         const multiBar = new MultiBar(this.barOptions, Presets.shades_classic);
-        multiBar.stop();
 
-        await this.dependenciesService.createViews();
+        const scope = { domain: "main", language: "en" };
 
-        await this.orm.em.flush();
-    }
-
-    async initiateDependencies(scope: { domain: string; language: string }): Promise<void> {
         this.logger.log(`Generate Images...`);
         await this.imageFixtureService.generateImages(5);
 
@@ -86,5 +78,9 @@ export class FixturesCommand extends CommandRunner {
             blockCategory: "textAndContent",
             parentId: blockCategoriesPage.id,
         });
+
+        multiBar.stop();
+        await this.dependenciesService.createViews();
+        await this.orm.em.flush();
     }
 }

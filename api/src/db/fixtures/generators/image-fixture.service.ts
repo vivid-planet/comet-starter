@@ -67,10 +67,7 @@ export class ImageFixtureService {
     }
 
     public async generateImages(maximumImageCount: number): Promise<void> {
-        console.log("Generate Pixel Images ...");
         await this.generatePixelImages(maximumImageCount);
-
-        console.log("Generate SVG Images ...");
         await this.generateSvgImages(maximumImageCount);
     }
 }

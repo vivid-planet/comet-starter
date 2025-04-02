@@ -32,7 +32,7 @@ export class VideoFixtureService {
 
         for (const video of files) {
             const file = await createFileUploadInputFromUrl(path.resolve(`${videoDirectoryPath}/${video}`));
-            this.videoFiles.push(await this.filesService.upload(file));
+            this.videoFiles.push(await this.filesService.upload(file, {}));
         }
 
         await this.entityManager.flush();
