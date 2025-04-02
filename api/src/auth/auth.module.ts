@@ -14,7 +14,7 @@ import { Config } from "@src/config/config";
 
 import { AccessControlService } from "./access-control.service";
 import { staticUsers } from "./static-users";
-import { UserService } from "./user.service";
+import { StaticUsersUserService } from "./static-users.user.service";
 
 export const SYSTEM_USER_NAME = "system-user";
 
@@ -34,12 +34,20 @@ export class AuthModule {
                 endSessionEndpoint: config.auth.idpEndSessionEndpoint,
             }),
             AccessControlService,
-            UserService,
+            StaticUsersUserService,
         ];
 
         if (config.auth.useAuthProxy) {
             authServices.push(
-                createJwtAuthService({ verifyOptions: { audience: config.auth.idpClientId }, jwksOptions: { jwksUri: config.auth.idpJwksUri } }),
+                createJwtAuthService({
+                    verifyOptions: {
+                        audience: config.auth.idpClientId,
+                    },
+                    jwksOptions: {
+                        jwksUri: config.auth.idpJwksUri,
+                    },
+                    convertJwtToUser: () => staticUsers.vividPlanetEmployee, // TODO Remove when correct UserService is used in UserPermissionsModule
+                }),
             );
             providers.push({
                 provide: APP_GUARD,
@@ -65,7 +73,7 @@ export class AuthModule {
         return {
             module: AuthModule,
             providers,
-            exports: [AccessControlService, UserService],
+            exports: [AccessControlService, StaticUsersUserService],
             imports: [JwtModule],
         };
     }

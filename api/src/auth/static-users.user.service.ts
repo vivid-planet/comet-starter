@@ -4,7 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { staticUsers } from "./static-users";
 
 @Injectable()
-export class UserService implements UserPermissionsUserServiceInterface {
+export class StaticUsersUserService implements UserPermissionsUserServiceInterface {
     getUser(id: string): User {
         const user = Object.values(staticUsers).find((user) => user.id === id);
 
