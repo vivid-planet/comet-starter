@@ -1,9 +1,9 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { StageBlock } from "@src/documents/pages/blocks/stage.block";
 
 import { BasicStageBlockFixtureService } from "./blocks/stage/basic-stage-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class StageBlockFixtureService {

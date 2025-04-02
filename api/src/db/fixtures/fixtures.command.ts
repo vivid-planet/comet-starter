@@ -1,14 +1,15 @@
 import { DependenciesService } from "@comet/cms-api";
+import { faker } from "@faker-js/faker";
 import { CreateRequestContext, MikroORM } from "@mikro-orm/core";
 import { Inject, Logger } from "@nestjs/common";
 import { Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
 import { MultiBar, Options, Presets } from "cli-progress";
 import { Command, CommandRunner } from "nest-commander";
+
 import { DocumentGeneratorService } from "./generators/document-generator.service";
 import { ImageFixtureService } from "./generators/image-fixture.service";
 import { VideoFixtureService } from "./generators/video-fixture.service";
-import { faker } from "@faker-js/faker";
 
 @Command({
     name: "fixtures",

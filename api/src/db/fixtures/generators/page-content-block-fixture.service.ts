@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { PageContentBlock } from "@src/documents/pages/blocks/page-content.block";
@@ -16,7 +17,6 @@ import { TeaserBlockFixtureService } from "./blocks/teaser/teaser-block-fixture.
 import { KeyFactsBlockFixtureService } from "./blocks/text-and-content/key-facts-block-fixture.service";
 import { RichTextBlockFixtureService } from "./blocks/text-and-content/rich-text-block-fixture.service";
 import { StandaloneHeadingBlockFixtureService } from "./blocks/text-and-content/standalone-heading-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 export type BlockCategory = "layout" | "media" | "navigation" | "teaser" | "textAndContent";
 

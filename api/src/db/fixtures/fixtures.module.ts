@@ -8,6 +8,7 @@ import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
 
+import { FixturesCommand } from "./fixtures.command";
 import { AccordionBlockFixtureService } from "./generators/blocks/layout/accordion-block-fixture.service";
 import { ColumnsBlockFixtureService } from "./generators/blocks/layout/columns-block-fixture.service";
 import { ContentGroupBlockFixtureService } from "./generators/blocks/layout/content-group-block-fixture.service";
@@ -41,7 +42,6 @@ import { PageContentBlockFixtureService } from "./generators/page-content-block-
 import { SeoBlockFixtureService } from "./generators/seo-block-fixture.service";
 import { StageBlockFixtureService } from "./generators/stage-block-fixture.service";
 import { VideoFixtureService } from "./generators/video-fixture.service";
-import { FixturesCommand } from "./fixtures.command";
 
 @Module({
     imports: [ConfigModule, PagesModule, LinksModule, DependenciesModule, MikroOrmModule.forFeature([DamFile, Page, Link])],

@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
@@ -5,7 +6,6 @@ import { KeyFactsItemBlock } from "@src/documents/pages/blocks/key-facts-item.bl
 
 import { SvgImageBlockFixtureService } from "../media/svg-image-block-fixture.service";
 import { RichTextBlockFixtureService } from "./rich-text-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class KeyFactsBlockFixtureService {

@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { MediaGalleryBlock, MediaGalleryListBlock } from "@src/common/blocks/media-gallery.block";
@@ -5,7 +6,6 @@ import { MediaGalleryItemBlock } from "@src/common/blocks/media-gallery-item.blo
 import { MediaAspectRatios } from "@src/util/mediaAspectRatios";
 
 import { MediaBlockFixtureService } from "./media-block.fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class MediaGalleryBlockFixtureService {

@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { AccordionBlock } from "@src/common/blocks/accordion.block";
@@ -8,7 +9,6 @@ import { StandaloneCallToActionListBlockFixtureService } from "../navigation/sta
 import { RichTextBlockFixtureService } from "../text-and-content/rich-text-block-fixture.service";
 import { StandaloneHeadingBlockFixtureService } from "../text-and-content/standalone-heading-block-fixture.service";
 import { SpaceBlockFixtureService } from "./space-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class AccordionBlockFixtureService {

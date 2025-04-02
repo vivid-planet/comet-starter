@@ -1,9 +1,9 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { TextLinkBlock } from "@src/common/blocks/text-link.block";
 
 import { LinkBlockFixtureService } from "./link-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class TextLinkBlockFixtureService {

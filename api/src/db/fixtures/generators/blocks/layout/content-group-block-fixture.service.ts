@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { BackgroundColor as ContentGroupBackgroundColor, ContentBlock, ContentGroupBlock } from "@src/documents/pages/blocks/content-group.block";
@@ -14,7 +15,6 @@ import { StandaloneHeadingBlockFixtureService } from "../text-and-content/standa
 import { AccordionBlockFixtureService } from "./accordion-block-fixture.service";
 import { ColumnsBlockFixtureService } from "./columns-block-fixture.service";
 import { SpaceBlockFixtureService } from "./space-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class ContentGroupBlockFixtureService {

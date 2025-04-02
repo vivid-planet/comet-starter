@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { ColumnsBlock, ColumnsContentBlock } from "@src/documents/pages/blocks/columns.block";
@@ -10,7 +11,6 @@ import { RichTextBlockFixtureService } from "../text-and-content/rich-text-block
 import { StandaloneHeadingBlockFixtureService } from "../text-and-content/standalone-heading-block-fixture.service";
 import { AccordionBlockFixtureService } from "./accordion-block-fixture.service";
 import { SpaceBlockFixtureService } from "./space-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 const oneColumnLayouts = [{ name: "2-20-2" }];
 

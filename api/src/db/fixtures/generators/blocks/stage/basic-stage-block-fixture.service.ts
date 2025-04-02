@@ -1,3 +1,4 @@
+import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
 import { Alignment as BasicStageBlockAlignment, BasicStageBlock } from "@src/documents/pages/blocks/basic-stage.block";
@@ -6,7 +7,6 @@ import { MediaBlockFixtureService } from "../media/media-block.fixture.service";
 import { CallToActionListBlockFixtureService } from "../navigation/call-to-action-list-block.service";
 import { HeadingBlockFixtureService } from "../text-and-content/heading-block-fixture.service";
 import { RichTextBlockFixtureService } from "../text-and-content/rich-text-block-fixture.service";
-import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 
 @Injectable()
 export class BasicStageBlockFixtureService {
