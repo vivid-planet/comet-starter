@@ -1,4 +1,4 @@
-import { createOneOfBlock, DamImageBlock, DamVideoBlock, YouTubeVideoBlock } from "@comet/cms-api";
+import { createOneOfBlock, DamImageBlock, DamVideoBlock, VimeoVideoBlock, YouTubeVideoBlock } from "@comet/cms-api";
 
 export const MediaBlock = createOneOfBlock(
     {
@@ -6,6 +6,7 @@ export const MediaBlock = createOneOfBlock(
             image: DamImageBlock,
             damVideo: DamVideoBlock,
             youTubeVideo: YouTubeVideoBlock,
+            vimeoVideo: VimeoVideoBlock,
         },
     },
     "Media",
