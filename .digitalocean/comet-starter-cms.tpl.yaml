@@ -230,7 +230,7 @@ services:
       - key: OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT
         scope: RUN_AND_BUILD_TIME
         value: "true"
-      - key: OAUTH2_PROXY_SKIP_AUTH_ROUTE
+      - key: OAUTH2_PROXY_SKIP_AUTH_ROUTES
         scope: RUN_AND_BUILD_TIME
         value: "^(/api)?/status/"
       - key: OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS
