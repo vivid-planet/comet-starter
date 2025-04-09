@@ -27,7 +27,7 @@ import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
 import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
-import { UserService } from "./auth/user.service";
+import { StaticUsersUserService } from "./auth/static-users.user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
@@ -80,7 +80,7 @@ export class AppModule {
                 }),
                 authModule,
                 UserPermissionsModule.forRootAsync({
-                    useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
+                    useFactory: (userService: StaticUsersUserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
                             siteConfig.scope.languages.map((language) => ({
                                 domain: siteConfig.scope.domain,
@@ -91,7 +91,7 @@ export class AppModule {
                         accessControlService,
                         systemUsers: [SYSTEM_USER_NAME],
                     }),
-                    inject: [UserService, AccessControlService],
+                    inject: [StaticUsersUserService, AccessControlService], // TODO Implement correct UserService and remove convertJwtToUser in AuthModule
                     imports: [authModule],
                 }),
                 BlocksModule,
