@@ -105,7 +105,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
     }
     if (document.__typename != "Page") throw new Error(`invalid document type`);
 
-    [document.content, document.seo] = await Promise.all([
+    [document.content, document.seo, document.stage] = await Promise.all([
         recursivelyLoadBlockData({
             blockType: "PageContent",
             blockData: document.content,
