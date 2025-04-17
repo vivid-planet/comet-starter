@@ -9,8 +9,12 @@
             "labels": ["comet", "dependencies"]
         },
         {
-            "groupName": "linters",
-            "matchPackageNames": ["/^eslint/", "/^prettier/"]
+            "groupName": "eslint",
+            "matchPackageNames": ["/^eslint/"]
+        },
+        {
+            "groupName": "prettier",
+            "matchPackageNames": ["/^prettier/"]
         },
         {
             "groupName": "typescript",

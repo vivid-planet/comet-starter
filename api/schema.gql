@@ -128,6 +128,48 @@ type UserPermissionPaginatedUserList {
   totalCount: Int!
 }
 
+type DamFolder {
+  id: ID!
+  name: String!
+  numberOfChildFolders: Int!
+  numberOfFiles: Int!
+  mpath: [ID!]!
+  archived: Boolean!
+  isInboxFromOtherScope: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  parent: DamFolder
+  parents: [DamFolder!]!
+}
+
+type DamFile {
+  id: ID!
+  folder: DamFolder
+  name: String!
+  size: Int!
+  mimetype: String!
+  contentHash: String!
+  title: String
+  altText: String
+  archived: Boolean!
+  image: DamFileImage
+  license: DamFileLicense
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  importSourceId: String
+  importSourceType: String
+  fileUrl: String!
+  duplicates: [DamFile!]!
+  damPath: String!
+  dependents(offset: Int! = 0, limit: Int! = 25, filter: DependentFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
+}
+
+input DependentFilter {
+  rootGraphqlObjectType: String
+  rootId: String
+  rootColumnName: String
+}
+
 type Link implements DocumentInterface {
   id: ID!
   updatedAt: DateTime!
@@ -182,12 +224,6 @@ enum PageTreeNodeCategory {
 
 union PageContentUnion = Page | Link
 
-input DependentFilter {
-  rootGraphqlObjectType: String
-  rootId: String
-  rootColumnName: String
-}
-
 type Page implements DocumentInterface {
   id: ID!
   updatedAt: DateTime!
@@ -225,42 +261,6 @@ scalar FooterContentBlockData @specifiedBy(url: "http://www.ecma-international.o
 
 type RedirectScope {
   domain: String!
-}
-
-type DamFolder {
-  id: ID!
-  name: String!
-  numberOfChildFolders: Int!
-  numberOfFiles: Int!
-  mpath: [ID!]!
-  archived: Boolean!
-  isInboxFromOtherScope: Boolean!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  parent: DamFolder
-  parents: [DamFolder!]!
-}
-
-type DamFile {
-  id: ID!
-  folder: DamFolder
-  name: String!
-  size: Int!
-  mimetype: String!
-  contentHash: String!
-  title: String
-  altText: String
-  archived: Boolean!
-  image: DamFileImage
-  license: DamFileLicense
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  importSourceId: String
-  importSourceType: String
-  fileUrl: String!
-  duplicates: [DamFile!]!
-  damPath: String!
-  dependents(offset: Int! = 0, limit: Int! = 25, filter: DependentFilter, forceRefresh: Boolean! = false): PaginatedDependencies!
 }
 
 type PaginatedPageTreeNodes {

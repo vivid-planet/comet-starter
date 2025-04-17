@@ -29,26 +29,42 @@ app.prepare().then(() => {
                     return;
                 }
             }
-            if (
-                parsedUrl.pathname?.startsWith("/assets/") ||
-                parsedUrl.pathname === "/favicon.ico" ||
-                parsedUrl.pathname === "/apple-icon.png" ||
-                parsedUrl.pathname === "/icon.svg" ||
-                parsedUrl.pathname === "/robots.txt" ||
-                parsedUrl.pathname === "/sitemap.xml"
-            ) {
-                const originalSetHeader = res.setHeader;
 
-                res.setHeader = function (name: string, value: string | number | readonly string[]) {
-                    if (name === "cache-control" || name === "Cache-Control") {
-                        // Next.js applies a default cache-control header of "public, max-age=0" for assets in the public/ folder
-                        // (see https://nextjs.org/docs/app/building-your-application/optimizing/static-assets#caching).
-                        // We want to cache these assets for 15 minutes.
-                        return originalSetHeader.call(this, name, "public, max-age=900");
+            // For Rsc requests: don't cache the response if the _rsc query param is missing
+            const rscParamMissing = !!req.headers["rsc"] && !new URLSearchParams(parsedUrl.search || "").has("_rsc");
+
+            const originalWriteHead = res.writeHead;
+            res.writeHead = function (statusCode: number, ...args: unknown[]) {
+                // since writeHead is a callback function, it's called after handle() -> we get the actual response statusCode
+                if (statusCode >= 400 || rscParamMissing) {
+                    // prevent caching of error responses
+                    res.setHeader("Cache-Control", "private, no-cache, no-store, max-age=0, must-revalidate");
+                } else if (
+                    parsedUrl.pathname?.startsWith("/assets/") ||
+                    parsedUrl.pathname === "/favicon.ico" ||
+                    parsedUrl.pathname === "/apple-icon.png" ||
+                    parsedUrl.pathname === "/icon.svg" ||
+                    parsedUrl.pathname === "/robots.txt" ||
+                    parsedUrl.pathname === "/sitemap.xml"
+                ) {
+                    res.setHeader("Cache-Control", "public, max-age=900");
+                }
+
+                // For redirects: append _rsc query param to redirect location if set in the original request
+                const rsc = new URLSearchParams(parsedUrl.search || "").get("_rsc");
+                const location = res.getHeader("location")?.toString() || "";
+                if (rsc && location.startsWith("/")) {
+                    const redirectUrl = parse(location, true);
+                    const redirectSearchParams = new URLSearchParams(redirectUrl.search || "");
+                    if (!redirectSearchParams.has("_rsc")) {
+                        redirectSearchParams.set("_rsc", rsc);
+                        res.setHeader("location", `${redirectUrl.pathname}?${redirectSearchParams.toString()}`);
                     }
-                    return originalSetHeader.call(this, name, value);
-                };
-            }
+                }
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return (originalWriteHead as any).apply(this, [statusCode, ...args]);
+            };
 
             await handle(req, res, parsedUrl);
         } catch (err) {
