@@ -4,6 +4,7 @@ import {
     PreviewSkeleton,
     type PropsWithData,
     type SupportedBlocks,
+    VimeoVideoBlock,
     withPreview,
     YouTubeVideoBlock,
 } from "@comet/cms-site";
@@ -15,6 +16,7 @@ const getSupportedBlocks = (sizes: string, aspectRatio: string, fill?: boolean):
         image: (data) => <DamImageBlock data={data} sizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
         damVideo: (data) => <DamVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
         youTubeVideo: (data) => <YouTubeVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
+        vimeoVideo: (data) => <VimeoVideoBlock data={data} previewImageSizes={sizes} aspectRatio={aspectRatio} fill={fill} />,
     };
 };
 
