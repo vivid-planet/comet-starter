@@ -15,6 +15,7 @@ const contentSecurityPolicyDirectives: ContentSecurityPolicyDirective[] = [
     { directive: "style-src-attr", values: ["'unsafe-inline'"] },
     { directive: "font-src", values: ["'self'", "data:"] },
     { directive: "frame-ancestors", values: [process.env.ADMIN_URL ?? "https:"] },
+    { directive: "frame-src", values: ["https://*.youtube-nocookie.com", "https://player.vimeo.com"] },
 ];
 
 if (process.env.NODE_ENV === "development") {
