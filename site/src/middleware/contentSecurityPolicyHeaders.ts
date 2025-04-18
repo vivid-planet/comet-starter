@@ -11,7 +11,8 @@ const contentSecurityPolicyDirectives: ContentSecurityPolicyDirective[] = [
     { directive: "default-src", values: ["'none'"] }, // Restrict any content not explicitly allowed
     { directive: "style-src-elem", values: ["'self'", "'unsafe-inline'"] },
     { directive: "script-src-elem", values: ["'self'", "'unsafe-inline'"] },
-    { directive: "img-src", values: ["'self'", "data:", process.env.API_URL?.replace("/api", "") ?? ""] },
+    { directive: "img-src", values: ["'self'", "data:"] },
+    { directive: "media-src", values: ["'self'", "data:"] },
     { directive: "style-src-attr", values: ["'unsafe-inline'"] },
     { directive: "font-src", values: ["'self'", "data:"] },
     { directive: "frame-ancestors", values: [process.env.ADMIN_URL ?? "https:"] },
