@@ -1,0 +1,20 @@
+---
+import Layout from "@src/layouts/Layout.astro";
+import { getSiteConfigForRequest } from "@src/util/siteConfig";
+import { previewParams } from "@src/util/sitePreview";
+
+const siteConfig = await getSiteConfigForRequest(Astro.request);
+if (!siteConfig) throw new Error("SiteConfig not found");
+//const preview = await previewParams(Astro.request);
+
+
+const language = Astro.params.language;
+const domain = siteConfig.scope.domain;
+if (!siteConfig.scope.languages.includes(language)) {
+    throw new Error("invalid language "+language);
+}
+
+---
+<Layout domain={domain}  language={language}>
+    News.....
+</Layout>

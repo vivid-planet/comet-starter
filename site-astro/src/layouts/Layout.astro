@@ -19,8 +19,12 @@ interface Props {
 
 const siteConfig = await getSiteConfigForRequest(Astro.request);
 if (!siteConfig) throw new Error("SiteConfig not found");
+if (!siteConfig.scope.languages.includes(Astro.props.language)) {
+    throw new Error("invalid language");
+}
 const preview = await previewParams(Astro.request);
 const graphQLFetch = createGraphQLFetch(preview?.previewData);
+
 
 const { header, footer } = await graphQLFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
     gql`

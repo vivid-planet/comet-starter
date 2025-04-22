@@ -15,6 +15,8 @@ Astro pain points:
 
 Astro so-lala:
 - kein rewrite (wie next) auf externen service möglich, geht aber per middleware oder endpoint (aka api route) plus fetch
+- predefined-pages rewrite genau so möglich wie in next (middleware)
+- mehrere middleware auch nicht möglich (wie in next)
 
 Astro top:
 - sehr gute docs

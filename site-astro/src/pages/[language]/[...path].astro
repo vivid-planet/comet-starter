@@ -6,11 +6,7 @@ import { getSiteConfigForRequest } from "@src/util/siteConfig";
 import { previewParams } from "@src/util/sitePreview";
 import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
 import type { GQLPageTreeNodeScope } from "@src/graphql.generated";
-import { ThemeProvider } from "styled-components";
-import { theme } from "@src/theme";
 import Layout from "@src/layouts/Layout.astro";
-import { IntlProvider } from "@src/util/IntlProvider";
-import { loadMessages } from "@src/util/loadMessages";
 
 export const documentTypeQuery = gql`
     query DocumentType($path: String!, $scope: PageTreeNodeScopeInput!, $redirectSource: String!, $redirectScope: RedirectScopeInput!) {
@@ -91,6 +87,6 @@ const pageTreeNodeId = documentTypeData.pageTreeNodeByPath.id;
 const { component: PageComponent } = documentTypes[documentType];
 
 ---
-<Layout domain={domain}  language={language}>
+<Layout domain={domain} language={language}>
     <PageComponent pageTreeNodeId={pageTreeNodeId} />
 </Layout>
