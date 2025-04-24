@@ -51,7 +51,7 @@
         "react-dom": "^18.3.1",
         "react-final-form": "^6.5.9",
         "react-intl": "^6.8.9",
-        "react-router": "^5.3.4",
+        "react-router": "^7.0.0",
         "react-router-dom": "^5.3.4"
     },
     "devDependencies": {
