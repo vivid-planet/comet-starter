@@ -73,7 +73,7 @@ const MediaCaption = styled(Typography)`
     /* min-height to show arrows when no caption */
     min-height: 20px;
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         min-height: 22px;
     }
 `;
