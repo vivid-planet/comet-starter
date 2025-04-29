@@ -15,7 +15,7 @@ const ResponsiveSpacingStyle = createGlobalStyle`
         --spacing-s100: 4px;
     }
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         :root {
             --spacing-d400: 96px;
             --spacing-d300: 68px;
@@ -24,7 +24,7 @@ const ResponsiveSpacingStyle = createGlobalStyle`
         }
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         :root {
             --spacing-d400: 120px;
             --spacing-d300: 84px;
@@ -33,7 +33,7 @@ const ResponsiveSpacingStyle = createGlobalStyle`
         }
     }
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
         :root {
             --spacing-d400: 172px;
             --spacing-d300: 100px;

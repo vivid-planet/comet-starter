@@ -10,19 +10,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 20px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 48px;
             line-height: 53px;
             margin-bottom: 24px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 61px;
             line-height: 67px;
             margin-bottom: 32px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 90px;
             line-height: 99px;
             margin-bottom: 40px;
@@ -34,19 +34,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 18px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 39px;
             line-height: 43px;
             margin-bottom: 20px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 48px;
             line-height: 53px;
             margin-bottom: 24px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 67px;
             line-height: 74px;
             margin-bottom: 30px;
@@ -58,19 +58,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 18px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 33px;
             line-height: 36px;
             margin-bottom: 20px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 39px;
             line-height: 43px;
             margin-bottom: 24px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 50px;
             line-height: 55px;
             margin-bottom: 30px;
@@ -82,19 +82,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 16px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 28px;
             line-height: 31px;
             margin-bottom: 18px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 31px;
             line-height: 34px;
             margin-bottom: 20px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 38px;
             line-height: 42px;
             margin-bottom: 22px;
@@ -106,19 +106,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 16px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 23px;
             line-height: 25px;
             margin-bottom: 16px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 25px;
             line-height: 28px;
             margin-bottom: 18px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 28px;
             line-height: 31px;
             margin-bottom: 18px;
@@ -130,19 +130,19 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 700;
         margin-bottom: 16px;
 
-        ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
             font-size: 20px;
             line-height: 22px;
             margin-bottom: 16px;
         }
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 21px;
             line-height: 23px;
             margin-bottom: 18px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 22px;
             line-height: 24px;
             margin-bottom: 18px;
@@ -154,13 +154,13 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 400;
         margin-bottom: 16px;
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 17px;
             line-height: 24px;
             margin-bottom: 17px;
         }
 
-        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
             font-size: 18px;
             line-height: 26px;
             margin-bottom: 18px;
@@ -172,7 +172,7 @@ const typographyVariantStyle: Record<TypographyVariant, ReturnType<typeof css>> 
         font-weight: 400;
         margin-bottom: 14px;
 
-        ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+        ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
             font-size: 15px;
             line-height: 22px;
             margin-bottom: 15px;
@@ -209,7 +209,7 @@ export const Typography = styled.div
         css`
             margin-bottom: 0;
 
-            ${theme.breakpoints.xs.mediaQuery} {
+            ${theme.breakpoints.sm.mediaQuery} {
                 margin-bottom: 0;
             }
         `};
