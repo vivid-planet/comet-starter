@@ -35,6 +35,9 @@ services:
       - key: NODE_ENV
         scope: RUN_TIME
         value: production
+      - key: SERVER_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: "0.0.0.0"
       - key: POSTGRESQL_HOST
         scope: RUN_AND_BUILD_TIME
         value: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
