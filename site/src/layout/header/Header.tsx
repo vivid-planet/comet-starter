@@ -122,7 +122,7 @@ const DesktopHeaderFullHeightNav = styled.nav`
     height: 100%;
     display: none;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: block;
     }
 `;
