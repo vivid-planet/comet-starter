@@ -168,3 +168,6 @@ services:
       - "traefik.http.routers.site.entrypoints=websecure"
       - "traefik.http.routers.site.tls.certresolver=myresolver"
       - "traefik.http.services.site.loadbalancer.server.port=3000"
+      # Add for prelogin (see https://doc.traefik.io/traefik/middlewares/http/basicauth/), e.g. comet/dxp
+      #- "traefik.http.routers.site.middlewares=prelogin"
+      #- "traefik.http.middlewares.prelogin.basicauth.users=comet:$$2y$$05$$KJPz7pyKVP66qQXipRSHZeidw44PBDep06r7P.ve6afvzfl1Td.t2"
