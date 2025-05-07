@@ -1,0 +1,56 @@
+import { gql } from "@comet/cms-site";
+import { ExternalLinkBlockData, InternalLinkBlockData } from "@src/blocks.generated";
+import { GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
+import { createGraphQLFetch } from "@src/util/graphQLClient";
+
+import { GQLLinkRedirectQuery, GQLLinkRedirectQueryVariables } from "./Link.generated";
+import { JSX } from "react";
+
+const linkRedirectQuery = gql`
+    query LinkRedirect($id: ID!) {
+        pageTreeNode(id: $id) {
+            document {
+                __typename
+                ... on Link {
+                    content
+                }
+            }
+        }
+    }
+`;
+
+interface Props {
+    pageTreeNodeId: string;
+    scope: GQLPageTreeNodeScopeInput;
+}
+
+export async function Link({ pageTreeNodeId }: Props): Promise<JSX.Element> {
+    const graphqlFetch = createGraphQLFetch();
+
+    const { pageTreeNode } = await graphqlFetch<GQLLinkRedirectQuery, GQLLinkRedirectQueryVariables>(linkRedirectQuery, {
+        id: pageTreeNodeId,
+    });
+
+    if (pageTreeNode?.document?.__typename === "Link") {
+        const content = pageTreeNode.document.content;
+
+        if (content.block?.type === "internal") {
+            const link = (content.block.props as InternalLinkBlockData).targetPage?.path;
+            if (link) {
+                //redirect(link);
+                throw new Error("Redirect"); // TODO
+            }
+        }
+
+        if (content.block?.type === "external") {
+            const link = (content.block.props as ExternalLinkBlockData).targetUrl;
+            if (link) {
+                //redirect(link);
+                throw new Error("Redirect"); // TODO
+            }
+        }
+    }
+
+    //notFound();
+    throw new Error("NotFound"); // TODO
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "target": "es2022",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@comet/cms-site": ["cms-site"]
+    }    
+  }
+}
