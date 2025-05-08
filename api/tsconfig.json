@@ -9,16 +9,18 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "outDir": "./dist",
-        "removeComments": true,
-        "target": "es2017",
         "paths": {
             "@src/*": ["src/*"]
         },
+        "removeComments": true,
         "resolveJsonModule": true,
+        "rootDir": ".",
         "skipLibCheck": true,
         "sourceMap": true,
+        "sourceRoot": "./src",
         "strict": true,
-        "strictPropertyInitialization": false
+        "strictPropertyInitialization": false,
+        "target": "es2017"
     },
     "exclude": ["dist"],
     "include": ["src"],
