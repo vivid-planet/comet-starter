@@ -12,7 +12,7 @@ const app = next({ dev, hostname: host, port });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
-    if (process.env.TRACING_ENABLED) {
+    if (process.env.TRACING_ENABLED === "1") {
         require("./tracing");
     }
     createServer(async (req, res) => {
