@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let tracing: any;
-if (process.env.TRACING_ENABLED) {
+if (process.env.TRACING_ENABLED === "1") {
     tracing = import("./tracing");
 }
 

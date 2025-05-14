@@ -1,4 +1,4 @@
-if (process.env.TRACING_ENABLED) {
+if (process.env.TRACING_ENABLED === "1") {
     import("./tracing");
 }
 
