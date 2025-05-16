@@ -1,6 +1,6 @@
 import { createSpaceBlock } from "@comet/cms-api";
 
-enum Spacing {
+export enum Spacing {
     D100 = "D100",
     D200 = "D200",
     D300 = "D300",
