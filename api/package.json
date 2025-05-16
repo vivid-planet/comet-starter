@@ -89,7 +89,7 @@
         "prettier": "^3.5.3",
         "ts-jest": "^29.2.6",
         "ts-node": "^10.9.2",
-        "tsconfig-paths": "^3.15.0",
+        "tsconfig-paths": "^4.2.0",
         "typescript": "5.8.2"
     },
     "engines": {
