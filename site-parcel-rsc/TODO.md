@@ -7,30 +7,32 @@ TODO done:
 - predefinedPage und übersetzte pfade für zB /news
 - cache headers
 - cache header für loader daten vgl. RSC request (der per fetch gemacht wird)
-
-TODO:
 - site-preview
 - block-preview
+- seo tags, incl. title u. description
 - sitemap.xml, baseUrl berücksichtigen
 - cache headers nicht in site-preview
+- visibility param (bei gql requests mitschicken)
+- dam rewrite
 - fetch cache, mit redis option (nicht in site-preview)
 - aktiven menüpunkt stylen
-- seo tags, incl. title u. description
-- visibility param (bei gql requests mitschicken)
 - 404 seite mit content und mehrsprachigkeit
+- Link Document: redirect/404
+
+TODO:
+- cache haders abhängig von page abschaltbar oder konfigurierbar
 - 404 wenn siteConfig nicht matched
 - 404 wenn /assets/ nicht matched
+- schöne 404 seite wenn language nicht matched
 - @comet eslint verwenden
-- Link Document: redirect/404
 - InternalLinkBlockProps <Link> verwenden
 - PageLink active status
 - beispiel für api route
-- h3 statt express (evntl. nitro)
+- h3 statt express (evntl. nitro) oder hono
 - alle responses gezip? html, assets, svg?
 middlewares:
 - admin redirect
 - csp header
-- dam rewrite
 - redirect to main host
 - status
 - cdn origin check (bei next im server)

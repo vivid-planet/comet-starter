@@ -5,6 +5,7 @@ import { createGraphQLFetch } from "@src/util/graphQLClient";
 
 import { GQLLinkRedirectQuery, GQLLinkRedirectQueryVariables } from "./Link.generated";
 import { JSX } from "react";
+import { NotFoundError, RedirectError } from "@src/util/rscErrors";
 
 const linkRedirectQuery = gql`
     query LinkRedirect($id: ID!) {
@@ -37,20 +38,17 @@ export async function Link({ pageTreeNodeId }: Props): Promise<JSX.Element> {
         if (content.block?.type === "internal") {
             const link = (content.block.props as InternalLinkBlockData).targetPage?.path;
             if (link) {
-                //redirect(link);
-                throw new Error("Redirect"); // TODO
+                throw new RedirectError(link);
             }
         }
 
         if (content.block?.type === "external") {
             const link = (content.block.props as ExternalLinkBlockData).targetUrl;
             if (link) {
-                //redirect(link);
-                throw new Error("Redirect"); // TODO
+                throw new RedirectError(link);
             }
         }
     }
 
-    //notFound();
-    throw new Error("NotFound"); // TODO
+    throw new NotFoundError();
 }

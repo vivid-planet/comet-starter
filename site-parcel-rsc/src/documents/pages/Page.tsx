@@ -54,53 +54,14 @@ async function fetchData({ pageTreeNodeId }: Props) {
         },
     };
 }
-/*
-export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-    const data = await fetchData({ pageTreeNodeId, scope });
-    const document = data?.pageContent?.document;
-    if (!document) {
-        return {};
-    }
-    const siteUrl = "http://localhost:3000"; //TODO get from site config
-    const canonicalUrl = document.seo.canonicalUrl || `${siteUrl}${data.pageContent.path}`;
 
-    // TODO move into library
-    return {
-        title: document.seo.htmlTitle || data.pageContent.name,
-        description: document.seo.metaDescription,
-        openGraph: {
-            title: document.seo.openGraphTitle,
-            description: document.seo.openGraphDescription,
-            type: "website",
-            url: canonicalUrl,
-            images: document.seo.openGraphImage.block?.urlTemplate
-                ? generateImageUrl({ src: document.seo.openGraphImage.block?.urlTemplate, width: 1200 }, 1200 / 630)
-                : undefined,
-        },
-        robots: {
-            index: !document.seo.noIndex,
-        },
-        alternates: {
-            canonical: canonicalUrl,
-            languages: document.seo.alternativeLinks.reduce(
-                (acc, link) => {
-                    if (link.code && link.url) acc[link.code] = link.url;
-                    return acc;
-                },
-                { [scope.language]: canonicalUrl } as Record<string, string>,
-            ),
-        },
-    };
-}
-*/
-export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput }) {
+export async function Page({ pageTreeNodeId, scope }: Props) {
     const graphQLFetch = createGraphQLFetch();
 
     const data = await fetchData({ pageTreeNodeId, scope });
     const document = data?.pageContent?.document;
     if (!document) {
         // no document attached to page
-        //notFound(); //no return needed
         throw new Error("Document not found");
     }
     if (document.__typename != "Page") throw new Error(`invalid document type`);
@@ -126,12 +87,38 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
         }),
     ]);
 
+    const siteUrl = "http://localhost:3000"; //TODO get from site config
+    const canonicalUrl = document.seo.canonicalUrl || `${siteUrl}${data.pageContent.path}`;
+
+
     return (
         <>
             <title>{document.seo.htmlTitle || data.pageContent.name}</title>
-            {document.seo.structuredData && document.seo.structuredData.length > 0 && (
-                <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: document.seo.structuredData }} />
+            {/* Meta*/}
+            {document.seo.metaDescription && <meta name="description" content={document.seo.metaDescription} />}
+
+            {/* Open Graph */}
+            {document.seo.openGraphTitle && <meta property="og:title" content={document.seo.openGraphTitle} />}
+            {document.seo.openGraphDescription && <meta property="og:description" content={document.seo.openGraphDescription} />}
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={canonicalUrl} />
+            {document.seo.openGraphImage.block?.urlTemplate && (
+                <meta property="og:image" content={generateImageUrl({ src: document.seo.openGraphImage.block?.urlTemplate, width: 1200 }, 1200 / 630)} />
             )}
+
+            {/* Structured Data */}
+            {document.seo.structuredData && document.seo.structuredData.length > 0 && <script type="application/ld+json">{document.seo.structuredData}</script>}
+
+            {/* No Index */}
+            {document.seo.noIndex && <meta name="robots" content="noindex" />}
+
+            {/* Canonical Url */}
+            <link rel="canonical" href={canonicalUrl} />
+
+            {/* Alternate Hreflang */}
+            {document.seo.alternativeLinks &&
+                document.seo.alternativeLinks.map((item) => <link key={item.code} rel="alternate" hrefLang={item.code} href={item.url} />)}
+
             <main>
                 <StageBlock data={document.stage} />
                 <PageContentBlock data={document.content} />

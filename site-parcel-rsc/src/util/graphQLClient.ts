@@ -1,11 +1,46 @@
 import {
     convertPreviewDataToHeaders,
+    createFetchRedisCache,
     createFetchWithDefaults,
     createGraphQLFetch as createGraphQLFetchLibrary,
-    SitePreviewData,
 } from "@comet/cms-site";
 
-import { getVisibilityParam } from "./ServerContext";
+import { sitePreviewParamsStorage } from "./sitePreview";
+import Redis from "ioredis";
+import { LRUCache } from "lru-cache";
+
+
+const REDIS_HOST = process.env.REDIS_HOST;
+if (!REDIS_HOST) {
+    throw new Error("REDIS_HOST is required");
+}
+
+const REDIS_PORT = parseInt(process.env.REDIS_PORT || "6379", 10);
+
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
+if (!REDIS_PASSWORD) {
+    throw new Error("REDIS_PASSWORD is required");
+}
+
+const REDIS_KEY_PREFIX = process.env.REDIS_KEY_PREFIX || "";
+
+
+const fetchWithRedisCache = createFetchRedisCache(fetch, {
+    redis: new Redis({
+        enableOfflineQueue: false,
+        host: REDIS_HOST,
+        keyPrefix: REDIS_KEY_PREFIX,
+        password: REDIS_PASSWORD,
+        port: REDIS_PORT,
+        enableAutoPipelining: true,
+    }),
+    fallbackCache: new LRUCache<string, any>({
+        maxSize: 50 * 1024 * 1024, // 50MB
+        ttlAutopurge: true,
+    }),
+    ttl: 24 * 60 * 60, // 1 day,
+    revalidate: 7.5  * 60  // set a default revalidate time of 7.5 minutes to get an effective cache duration of 15 minutes if a CDN cache is enabled
+});
 
 export function createGraphQLFetch() {
     if (typeof window !== "undefined") {
@@ -15,22 +50,15 @@ export function createGraphQLFetch() {
         throw new Error("createGraphQLFetch: cannot use in edge runtime, use createGraphQLFetchMiddleware instead.");
     }
 
-    let previewData: SitePreviewData | undefined;
-    const visibilityParam = getVisibilityParam();
-    if (visibilityParam === "invisibleBlocks") previewData = { includeInvisible: true };
-    if (visibilityParam === "invisiblePages") previewData = { includeInvisible: false };
+    const sitePreviewParams = sitePreviewParamsStorage.getStore();
+    const eventualCachingFetch = sitePreviewParams ? fetch : fetchWithRedisCache;
 
     return createGraphQLFetchLibrary(
-        // set a default revalidate time of 7.5 minutes to get an effective cache duration of 15 minutes if a CDN cache is enabled
-        // see cache-handler.ts for maximum cache duration (24 hours)
-        createFetchWithDefaults(fetch, {
-            next: {
-                revalidate: 7.5 * 60,
-            },
+        createFetchWithDefaults(eventualCachingFetch, {
             headers: {
                 "x-relative-dam-urls": "1",
                 authorization: `Basic ${Buffer.from(`vivid:${process.env.API_PASSWORD}`).toString("base64")}`,
-                ...convertPreviewDataToHeaders(previewData),
+                ...convertPreviewDataToHeaders(sitePreviewParams?.previewData),
             },
         }),
         `${process.env.API_URL_INTERNAL}/graphql`,

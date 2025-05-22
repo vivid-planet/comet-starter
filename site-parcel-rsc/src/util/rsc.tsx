@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 import { NotFound } from '@src/routes/NotFound';
 import { NotFoundError, RedirectError } from './rscErrors';
 import { Request, Response } from 'express';
+import { InitialUrlContext, InitialUrlProvider } from './usePathname';
 
 
 export async function renderDevError2(error: Error, options: RSCToHTMLOptions): Promise<Readable | string> {
@@ -78,19 +79,19 @@ export async function renderRequest(req: Request, res: Response, root: any, opti
   const siteConfig = res.locals.siteConfig;
   const language = res.locals.language;
   if (res.locals.isRSC) {    
-    const html = await renderRSC(root);
+    const html = await renderRSC(<InitialUrlProvider value={req.url}>{root}</InitialUrlProvider>);
     res.setHeader('Content-Type', 'text/x-component');
     html.pipe(res);
-    if (res.statusCode === 200) {
+    if (res.statusCode === 200 && !res.locals.preview) {
       res.setHeader("Cache-Control", "max-age=450, s-maxage=450, stale-while-revalidate"); // TODO not always?
     }
 } else {
-    await renderRequestHTML(req, res, root, {
+    await renderRequestHTML(req, res, <InitialUrlProvider value={req.url}>{root}</InitialUrlProvider>, {
       ...options,
       renderError: (error) => {
         if (error.message === 'NotFound') {
           res.status(404);
-          return <NotFound domain={siteConfig.scope.domain} language={language} />;
+          return <NotFound scope={{ domain: siteConfig.scope.domain, language }} />;
         } else if (error.message === 'Redirect') {
           if (!("target" in error)) throw new Error("Redirect target is undefined");
           res.redirect(302, error.target as string);
@@ -109,7 +110,7 @@ export async function renderRequest(req: Request, res: Response, root: any, opti
         }
       }
     });
-    if (res.statusCode === 200) {
+    if (res.statusCode === 200 && !res.locals.preview) {
       res.setHeader("Cache-Control", "max-age=450, s-maxage=450, stale-while-revalidate"); // TODO not always?
     }  
 }

@@ -9,13 +9,17 @@ import { createGraphQLFetch } from "@src/util/graphQLClient";
 
 import { GQLNewsIndexPageQuery, GQLNewsIndexPageQueryVariables } from "./page.generated";
 import { Layout } from "../Layout";
+import { PublicSiteConfig } from '@src/site-configs';
 
-export async function NewsIndexPage({
-    domain, language,
-}: {
-    domain: string; language: string;
-}) {
-    //setVisibilityParam(visibility);
+
+interface Props {
+    scope: {
+        domain: string;
+        language: string;    
+    };
+    siteConfig: PublicSiteConfig
+}
+export async function NewsIndexPage({ scope }: Props) {
     const graphqlFetch = createGraphQLFetch();
 
     const { newsList } = await graphqlFetch<GQLNewsIndexPageQuery, GQLNewsIndexPageQueryVariables>(
@@ -28,10 +32,10 @@ export async function NewsIndexPage({
 
             ${newsListFragment}
         `,
-        { scope: { domain, language } as GQLNewsContentScopeInput, sort: [{ field: "createdAt", direction: "DESC" }] },
+        { scope, sort: [{ field: "createdAt", direction: "DESC" }] },
     );
 
-    return <Layout domain={domain} language={language}>
+    return <Layout scope={scope}>
         <NewsList newsList={newsList} />
     </Layout>;
 }

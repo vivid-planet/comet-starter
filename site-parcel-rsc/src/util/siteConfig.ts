@@ -45,7 +45,11 @@ export async function getSiteConfigForRequest(request: Request) {
 let siteConfigs: PublicSiteConfig[];
 export function getSiteConfigs() {
     if (!siteConfigs) {
-        const json = process.env.PUBLIC_SITE_CONFIGS;
+        const json = avoidInliningEnv(process.env);
+        function avoidInliningEnv(env: any) {
+            if (!env) throw new Error("process.env must be set.");
+            return env.PUBLIC_SITE_CONFIGS;
+        }
         if (!json) throw new Error("process.env.PUBLIC_SITE_CONFIGS must be set.");
         siteConfigs = JSON.parse(atob(json)) as PublicSiteConfig[];
     }

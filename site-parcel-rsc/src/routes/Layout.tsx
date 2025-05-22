@@ -11,11 +11,13 @@ import { GQLLayoutQuery, GQLLayoutQueryVariables } from "./Layout.generated";
 import { RootLayout } from "./RootLayout";
 
 interface LayoutProps {
-    domain: string;
-    language: string;
+    scope: {
+        domain: string;
+        language: string;    
+    };
 }
 
-export async function Layout({ children, domain, language }: PropsWithChildren<LayoutProps>) {
+export async function Layout({ children, scope }: PropsWithChildren<LayoutProps>) {
     const graphqlFetch = createGraphQLFetch();
     const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
         gql`
@@ -30,11 +32,11 @@ export async function Layout({ children, domain, language }: PropsWithChildren<L
             ${headerFragment}
             ${footerFragment}
         `,
-        { domain, language },
+        scope,
     );
 
     return (
-        <RootLayout domain={domain} language={language}>
+        <RootLayout scope={scope}>
             <Header header={header} />
             {children}
             {footer && <Footer footer={footer} />}

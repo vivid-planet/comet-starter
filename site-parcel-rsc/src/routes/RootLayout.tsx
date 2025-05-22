@@ -2,15 +2,21 @@ import { loadMessages } from "@src/util/loadMessages";
 import { PropsWithChildren } from "react";
 import { RootLayoutClient } from "./RootLayoutClient";
 
-export async function RootLayout({ children, domain, language }: PropsWithChildren<{ domain: string; language: string }>) {
-    const messages = await loadMessages(language);
+interface RootLayoutProps {
+    scope: {
+        domain: string;
+        language: string;    
+    };
+}
+export async function RootLayout({ children, scope }: PropsWithChildren<RootLayoutProps>) {
+    const messages = await loadMessages(scope.language);
     return (
-        <html lang={language}>
+        <html lang={scope.language}>
             <head>
                 <meta charSet="utf-8" />
             </head>
             <body>
-                <RootLayoutClient language={language} messages={messages}>
+                <RootLayoutClient language={scope.language} messages={messages}>
                     {children}
                 </RootLayoutClient>
             </body>

@@ -1,11 +1,10 @@
 "use client";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
-//import Link from "next/link";
-//import { usePathname } from "next/navigation";
 import { JSX, PropsWithChildren } from "react";
 
 import { GQLPageLinkFragment } from "./PageLink.fragment.generated";
+import { usePathname } from "@src/util/usePathname";
 
 interface Props extends PropsWithChildren {
     page: GQLPageLinkFragment;
@@ -14,9 +13,8 @@ interface Props extends PropsWithChildren {
 }
 
 function PageLink({ page, children, className: passedClassName, activeClassName }: Props): JSX.Element | null {
-    //const pathname = usePathname();
-    //const active = pathname && (pathname.substring(3) || "/") === page.path; // Remove language prefix
-    const active = false; // TODO
+    const pathname = usePathname();
+    const active = pathname && (pathname.substring(3) || "/") === page.path; // Remove language prefix    
 
     let className = passedClassName;
 

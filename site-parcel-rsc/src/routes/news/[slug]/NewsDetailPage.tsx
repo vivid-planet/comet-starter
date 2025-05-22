@@ -10,13 +10,18 @@ import { fragment } from "./fragment";
 import { GQLNewsDetailPageQuery, GQLNewsDetailPageQueryVariables } from "./page.generated";
 import { NotFoundError } from "@src/util/rscErrors";
 import { Layout } from "@src/routes/Layout";
+import { PublicSiteConfig } from '@src/site-configs';
 
-export async function NewsDetailPage({
-    domain, language, slug,
-}: {
-    domain: string; language: string; slug: string;
-}) {
-    //setVisibilityParam(visibility);
+interface Props {
+    slug: string;
+    scope: {
+        domain: string;
+        language: string;    
+    };
+    siteConfig: PublicSiteConfig
+}
+export async function NewsDetailPage({ scope, slug }: Props) {
+
     const graphqlFetch = createGraphQLFetch();
 
     const data = await graphqlFetch<GQLNewsDetailPageQuery, GQLNewsDetailPageQueryVariables>(
@@ -29,14 +34,14 @@ export async function NewsDetailPage({
             }
             ${fragment}
         `,
-        { slug, scope: { domain: domain, language: language } as GQLNewsContentScopeInput },
+        { slug, scope },
     );
 
     if (data.newsBySlug === null) {
         throw new NotFoundError();
     }
 
-    return <Layout domain={domain} language={language}>
+    return <Layout scope={scope}>
         <Content news={data.newsBySlug} />
     </Layout>;
 }

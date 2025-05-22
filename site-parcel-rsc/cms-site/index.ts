@@ -28,6 +28,7 @@ export {
     gql,
     type GraphQLFetch,
 } from "./graphQLFetch/graphQLFetch";
+export { createFetchRedisCache } from "./graphQLFetch/fetchRedisCache";
 export { IFrameBridgeProvider } from "./iframebridge/IFrameBridge";
 export {
     AdminMessageType,
