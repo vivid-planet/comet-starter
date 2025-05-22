@@ -1,16 +1,16 @@
 import { renderHTML as renderHTMLBase, renderRSC } from '@parcel/rsc/node';
-import { renderDevError, RSCToHTMLOptions } from '@parcel/rsc/server';
+import { RSCToHTMLOptions } from '@parcel/rsc/server';
 import type { IncomingMessage, ServerResponse } from 'http';
-import type { ReadableStream as NodeReadableStream } from 'stream/web';
 import { Readable } from 'stream';
 import { ReactNode } from 'react';
 import { NotFound } from '@src/routes/NotFound';
-import { NotFoundError, RedirectError } from './rscErrors';
 import { Request, Response } from 'express';
-import { InitialUrlContext, InitialUrlProvider } from './usePathname';
+import { ClientRouterProvider } from './ClientRouter';
+import { fetchPredefinedPages } from './predefinedPages';
+import { ServerStyleSheet } from 'styled-components';
 
 
-export async function renderDevError2(error: Error, options: RSCToHTMLOptions): Promise<Readable | string> {
+export async function renderDevError(error: Error, options: RSCToHTMLOptions): Promise<Readable | string> {
   if (process.env.NODE_ENV !== 'production') {
     let content = (
       <html>
@@ -63,7 +63,7 @@ export async function renderRequestHTML(request: IncomingMessage, response: Serv
       try {
         renderedError = options?.renderError 
           ? await renderHTMLBase(options.renderError(error), options)
-          : await renderDevError2(error, options);
+          : await renderDevError(error, options);
       } catch {
         renderedError = '<h1>Something went wrong!</h1>';
       }
@@ -78,15 +78,17 @@ export async function renderRequestHTML(request: IncomingMessage, response: Serv
 export async function renderRequest(req: Request, res: Response, root: any, options?: RenderRequestHTMLOptions): Promise<void> {
   const siteConfig = res.locals.siteConfig;
   const language = res.locals.language;
+  const predefinedPages = await fetchPredefinedPages(siteConfig.scope.domain, language);
   if (res.locals.isRSC) {    
-    const html = await renderRSC(<InitialUrlProvider value={req.url}>{root}</InitialUrlProvider>);
+    
+    const html = await renderRSC(<ClientRouterProvider value={{ initialUrl: req.url, predefinedPages }}>{root}</ClientRouterProvider>);
     res.setHeader('Content-Type', 'text/x-component');
     html.pipe(res);
     if (res.statusCode === 200 && !res.locals.preview) {
       res.setHeader("Cache-Control", "max-age=450, s-maxage=450, stale-while-revalidate"); // TODO not always?
     }
 } else {
-    await renderRequestHTML(req, res, <InitialUrlProvider value={req.url}>{root}</InitialUrlProvider>, {
+    await renderRequestHTML(req, res, <ClientRouterProvider value={{ initialUrl: req.url, predefinedPages }}>{root}</ClientRouterProvider>, {
       ...options,
       renderError: (error) => {
         if (error.message === 'NotFound') {

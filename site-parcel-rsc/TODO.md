@@ -18,23 +18,23 @@ TODO done:
 - aktiven menüpunkt stylen
 - 404 seite mit content und mehrsprachigkeit
 - Link Document: redirect/404
+- admin redirect
+- status
+- InternalLinkBlockProps <Link> verwenden (nicht nötig)
 
 TODO:
 - cache haders abhängig von page abschaltbar oder konfigurierbar
 - 404 wenn siteConfig nicht matched
 - 404 wenn /assets/ nicht matched
-- schöne 404 seite wenn language nicht matched
+- schöne 404 seite generall nochmal checken ob die h geht
+- schöne 404 seite wenn language nicht matched, wenn predefined page nicht matched
 - @comet eslint verwenden
-- InternalLinkBlockProps <Link> verwenden
-- PageLink active status
 - beispiel für api route
 - h3 statt express (evntl. nitro) oder hono
 - alle responses gezip? html, assets, svg?
 middlewares:
-- admin redirect
 - csp header
 - redirect to main host
-- status
 - cdn origin check (bei next im server)
 - styled-components server-side css
 

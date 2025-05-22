@@ -3,7 +3,6 @@ import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { GQLPredefinedPagesQuery, GQLPredefinedPagesQueryVariables } from "./predefinedPages.generated";
 import { createCache, memoryStore } from "cache-manager";
 import { createGraphQLFetch } from "./graphQLClient";
-import { predefinedPagePaths } from "@src/documents/predefinedPages/predefinedPagePaths";
 
 export const memoryCache = createCache(
     memoryStore({
@@ -32,53 +31,28 @@ const predefinedPagesQuery = gql`
         }
     }
 `;
-/*
-export async function fetchPredefinedPages(domain: string) {
-    const graphQLFetch = createGraphQLFetch();
-    const key = `predefinedPages-${domain}`;
 
-    return memoryCache.wrap(key, async () => {
-        const pages: Array<{ type: string; path: string, language: string }> = [];
-
-        for (const language of getSiteConfigForDomain(domain).scope.languages) {
-            const { paginatedPageTreeNodes } = await graphQLFetch<GQLPredefinedPagesQuery, GQLPredefinedPagesQueryVariables>(predefinedPagesQuery, {
-                scope: { domain: domain, language },
-            });
-
-            for (const node of paginatedPageTreeNodes.nodes) {
-                if (node.document?.__typename === "PredefinedPage" && node.document.type) {
-                    pages.push({
-                        type: node.document.type,
-                        path: "/"+language+node.path,
-                        language
-                    });
-                }
-            }
-        }
-
-        return pages;
-    });
+export type PredefinedPage = {
+    type: string;
+    path: string;
 }
-*/
-export async function fetchPredefinedPages(domain: string) {
+export async function fetchPredefinedPages(domain: string, language: string): Promise<PredefinedPage[]> {
     const graphQLFetch = createGraphQLFetch();
-    const key = `predefinedPages-${domain}`;
+    const key = `predefinedPages-${domain}-${language}`;
 
     return memoryCache.wrap(key, async () => {
-        const pages: Array<{ codePath: string; pageTreeNodePath: string }> = [];
+        const pages: Array<PredefinedPage> = [];
 
-        for (const language of getSiteConfigForDomain(domain).scope.languages) {
-            const { paginatedPageTreeNodes } = await graphQLFetch<GQLPredefinedPagesQuery, GQLPredefinedPagesQueryVariables>(predefinedPagesQuery, {
-                scope: { domain: domain, language },
-            });
+        const { paginatedPageTreeNodes } = await graphQLFetch<GQLPredefinedPagesQuery, GQLPredefinedPagesQueryVariables>(predefinedPagesQuery, {
+            scope: { domain: domain, language },
+        });
 
-            for (const node of paginatedPageTreeNodes.nodes) {
-                if (node.document?.__typename === "PredefinedPage" && node.document.type) {
-                    pages.push({
-                        codePath: `/${language}${predefinedPagePaths[node.document.type]}`,
-                        pageTreeNodePath: `/${language}${node.path}`,
-                    });
-                }
+        for (const node of paginatedPageTreeNodes.nodes) {
+            if (node.document?.__typename === "PredefinedPage" && node.document.type) {
+                pages.push({
+                    type: node.document.type,
+                    path: node.path,
+                });
             }
         }
 

@@ -1,7 +1,6 @@
 "use client";
 import { PropsWithData } from "@comet/cms-site";
 import { InternalLinkBlockData } from "@src/blocks.generated";
-//import Link from "next/link";
 import { PropsWithChildren } from "react";
 
 interface InternalLinkBlockProps extends PropsWithChildren<PropsWithData<InternalLinkBlockData>> {

@@ -1,16 +1,8 @@
 "use client"
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState } from 'react';
+import { useClientRouter } from './ClientRouter';
 
-const InitialUrlContext = createContext<string | undefined>(undefined);
-
-export function InitialUrlProvider({ children, value }: { children: React.ReactNode, value: string }) {
-    return (
-      <InitialUrlContext.Provider value={value}>
-        {children}
-      </InitialUrlContext.Provider>
-    );
-}
-
+// alternative to this patching would be a custom Link component etc. (instead of the default <a>)
 let isPatched = false;
 export function patchHistoryEvents(): void {
   if (isPatched) return;
@@ -38,7 +30,8 @@ export function patchHistoryEvents(): void {
 
 // This hook returns the current pathname and updates it when the URL changes.
 export function usePathname(): string | undefined {
-  const initialUrl = useContext(InitialUrlContext);
+  
+  const { initialUrl } = useClientRouter();
   const [pathname, setPathname] = useState(typeof window === 'undefined' ? initialUrl : window.location.pathname);
 
   useEffect(() => {

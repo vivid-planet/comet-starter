@@ -17,6 +17,8 @@ import cookieParser from 'cookie-parser';
 import { BlockPreviewPage } from './routes/BlockPreviewPage';
 import { sitemapXmlRoute } from './routes/sitemap.xml';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import { routes as newsRoutes } from './routes/news/routes';
+import { match } from 'path-to-regexp';
 
 const app = express();
 
@@ -100,20 +102,18 @@ app.use(async (req, res, next) => {
 });
 
 
-// predefined pages rewrite middleware
-app.use(async (req, res, next) => {
-  const siteConfig = res.locals.siteConfig;
-  const predefinedPages = await fetchPredefinedPages(siteConfig.scope.domain);
-  for (const page of predefinedPages) {
-    if (req.url.startsWith(page.pageTreeNodePath)) {
-      req.url = req.url.replace(page.pageTreeNodePath, page.codePath);
-      next();
-      return;
-    }
+
+
+app.get("/admin", async (req, res) => {
+  if (process.env.ADMIN_URL) {
+    return res.redirect(process.env.ADMIN_URL);
   }
-  next();
+  res.status(404).send('404 Not Found, ADMIN_URL is not set');
 });
 
+app.get("/api/status", async (req, res) => {
+  res.json({ status: "OK" });
+});
 
 app.get("/robots.txt", async (req, res) => {
   const siteConfig = res.locals.siteConfig;
@@ -135,29 +135,11 @@ app.use('/:language', async (req, res, next) => {
   const language = req.params.language;
   const siteConfig = res.locals.siteConfig;
   if (!siteConfig.scope.languages.includes(language)) {
-      res.status(404).send('404 Not Found');
+      res.status(404).send('404 Not Found');// TODO styled 404 page
       return;
   }
   res.locals.language = language;
   next();
-});
-
-app.get('/:language/news', async (req, res) => {
-    
-  const language = req.params.language;
-  const siteConfig = res.locals.siteConfig;
-
-  renderRequest(req, res, <NewsIndexPage scope={{ domain: siteConfig.scope.domain, language}} siteConfig={siteConfig} />, {
-    component: NewsIndexPage as ComponentType
-  });
-});
-app.get('/:language/news/:slug', async (req, res) => {
-  const language = req.params.language;
-  const siteConfig = res.locals.siteConfig;
-
-  renderRequest(req, res, <NewsDetailPage slug={req.params.slug} scope={{ domain: siteConfig.scope.domain, language}} siteConfig={siteConfig} />, {
-    component: NewsDetailPage as ComponentType
-  });
 });
 
 app.get('/:language/:path(*)?', async (req, res) => {
@@ -166,6 +148,25 @@ app.get('/:language/:path(*)?', async (req, res) => {
   const language = req.params.language;
   const siteConfig = res.locals.siteConfig;
 
+  const predefinedPages = await fetchPredefinedPages(siteConfig.scope.domain, language);
+  for (const page of predefinedPages) {
+    if (path.startsWith(page.path)) {
+      if (page.type === "News") { // TODO move into a map
+        let subPath  = path.replace(page.path, "");
+        if (subPath === "")  subPath = "/";
+        for (const route of newsRoutes) {
+          const matchFn = match(route.pattern);
+          const result = matchFn(subPath);
+          if (result) {
+            return route.handler(req, res, result.params);
+          }
+        }
+        res.status(404).send('404 Not Found'); // TODO styled 404 page
+      }
+    }
+  }
+
+  // fall back to "normal" page
   renderRequest(req, res, <Page path={path} siteConfig={siteConfig} scope={{ domain: siteConfig.scope.domain, language}} />, {
     component: Page as ComponentType
   });
