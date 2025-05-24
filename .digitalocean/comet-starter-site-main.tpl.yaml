@@ -31,6 +31,9 @@ services:
       - key: NODE_ENV
         scope: RUN_TIME
         value: production
+      - key: SERVER_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: "0.0.0.0"
       - key: ADMIN_URL
         scope: RUN_AND_BUILD_TIME
         value: https://admin.digitalocean.comet-dxp.com/

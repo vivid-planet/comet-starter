@@ -2,6 +2,7 @@ import { generateImageUrl, gql } from "@comet/cms-site";
 import { type GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { type Metadata, type ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -58,12 +59,15 @@ async function fetchData({ pageTreeNodeId }: Props) {
 
 export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent: ResolvingMetadata): Promise<Metadata> {
     const data = await fetchData({ pageTreeNodeId, scope });
+    const siteConfig = getSiteConfigForDomain(scope.domain);
+
     const document = data?.pageContent?.document;
     if (!document) {
         return {};
     }
-    const siteUrl = "http://localhost:3000"; //TODO get from site config
-    const canonicalUrl = document.seo.canonicalUrl || `${siteUrl}${data.pageContent.path}`;
+
+    const siteUrl = siteConfig.url;
+    const canonicalUrl = (document.seo.canonicalUrl || `${siteUrl}/${scope.language}${data.pageContent.path}`).replace(/\/$/, ""); // Remove trailing slash for "home"
 
     // TODO move into library
     return {
@@ -105,7 +109,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
     }
     if (document.__typename != "Page") throw new Error(`invalid document type`);
 
-    [document.content, document.seo] = await Promise.all([
+    [document.content, document.seo, document.stage] = await Promise.all([
         recursivelyLoadBlockData({
             blockType: "PageContent",
             blockData: document.content,

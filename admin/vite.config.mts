@@ -47,8 +47,17 @@ export default defineConfig(({ mode }) => {
             }),
         ],
         server: {
-            host: true,
+            host: process.env.SERVER_HOST ?? "localhost",
             port: Number(process.env.ADMIN_PORT),
+            proxy: process.env.API_URL_INTERNAL
+                ? {
+                      "/api": {
+                          target: new URL(process.env.API_URL_INTERNAL).origin,
+                          changeOrigin: true,
+                          secure: false,
+                      },
+                  }
+                : undefined,
         },
         define: {
             // define NODE_ENV for packages using it

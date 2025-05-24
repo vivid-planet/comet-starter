@@ -148,7 +148,7 @@ export const MobileMenu = ({ header }: Props) => {
 };
 
 const Root = styled.div`
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;
     }
 `;
@@ -241,7 +241,7 @@ const Link = styled(PageLink)`
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme }) => theme.palette.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }
@@ -260,7 +260,7 @@ const ButtonLinkBase = styled.button`
     padding: ${({ theme }) => theme.spacing.S500} 0;
     gap: ${({ theme }) => theme.spacing.S200};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }
@@ -286,7 +286,7 @@ const OverviewButton = styled(PageLink)`
     text-decoration: none;
     color: ${({ theme }) => theme.palette.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }

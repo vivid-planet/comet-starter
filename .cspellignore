@@ -29,3 +29,4 @@ schemaname
 tablename
 timestamptz
 formatjs
+cspellignore
