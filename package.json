@@ -26,7 +26,7 @@
     "devDependencies": {
         "@comet/cli": "8.0.0-beta.3",
         "@comet/dev-process-manager": "^2.7.0",
-        "cspell": "^8.17.5",
+        "cspell": "^8.19.4",
         "dotenv-cli": "^7.4.4",
         "husky": "^9.1.7",
         "knip": "^5.57.2",
