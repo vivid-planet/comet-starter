@@ -1,0 +1,27 @@
+@use '../styles/variables' as *;
+
+.pageLayoutContent {
+  grid-column: 3 / -3;
+}
+
+.notFoundTypography {
+  margin-top: var(--spacing-s300);
+  margin-bottom: var(--spacing-s300);
+}
+
+.homeLink {
+  text-decoration: none;
+  display: inline-block;
+  padding: var(--spacing-s100) 0;
+  font-family: var(--font-family);
+  color: var(--text-primary);
+
+  &:hover {
+    color: var(--primary-main);
+  }
+
+  &.active {
+    text-decoration: underline var(--primary-main);
+    text-underline-offset: 8px;
+  }
+} 

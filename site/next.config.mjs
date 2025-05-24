@@ -19,11 +19,8 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: process.env.NODE_ENV === "production",
     },
-    compiler: {
-        styledComponents: true,
-    },
     experimental: {
-        optimizePackageImports: ["@comet/cms-site"],
+        optimizePackageImports: ["@comet/site-nextjs"],
     },
     poweredByHeader: false,
     // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware/cspHeaders.ts)

@@ -1,4 +1,3 @@
-"use client";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { createSitePath } from "@src/util/createSitePath";

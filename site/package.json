@@ -3,7 +3,8 @@
     "private": true,
     "scripts": {
         "build": "npm run intl:compile && run-p gql:types generate-block-types && tsc --project tsconfig.server.json && next build",
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && NODE_OPTIONS='--inspect=localhost:9230 --max-old-space-size=512' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node dist/server.js",
+        "css:types": "tcm -p 'src/**/*.scss'",
+        "dev": "npm run intl:compile && run-s gql:types generate-block-types css:types && tsc --project tsconfig.server.json && NODE_OPTIONS='--inspect=localhost:9230 --max-old-space-size=512' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node dist/server.js",
         "generate-block-types": "comet generate-block-types",
         "generate-block-types:watch": "chokidar -s \"block-meta.json\" -c \"npm run generate-block-types\"",
         "gql:types": "graphql-codegen",
@@ -13,21 +14,22 @@
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "run-p lint:eslint lint:tsc lint:style intl:extract lint:knip",
         "lint:ci": "npm run lint",
+        "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
-        "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",
+        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml,scss}'",
+        "lint:style": "npx stylelint '**/*.{ts,tsx,css,scss}'",
         "lint:tsc": "tsc --project .",
-        "serve": "NODE_ENV=production node dist/server.js",
-        "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored"
+        "serve": "NODE_ENV=production node dist/server.js"
     },
     "dependencies": {
-        "@comet/cms-site": "8.0.0-beta.3",
+        "@comet/site-nextjs": "7.21.0",
         "@fontsource/roboto": "^5.2.5",
         "@next/bundle-analyzer": "^14.2.26",
         "@opentelemetry/api": "^1.9.0",
         "@opentelemetry/auto-instrumentations-node": "^0.56.1",
         "@opentelemetry/exporter-trace-otlp-http": "^0.57.2",
         "@opentelemetry/sdk-node": "^0.57.2",
+        "clsx": "^2.1.1",
         "graphql": "^15.10.1",
         "ioredis": "^5.6.1",
         "lru-cache": "^11.0.2",
@@ -36,7 +38,6 @@
         "react-dom": "^18.3.1",
         "react-intl": "^6.8.9",
         "redraft": "^0.10.2",
-        "styled-components": "^6.1.18",
         "swiper": "^11.2.5"
     },
     "devDependencies": {
@@ -61,8 +62,10 @@
         "npm-run-all2": "^7.0.2",
         "postcss-styled-syntax": "^0.7.1",
         "prettier": "^3.5.3",
+        "sass": "^1.89.0",
         "stylelint": "^16.15.0",
         "stylelint-config-standard": "^36.0.1",
+        "typed-css-modules": "^0.9.1",
         "typescript": "5.8.3"
     },
     "engines": {

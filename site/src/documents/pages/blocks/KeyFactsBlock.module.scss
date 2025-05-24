@@ -1,0 +1,35 @@
+@use "@src/styles/variables" as *;
+
+.pageLayoutContent {
+    grid-column: 3 / -3;
+}
+
+.itemWrapper {
+    display: grid;
+    gap: var(--spacing-d100);
+
+    &.items1 {
+        grid-template-columns: 1fr;
+    }
+
+    &.items2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.items3,
+    &.items4 {
+        grid-template-columns: repeat(2, 1fr);
+
+        @media (min-width: $breakpoint-md) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &.items4plus {
+        grid-template-columns: repeat(2, 1fr);
+
+        @media (min-width: $breakpoint-md) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+} 

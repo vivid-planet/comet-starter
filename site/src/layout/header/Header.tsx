@@ -3,12 +3,13 @@ import { SvgUse } from "@src/common/helpers/SvgUse";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
+import clsx from "clsx";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useIntl } from "react-intl";
-import styled from "styled-components";
 
 import { type GQLHeaderFragment } from "./Header.fragment.generated";
+import styles from "./Header.module.scss";
 
 interface Props {
     header: GQLHeaderFragment[];
@@ -42,28 +43,35 @@ export const Header = ({ header }: Props) => {
     return (
         <header>
             <PageLayout grid>
-                <PageLayoutContent>
-                    <Root>
+                <div className={styles.pageLayoutContent}>
+                    <div className={styles.root}>
                         <Link href="/">
                             <SvgUse href="/assets/comet-logo.svg#root" />
                         </Link>
 
-                        <DesktopHeaderFullHeightNav>
-                            <TopLevelNavigation>
+                        <nav className={styles.desktopHeaderFullHeightNav}>
+                            <ol className={styles.topLevelNavigation}>
                                 {header.map((node) => {
                                     const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
                                     return (
-                                        <TopLevelLinkContainer
+                                        <li
                                             key={node.id}
+                                            className={styles.topLevelLinkContainer}
                                             onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
                                             onMouseLeave={() => setExpandedSubLevelNavigation(null)}
                                         >
-                                            <LinkContainer>
-                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                            <div className={styles.linkContainer}>
+                                                <PageLink
+                                                    page={node}
+                                                    className={styles.menuPageLink}
+                                                    activeClassName={styles.active}
+                                                    aria-label={node.name}
+                                                >
                                                     {node.name}
-                                                </MenuPageLink>
+                                                </PageLink>
                                                 {visibleChildNodes.length > 0 && (
-                                                    <ToggleSubLevelNavigationButton
+                                                    <button
+                                                        className={styles.toggleSubLevelNavigationButton}
                                                         aria-label={intl.formatMessage(
                                                             {
                                                                 id: "header.subMenu.arialLabel",
@@ -74,133 +82,45 @@ export const Header = ({ header }: Props) => {
                                                         aria-expanded={expandedSubLevelNavigation === node.id}
                                                         onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                     >
-                                                        <AnimatedChevron
+                                                        <SvgUse
                                                             href="/assets/icons/chevron-down.svg#root"
-                                                            $isExpanded={expandedSubLevelNavigation === node.id}
+                                                            className={clsx(styles.animatedChevron, {
+                                                                [styles.expanded]: expandedSubLevelNavigation === node.id,
+                                                            })}
                                                         />
-                                                    </ToggleSubLevelNavigationButton>
+                                                    </button>
                                                 )}
-                                            </LinkContainer>
+                                            </div>
                                             {visibleChildNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                <ol
+                                                    className={clsx(styles.subLevelNavigation, {
+                                                        [styles.expanded]: expandedSubLevelNavigation === node.id,
+                                                    })}
+                                                >
                                                     {visibleChildNodes.map((node) => (
                                                         <li key={node.id}>
-                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                                            <PageLink
+                                                                page={node}
+                                                                className={styles.menuPageLink}
+                                                                activeClassName={styles.active}
+                                                                aria-label={node.name}
+                                                            >
                                                                 {node.name}
-                                                            </MenuPageLink>
+                                                            </PageLink>
                                                         </li>
                                                     ))}
-                                                </SubLevelNavigation>
+                                                </ol>
                                             )}
-                                        </TopLevelLinkContainer>
+                                        </li>
                                     );
                                 })}
-                            </TopLevelNavigation>
-                        </DesktopHeaderFullHeightNav>
+                            </ol>
+                        </nav>
 
                         <MobileMenu header={header} />
-                    </Root>
-                </PageLayoutContent>
+                    </div>
+                </div>
             </PageLayout>
         </header>
     );
 };
-
-const PageLayoutContent = styled.div`
-    grid-column: 2 / -2;
-`;
-
-const Root = styled.div`
-    display: flex;
-    height: var(--header-height);
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-`;
-
-const DesktopHeaderFullHeightNav = styled.nav`
-    height: 100%;
-    display: none;
-
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        display: block;
-    }
-`;
-
-const TopLevelNavigation = styled.ol`
-    display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    gap: ${({ theme }) => theme.spacing.S600};
-    height: 100%;
-`;
-
-const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
-    display: ${({ $isExpanded }) => ($isExpanded ? "flex" : "none")};
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.S200};
-    position: absolute;
-    z-index: 40;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    list-style-type: none;
-    padding: ${({ theme }) => theme.spacing.D100};
-    background-color: white;
-    border-left: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-right: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-`;
-
-const TopLevelLinkContainer = styled.li`
-    position: relative;
-
-    &:last-child ${SubLevelNavigation} {
-        left: auto;
-        transform: none;
-        right: 0;
-    }
-`;
-
-const LinkContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.S100};
-    height: 100%;
-`;
-
-const ToggleSubLevelNavigationButton = styled.button`
-    appearance: none;
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-`;
-
-const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
-    width: 100%;
-    height: 100%;
-    color: ${({ theme, $isExpanded }) => ($isExpanded ? theme.palette.primary.main : theme.palette.text.primary)};
-    transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
-    transition: transform 0.4s ease;
-`;
-
-const MenuPageLink = styled(PageLink)`
-    text-decoration: none;
-    display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S100} 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
-
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
-    }
-
-    &.active {
-        text-decoration: underline ${({ theme }) => theme.palette.primary.main};
-        text-underline-offset: 8px;
-    }
-`;

@@ -1,8 +1,14 @@
-import { createGlobalStyle } from "styled-components";
+import { useEffect } from "react";
 
-export const DisableBodyScrolling = createGlobalStyle`
-    html {
-        overflow: hidden;
-        height: 100vh;
-    }
-`;
+import styles from "./DisableBodyScrolling.module.css";
+
+export function DisableBodyScrolling() {
+    useEffect(() => {
+        document.documentElement.classList.add(styles.noScroll);
+        return () => {
+            document.documentElement.classList.remove(styles.noScroll);
+        };
+    }, []);
+
+    return null;
+}

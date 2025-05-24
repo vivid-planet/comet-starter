@@ -1,0 +1,17 @@
+.root {
+  &.spacing-xs {
+    height: var(--spacing-xs);
+  }
+  &.spacing-sm {
+    height: var(--spacing-sm);
+  }
+  &.spacing-md {
+    height: var(--spacing-md);
+  }
+  &.spacing-lg {
+    height: var(--spacing-lg);
+  }
+  &.spacing-xl {
+    height: var(--spacing-xl);
+  }
+} 

@@ -1,0 +1,10 @@
+.rootPageLayout {
+    &.lightGray {
+        background-color: var(--palette-gray-100);
+    }
+
+    &.darkGray {
+        background-color: var(--palette-gray-900);
+        color: var(--palette-text-inverted);
+    }
+} 
