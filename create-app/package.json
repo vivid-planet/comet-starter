@@ -42,7 +42,7 @@
         "@comet/eslint-config": "^8.0.0-beta.3",
         "@comet/eslint-plugin": "^8.0.0-beta.3",
         "@cspell/eslint-plugin": "^8.19.4",
-        "@tsconfig/node22": "^22.0.1",
+        "@tsconfig/node22": "^22.0.2",
         "@types/node": "^22.14.1",
         "cspell": "^8.19.4",
         "npm-run-all2": "^7.0.2",
