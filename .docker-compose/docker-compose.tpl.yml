@@ -8,6 +8,9 @@ services:
       - "--accessLog=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false" # services need to be exposed by setting traefik.enable=true
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # used for cert debugging
@@ -170,3 +173,7 @@ services:
       - "traefik.http.routers.site.entrypoints=websecure"
       - "traefik.http.routers.site.tls.certresolver=myresolver"
       - "traefik.http.services.site.loadbalancer.server.port=3000"
+      - "traefik.http.routers.site-http.rule=Host(`docker.comet-dxp.com`)"
+      - "traefik.http.routers.site-http.entrypoints=web"
+      - "traefik.http.routers.site-http.middlewares=site-redirect"
+      - "traefik.http.middlewares.site-redirect.redirectscheme.scheme=https"
