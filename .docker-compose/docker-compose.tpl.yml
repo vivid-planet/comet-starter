@@ -84,6 +84,7 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
+      SERVER_HOST: "0.0.0.0"
       POSTGRESQL_HOST: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
       POSTGRESQL_PORT: "25060"
       POSTGRESQL_DB: db_starter
@@ -157,6 +158,7 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
+      SERVER_HOST: "0.0.0.0"
       ADMIN_URL: https://admin.docker.comet-dxp.com/
       NEXT_PUBLIC_API_URL: "TODO"
       API_URL_INTERNAL: http://api:4000/api
