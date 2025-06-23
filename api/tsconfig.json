@@ -1,27 +1,27 @@
 {
     "compilerOptions": {
-        "target": "es2017",
+        "baseUrl": "./",
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "incremental": true,
+        "lib": ["esnext"],
         "module": "commonjs",
         "moduleResolution": "node",
-        "lib": ["esnext"],
-        "removeComments": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
         "outDir": "./dist",
-        "baseUrl": "./",
-        "incremental": true,
-        "esModuleInterop": true,
-        "strict": true,
-        "strictPropertyInitialization": false,
-        "skipLibCheck": true,
-        "resolveJsonModule": true,
+        "removeComments": true,
+        "target": "es2017",
         "paths": {
             "@src/*": ["src/*"]
-        }
+        },
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "strictPropertyInitialization": false
     },
-    "include": ["src"],
     "exclude": ["dist"],
+    "include": ["src"],
     "watchOptions": {
         "excludeDirectories": ["node_modules", "dist", "uploads"],
         "excludeFiles": ["block-meta.json", "node_modules/**/*"]
