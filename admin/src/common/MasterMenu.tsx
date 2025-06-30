@@ -40,6 +40,7 @@ export const masterMenuData: MasterMenuData = [
             path: "/pages/pagetree/main-navigation",
             render: () => (
                 <PagesPage
+                    path="/pages/pagetree/main-navigation"
                     documentTypes={pageTreeDocumentTypes}
                     category="MainNavigation"
                     renderContentScopeIndicator={(scope) => <ContentScopeIndicator scope={scope} />}
@@ -83,7 +84,7 @@ export const masterMenuData: MasterMenuData = [
             path: "/user-permissions",
             component: UserPermissionsPage,
         },
-        requiredPermission: "userPermissions",
+        requiredPermission: ["userPermissions", "impersonation"],
     },
     {
         type: "collapsible",
