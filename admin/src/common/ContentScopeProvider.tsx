@@ -1,4 +1,5 @@
 import {
+    type ContentScope,
     ContentScopeProvider as ContentScopeProviderLibrary,
     type ContentScopeProviderProps,
     type ContentScopeValues,
@@ -7,7 +8,12 @@ import {
     type UseContentScopeApi,
     useCurrentUser,
 } from "@comet/cms-admin";
-import { type ContentScope } from "@src/site-configs";
+import { type ContentScope as BaseContentScope } from "@src/site-configs";
+
+declare module "@comet/cms-admin" {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    interface ContentScope extends BaseContentScope {}
+}
 
 // convenience wrapper for app (Bind Generic)
 export function useContentScope(): UseContentScopeApi {
