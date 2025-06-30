@@ -59,6 +59,12 @@ app.get("/status/health", (req, res) => {
     res.send("OK!");
 });
 
+const proxyMiddleware = createProxyMiddleware({
+    target: process.env.API_URL_INTERNAL + "/dam",
+    changeOrigin: true,
+});
+app.use("/dam", proxyMiddleware);
+
 app.use(
     express.static("./build", {
         index: false, // Don't send index.html for requests to "/" as it will be handled by the fallback route (with replaced environment variables)

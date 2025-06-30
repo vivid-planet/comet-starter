@@ -56,6 +56,11 @@ export default defineConfig(({ mode }) => {
                           changeOrigin: true,
                           secure: false,
                       },
+                      "/dam": {
+                          target: process.env.API_URL_INTERNAL,
+                          changeOrigin: true,
+                          secure: false,
+                      },
                   }
                 : undefined,
         },
