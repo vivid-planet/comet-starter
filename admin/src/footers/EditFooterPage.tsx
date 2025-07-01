@@ -9,11 +9,11 @@ import {
     resolveHasSaveConflict,
     useBlockContext,
     useBlockPreview,
+    useContentScope,
     useSaveConflictQuery,
     useSiteConfig,
 } from "@comet/cms-admin";
 import { type FooterContentBlockInput } from "@src/blocks.generated";
-import { useContentScope } from "@src/common/ContentScopeProvider";
 import isEqual from "lodash.isequal";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";

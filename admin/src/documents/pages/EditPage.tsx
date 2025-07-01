@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { Loading, MainContent, RouterPrompt, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
+import { Button, Loading, MainContent, RouterPrompt, Toolbar, ToolbarActions, ToolbarFillSpace, ToolbarItem, useStackApi } from "@comet/admin";
 import { ArrowLeft, Preview } from "@comet/admin-icons";
 import {
     BlockAdminComponentRoot,
@@ -11,10 +11,10 @@ import {
     PageName,
     useBlockContext,
     useBlockPreview,
+    useContentScope,
     useSiteConfig,
 } from "@comet/cms-admin";
-import { Button, IconButton, Stack } from "@mui/material";
-import { useContentScope } from "@src/common/ContentScopeProvider";
+import { IconButton, Stack } from "@mui/material";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useRouteMatch } from "react-router";
 
