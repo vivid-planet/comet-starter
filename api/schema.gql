@@ -220,7 +220,7 @@ enum PageTreeNodeVisibility {
 }
 
 enum PageTreeNodeCategory {
-  MainNavigation
+  mainNavigation
 }
 
 union PageContentUnion = Page | Link
