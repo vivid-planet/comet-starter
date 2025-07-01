@@ -16,6 +16,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import { getMessages } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
+import { type ContentScope as BaseContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { enUS } from "date-fns/locale";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
@@ -121,4 +122,9 @@ export function App() {
             </ApolloProvider>
         </CometConfigProvider>
     );
+}
+
+declare module "@comet/cms-admin" {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    interface ContentScope extends BaseContentScope {}
 }
