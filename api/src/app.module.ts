@@ -9,6 +9,7 @@ import {
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
+    WarningsModule,
 } from "@comet/cms-api";
 import { ApolloDriver, ApolloDriverConfig, ValidationError } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
@@ -129,6 +130,7 @@ export class AppModule {
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                WarningsModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
