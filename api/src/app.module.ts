@@ -84,8 +84,11 @@ export class AppModule {
                     useFactory: (userService: StaticUsersUserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
                             siteConfig.scope.languages.map((language) => ({
-                                domain: siteConfig.scope.domain,
-                                language,
+                                scope: {
+                                    domain: siteConfig.scope.domain,
+                                    language,
+                                },
+                                label: { domain: siteConfig.name, language: language.toUpperCase() },
                             })),
                         ),
                         userService,

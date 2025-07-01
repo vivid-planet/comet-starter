@@ -3,7 +3,14 @@ import "@src/polyfills";
 
 import { ApolloProvider } from "@apollo/client";
 import { ErrorDialogHandler, MasterLayout, MuiThemeProvider, RouterBrowserRouter, SnackbarProvider } from "@comet/admin";
-import { CometConfigProvider, createDamFileDependency, CurrentUserProvider, MasterMenuRoutes, SitePreview } from "@comet/cms-admin";
+import {
+    CometConfigProvider,
+    ContentScopeProvider,
+    createDamFileDependency,
+    CurrentUserProvider,
+    MasterMenuRoutes,
+    SitePreview,
+} from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
@@ -17,7 +24,6 @@ import { IntlProvider } from "react-intl";
 import { Route, Switch } from "react-router";
 
 import { createApolloClient } from "./common/apollo/createApolloClient";
-import { ContentScopeProvider } from "./common/ContentScopeProvider";
 import { MasterHeader } from "./common/MasterHeader";
 import { AppMasterMenu, masterMenuData, pageTreeDocumentTypes } from "./common/MasterMenu";
 import { createConfig } from "./config";
