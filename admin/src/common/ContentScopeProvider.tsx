@@ -23,7 +23,7 @@ export const ContentScopeProvider = ({ children }: Pick<ContentScopeProviderProp
 
     const values: ContentScopeValues = userContentScopes.map((contentScope) => ({
         scope: contentScope,
-        label: { language: contentScope.language.toUpperCase() },
+        label: { domain: contentScope.domain, language: contentScope.language.toUpperCase() },
     }));
 
     if (user.allowedContentScopes.length === 0) {
