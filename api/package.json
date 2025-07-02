@@ -30,7 +30,7 @@
     },
     "dependencies": {
         "@apollo/server": "^4.12.2",
-        "@comet/cms-api": "8.0.0-beta.5",
+        "@comet/cms-api": "8.0.0-canary-20250702071752",
         "@faker-js/faker": "8.4.1",
         "@mikro-orm/cli": "^6.4.16",
         "@mikro-orm/core": "^6.4.16",
@@ -63,9 +63,9 @@
         "uuid": "^11.1.0"
     },
     "devDependencies": {
-        "@comet/api-generator": "8.0.0-beta.5",
-        "@comet/cli": "8.0.0-beta.5",
-        "@comet/eslint-config": "8.0.0-beta.5",
+        "@comet/api-generator": "8.0.0-canary-20250227115813",
+        "@comet/cli": "8.0.0-canary-20250702071752",
+        "@comet/eslint-config": "8.0.0-canary-20250702071752",
         "@cspell/eslint-plugin": "^8.19.4",
         "@jest/types": "^29.6.3",
         "@nestjs/cli": "^11.0.5",
