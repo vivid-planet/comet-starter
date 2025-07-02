@@ -5,7 +5,7 @@ import { FormattedMessage } from "react-intl";
 
 export const pageTreeCategories: AllCategories = [
     {
-        category: "MainNavigation",
+        category: "mainNavigation",
         label: <FormattedMessage id="menu.pageTree.mainNavigation" defaultMessage="Main navigation" />,
     },
 ];
