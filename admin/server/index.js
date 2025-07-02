@@ -3,6 +3,7 @@ const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
 const fs = require("fs");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
