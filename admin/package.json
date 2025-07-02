@@ -27,7 +27,7 @@
         "start": "npm run intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
-        "@apollo/client": "^3.13.5",
+        "@apollo/client": "^3.13.8",
         "@comet/admin": "8.0.0-beta.5",
         "@comet/admin-icons": "8.0.0-beta.5",
         "@comet/cms-admin": "8.0.0-beta.5",
