@@ -42,7 +42,7 @@ export const masterMenuData: MasterMenuData = [
                 <PagesPage
                     path="/pages/pagetree/main-navigation"
                     documentTypes={pageTreeDocumentTypes}
-                    category="MainNavigation"
+                    category="mainNavigation"
                     renderContentScopeIndicator={(scope) => <ContentScopeIndicator scope={scope} />}
                 />
             ),
