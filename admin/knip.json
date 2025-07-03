@@ -8,7 +8,6 @@
             "project": ["./src/**/*.{ts,tsx}"]
         },
         "server": {
-            "ignoreDependencies": ["http-proxy-middleware"],
             "project": ["**/*.js"]
         }
     }
