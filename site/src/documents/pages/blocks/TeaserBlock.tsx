@@ -24,10 +24,10 @@ const PageLayoutContent = styled.div`
 
 const ItemWrapper = styled.div`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${({ theme }) => theme.spacing.d100};
 
     ${({ theme }) => css`
-        ${theme.breakpoints.sm.mediaQuery} {
+        ${theme.breakpoints.md.mediaQuery} {
             grid-template-columns: repeat(4, 1fr);
         }
     `}

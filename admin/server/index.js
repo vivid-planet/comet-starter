@@ -3,6 +3,7 @@ const express = require("express");
 const compression = require("compression");
 const helmet = require("helmet");
 const fs = require("fs");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
@@ -30,6 +31,7 @@ app.use(
                 "font-src": ["'self'", "data:"],
                 "connect-src": ["'self'"],
                 "img-src": ["'self'", "data:"],
+                "media-src": ["'self'", "data:"],
                 "frame-src": [process.env.PREVIEW_URL],
                 upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [], // Upgrade all requests to HTTPS on production
             },
@@ -57,6 +59,12 @@ app.use(
 app.get("/status/health", (req, res) => {
     res.send("OK!");
 });
+
+const proxyMiddleware = createProxyMiddleware({
+    target: process.env.API_URL_INTERNAL + "/dam",
+    changeOrigin: true,
+});
+app.use("/dam", proxyMiddleware);
 
 app.use(
     express.static("./build", {

@@ -13,7 +13,6 @@ import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
 import { EditFooterPage } from "@src/footers/EditFooterPage";
-import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { FormattedMessage } from "react-intl";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,9 +40,9 @@ export const masterMenuData: MasterMenuData = [
             path: "/pages/pagetree/main-navigation",
             render: () => (
                 <PagesPage
-                    allCategories={pageTreeCategories}
+                    path="/pages/pagetree/main-navigation"
                     documentTypes={pageTreeDocumentTypes}
-                    category="MainNavigation"
+                    category="mainNavigation"
                     renderContentScopeIndicator={(scope) => <ContentScopeIndicator scope={scope} />}
                 />
             ),
@@ -85,7 +84,7 @@ export const masterMenuData: MasterMenuData = [
             path: "/user-permissions",
             component: UserPermissionsPage,
         },
-        requiredPermission: "userPermissions",
+        requiredPermission: ["userPermissions", "impersonation"],
     },
     {
         type: "collapsible",

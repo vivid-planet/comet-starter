@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let tracing: any;
-if (process.env.TRACING_ENABLED) {
+if (process.env.TRACING_ENABLED === "1") {
     tracing = import("./tracing");
 }
 
@@ -15,19 +15,18 @@ const config = createConfig(process.env);
 
 async function bootstrap() {
     tracer.startActiveSpan(process.argv.slice(2).join(" "), async (span) => {
-        try {
-            await CommandFactory.run(AppModule.forRoot(config), {
-                logger: ["error", "warn", "log"],
-            });
-            span.end();
-            await (await tracing)?.sdk?.shutdown();
-            process.exit(0);
-        } catch (e) {
-            console.error(e);
-            span.end();
-            await (await tracing)?.sdk?.shutdown();
-            process.exit(1);
-        }
+        await CommandFactory.run(AppModule.forRoot(config), {
+            logger: ["error", "warn", "log"],
+            serviceErrorHandler: async (error) => {
+                console.error(error);
+                span.end();
+                await (await tracing)?.sdk?.shutdown();
+                process.exit(1);
+            },
+        });
+        span.end();
+        await (await tracing)?.sdk?.shutdown();
+        process.exit(0);
     });
 }
 
