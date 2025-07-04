@@ -1,3 +1,4 @@
+import "@comet/site-nextjs/css";
 import "@fontsource/roboto";
 import "@fontsource/roboto/700.css";
 
