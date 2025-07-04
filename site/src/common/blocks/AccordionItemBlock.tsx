@@ -1,4 +1,4 @@
-import { BlocksBlock, type PropsWithData, type SupportedBlocks, withPreview } from "@comet/cms-site";
+import { BlocksBlock, type PropsWithData, type SupportedBlocks, withPreview } from "@comet/site-nextjs";
 import { type AccordionContentBlockData, type AccordionItemBlockData } from "@src/blocks.generated";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";

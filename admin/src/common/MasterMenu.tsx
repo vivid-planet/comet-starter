@@ -8,6 +8,7 @@ import {
     type MasterMenuData,
     PagesPage,
     UserPermissionsPage,
+    WarningsPage,
 } from "@comet/cms-admin";
 import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
@@ -99,6 +100,15 @@ export const masterMenuData: MasterMenuData = [
                     component: RedirectsPage,
                 },
                 requiredPermission: "pageTree",
+            },
+            {
+                type: "route",
+                primary: <FormattedMessage id="menu.warnings" defaultMessage="Warnings" />,
+                route: {
+                    path: "/system/warnings",
+                    component: WarningsPage,
+                },
+                requiredPermission: "warnings",
             },
         ],
         requiredPermission: "pageTree",

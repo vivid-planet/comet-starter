@@ -1,4 +1,4 @@
-import { SitePreviewProvider } from "@comet/cms-site";
+import { SitePreviewProvider } from "@comet/site-nextjs";
 import { IntlProvider } from "@src/util/IntlProvider";
 import { loadMessages } from "@src/util/loadMessages";
 import { setNotFoundContext } from "@src/util/ServerContext";

@@ -1,4 +1,4 @@
-import { generateImageUrl, gql } from "@comet/cms-site";
+import { generateImageUrl, gql } from "@comet/site-nextjs";
 import { type GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
