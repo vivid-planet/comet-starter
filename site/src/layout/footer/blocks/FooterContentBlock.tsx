@@ -53,11 +53,11 @@ const PageLayoutContent = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: ${({ theme }) => `${theme.spacing.D400} 0`};
+    padding: ${({ theme }) => `${theme.spacing.d400} 0`};
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         position: relative;
-        gap: ${({ theme }) => theme.spacing.D100};
+        gap: ${({ theme }) => theme.spacing.d100};
         flex-direction: row;
         justify-content: space-between;
     }
@@ -68,7 +68,7 @@ const TopContainer = styled.div`
     width: 100%;
     flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${({ theme }) => theme.spacing.d100};
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         align-self: stretch;
@@ -112,7 +112,7 @@ const LinkCopyrightWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S500};
+    gap: ${({ theme }) => theme.spacing.s500};
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         width: 80%;
@@ -122,7 +122,7 @@ const LinkCopyrightWrapper = styled.div`
 
 const LinksWrapper = styled.div`
     display: flex;
-    gap: ${({ theme }) => theme.spacing.S500};
+    gap: ${({ theme }) => theme.spacing.s500};
     flex-wrap: wrap;
     justify-content: center;
 `;
@@ -146,7 +146,7 @@ const HorizontalLine = styled.hr`
     border: none;
     background-color: ${({ theme }) => theme.palette.gray["600"]};
     color: ${({ theme }) => theme.palette.gray["600"]};
-    margin: ${({ theme }) => `${theme.spacing.D300} 0`};
+    margin: ${({ theme }) => `${theme.spacing.d300} 0`};
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         display: none;

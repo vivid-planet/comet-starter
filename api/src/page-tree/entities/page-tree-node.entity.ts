@@ -17,7 +17,7 @@ export class PageTreeNode extends PageTreeNodeBase {
     @Index()
     parent?: PageTreeNode;
 
-    @Enum({ items: () => PageTreeNodeCategory, default: PageTreeNodeCategory.MainNavigation })
+    @Enum({ items: () => PageTreeNodeCategory, default: PageTreeNodeCategory.mainNavigation })
     @Field(() => PageTreeNodeCategory)
     category: PageTreeNodeCategory;
 }

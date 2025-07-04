@@ -33,14 +33,14 @@ const PageLayoutContent = styled.div`
 `;
 
 const NotFoundTypography = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S300};
-    margin-bottom: ${({ theme }) => theme.spacing.S300};
+    margin-top: ${({ theme }) => theme.spacing.s300};
+    margin-bottom: ${({ theme }) => theme.spacing.s300};
 `;
 
 const HomeLink = styled(Link)`
     text-decoration: none;
     display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S100} 0;
+    padding: ${({ theme }) => theme.spacing.s100} 0;
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme }) => theme.palette.text.primary};
 

@@ -7,9 +7,9 @@ import { Button, type ButtonVariant } from "../components/Button";
 import { HiddenIfInvalidLink } from "../helpers/HiddenIfInvalidLink";
 
 const buttonVariantMap: Record<CallToActionBlockData["variant"], ButtonVariant> = {
-    Contained: "contained",
-    Outlined: "outlined",
-    Text: "text",
+    contained: "contained",
+    outlined: "outlined",
+    text: "text",
 };
 
 export const CallToActionBlock = withPreview(
