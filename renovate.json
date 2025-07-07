@@ -6,7 +6,8 @@
             "groupName": "comet",
             "prPriority": 6,
             "matchPackageNames": ["/@comet/*/"],
-            "labels": ["comet", "dependencies"]
+            "labels": ["comet", "dependencies"],
+            "allowedVersions": "!/canary/"
         },
         {
             "groupName": "eslint",
