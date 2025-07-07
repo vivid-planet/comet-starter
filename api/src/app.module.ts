@@ -9,6 +9,7 @@ import {
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
+    WarningsModule,
 } from "@comet/cms-api";
 import { ApolloDriver, ApolloDriverConfig, ValidationError } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
@@ -84,8 +85,11 @@ export class AppModule {
                     useFactory: (userService: StaticUsersUserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
                             siteConfig.scope.languages.map((language) => ({
-                                domain: siteConfig.scope.domain,
-                                language,
+                                scope: {
+                                    domain: siteConfig.scope.domain,
+                                    language,
+                                },
+                                label: { domain: siteConfig.name, language: language.toUpperCase() },
                             })),
                         ),
                         userService,
@@ -126,6 +130,7 @@ export class AppModule {
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                WarningsModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
