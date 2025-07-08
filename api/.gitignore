@@ -45,3 +45,6 @@ junit.xml
 src/site-configs.d.ts
 
 .nestjs_repl_history
+
+# API generator files
+src/**/generated

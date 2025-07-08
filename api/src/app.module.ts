@@ -5,9 +5,11 @@ import {
     BlocksTransformerMiddlewareFactory,
     DamModule,
     DependenciesModule,
+    ImgproxyModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
+    WarningsModule,
 } from "@comet/cms-api";
 import { ApolloDriver, ApolloDriverConfig, ValidationError } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
@@ -27,7 +29,7 @@ import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
 import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
-import { UserService } from "./auth/user.service";
+import { StaticUsersUserService } from "./auth/static-users.user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
@@ -80,18 +82,21 @@ export class AppModule {
                 }),
                 authModule,
                 UserPermissionsModule.forRootAsync({
-                    useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
+                    useFactory: (userService: StaticUsersUserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
                             siteConfig.scope.languages.map((language) => ({
-                                domain: siteConfig.scope.domain,
-                                language,
+                                scope: {
+                                    domain: siteConfig.scope.domain,
+                                    language,
+                                },
+                                label: { domain: siteConfig.name, language: language.toUpperCase() },
                             })),
                         ),
                         userService,
                         accessControlService,
                         systemUsers: [SYSTEM_USER_NAME],
                     }),
-                    inject: [UserService, AccessControlService],
+                    inject: [StaticUsersUserService, AccessControlService], // TODO Implement correct UserService and remove convertJwtToUser in AuthModule
                     imports: [authModule],
                 }),
                 BlocksModule,
@@ -106,25 +111,26 @@ export class AppModule {
                 RedirectsModule.register({ Scope: RedirectScope }),
                 BlobStorageModule.register({
                     backend: config.blob.storage,
+                    cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                 }),
+                ImgproxyModule.register(config.imgproxy),
                 DamModule.register({
                     File: DamFile,
                     Folder: DamFolder,
                     damConfig: {
-                        apiUrl: config.apiUrl,
                         secret: config.dam.secret,
                         allowedImageSizes: config.dam.allowedImageSizes,
                         allowedAspectRatios: config.dam.allowedImageAspectRatios,
                         filesDirectory: `${config.blob.storageDirectoryPrefix}-files`,
-                        cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                         maxFileSize: config.dam.uploadsMaxFileSize,
+                        maxSrcResolution: config.dam.maxSrcResolution,
                     },
-                    imgproxyConfig: config.imgproxy,
                 }),
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                WarningsModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
