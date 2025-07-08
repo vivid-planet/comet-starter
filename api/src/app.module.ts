@@ -51,7 +51,8 @@ export class AppModule {
                     imports: [BlocksModule],
                     useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
-                        playground: config.debug,
+                        graphiql: config.debug ? { url: "/api/graphql" } : undefined,
+                        playground: false,
                         // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
                         autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
                         formatError: (error) => {
