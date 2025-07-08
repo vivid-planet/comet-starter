@@ -62,7 +62,7 @@
         "npm-run-all2": "^7.0.2",
         "postcss-styled-syntax": "^0.7.1",
         "prettier": "^3.6.2",
-        "stylelint": "^16.19.1",
+        "stylelint": "^16.21.1",
         "stylelint-config-standard": "^36.0.1",
         "typescript": "5.8.3"
     },
