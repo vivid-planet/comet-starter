@@ -46,7 +46,7 @@
         "@types/node": "^22.14.1",
         "cspell": "^8.19.4",
         "npm-run-all2": "^7.0.2",
-        "prettier": "^3.5.3",
+        "prettier": "^3.6.2",
         "typescript": "5.8.3",
         "eslint-plugin-package-json": "0.26.3"
     },
