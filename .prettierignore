@@ -9,3 +9,5 @@
 
 # Go Templates can not be formatted with prettier (https://github.com/prettier/prettier/issues/6517)
 chart/*/templates/*
+
+.github/pull_request_template.md
