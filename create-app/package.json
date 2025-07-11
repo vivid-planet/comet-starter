@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "commander": "^12.1.0",
-        "eslint": "^9.18.0",
+        "eslint": "^9.31.0",
         "glob": "^11.0.2",
         "kleur": "^4.1.5",
         "nanospinner": "^1.2.2",
@@ -48,7 +48,7 @@
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.6.2",
         "typescript": "5.8.3",
-        "eslint-plugin-package-json": "0.26.3"
+        "eslint-plugin-package-json": "0.44.1"
     },
     "publishConfig": {
         "access": "public",
