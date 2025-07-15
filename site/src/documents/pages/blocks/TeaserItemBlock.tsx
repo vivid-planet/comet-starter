@@ -5,6 +5,7 @@ import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { createImageSizes } from "@src/util/createImageSizes";
 import { type Renderers } from "redraft";
 import styled from "styled-components";
 
@@ -16,10 +17,10 @@ export const TeaserItemBlock = withPreview(
     ({ data: { media, title, description, link } }: PropsWithData<TeaserItemBlockData>) => (
         <RootLinkBlock data={link.link}>
             <MediaMobile>
-                <MediaBlock data={media} aspectRatio="1x1" sizes="20vw" />
+                <MediaBlock data={media} aspectRatio="1x1" sizes={createImageSizes({ default: "20vw" })} />
             </MediaMobile>
             <MediaDesktop>
-                <MediaBlock data={media} aspectRatio="16x9" sizes="20vw" />
+                <MediaBlock data={media} aspectRatio="16x9" sizes={createImageSizes({ default: "20vw" })} />
             </MediaDesktop>
             <ContentContainer>
                 <TitleTypography variant="h350">{title}</TitleTypography>
