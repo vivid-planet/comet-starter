@@ -1,4 +1,4 @@
-import { hasRichTextBlockContent, type PropsWithData, SvgImageBlock, withPreview } from "@comet/cms-site";
+import { hasRichTextBlockContent, type PropsWithData, SvgImageBlock, withPreview } from "@comet/site-nextjs";
 import { type KeyFactsItemBlockData } from "@src/blocks.generated";
 import { defaultRichTextInlineStyleMap, RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { Typography } from "@src/common/components/Typography";
@@ -33,14 +33,14 @@ const Root = styled.div`
 `;
 
 const Icon = styled(SvgImageBlock)`
-    margin-bottom: ${({ theme }) => theme.spacing.S100};
+    margin-bottom: ${({ theme }) => theme.spacing.s100};
 `;
 
 const FactTypography = styled(Typography)`
-    margin-bottom: ${({ theme }) => theme.spacing.S300};
+    margin-bottom: ${({ theme }) => theme.spacing.s300};
     color: ${({ theme }) => theme.palette.primary.dark};
 `;
 
 const DescriptionTypography = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S100};
+    margin-top: ${({ theme }) => theme.spacing.s100};
 `;
