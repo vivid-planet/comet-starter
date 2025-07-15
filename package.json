@@ -27,7 +27,7 @@
         "@comet/cli": "8.0.0-beta.6",
         "@comet/dev-process-manager": "^2.7.0",
         "cspell": "^8.19.4",
-        "dotenv-cli": "^7.4.4",
+        "dotenv-cli": "^8.0.0",
         "husky": "^9.1.7",
         "knip": "^5.61.3",
         "lint-staged": "^15.5.2",
