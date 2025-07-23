@@ -24,7 +24,7 @@
         "postinstall": "cd server && npm install",
         "preview": "npm run build && vite preview",
         "serve": "node server",
-        "start": "npm run intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
+        "start": "npm run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
         "@apollo/client": "^3.13.8",
