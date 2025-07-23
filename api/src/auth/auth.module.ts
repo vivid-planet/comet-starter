@@ -5,6 +5,7 @@ import {
     createAuthResolver,
     createBasicAuthService,
     createJwtAuthService,
+    createSitePreviewAuthService,
     createStaticUserAuthService,
 } from "@comet/cms-api";
 import { DynamicModule, Module, Provider, type Type } from "@nestjs/common";
@@ -26,6 +27,7 @@ export class AuthModule {
                 username: SYSTEM_USER_NAME,
                 password: config.auth.systemUserPassword,
             }),
+            createSitePreviewAuthService({ sitePreviewSecret: config.sitePreviewSecret }),
         ];
 
         const providers: Provider[] = [
