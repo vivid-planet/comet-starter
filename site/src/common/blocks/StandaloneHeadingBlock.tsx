@@ -1,5 +1,5 @@
 "use client";
-import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type PropsWithData, withPreview } from "@comet/site-nextjs";
 import { type StandaloneHeadingBlockData } from "@src/blocks.generated";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { PageLayout } from "@src/layout/PageLayout";

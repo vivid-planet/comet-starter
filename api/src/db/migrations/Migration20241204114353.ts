@@ -15,7 +15,7 @@ export class Migration20241204114353 extends Migration {
         );
 
         this.addSql(
-            'alter table "PageTreeNode" add column "scope_domain" text not null, add column "scope_language" text not null, add column "category" text check ("category" in (\'MainNavigation\')) not null default \'MainNavigation\';',
+            'alter table "PageTreeNode" add column "scope_domain" text not null, add column "scope_language" text not null, add column "category" text check ("category" in (\'mainNavigation\')) not null default \'mainNavigation\';',
         );
         this.addSql(
             'alter table "PageTreeNode" add constraint "PageTreeNode_parentId_foreign" foreign key ("parentId") references "PageTreeNode" ("id") on update cascade on delete set null;',
