@@ -1,4 +1,4 @@
-import { gql } from "@comet/cms-site";
+import { gql } from "@comet/site-nextjs";
 import { Footer } from "@src/layout/footer/Footer";
 import { footerFragment } from "@src/layout/footer/Footer.fragment";
 import { Header } from "@src/layout/header/Header";
@@ -15,6 +15,10 @@ interface LayoutProps {
 }
 
 export default async function Layout({ children, params: { domain, language } }: PropsWithChildren<LayoutProps>) {
+    const siteConfig = getSiteConfigForDomain(domain);
+    if (!siteConfig.scope.languages.includes(language)) {
+        language = "en";
+    }
     const graphqlFetch = createGraphQLFetch();
 
     const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
