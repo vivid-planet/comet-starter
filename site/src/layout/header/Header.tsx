@@ -5,6 +5,7 @@ import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import FocusLock from "react-focus-lock";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
 
@@ -82,15 +83,28 @@ export const Header = ({ header }: Props) => {
                                                 )}
                                             </LinkContainer>
                                             {visibleChildNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                    {visibleChildNodes.map((node) => (
-                                                        <li key={node.id}>
-                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
-                                                                {node.name}
-                                                            </MenuPageLink>
-                                                        </li>
-                                                    ))}
-                                                </SubLevelNavigation>
+                                                <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
+                                                    <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                        {visibleChildNodes.map((node) => (
+                                                            <li key={node.id}>
+                                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                                                    {node.name}
+                                                                </MenuPageLink>
+                                                            </li>
+                                                        ))}
+                                                        <ReturnButtonListItem>
+                                                            <ReturnButton onClick={() => setExpandedSubLevelNavigation(null)}>
+                                                                {intl.formatMessage(
+                                                                    {
+                                                                        id: "header.subMenu.returnButton",
+                                                                        defaultMessage: "Return to {name}",
+                                                                    },
+                                                                    { name: node.name },
+                                                                )}
+                                                            </ReturnButton>
+                                                        </ReturnButtonListItem>
+                                                    </SubLevelNavigation>
+                                                </FocusLock>
                                             )}
                                         </TopLevelLinkContainer>
                                     );
@@ -202,5 +216,27 @@ const MenuPageLink = styled(PageLink)`
     &.active {
         text-decoration: underline ${({ theme }) => theme.palette.primary.main};
         text-underline-offset: 8px;
+    }
+`;
+
+const ReturnButton = styled.button`
+    opacity: 0;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 0;
+    font-family: ${({ theme }) => theme.fontFamily};
+    color: ${({ theme }) => theme.palette.text.primary};
+
+    &:focus-visible {
+        opacity: 1;
+    }
+`;
+
+const ReturnButtonListItem = styled.li`
+    height: 0;
+
+    &:has(button:focus-visible) {
+        height: 100%;
     }
 `;
