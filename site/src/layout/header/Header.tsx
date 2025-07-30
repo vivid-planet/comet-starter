@@ -5,6 +5,7 @@ import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import FocusLock from "react-focus-lock";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
 
@@ -82,15 +83,17 @@ export const Header = ({ header }: Props) => {
                                                 )}
                                             </LinkContainer>
                                             {visibleChildNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                    {visibleChildNodes.map((node) => (
-                                                        <li key={node.id}>
-                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
-                                                                {node.name}
-                                                            </MenuPageLink>
-                                                        </li>
-                                                    ))}
-                                                </SubLevelNavigation>
+                                                <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
+                                                    <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                        {visibleChildNodes.map((node) => (
+                                                            <li key={node.id}>
+                                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                                                    {node.name}
+                                                                </MenuPageLink>
+                                                            </li>
+                                                        ))}
+                                                    </SubLevelNavigation>
+                                                </FocusLock>
                                             )}
                                         </TopLevelLinkContainer>
                                     );
