@@ -32,16 +32,17 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData> & {
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content }, isExpanded, onChange }: AccordionItemBlockProps) => {
         const headlineId = useId();
+        const contentId = useId();
 
         return (
             <>
-                <TitleWrapper onClick={() => onChange()} aria-label={title}>
+                <TitleWrapper onClick={() => onChange()} aria-label={title} aria-expanded={isExpanded} aria-controls={contentId}>
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#root" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper $isExpanded={isExpanded} role="region" aria-labelledby={headlineId}>
+                <ContentWrapper id={contentId} $isExpanded={isExpanded} role="region" aria-labelledby={headlineId}>
                     <ContentWrapperInner>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
