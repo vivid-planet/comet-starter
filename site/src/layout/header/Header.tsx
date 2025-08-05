@@ -4,7 +4,7 @@ import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import FocusLock from "react-focus-lock";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
@@ -18,6 +18,7 @@ interface Props {
 export const Header = ({ header }: Props) => {
     const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
+    const sublevelMenuId = useId();
 
     const handleSubLevelNavigationButtonClick = (id: string) => {
         if (expandedSubLevelNavigation === id) {
@@ -72,6 +73,7 @@ export const Header = ({ header }: Props) => {
                                                             },
                                                             { name: node.name },
                                                         )}
+                                                        aria-controls={sublevelMenuId}
                                                         aria-expanded={expandedSubLevelNavigation === node.id}
                                                         onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                     >
@@ -84,7 +86,7 @@ export const Header = ({ header }: Props) => {
                                             </LinkContainer>
                                             {visibleChildNodes.length > 0 && (
                                                 <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
-                                                    <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                    <SubLevelNavigation id={sublevelMenuId} $isExpanded={expandedSubLevelNavigation === node.id}>
                                                         {visibleChildNodes.map((node) => (
                                                             <li key={node.id}>
                                                                 <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
