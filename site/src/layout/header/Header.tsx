@@ -79,7 +79,17 @@ export const Header = ({ header }: Props) => {
                                             {visibleChildNodes.length > 0 && (
                                                 <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
                                                     <SubLevelNavigation id={sublevelMenuId} $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                        <CloseSublevelNavigationButton>
+                                                        <CloseSublevelNavigationButton
+                                                            onClick={() => setExpandedSubLevelNavigation(null)}
+                                                            aria-label={intl.formatMessage(
+                                                                {
+                                                                    id: "header.subMenu.closeButton",
+                                                                    defaultMessage: "Close submenu of {name}",
+                                                                },
+                                                                { name: node.name },
+                                                            )}
+                                                            aria-controls={sublevelMenuId}
+                                                        >
                                                             <SvgUse href="/assets/icons/menu-open.svg#root" width={16} height={16} />
                                                         </CloseSublevelNavigationButton>
 
