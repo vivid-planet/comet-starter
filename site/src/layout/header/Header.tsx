@@ -3,8 +3,9 @@ import { SvgUse } from "@src/common/helpers/SvgUse";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
+import { useEscapeKeyPressed } from "@src/util/useEscapeKeyPressed";
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
+import { useId, useState } from "react";
 import FocusLock from "react-focus-lock";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
@@ -28,18 +29,9 @@ export const Header = ({ header }: Props) => {
         }
     };
 
-    useEffect(() => {
-        if (!expandedSubLevelNavigation) return;
-
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                event.preventDefault();
-                setExpandedSubLevelNavigation(null);
-            }
-        };
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [expandedSubLevelNavigation]);
+    useEscapeKeyPressed(() => {
+        setExpandedSubLevelNavigation(null);
+    });
 
     return (
         <header>
