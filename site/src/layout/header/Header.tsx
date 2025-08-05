@@ -19,6 +19,7 @@ interface Props {
 export const Header = ({ header }: Props) => {
     const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
+    const [autoFocus, setAutoFocus] = useState<boolean>(false);
     const sublevelMenuId = useId();
 
     const handleSubLevelNavigationButtonClick = (id: string) => {
@@ -31,6 +32,7 @@ export const Header = ({ header }: Props) => {
 
     useEscapeKeyPressed(() => {
         setExpandedSubLevelNavigation(null);
+        setAutoFocus(false);
     });
 
     return (
@@ -50,7 +52,10 @@ export const Header = ({ header }: Props) => {
                                         <TopLevelLinkContainer
                                             key={node.id}
                                             onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
-                                            onMouseLeave={() => setExpandedSubLevelNavigation(null)}
+                                            onMouseLeave={() => {
+                                                setExpandedSubLevelNavigation(null);
+                                                setAutoFocus(false);
+                                            }}
                                         >
                                             <LinkContainer>
                                                 <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
@@ -67,7 +72,10 @@ export const Header = ({ header }: Props) => {
                                                         )}
                                                         aria-controls={sublevelMenuId}
                                                         aria-expanded={expandedSubLevelNavigation === node.id}
-                                                        onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                        onClick={() => {
+                                                            setAutoFocus(true);
+                                                            handleSubLevelNavigationButtonClick(node.id);
+                                                        }}
                                                     >
                                                         <AnimatedChevron
                                                             href="/assets/icons/chevron-down.svg#root"
@@ -77,7 +85,7 @@ export const Header = ({ header }: Props) => {
                                                 )}
                                             </LinkContainer>
                                             {visibleChildNodes.length > 0 && (
-                                                <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
+                                                <FocusLock disabled={expandedSubLevelNavigation !== node.id} autoFocus={autoFocus}>
                                                     <SubLevelNavigation id={sublevelMenuId} $isExpanded={expandedSubLevelNavigation === node.id}>
                                                         <CloseSublevelNavigationButton
                                                             onClick={() => setExpandedSubLevelNavigation(null)}
