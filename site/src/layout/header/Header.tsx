@@ -92,17 +92,6 @@ export const Header = ({ header }: Props) => {
                                                                 </MenuPageLink>
                                                             </li>
                                                         ))}
-                                                        <ReturnButtonListItem>
-                                                            <ReturnButton onClick={() => setExpandedSubLevelNavigation(null)}>
-                                                                {intl.formatMessage(
-                                                                    {
-                                                                        id: "header.subMenu.returnButton",
-                                                                        defaultMessage: "Return to {name}",
-                                                                    },
-                                                                    { name: node.name },
-                                                                )}
-                                                            </ReturnButton>
-                                                        </ReturnButtonListItem>
                                                     </SubLevelNavigation>
                                                 </FocusLock>
                                             )}
@@ -216,27 +205,5 @@ const MenuPageLink = styled(PageLink)`
     &.active {
         text-decoration: underline ${({ theme }) => theme.palette.primary.main};
         text-underline-offset: 8px;
-    }
-`;
-
-const ReturnButton = styled.button`
-    opacity: 0;
-    background: none;
-    border: none;
-    text-align: left;
-    padding: 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
-
-    &:focus-visible {
-        opacity: 1;
-    }
-`;
-
-const ReturnButtonListItem = styled.li`
-    height: 0;
-
-    &:has(button:focus-visible) {
-        height: 100%;
     }
 `;
