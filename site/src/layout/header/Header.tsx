@@ -87,6 +87,10 @@ export const Header = ({ header }: Props) => {
                                             {visibleChildNodes.length > 0 && (
                                                 <FocusLock disabled={expandedSubLevelNavigation !== node.id}>
                                                     <SubLevelNavigation id={sublevelMenuId} $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                        <CloseSublevelNavigationButton>
+                                                            <SvgUse href="/assets/icons/menu-open.svg#root" width={16} height={16} />
+                                                        </CloseSublevelNavigationButton>
+
                                                         {visibleChildNodes.map((node) => (
                                                             <li key={node.id}>
                                                                 <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
@@ -173,6 +177,7 @@ const LinkContainer = styled.div`
     align-items: center;
     gap: ${({ theme }) => theme.spacing.s100};
     height: 100%;
+    position: relative;
 `;
 
 const ToggleSubLevelNavigationButton = styled.button`
@@ -191,6 +196,28 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     color: ${({ theme, $isExpanded }) => ($isExpanded ? theme.palette.primary.main : theme.palette.text.primary)};
     transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
     transition: transform 0.4s ease;
+`;
+
+const CloseSublevelNavigationButton = styled.button`
+    opacity: 0;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    pointer-events: none;
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    width: 1px;
+
+    &:focus-visible {
+        opacity: 1;
+        pointer-events: auto;
+        width: auto;
+        height: auto;
+        clip-path: none;
+    }
 `;
 
 const MenuPageLink = styled(PageLink)`
