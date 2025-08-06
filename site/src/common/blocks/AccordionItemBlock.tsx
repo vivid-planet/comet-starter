@@ -5,7 +5,7 @@ import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { useIntl } from "react-intl";
+import { useId } from "react";
 import styled, { css } from "styled-components";
 
 import { Typography } from "../components/Typography";
@@ -31,21 +31,18 @@ type AccordionItemBlockProps = PropsWithData<AccordionItemBlockData> & {
 
 export const AccordionItemBlock = withPreview(
     ({ data: { title, content }, isExpanded, onChange }: AccordionItemBlockProps) => {
-        const intl = useIntl();
-
-        const ariaLabelText = isExpanded
-            ? intl.formatMessage({ id: "accordionBlock.ariaLabel.expanded", defaultMessage: "Collapse accordion item" })
-            : intl.formatMessage({ id: "accordionBlock.ariaLabel.collapsed", defaultMessage: "Expand accordion item" });
+        const headlineId = useId();
+        const contentId = useId();
 
         return (
             <>
-                <TitleWrapper onClick={() => onChange()} aria-label={ariaLabelText}>
+                <TitleWrapper id={headlineId} onClick={onChange} aria-expanded={isExpanded} aria-controls={contentId}>
                     <Typography variant="h350">{title}</Typography>
                     <IconWrapper>
                         <AnimatedChevron href="/assets/icons/chevron-down.svg#root" $isExpanded={isExpanded} />
                     </IconWrapper>
                 </TitleWrapper>
-                <ContentWrapper $isExpanded={isExpanded}>
+                <ContentWrapper id={contentId} $isExpanded={isExpanded} aria-labelledby={headlineId}>
                     <ContentWrapperInner>
                         <AccordionContentBlock data={content} />
                     </ContentWrapperInner>
@@ -84,7 +81,7 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     transition: transform 0.4s ease;
 `;
 
-const ContentWrapper = styled.div<{ $isExpanded: boolean }>`
+const ContentWrapper = styled.section<{ $isExpanded: boolean }>`
     position: relative;
     display: grid;
     grid-template-rows: 0fr;
