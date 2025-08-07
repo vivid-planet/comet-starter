@@ -87,4 +87,17 @@ export const GlobalStyle = createGlobalStyle`
     #__next {
         isolation: isolate;
     }
+
+    /* Fieldset CSS Reset */
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+    }
+
+    legend {
+        padding: 0;
+        margin-bottom: 0;
+    }
 `;

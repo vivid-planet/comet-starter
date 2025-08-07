@@ -29,3 +29,5 @@ schemaname
 tablename
 timestamptz
 formatjs
+cspellignore
+graphiql
