@@ -1,3 +1,27 @@
+# Debugging
+
+When making changes in the debug files:
+
+- `debug/DefaultPropsProvider.js`
+- `debug/MuiTypography.js`
+
+Run:
+
+```sh
+dpm shutdown && gclean && ins && npm --prefix admin run preview
+```
+
+Wehen the preview is running, in another terminal, run:
+
+```sh
+npm run dev && dpm log admin
+```
+
+Then open preview and dev side-by-side to see the differences:
+
+- Preview (works): `http://localhost:4173/`
+- Dev (broken): `http://localhost:8000/`
+
 # Comet DXP Starter
 
 In use by `@comet/create-app` to create new Comet DXP projects. Find more information in the [Comet DXP documentation](https://docs.comet-dxp.com).

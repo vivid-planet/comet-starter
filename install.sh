@@ -61,3 +61,9 @@ echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
 npm --prefix create-app install
 
 mkdir -p ./api/uploads
+
+rm admin/node_modules/@mui/material/esm/Typography/Typography.js
+cp debug/MuiTypography.js admin/node_modules/@mui/material/esm/Typography/Typography.js
+
+rm admin/node_modules/@mui/system/esm/DefaultPropsProvider/DefaultPropsProvider.js
+cp debug/DefaultPropsProvider.js admin/node_modules/@mui/system/esm/DefaultPropsProvider/DefaultPropsProvider.js
