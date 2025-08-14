@@ -21,7 +21,7 @@ export const pageTreeDocumentTypes: Record<string, DocumentInterface<any, any>> 
     Page,
     Link,
 };
-const RedirectsPage = createRedirectsPage({ scopeParts: ["domain"] });
+const RedirectsPage = createRedirectsPage({});
 
 export const masterMenuData: MasterMenuData = [
     {
