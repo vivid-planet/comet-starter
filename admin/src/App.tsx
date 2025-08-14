@@ -14,6 +14,7 @@ import {
 import { css, Global } from "@emotion/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import type { GQLPermission } from "@src/graphql.generated";
 import { getMessages } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { type ContentScope as BaseContentScope } from "@src/site-configs";
@@ -77,6 +78,7 @@ export function App() {
             }}
             buildInformation={{ date: config.buildDate, number: config.buildNumber, commitHash: config.commitSha }}
             contentLanguage={{ resolveContentLanguageForScope: (scope) => scope.language }}
+            redirects={{ scopeParts: ["domain"] }}
         >
             <ApolloProvider client={apolloClient}>
                 <IntlProvider locale="en" messages={getMessages()}>
@@ -127,4 +129,8 @@ export function App() {
 declare module "@comet/cms-admin" {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     interface ContentScope extends BaseContentScope {}
+
+    export interface PermissionOverrides {
+        permission: GQLPermission;
+    }
 }

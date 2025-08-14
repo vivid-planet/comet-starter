@@ -15,6 +15,7 @@ import { ApolloDriver, ApolloDriverConfig, ValidationError } from "@nestjs/apoll
 import { DynamicModule, Module } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Enhancer, GraphQLModule } from "@nestjs/graphql";
+import { AppPermission } from "@src/auth/app-permission.enum";
 import { DbModule } from "@src/db/db.module";
 import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
@@ -99,6 +100,7 @@ export class AppModule {
                     }),
                     inject: [StaticUsersUserService, AccessControlService], // TODO Implement correct UserService and remove convertJwtToUser in AuthModule
                     imports: [authModule],
+                    AppPermission,
                 }),
                 BlocksModule,
                 LinksModule,
