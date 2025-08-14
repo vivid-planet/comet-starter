@@ -1,4 +1,4 @@
-import { ListBlock, type PropsWithData, withPreview } from "@comet/cms-site";
+import { ListBlock, type PropsWithData, withPreview } from "@comet/site-nextjs";
 import { type KeyFactsBlockData } from "@src/blocks.generated";
 import { PageLayout } from "@src/layout/PageLayout";
 import styled, { css } from "styled-components";
@@ -24,14 +24,14 @@ const PageLayoutContent = styled.div`
 
 const ItemWrapper = styled.div<{ $listItemCount: number }>`
     display: grid;
-    gap: ${({ theme }) => theme.spacing.D100};
+    gap: ${({ theme }) => theme.spacing.d100};
 
     ${({ $listItemCount, theme }) =>
         $listItemCount > 0 &&
         css`
             grid-template-columns: repeat(${Math.min($listItemCount, 2)}, 1fr);
 
-            ${theme.breakpoints.sm.mediaQuery} {
+            ${theme.breakpoints.md.mediaQuery} {
                 grid-template-columns: repeat(${Math.min($listItemCount, 4)}, 1fr);
             }
         `}

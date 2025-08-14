@@ -1,4 +1,4 @@
-if (process.env.TRACING_ENABLED) {
+if (process.env.TRACING_ENABLED === "1") {
     import("./tracing");
 }
 
@@ -94,8 +94,9 @@ async function bootstrap(): Promise<void> {
     app.enableShutdownHooks();
 
     const port = config.apiPort;
-    await app.listen(port);
-    logger.log(`Application is running on: http://localhost:${port}/`);
+    const host = config.serverHost;
+    await app.listen(port, host);
+    logger.log(`Application is running on: http://${host}:${port}/`);
 }
 
 bootstrap();
