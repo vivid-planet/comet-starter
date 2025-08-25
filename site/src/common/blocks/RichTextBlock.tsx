@@ -144,6 +144,8 @@ const InlineLink = styled(LinkBlock)`
 
     &:hover {
         color: ${({ theme }) => theme.palette.primary.dark};
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
     }
 `;
 
