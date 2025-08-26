@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
         server: {
             host: process.env.SERVER_HOST ?? "localhost",
             port: Number(process.env.ADMIN_PORT),
+            cors: false,
             proxy: process.env.API_URL_INTERNAL
                 ? {
                       "/api": {
