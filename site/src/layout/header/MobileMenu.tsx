@@ -148,7 +148,7 @@ export const MobileMenu = ({ header }: Props) => {
 };
 
 const Root = styled.div`
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;
     }
 `;
@@ -237,11 +237,11 @@ const Link = styled(PageLink)`
     width: 100%;
     text-decoration: none;
     display: inline-block;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
+    padding: ${({ theme }) => theme.spacing.s500} 0;
     font-family: ${({ theme }) => theme.fontFamily};
     color: ${({ theme }) => theme.palette.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }
@@ -257,10 +257,10 @@ const ButtonLinkBase = styled.button`
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
-    gap: ${({ theme }) => theme.spacing.S200};
+    padding: ${({ theme }) => theme.spacing.s500} 0;
+    gap: ${({ theme }) => theme.spacing.s200};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }
@@ -280,13 +280,13 @@ const OverviewButton = styled(PageLink)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${({ theme }) => theme.spacing.S200};
+    gap: ${({ theme }) => theme.spacing.s200};
     width: 100%;
-    padding: ${({ theme }) => theme.spacing.S500} 0;
+    padding: ${({ theme }) => theme.spacing.s500} 0;
     text-decoration: none;
     color: ${({ theme }) => theme.palette.text.primary};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
             color: ${({ theme }) => theme.palette.primary.main};
         }
