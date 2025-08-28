@@ -20,3 +20,5 @@ src/comet-config.json
 src/site-configs.d.ts
 
 .swc/
+
+generated/
