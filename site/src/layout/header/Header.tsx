@@ -5,7 +5,7 @@ import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import styled from "styled-components";
 
 import { type GQLHeaderFragment } from "./Header.fragment.generated";
@@ -45,7 +45,10 @@ export const Header = ({ header }: Props) => {
                 <PageLayoutContent>
                     <Root>
                         <Link href="/">
-                            <SvgUse href="/assets/comet-logo.svg#root" />
+                            <SvgUse
+                                href="/assets/comet-logo.svg#root"
+                                title={<FormattedMessage id="header.logo" defaultMessage="Comet DXP Logo" />}
+                            />
                         </Link>
 
                         <DesktopHeaderFullHeightNav>
