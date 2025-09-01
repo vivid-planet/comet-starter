@@ -15,6 +15,17 @@ indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
     return process.env[p1] || "";
 });
 
+setInterval(() => {
+    const mem = process.memoryUsage();
+    console.log({
+        rss: `${Math.round(mem.rss / 1024 / 1024)} MB`,
+        heapUsed: `${Math.round(mem.heapUsed / 1024 / 1024)} MB`,
+        heapTotal: `${Math.round(mem.heapTotal / 1024 / 1024)} MB`,
+        external: `${Math.round(mem.external / 1024 / 1024)} MB`, // Buffer/native
+        arrayBuffers: `${Math.round(mem.arrayBuffers / 1024 / 1024)} MB`
+    });
+}, 5000);
+
 app.use(compression());
 
 app.disable("x-powered-by"); // Disable the X-Powered-By header as it is not needed and can be used to infer the server technology
