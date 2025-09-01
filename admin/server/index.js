@@ -6,7 +6,7 @@ const fs = require("fs");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
-const port = process.env.APP_PORT ?? 3000;
+const port = process.env.APP_PORT ?? 8000;
 
 let indexFile = fs.readFileSync("./build/index.html", "utf8");
 
