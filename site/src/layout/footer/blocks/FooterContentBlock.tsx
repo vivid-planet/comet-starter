@@ -78,6 +78,7 @@ const TopContainer = styled.div`
         align-self: stretch;
         flex-direction: row-reverse;
         justify-content: space-between;
+        reading-flow: flex-visual;
     }
 
     ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
