@@ -151,6 +151,19 @@
                 "name": "openByDefault",
                 "kind": "Boolean",
                 "nullable": false
+            },
+            {
+                "name": "titleHtmlTag",
+                "kind": "Enum",
+                "enum": [
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6"
+                ],
+                "nullable": false
             }
         ],
         "inputFields": [
@@ -168,6 +181,19 @@
             {
                 "name": "openByDefault",
                 "kind": "Boolean",
+                "nullable": false
+            },
+            {
+                "name": "titleHtmlTag",
+                "kind": "Enum",
+                "enum": [
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6"
+                ],
                 "nullable": false
             }
         ]
