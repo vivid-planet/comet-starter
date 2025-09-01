@@ -22,7 +22,7 @@ setInterval(() => {
         heapUsed: `${Math.round(mem.heapUsed / 1024 / 1024)} MB`,
         heapTotal: `${Math.round(mem.heapTotal / 1024 / 1024)} MB`,
         external: `${Math.round(mem.external / 1024 / 1024)} MB`, // Buffer/native
-        arrayBuffers: `${Math.round(mem.arrayBuffers / 1024 / 1024)} MB`
+        arrayBuffers: `${Math.round(mem.arrayBuffers / 1024 / 1024)} MB`,
     });
 }, 5000);
 
@@ -44,9 +44,9 @@ app.use(
                 "img-src": ["'self'", "data:"],
                 "media-src": ["'self'", "data:"],
                 "frame-src": [process.env.PREVIEW_URL],
-                upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [], // Upgrade all requests to HTTPS on production
             },
             useDefaults: false, // Avoid default values for not explicitly set directives
+            upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : true, // Upgrade all requests to HTTPS on production
         },
         xFrameOptions: false, // Disable deprecated X-Frame-Options header
         crossOriginResourcePolicy: "same-origin", // Do not allow cross-origin requests to access the response
