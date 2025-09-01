@@ -40,7 +40,7 @@ app.use(
                 "style-src-elem": ["'self'", "'unsafe-inline'", process.env.PREVIEW_URL],
                 "style-src-attr": ["'unsafe-inline'"],
                 "font-src": ["'self'", "data:"],
-                "connect-src": ["'self'"],
+                "connect-src": ["'self'", "http://localhost:4000"],
                 "img-src": ["'self'", "data:"],
                 "media-src": ["'self'", "data:"],
                 "frame-src": [process.env.PREVIEW_URL],
