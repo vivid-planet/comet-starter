@@ -45,7 +45,10 @@ export const Header = ({ header }: Props) => {
                 <PageLayoutContent>
                     <Root>
                         <Link href="/">
-                            <SvgUse href="/assets/comet-logo.svg#root" />
+                            <SvgUse
+                                href="/assets/comet-logo.svg#root"
+                                title={intl.formatMessage({ id: "header.logo", defaultMessage: "Comet DXP Logo" })}
+                            />
                         </Link>
 
                         <DesktopHeaderFullHeightNav>
