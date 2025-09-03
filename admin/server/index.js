@@ -6,7 +6,7 @@ const fs = require("fs");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const app = express();
-const port = process.env.APP_PORT ?? 3000;
+const port = process.env.APP_PORT ?? 8000;
 
 let indexFile = fs.readFileSync("./build/index.html", "utf8");
 
@@ -14,6 +14,17 @@ let indexFile = fs.readFileSync("./build/index.html", "utf8");
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
     return process.env[p1] || "";
 });
+
+setInterval(() => {
+    const mem = process.memoryUsage();
+    console.log({
+        rss: `${Math.round(mem.rss / 1024 / 1024)} MB`,
+        heapUsed: `${Math.round(mem.heapUsed / 1024 / 1024)} MB`,
+        heapTotal: `${Math.round(mem.heapTotal / 1024 / 1024)} MB`,
+        external: `${Math.round(mem.external / 1024 / 1024)} MB`, // Buffer/native
+        arrayBuffers: `${Math.round(mem.arrayBuffers / 1024 / 1024)} MB`,
+    });
+}, 5000);
 
 app.use(compression());
 
@@ -29,13 +40,13 @@ app.use(
                 "style-src-elem": ["'self'", "'unsafe-inline'", process.env.PREVIEW_URL],
                 "style-src-attr": ["'unsafe-inline'"],
                 "font-src": ["'self'", "data:"],
-                "connect-src": ["'self'"],
+                "connect-src": ["'self'", "http://localhost:4000"],
                 "img-src": ["'self'", "data:"],
                 "media-src": ["'self'", "data:"],
                 "frame-src": [process.env.PREVIEW_URL],
-                upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : [], // Upgrade all requests to HTTPS on production
             },
             useDefaults: false, // Avoid default values for not explicitly set directives
+            upgradeInsecureRequests: process.env.NODE_ENV === "development" ? undefined : true, // Upgrade all requests to HTTPS on production
         },
         xFrameOptions: false, // Disable deprecated X-Frame-Options header
         crossOriginResourcePolicy: "same-origin", // Do not allow cross-origin requests to access the response
