@@ -43,9 +43,10 @@ export const ContentGroupBlock = createCompositeBlock(
         blocks: {
             backgroundColor: {
                 block: createCompositeBlockSelectField<ContentGroupBlockData["backgroundColor"]>({
+                    label: <FormattedMessage id="contentGroupBlock.overlay" defaultMessage="Background Color" />,
+                    fullWidth: true,
                     defaultValue: "default",
                     options: backgroundColorOptions,
-                    fieldProps: { fullWidth: true, label: <FormattedMessage id="contentGroupBlock.overlay" defaultMessage="Background Color" /> },
                 }),
                 hiddenInSubroute: true,
             },

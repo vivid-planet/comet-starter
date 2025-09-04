@@ -1,5 +1,5 @@
 "use client";
-import { hasRichTextBlockContent, PreviewSkeleton, type PropsWithData, withPreview } from "@comet/cms-site";
+import { hasRichTextBlockContent, PreviewSkeleton, type PropsWithData, withPreview } from "@comet/site-nextjs";
 import { type LinkBlockData, type RichTextBlockData } from "@src/blocks.generated";
 import { Typography, type TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
@@ -117,7 +117,7 @@ const DisableLastBottomSpacing = styled.div`
         > *:last-child {
             margin-bottom: 0;
 
-            ${theme.breakpoints.xs.mediaQuery} {
+            ${theme.breakpoints.sm.mediaQuery} {
                 margin-bottom: 0;
             }
         }
@@ -144,6 +144,7 @@ const InlineLink = styled(LinkBlock)`
 
     &:hover {
         color: ${({ theme }) => theme.palette.primary.dark};
+        text-decoration-thickness: 2px;
     }
 `;
 
