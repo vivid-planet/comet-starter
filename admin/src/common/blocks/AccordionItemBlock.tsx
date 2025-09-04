@@ -47,6 +47,7 @@ export const AccordionItemBlock = createCompositeBlock(
                     })),
                     required: true,
                 }),
+                hiddenInSubroute: true,
             },
             content: {
                 block: AccordionContentBlock,
