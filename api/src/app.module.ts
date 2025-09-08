@@ -56,6 +56,7 @@ export class AppModule {
                         playground: false,
                         // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
                         autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
+                        sortSchema: true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
                             if (!config.debug) {
