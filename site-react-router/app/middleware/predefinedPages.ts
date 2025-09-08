@@ -31,50 +31,6 @@ async function getPredefinedPageRewrite(domain: string, pathname: string): Promi
     return undefined;
 }
 
-const predefinedPagesQuery = gql`
-    query PredefinedPages($scope: PageTreeNodeScopeInput!) {
-        paginatedPageTreeNodes(scope: $scope, documentType: "PredefinedPage") {
-            nodes {
-                id
-                path
-                document {
-                    __typename
-                    ... on PredefinedPage {
-                        type
-                    }
-                }
-            }
-        }
-    }
-`;
-
-const graphQLFetch = createGraphQLFetch();
-
-async function fetchPredefinedPages(domain: string) {
-    const key = `predefinedPages-${domain}`;
-
-    return memoryCache.wrap(key, async () => {
-        const pages: Array<{ codePath: string; pageTreeNodePath: string }> = [];
-
-        for (const language of getSiteConfigForDomain(domain).scope.languages) {
-            const { paginatedPageTreeNodes } = await graphQLFetch<GQLPredefinedPagesQuery, GQLPredefinedPagesQueryVariables>(predefinedPagesQuery, {
-                scope: { domain: domain, language },
-            });
-
-            for (const node of paginatedPageTreeNodes.nodes) {
-                if (node.document?.__typename === "PredefinedPage" && node.document.type) {
-                    pages.push({
-                        codePath: `/${language}${predefinedPagePaths[node.document.type]}`,
-                        pageTreeNodePath: `/${language}${node.path}`,
-                    });
-                }
-            }
-        }
-
-        return pages;
-    });
-}
-
 export async function predefinedPagesMiddleware(req: ExpressRequest, res: ExpressResponse, next: NextFunction) {
     console.log("predefinedPagesMiddleware");
     const host = getHostByHeaders(new Headers(req.headers as HeadersInit));

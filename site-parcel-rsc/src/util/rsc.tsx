@@ -53,9 +53,13 @@ export async function renderRequestHTML(request: IncomingMessage, response: Serv
     temporaryReferences: options?.temporaryReferences ?? (request as any)[temporaryReferencesSymbol]
   };
     try {
+
+      const sheet = new ServerStyleSheet();
+      //let html = await renderHTMLBase(sheet.collectStyles(root), options);
       let html = await renderHTMLBase(root, options);
+      const streamWithStyles = sheet.interleaveWithNodeStream(html);
       response.setHeader('Content-Type', 'text/html');
-      html.pipe(response);
+      streamWithStyles.pipe(response);
     } catch (err) {
       response.statusCode = 500;
       let error = err instanceof Error ? err : new Error(String(err));

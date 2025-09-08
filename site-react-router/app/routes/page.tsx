@@ -8,6 +8,7 @@ import { redirect, data } from "react-router";
 import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@app/blocks.generated";
 import type { GQLPageTreeNodeScope } from "@app/graphql.generated";
 import { previewParams } from "@app/util/sitePreview";
+import { fetchPredefinedPages } from "@app/documents/predefinedPages/predefinedPagePaths";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -36,7 +37,18 @@ export async function loader({ request, params }: Route.LoaderArgs) {
   
   const language = params.language;
   const scope = { domain: siteConfig.scope.domain, language };
-  const pathname = "/" + (params["*"] || "");
+  let pathname = "/" + (params["*"] || "");
+
+
+
+  const predefinedPages = await fetchPredefinedPages(siteConfig.scope.domain);
+  for (const page of predefinedPages) {
+    if (pathname.startsWith(page.pageTreeNodePath)) {
+      pathname = pathname.replace(page.pageTreeNodePath, page.codePath);
+      // hier brauchen wir unseren eigenen router für die predefined pages
+      // news und newsDetail gibts nicht
+    }
+  }
 
   const graphQLFetch = createGraphQLFetch(preview?.previewData);
   const documentTypeData = await graphQLFetch<GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables>(
