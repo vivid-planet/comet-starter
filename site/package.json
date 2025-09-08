@@ -3,7 +3,8 @@
     "private": true,
     "scripts": {
         "build": "npm run intl:compile && run-p gql:types generate-block-types && tsc --project tsconfig.server.json && next build",
-        "dev": "npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node --inspect=localhost:9230 --max-old-space-size=512 dist/server.js",
+        "check-node-version": "check-node-version --node $(cat ../.nvmrc)",
+        "dev": "npm run check-node-version && npm run intl:compile && run-s gql:types generate-block-types && tsc --project tsconfig.server.json && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- node --inspect=localhost:9230 --max-old-space-size=512 dist/server.js",
         "generate-block-types": "comet generate-block-types",
         "generate-block-types:watch": "chokidar -s \"block-meta.json\" -c \"npm run generate-block-types\"",
         "gql:types": "graphql-codegen",
@@ -54,6 +55,7 @@
         "@types/node": "^22.14.1",
         "@types/react": "^18.3.23",
         "@types/react-dom": "^18.3.7",
+        "check-node-version": "^4.2.1",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
         "eslint": "^9.31.0",

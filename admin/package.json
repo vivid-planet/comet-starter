@@ -23,7 +23,8 @@
         "postinstall": "cd server && npm install",
         "preview": "npm run build && vite preview",
         "serve": "node server",
-        "start": "run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
+        "check-node-version": "check-node-version --node $(cat ../.nvmrc)",
+        "start": "npm run check-node-version && run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
         "@apollo/client": "^3.13.8",
@@ -78,6 +79,7 @@
         "@types/react-router": "^5.1.20",
         "@types/react-router-dom": "^5.3.3",
         "@vitejs/plugin-react-swc": "^3.8.1",
+        "check-node-version": "^4.2.1",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
         "eslint": "^9.31.0",
