@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "admin-generator": "rimraf --glob 'src/**/generated' && comet-admin-generator generate",
+        "admin-generator": "rimraf --glob 'src/**/generated' && comet-admin-generator generate && npm run gql:types",
         "build": "run-s admin-generator intl:compile && run-p gql:types generate-block-types && NODE_ENV=production vite build",
         "check-node-version": "check-node-version --node $(cat ../.nvmrc)",
         "generate-block-types": "comet generate-block-types --inputs",
