@@ -107,9 +107,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                                         color="inherit"
                                                                     />
 
-                                                                    <Typography>
-                                                                        <FormattedMessage id="header.back" defaultMessage="Back" />
-                                                                    </Typography>
+                                                                    <FormattedMessage id="header.back" defaultMessage="Back" />
                                                                 </BackButton>
                                                             </li>
                                                             <li>
@@ -120,11 +118,9 @@ export const MobileMenu = ({ header }: Props) => {
                                                                         height={16}
                                                                         color="inherit"
                                                                     />
-                                                                    <Typography>
-                                                                        <FormattedMessage id="header.overview" defaultMessage="Overview" />
-                                                                        <span aria-hidden="true"> | </span>
-                                                                        {node.name}
-                                                                    </Typography>
+                                                                    <FormattedMessage id="header.overview" defaultMessage="Overview" />
+                                                                    <span aria-hidden="true"> | </span>
+                                                                    {node.name}
                                                                 </OverviewButton>
                                                             </li>
                                                             {visibleChildNodes.map((node) => (
