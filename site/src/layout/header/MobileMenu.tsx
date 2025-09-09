@@ -60,7 +60,12 @@ export const MobileMenu = ({ header }: Props) => {
                 aria-expanded={isMenuOpen}
                 onClick={handleMenuButtonClick}
             >
-                <Icon href={isMenuOpen ? "/assets/icons/menu-open.svg#root" : "/assets/icons/menu.svg#root"} />
+                <SvgUse
+                    href={isMenuOpen ? "/assets/icons/menu-open.svg#root" : "/assets/icons/menu.svg#root"}
+                    width={16}
+                    height={16}
+                    color="inherit"
+                />
             </MenuButton>
             <MenuContainer $isMenuOpen={isMenuOpen} aria-hidden={!isMenuOpen}>
                 <PageLayout grid>
@@ -84,9 +89,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                     onClick={() => handleSubLevelNavigationButtonClick(node.id)}
                                                 >
                                                     <Typography>{node.name}</Typography>
-                                                    <IconWrapper>
-                                                        <Icon href="/assets/icons/arrow-right.svg#root" />
-                                                    </IconWrapper>
+                                                    <SvgUse href="/assets/icons/arrow-right.svg#root" width={16} height={16} color="inherit" />
                                                 </ButtonLink>
                                             ) : (
                                                 <Link page={node}>{node.name}</Link>
@@ -97,9 +100,13 @@ export const MobileMenu = ({ header }: Props) => {
                                                         <PageLayoutContent>
                                                             <li>
                                                                 <BackButton onClick={() => setExpandedSubLevelNavigation(null)}>
-                                                                    <IconWrapper>
-                                                                        <Icon href="/assets/icons/arrow-left.svg#root" />
-                                                                    </IconWrapper>
+                                                                    <SvgUse
+                                                                        href="/assets/icons/arrow-left.svg#root"
+                                                                        width={16}
+                                                                        height={16}
+                                                                        color="inherit"
+                                                                    />
+
                                                                     <Typography>
                                                                         <FormattedMessage id="header.back" defaultMessage="Back" />
                                                                     </Typography>
@@ -107,9 +114,12 @@ export const MobileMenu = ({ header }: Props) => {
                                                             </li>
                                                             <li>
                                                                 <OverviewButton page={node}>
-                                                                    <IconWrapper>
-                                                                        <Icon href="/assets/icons/overview.svg#root" />
-                                                                    </IconWrapper>
+                                                                    <SvgUse
+                                                                        href="/assets/icons/overview.svg#root"
+                                                                        width={16}
+                                                                        height={16}
+                                                                        color="inherit"
+                                                                    />
                                                                     <Typography>
                                                                         <FormattedMessage id="header.overview" defaultMessage="Overview" />
                                                                         {` | ${node.name}`}
@@ -155,17 +165,6 @@ const MenuButton = styled.button`
     padding: 0;
     width: 24px;
     height: 24px;
-`;
-
-const IconWrapper = styled.div`
-    width: 16px;
-    height: 16px;
-`;
-
-const Icon = styled(SvgUse)`
-    width: 100%;
-    height: 100%;
-    color: inherit;
 `;
 
 const MenuContainer = styled.div<{ $isMenuOpen: boolean }>`
