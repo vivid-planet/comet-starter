@@ -89,22 +89,14 @@ export const MobileMenu = ({ header }: Props) => {
                                                     </IconWrapper>
                                                 </ButtonLink>
                                             ) : (
-                                                <Link page={node} aria-label={node.name}>
-                                                    {node.name}
-                                                </Link>
+                                                <Link page={node}>{node.name}</Link>
                                             )}
                                             {visibleChildNodes.length > 0 && (
                                                 <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
                                                     <PageLayout grid>
                                                         <PageLayoutContent>
                                                             <li>
-                                                                <BackButton
-                                                                    aria-label={intl.formatMessage({
-                                                                        id: "header.backButton.arialLabel",
-                                                                        defaultMessage: "Go back",
-                                                                    })}
-                                                                    onClick={() => setExpandedSubLevelNavigation(null)}
-                                                                >
+                                                                <BackButton onClick={() => setExpandedSubLevelNavigation(null)}>
                                                                     <IconWrapper>
                                                                         <Icon href="/assets/icons/arrow-left.svg#root" />
                                                                     </IconWrapper>
@@ -114,7 +106,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                                 </BackButton>
                                                             </li>
                                                             <li>
-                                                                <OverviewButton page={node} aria-label={node.name}>
+                                                                <OverviewButton page={node}>
                                                                     <IconWrapper>
                                                                         <Icon href="/assets/icons/overview.svg#root" />
                                                                     </IconWrapper>
@@ -126,9 +118,7 @@ export const MobileMenu = ({ header }: Props) => {
                                                             </li>
                                                             {visibleChildNodes.map((node) => (
                                                                 <li key={node.id}>
-                                                                    <Link page={node} aria-label={node.name}>
-                                                                        {node.name}
-                                                                    </Link>
+                                                                    <Link page={node}>{node.name}</Link>
                                                                 </li>
                                                             ))}
                                                         </PageLayoutContent>
