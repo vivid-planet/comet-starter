@@ -59,7 +59,7 @@ export const Header = ({ header }: Props) => {
                                             onMouseLeave={() => setExpandedSubLevelNavigation(null)}
                                         >
                                             <LinkContainer>
-                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                                <MenuPageLink page={node} activeClassName="active">
                                                     {node.name}
                                                 </MenuPageLink>
                                                 {visibleChildNodes.length > 0 && (
@@ -85,7 +85,7 @@ export const Header = ({ header }: Props) => {
                                                 <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
                                                     {visibleChildNodes.map((node) => (
                                                         <li key={node.id}>
-                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
+                                                            <MenuPageLink page={node} activeClassName="active">
                                                                 {node.name}
                                                             </MenuPageLink>
                                                         </li>
