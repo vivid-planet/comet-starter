@@ -122,7 +122,8 @@ export const MobileMenu = ({ header }: Props) => {
                                                                     />
                                                                     <Typography>
                                                                         <FormattedMessage id="header.overview" defaultMessage="Overview" />
-                                                                        {` | ${node.name}`}
+                                                                        <span aria-hidden="true"> | </span>
+                                                                        {node.name}
                                                                     </Typography>
                                                                 </OverviewButton>
                                                             </li>
