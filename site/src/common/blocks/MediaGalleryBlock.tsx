@@ -1,7 +1,7 @@
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type PropsWithData, withPreview } from "@comet/site-nextjs";
 import { type MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { Typography } from "@src/common/components/Typography";
@@ -53,22 +53,22 @@ const PageLayoutContent = styled.div`
     grid-column: 2 / -2;
     position: relative;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         grid-column: 5 / -5;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         grid-column: 6 / -6;
     }
 
-    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.xl.mediaQuery} {
         grid-column: 7 / -7;
     }
 `;
 
 const MediaCaption = styled(Typography)`
-    margin-top: ${({ theme }) => theme.spacing.S300};
-    padding-right: calc(var(--swiper-button-size) * 2 + ${({ theme }) => theme.spacing.S300} + ${({ theme }) => theme.spacing.S500});
+    margin-top: ${({ theme }) => theme.spacing.s300};
+    padding-right: calc(var(--swiper-button-size) * 2 + ${({ theme }) => theme.spacing.s300} + ${({ theme }) => theme.spacing.s500});
 
     /* min-height to show arrows when no caption */
     min-height: 20px;
@@ -92,7 +92,7 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
         cursor: pointer;
 
         /* Move buttons just below the image height, calculated with aspectRatio. not possible with top: 100% because this moves them down the whole slider height which is variable because of caption text */
-        padding-top: ${({ theme }) => theme.spacing.S300};
+        padding-top: ${({ theme }) => theme.spacing.s300};
         margin-top: calc(${({ $aspectRatioVertical }) => $aspectRatioVertical} / ${({ $aspectRatioHorizontal }) => $aspectRatioHorizontal} * 100%);
 
         &::after {
@@ -109,7 +109,7 @@ const SwiperWrapper = styled(Swiper)<{ $aspectRatioHorizontal: string; $aspectRa
 
     .swiper-button-prev {
         /* Button width plus space */
-        right: calc(var(--swiper-button-size) + ${({ theme }) => theme.spacing.S300});
+        right: calc(var(--swiper-button-size) + ${({ theme }) => theme.spacing.s300});
         left: auto;
 
         &::after {

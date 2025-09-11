@@ -1,4 +1,4 @@
-import { type PropsWithData, withPreview } from "@comet/cms-site";
+import { type PropsWithData, withPreview } from "@comet/site-nextjs";
 import { type BillboardTeaserBlockData } from "@src/blocks.generated";
 import { CallToActionListBlock } from "@src/common/blocks/CallToActionListBlock";
 import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
@@ -58,7 +58,7 @@ const AbsoluteGridRoot = styled(PageLayout)`
 `;
 
 const Content = styled.div`
-    padding: ${({ theme }) => theme.spacing.D200} 0;
+    padding: ${({ theme }) => theme.spacing.d200} 0;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -70,18 +70,18 @@ const Content = styled.div`
     ${({ theme }) => css`
         grid-column: 3 / -3;
 
-        ${theme.breakpoints.xs.mediaQuery} {
+        ${theme.breakpoints.sm.mediaQuery} {
             grid-column: 5 / -5;
         }
 
-        ${theme.breakpoints.lg.mediaQuery} {
+        ${theme.breakpoints.xl.mediaQuery} {
             grid-column: 7 / -7;
         }
     `};
 `;
 
 const ImageMobile = styled.div`
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         display: none;
     }
 `;
@@ -89,11 +89,11 @@ const ImageMobile = styled.div`
 const ImageTablet = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: none;
     }
 `;
@@ -101,11 +101,11 @@ const ImageTablet = styled.div`
 const ImageDesktop = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         display: block;
     }
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         display: none;
     }
 `;
@@ -113,7 +113,7 @@ const ImageDesktop = styled.div`
 const ImageLargeDesktop = styled.div`
     display: none;
 
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.lg.mediaQuery} {
         display: block;
     }
 `;
