@@ -69,73 +69,71 @@ export const MobileMenu = ({ header }: Props) => {
             <MenuContainer $isMenuOpen={isMenuOpen} aria-hidden={!isMenuOpen}>
                 <PageLayout grid>
                     <PageLayoutContent>
-                        <nav>
-                            <TopLevelNavigation>
-                                {header.map((node) => {
-                                    const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
-                                    return (
-                                        <li key={node.id}>
-                                            {visibleChildNodes.length > 0 ? (
-                                                <ButtonLink
-                                                    aria-label={intl.formatMessage(
-                                                        {
-                                                            id: "header.subMenu.arialLabel",
-                                                            defaultMessage: "Submenu of {name}",
-                                                        },
-                                                        { name: node.name },
-                                                    )}
-                                                    aria-expanded={expandedSubLevelNavigation === node.id}
-                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                                >
-                                                    {node.name}
-                                                    <SvgUse href="/assets/icons/arrow-right.svg#root" width={16} height={16} color="inherit" />
-                                                </ButtonLink>
-                                            ) : (
-                                                <Link page={node}>{node.name}</Link>
-                                            )}
-                                            {visibleChildNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                    <PageLayout grid>
-                                                        <PageLayoutContent>
-                                                            <li>
-                                                                <BackButton onClick={() => setExpandedSubLevelNavigation(null)}>
-                                                                    <SvgUse
-                                                                        href="/assets/icons/arrow-left.svg#root"
-                                                                        width={16}
-                                                                        height={16}
-                                                                        color="inherit"
-                                                                    />
+                        <TopLevelNavigation>
+                            {header.map((node) => {
+                                const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
+                                return (
+                                    <li key={node.id}>
+                                        {visibleChildNodes.length > 0 ? (
+                                            <ButtonLink
+                                                aria-label={intl.formatMessage(
+                                                    {
+                                                        id: "header.subMenu.arialLabel",
+                                                        defaultMessage: "Submenu of {name}",
+                                                    },
+                                                    { name: node.name },
+                                                )}
+                                                aria-expanded={expandedSubLevelNavigation === node.id}
+                                                onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                            >
+                                                {node.name}
+                                                <SvgUse href="/assets/icons/arrow-right.svg#root" width={16} height={16} color="inherit" />
+                                            </ButtonLink>
+                                        ) : (
+                                            <Link page={node}>{node.name}</Link>
+                                        )}
+                                        {visibleChildNodes.length > 0 && (
+                                            <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                <PageLayout grid>
+                                                    <PageLayoutContent>
+                                                        <li>
+                                                            <BackButton onClick={() => setExpandedSubLevelNavigation(null)}>
+                                                                <SvgUse
+                                                                    href="/assets/icons/arrow-left.svg#root"
+                                                                    width={16}
+                                                                    height={16}
+                                                                    color="inherit"
+                                                                />
 
-                                                                    <FormattedMessage id="header.back" defaultMessage="Back" />
-                                                                </BackButton>
+                                                                <FormattedMessage id="header.back" defaultMessage="Back" />
+                                                            </BackButton>
+                                                        </li>
+                                                        <li>
+                                                            <OverviewButton page={node}>
+                                                                <SvgUse
+                                                                    href="/assets/icons/overview.svg#root"
+                                                                    width={16}
+                                                                    height={16}
+                                                                    color="inherit"
+                                                                />
+                                                                <FormattedMessage id="header.overview" defaultMessage="Overview" />
+                                                                <span aria-hidden="true"> | </span>
+                                                                {node.name}
+                                                            </OverviewButton>
+                                                        </li>
+                                                        {visibleChildNodes.map((node) => (
+                                                            <li key={node.id}>
+                                                                <Link page={node}>{node.name}</Link>
                                                             </li>
-                                                            <li>
-                                                                <OverviewButton page={node}>
-                                                                    <SvgUse
-                                                                        href="/assets/icons/overview.svg#root"
-                                                                        width={16}
-                                                                        height={16}
-                                                                        color="inherit"
-                                                                    />
-                                                                    <FormattedMessage id="header.overview" defaultMessage="Overview" />
-                                                                    <span aria-hidden="true"> | </span>
-                                                                    {node.name}
-                                                                </OverviewButton>
-                                                            </li>
-                                                            {visibleChildNodes.map((node) => (
-                                                                <li key={node.id}>
-                                                                    <Link page={node}>{node.name}</Link>
-                                                                </li>
-                                                            ))}
-                                                        </PageLayoutContent>
-                                                    </PageLayout>
-                                                </SubLevelNavigation>
-                                            )}
-                                        </li>
-                                    );
-                                })}
-                            </TopLevelNavigation>
-                        </nav>
+                                                        ))}
+                                                    </PageLayoutContent>
+                                                </PageLayout>
+                                            </SubLevelNavigation>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                        </TopLevelNavigation>
                     </PageLayoutContent>
                 </PageLayout>
             </MenuContainer>

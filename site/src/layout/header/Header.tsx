@@ -34,13 +34,15 @@ export const Header = ({ header }: Props) => {
             <PageLayout grid>
                 <PageLayoutContent>
                     <Root>
-                        <Link href="/">
-                            <SvgUse href="/assets/comet-logo.svg#root" />
-                        </Link>
+                        <nav>
+                            <Link href="/">
+                                <SvgUse href="/assets/comet-logo.svg#root" />
+                            </Link>
 
-                        <DesktopMenu header={header} />
+                            <DesktopMenu header={header} />
 
-                        <MobileMenu header={header} />
+                            <MobileMenu header={header} />
+                        </nav>
                     </Root>
                 </PageLayoutContent>
             </PageLayout>
