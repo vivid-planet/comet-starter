@@ -52,7 +52,7 @@ const PageLayoutContent = styled.div`
     grid-column: 2 / -2;
 `;
 
-const Root = styled.div`
+const Root = styled.nav`
     display: flex;
     height: var(--header-height);
     justify-content: space-between;
