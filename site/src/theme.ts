@@ -33,26 +33,26 @@ export const theme = {
     },
     fontFamily: "Roboto, sans-serif",
     breakpoints: {
-        xs: createBreakpoint(600),
-        sm: createBreakpoint(900),
-        md: createBreakpoint(1200),
-        lg: createBreakpoint(1600),
+        sm: createBreakpoint(600),
+        md: createBreakpoint(900),
+        lg: createBreakpoint(1200),
+        xl: createBreakpoint(1600),
     },
     spacing: {
-        D100: "var(--spacing-d100)",
-        D200: "var(--spacing-d200)",
-        D300: "var(--spacing-d300)",
-        D400: "var(--spacing-d400)",
-        S100: "var(--spacing-s100)",
-        S200: "var(--spacing-s200)",
-        S300: "var(--spacing-s300)",
-        S400: "var(--spacing-s400)",
-        S500: "var(--spacing-s500)",
-        S600: "var(--spacing-s600)",
+        d100: "var(--spacing-d100)",
+        d200: "var(--spacing-d200)",
+        d300: "var(--spacing-d300)",
+        d400: "var(--spacing-d400)",
+        s100: "var(--spacing-s100)",
+        s200: "var(--spacing-s200)",
+        s300: "var(--spacing-s300)",
+        s400: "var(--spacing-s400)",
+        s500: "var(--spacing-s500)",
+        s600: "var(--spacing-s600)",
     },
 };
 
-type Theme = typeof theme;
+export type Theme = typeof theme;
 
 declare module "styled-components" {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type

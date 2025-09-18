@@ -1,4 +1,4 @@
-import { gql } from "@comet/cms-site";
+import { gql } from "@comet/site-nextjs";
 import { mobileMenuFragment } from "@src/layout/header/MobileMenu.fragment";
 
 import { pageLinkFragment } from "./PageLink.fragment";
