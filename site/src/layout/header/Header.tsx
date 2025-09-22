@@ -44,7 +44,7 @@ export const Header = ({ header }: Props) => {
             <PageLayout grid>
                 <PageLayoutContent>
                     <Root>
-                        <Link href="/">
+                        <Link href="/" title={intl.formatMessage({ id: "header.logo.title", defaultMessage: "Comet DXP Logo" })}>
                             <SvgUse href="/assets/comet-logo.svg#root" />
                         </Link>
 
