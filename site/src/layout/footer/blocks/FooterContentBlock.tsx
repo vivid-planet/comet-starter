@@ -11,7 +11,8 @@ import styled from "styled-components";
 export const FooterContentBlock = withPreview(
     ({ data: { text, image, linkList, copyrightNotice } }: PropsWithData<FooterContentBlockData>) => {
         return (
-            <Root>
+            // ID is used for skip link
+            <Root id="footer">
                 <PageLayout grid>
                     <PageLayoutContent>
                         <TopContainer>

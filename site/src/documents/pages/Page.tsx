@@ -135,7 +135,8 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
             {document.seo.structuredData && document.seo.structuredData.length > 0 && (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: document.seo.structuredData }} />
             )}
-            <main>
+            {/* ID is used for skip link */}
+            <main id="mainContent">
                 <StageBlock data={document.stage} />
                 <PageContentBlock data={document.content} />
             </main>
