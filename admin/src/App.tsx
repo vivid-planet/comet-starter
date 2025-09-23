@@ -81,7 +81,7 @@ export function App() {
             redirects={{ scopeParts: ["domain"] }}
         >
             <ApolloProvider client={apolloClient}>
-                <IntlProvider locale="en" messages={getMessages()}>
+                <IntlProvider locale="en" messages={getMessages("en")}>
                     <LocalizationProvider adapterLocale={enUS} dateAdapter={AdapterDateFns}>
                         <MuiThemeProvider theme={theme}>
                             <DndProvider options={HTML5toTouch}>
