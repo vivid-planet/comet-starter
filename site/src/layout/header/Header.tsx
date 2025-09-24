@@ -1,13 +1,14 @@
 "use client";
+import { Button } from "@src/common/components/Button";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
-import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useIntl } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 import styled from "styled-components";
 
+import { DesktopMenu } from "./DesktopMenu";
 import { type GQLHeaderFragment } from "./Header.fragment.generated";
 
 interface Props {
@@ -15,16 +16,8 @@ interface Props {
 }
 
 export const Header = ({ header }: Props) => {
-    const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
-
-    const handleSubLevelNavigationButtonClick = (id: string) => {
-        if (expandedSubLevelNavigation === id) {
-            setExpandedSubLevelNavigation(null);
-        } else {
-            setExpandedSubLevelNavigation(id);
-        }
-    };
+    const intl = useIntl();
 
     useEffect(() => {
         if (!expandedSubLevelNavigation) return;
@@ -41,62 +34,24 @@ export const Header = ({ header }: Props) => {
 
     return (
         <header>
+            <SkipLink href="#mainContent">
+                <Button as="span">
+                    <FormattedMessage defaultMessage="Skip to main content" id="skipLink.skipToMainContent" />
+                </Button>
+            </SkipLink>
+            <SkipLink href="#footer">
+                <Button as="span">
+                    <FormattedMessage defaultMessage="Skip to footer" id="skipLink.skipToFooter" />
+                </Button>
+            </SkipLink>
             <PageLayout grid>
                 <PageLayoutContent>
                     <Root>
-                        <Link href="/">
+                        <Link href="/" title={intl.formatMessage({ id: "header.logo.title", defaultMessage: "Comet DXP Logo" })}>
                             <SvgUse href="/assets/comet-logo.svg#root" />
                         </Link>
 
-                        <DesktopHeaderFullHeightNav>
-                            <TopLevelNavigation>
-                                {header.map((node) => {
-                                    const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
-                                    return (
-                                        <TopLevelLinkContainer
-                                            key={node.id}
-                                            onMouseEnter={() => setExpandedSubLevelNavigation(node.id)}
-                                            onMouseLeave={() => setExpandedSubLevelNavigation(null)}
-                                        >
-                                            <LinkContainer>
-                                                <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
-                                                    {node.name}
-                                                </MenuPageLink>
-                                                {visibleChildNodes.length > 0 && (
-                                                    <ToggleSubLevelNavigationButton
-                                                        aria-label={intl.formatMessage(
-                                                            {
-                                                                id: "header.subMenu.arialLabel",
-                                                                defaultMessage: "Submenu of {name}",
-                                                            },
-                                                            { name: node.name },
-                                                        )}
-                                                        aria-expanded={expandedSubLevelNavigation === node.id}
-                                                        onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                                    >
-                                                        <AnimatedChevron
-                                                            href="/assets/icons/chevron-down.svg#root"
-                                                            $isExpanded={expandedSubLevelNavigation === node.id}
-                                                        />
-                                                    </ToggleSubLevelNavigationButton>
-                                                )}
-                                            </LinkContainer>
-                                            {visibleChildNodes.length > 0 && (
-                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                    {visibleChildNodes.map((node) => (
-                                                        <li key={node.id}>
-                                                            <MenuPageLink page={node} activeClassName="active" aria-label={node.name}>
-                                                                {node.name}
-                                                            </MenuPageLink>
-                                                        </li>
-                                                    ))}
-                                                </SubLevelNavigation>
-                                            )}
-                                        </TopLevelLinkContainer>
-                                    );
-                                })}
-                            </TopLevelNavigation>
-                        </DesktopHeaderFullHeightNav>
+                        <DesktopMenu header={header} />
 
                         <MobileMenu header={header} />
                     </Root>
@@ -106,96 +61,36 @@ export const Header = ({ header }: Props) => {
     );
 };
 
+const SkipLink = styled.a`
+    position: fixed;
+    top: 120px;
+    left: 20px;
+    z-index: 100;
+    opacity: 0;
+
+    /* Hide the skip link visually but keep it accessible for screen readers */
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip-path: inset(50%);
+
+    &:focus {
+        opacity: 1;
+        height: auto;
+        width: auto;
+        clip-path: none;
+    }
+`;
+
 const PageLayoutContent = styled.div`
     grid-column: 2 / -2;
 `;
 
-const Root = styled.div`
+const Root = styled.nav`
     display: flex;
     height: var(--header-height);
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-`;
-
-const DesktopHeaderFullHeightNav = styled.nav`
-    height: 100%;
-    display: none;
-
-    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
-        display: block;
-    }
-`;
-
-const TopLevelNavigation = styled.ol`
-    display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    gap: ${({ theme }) => theme.spacing.s600};
-    height: 100%;
-`;
-
-const SubLevelNavigation = styled.ol<{ $isExpanded: boolean }>`
-    display: ${({ $isExpanded }) => ($isExpanded ? "flex" : "none")};
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.s200};
-    position: absolute;
-    z-index: 40;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    list-style-type: none;
-    padding: ${({ theme }) => theme.spacing.d100};
-    background-color: white;
-    border-left: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-bottom: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-    border-right: 1px solid ${({ theme }) => theme.palette.gray["200"]};
-`;
-
-const TopLevelLinkContainer = styled.li`
-    position: relative;
-
-    &:last-child ${SubLevelNavigation} {
-        left: auto;
-        transform: none;
-        right: 0;
-    }
-`;
-
-const LinkContainer = styled.div`
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.s100};
-    height: 100%;
-`;
-
-const ToggleSubLevelNavigationButton = styled.button`
-    width: 20px;
-    height: 20px;
-`;
-
-const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
-    width: 100%;
-    height: 100%;
-    color: ${({ theme, $isExpanded }) => ($isExpanded ? theme.palette.primary.main : theme.palette.text.primary)};
-    transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
-    transition: transform 0.4s ease;
-`;
-
-const MenuPageLink = styled(PageLink)`
-    text-decoration: none;
-    display: inline-block;
-    padding: ${({ theme }) => theme.spacing.s100} 0;
-    font-family: ${({ theme }) => theme.fontFamily};
-    color: ${({ theme }) => theme.palette.text.primary};
-
-    &:hover {
-        color: ${({ theme }) => theme.palette.primary.main};
-    }
-
-    &.active {
-        text-decoration: underline ${({ theme }) => theme.palette.primary.main};
-        text-underline-offset: 8px;
-    }
 `;
