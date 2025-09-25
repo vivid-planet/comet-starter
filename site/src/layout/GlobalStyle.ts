@@ -46,7 +46,7 @@ export const GlobalStyle = createGlobalStyle`
     /* Prevent sub and sup elements from affecting the line height in all browsers */
     sub,
     sup {
-        font-size: 75%;
+        font-size: max(12px, 75%);
         line-height: 0;
         position: relative;
         vertical-align: baseline;
@@ -58,6 +58,16 @@ export const GlobalStyle = createGlobalStyle`
 
     sup {
         top: -0.5em;
+    }
+    
+    button {
+        appearance: none;
+        margin: 0;
+        border: none;
+        padding: 0;
+        background: none;
+        color: inherit;
+        cursor: pointer;
     }
 
     button,
@@ -86,5 +96,18 @@ export const GlobalStyle = createGlobalStyle`
     #root,
     #__next {
         isolation: isolate;
+    }
+
+    /* Fieldset CSS Reset */
+    fieldset {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        min-width: 0;
+    }
+
+    legend {
+        padding: 0;
+        margin-bottom: 0;
     }
 `;

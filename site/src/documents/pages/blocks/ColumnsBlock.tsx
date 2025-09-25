@@ -1,4 +1,4 @@
-import { BlocksBlock, type PropsWithData, type SupportedBlocks, withPreview } from "@comet/cms-site";
+import { BlocksBlock, type PropsWithData, type SupportedBlocks, withPreview } from "@comet/site-nextjs";
 import { type ColumnsBlockData, type ColumnsContentBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
@@ -46,25 +46,15 @@ const Column = styled.div<{ $layout: string }>`
     grid-column: 3 / -3;
 
     ${({ $layout, theme }) =>
-        $layout === "9-6-9" &&
+        $layout === "6-12-6" &&
         css`
-            grid-column: 5 / -5;
-
-            ${theme.breakpoints.xs.mediaQuery} {
-                grid-column: 7 / -7;
-            }
+            grid-column: 4 / -4;
             ${theme.breakpoints.sm.mediaQuery} {
-                grid-column: 8 / -8;
-            }
-            ${theme.breakpoints.md.mediaQuery} {
-                grid-column: 9 / -9;
-            }
-            ${theme.breakpoints.lg.mediaQuery} {
-                grid-column: 10 / -10;
+                grid-column: 7 / -7;
             }
         `};
 
-    ${({ theme }) => theme.breakpoints.xs.mediaQuery} {
+    ${({ theme }) => theme.breakpoints.md.mediaQuery} {
         ${({ $layout }) =>
             $layout === "4-16-4" &&
             css`

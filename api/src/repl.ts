@@ -31,6 +31,6 @@ async function bootstrap() {
     // Context shortcuts
     const replContext = replServer.context;
     replContext.orm = orm;
-    replContext.em = orm.em;
+    replContext.em = orm.em.fork();
 }
 bootstrap();
