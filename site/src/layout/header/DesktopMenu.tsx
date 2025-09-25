@@ -1,11 +1,13 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
-import { useState } from "react";
+import { PageLink } from "@src/layout/header/PageLink";
+import { useEscapeKeyPressed } from "@src/util/useEscapeKeyPressed";
+import { useId, useState } from "react";
+import FocusLock from "react-focus-lock";
 import { useIntl } from "react-intl";
 import styled from "styled-components";
 
 import { type GQLDesktopMenuFragment } from "./DesktopMenu.fragment.generated";
-import { PageLink } from "./PageLink";
 
 interface Props {
     header: GQLDesktopMenuFragment[];
@@ -14,6 +16,8 @@ interface Props {
 export const DesktopMenu = ({ header }: Props) => {
     const intl = useIntl();
     const [expandedSubLevelNavigation, setExpandedSubLevelNavigation] = useState<string | null>(null);
+    const [autoFocus, setAutoFocus] = useState<boolean>(false);
+    const sublevelMenuId = useId();
 
     const handleSubLevelNavigationButtonClick = (id: string) => {
         if (expandedSubLevelNavigation === id) {
@@ -22,6 +26,11 @@ export const DesktopMenu = ({ header }: Props) => {
             setExpandedSubLevelNavigation(id);
         }
     };
+
+    useEscapeKeyPressed(() => {
+        setExpandedSubLevelNavigation(null);
+        setAutoFocus(false);
+    });
 
     return (
         <DesktopHeaderFullHeightNav>
@@ -47,8 +56,12 @@ export const DesktopMenu = ({ header }: Props) => {
                                             },
                                             { name: node.name },
                                         )}
+                                        aria-controls={sublevelMenuId}
                                         aria-expanded={expandedSubLevelNavigation === node.id}
-                                        onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                        onClick={() => {
+                                            setAutoFocus(true);
+                                            handleSubLevelNavigationButtonClick(node.id);
+                                        }}
                                     >
                                         <AnimatedChevron
                                             href="/assets/icons/chevron-down.svg#root"
@@ -58,15 +71,31 @@ export const DesktopMenu = ({ header }: Props) => {
                                 )}
                             </LinkContainer>
                             {visibleChildNodes.length > 0 && (
-                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                    {visibleChildNodes.map((node) => (
-                                        <li key={node.id}>
-                                            <MenuPageLink page={node} activeClassName="active">
-                                                {node.name}
-                                            </MenuPageLink>
-                                        </li>
-                                    ))}
-                                </SubLevelNavigation>
+                                <FocusLock disabled={expandedSubLevelNavigation !== node.id} autoFocus={autoFocus}>
+                                    <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                        <CloseSublevelNavigationButton
+                                            onClick={() => setExpandedSubLevelNavigation(null)}
+                                            aria-label={intl.formatMessage(
+                                                {
+                                                    id: "header.subMenu.closeButton",
+                                                    defaultMessage: "Close submenu of {name}",
+                                                },
+                                                { name: node.name },
+                                            )}
+                                            aria-controls={sublevelMenuId}
+                                        >
+                                            <SvgUse href="/assets/icons/menu-open.svg#root" width={16} height={16} />
+                                        </CloseSublevelNavigationButton>
+
+                                        {visibleChildNodes.map((node) => (
+                                            <li key={node.id}>
+                                                <MenuPageLink page={node} activeClassName="active">
+                                                    {node.name}
+                                                </MenuPageLink>
+                                            </li>
+                                        ))}
+                                    </SubLevelNavigation>
+                                </FocusLock>
                             )}
                         </TopLevelLinkContainer>
                     );
@@ -144,6 +173,28 @@ const AnimatedChevron = styled(SvgUse)<{ $isExpanded: boolean }>`
     color: ${({ theme, $isExpanded }) => ($isExpanded ? theme.palette.primary.main : theme.palette.text.primary)};
     transform: rotate(${({ $isExpanded }) => ($isExpanded ? "-180deg" : "0deg")});
     transition: transform 0.4s ease;
+`;
+
+const CloseSublevelNavigationButton = styled.button`
+    opacity: 0;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    pointer-events: none;
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    width: 1px;
+
+    &:focus-visible {
+        opacity: 1;
+        pointer-events: auto;
+        width: auto;
+        height: auto;
+        clip-path: none;
+    }
 `;
 
 const MenuPageLink = styled(PageLink)`
