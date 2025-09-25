@@ -3,7 +3,9 @@ import { SvgUse } from "@src/common/helpers/SvgUse";
 import { PageLink } from "@src/layout/header/PageLink";
 import { PageLayout } from "@src/layout/PageLayout";
 import { DisableBodyScrolling } from "@src/util/DisableBodyScrolling";
-import { useEffect, useState } from "react";
+import { useEscapeKeyPressed } from "@src/util/useEscapeKeyPressed";
+import { useState } from "react";
+import FocusLock from "react-focus-lock";
 import { FormattedMessage, useIntl } from "react-intl";
 import styled, { css } from "styled-components";
 
@@ -35,18 +37,13 @@ export const MobileMenu = ({ header }: Props) => {
         }
     };
 
-    useEffect(() => {
-        if (!expandedSubLevelNavigation) return;
-
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                event.preventDefault();
-                setExpandedSubLevelNavigation(null);
-            }
-        };
-        document.addEventListener("keydown", handleKeyDown);
-        return () => document.removeEventListener("keydown", handleKeyDown);
-    }, [expandedSubLevelNavigation]);
+    useEscapeKeyPressed(() => {
+        if (expandedSubLevelNavigation !== null) {
+            setExpandedSubLevelNavigation(null);
+        } else {
+            setIsMenuOpen(false);
+        }
+    });
 
     return (
         <Root>
@@ -69,71 +66,91 @@ export const MobileMenu = ({ header }: Props) => {
             <MenuContainer $isMenuOpen={isMenuOpen} aria-hidden={!isMenuOpen}>
                 <PageLayout grid>
                     <PageLayoutContent>
-                        <TopLevelNavigation>
-                            {header.map((node) => {
-                                const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
-                                return (
-                                    <li key={node.id}>
-                                        {visibleChildNodes.length > 0 ? (
-                                            <ButtonLink
-                                                aria-label={intl.formatMessage(
-                                                    {
-                                                        id: "header.subMenu.arialLabel",
-                                                        defaultMessage: "Submenu of {name}",
-                                                    },
-                                                    { name: node.name },
-                                                )}
-                                                aria-expanded={expandedSubLevelNavigation === node.id}
-                                                onClick={() => handleSubLevelNavigationButtonClick(node.id)}
-                                            >
-                                                {node.name}
-                                                <SvgUse href="/assets/icons/arrow-right.svg#root" width={16} height={16} color="inherit" />
-                                            </ButtonLink>
-                                        ) : (
-                                            <Link page={node}>{node.name}</Link>
-                                        )}
-                                        {visibleChildNodes.length > 0 && (
-                                            <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
-                                                <PageLayout grid>
-                                                    <PageLayoutContent>
-                                                        <li>
-                                                            <BackButton onClick={() => setExpandedSubLevelNavigation(null)}>
-                                                                <SvgUse
-                                                                    href="/assets/icons/arrow-left.svg#root"
-                                                                    width={16}
-                                                                    height={16}
-                                                                    color="inherit"
-                                                                />
+                        <FocusLock>
+                            <TopLevelNavigation>
+                                <li>
+                                    <BackButton
+                                        aria-label={intl.formatMessage({
+                                            id: "header.closeButton.arialLabel",
+                                            defaultMessage: "Close Menu",
+                                        })}
+                                        onClick={() => setIsMenuOpen(false)}
+                                    >
+                                        <SvgUse href="/assets/icons/arrow-left.svg#root" width={16} height={16} color="inherit" />
+                                        <FormattedMessage id="header.closeMenu" defaultMessage="Close Menu" />
+                                    </BackButton>
+                                </li>
+                                {header.map((node) => {
+                                    const visibleChildNodes = node.childNodes.filter((node) => !node.hideInMenu);
+                                    return (
+                                        <li key={node.id}>
+                                            {visibleChildNodes.length > 0 ? (
+                                                <ButtonLink
+                                                    aria-label={intl.formatMessage(
+                                                        {
+                                                            id: "header.subMenu.arialLabel",
+                                                            defaultMessage: "Submenu of {name}",
+                                                        },
+                                                        { name: node.name },
+                                                    )}
+                                                    aria-expanded={expandedSubLevelNavigation === node.id}
+                                                    onClick={() => handleSubLevelNavigationButtonClick(node.id)}
+                                                >
+                                                    {node.name}
+                                                    <SvgUse href="/assets/icons/arrow-right.svg#root" width={16} height={16} color="inherit" />
+                                                </ButtonLink>
+                                            ) : (
+                                                <Link page={node}>{node.name}</Link>
+                                            )}
+                                            {visibleChildNodes.length > 0 && (
+                                                <SubLevelNavigation $isExpanded={expandedSubLevelNavigation === node.id}>
+                                                    <PageLayout grid>
+                                                        <PageLayoutContent>
+                                                            <li>
+                                                                <BackButton
+                                                                    aria-label={intl.formatMessage({
+                                                                        id: "header.backButton.arialLabel",
+                                                                        defaultMessage: "Go back",
+                                                                    })}
+                                                                    onClick={() => setExpandedSubLevelNavigation(null)}
+                                                                >
+                                                                    <SvgUse
+                                                                        href="/assets/icons/arrow-left.svg#root"
+                                                                        width={16}
+                                                                        height={16}
+                                                                        color="inherit"
+                                                                    />
 
-                                                                <FormattedMessage id="header.back" defaultMessage="Back" />
-                                                            </BackButton>
-                                                        </li>
-                                                        <li>
-                                                            <OverviewButton page={node}>
-                                                                <SvgUse
-                                                                    href="/assets/icons/overview.svg#root"
-                                                                    width={16}
-                                                                    height={16}
-                                                                    color="inherit"
-                                                                />
-                                                                <FormattedMessage id="header.overview" defaultMessage="Overview" />
-                                                                <span aria-hidden="true"> | </span>
-                                                                {node.name}
-                                                            </OverviewButton>
-                                                        </li>
-                                                        {visibleChildNodes.map((node) => (
-                                                            <li key={node.id}>
-                                                                <Link page={node}>{node.name}</Link>
+                                                                    <FormattedMessage id="header.back" defaultMessage="Back" />
+                                                                </BackButton>
                                                             </li>
-                                                        ))}
-                                                    </PageLayoutContent>
-                                                </PageLayout>
-                                            </SubLevelNavigation>
-                                        )}
-                                    </li>
-                                );
-                            })}
-                        </TopLevelNavigation>
+                                                            <li>
+                                                                <OverviewButton page={node}>
+                                                                    <SvgUse
+                                                                        href="/assets/icons/overview.svg#root"
+                                                                        width={16}
+                                                                        height={16}
+                                                                        color="inherit"
+                                                                    />
+                                                                    <FormattedMessage id="header.overview" defaultMessage="Overview" />
+                                                                    <span aria-hidden="true"> | </span>
+                                                                    {node.name}
+                                                                </OverviewButton>
+                                                            </li>
+                                                            {visibleChildNodes.map((node) => (
+                                                                <li key={node.id}>
+                                                                    <Link page={node}>{node.name}</Link>
+                                                                </li>
+                                                            ))}
+                                                        </PageLayoutContent>
+                                                    </PageLayout>
+                                                </SubLevelNavigation>
+                                            )}
+                                        </li>
+                                    );
+                                })}
+                            </TopLevelNavigation>
+                        </FocusLock>
                     </PageLayoutContent>
                 </PageLayout>
             </MenuContainer>
