@@ -152,11 +152,6 @@ const PageLayoutContent = styled.div`
 `;
 
 const MenuButton = styled.button`
-    appearance: none;
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
     width: 24px;
     height: 24px;
 `;
@@ -232,11 +227,6 @@ const Link = styled(PageLink)`
 `;
 
 const ButtonLinkBase = styled.button`
-    appearance: none;
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    cursor: pointer;
     display: flex;
     flex-direction: row;
     width: 100%;

@@ -59,6 +59,16 @@ export const GlobalStyle = createGlobalStyle`
     sup {
         top: -0.5em;
     }
+    
+    button {
+        appearance: none;
+        margin: 0;
+        border: none;
+        padding: 0;
+        background: none;
+        color: inherit;
+        cursor: pointer;
+    }
 
     button,
     input,

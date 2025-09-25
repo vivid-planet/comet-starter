@@ -6,7 +6,6 @@ export const Button = styled.button<{ variant?: ButtonVariant }>`
     display: inline-flex;
     padding: ${({ theme }) => `${theme.spacing.s400} ${theme.spacing.s500}`};
     border-radius: 4px;
-    cursor: pointer;
     justify-content: center;
     align-items: center;
     transition:

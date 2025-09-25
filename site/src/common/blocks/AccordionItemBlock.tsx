@@ -54,16 +54,9 @@ export const AccordionItemBlock = withPreview(
 );
 
 const TitleWrapper = styled.button`
-    appearance: none;
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    text-align: left;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-    cursor: pointer;
     border-top: 1px solid ${({ theme }) => theme.palette.gray["300"]};
     padding: ${({ theme }) => theme.spacing.s300} 0;
 `;
