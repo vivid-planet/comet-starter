@@ -46,6 +46,11 @@ const config = {
             waitOn: ["tcp:$API_PORT"],
         },
         {
+            name: "site-css-types",
+            script: "npm --prefix site run css:types:watch",
+            group: ["site"],
+        },
+        {
             name: "site-codegen",
             script: "npm --prefix site run gql:watch",
             group: "site",
