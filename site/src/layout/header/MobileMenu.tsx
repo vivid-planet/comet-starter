@@ -249,6 +249,7 @@ const ButtonLinkBase = styled.button`
     width: 100%;
     padding: ${({ theme }) => theme.spacing.s500} 0;
     gap: ${({ theme }) => theme.spacing.s200};
+    font-family: ${({ theme }) => theme.fontFamily};
 
     ${({ theme }) => theme.breakpoints.sm.mediaQuery} {
         &:hover {
