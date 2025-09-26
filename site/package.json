@@ -18,8 +18,8 @@
         "lint:ci": "npm run lint",
         "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml,scss}'",
-        "lint:style": "npx stylelint '**/*.{ts,tsx,css}'",
+        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml,css,scss}'",
+        "lint:style": "npx stylelint '**/*.{css,scss}'",
         "lint:tsc": "tsc --project .",
         "serve": "NODE_ENV=production node dist/server.js"
     },
@@ -69,8 +69,8 @@
         "postcss-styled-syntax": "^0.7.1",
         "prettier": "^3.6.2",
         "sass": "^1.93.2",
-        "stylelint": "^16.21.1",
-        "stylelint-config-standard": "^36.0.1",
+        "stylelint": "^16.24.0",
+        "stylelint-config-standard-scss": "^16.0.0",
         "typed-scss-modules": "^8.1.1",
         "typescript": "5.8.3"
     },
