@@ -286,6 +286,9 @@ services:
       - key: PREVIEW_URL
         scope: RUN_AND_BUILD_TIME
         value: https://preview.digitalocean.comet-dxp.com
+      - key: SERVER_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: "0.0.0.0"
     github:
       branch: main
       deploy_on_push: false
