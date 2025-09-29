@@ -10,7 +10,7 @@ export class HeadingBlockFixtureService {
     constructor(private readonly richTextBlockFixtureService: RichTextBlockFixtureService) {}
 
     async generateBlockInput(): Promise<ExtractBlockInputFactoryProps<typeof HeadingBlock>> {
-        const possibleTypes = ["h1", "h2", "h3", "h4", "subHeadlineMedium", "subHeadlineSmall"];
+        const possibleTypes = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six"];
 
         const eyebrowBlock = {
             key: faker.string.uuid(),

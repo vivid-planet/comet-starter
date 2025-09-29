@@ -9,7 +9,7 @@ export class RichTextBlockFixtureService {
         lineCount = 3,
         blocks?: ExtractBlockInputFactoryProps<typeof RichTextBlock>["draftContent"]["blocks"],
     ): Promise<ExtractBlockInputFactoryProps<typeof RichTextBlock>> {
-        const possibleTypes = ["textMedium", "textSmall", "textXSmall"];
+        const possibleTypes = ["paragraph-standard", "paragraph-small"];
 
         const defaultBlocks: ExtractBlockInputFactoryProps<typeof RichTextBlock>["draftContent"]["blocks"] = [];
 
