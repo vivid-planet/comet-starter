@@ -13,7 +13,7 @@ export const NotFoundContent = ({ scope }: { scope: ContentScope }) => {
     return (
         <PageLayout grid>
             <div className={styles.pageLayoutContent}>
-                <Typography className={styles.notFound} variant="h350">
+                <Typography className={styles.title} variant="h350">
                     <FormattedMessage id="notFound.pageNotFound" defaultMessage="Page not found." />
                 </Typography>
                 <Link className={styles.homeLink} href={createSitePath({ scope: scope, path: "/" })}>
