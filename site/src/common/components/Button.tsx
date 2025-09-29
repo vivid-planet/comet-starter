@@ -38,11 +38,13 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
             border: 1px solid ${theme.palette.primary.main};
 
             &:hover {
-                background-color: ${theme.palette.primary.dark};
+                color: ${theme.palette.primary.dark};
                 border-color: ${theme.palette.primary.dark};
+                background-color: ${theme.palette.primary.contrastText};
             }
         `}
     `,
+
     outlined: css`
         ${({ theme }) => css`
             background-color: transparent;
@@ -50,19 +52,24 @@ const buttonVariantStyle: Record<ButtonVariant, ReturnType<typeof css>> = {
             border: 1px solid ${theme.palette.primary.main};
 
             &:hover {
-                color: ${theme.palette.primary.dark};
+                background-color: ${theme.palette.primary.dark};
+                color: ${theme.palette.primary.contrastText};
                 border-color: ${theme.palette.primary.dark};
             }
         `}
     `,
+
     text: css`
         ${({ theme }) => css`
             background-color: transparent;
             color: ${theme.palette.primary.main};
             border: 1px solid transparent;
+            text-decoration: underline;
+            text-underline-offset: 3px;
 
             &:hover {
                 color: ${theme.palette.primary.dark};
+                text-underline-offset: 3px;
             }
         `}
     `,
