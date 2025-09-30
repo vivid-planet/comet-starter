@@ -1,4 +1,4 @@
-import NotFoundContent from "@src/documents/NotFound";
+import { NotFoundContent } from "@src/documents/NotFound";
 import { getNotFoundContext } from "@src/util/ServerContext";
 
 export default async function NotFound() {
