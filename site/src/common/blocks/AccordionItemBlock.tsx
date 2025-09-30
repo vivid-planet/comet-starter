@@ -38,13 +38,12 @@ export const AccordionItemBlock = withPreview(
         return (
             <>
                 <button id={headlineId} onClick={onChange} aria-expanded={isExpanded} aria-controls={contentId} className={styles.titleWrapper}>
+                    <div className={styles.iconWrapper}>
+                        <SvgUse href={isExpanded ? "/assets/icons/minus.svg#root" : "/assets/icons/plus.svg#root"} width={16} height={16} />
+                    </div>
                     <Typography variant="h350" as={titleHtmlTag}>
                         {title}
                     </Typography>
-                    <SvgUse
-                        href="/assets/icons/chevron-down.svg#root"
-                        className={clsx(styles.animatedChevron, isExpanded && styles.animatedChevronExpanded)}
-                    />
                 </button>
                 <section
                     id={contentId}
