@@ -64,7 +64,7 @@ const defaultRichTextRenderers: Renderers = {
         "ordered-list-item": (children, { depth, keys }) => (
             <ol
                 key={keys.join("|")}
-                className={styles[depth % 3 === 0 ? `orderedListLevel0` : depth % 3 === 1 ? `orderedListLevel1` : `orderedListLevel2`]}
+                className={depth % 3 === 0 ? styles.orderedListLevel0 : depth % 3 === 1 ? styles.orderedListLevel1 : styles.orderedListLevel2}
             >
                 {children.map((child, index) => (
                     <Typography as="li" key={keys[index]} className={styles.text}>
