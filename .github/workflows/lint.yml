@@ -21,7 +21,7 @@ jobs:
     steps:
       - run: echo "${{ github.actor }}"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -30,21 +30,21 @@ jobs:
           git config user.email github-actions@github.com
 
       - name: "Admin: Clone library translations"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: vivid-planet/comet-lang
           token: ${{ secrets.GITHUB_TOKEN }}
           path: "admin/lang/comet-lang"
 
       - name: "Admin: Clone starter translations"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: vivid-planet/comet-starter-lang
           token: ${{ secrets.GITHUB_TOKEN }}
           path: "admin/lang/starter-lang"
 
       - name: "Site: Clone starter translations"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: vivid-planet/comet-starter-lang
           token: ${{ secrets.GITHUB_TOKEN }}
