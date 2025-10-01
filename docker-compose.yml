@@ -9,7 +9,7 @@ services:
       - "127.0.0.1:${POSTGRESQL_PORT}:5432"
     environment:
       POSTGRES_USER: ${POSTGRESQL_USER}
-      POSTGRES_PASSWORD: ${POSTGRESQL_PWD_DECODED}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
       POSTGRES_DB: ${POSTGRESQL_DB}
     networks:
       - postgres
