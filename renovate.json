@@ -23,7 +23,6 @@
                 "^@emotion/",
                 "class-validator",
                 "reflect-metadata",
-                "eslint-plugin-package-json",
                 "opentelemetry/auto-instrumentations-node",
                 "opentelemetry/exporter-trace-otlp-http",
                 "opentelemetry/sdk-node",
