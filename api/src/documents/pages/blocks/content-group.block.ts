@@ -23,7 +23,7 @@ import { KeyFactsBlock } from "@src/documents/pages/blocks/key-facts.block";
 import { TeaserBlock } from "@src/documents/pages/blocks/teaser.block";
 import { IsEnum } from "class-validator";
 
-const ContentBlock = createBlocksBlock(
+export const ContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
             accordion: AccordionBlock,
@@ -42,7 +42,7 @@ const ContentBlock = createBlocksBlock(
     { name: "ContentGroupContent" },
 );
 
-enum BackgroundColor {
+export enum BackgroundColor {
     default = "default",
     lightGray = "lightGray",
     darkGray = "darkGray",

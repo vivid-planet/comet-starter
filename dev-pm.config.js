@@ -35,10 +35,20 @@ const config = {
             waitOn: ["tcp:$POSTGRESQL_PORT", "tcp:$IMGPROXY_PORT"],
         },
         {
+            name: "api-generator",
+            script: "npm --prefix api run api-generator:watch",
+            group: "api",
+        },
+        {
             name: "site",
             script: "npm --prefix site run dev",
             group: "site",
             waitOn: ["tcp:$API_PORT"],
+        },
+        {
+            name: "site-css-types",
+            script: "npm --prefix site run css:types:watch",
+            group: ["site"],
         },
         {
             name: "site-codegen",
