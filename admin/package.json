@@ -27,7 +27,7 @@
         "start": "npm run check-node-version && run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
-        "@apollo/client": "^3.14.0",
+        "@apollo/client": "^4.0.6",
         "@comet/admin": "8.3.0",
         "@comet/admin-icons": "8.3.0",
         "@comet/cms-admin": "8.3.0",
