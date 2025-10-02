@@ -22,8 +22,9 @@
         "prebuild": "npm run clean",
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
-        "lint": "run-p lint:prettier lint:eslint lint:tsc",
+        "lint": "run-p lint:prettier lint:eslint lint:tsc lint:knip",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
+        "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
         "prepublishOnly": "npm run lint && npm run build",
@@ -40,15 +41,13 @@
     },
     "devDependencies": {
         "@comet/eslint-config": "^8.3.0",
-        "@comet/eslint-plugin": "^8.3.0",
         "@cspell/eslint-plugin": "^8.19.4",
         "@tsconfig/node22": "^22.0.2",
         "@types/node": "^22.14.1",
-        "cspell": "^8.19.4",
+        "knip": "^5.61.3",
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.6.2",
-        "typescript": "5.8.3",
-        "eslint-plugin-package-json": "0.44.1"
+        "typescript": "5.8.3"
     },
     "publishConfig": {
         "access": "public",
