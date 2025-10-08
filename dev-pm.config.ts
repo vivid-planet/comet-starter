@@ -1,9 +1,6 @@
-// @ts-check
+import { defineConfig } from "@comet/dev-process-manager";
 
-/**
- * @type {import('@comet/dev-process-manager').Config}
- **/
-const config = {
+export default defineConfig({
     scripts: [
         {
             name: "docker",
@@ -63,6 +60,4 @@ const config = {
             waitOn: ["tcp:$SITE_PORT"],
         },
     ],
-};
-
-module.exports = config;
+});
