@@ -12,7 +12,7 @@ function removeSiteReferences(verbose: boolean) {
     removeReferenceInFile("./package.json", / browser:site/g, verbose);
     removeReferenceInFile("./package.json", /\|site\|create-app/g, verbose);
     removeReferenceInFile("./package.json", /.*site.*\n/gim, verbose);
-    removeReferenceInFile("dev-pm.config.js", /{[\n ]*name: "site.*},\n/gis, verbose);
+    removeReferenceInFile("dev-pm.config.ts", /{[\n ]*name: "site.*},\n/gis, verbose);
 }
 
 export function removeSite(verbose: boolean) {
