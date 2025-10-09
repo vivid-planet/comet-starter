@@ -1,24 +1,46 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": ["config:recommended", ":semanticCommitsDisabled"],
+    "minimumReleaseAge": "3 days",
+    "internalChecksFilter": "strict",
     "packageRules": [
         {
             "groupName": "comet",
             "prPriority": 6,
             "matchPackageNames": ["/@comet/*/"],
-            "labels": ["comet", "dependencies"]
+            "labels": ["comet", "dependencies"],
+            "allowedVersions": "!/canary/"
         },
         {
-            "groupName": "linters",
-            "matchPackageNames": ["/^eslint/", "/^prettier/"]
+            "groupName": "Low-Risk Patches and Minors",
+            "matchUpdateTypes": ["patch", "minor"],
+            "excludePackagePatterns": [
+                "^next$",
+                "^react",
+                "^@nestjs/",
+                "^@apollo/",
+                "^@mui/",
+                "^@emotion/",
+                "class-validator",
+                "reflect-metadata",
+                "opentelemetry/auto-instrumentations-node",
+                "opentelemetry/exporter-trace-otlp-http",
+                "opentelemetry/sdk-node",
+                "redraft",
+                "knip"
+            ]
+        },
+        {
+            "groupName": "eslint",
+            "matchPackageNames": ["/^eslint/"]
+        },
+        {
+            "groupName": "prettier",
+            "matchPackageNames": ["/^prettier/"]
         },
         {
             "groupName": "typescript",
             "matchPackageNames": ["/typescript/"]
-        },
-        {
-            "groupName": "Storybook",
-            "matchPackageNames": ["/^@storybook/", "/^storybook/"]
         },
         {
             "groupName": "Mui-X",
@@ -26,11 +48,15 @@
         },
         {
             "groupName": "Mui",
-            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/", "/@mui/lab/"]
+            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/"]
         },
         {
             "groupName": "emotion",
             "matchPackageNames": ["/@emotion/*/"]
+        },
+        {
+            "groupName": "Final Form",
+            "matchPackageNames": ["/final-form/", "/react-final-form/"]
         },
         {
             "groupName": "React Router",
@@ -39,6 +65,14 @@
         {
             "matchPackageNames": ["@graphql-codegen/*"],
             "groupName": "GraphQL Codegen"
+        },
+        {
+            "groupName": "@apollo/server",
+            "matchPackageNames": ["@apollo/server"]
+        },
+        {
+            "groupName": "@apollo/client",
+            "matchPackageNames": ["@apollo/client"]
         },
         {
             "groupName": "Mikro-ORM",
@@ -60,6 +94,10 @@
         {
             "matchUpdateTypes": ["major"],
             "labels": ["major", "dependencies"]
+        },
+        {
+            "groupName": "SWC",
+            "matchPackageNames": ["@swc/plugin-emotion", "@vitejs/plugin-react-swc"]
         }
     ],
     "lockFileMaintenance": { "enabled": true },
