@@ -153,7 +153,7 @@ export const EditPage = ({ id }: Props) => {
                             onClick={() => {
                                 openSitePreviewWindow(pageState.path, contentScopeMatch.url);
                             }}
-                            color="info"
+                            variant="textDark"
                         >
                             <FormattedMessage id="pages.pages.page.edit.preview" defaultMessage="Web preview" />
                         </Button>
