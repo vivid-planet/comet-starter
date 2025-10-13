@@ -15,8 +15,9 @@ fi
 nvm install
 nvm use
 
+export NPM_CONFIG_STRICT_PEER_DEPS=true
 echo -e "\033[34m\nInstalling dependencies for root package\033[0m"
-npm install --strict-peer-deps
+npm install
 
 echo -e "\033[34m\nSetup project files\033[0m"
 npm run setup-project-files
@@ -27,12 +28,12 @@ sh ./admin/intl-update.sh
 npm run create-site-configs-env
 
 echo -e "\033[34m\nInstalling dependencies for admin\033[0m"
-npm --prefix admin install --strict-peer-deps
+npm --prefix admin install
 echo -e "\033[34m\nInstalling dependencies for api\033[0m"
-npm --prefix api install --strict-peer-deps
+npm --prefix api install
 echo -e "\033[34m\nInstalling dependencies for site\033[0m"
-npm --prefix site install --strict-peer-deps
+npm --prefix site install
 echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
-npm --prefix create-app install --strict-peer-deps
+npm --prefix create-app install
 
 mkdir -p ./api/uploads
