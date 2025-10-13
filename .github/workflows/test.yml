@@ -38,7 +38,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci --strict-peer-deps & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
+        run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
 
       - name: Setup project for CI run
         run: npm run setup:ci
