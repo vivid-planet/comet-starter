@@ -9,7 +9,7 @@ COPY --from=api ./src/comet-config.json ./src/comet-config.json
 COPY --from=site-configs ./site-configs.d.ts ./src/site-configs.d.ts
 
 RUN ./intl-update.sh && \
-    npm ci && \
+    npm ci --strict-peer-deps && \
     npm run build && \
     npm prune --omit=dev
 
