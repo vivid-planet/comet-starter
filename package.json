@@ -24,7 +24,7 @@
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'"
     },
     "devDependencies": {
-        "@comet/cli": "8.3.0",
+        "@comet/cli": "8.4.0",
         "@comet/dev-process-manager": "^3.0.0",
         "cspell": "^9.2.1",
         "dotenv-cli": "^7.4.4",
