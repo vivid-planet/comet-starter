@@ -12,25 +12,6 @@
             "allowedVersions": "!/canary/"
         },
         {
-            "groupName": "Low-Risk Patches and Minors",
-            "matchUpdateTypes": ["patch", "minor"],
-            "excludePackagePatterns": [
-                "^next$",
-                "^react",
-                "^@nestjs/",
-                "^@apollo/",
-                "^@mui/",
-                "^@emotion/",
-                "class-validator",
-                "reflect-metadata",
-                "opentelemetry/auto-instrumentations-node",
-                "opentelemetry/exporter-trace-otlp-http",
-                "opentelemetry/sdk-node",
-                "redraft",
-                "knip"
-            ]
-        },
-        {
             "groupName": "eslint",
             "matchPackageNames": ["/^eslint/"]
         },
