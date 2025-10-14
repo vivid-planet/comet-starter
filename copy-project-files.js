@@ -7,36 +7,36 @@ const files = [
         : [
               {
                   file: ".env",
-                  targetDir: ["admin/", "api/", "site/"],
+                  targetDir: ["admin", "api", "site"],
               },
               {
                   file: ".env.local",
-                  targetDir: ["admin/", "api/", "site/"],
+                  targetDir: ["admin", "api", "site"],
               },
               {
                   file: ".env.secrets",
-                  targetDir: ["admin/", "api/", "site/"],
+                  targetDir: ["admin", "api", "site"],
               },
               {
                   file: ".env.site-configs",
-                  targetDir: ["admin/", "api/", "site/"],
+                  targetDir: ["admin", "api", "site"],
               },
           ]),
     {
         file: "api/schema.gql",
-        targetDir: ["admin/", "site/"],
+        targetDir: ["admin", "site"],
     },
     {
         file: "api/block-meta.json",
-        targetDir: ["admin/", "site/"],
+        targetDir: ["admin", "site"],
     },
     {
         file: "api/src/comet-config.json",
-        targetDir: ["admin/src/", "site/src/"],
+        targetDir: ["admin/src", "site/src"],
     },
     {
         file: "site-configs/site-configs.d.ts",
-        targetDir: ["admin/src/", "api/src/", "site/src/"],
+        targetDir: ["admin/src", "api/src", "site/src"],
     },
 ];
 
