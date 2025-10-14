@@ -40,8 +40,8 @@ jobs:
       - name: Install dependencies
         run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
 
-      - name: Copy schema files
-        run: npm run copy-schema-files
+      - name: Setup project for CI run
+        run: npm run setup:ci
 
       - name: Test
         run: npm run test:ci
