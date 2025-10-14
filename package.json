@@ -6,6 +6,7 @@
         "dev": "npm run create-site-configs-env && dev-pm start",
         "setup-project-files": "node setup-project-files.js",
         "lint": "run-p lint:*",
+        "lint:ci": "npm run lint:root",
         "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}' && npx cspell '**'",
         "lint:api": "npm --prefix api run lint",
         "lint:admin": "npm --prefix admin run lint",
