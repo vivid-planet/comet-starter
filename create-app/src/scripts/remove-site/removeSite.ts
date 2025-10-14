@@ -7,7 +7,6 @@ function removeSiteReferences(verbose: boolean) {
     removeReferenceInFile(".env", /# site.*NEXT_PUBLIC_API_URL=\$API_URL\n\n/gms, verbose);
     removeReferenceInFile("install.sh", /.*site.*\n/gim, verbose);
     removeReferenceInFile(".prettierignore", /.*site.*\n/gim, verbose);
-    removeReferenceInFile("copy-schema-files.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("lint-staged.config.js", /.*site.*\n/gim, verbose);
     removeReferenceInFile("./package.json", / browser:site/g, verbose);
     removeReferenceInFile("./package.json", /\|site\|create-app/g, verbose);
