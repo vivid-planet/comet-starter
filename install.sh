@@ -18,8 +18,8 @@ nvm use
 echo -e "\033[34m\nInstalling dependencies for root package\033[0m"
 npm install
 
-echo -e "\033[34m\nCopy project files\033[0m"
-npm run copy-project-files
+echo -e "\033[34m\nSetup project files\033[0m"
+npm run setup-project-files
 
 # Lang install
 sh ./site/intl-update.sh

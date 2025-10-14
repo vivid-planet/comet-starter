@@ -4,7 +4,7 @@
     "scripts": {
         "create-site-configs-env": "npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs --base64",
         "dev": "npm run create-site-configs-env && dev-pm start",
-        "copy-project-files": "node copy-project-files.js",
+        "setup-project-files": "node setup-project-files.js",
         "lint": "run-p lint:*",
         "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}' && npx cspell '**'",
         "lint:api": "npm --prefix api run lint",
@@ -22,7 +22,7 @@
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
-        "setup:ci": "npm run copy-project-files"
+        "setup:ci": "npm run setup-project-files"
     },
     "devDependencies": {
         "@comet/cli": "8.3.0",

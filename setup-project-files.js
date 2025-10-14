@@ -48,7 +48,9 @@ for (const { file, targetDir } of files) {
         } else {
             try {
                 fs.unlinkSync(targetFile);
-            } catch (e) {}
+            } catch (e) {
+                // Do nothing, if file does not exist
+            }
             fs.symlinkSync(path.relative(dir, file), targetFile);
         }
     }
