@@ -8,7 +8,7 @@ COPY --from=api ./schema.gql ./schema.gql
 COPY --from=api ./src/comet-config.json ./src/comet-config.json
 
 RUN ./intl-update.sh && \
-    npm ci --strict-peer-deps && \
+    npm ci && \
     npm run build && \
     rm -rf ./node_modules
 

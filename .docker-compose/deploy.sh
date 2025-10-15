@@ -10,7 +10,7 @@ git pull
 
 echo "Installing root dependencies..."
 nvm use 22
-npm ci --strict-peer-deps
+npm ci
 
 echo "Injecting site configs..."
 sed -i 's/dev\.comet\-dxp\.com/docker.comet-dxp.com/g' site-configs/main.ts # TODO: Remove me in real project

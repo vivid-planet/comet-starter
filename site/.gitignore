@@ -54,3 +54,4 @@ public/robots.txt
 tsconfig.tsbuildinfo
 
 /dist
+.npmrc
