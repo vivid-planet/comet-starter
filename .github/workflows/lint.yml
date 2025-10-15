@@ -29,27 +29,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: "Admin: Clone library translations"
-        uses: actions/checkout@v5
-        with:
-          repository: vivid-planet/comet-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "admin/lang/comet-lang"
-
-      - name: "Admin: Clone starter translations"
-        uses: actions/checkout@v5
-        with:
-          repository: vivid-planet/comet-starter-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "admin/lang/starter-lang"
-
-      - name: "Site: Clone starter translations"
-        uses: actions/checkout@v5
-        with:
-          repository: vivid-planet/comet-starter-lang
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: "site/lang/starter-lang"
-
       - name: Use Node.js 22.x
         uses: actions/setup-node@v5
         with:

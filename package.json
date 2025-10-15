@@ -23,7 +23,7 @@
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
-        "setup:ci": "npm run setup-project-files"
+        "setup:ci": "npm run setup-project-files && npm --prefix admin run setup:ci && npm --prefix site run setup:ci"
     },
     "devDependencies": {
         "@comet/cli": "8.3.0",
