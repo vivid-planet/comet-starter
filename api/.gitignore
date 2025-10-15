@@ -48,3 +48,4 @@ src/site-configs.d.ts
 
 # API generator files
 src/**/generated
+.npmrc

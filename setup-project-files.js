@@ -38,6 +38,10 @@ const files = [
         file: "site-configs/site-configs.d.ts",
         targetDir: ["admin/src", "api/src", "site/src"],
     },
+    {
+        file: ".npmrc",
+        targetDir: ["admin", "site", "api", "create-app"],
+    },
 ];
 
 for (const { file, targetDir } of files) {

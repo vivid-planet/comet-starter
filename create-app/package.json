@@ -47,13 +47,13 @@
         "knip": "^5.64.3",
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.6.2",
-        "typescript": "5.9.3"
+        "typescript": "5.8.3"
+    },
+    "engines": {
+        "node": "22"
     },
     "publishConfig": {
         "access": "public",
         "registry": "https://registry.npmjs.org"
-    },
-    "engines": {
-        "node": "22"
     }
 }

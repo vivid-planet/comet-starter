@@ -15,6 +15,7 @@ fi
 nvm install
 nvm use
 
+export NPM_CONFIG_STRICT_PEER_DEPS=true
 echo -e "\033[34m\nInstalling dependencies for root package\033[0m"
 npm install
 
