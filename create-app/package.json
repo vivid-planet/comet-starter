@@ -22,7 +22,7 @@
         "prebuild": "npm run clean",
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
-        "lint": "run-p lint:prettier lint:eslint lint:tsc lint:knip",
+        "lint": "run-p -l lint:{eslint,knip,prettier,tsc}",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
