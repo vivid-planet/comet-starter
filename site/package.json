@@ -21,7 +21,8 @@
         "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml,css,scss}'",
         "lint:style": "npx stylelint '**/*.{css,scss}'",
         "lint:tsc": "tsc --project .",
-        "serve": "NODE_ENV=production node dist/server.js"
+        "serve": "NODE_ENV=production node dist/server.js",
+        "setup:ci": "./intl-update.sh"
     },
     "dependencies": {
         "@comet/site-nextjs": "8.3.0",

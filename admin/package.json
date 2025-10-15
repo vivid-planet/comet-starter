@@ -24,6 +24,7 @@
         "lint:tsc": "tsc --project .",
         "preview": "npm run build && vite preview",
         "serve": "node server",
+        "setup:ci": "./intl-update.sh",
         "start": "npm run check-node-version && run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
     "dependencies": {
