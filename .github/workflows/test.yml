@@ -41,7 +41,7 @@ jobs:
         run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
 
       - name: Setup project for CI run
-        run: npm run setup:ci
+        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
 
       - name: Test
         run: npm run test:ci
