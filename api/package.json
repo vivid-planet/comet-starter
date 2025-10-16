@@ -14,7 +14,7 @@
         "db:migrate:prod": "npm run console:prod migrate --",
         "fixtures": "npm run console fixtures --",
         "fixtures:prod": "npm run console:prod fixtures --",
-        "lint": "npm run api-generator && run-p lint:eslint lint:tsc lint:prettier lint:knip",
+        "lint": "npm run api-generator && run-p -l lint:{eslint,knip,prettier,tsc}",
         "lint:ci": "npm run lint",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
