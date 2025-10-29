@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 const express = require("express");
-const compression = require("compression");
 const helmet = require("helmet");
 const fs = require("fs");
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const expressStaticGzip = require("express-static-gzip");
 
 const app = express();
 const port = process.env.APP_PORT ?? 3000;
@@ -15,8 +15,6 @@ let indexFile = fs.readFileSync("./build/index.html", "utf8");
 indexFile = indexFile.replace(/\$([A-Z_]+)/g, (match, p1) => {
     return process.env[p1] || "";
 });
-
-app.use(compression());
 
 app.disable("x-powered-by"); // Disable the X-Powered-By header as it is not needed and can be used to infer the server technology
 
@@ -68,11 +66,21 @@ const proxyMiddleware = createProxyMiddleware({
 });
 app.use("/dam", proxyMiddleware);
 
+if (process.env.NODE_ENV === "development") {
+    const proxyMiddleware = createProxyMiddleware({
+        target: process.env.API_URL_INTERNAL,
+        changeOrigin: true,
+    });
+    app.use("/api", proxyMiddleware);
+}
+
 app.use(
-    express.static("./build", {
+    expressStaticGzip("./build", {
+        enableBrotli: true,
+        orderPreference: ["br", "gz"],
         index: false, // Don't send index.html for requests to "/" as it will be handled by the fallback route (with replaced environment variables)
-        setHeaders: (res, path, stat) => {
-            if (path.endsWith(".js")) {
+        setHeaders: (res, filePath, stat) => {
+            if ([".js", ".js.br", ".js.gz", ".css", ".css.br", ".css.gz"].some((fileExtension) => filePath.endsWith(fileExtension))) {
                 // The js file is static and the index.html uses a parameter as cache buster
                 // implemented as suggested by https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#caching_static_assets
                 res.setHeader("cache-control", "private, max-age=31536000, immutable");
