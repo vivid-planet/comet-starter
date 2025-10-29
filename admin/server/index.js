@@ -66,14 +66,6 @@ const proxyMiddleware = createProxyMiddleware({
 });
 app.use("/dam", proxyMiddleware);
 
-if (process.env.NODE_ENV === "development") {
-    const proxyMiddleware = createProxyMiddleware({
-        target: process.env.API_URL_INTERNAL,
-        changeOrigin: true,
-    });
-    app.use("/api", proxyMiddleware);
-}
-
 app.use(
     expressStaticGzip("./build", {
         enableBrotli: true,
