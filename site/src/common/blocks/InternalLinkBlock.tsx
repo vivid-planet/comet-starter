@@ -1,5 +1,5 @@
 "use client";
-import { type PropsWithData } from "@comet/cms-site";
+import { type PropsWithData } from "@comet/site-nextjs";
 import { type InternalLinkBlockData } from "@src/blocks.generated";
 import Link from "next/link";
 import { type PropsWithChildren } from "react";
