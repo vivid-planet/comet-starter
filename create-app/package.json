@@ -1,6 +1,6 @@
 {
     "name": "@comet/create-app",
-    "version": "1.107.0",
+    "version": "1.108.0",
     "description": "Command-line interface to create a new Comet application",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
     "bugs": {
