@@ -53,7 +53,7 @@ export const AccordionItemBlock = withPreview(
                     <div className={styles.contentWrapperInner}>
                         <PreviewSkeleton hasContent={isExpanded}>
                             <AccordionContentBlock data={content} />
-                        </PreviewSkeleton>{" "}
+                        </PreviewSkeleton>
                     </div>
                 </section>
             </>
