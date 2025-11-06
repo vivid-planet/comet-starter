@@ -1,6 +1,6 @@
 module.exports = {
     "admin/src/**/*.{ts,tsx,js,jsx,json,css,md}": () => ["npm --prefix admin run lint:eslint", "npm --prefix admin run lint:knip"],
-    "admin/**/*.{ts,tsx}": () => "npm --prefix admin run lint:tsc",
+    "admin/**/*.{ts,tsx}": () => ["npm --prefix admin run lint:tsc", "npm --prefix admin run intl:extract"],
     "admin/**/*.{js,json,md,yml,yaml}": () => "npm --prefix admin run lint:prettier",
     "api/src/**/*.{ts,tsx,js,jsx,json,css,md}": () => ["npm --prefix api run lint:eslint", "npm --prefix api run lint:knip"],
     "api/**/*.{ts,tsx}": () => "npm --prefix api run lint:tsc",
