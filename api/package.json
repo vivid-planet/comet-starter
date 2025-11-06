@@ -33,7 +33,7 @@
     "dependencies": {
         "@apollo/server": "^4.12.2",
         "@comet/cms-api": "8.5.1",
-        "@faker-js/faker": "8.4.1",
+        "@faker-js/faker": "10.1.0",
         "@mikro-orm/cli": "^6.5.9",
         "@mikro-orm/core": "^6.5.9",
         "@mikro-orm/migrations": "^6.5.9",
