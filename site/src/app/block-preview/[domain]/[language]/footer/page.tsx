@@ -3,6 +3,7 @@
 import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIFrameBridge } from "@comet/site-nextjs";
 import { type FooterContentBlockData } from "@src/blocks.generated";
 import { FooterContentBlock } from "@src/layout/footer/blocks/FooterContentBlock";
+import { type ContentScope } from "@src/site-configs";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { type FunctionComponent, useEffect, useState } from "react";
 
@@ -24,11 +25,12 @@ const PreviewPage: FunctionComponent = () => {
                 blockData: iFrameBridge.block,
                 graphQLFetch,
                 fetch,
+                scope: iFrameBridge.contentScope as ContentScope,
             });
             setBlockData(newData);
         }
         load();
-    }, [iFrameBridge.block, fetch, graphQLFetch]);
+    }, [iFrameBridge.block, fetch, graphQLFetch, iFrameBridge.contentScope]);
 
     return <div>{blockData && <FooterContentBlock data={blockData} />}</div>;
 };
