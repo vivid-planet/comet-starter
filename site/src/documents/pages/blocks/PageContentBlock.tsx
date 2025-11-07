@@ -4,6 +4,7 @@ import { type PageContentBlockData } from "@src/blocks.generated";
 import { PageContentAccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { AnchorBlock } from "@src/common/blocks/AnchorBlock";
 import { PageContentMediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
+import { PageTreeIndexBlock } from "@src/common/blocks/PageTreeIndexBlock";
 import { PageContentRichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { PageContentStandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
@@ -29,6 +30,7 @@ const supportedBlocks: SupportedBlocks = {
     media: (props) => <StandaloneMediaBlock data={props} />,
     contentGroup: (props) => <ContentGroupBlock data={props} />,
     mediaGallery: (props) => <PageContentMediaGalleryBlock data={props} />,
+    pageTreeIndex: (props) => <PageTreeIndexBlock data={props} />,
 };
 
 export const PageContentBlock = ({ data }: PropsWithData<PageContentBlockData>) => {
