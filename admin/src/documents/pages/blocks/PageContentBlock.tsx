@@ -1,6 +1,7 @@
 import { AnchorBlock, createBlocksBlock } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
+import { PageTreeIndexBlock } from "@src/common/blocks/PageTreeIndexBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
@@ -28,5 +29,6 @@ export const PageContentBlock = createBlocksBlock({
         media: StandaloneMediaBlock,
         contentGroup: ContentGroupBlock,
         mediaGallery: MediaGalleryBlock,
+        pageTreeIndex: PageTreeIndexBlock,
     },
 });
