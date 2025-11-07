@@ -11,6 +11,7 @@ import { SpaceBlockFixtureService } from "./blocks/layout/space-block-fixture.se
 import { MediaGalleryBlockFixtureService } from "./blocks/media/media-gallery-block-fixture.service";
 import { StandaloneMediaBlockFixtureService } from "./blocks/media/standalone-media-block-fixture.service";
 import { AnchorBlockFixtureService } from "./blocks/navigation/anchor-block-fixture.service";
+import { PageTreeIndexBlockFixtureService } from "./blocks/navigation/page-tree-index-block-fixture.service";
 import { StandaloneCallToActionListBlockFixtureService } from "./blocks/navigation/standalone-call-to-action-list-block-fixture.service";
 import { BillboardTeaserBlockFixtureService } from "./blocks/teaser/billboard-teaser-block-fixture.service";
 import { TeaserBlockFixtureService } from "./blocks/teaser/teaser-block-fixture.service";
@@ -36,6 +37,7 @@ export class PageContentBlockFixtureService {
         private readonly spaceBlockFixtureService: SpaceBlockFixtureService,
         private readonly mediaBlockFixtureService: StandaloneMediaBlockFixtureService,
         private readonly teaserBlockFixtureService: TeaserBlockFixtureService,
+        private readonly pageTreeIndexBlockFixtureService: PageTreeIndexBlockFixtureService,
     ) {}
 
     async generateBlockInput(blockCategory?: BlockCategory): Promise<ExtractBlockInputFactoryProps<typeof PageContentBlock>> {
@@ -57,6 +59,7 @@ export class PageContentBlockFixtureService {
             heading: ["textAndContent", this.headingBlockFixtureService],
             keyFacts: ["textAndContent", this.keyFactsBlockFixtureService],
             richtext: ["textAndContent", this.richtextBlockFixtureService],
+            pageTreeIndex: ["navigation", this.pageTreeIndexBlockFixtureService],
         };
 
         const supportedBlocksFixtureGenerators = Object.entries(fixtures)
