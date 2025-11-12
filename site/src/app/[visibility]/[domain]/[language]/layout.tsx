@@ -6,6 +6,7 @@ import { headerFragment } from "@src/layout/header/Header.fragment";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { IntlProvider } from "@src/util/IntlProvider";
 import { loadMessages } from "@src/util/loadMessages";
+import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { setNotFoundContext } from "@src/util/ServerContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import type { Metadata } from "next";
@@ -24,9 +25,9 @@ export default async function Layout({ children, params: { domain, language } }:
     }
     setNotFoundContext({ domain, language });
 
-    const graphqlFetch = createGraphQLFetch();
+    const graphQLFetch = createGraphQLFetch();
 
-    const { header, footer } = await graphqlFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
+    const { header, footer } = await graphQLFetch<GQLLayoutQuery, GQLLayoutQueryVariables>(
         gql`
             query Layout($domain: String!, $language: String!) {
                 header: mainMenu(scope: { domain: $domain, language: $language }) {
@@ -41,6 +42,15 @@ export default async function Layout({ children, params: { domain, language } }:
         `,
         { domain, language },
     );
+
+    if (footer) {
+        footer.content = await recursivelyLoadBlockData({
+            blockData: footer.content,
+            blockType: "FooterContent",
+            graphQLFetch,
+            fetch,
+        });
+    }
 
     const messages = await loadMessages(language);
     return (
