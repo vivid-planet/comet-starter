@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/nodejs-24:latest
+FROM registry.access.redhat.com/ubi10/nodejs-24:latest
 
 USER 1001
 
