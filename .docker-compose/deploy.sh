@@ -9,7 +9,7 @@ echo "Pulling latest changes from the repository..."
 git pull
 
 echo "Installing root dependencies..."
-nvm use 22
+nvm use 24
 npm ci
 
 echo "Injecting site configs..."
