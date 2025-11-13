@@ -65,7 +65,7 @@
         "helmet": "^7.2.0",
         "nest-commander": "^3.20.1",
         "reflect-metadata": "^0.2.2",
-        "rimraf": "^6.0.1",
+        "rimraf": "^6.1.0",
         "rxjs": "^7.8.2",
         "slugify": "^1.6.6",
         "uuid": "^11.1.0"
