@@ -41,7 +41,7 @@
     },
     "devDependencies": {
         "@comet/eslint-config": "^8.5.2",
-        "@cspell/eslint-plugin": "^9.2.2",
+        "@cspell/eslint-plugin": "^9.3.0",
         "@tsconfig/node24": "^24.0.1",
         "@types/node": "^24.10.1",
         "knip": "^5.64.3",
