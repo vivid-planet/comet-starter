@@ -55,7 +55,7 @@
         "compression": "^1.8.1",
         "cookie-parser": "^1.4.7",
         "express": "^5.0.1",
-        "graphql": "^16.10.0",
+        "graphql": "^16.12.0",
         "helmet": "^7.2.0",
         "nest-commander": "^3.20.1",
         "reflect-metadata": "^0.2.2",
