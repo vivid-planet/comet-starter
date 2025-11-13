@@ -74,7 +74,7 @@
         "@parcel/watcher": "^2.5.1",
         "@swc/plugin-emotion": "^10.0.4",
         "@types/lodash.isequal": "^4.5.8",
-        "@types/node": "^22.14.1",
+        "@types/node": "^24.10.1",
         "@types/react": "^18.3.26",
         "@types/react-dom": "^18.3.7",
         "@types/react-router": "^5.1.20",
@@ -94,6 +94,6 @@
         "vite-plugin-html": "^3.2.2"
     },
     "engines": {
-        "node": "22"
+        "node": "24"
     }
 }
