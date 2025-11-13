@@ -1,18 +1,18 @@
 import { AnchorBlock, ColumnsBlockFactory, createBlocksBlock } from "@comet/cms-api";
 import { AccordionBlock } from "@src/common/blocks/accordion.block";
 import { MediaGalleryBlock } from "@src/common/blocks/media-gallery.block";
-import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/standalone-call-to-action-list.block";
 import { StandaloneHeadingBlock } from "@src/common/blocks/standalone-heading.block";
 import { StandaloneMediaBlock } from "@src/common/blocks/standalone-media.block";
+import { StandaloneRichTextBlock } from "@src/common/blocks/standalone-rich-text.block";
 
 export const ColumnsContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
             accordion: AccordionBlock,
             anchor: AnchorBlock,
-            richtext: RichTextBlock,
+            richtext: StandaloneRichTextBlock,
             space: SpaceBlock,
             heading: StandaloneHeadingBlock,
             callToActionList: StandaloneCallToActionListBlock,

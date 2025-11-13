@@ -8,11 +8,11 @@ import {
 } from "@comet/cms-admin";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
-import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
+import { StandaloneRichTextBlock } from "@src/common/blocks/StandaloneRichTextBlock";
 import { FormattedMessage } from "react-intl";
 
 const oneColumnLayouts = [
@@ -116,7 +116,7 @@ const ColumnsContentBlock = createBlocksBlock({
     supportedBlocks: {
         accordion: AccordionBlock,
         anchor: AnchorBlock,
-        richtext: RichTextBlock,
+        richtext: StandaloneRichTextBlock,
         space: SpaceBlock,
         heading: StandaloneHeadingBlock,
         callToActionList: StandaloneCallToActionListBlock,
