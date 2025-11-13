@@ -27,7 +27,7 @@
         "setup:ci": "npm run setup-project-files"
     },
     "devDependencies": {
-        "@comet/cli": "8.5.1",
+        "@comet/cli": "8.5.2",
         "@comet/dev-process-manager": "^3.0.0",
         "cspell": "^9.2.2",
         "dotenv-cli": "^7.4.4",
@@ -41,6 +41,6 @@
         "typescript": "5.8.3"
     },
     "engines": {
-        "node": "22"
+        "node": "24"
     }
 }

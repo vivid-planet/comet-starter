@@ -1,6 +1,6 @@
 {
     "name": "@comet/create-app",
-    "version": "1.110.0",
+    "version": "1.113.0",
     "description": "Command-line interface to create a new Comet application",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
     "bugs": {
@@ -40,17 +40,17 @@
         "rimraf": "^6.0.1"
     },
     "devDependencies": {
-        "@comet/eslint-config": "^8.5.1",
+        "@comet/eslint-config": "^8.5.2",
         "@cspell/eslint-plugin": "^9.2.2",
-        "@tsconfig/node22": "^22.0.2",
-        "@types/node": "^22.14.1",
+        "@tsconfig/node24": "^24.0.1",
+        "@types/node": "^24.10.1",
         "knip": "^5.64.3",
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.6.2",
         "typescript": "5.8.3"
     },
     "engines": {
-        "node": "22"
+        "node": "24"
     },
     "publishConfig": {
         "access": "public",
