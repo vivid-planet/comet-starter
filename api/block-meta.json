@@ -1750,7 +1750,8 @@
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "contentGroup": "ContentGroup",
-                                "mediaGallery": "MediaGallery"
+                                "mediaGallery": "MediaGallery",
+                                "pageTreeIndex": "PageTreeIndex"
                             },
                             "nullable": false
                         }
@@ -1796,7 +1797,8 @@
                                 "keyFacts": "KeyFacts",
                                 "media": "StandaloneMedia",
                                 "contentGroup": "ContentGroup",
-                                "mediaGallery": "MediaGallery"
+                                "mediaGallery": "MediaGallery",
+                                "pageTreeIndex": "PageTreeIndex"
                             },
                             "nullable": false
                         }
@@ -1805,6 +1807,11 @@
                 "nullable": false
             }
         ]
+    },
+    {
+        "name": "PageTreeIndex",
+        "fields": [],
+        "inputFields": []
     },
     {
         "name": "PhoneLink",
