@@ -4,7 +4,6 @@ import { type ContentScope } from "@src/site-configs";
 
 declare module "@comet/site-nextjs" {
     export interface BlockLoaderDependencies {
-        pageTreeNodeId?: string;
         scope: ContentScope;
     }
 }
