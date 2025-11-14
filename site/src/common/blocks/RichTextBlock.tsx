@@ -3,7 +3,6 @@ import { hasRichTextBlockContent, PreviewSkeleton, type PropsWithData, withPrevi
 import { type LinkBlockData, type RichTextBlockData } from "@src/blocks.generated";
 import { Typography, type TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
-import { PageLayout } from "@src/layout/PageLayout";
 import clsx from "clsx";
 import redraft, { type Renderers, type TextBlockRenderFn } from "redraft";
 
@@ -106,12 +105,4 @@ export const RichTextBlock = withPreview(
         );
     },
     { label: "Rich Text" },
-);
-
-export const PageContentRichTextBlock = (props: RichTextBlockProps) => (
-    <PageLayout grid>
-        <div className={styles.pageLayoutContent}>
-            <RichTextBlock {...props} />
-        </div>
-    </PageLayout>
 );
