@@ -8,8 +8,8 @@ import { MediaGalleryBlockFixtureService } from "../media/media-gallery-block-fi
 import { StandaloneMediaBlockFixtureService } from "../media/standalone-media-block-fixture.service";
 import { AnchorBlockFixtureService } from "../navigation/anchor-block-fixture.service";
 import { StandaloneCallToActionListBlockFixtureService } from "../navigation/standalone-call-to-action-list-block-fixture.service";
-import { RichTextBlockFixtureService } from "../text-and-content/rich-text-block-fixture.service";
 import { StandaloneHeadingBlockFixtureService } from "../text-and-content/standalone-heading-block-fixture.service";
+import { StandaloneRichTextBlockFixtureService } from "../text-and-content/standalone-rich-text-block-fixture.service";
 import { AccordionBlockFixtureService } from "./accordion-block-fixture.service";
 import { SpaceBlockFixtureService } from "./space-block-fixture.service";
 
@@ -22,7 +22,7 @@ export class ColumnsBlockFixtureService {
         private readonly anchorBlockFixtureService: AnchorBlockFixtureService,
         private readonly callToActionListBlockFixtureService: StandaloneCallToActionListBlockFixtureService,
         private readonly headingBlockFixtureService: StandaloneHeadingBlockFixtureService,
-        private readonly richtextBlockFixtureService: RichTextBlockFixtureService,
+        private readonly standaloneRichTextBlockFixtureService: StandaloneRichTextBlockFixtureService,
         private readonly mediaGalleryBlockFixtureService: MediaGalleryBlockFixtureService,
         private readonly spaceBlockFixtureService: SpaceBlockFixtureService,
         private readonly standaloneMediaBlockFixtureService: StandaloneMediaBlockFixtureService,
@@ -38,7 +38,7 @@ export class ColumnsBlockFixtureService {
             heading: this.headingBlockFixtureService,
             media: this.standaloneMediaBlockFixtureService,
             mediaGallery: this.mediaGalleryBlockFixtureService,
-            richtext: this.richtextBlockFixtureService,
+            richtext: this.standaloneRichTextBlockFixtureService,
             space: this.spaceBlockFixtureService,
         };
 
