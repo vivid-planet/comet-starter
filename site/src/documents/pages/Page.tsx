@@ -34,7 +34,7 @@ const pageQuery = gql`
 
 type Props = { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput };
 
-async function fetchData({ pageTreeNodeId, scope }: Props) {
+async function fetchData({ pageTreeNodeId }: Props) {
     const graphQLFetch = createGraphQLFetch();
 
     const props = await graphQLFetch<GQLPageQuery, GQLPageQueryVariables>(
