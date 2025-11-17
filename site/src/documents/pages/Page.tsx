@@ -1,4 +1,6 @@
 import { generateImageUrl, gql } from "@comet/site-nextjs";
+import { Breadcrumbs } from "@src/common/components/breadcrumbs/Breadcrumbs";
+import { breadcrumbsFragment } from "@src/common/components/breadcrumbs/Breadcrumbs.fragment";
 import { type GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
@@ -24,8 +26,10 @@ const pageQuery = gql`
                     stage
                 }
             }
+            ...Breadcrumbs
         }
     }
+    ${breadcrumbsFragment}
 `;
 
 type Props = { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput };
@@ -138,6 +142,7 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
             {document.seo.structuredData && document.seo.structuredData.length > 0 && (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: document.seo.structuredData }} />
             )}
+            <Breadcrumbs {...data.pageContent} scope={scope} />
             {/* ID is used for skip link */}
             <main id="mainContent">
                 <StageBlock data={document.stage} />
