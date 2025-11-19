@@ -83,7 +83,7 @@
         "check-node-version": "^4.2.1",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
-        "eslint": "^9.37.0",
+        "eslint": "^9.39.1",
         "knip": "^5.69.1",
         "npm-run-all2": "^7.0.2",
         "prettier": "^3.6.2",
