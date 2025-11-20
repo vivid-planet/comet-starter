@@ -81,7 +81,7 @@ const nextConfig = {
             ],
         };
     },
-    webpack: (config, { isServer, nextRuntime }) => {
+    webpack: (config, { isServer }) => {
         if (!isServer) {
             config.module.rules.push({
                 test: /\.[jt]sx?$/,
