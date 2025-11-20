@@ -9,4 +9,5 @@ export function cleanupWorkingDirectory(verbose: boolean) {
     removeReferenceInFile("lint-staged.config.js", /.*create-app.*\n/gim, verbose);
     removeReferenceInFile(".vscode/settings.json", /, "create-app"/g, verbose);
     removeReferenceInFile("install.sh", /^.*create-app.*$/gm, verbose);
+    removeReferenceInFile("setup-project-files.js", /, "create-app"/g, verbose);
 }
