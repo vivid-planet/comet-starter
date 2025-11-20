@@ -984,7 +984,7 @@
                                     }
                                 ]
                             },
-                            "nullable": false
+                            "nullable": true
                         }
                     ]
                 },
