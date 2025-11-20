@@ -511,6 +511,7 @@ type PaginatedWarnings {
 }
 
 enum Permission {
+  blockPreview
   builds
   cronJobs
   dam
@@ -519,6 +520,7 @@ enum Permission {
   impersonation
   pageTree
   prelogin
+  sitePreview
   translation
   userPermissions
   warnings
@@ -588,6 +590,7 @@ type Redirect {
 }
 
 input RedirectFilter {
+  activatedAt: DateTimeFilter
   active: BooleanFilter
   and: [RedirectFilter!]
   createdAt: DateTimeFilter
