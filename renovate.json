@@ -1,8 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:recommended", ":semanticCommitsDisabled"],
-    "minimumReleaseAge": "3 days",
-    "internalChecksFilter": "strict",
+    "extends": ["github>vivid-planet/comet//renovate/default"],
     "packageRules": [
         {
             "groupName": "comet",
@@ -10,78 +8,6 @@
             "matchPackageNames": ["/@comet/*/"],
             "labels": ["comet", "dependencies"],
             "allowedVersions": "!/canary/"
-        },
-        {
-            "groupName": "eslint",
-            "matchPackageNames": ["/^eslint/"]
-        },
-        {
-            "groupName": "prettier",
-            "matchPackageNames": ["/^prettier/"]
-        },
-        {
-            "groupName": "typescript",
-            "matchPackageNames": ["/typescript/"]
-        },
-        {
-            "groupName": "Mui-X",
-            "matchPackageNames": ["/^@mui/x/"]
-        },
-        {
-            "groupName": "Mui",
-            "matchPackageNames": ["/@mui/material/", "/@mui/system/", "/@mui/utils/"]
-        },
-        {
-            "groupName": "emotion",
-            "matchPackageNames": ["/@emotion/*/"]
-        },
-        {
-            "groupName": "Final Form",
-            "matchPackageNames": ["/final-form/", "/react-final-form/"]
-        },
-        {
-            "groupName": "React Router",
-            "matchPackageNames": ["/^react-router/"]
-        },
-        {
-            "matchPackageNames": ["@graphql-codegen/*"],
-            "groupName": "GraphQL Codegen"
-        },
-        {
-            "groupName": "@apollo/server",
-            "matchPackageNames": ["@apollo/server"]
-        },
-        {
-            "groupName": "@apollo/client",
-            "matchPackageNames": ["@apollo/client"]
-        },
-        {
-            "groupName": "Mikro-ORM",
-            "matchPackageNames": ["/^@mikro-orm/*/"]
-        },
-        {
-            "groupName": "NestJS",
-            "matchPackageNames": ["/^@nestjs/*/"]
-        },
-        {
-            "groupName": "OpenTelemetry",
-            "matchPackageNames": ["/^@opentelemetry/*/"]
-        },
-        {
-            "groupName": "node",
-            "matchPackageNames": ["node"],
-            "rangeStrategy": "widen"
-        },
-        {
-            "matchUpdateTypes": ["major"],
-            "labels": ["major", "dependencies"]
-        },
-        {
-            "groupName": "SWC",
-            "matchPackageNames": ["@swc/plugin-emotion", "@vitejs/plugin-react-swc"]
         }
-    ],
-    "lockFileMaintenance": { "enabled": true },
-    "rangeStrategy": "bump",
-    "labels": ["dependencies"]
+    ]
 }
