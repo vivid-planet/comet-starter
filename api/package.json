@@ -76,7 +76,7 @@
         "@comet/eslint-config": "8.7.1",
         "@cspell/eslint-plugin": "^9.3.2",
         "@jest/types": "^29.6.3",
-        "@nestjs/cli": "^11.0.10",
+        "@nestjs/cli": "^11.0.12",
         "@nestjs/schematics": "^11.0.9",
         "@nestjs/testing": "^11.1.9",
         "@types/cli-progress": "^3.11.6",
