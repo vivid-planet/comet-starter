@@ -47,4 +47,14 @@
 .contentWrapperInner {
     overflow: hidden;
     padding-left: 32px;
+
+    /* If the last direct child has no children, style the last child itself */
+    > *:last-child:not(:has(*)) {
+        margin-bottom: 0;
+    }
+
+    /* If the last direct child has children, style the inner last child */
+    > *:last-child:has(*) > *:last-child {
+        margin-bottom: 0;
+    }
 }
