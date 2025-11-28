@@ -15,9 +15,18 @@ import { RichTextBlock } from "@src/common/blocks/rich-text.block";
 import { SpaceBlock } from "@src/common/blocks/space.block";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/standalone-call-to-action-list.block";
 import { StandaloneHeadingBlock } from "@src/common/blocks/standalone-heading.block";
-import { IsBoolean, IsString } from "class-validator";
+import { IsBoolean, IsEnum, IsString } from "class-validator";
 
-const AccordionContentBlock = createBlocksBlock(
+export enum AccordionItemTitleHtmlTag {
+    h1 = "h1",
+    h2 = "h2",
+    h3 = "h3",
+    h4 = "h4",
+    h5 = "h5",
+    h6 = "h6",
+}
+
+export const AccordionContentBlock = createBlocksBlock(
     {
         supportedBlocks: {
             richtext: RichTextBlock,
@@ -38,6 +47,9 @@ class AccordionItemBlockData extends BlockData {
 
     @BlockField()
     openByDefault: boolean;
+
+    @BlockField({ type: "enum", enum: AccordionItemTitleHtmlTag })
+    titleHtmlTag: AccordionItemTitleHtmlTag;
 }
 
 class AccordionItemBlockInput extends BlockInput {
@@ -52,6 +64,10 @@ class AccordionItemBlockInput extends BlockInput {
     @IsBoolean()
     @BlockField()
     openByDefault: boolean;
+
+    @IsEnum(AccordionItemTitleHtmlTag)
+    @BlockField({ type: "enum", enum: AccordionItemTitleHtmlTag })
+    titleHtmlTag: AccordionItemTitleHtmlTag;
 
     transformToBlockData(): AccordionItemBlockData {
         return blockInputToData(AccordionItemBlockData, this);
