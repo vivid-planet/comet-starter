@@ -26,7 +26,7 @@ const config: CodegenConfig = {
                 },
                 enumsAsTypes: true,
                 namingConvention: "keep",
-                scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string" }),
+                scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string", Date: "string", LocalDate: "string" }),
                 typesPrefix: "GQL",
             },
         },
@@ -43,7 +43,7 @@ const config: CodegenConfig = {
                 },
                 enumsAsTypes: true,
                 namingConvention: "keep",
-                scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string" }),
+                scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string", Date: "string", LocalDate: "string" }),
                 typesPrefix: "GQL",
                 skipDocumentsValidation: {
                     ignoreRules: ["KnownFragmentNamesRule"],

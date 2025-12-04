@@ -1,23 +1,15 @@
-import { gql } from "@comet/cms-site";
+import { gql } from "@comet/site-nextjs";
 import { mobileMenuFragment } from "@src/layout/header/MobileMenu.fragment";
 
+import { desktopMenuFragment } from "./DesktopMenu.fragment";
 import { pageLinkFragment } from "./PageLink.fragment";
 
 export const headerFragment = gql`
     fragment Header on PageTreeNode {
-        id
-        name
-        hideInMenu
-        ...PageLink
-        childNodes {
-            id
-            name
-            hideInMenu
-            ...PageLink
-        }
+        ...DesktopMenu
         ...MobileMenu
     }
-
     ${pageLinkFragment}
+    ${desktopMenuFragment}
     ${mobileMenuFragment}
 `;

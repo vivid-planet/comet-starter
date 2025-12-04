@@ -23,9 +23,8 @@ export class EnvironmentVariables {
     @IsString()
     POSTGRESQL_DB: string;
 
-    @IsOptional()
     @IsString()
-    POSTGRESQL_USER?: string;
+    POSTGRESQL_USER: string;
 
     @IsString()
     POSTGRESQL_PASSWORD: string;
@@ -40,6 +39,7 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @MinLength(16)
     BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
 
     @IsString()
@@ -96,23 +96,23 @@ export class EnvironmentVariables {
     @IsString()
     BLOB_STORAGE_DIRECTORY_PREFIX: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_REGION: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ENDPOINT: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_BUCKET: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ACCESS_KEY_ID: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_SECRET_ACCESS_KEY: string;
 
