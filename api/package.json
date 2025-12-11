@@ -94,7 +94,7 @@
         "knip": "^5.70.1",
         "npm-run-all2": "^8.0.4",
         "prettier": "^3.6.2",
-        "ts-jest": "^29.4.5",
+        "ts-jest": "^29.4.6",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
         "typescript": "5.8.3"
