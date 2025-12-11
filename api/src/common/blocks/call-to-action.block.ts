@@ -13,10 +13,10 @@ import { IsEnum } from "class-validator";
 
 import { TextLinkBlock } from "./text-link.block";
 
-enum Variant {
-    Contained = "Contained",
-    Outlined = "Outlined",
-    Text = "Text",
+export enum Variant {
+    contained = "contained",
+    outlined = "outlined",
+    text = "text",
 }
 
 class CallToActionBlockData extends BlockData {

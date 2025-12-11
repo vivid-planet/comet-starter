@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react-swc";
 import { resolve } from "path";
 import { defineConfig } from "vite";
+import { compression } from "vite-plugin-compression2";
 import { createHtmlPlugin } from "vite-plugin-html";
 
 import { environment as envVarsToLoad } from "./src/environment";
@@ -33,6 +34,7 @@ export default defineConfig(({ mode }) => {
                     ],
                 ],
             }),
+            compression(),
             createHtmlPlugin({
                 minify: true,
                 entry: resolve(__dirname, "src/loader.ts"),
@@ -47,8 +49,23 @@ export default defineConfig(({ mode }) => {
             }),
         ],
         server: {
-            host: true,
+            host: process.env.SERVER_HOST ?? "localhost",
             port: Number(process.env.ADMIN_PORT),
+            cors: false,
+            proxy: process.env.API_URL_INTERNAL
+                ? {
+                      "/api": {
+                          target: new URL(process.env.API_URL_INTERNAL).origin,
+                          changeOrigin: true,
+                          secure: false,
+                      },
+                      "/dam": {
+                          target: process.env.API_URL_INTERNAL,
+                          changeOrigin: true,
+                          secure: false,
+                      },
+                  }
+                : undefined,
         },
         define: {
             // define NODE_ENV for packages using it

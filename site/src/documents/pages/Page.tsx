@@ -1,7 +1,10 @@
-import { generateImageUrl, gql } from "@comet/cms-site";
+import { generateImageUrl, gql } from "@comet/site-nextjs";
+import { Breadcrumbs } from "@src/common/components/breadcrumbs/Breadcrumbs";
+import { breadcrumbsFragment } from "@src/common/components/breadcrumbs/Breadcrumbs.fragment";
 import { type GQLPageTreeNodeScopeInput } from "@src/graphql.generated";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
+import { getSiteConfigForDomain } from "@src/util/siteConfig";
 import { type Metadata, type ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -23,8 +26,10 @@ const pageQuery = gql`
                     stage
                 }
             }
+            ...Breadcrumbs
         }
     }
+    ${breadcrumbsFragment}
 `;
 
 type Props = { pageTreeNodeId: string; scope: GQLPageTreeNodeScopeInput };
@@ -58,12 +63,15 @@ async function fetchData({ pageTreeNodeId }: Props) {
 
 export async function generateMetadata({ pageTreeNodeId, scope }: Props, parent: ResolvingMetadata): Promise<Metadata> {
     const data = await fetchData({ pageTreeNodeId, scope });
+    const siteConfig = getSiteConfigForDomain(scope.domain);
+
     const document = data?.pageContent?.document;
     if (!document) {
         return {};
     }
-    const siteUrl = "http://localhost:3000"; //TODO get from site config
-    const canonicalUrl = document.seo.canonicalUrl || `${siteUrl}${data.pageContent.path}`;
+
+    const siteUrl = siteConfig.url;
+    const canonicalUrl = (document.seo.canonicalUrl || `${siteUrl}/${scope.language}${data.pageContent.path}`).replace(/\/$/, ""); // Remove trailing slash for "home"
 
     // TODO move into library
     return {
@@ -105,24 +113,27 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
     }
     if (document.__typename != "Page") throw new Error(`invalid document type`);
 
-    [document.content, document.seo] = await Promise.all([
+    [document.content, document.seo, document.stage] = await Promise.all([
         recursivelyLoadBlockData({
             blockType: "PageContent",
             blockData: document.content,
             graphQLFetch,
             fetch,
+            scope,
         }),
         recursivelyLoadBlockData({
             blockType: "Seo",
             blockData: document.seo,
             graphQLFetch,
             fetch,
+            scope,
         }),
         recursivelyLoadBlockData({
             blockType: "Stage",
             blockData: document.stage,
             graphQLFetch,
             fetch,
+            scope,
         }),
     ]);
 
@@ -131,7 +142,9 @@ export async function Page({ pageTreeNodeId, scope }: { pageTreeNodeId: string; 
             {document.seo.structuredData && document.seo.structuredData.length > 0 && (
                 <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: document.seo.structuredData }} />
             )}
-            <main>
+            <Breadcrumbs {...data.pageContent} scope={scope} />
+            {/* ID is used for skip link */}
+            <main id="mainContent">
                 <StageBlock data={document.stage} />
                 <PageContentBlock data={document.content} />
             </main>
