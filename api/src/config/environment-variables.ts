@@ -38,24 +38,24 @@ export class EnvironmentVariables {
     USE_AUTHPROXY: boolean;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
     @MinLength(16)
     BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
     IDP_CLIENT_ID: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
     IDP_JWKS_URI: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
     IDP_END_SESSION_ENDPOINT: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
     POST_LOGOUT_REDIRECT_URI: string;
 
     @Type(() => Number)
@@ -81,38 +81,38 @@ export class EnvironmentVariables {
     @IsString()
     BLOB_STORAGE_DRIVER: BlobStorageConfig["backend"]["driver"];
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "file")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "file")
     @IsString()
     FILE_STORAGE_PATH: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "azure")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "azure")
     @IsString()
     AZURE_ACCOUNT_NAME: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "azure")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "azure")
     @IsString()
     AZURE_ACCOUNT_KEY: string;
 
     @IsString()
     BLOB_STORAGE_DIRECTORY_PREFIX: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_REGION: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ENDPOINT: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_BUCKET: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ACCESS_KEY_ID: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_SECRET_ACCESS_KEY: string;
 
