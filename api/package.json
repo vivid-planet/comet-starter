@@ -85,7 +85,7 @@
         "@types/express": "^5.0.5",
         "@types/inquirer": "^8.2.12",
         "@types/jest": "^29.5.14",
-        "@types/node": "^24.10.1",
+        "@types/node": "^24.10.3",
         "check-node-version": "^4.2.1",
         "dotenv-cli": "^7.4.4",
         "eslint": "^9.39.1",
