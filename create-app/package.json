@@ -33,7 +33,7 @@
     },
     "dependencies": {
         "commander": "^14.0.2",
-        "eslint": "^9.39.1",
+        "eslint": "^9.39.2",
         "glob": "^11.1.0",
         "kleur": "^4.1.5",
         "nanospinner": "^1.2.2",

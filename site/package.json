@@ -63,7 +63,7 @@
         "check-node-version": "^4.2.1",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^7.4.4",
-        "eslint": "^9.39.1",
+        "eslint": "^9.39.2",
         "eslint-config-next": "^15.5.9",
         "knip": "^5.73.4",
         "npm-run-all2": "^8.0.4",
