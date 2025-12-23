@@ -1,0 +1,26 @@
+@use "@src/styles/variables" as *;
+
+.pageLayoutContent {
+    grid-column: 3 / -3;
+}
+
+.title {
+    margin-top: var(--spacing-s300);
+    margin-bottom: var(--spacing-s300);
+}
+
+.homeLink {
+    text-decoration: none;
+    display: inline-block;
+    padding: var(--spacing-s100) 0;
+    color: var(--brand-grey-900);
+
+    &:hover {
+        color: var(--brand-primary-main);
+    }
+
+    &.active {
+        text-decoration: underline var(--brand-primary-main);
+        text-underline-offset: 8px;
+    }
+}
