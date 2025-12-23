@@ -68,7 +68,7 @@
         "knip": "^5.73.4",
         "npm-run-all2": "^8.0.4",
         "prettier": "^3.7.4",
-        "sass": "^1.96.0",
+        "sass": "^1.97.1",
         "stylelint": "^16.26.1",
         "stylelint-config-standard-scss": "^16.0.0",
         "typed-scss-modules": "^8.1.1",
