@@ -57,7 +57,7 @@ export class AuthModule {
             });
         } else {
             if (process.env.NODE_ENV !== "development") {
-                throw new Error("config.auth.useAuthproxy must only be false in development");
+                throw new Error("config.auth.useAuthProxy may only be false in development");
             }
             authServices.push(
                 createStaticUserAuthService({
