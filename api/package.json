@@ -39,7 +39,7 @@
         "@apollo/server": "^5.2.0",
         "@as-integrations/express5": "^1.1.2",
         "@comet/cms-api": "8.10.0",
-        "@faker-js/faker": "10.1.0",
+        "@faker-js/faker": "10.2.0",
         "@mikro-orm/cli": "^6.6.2",
         "@mikro-orm/core": "^6.6.2",
         "@mikro-orm/migrations": "^6.6.2",
