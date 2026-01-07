@@ -18,7 +18,7 @@
         "lint:ci": "npm run lint",
         "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml,css,scss}'",
+        "lint:prettier": "npx prettier --check '*.{js,json,md,yml,yaml,css,scss}'",
         "lint:style": "npx stylelint '**/*.{css,scss}'",
         "lint:tsc": "tsc --project .",
         "serve": "NODE_ENV=production node dist/server.js",

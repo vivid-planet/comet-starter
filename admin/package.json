@@ -20,7 +20,7 @@
         "lint:ci": "npm run lint",
         "lint:eslint": "eslint --max-warnings 0 --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
+        "lint:prettier": "npx prettier --check '*.{js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project .",
         "preview": "npm run build && vite preview",
         "serve": "node server",
