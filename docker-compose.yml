@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:16
+    image: postgres:18
     pull_policy: weekly
     tty: true
     volumes:
