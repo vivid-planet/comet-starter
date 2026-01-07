@@ -1,4 +1,4 @@
-import { CodegenConfig } from "@graphql-codegen/cli";
+import { type CodegenConfig } from "@graphql-codegen/cli";
 import { readFileSync } from "fs";
 import { buildSchema } from "graphql";
 
@@ -12,7 +12,7 @@ const pluginConfig = {
     },
     enumsAsTypes: true,
     namingConvention: "keep",
-    scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string" }),
+    scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string", LocalDate: "string" }),
     typesPrefix: "GQL",
 };
 

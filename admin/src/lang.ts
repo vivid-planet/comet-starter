@@ -15,7 +15,14 @@ const projectMessages = {
     de: project_messages_de,
 };
 
-export const getMessages = (): ResolvedIntlConfig["messages"] => {
+export const getMessages = (language: "de" | "en"): ResolvedIntlConfig["messages"] => {
+    if (language === "de") {
+        return {
+            ...cometMessages["de"],
+            ...projectMessages["de"],
+        };
+    }
+
     return {
         ...cometMessages["en"],
         ...projectMessages["en"],

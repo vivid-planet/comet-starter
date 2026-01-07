@@ -5,6 +5,7 @@ import {
     createAuthResolver,
     createBasicAuthService,
     createJwtAuthService,
+    createSitePreviewAuthService,
     createStaticUserAuthService,
 } from "@comet/cms-api";
 import { DynamicModule, Module, Provider, type Type } from "@nestjs/common";
@@ -14,7 +15,7 @@ import { Config } from "@src/config/config";
 
 import { AccessControlService } from "./access-control.service";
 import { staticUsers } from "./static-users";
-import { UserService } from "./user.service";
+import { StaticUsersUserService } from "./static-users.user.service";
 
 export const SYSTEM_USER_NAME = "system-user";
 
@@ -26,6 +27,7 @@ export class AuthModule {
                 username: SYSTEM_USER_NAME,
                 password: config.auth.systemUserPassword,
             }),
+            createSitePreviewAuthService({ sitePreviewSecret: config.sitePreviewSecret }),
         ];
 
         const providers: Provider[] = [
@@ -34,12 +36,20 @@ export class AuthModule {
                 endSessionEndpoint: config.auth.idpEndSessionEndpoint,
             }),
             AccessControlService,
-            UserService,
+            StaticUsersUserService,
         ];
 
         if (config.auth.useAuthProxy) {
             authServices.push(
-                createJwtAuthService({ verifyOptions: { audience: config.auth.idpClientId }, jwksOptions: { jwksUri: config.auth.idpJwksUri } }),
+                createJwtAuthService({
+                    verifyOptions: {
+                        audience: config.auth.idpClientId,
+                    },
+                    jwksOptions: {
+                        jwksUri: config.auth.idpJwksUri,
+                    },
+                    convertJwtToUser: () => staticUsers.vividPlanetEmployee, // TODO Remove when correct UserService is used in UserPermissionsModule
+                }),
             );
             providers.push({
                 provide: APP_GUARD,
@@ -47,7 +57,7 @@ export class AuthModule {
             });
         } else {
             if (process.env.NODE_ENV !== "development") {
-                throw new Error("config.auth.useAuthproxy must only be false in development");
+                throw new Error("config.auth.useAuthProxy may only be false in development");
             }
             authServices.push(
                 createStaticUserAuthService({
@@ -65,7 +75,7 @@ export class AuthModule {
         return {
             module: AuthModule,
             providers,
-            exports: [AccessControlService, UserService],
+            exports: [AccessControlService, StaticUsersUserService],
             imports: [JwtModule],
         };
     }
