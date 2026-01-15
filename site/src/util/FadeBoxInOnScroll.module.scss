@@ -8,12 +8,12 @@
             opacity 0.5s ease-in-out var(--fade-delay, 0ms),
             transform 1.3s cubic-bezier(0.22, 1, 0.36, 1) var(--fade-delay, 0ms);
 
-    @media (max-width: 599px) {
-        /* No animation on mobile, or adjust as needed */
-        transition: none;
-        opacity: 1;
-        transform: none;
-    }
+    //@media (max-width: 599px) {
+    //    /* No animation on mobile, or adjust as needed */
+    //    transition: none;
+    //    opacity: 1;
+    //    transform: none;
+    //}
 }
 
 .fullHeight {
