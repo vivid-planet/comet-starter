@@ -5,6 +5,7 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
+import { FadeBoxInOnScroll } from "@src/util/FadeBoxInOnScroll";
 
 import styles from "./BillboardTeaserBlock.module.scss";
 
@@ -26,9 +27,13 @@ export const BillboardTeaserBlock = withPreview(
             <div className={styles.imageOverlay} style={{ opacity: `${overlay}%` }} />
             <PageLayout className={styles.absoluteGridRoot} grid>
                 <div className={styles.content}>
-                    <HeadingBlock data={heading} />
-                    <RichTextBlock data={text} />
-                    <CallToActionListBlock data={callToActionList} />
+                    <FadeBoxInOnScroll direction="bottom">
+                        <>
+                            <HeadingBlock data={heading} />
+                            <RichTextBlock data={text} />
+                            <CallToActionListBlock data={callToActionList} />
+                        </>
+                    </FadeBoxInOnScroll>
                 </div>
             </PageLayout>
         </div>
