@@ -65,7 +65,7 @@
         "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.2",
         "eslint-config-next": "^15.5.9",
-        "knip": "^5.79.0",
+        "knip": "^5.81.0",
         "npm-run-all2": "^8.0.4",
         "prettier": "^3.7.4",
         "sass": "^1.97.1",
