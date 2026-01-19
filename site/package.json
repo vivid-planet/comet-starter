@@ -48,7 +48,7 @@
     "devDependencies": {
         "@comet/cli": "8.10.0",
         "@comet/eslint-config": "8.10.0",
-        "@cspell/eslint-plugin": "^9.4.0",
+        "@cspell/eslint-plugin": "^9.6.0",
         "@formatjs/cli": "^6.11.0",
         "@graphql-codegen/add": "^6.0.0",
         "@graphql-codegen/cli": "^6.1.1",
