@@ -52,7 +52,8 @@ export class EnvironmentVariables {
 
     @IsString()
     @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
-    IDP_END_SESSION_ENDPOINT: string;
+    @IsOptional()
+    IDP_END_SESSION_ENDPOINT?: string;
 
     @IsString()
     @ValidateIf((variables: EnvironmentVariables) => variables.USE_AUTHPROXY === true)
