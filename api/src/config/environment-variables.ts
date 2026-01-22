@@ -43,7 +43,8 @@ export class EnvironmentVariables {
     IDP_JWKS_URI: string;
 
     @IsString()
-    IDP_END_SESSION_ENDPOINT: string;
+    @IsOptional()
+    IDP_END_SESSION_ENDPOINT?: string;
 
     @IsString()
     POST_LOGOUT_REDIRECT_URI: string;
