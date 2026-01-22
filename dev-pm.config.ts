@@ -61,12 +61,12 @@ export default defineConfig({
         },
         {
             name: "auth-provider",
-            script: "pnpm run dev:auth-provider",
+            script: "npm run dev:auth-provider",
             group: "login",
         },
         {
             name: "auth-proxy",
-            script: "pnpm run dev:auth-proxy",
+            script: "npm run dev:auth-proxy",
             group: "login",
             waitOn: ["tcp:$IDP_PORT", "tcp:$ADMIN_PORT"],
         },
