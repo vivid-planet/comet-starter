@@ -1,12 +1,3 @@
-# Copy from .gitignore, remove once prettier v3 is in use
-.idea
-
-.npm
-.babelCache
-
-.env.local
-.env.secrets
-
 # Go Templates can not be formatted with prettier (https://github.com/prettier/prettier/issues/6517)
 chart/*/templates/*
 
