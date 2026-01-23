@@ -41,7 +41,7 @@
         "@mui/x-date-pickers": "^7.29.4",
         "change-case": "^5.4.4",
         "date-fns": "^4.1.0",
-        "final-form": "^4.20.10",
+        "final-form": "^5.0.0",
         "graphql": "^16.12.0",
         "history": "^4.10.1",
         "lodash.isequal": "^4.5.0",
@@ -51,7 +51,7 @@
         "react-dnd-html5-backend": "^16.0.1",
         "react-dnd-multi-backend": "^9.0.0",
         "react-dom": "^18.3.1",
-        "react-final-form": "^6.5.9",
+        "react-final-form": "^7.0.0",
         "react-intl": "^7.1.14",
         "react-router": "^5.3.4",
         "react-router-dom": "^5.3.4"
