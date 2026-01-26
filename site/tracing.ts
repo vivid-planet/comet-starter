@@ -10,6 +10,7 @@ const sdk = new opentelemetry.NodeSDK({
     traceExporter: new OTLPTraceExporter({
         url: `http://localhost:${process.env.JAEGER_OLTP_PORT}/v1/traces`,
     }),
+    metricReaders: [],
     instrumentations: [
         getNodeAutoInstrumentations({
             "@opentelemetry/instrumentation-http": {
