@@ -5,33 +5,24 @@ import { withDamRewriteMiddleware } from "./middleware/damRewrite";
 import { withDomainRewriteMiddleware } from "./middleware/domainRewrite";
 import { withPreviewMiddleware } from "./middleware/preview";
 import { withRedirectToMainHostMiddleware } from "./middleware/redirectToMainHost";
-import { withSitePreviewMiddleware } from "./middleware/sitePreview";
+import { withRobotsMiddleware } from "./middleware/robots";
+import { withSkipRewriteMiddleware } from "./middleware/skipRewrite";
 import { withStatusMiddleware } from "./middleware/status";
 
 export default chain([
     withStatusMiddleware,
-    withSitePreviewMiddleware,
-    withRedirectToMainHostMiddleware,
     withAdminRedirectMiddleware,
+    withSkipRewriteMiddleware,
     withDamRewriteMiddleware,
-    withContentSecurityPolicyHeadersMiddleware, // order matters: after redirects (that don't need csp headers), before everything else that needs csp headers
+    withContentSecurityPolicyHeadersMiddleware,
     withPreviewMiddleware,
+    withRedirectToMainHostMiddleware,
+    withRobotsMiddleware, // for robots.txt, the middleware may only be skipped after the main host redirect
     withDomainRewriteMiddleware, // must be last (rewrites all urls)
 ]);
 
 export const config = {
-    matcher: [
-        /*
-         * Match all request paths except for the ones starting with:
-         * - _next/static (static files)
-         * - _next/image (image optimization files)
-         * - favicon.ico, icon.svg, apple-icon.png
-         * - manifest.json
-         * - assets (assets from /public folder)
-         * - robots.txt
-         */
-        "/((?!_next/static|_next/image|favicon.ico|icon.svg|apple-icon.png|manifest.json|assets/|robots.txt).*)",
-    ],
+    matcher: ["/(.*)"],
     // TODO find a better solution for this (https://nextjs.org/docs/messages/edge-dynamic-code-evaluation)
     unstable_allowDynamic: [
         "/node_modules/graphql/**",

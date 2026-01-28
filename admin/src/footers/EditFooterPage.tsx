@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { MainContent, messages, SaveButton, Stack, StackToolbar, ToolbarActions, ToolbarFillSpace, ToolbarTitleItem } from "@comet/admin";
+import { FillSpace, MainContent, messages, SaveButton, Stack, StackToolbar, ToolbarActions, ToolbarTitleItem } from "@comet/admin";
 import { Save } from "@comet/admin-icons";
 import {
     BlockAdminComponentRoot,
@@ -7,13 +7,13 @@ import {
     type BlockState,
     ContentScopeIndicator,
     resolveHasSaveConflict,
+    useBlockContext,
     useBlockPreview,
-    useCmsBlockContext,
+    useContentScope,
     useSaveConflictQuery,
     useSiteConfig,
 } from "@comet/cms-admin";
 import { type FooterContentBlockInput } from "@src/blocks.generated";
-import { useContentScope } from "@src/common/ContentScopeProvider";
 import isEqual from "lodash.isequal";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -38,7 +38,7 @@ export function EditFooterPage(): JSX.Element | null {
     const [referenceContent, setReferenceContent] = useState<FooterContentBlockInput | null>(null);
     const match = useRouteMatch();
     const previewApi = useBlockPreview();
-    const blockContext = useCmsBlockContext();
+    const blockContext = useBlockContext();
 
     const { data, refetch, loading } = useQuery<GQLFooterQuery, GQLFooterQueryVariables>(footerQuery, {
         variables: {
@@ -102,7 +102,7 @@ export function EditFooterPage(): JSX.Element | null {
         }
 
         const input = { content: FooterContentBlock.state2Output(footerState) };
-        return update({
+        await update({
             variables: { input, scope },
         });
     };
@@ -131,13 +131,12 @@ export function EditFooterPage(): JSX.Element | null {
                 <ToolbarTitleItem>
                     <FormattedMessage id="footers.edit.toolbarTitle" defaultMessage="Edit footer" />
                 </ToolbarTitleItem>
-                <ToolbarFillSpace />
+                <FillSpace />
                 <ToolbarActions>
                     <SaveButton
                         disabled={!hasChanges}
-                        color="primary"
-                        variant="contained"
-                        saving={saving}
+                        variant="primary"
+                        loading={saving}
                         hasErrors={hasSaveErrors != null}
                         onClick={handleSavePage}
                         startIcon={<Save />}
