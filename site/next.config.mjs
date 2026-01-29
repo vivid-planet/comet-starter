@@ -1,6 +1,8 @@
 // @ts-check
 
 import nextBundleAnalyzer from "@next/bundle-analyzer";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
 import cometConfig from "./src/comet-config.json" with { type: "json" };
 
@@ -19,11 +21,8 @@ const nextConfig = {
     eslint: {
         ignoreDuringBuilds: process.env.NODE_ENV === "production",
     },
-    compiler: {
-        styledComponents: true,
-    },
     experimental: {
-        optimizePackageImports: ["@comet/cms-site"],
+        optimizePackageImports: ["@comet/site-nextjs"],
     },
     poweredByHeader: false,
     // https://nextjs.org/docs/advanced-features/security-headers (Content-Security-Policy and CORS are set in middleware/cspHeaders.ts)
@@ -78,6 +77,23 @@ const nextConfig = {
                 },
             ],
         };
+    },
+    webpack: (config, { isServer }) => {
+        if (!isServer) {
+            config.module.rules.push({
+                test: /\.[jt]sx?$/,
+                include: [dirname(fileURLToPath(import.meta.url)) + "/src"],
+                use: [
+                    {
+                        loader: "@comet/site-nextjs/webpackPersistedQueriesLoader",
+                        options: {
+                            persistedQueriesPath: ".next/persisted-queries.json",
+                        },
+                    },
+                ],
+            });
+        }
+        return config;
     },
 };
 
