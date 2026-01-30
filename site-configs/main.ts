@@ -15,7 +15,8 @@ export default ((env) => {
             main: envToDomainMap[env],
             preliminary: env === "prod" ? "preliminary.comet-dxp.com" : undefined, // preliminary domain activates prelogin automatically
         },
-        preloginEnabled: env !== "local" && env !== "prod",
+        preloginEnabled: env !== "local",
+        // preloginEnabled: env !== "local" && env !== "prod", // uncomment to disable prelogin on prod for golive
         preloginPassword: undefined,
         public: {
             scope: {

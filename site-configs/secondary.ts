@@ -14,7 +14,8 @@ export default ((env) => {
         domains: {
             main: envToDomainMap[env],
         },
-        preloginEnabled: env !== "local" && env !== "prod",
+        preloginEnabled: env !== "local",
+        // preloginEnabled: env !== "local" && env !== "prod", // uncomment to disable prelogin on prod for golive
         preloginPassword: undefined,
         public: {
             scope: {
