@@ -47,7 +47,8 @@ export class EnvironmentVariables {
     IDP_END_SESSION_ENDPOINT?: string;
 
     @IsString()
-    POST_LOGOUT_REDIRECT_URI: string;
+    @IsOptional()
+    POST_LOGOUT_REDIRECT_URI?: string;
 
     @Type(() => Number)
     @IsInt()
