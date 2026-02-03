@@ -36,3 +36,5 @@ echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
 npm --prefix create-app install
 
 mkdir -p ./api/uploads
+
+npm run setup:download-oauth2-proxy

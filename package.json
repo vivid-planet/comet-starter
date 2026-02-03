@@ -4,6 +4,8 @@
     "scripts": {
         "create-site-configs-env": "npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs --base64",
         "dev": "npm run create-site-configs-env && dev-pm start",
+        "dev:auth-proxy": "dotenv -- ./node_modules/.bin/oauth2-proxy --cookie-secret=$(head -c 16 /dev/random | base64)",
+        "dev:auth-provider": "dotenv -- dev-oidc-provider",
         "setup-project-files": "node setup-project-files.js",
         "lint": "run-p -l lint:{admin,api,create-app,root,site}",
         "lint:admin": "npm --prefix admin run lint",
@@ -24,10 +26,12 @@
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
-        "setup:ci": "npm run setup-project-files"
+        "setup:ci": "npm run setup-project-files",
+        "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
         "@comet/cli": "8.13.0",
+        "@comet/dev-oidc-provider": "^1.2.1",
         "@comet/dev-process-manager": "^3.0.0",
         "cspell": "^9.6.2",
         "dotenv-cli": "^11.0.0",
