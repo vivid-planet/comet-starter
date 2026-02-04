@@ -1,9 +1,12 @@
-import { BlobStorageConfig } from "@comet/cms-api";
+import { BlobStorageConfig, IsUndefinable } from "@comet/cms-api";
 import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsBoolean, IsEmail, IsFQDN, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { IsArray, IsBoolean, IsEmail, IsFQDN, IsIn, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class EnvironmentVariables {
+    @IsIn(["development", "production", "test"])
+    NODE_ENV: "development" | "production" | "test";
+
     @IsString()
     POSTGRESQL_HOST: string;
 
@@ -49,6 +52,10 @@ export class EnvironmentVariables {
     @IsString()
     @IsOptional()
     POST_LOGOUT_REDIRECT_URI?: string;
+
+    @IsString()
+    @IsUndefinable()
+    SERVER_HOST?: string;
 
     @Type(() => Number)
     @IsInt()
