@@ -1,4 +1,4 @@
-# Agents.md
+# AGENTS.md
 
 This file provides guidance to AI agents (Copilot, Cursor, Claude) when working with code in this repository.
 
