@@ -46,6 +46,7 @@ block-meta.json
 src/**/*.generated.ts
 src/comet-config.json
 src/site-configs.d.ts
+src/**/*.scss.d.ts
 
 public/sitemap.xml
 public/robots.txt
@@ -53,3 +54,4 @@ public/robots.txt
 tsconfig.tsbuildinfo
 
 /dist
+.npmrc
