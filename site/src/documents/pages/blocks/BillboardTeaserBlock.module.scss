@@ -41,6 +41,13 @@
     }
 }
 
+.callToActionWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .imageMobile {
     @media (min-width: $breakpoint-sm) {
         display: none;
