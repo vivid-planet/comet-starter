@@ -1,6 +1,7 @@
 "use client";
 
 import { usePreview } from "@comet/site-nextjs";
+import { useFadeGroup } from "@src/util/FadeGroup";
 import { useGlobalScrollSpeed } from "@src/util/useGlobalScrollSpeed";
 import { useWindowSize } from "@src/util/useWindowSize";
 import clsx from "clsx";
@@ -11,28 +12,34 @@ import styles from "./FadeBoxInOnScroll.module.scss";
 interface FadeBoxInOnScrollProps {
     direction?: "top" | "right" | "bottom" | "left" | undefined;
     children: ReactElement;
-    threshold?: number;
     offset?: number;
     delay?: number;
     fullHeight?: boolean;
     onChange?: (inView: boolean) => void;
+    className?: string;
+    innerClassName?: string;
 }
 
 export function FadeBoxInOnScroll({
     children,
     direction = undefined,
-    threshold = 1,
     offset = 200,
     delay = 0,
     fullHeight = false,
     onChange,
+    className,
+    innerClassName,
     ...props
 }: FadeBoxInOnScrollProps) {
+    const fadeGroup = useFadeGroup();
     const refScrollContainer = useRef<HTMLDivElement | null>(null);
     const [fadeIn, setFadeIn] = useState<boolean>(false);
     const { previewType } = usePreview();
     const windowSize = useWindowSize();
     const scrollSpeed = useGlobalScrollSpeed();
+
+    const groupForceVisible = fadeGroup?.visible ?? false;
+    const groupOnVisible = fadeGroup?.onVisible;
 
     // Dynamic delay and fade duration for speedup fade in on faster scrolling
     const dynamicDelay = scrollSpeed > 1 ? delay / (scrollSpeed / 2) : delay;
@@ -53,9 +60,8 @@ export function FadeBoxInOnScroll({
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setFadeIn(true);
-                        if (onChange) {
-                            onChange(entry.isIntersecting);
-                        }
+                        onChange?.(entry.isIntersecting);
+                        groupOnVisible?.();
                     }
                 });
             },
@@ -72,15 +78,19 @@ export function FadeBoxInOnScroll({
                 observer.unobserve(scrollContainer);
             }
         };
-    }, [offset, threshold, previewType, direction, windowSize, onChange, scrollSpeed]);
+    }, [offset, previewType, direction, windowSize, onChange, scrollSpeed, groupOnVisible]);
 
     // Set CSS variable for delay and duration
     const style = { "--fade-delay": `${dynamicDelay ?? 0}ms`, "--fade-duration": `${dynamicFadeDuration ?? 0}ms` } as React.CSSProperties;
 
     return (
-        <div className={styles.overflowContainer}>
+        <div className={clsx(styles.overflowContainer, className)}>
             <div
                 ref={refScrollContainer}
+                onFocus={() => {
+                    setFadeIn(true);
+                    groupOnVisible?.();
+                }}
                 className={clsx(
                     styles.scrollContainer,
                     fullHeight && styles.fullHeight,
@@ -88,7 +98,8 @@ export function FadeBoxInOnScroll({
                     direction === "right" && styles.fromRight,
                     direction === "top" && styles.fromTop,
                     direction === "bottom" && styles.fromBottom,
-                    (previewType === "BlockPreview" || fadeIn) && styles.fadeIn,
+                    (previewType === "BlockPreview" || fadeIn || groupForceVisible) && styles.fadeIn,
+                    innerClassName,
                 )}
                 style={style}
                 {...props}
