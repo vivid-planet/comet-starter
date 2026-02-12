@@ -1,6 +1,7 @@
 "use client";
 
 import { usePreview } from "@comet/site-nextjs";
+import { useGlobalScrollSpeed } from "@src/util/useGlobalScrollSpeed";
 import { useWindowSize } from "@src/util/useWindowSize";
 import clsx from "clsx";
 import { type ReactElement, useEffect, useRef, useState } from "react";
@@ -21,7 +22,7 @@ export function FadeBoxInOnScroll({
     children,
     direction = undefined,
     threshold = 1,
-    offset = 0,
+    offset = 200,
     delay = 0,
     fullHeight = false,
     onChange,
@@ -31,12 +32,21 @@ export function FadeBoxInOnScroll({
     const [fadeIn, setFadeIn] = useState<boolean>(false);
     const { previewType } = usePreview();
     const windowSize = useWindowSize();
+    const scrollSpeed = useGlobalScrollSpeed();
+
+    // Dynamic delay and fade duration for speedup fade in on faster scrolling
+    const dynamicDelay = scrollSpeed > 1 ? delay / (scrollSpeed / 2) : delay;
+    const dynamicFadeDuration = scrollSpeed > 1 ? Math.min(500 / (scrollSpeed / 2), 200) : 500;
 
     useEffect(() => {
         const scrollContainer = refScrollContainer.current;
         if (!scrollContainer || previewType === "BlockPreview") return;
 
-        const fadeInOffset = windowSize ? (windowSize?.height / 2.5) * -1 + offset : offset;
+        // Dynamic offset for trigger fade in earlier on faster scrolling
+        const dynamicOffsetScrollSpeed = scrollSpeed > 1 ? scrollSpeed * 100 : 0;
+        // Dynamic offset page height for adjusting offset relative to page height
+        const dynamicOffsetPageHeight = windowSize ? (windowSize?.height / 2.5) * -1 + offset : offset;
+        const fadeInOffset = dynamicOffsetScrollSpeed + dynamicOffsetPageHeight;
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -50,7 +60,8 @@ export function FadeBoxInOnScroll({
                 });
             },
             {
-                rootMargin: `0px 0px ${direction === "bottom" ? fadeInOffset + 50 : direction === "top" ? fadeInOffset - 50 : fadeInOffset}px 0px`,
+                rootMargin: `0px 0px ${direction === "bottom" ? fadeInOffset + 40 : direction === "top" ? fadeInOffset - 40 : fadeInOffset}px 0px`,
+                threshold: 0,
             },
         );
 
@@ -61,10 +72,10 @@ export function FadeBoxInOnScroll({
                 observer.unobserve(scrollContainer);
             }
         };
-    }, [offset, threshold, previewType, direction, windowSize, onChange]);
+    }, [offset, threshold, previewType, direction, windowSize, onChange, scrollSpeed]);
 
-    // Set CSS variable for delay
-    const style = { "--fade-delay": `${delay ?? 0}ms` } as React.CSSProperties;
+    // Set CSS variable for delay and duration
+    const style = { "--fade-delay": `${dynamicDelay ?? 0}ms`, "--fade-duration": `${dynamicFadeDuration ?? 0}ms` } as React.CSSProperties;
 
     return (
         <div className={styles.overflowContainer}>
