@@ -97,8 +97,8 @@ The `site-configs/` directory manages site configurations, compiled into environ
 
 ### Docker Services
 
-- PostgreSQL 16 (port 5432)
-- imgproxy v3 (port 6080) - image optimization
+- PostgreSQL (port 5432)
+- imgproxy (port 6080) - image optimization
 - Jaeger (port 16686) - distributed tracing
 
 ### Local Ports
