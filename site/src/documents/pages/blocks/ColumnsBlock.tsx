@@ -9,6 +9,7 @@ import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBloc
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { StandaloneRichTextBlock } from "@src/common/blocks/StandaloneRichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
+import { FadeBoxInOnScroll } from "@src/util/FadeBoxInOnScroll";
 import clsx from "clsx";
 
 import styles from "./ColumnsBlock.module.scss";
@@ -42,9 +43,11 @@ const layoutToStyleMap: { [key: string]: string } = {
 export const ColumnsBlock = withPreview(
     ({ data: { columns, layout } }: PropsWithData<ColumnsBlockData>) => (
         <PageLayout grid>
-            {columns.map((column) => (
+            {columns.map((column, index) => (
                 <div className={clsx(styles.column, layoutToStyleMap[layout])} key={column.key}>
-                    <ColumnsContentBlock data={column.props} />
+                    <FadeBoxInOnScroll delay={300 * index}>
+                        <ColumnsContentBlock data={column.props} />
+                    </FadeBoxInOnScroll>
                 </div>
             ))}
         </PageLayout>
