@@ -3,15 +3,15 @@ import { Migration } from "@mikro-orm/migrations";
 export class Migration20241204114353 extends Migration {
     async up(): Promise<void> {
         this.addSql(
-            'create table "Footer" ("id" uuid not null, "content" json not null, "scope_domain" text not null, "scope_language" text not null, "createdAt" timestamptz(0) not null, "updatedAt" timestamptz(0) not null, constraint "Footer_pkey" primary key ("id"));',
+            'create table "Footer" ("id" uuid not null, "content" json not null, "scope_domain" text not null, "scope_language" text not null, "createdAt" timestamptz not null, "updatedAt" timestamptz not null, constraint "Footer_pkey" primary key ("id"));',
         );
 
         this.addSql(
-            'create table "Link" ("id" uuid not null, "content" json not null, "createdAt" timestamptz(0) not null, "updatedAt" timestamptz(0) not null, constraint "Link_pkey" primary key ("id"));',
+            'create table "Link" ("id" uuid not null, "content" json not null, "createdAt" timestamptz not null, "updatedAt" timestamptz not null, constraint "Link_pkey" primary key ("id"));',
         );
 
         this.addSql(
-            'create table "Page" ("id" uuid not null, "content" json not null, "seo" json not null, "stage" json not null, "createdAt" timestamptz(0) not null, "updatedAt" timestamptz(0) not null, constraint "Page_pkey" primary key ("id"));',
+            'create table "Page" ("id" uuid not null, "content" json not null, "seo" json not null, "stage" json not null, "createdAt" timestamptz not null, "updatedAt" timestamptz not null, constraint "Page_pkey" primary key ("id"));',
         );
 
         this.addSql(
