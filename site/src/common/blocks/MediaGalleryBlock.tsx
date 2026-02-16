@@ -6,7 +6,7 @@ import { type MediaGalleryBlockData } from "@src/blocks.generated";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { Typography } from "@src/common/components/Typography";
 import { PageLayout } from "@src/layout/PageLayout";
-import { FadeBoxInOnScroll } from "@src/util/FadeBoxInOnScroll";
+import { FadeBoxInOnScroll } from "@src/util/animations/FadeBoxInOnScroll";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";

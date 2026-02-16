@@ -5,7 +5,7 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { FadeBoxInOnScroll } from "@src/util/FadeBoxInOnScroll";
+import { FadeBoxInOnScroll } from "@src/util/animations/FadeBoxInOnScroll";
 
 import styles from "./BillboardTeaserBlock.module.scss";
 

@@ -9,7 +9,7 @@ import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBloc
 import { StandaloneMediaBlock } from "@src/common/blocks/StandaloneMediaBlock";
 import { StandaloneRichTextBlock } from "@src/common/blocks/StandaloneRichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { FadeBoxInOnScroll } from "@src/util/FadeBoxInOnScroll";
+import { FadeBoxInOnScroll } from "@src/util/animations/FadeBoxInOnScroll";
 import clsx from "clsx";
 
 import styles from "./ColumnsBlock.module.scss";

@@ -6,7 +6,7 @@ import { HeadingBlock } from "@src/common/blocks/HeadingBlock";
 import { MediaBlock } from "@src/common/blocks/MediaBlock";
 import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { PageLayout } from "@src/layout/PageLayout";
-import { FadeBoxInOnLoad } from "@src/util/FadeBoxInOnLoad";
+import { FadeBoxInOnLoad } from "@src/util/animations/FadeBoxInOnLoad";
 
 import styles from "./BasicStageBlock.module.scss";
 

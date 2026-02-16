@@ -1,8 +1,8 @@
 "use client";
 
 import { usePreview } from "@comet/site-nextjs";
-import { useFadeGroup } from "@src/util/FadeGroup";
-import { useGlobalScrollSpeed } from "@src/util/useGlobalScrollSpeed";
+import { useFadeGroup } from "@src/util/animations/FadeGroup";
+import { useGlobalScrollSpeed } from "@src/util/animations/useGlobalScrollSpeed";
 import { useWindowSize } from "@src/util/useWindowSize";
 import clsx from "clsx";
 import { type ReactElement, useEffect, useRef, useState } from "react";
