@@ -5,6 +5,7 @@ export default defineConfig({
     plugins: [tsconfigPaths()],
     test: {
         setupFiles: ["./vitest.setup.ts"],
+        reporters: ["default", "junit"],
         outputFile: { junit: "./junit.xml" },
     },
 });
