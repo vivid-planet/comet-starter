@@ -21,7 +21,7 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 ### Development
 
 ```bash
-nvm use                          # Use Node version from .nvmrc
+nvm install                      # Install and use Node version from .nvmrc (use instead of nvm use to avoid "not installed" errors)
 npm run dev                      # Start all services via dev-pm
 npx dev-pm status                # Show service status
 npx dev-pm logs <service>        # Tail service logs
