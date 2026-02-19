@@ -34,7 +34,7 @@
         "@opentelemetry/sdk-node": "^0.211.0",
         "clsx": "^2.1.1",
         "graphql": "^16.12.0",
-        "ioredis": "^5.9.2",
+        "ioredis": "^5.9.3",
         "lru-cache": "^11.2.5",
         "next": "^14.2.33",
         "react": "^18.3.1",
