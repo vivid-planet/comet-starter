@@ -15,13 +15,13 @@ npx @comet/create-app <project-name>
 
 The following arguments can be passed to customize the project setup:
 
--   `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
--   `-ni` or `--no-install`: Disables the automatic installation of dependencies.
--   `-r` or `--repository <repository>`: Repository to clone from. Defaults to `https://github.com/vivid-planet/comet-starter.git`.
--   `-b` or `--branch <branch>`: Branch to checkout. Defaults to `main`.
--   `-v` or `--verbose`: Enables extra console logs for verbose output.
--   `-V` or `--version`: Outputs the version number.
--   `-h` or `--help`: Display help for the command.
+- `project-name` (required): Specifies the name of the project. It will be used as the directory name for the project.
+- `--no-install`: Disables the automatic installation of dependencies.
+- `--repository <repository>`: Repository to clone from. Defaults to `https://github.com/vivid-planet/comet-starter.git`.
+- `--branch <branch>`: Branch to checkout. Defaults to `main`.
+- `--verbose` or `-v`: Enables extra console logs for verbose output.
+- `--version` or `-V`: Outputs the version number.
+- `--help` or `-h`: Display help for the command.
 
 #### Example usage with arguments
 
@@ -41,7 +41,7 @@ npx @comet/create-app my-project -r https://github.com/my-company/comet-starter.
 
 The following commands can be used to customize the project setup:
 
--   `remove-site`: Removes the site from the project.
+- `remove-site`: Removes the site from the project.
 
 Example usage:
 

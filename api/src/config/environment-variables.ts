@@ -1,9 +1,12 @@
-import { BlobStorageConfig } from "@comet/cms-api";
+import { BlobStorageConfig, IsUndefinable } from "@comet/cms-api";
 import { PrivateSiteConfig } from "@src/site-configs";
 import { Transform, Type } from "class-transformer";
-import { IsArray, IsBoolean, IsEmail, IsFQDN, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
+import { IsArray, IsBoolean, IsEmail, IsFQDN, IsIn, IsInt, IsOptional, IsString, MinLength, ValidateIf } from "class-validator";
 
 export class EnvironmentVariables {
+    @IsIn(["development", "production", "test"])
+    NODE_ENV: "development" | "production" | "test";
+
     @IsString()
     POSTGRESQL_HOST: string;
 
@@ -23,9 +26,8 @@ export class EnvironmentVariables {
     @IsString()
     POSTGRESQL_DB: string;
 
-    @IsOptional()
     @IsString()
-    POSTGRESQL_USER?: string;
+    POSTGRESQL_USER: string;
 
     @IsString()
     POSTGRESQL_PASSWORD: string;
@@ -33,30 +35,27 @@ export class EnvironmentVariables {
     @IsString()
     API_URL: string;
 
-    @IsOptional()
-    @IsBoolean()
-    @Transform(({ value }) => value === "true")
-    USE_AUTHPROXY: boolean;
-
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
+    @MinLength(16)
     BASIC_AUTH_SYSTEM_USER_PASSWORD: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
     IDP_CLIENT_ID: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
     IDP_JWKS_URI: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
-    IDP_END_SESSION_ENDPOINT: string;
+    @IsOptional()
+    IDP_END_SESSION_ENDPOINT?: string;
 
     @IsString()
-    @ValidateIf((v) => v.USE_AUTHPROXY === "true")
-    POST_LOGOUT_REDIRECT_URI: string;
+    @IsOptional()
+    POST_LOGOUT_REDIRECT_URI?: string;
+
+    @IsString()
+    @IsUndefinable()
+    SERVER_HOST?: string;
 
     @Type(() => Number)
     @IsInt()
@@ -81,38 +80,38 @@ export class EnvironmentVariables {
     @IsString()
     BLOB_STORAGE_DRIVER: BlobStorageConfig["backend"]["driver"];
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "file")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "file")
     @IsString()
     FILE_STORAGE_PATH: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "azure")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "azure")
     @IsString()
     AZURE_ACCOUNT_NAME: string;
 
-    @ValidateIf((v) => v.BLOB_STORAGE_DRIVER === "azure")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "azure")
     @IsString()
     AZURE_ACCOUNT_KEY: string;
 
     @IsString()
     BLOB_STORAGE_DIRECTORY_PREFIX: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_REGION: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ENDPOINT: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_BUCKET: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_ACCESS_KEY_ID: string;
 
-    @ValidateIf((v) => v.DAM_STORAGE_DRIVER === "s3")
+    @ValidateIf((variables: EnvironmentVariables) => variables.BLOB_STORAGE_DRIVER === "s3")
     @IsString()
     S3_SECRET_ACCESS_KEY: string;
 

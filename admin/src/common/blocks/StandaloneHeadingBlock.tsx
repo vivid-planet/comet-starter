@@ -13,12 +13,14 @@ export const StandaloneHeadingBlock = createCompositeBlock(
             },
             textAlignment: {
                 block: createCompositeBlockSelectField<StandaloneHeadingBlockData["textAlignment"]>({
+                    label: <FormattedMessage id="standaloneHeading.textAlignment" defaultMessage="Text alignment" />,
+                    fullWidth: true,
                     defaultValue: "left",
                     options: [
                         { value: "left", label: <FormattedMessage id="standaloneHeading.textAlignment.left" defaultMessage="left" /> },
                         { value: "center", label: <FormattedMessage id="standaloneHeading.textAlignment.center" defaultMessage="center" /> },
                     ],
-                    fieldProps: { label: <FormattedMessage id="standaloneHeading.textAlignment" defaultMessage="Text alignment" />, fullWidth: true },
+                    required: true,
                 }),
             },
         },

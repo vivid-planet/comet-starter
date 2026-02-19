@@ -13,6 +13,6 @@ export class MenusResolver {
     mainMenu(@Args("scope", { type: () => PageTreeNodeScope }) scope: PageTreeNodeScope): Promise<PageTreeNodeInterface[]> {
         return this.pageTreeService
             .createReadApi({ visibility: [PageTreeNodeVisibility.Published] })
-            .pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.MainNavigation, excludeHiddenInMenu: true });
+            .pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.mainNavigation, excludeHiddenInMenu: true });
     }
 }

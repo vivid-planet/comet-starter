@@ -5,14 +5,17 @@ import {
     BlocksTransformerMiddlewareFactory,
     DamModule,
     DependenciesModule,
+    ImgproxyModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
+    WarningsModule,
 } from "@comet/cms-api";
 import { ApolloDriver, ApolloDriverConfig, ValidationError } from "@nestjs/apollo";
 import { DynamicModule, Module } from "@nestjs/common";
 import { ModuleRef } from "@nestjs/core";
 import { Enhancer, GraphQLModule } from "@nestjs/graphql";
+import { AppPermission } from "@src/auth/app-permission.enum";
 import { DbModule } from "@src/db/db.module";
 import { Link } from "@src/documents/links/entities/link.entity";
 import { LinksModule } from "@src/documents/links/links.module";
@@ -27,7 +30,7 @@ import { Request } from "express";
 
 import { AccessControlService } from "./auth/access-control.service";
 import { AuthModule, SYSTEM_USER_NAME } from "./auth/auth.module";
-import { UserService } from "./auth/user.service";
+import { StaticUsersUserService } from "./auth/static-users.user.service";
 import { Config } from "./config/config";
 import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
@@ -49,9 +52,11 @@ export class AppModule {
                     imports: [BlocksModule],
                     useFactory: (moduleRef: ModuleRef) => ({
                         debug: config.debug,
-                        playground: config.debug,
+                        graphiql: config.debug ? { url: "/api/graphql" } : undefined,
+                        playground: false,
                         // Prevents writing the schema.gql file in production. Necessary for environments with a read-only file system
                         autoSchemaFile: process.env.NODE_ENV === "development" ? "schema.gql" : true,
+                        sortSchema: true,
                         formatError: (error) => {
                             // Disable GraphQL field suggestions in production
                             if (!config.debug) {
@@ -80,19 +85,23 @@ export class AppModule {
                 }),
                 authModule,
                 UserPermissionsModule.forRootAsync({
-                    useFactory: (userService: UserService, accessControlService: AccessControlService) => ({
+                    useFactory: (userService: StaticUsersUserService, accessControlService: AccessControlService) => ({
                         availableContentScopes: config.siteConfigs.flatMap((siteConfig) =>
                             siteConfig.scope.languages.map((language) => ({
-                                domain: siteConfig.scope.domain,
-                                language,
+                                scope: {
+                                    domain: siteConfig.scope.domain,
+                                    language,
+                                },
+                                label: { domain: siteConfig.name, language: language.toUpperCase() },
                             })),
                         ),
                         userService,
                         accessControlService,
                         systemUsers: [SYSTEM_USER_NAME],
                     }),
-                    inject: [UserService, AccessControlService],
+                    inject: [StaticUsersUserService, AccessControlService], // TODO Implement correct UserService and remove convertJwtToUser in AuthModule
                     imports: [authModule],
+                    AppPermission,
                 }),
                 BlocksModule,
                 LinksModule,
@@ -106,25 +115,26 @@ export class AppModule {
                 RedirectsModule.register({ Scope: RedirectScope }),
                 BlobStorageModule.register({
                     backend: config.blob.storage,
+                    cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                 }),
+                ImgproxyModule.register(config.imgproxy),
                 DamModule.register({
                     File: DamFile,
                     Folder: DamFolder,
                     damConfig: {
-                        apiUrl: config.apiUrl,
                         secret: config.dam.secret,
                         allowedImageSizes: config.dam.allowedImageSizes,
                         allowedAspectRatios: config.dam.allowedImageAspectRatios,
                         filesDirectory: `${config.blob.storageDirectoryPrefix}-files`,
-                        cacheDirectory: `${config.blob.storageDirectoryPrefix}-cache`,
                         maxFileSize: config.dam.uploadsMaxFileSize,
+                        maxSrcResolution: config.dam.maxSrcResolution,
                     },
-                    imgproxyConfig: config.imgproxy,
                 }),
                 StatusModule,
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                WarningsModule,
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({

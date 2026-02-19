@@ -1,4 +1,4 @@
-import { gql } from "@comet/cms-site";
+import { gql } from "@comet/site-nextjs";
 
 export const mobileMenuFragment = gql`
     fragment MobileMenu on PageTreeNode {

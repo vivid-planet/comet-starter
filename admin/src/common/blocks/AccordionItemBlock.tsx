@@ -5,6 +5,7 @@ import {
     createBlocksBlock,
     createCompositeBlock,
     createCompositeBlockField,
+    createCompositeBlockSelectField,
     createCompositeBlockTextField,
 } from "@comet/cms-admin";
 import { type AccordionItemBlockData } from "@src/blocks.generated";
@@ -31,7 +32,20 @@ export const AccordionItemBlock = createCompositeBlock(
         blocks: {
             title: {
                 block: createCompositeBlockTextField({
-                    fieldProps: { fullWidth: true, label: <FormattedMessage id="accordionBlock.accordionItem.title" defaultMessage="Title" /> },
+                    label: <FormattedMessage id="accordionBlock.accordionItem.title" defaultMessage="Title" />,
+                    fullWidth: true,
+                }),
+                hiddenInSubroute: true,
+            },
+            titleHtmlTag: {
+                block: createCompositeBlockSelectField<AccordionItemBlockData["titleHtmlTag"]>({
+                    label: <FormattedMessage id="accordionItem.titleHtmlTag" defaultMessage="Title HTML tag" />,
+                    defaultValue: "h3",
+                    options: ([1, 2, 3, 4, 5, 6] as const).map((level) => ({
+                        value: `h${level}`,
+                        label: <FormattedMessage id="accordionItem.headline" defaultMessage="Headline {level}" values={{ level }} />,
+                    })),
+                    required: true,
                 }),
                 hiddenInSubroute: true,
             },

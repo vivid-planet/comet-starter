@@ -3,18 +3,21 @@ on:
   push:
     branches:
       - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   update-deployment:
     name: Update DigitalOcean Deployment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
-      - name: Setup Node.js 22.x
-        uses: actions/setup-node@v4
+      - name: Setup Node.js 24.x
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
 
       - name: Install dependencies
         run: npm install

@@ -1,6 +1,6 @@
 {
     "name": "@comet/create-app",
-    "version": "1.77.0",
+    "version": "1.164.0",
     "description": "Command-line interface to create a new Comet application",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
     "bugs": {
@@ -22,32 +22,35 @@
         "prebuild": "npm run clean",
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
-        "lint": "run-p lint:prettier lint:eslint lint:tsc",
+        "lint": "run-p -l lint:{eslint,knip,prettier,tsc}",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
-        "lint:prettier": "npx prettier --check './**/*.{js,json,md,yml,yaml}'",
+        "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
+        "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
         "prepublishOnly": "npm run lint && npm run build",
         "prestart": "npm run clean",
         "start": "tsc --watch --project tsconfig.json"
     },
     "dependencies": {
-        "commander": "^12.1.0",
-        "eslint": "^8.57.1",
-        "glob": "^11.0.1",
+        "commander": "^14.0.3",
+        "eslint": "^9.39.2",
+        "glob": "^13.0.3",
         "kleur": "^4.1.5",
         "nanospinner": "^1.2.2",
-        "rimraf": "^6.0.1"
+        "rimraf": "^6.1.3"
     },
     "devDependencies": {
-        "@comet/eslint-config": "^7.15.0",
-        "@comet/eslint-plugin": "^7.15.0",
-        "@cspell/eslint-plugin": "^8.17.5",
-        "@tsconfig/node20": "^20.1.4",
-        "@types/node": "^22.13.9",
-        "cspell": "^8.17.5",
-        "npm-run-all2": "^7.0.2",
-        "prettier": "^2.8.8",
-        "typescript": "5.8.2"
+        "@comet/eslint-config": "^8.14.0",
+        "@cspell/eslint-plugin": "^9.6.4",
+        "@tsconfig/node24": "^24.0.4",
+        "@types/node": "^24.10.12",
+        "knip": "^5.83.1",
+        "npm-run-all2": "^8.0.4",
+        "prettier": "^3.8.1",
+        "typescript": "^5.9.3"
+    },
+    "engines": {
+        "node": "24"
     },
     "publishConfig": {
         "access": "public",

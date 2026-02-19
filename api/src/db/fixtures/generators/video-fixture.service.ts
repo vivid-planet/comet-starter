@@ -1,0 +1,37 @@
+import { createFileUploadInputFromUrl, FileInterface, FilesService } from "@comet/cms-api";
+import { faker } from "@faker-js/faker";
+import { EntityManager } from "@mikro-orm/postgresql";
+import { Injectable } from "@nestjs/common";
+import * as fs from "fs/promises";
+import path from "path";
+
+@Injectable()
+export class VideoFixtureService {
+    private videoFiles: FileInterface[] = [];
+
+    constructor(
+        private readonly entityManager: EntityManager,
+        private readonly filesService: FilesService,
+    ) {}
+
+    public getRandomVideo() {
+        const randomIndex = faker.number.int({
+            min: 0,
+            max: this.videoFiles.length - 1,
+        });
+
+        return this.videoFiles[randomIndex];
+    }
+
+    public async generateVideos(): Promise<void> {
+        const videoDirectoryPath = "./src/db/fixtures/assets/videos";
+        const files = await fs.readdir(path.resolve(videoDirectoryPath));
+
+        for (const video of files) {
+            const file = await createFileUploadInputFromUrl(path.resolve(`${videoDirectoryPath}/${video}`));
+            this.videoFiles.push(await this.filesService.upload(file, {}));
+        }
+
+        await this.entityManager.flush();
+    }
+}
