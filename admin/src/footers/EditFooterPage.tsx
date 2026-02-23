@@ -30,7 +30,7 @@ import {
     namedOperations,
 } from "./EditFooterPage.generated";
 
-export function EditFooterPage(): JSX.Element | null {
+export function EditFooterPage() {
     const { scope } = useContentScope();
     const siteConfig = useSiteConfig({ scope });
     const [footerState, setFooterState] = useState<BlockState<typeof FooterContentBlock>>(FooterContentBlock.defaultValues());
