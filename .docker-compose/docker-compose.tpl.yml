@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v3.3"
+    image: "traefik:v3.6"
     container_name: "traefik"
     restart: "on-failure"
     command:
@@ -8,6 +8,9 @@ services:
       - "--accessLog=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false" # services need to be exposed by setting traefik.enable=true
+      - "--entryPoints.web.address=:80"
+      - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
       - "--entryPoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory" # used for cert debugging
@@ -30,6 +33,7 @@ services:
       IMGPROXY_USE_S3: "true"
       IMGPROXY_S3_REGION: fra1
       IMGPROXY_S3_ENDPOINT: https://comet-starter.fra1.digitaloceanspaces.com
+    env_file: "imgproxy.secrets.env"
 
   oauthproxy:
     image: "dkarnutsch/oauth2-proxy:latest"
@@ -37,27 +41,34 @@ services:
     ports:
       - 4180:4180
     environment:
-      OAUTH2_PROXY_API_ROUTES: "/api"
-      OAUTH2_PROXY_CODE_CHALLENGE_METHOD: "S256"
-      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
-      OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
-      OAUTH2_PROXY_COOKIE_SECURE: "true"
-      OAUTH2_PROXY_COOKIE_SAMESITE: "lax"
-      OAUTH2_PROXY_COOKIE_HTTPONLY: "true"
-      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
-      OAUTH2_PROXY_SILENCE_PING_LOGGING_true: "true"
-      OAUTH2_PROXY_REQUEST_LOGGING: "true"
-      OAUTH2_PROXY_AUTH_LOGGING: "true"
-      OAUTH2_PROXY_COOKIE_REFRESH: "23h"
-      OAUTH2_PROXY_EMAIL_DOMAINS: "*"
       OAUTH2_PROXY_CLIENT_ID: "59e44de5-0431-4413-b50b-7e52740a6d7b"
-      OAUTH2_PROXY_PROVIDER: "oidc"
+      # Provider
+      OAUTH2_PROXY_CODE_CHALLENGE_METHOD: "S256"
       OAUTH2_PROXY_OIDC_ISSUER_URL: "https://auth-sso.vivid-planet.cloud"
-      OAUTH2_PROXY_UPSTREAMS: "http://admin:3000,http://api:4000/api/"
-      OAUTH2_PROXY_WHITELIST_DOMAIN: "auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_PROVIDER: "oidc"
       OAUTH2_PROXY_SCOPE: "openid profile email offline_access"
-      OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180"
+      # Cookie
+      OAUTH2_PROXY_COOKIE_SAMESITE: "lax"
+      OAUTH2_PROXY_COOKIE_REFRESH: "55m"
+      # Header
+      OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
+      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
+      # Logging
+      OAUTH2_PROXY_AUTH_LOGGING: "true"
+      OAUTH2_PROXY_REQUEST_LOGGING: "false"
+      OAUTH2_PROXY_SILENCE_PING_LOGGING_true: "true"
+      OAUTH2_PROXY_STANDARD_LOGGING: "false"
+      # Proxy
+      OAUTH2_PROXY_API_ROUTES: "/api"
+      OAUTH2_PROXY_EMAIL_DOMAINS: "*"
       OAUTH2_PROXY_SKIP_AUTH_PREFLIGHT: "true"
+      OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/api)?/status/"
+      OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS: "true"
+      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+      OAUTH2_PROXY_WHITELIST_DOMAIN: "auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180" # allow access from outside the container
+      # Upstrean
+      OAUTH2_PROXY_UPSTREAMS: "http://admin:3000,http://api:4000/api/"
       # OAUTH2_PROXY_SHOW_DEBUG_ON_ERROR: "true"
     env_file: "oauthproxy.secrets.env"
     labels:
@@ -76,6 +87,7 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
+      SERVER_HOST: "0.0.0.0"
       POSTGRESQL_HOST: db-postgresql-fra1-74967-do-user-15310175-0.l.db.ondigitalocean.com
       POSTGRESQL_PORT: "25060"
       POSTGRESQL_DB: db_starter
@@ -149,6 +161,7 @@ services:
     restart: "on-failure"
     environment:
       NODE_ENV: production
+      SERVER_HOST: "0.0.0.0"
       ADMIN_URL: https://admin.docker.comet-dxp.com/
       NEXT_PUBLIC_API_URL: "TODO"
       API_URL_INTERNAL: http://api:4000/api
@@ -160,3 +173,10 @@ services:
       - "traefik.http.routers.site.entrypoints=websecure"
       - "traefik.http.routers.site.tls.certresolver=myresolver"
       - "traefik.http.services.site.loadbalancer.server.port=3000"
+      - "traefik.http.routers.site-http.rule=Host(`docker.comet-dxp.com`)"
+      - "traefik.http.routers.site-http.entrypoints=web"
+      - "traefik.http.routers.site-http.middlewares=site-redirect"
+      - "traefik.http.middlewares.site-redirect.redirectscheme.scheme=https"
+      # Add for prelogin (see https://doc.traefik.io/traefik/middlewares/http/basicauth/), e.g. comet/dxp
+      #- "traefik.http.routers.site.middlewares=prelogin"
+      #- "traefik.http.middlewares.prelogin.basicauth.users=comet:$$2y$$05$$KJPz7pyKVP66qQXipRSHZeidw44PBDep06r7P.ve6afvzfl1Td.t2"

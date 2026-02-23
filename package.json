@@ -4,11 +4,15 @@
     "scripts": {
         "create-site-configs-env": "npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs --base64",
         "dev": "npm run create-site-configs-env && dev-pm start",
-        "copy-schema-files": "node copy-schema-files.js",
-        "lint": "run-p lint:*",
-        "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}' && npx cspell '**'",
-        "lint:api": "npm --prefix api run lint",
+        "dev:auth-proxy": "dotenv -- ./node_modules/.bin/oauth2-proxy --cookie-secret=$(head -c 16 /dev/random | base64)",
+        "dev:auth-provider": "dotenv -- dev-oidc-provider",
+        "setup-project-files": "node setup-project-files.js",
+        "lint": "run-p -l lint:{admin,api,create-app,root,site}",
         "lint:admin": "npm --prefix admin run lint",
+        "lint:api": "npm --prefix api run lint",
+        "lint:ci": "npm run lint:root",
+        "lint:create-app": "npm --prefix api run lint",
+        "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}' && npx cspell '**'",
         "lint:site": "npm --prefix site run lint",
         "test:ci": "run-p test:ci:*",
         "test:ci:api": "npm --prefix api run test:ci",
@@ -21,23 +25,26 @@
         "browser:api": "dotenv -- sh -c 'open-cli $API_URL/graphql'",
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
-        "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'"
+        "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
+        "setup:ci": "npm run setup-project-files",
+        "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
-        "@comet/cli": "8.0.0-beta.1",
-        "@comet/dev-process-manager": "^2.7.0",
-        "cspell": "^8.17.5",
-        "dotenv-cli": "^7.4.4",
+        "@comet/cli": "8.14.0",
+        "@comet/dev-oidc-provider": "^1.2.1",
+        "@comet/dev-process-manager": "^3.0.0",
+        "cspell": "^9.6.4",
+        "dotenv-cli": "^11.0.0",
         "husky": "^9.1.7",
-        "knip": "^5.45.0",
-        "lint-staged": "^15.4.3",
-        "npm-run-all2": "^7.0.2",
+        "knip": "^5.83.1",
+        "lint-staged": "^16.2.7",
+        "npm-run-all2": "^8.0.4",
         "open-cli": "^8.0.0",
-        "prettier": "^3.4.2",
+        "prettier": "^3.8.1",
         "ts-node": "^10.9.2",
-        "typescript": "5.8.2"
+        "typescript": "^5.9.3"
     },
     "engines": {
-        "node": "22"
+        "node": "24"
     }
 }
