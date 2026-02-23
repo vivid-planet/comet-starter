@@ -2,7 +2,7 @@
     "name": "starter-site",
     "private": true,
     "scripts": {
-        "build": "npm run intl:compile && run-p gql:types generate-block-types css:types && tsc --project tsconfig.server.json && next build",
+        "build": "npm run intl:compile && run-p gql:types generate-block-types css:types && tsc --project tsconfig.server.json && next build --webpack",
         "check-node-version": "check-node-version --node $(cat ../.nvmrc)",
         "css:types": "typed-scss-modules src --nameFormat none --exportType default --aliasPrefixes.@src src",
         "css:types:watch": "npm run css:types -- --watch",
