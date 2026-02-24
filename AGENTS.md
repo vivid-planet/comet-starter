@@ -2,6 +2,16 @@
 
 This file provides guidance to AI agents (Copilot, Cursor, Claude) when working with code in this repository.
 
+## Keeping This File Up to Date
+
+When making changes that affect project structure, commands, architecture, ports, conventions, or configuration, update the relevant section of this file to reflect the new state. This includes:
+
+- Adding or removing packages/services
+- Changing commands or scripts
+- Introducing new patterns or conventions
+- Modifying ports, environment files, or Docker services
+- Updating tooling or linting configuration
+
 ## Project Overview
 
 This is a monorepo containing a Comet DXP project. It contains three main packages:
