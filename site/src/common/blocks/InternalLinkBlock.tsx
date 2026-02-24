@@ -2,16 +2,15 @@
 import { type PropsWithData } from "@comet/site-nextjs";
 import { type InternalLinkBlockData } from "@src/blocks.generated";
 import Link from "next/link";
-import { type PropsWithChildren } from "react";
+import { type AnchorHTMLAttributes, type PropsWithChildren } from "react";
 
-interface InternalLinkBlockProps extends PropsWithChildren<PropsWithData<InternalLinkBlockData>> {
-    title?: string;
-    className?: string;
-}
+interface InternalLinkBlockProps
+    extends PropsWithChildren<PropsWithData<InternalLinkBlockData>>,
+        Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {}
 
-export function InternalLinkBlock({ data: { targetPage, targetPageAnchor }, children, title, className }: InternalLinkBlockProps) {
+export function InternalLinkBlock({ data: { targetPage, targetPageAnchor }, children, ...anchorProps }: InternalLinkBlockProps) {
     if (!targetPage) {
-        return <span className={className}>{children}</span>;
+        return <span className={anchorProps.className}>{children}</span>;
     }
 
     let href = targetPageAnchor !== undefined ? `${targetPage.path}#${targetPageAnchor}` : targetPage.path;
@@ -23,7 +22,7 @@ export function InternalLinkBlock({ data: { targetPage, targetPageAnchor }, chil
     }
 
     return (
-        <Link href={href} title={title} className={className}>
+        <Link {...anchorProps} href={href}>
             {children}
         </Link>
     );
