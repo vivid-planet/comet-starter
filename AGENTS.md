@@ -12,16 +12,19 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 
 ## Common Commands
 
+**Important:** Always use the correct Node version before executing any npm command or ./install.sh. Run `nvm use` in the project root to do so.
+
 ### Setup
 
 ```bash
 ./install.sh                     # Full installation
 ```
 
+Use `./install.sh` instead of `npm install` whenever you add, remove, or update dependencies in any `package.json` file.
+
 ### Development
 
 ```bash
-nvm use                          # Use Node version from .nvmrc
 npm run dev                      # Start all services via dev-pm
 npx dev-pm status                # Show service status
 npx dev-pm logs <service>        # Tail service logs
