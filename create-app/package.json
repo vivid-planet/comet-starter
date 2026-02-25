@@ -23,7 +23,7 @@
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
         "lint": "run-p -l lint:{eslint,knip,prettier,tsc}",
-        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json --max-warnings 0 src/",
+        "lint:eslint": "eslint --max-warnings 0 src/ \"**/*.json\" --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
