@@ -5,7 +5,7 @@ import cspellRecommended from "@cspell/eslint-plugin/recommended";
 /** @type {import('eslint')} */
 const config = [
     {
-        ignores: ["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**", "block-meta.json"],
+        ignores: ["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**", "block-meta.json", "package-lock.json"],
     },
     ...eslintConfigNextJs,
     {
