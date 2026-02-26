@@ -15,7 +15,6 @@
     "author": "Vivid Planet Software GmbH <office@vivid-planet.com> (https://www.vivid-planet.com/)",
     "bin": "./bin/index.js",
     "files": [
-        "bin/index.js",
         "lib/**/*.js"
     ],
     "scripts": {
