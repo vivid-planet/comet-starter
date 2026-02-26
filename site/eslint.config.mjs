@@ -1,12 +1,10 @@
 import eslintConfigNextJs from "@comet/eslint-config/nextjs.js";
 import cspellPlugin from "@cspell/eslint-plugin";
 import cspellRecommended from "@cspell/eslint-plugin/recommended";
+import { defineConfig, globalIgnores } from "eslint/config";
 
-/** @type {import('eslint')} */
-const config = [
-    {
-        ignores: ["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**"],
-    },
+const config = defineConfig([
+    globalIgnores(["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**"]),
     ...eslintConfigNextJs,
     {
         plugins: {
@@ -14,6 +12,6 @@ const config = [
         },
         ...cspellRecommended,
     },
-];
+]);
 
 export default config;
