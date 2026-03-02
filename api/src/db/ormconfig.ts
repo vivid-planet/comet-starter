@@ -1,5 +1,5 @@
 import { createMigrationsList, createOrmConfig } from "@comet/cms-api";
-import { EntityCaseNamingStrategy } from "@mikro-orm/core";
+import { DataloaderType, EntityCaseNamingStrategy } from "@mikro-orm/core";
 import { defineConfig } from "@mikro-orm/postgresql";
 import path from "path";
 
@@ -24,5 +24,6 @@ export const ormConfig = createOrmConfig(
             dropTables: false,
             snapshot: false,
         },
+        dataloader: DataloaderType.ALL,
     }),
 );

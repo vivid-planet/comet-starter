@@ -18,7 +18,7 @@ function buildTree(nodes: PageTreeNode[], parentId = "root"): PageTreeNodeWithCh
         }));
 }
 
-function renderTree(nodes: PageTreeNodeWithChildren[]): JSX.Element {
+function renderTree(nodes: PageTreeNodeWithChildren[]) {
     return (
         <ul className={styles.list}>
             {nodes.map((node) => (

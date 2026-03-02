@@ -6,8 +6,8 @@
     },
     "compilerOptions": {
         "target": "ESNext",
-        "module": "ESNext",
-        "moduleResolution": "Node",
+        "module": "preserve",
+        "moduleResolution": "bundler",
         "strict": true,
         "jsx": "react-jsx",
         "jsxImportSource": "@emotion/react",
