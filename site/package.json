@@ -16,7 +16,7 @@
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types css:types",
         "lint": "run-p -l lint:{eslint,knip,prettier,style,tsc} intl:extract",
         "lint:ci": "npm run lint",
-        "lint:eslint": "eslint --max-warnings 0 src/ **/*.json --no-warn-ignored",
+        "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml,css,scss}'",
         "lint:style": "npx stylelint '**/*.{css,scss}'",
