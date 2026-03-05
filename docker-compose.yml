@@ -45,20 +45,20 @@ services:
       COLLECTOR_OTLP_ENABLED: "true"
       COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
 
-  # redis:
-  #   image: redis:7
-  #   pull_policy: weekly
-  #   command: redis-server --maxmemory 256M --maxmemory-policy allkeys-lru --loglevel warning --requirepass ${REDIS_PASSWORD}
-  #   ports:
-  #     - "127.0.0.1:${REDIS_PORT}:6379"
-  #   networks:
-  #     - redis
+#  valkey:
+#    image: valkey/valkey:9
+#    pull_policy: weekly
+#    command: valkey-server --maxmemory 256M --maxmemory-policy allkeys-lru --loglevel warning --requirepass ${VALKEY_PASSWORD}
+#    ports:
+#      - "127.0.0.1:${VALKEY_PORT}:6379"
+#    networks:
+#      - valkey
 
 networks:
   postgres:
     driver: bridge
-  # redis:
-  #   driver: bridge
+#  valkey:
+#    driver: bridge
 
 volumes:
   postgres:
