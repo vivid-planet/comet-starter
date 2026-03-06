@@ -9,7 +9,10 @@ export function registerGetPageTreeNode(server: McpServer): void {
         "get_page_tree_node",
         {
             description: `Get a single page tree node by ID.
-Returns name, slug, path, visibility, documentType, children, parent info, and the attached document ID.`,
+Returns name, slug, path, visibility, documentType, children, parent info, and the attached document ID.
+
+IMPORTANT: This query only returns Published nodes. Unpublished or Archived nodes will result in an error.
+If you just created a node (which defaults to Unpublished), you cannot retrieve it with this tool until it is published.`,
             inputSchema: {
                 id: z.string().describe("The page tree node ID (UUID)"),
             },

@@ -20,7 +20,11 @@ Parameters:
 - category: e.g. "mainNavigation" (default)
 - hideInMenu: Whether to hide in navigation menus
 
-The mutation automatically creates the attached document (Page or Link) with the given type.`,
+The node is created with visibility "Unpublished" by default. Use update_page_tree_node_visibility to publish it.
+
+IMPORTANT: The attached document (Page or Link) is NOT created automatically by this mutation.
+To create the document, call save_page with a new UUID as pageId and pass this node's id as attachedPageTreeNodeId.
+The response will show document: null — this is expected.`,
             inputSchema: {
                 name: z.string().describe("Display name of the page"),
                 slug: z.string().describe("URL-safe slug"),

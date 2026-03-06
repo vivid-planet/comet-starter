@@ -5,7 +5,8 @@
     "type": "module",
     "scripts": {
         "gql:types": "graphql-codegen",
-        "build": "npm run gql:types && tsup",
+        "generate-block-types": "comet generate-block-types --output-file blocks.generated.ts",
+        "build": "run-s gql:types generate-block-types && tsup",
         "start": "node dist/index.js",
         "prelint": "npm run gql:types",
         "lint": "run-p -l lint:{eslint,prettier,tsc}",
@@ -20,6 +21,7 @@
         "zod": "^3.25.7"
     },
     "devDependencies": {
+        "@comet/cli": "8.17.1",
         "@comet/eslint-config": "8.17.1",
         "@cspell/eslint-plugin": "^9.6.4",
         "@graphql-codegen/cli": "^6.1.2",

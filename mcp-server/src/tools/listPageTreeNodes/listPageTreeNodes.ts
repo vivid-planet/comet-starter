@@ -11,7 +11,9 @@ export function registerListPageTreeNodes(server: McpServer): void {
         {
             description: `List all page tree nodes in a scope.
 Returns an array of nodes with id, name, slug, path, visibility, documentType, parentId, and category.
-Optional: filter by category (e.g. "mainNavigation") or documentType (e.g. "Page", "Link").`,
+Optional: filter by category (e.g. "mainNavigation") or documentType (e.g. "Page", "Link").
+
+IMPORTANT: This query only returns Published nodes. Newly created (Unpublished) or Archived nodes will not appear in the results.`,
             inputSchema: {
                 scope: scopeSchema,
                 category: z.string().optional().describe('Filter by category, e.g. "mainNavigation"'),

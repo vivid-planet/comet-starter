@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 import { registerBlockMetaResource } from "./resources/blockMeta/blockMeta";
+import { registerBlockTypesResource } from "./resources/blockTypes/blockTypes";
 import { registerCheckSlugAvailability } from "./tools/checkSlugAvailability/checkSlugAvailability";
 import { registerCreatePageTreeNode } from "./tools/createPageTreeNode/createPageTreeNode";
 import { registerDeletePageTreeNode } from "./tools/deletePageTreeNode/deletePageTreeNode";
@@ -46,6 +47,7 @@ registerDeletePageTreeNode(server);
 // ---------------------------------------------------------------------------
 
 registerBlockMetaResource(server);
+registerBlockTypesResource(server);
 
 // ---------------------------------------------------------------------------
 // Start server
