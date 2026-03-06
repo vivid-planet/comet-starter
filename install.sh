@@ -32,6 +32,8 @@ echo -e "\033[34m\nInstalling dependencies for api\033[0m"
 npm --prefix api install
 echo -e "\033[34m\nInstalling dependencies for site\033[0m"
 npm --prefix site install
+echo -e "\033[34m\nInstalling dependencies for mcp-server\033[0m"
+npm --prefix mcp-server install
 echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
 npm --prefix create-app install
 

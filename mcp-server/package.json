@@ -1,0 +1,37 @@
+{
+    "name": "comet-dxp-mcp-server",
+    "version": "1.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "gql:types": "graphql-codegen",
+        "build": "npm run gql:types && tsup",
+        "start": "node dist/index.js",
+        "prelint": "npm run gql:types",
+        "lint": "run-p -l lint:{eslint,prettier,tsc}",
+        "lint:eslint": "eslint --max-warnings 0 src/",
+        "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
+        "lint:tsc": "tsc --project ."
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.27.1",
+        "graphql": "^16.12.0",
+        "graphql-request": "^7.1.2",
+        "zod": "^3.25.7"
+    },
+    "devDependencies": {
+        "@comet/eslint-config": "8.17.1",
+        "@cspell/eslint-plugin": "^9.6.4",
+        "@graphql-codegen/cli": "^6.1.2",
+        "@graphql-codegen/near-operation-file-preset": "^3.0.1",
+        "@graphql-codegen/typed-document-node": "^6.0.0",
+        "@graphql-codegen/typescript": "^5.0.8",
+        "@graphql-codegen/typescript-operations": "^5.0.8",
+        "@parcel/watcher": "^2.5.1",
+        "eslint": "^9.39.3",
+        "npm-run-all2": "^8.0.4",
+        "tsup": "^8.5.1",
+        "prettier": "^3.8.1",
+        "typescript": "^5.9.3"
+    }
+}

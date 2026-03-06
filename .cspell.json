@@ -9,5 +9,5 @@
         }
     ],
     "dictionaries": ["cspellignore"],
-    "ignorePaths": ["node_modules", "/.cspellignore", "admin", "api", "create-app", "site", "/build-and-run-site.sh"]
+    "ignorePaths": ["node_modules", "/.cspellignore", "admin", "api", "create-app", "mcp-server", "site", "/build-and-run-site.sh", ".claude"]
 }

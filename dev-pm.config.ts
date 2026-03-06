@@ -60,6 +60,12 @@ export default defineConfig({
             waitOn: ["tcp:$SITE_PORT"],
         },
         {
+            name: "mcp-server",
+            script: "npm --prefix mcp-server run build && npm --prefix mcp-server run start",
+            group: "api",
+            waitOn: ["tcp:$API_PORT"],
+        },
+        {
             name: "auth-provider",
             script: "npm run dev:auth-provider",
             group: "login",

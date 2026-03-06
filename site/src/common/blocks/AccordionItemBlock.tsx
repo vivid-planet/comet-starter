@@ -4,11 +4,11 @@ import { RichTextBlock } from "@src/common/blocks/RichTextBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
 import { StandaloneCallToActionListBlock } from "@src/common/blocks/StandaloneCallToActionListBlock";
 import { StandaloneHeadingBlock } from "@src/common/blocks/StandaloneHeadingBlock";
+import { Typography } from "@src/common/components/Typography";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import clsx from "clsx";
 import { useId } from "react";
 
-import { Typography } from "../components/Typography";
 import styles from "./AccordionItemBlock.module.scss";
 
 const supportedBlocks: SupportedBlocks = {

@@ -24,11 +24,11 @@ const files = [
           ]),
     {
         file: "api/schema.gql",
-        targetDir: ["admin", "site"],
+        targetDir: ["admin", "site", "mcp-server"],
     },
     {
         file: "api/block-meta.json",
-        targetDir: ["admin", "site"],
+        targetDir: ["admin", "site", "mcp-server"],
     },
     {
         file: "api/src/comet-config.json",
