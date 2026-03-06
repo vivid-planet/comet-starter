@@ -19,28 +19,28 @@ interface LinkBlockProps extends PropsWithChildren<PropsWithData<LinkBlockData>>
 export const LinkBlock = withPreview(
     ({ data, children, ...anchorProps }: LinkBlockProps) => {
         const supportedBlocks: SupportedBlocks = {
-            internal: ({ children, className, ...props }) => (
-                <InternalLinkBlock data={props} className={className} {...anchorProps}>
+            internal: ({ children, ...props }) => (
+                <InternalLinkBlock data={props} {...anchorProps}>
                     {children}
                 </InternalLinkBlock>
             ),
-            external: ({ children, className, ...props }) => (
-                <ExternalLinkBlock data={props} className={className} {...anchorProps}>
+            external: ({ children, ...props }) => (
+                <ExternalLinkBlock data={props} {...anchorProps}>
                     {children}
                 </ExternalLinkBlock>
             ),
-            damFileDownload: ({ children, className, ...props }) => (
-                <DamFileDownloadLinkBlock data={props} className={className} {...anchorProps}>
+            damFileDownload: ({ children, ...props }) => (
+                <DamFileDownloadLinkBlock data={props} {...anchorProps}>
                     {children}
                 </DamFileDownloadLinkBlock>
             ),
-            email: ({ children, className, ...props }) => (
-                <EmailLinkBlock data={props} className={className} {...anchorProps}>
+            email: ({ children, ...props }) => (
+                <EmailLinkBlock data={props} {...anchorProps}>
                     {children}
                 </EmailLinkBlock>
             ),
-            phone: ({ children, className, ...props }) => (
-                <PhoneLinkBlock data={props} className={className} {...anchorProps}>
+            phone: ({ children, ...props }) => (
+                <PhoneLinkBlock data={props} {...anchorProps}>
                     {children}
                 </PhoneLinkBlock>
             ),
