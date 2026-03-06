@@ -17,37 +17,37 @@ import { InternalLinkBlock } from "./InternalLinkBlock";
 interface LinkBlockProps extends PropsWithChildren<PropsWithData<LinkBlockData>>, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {}
 
 export const LinkBlock = withPreview(
-    ({ data, children, className, ...anchorProps }: LinkBlockProps) => {
+    ({ data, children, ...anchorProps }: LinkBlockProps) => {
         const supportedBlocks: SupportedBlocks = {
-            internal: ({ children: blockChildren, className: blockClassName, ...props }) => (
-                <InternalLinkBlock data={props} className={blockClassName} {...anchorProps}>
-                    {blockChildren}
+            internal: ({ children, className, ...props }) => (
+                <InternalLinkBlock data={props} className={className} {...anchorProps}>
+                    {children}
                 </InternalLinkBlock>
             ),
-            external: ({ children: blockChildren, className: blockClassName, ...props }) => (
-                <ExternalLinkBlock data={props} className={blockClassName} {...anchorProps}>
-                    {blockChildren}
+            external: ({ children, className, ...props }) => (
+                <ExternalLinkBlock data={props} className={className} {...anchorProps}>
+                    {children}
                 </ExternalLinkBlock>
             ),
-            damFileDownload: ({ children: blockChildren, className: blockClassName, ...props }) => (
-                <DamFileDownloadLinkBlock data={props} className={blockClassName} {...anchorProps}>
-                    {blockChildren}
+            damFileDownload: ({ children, className, ...props }) => (
+                <DamFileDownloadLinkBlock data={props} className={className} {...anchorProps}>
+                    {children}
                 </DamFileDownloadLinkBlock>
             ),
-            email: ({ children: blockChildren, className: blockClassName, ...props }) => (
-                <EmailLinkBlock data={props} className={blockClassName} {...anchorProps}>
-                    {blockChildren}
+            email: ({ children, className, ...props }) => (
+                <EmailLinkBlock data={props} className={className} {...anchorProps}>
+                    {children}
                 </EmailLinkBlock>
             ),
-            phone: ({ children: blockChildren, className: blockClassName, ...props }) => (
-                <PhoneLinkBlock data={props} className={blockClassName} {...anchorProps}>
-                    {blockChildren}
+            phone: ({ children, className, ...props }) => (
+                <PhoneLinkBlock data={props} className={className} {...anchorProps}>
+                    {children}
                 </PhoneLinkBlock>
             ),
         };
 
         return (
-            <OneOfBlock data={data} supportedBlocks={supportedBlocks} className={className}>
+            <OneOfBlock data={data} supportedBlocks={supportedBlocks} {...anchorProps}>
                 {children}
             </OneOfBlock>
         );
