@@ -3,11 +3,6 @@ import { defineConfig } from "@comet/dev-process-manager";
 export default defineConfig({
     scripts: [
         {
-            name: "docker",
-            script: "docker compose up",
-            group: "api",
-        },
-        {
             name: "admin",
             script: "npm run --prefix admin start",
             group: "admin",
@@ -28,8 +23,7 @@ export default defineConfig({
         {
             name: "api",
             script: "npm --prefix api run start:dev",
-            group: "api",
-            waitOn: ["tcp:$POSTGRESQL_PORT", "tcp:$IMGPROXY_PORT"],
+            group: "api"
         },
         {
             name: "api-generator",
