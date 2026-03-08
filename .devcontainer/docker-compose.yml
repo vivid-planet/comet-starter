@@ -1,0 +1,50 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    environment:
+      POSTGRESQL_HOST: postgres
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_USER: postgres
+      POSTGRESQL_PASSWORD: vivid
+      POSTGRESQL_DB: main
+      IMGPROXY_PORT: 6080
+      DEV_DOMAIN: localhost
+      SERVER_HOST: 0.0.0.0
+    depends_on:
+      - postgres
+      - imgproxy
+      - jaeger
+
+  postgres:
+    image: postgres:16
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vivid
+      POSTGRES_DB: main
+
+  imgproxy:
+    image: darthsim/imgproxy:v3
+    volumes:
+      - ..:/workspace:cached
+    environment:
+      IMGPROXY_KEY: 943b421c9eb07c830af81030552c86009268de4e532ba2ee2eab8247c6da0881
+      IMGPROXY_SALT: 520f986b998545b4785e0defbc4f3c1203f22de2374a3d53cb7a7fe9fea309c5
+      IMGPROXY_MAX_SRC_RESOLUTION: 70
+      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /workspace/api/uploads
+
+  jaeger:
+    image: jaegertracing/all-in-one:1
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+      COLLECTOR_OTLP_HTTP_HOST_PORT: 0.0.0.0:4318
+
+volumes:
+  postgres:
+    driver: local
