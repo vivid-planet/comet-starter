@@ -27,7 +27,11 @@
     "postStartCommand": "npm run dev",
     "customizations": {
         "vscode": {
-            "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"],
+            "extensions": [
+                "dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+                "Anthropic.claude-code"
+            ],
             "settings": {
                 "editor.defaultFormatter": "esbenp.prettier-vscode",
                 "editor.formatOnSave": true
