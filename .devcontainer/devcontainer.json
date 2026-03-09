@@ -20,8 +20,6 @@
         "16686": { "label": "Jaeger" }
     },
     "mounts": [
-        "source=${localEnv:HOME}/.claude,target=/home/node/.claude,type=bind",
-        "source=${localEnv:HOME}/.claude.json,target=/home/node/.claude.json,type=bind"
     ],
     "postCreateCommand": "bash .devcontainer/post-create.sh",
     "postStartCommand": "npm run dev",
