@@ -5,8 +5,7 @@ import Link from "next/link";
 import { type AnchorHTMLAttributes, type PropsWithChildren } from "react";
 
 interface InternalLinkBlockProps
-    extends PropsWithChildren<PropsWithData<InternalLinkBlockData>>,
-        Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {}
+    extends PropsWithChildren<PropsWithData<InternalLinkBlockData>>, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {}
 
 export function InternalLinkBlock({ data: { targetPage, targetPageAnchor }, children, ...anchorProps }: InternalLinkBlockProps) {
     if (!targetPage) {
