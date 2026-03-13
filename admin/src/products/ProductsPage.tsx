@@ -1,4 +1,19 @@
-import { SaveBoundary, Stack, StackMainContent, StackPage, StackSwitch } from "@comet/admin";
+import {
+    Button,
+    FillSpace,
+    SaveBoundary,
+    Stack,
+    StackLink,
+    StackMainContent,
+    StackPage,
+    StackSwitch,
+    StackToolbar,
+    ToolbarActions,
+    ToolbarAutomaticTitleItem,
+    ToolbarBackButton,
+} from "@comet/admin";
+import { Add } from "@comet/admin-icons";
+import { ContentScopeIndicator } from "@comet/cms-admin";
 import { type FunctionComponent } from "react";
 import { FormattedMessage } from "react-intl";
 
@@ -11,7 +26,19 @@ export const ProductsPage: FunctionComponent = () => {
         <Stack topLevelTitle={<FormattedMessage id="products.title" defaultMessage="Products" />}>
             <StackSwitch>
                 <StackPage name="grid">
-                    <ProductsGrid />
+                    <StackToolbar scopeIndicator={<ContentScopeIndicator />}>
+                        <ToolbarBackButton />
+                        <ToolbarAutomaticTitleItem />
+                        <FillSpace />
+                        <ToolbarActions>
+                            <Button variant="primary" component={StackLink} pageName="add" payload="add" startIcon={<Add />}>
+                                <FormattedMessage id="products.addProduct" defaultMessage="Add Product" />
+                            </Button>
+                        </ToolbarActions>
+                    </StackToolbar>
+                    <StackMainContent fullHeight>
+                        <ProductsGrid />
+                    </StackMainContent>
                 </StackPage>
                 <StackPage name="add">
                     <SaveBoundary>
