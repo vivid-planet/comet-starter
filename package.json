@@ -30,14 +30,18 @@
         "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/cli": "9.0.0-beta.0",
+=======
+        "@comet/cli": "8.18.0",
+>>>>>>> main
         "@comet/dev-oidc-provider": "^1.2.1",
         "@comet/dev-process-manager": "^3.0.0",
-        "cspell": "^9.6.4",
+        "cspell": "^9.7.0",
         "dotenv-cli": "^11.0.0",
         "husky": "^9.1.7",
-        "knip": "^5.83.1",
-        "lint-staged": "^16.2.7",
+        "knip": "^5.85.0",
+        "lint-staged": "^16.3.1",
         "npm-run-all2": "^8.0.4",
         "open-cli": "^8.0.0",
         "prettier": "^3.8.1",

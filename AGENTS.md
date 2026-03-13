@@ -12,16 +12,19 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 
 ## Common Commands
 
+**Important:** Always use the correct Node version before executing any npm command or ./install.sh. Run `nvm use` in the project root to do so.
+
 ### Setup
 
 ```bash
 ./install.sh                     # Full installation
 ```
 
+Use `./install.sh` instead of `npm install` whenever you add, remove, or update dependencies in any `package.json` file.
+
 ### Development
 
 ```bash
-nvm use                          # Use Node version from .nvmrc
 npm run dev                      # Start all services via dev-pm
 npx dev-pm status                # Show service status
 npx dev-pm logs <service>        # Tail service logs
@@ -149,3 +152,14 @@ Component-based with GraphQL mutations/queries co-located
 ### Site Structure
 
 Next.js App Router conventions with pages in `app/`
+
+## References
+
+This project is derived from the [Comet Starter](https://github.com/vivid-planet/comet-starter) repo and may have diverged over time. When implementing or refactoring features, consult the starter for current best-practice patterns. The repo follows the same `api/`, `admin/`, `site/` structure, so equivalent files can be found at matching paths.
+
+To browse the starter repo, use the GitHub API:
+
+- List a directory: `https://api.github.com/repos/vivid-planet/comet-starter/contents/{path}`
+- Fetch a file: `https://raw.githubusercontent.com/vivid-planet/comet-starter/main/{path}`
+
+Comet DXP documentation is available at https://docs.comet-dxp.com/docs/ - search for relevant pages with `site:docs.comet-dxp.com {topic}`.
