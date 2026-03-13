@@ -82,7 +82,9 @@ export function ProductForm({ id }: FormProps) {
                 ? {
                       ...filterByFragment<GQLProductFormDetailsFragment>(productFormFragment, data.product),
                       publishedAt: data.product.publishedAt ? new Date(data.product.publishedAt) : undefined,
-                      mainImage: data.product.mainImage ? rootBlocks.mainImage.input2State(data.product.mainImage) : rootBlocks.mainImage.defaultValues(),
+                      mainImage: data.product.mainImage
+                          ? rootBlocks.mainImage.input2State(data.product.mainImage)
+                          : rootBlocks.mainImage.defaultValues(),
                   }
                 : {
                       isPublished: false,
