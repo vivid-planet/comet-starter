@@ -16,7 +16,7 @@
         "fixtures:prod": "npm run console:prod fixtures --",
         "lint": "npm run api-generator && run-p -l lint:{eslint,knip,prettier,tsc}",
         "lint:ci": "npm run lint",
-        "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
+        "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:fix": "run-p lint:fix:{eslint,prettier}",
         "lint:fix:eslint": "npm run lint:eslint -- --fix",
         "lint:fix:prettier": "npx prettier --write '*.{ts,js,json,md,yml,yaml}'",

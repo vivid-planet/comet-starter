@@ -18,7 +18,7 @@
         "prelint": "npm run intl:compile && run-p gql:types generate-block-types",
         "lint": "npm run admin-generator && run-p -l lint:{eslint,knip,prettier,tsc} intl:extract",
         "lint:ci": "npm run lint",
-        "lint:eslint": "eslint --max-warnings 0 --ext .ts,.tsx,.js,.jsx,.json,.md src/ package.json",
+        "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:fix": "run-p lint:fix:{eslint,prettier}",
         "lint:fix:eslint": "npm run lint:eslint -- --fix",
         "lint:fix:prettier": "npx prettier --write '*.{ts,js,json,md,yml,yaml}'",
