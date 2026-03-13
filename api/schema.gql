@@ -26,6 +26,11 @@ input CreateDamFolderInput {
   parentId: ID
 }
 
+type CreateProductPayload {
+  errors: [ProductValidationError!]!
+  product: Product
+}
+
 type CurrentUser {
   accountUrl: String
   allowedContentScopes: [ContentScopeWithLabel!]!
@@ -105,6 +110,12 @@ type DamFolder {
   parents: [DamFolder!]!
   updatedAt: DateTime!
 }
+
+"""DamImage root block data"""
+scalar DamImageBlockData @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+"""DamImage root block input"""
+scalar DamImageBlockInput @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 union DamItem = DamFile | DamFolder
 
@@ -266,6 +277,12 @@ input FooterScopeInput {
   language: String!
 }
 
+input IdFilter {
+  equal: ID
+  isAnyOf: [ID!]
+  notEqual: ID
+}
+
 type ImageCropArea {
   focalPoint: FocalPoint!
   height: Float
@@ -341,12 +358,14 @@ type Mutation {
   createDamFolder(input: CreateDamFolderInput!, scope: DamScopeInput! = {}): DamFolder!
   createDamMediaAlternative(alternative: ID!, for: ID!, input: DamMediaAlternativeInput!): DamMediaAlternative!
   createPageTreeNode(category: String!, input: PageTreeNodeCreateInput!, scope: PageTreeNodeScopeInput!): PageTreeNode!
+  createProduct(input: ProductInput!, scope: ProductScopeInput!): CreateProductPayload!
   createRedirect(input: RedirectInput!, scope: RedirectScopeInput!): Redirect!
   currentUserSignOut: String!
   deleteDamFile(id: ID!): Boolean!
   deleteDamFolder(id: ID!): Boolean!
   deleteDamMediaAlternative(id: ID!): Boolean!
   deletePageTreeNode(id: ID!): Boolean!
+  deleteProduct(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
   importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
@@ -365,6 +384,7 @@ type Mutation {
   updatePageTreeNodeCategory(category: String!, id: ID!): PageTreeNode!
   updatePageTreeNodeSlug(id: ID!, slug: String!): PageTreeNode!
   updatePageTreeNodeVisibility(id: ID!, input: PageTreeNodeUpdateVisibilityInput!): PageTreeNode!
+  updateProduct(id: ID!, input: ProductUpdateInput!): UpdateProductPayload!
   updateRedirect(id: ID!, input: RedirectInput!, lastUpdatedAt: DateTime): Redirect!
   updateRedirectActiveness(id: ID!, input: RedirectUpdateActivenessInput!): Redirect!
   userPermissionsCreatePermission(input: UserPermissionInput!, userId: String!): UserPermission!
@@ -372,6 +392,18 @@ type Mutation {
   userPermissionsUpdateContentScopes(input: UserContentScopesInput!, userId: String!): Boolean!
   userPermissionsUpdateOverrideContentScopes(input: UserPermissionOverrideContentScopesInput!): UserPermission!
   userPermissionsUpdatePermission(id: String!, input: UserPermissionInput!): UserPermission!
+}
+
+input NumberFilter {
+  equal: Float
+  greaterThan: Float
+  greaterThanEqual: Float
+  isAnyOf: [Float!]
+  isEmpty: Boolean
+  isNotEmpty: Boolean
+  lowerThan: Float
+  lowerThanEqual: Float
+  notEqual: Float
 }
 
 type Page implements DocumentInterface {
@@ -501,6 +533,11 @@ type PaginatedPageTreeNodes {
   totalCount: Int!
 }
 
+type PaginatedProducts {
+  nodes: [Product!]!
+  totalCount: Int!
+}
+
 type PaginatedRedirects {
   nodes: [Redirect!]!
   totalCount: Int!
@@ -521,6 +558,7 @@ enum Permission {
   impersonation
   pageTree
   prelogin
+  products
   sitePreview
   translation
   userPermissions
@@ -531,6 +569,120 @@ input PermissionFilter {
   equal: Permission
   isAnyOf: [Permission!]
   notEqual: Permission
+}
+
+type Product {
+  createdAt: DateTime!
+  description: String
+  domain: String!
+  id: ID!
+  isPublished: Boolean!
+  language: String!
+  mainImage: DamImageBlockData
+  name: String!
+  price: Float!
+  productStatus: ProductStatus!
+  productType: ProductType!
+  publishedAt: DateTime
+  sku: String!
+  slug: String!
+  updatedAt: DateTime!
+}
+
+input ProductFilter {
+  and: [ProductFilter!]
+  createdAt: DateTimeFilter
+  id: IdFilter
+  isPublished: BooleanFilter
+  name: StringFilter
+  or: [ProductFilter!]
+  price: NumberFilter
+  productStatus: ProductStatusEnumFilter
+  productType: ProductTypeEnumFilter
+  publishedAt: DateTimeFilter
+  sku: StringFilter
+  slug: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProductInput {
+  description: String
+  isPublished: Boolean! = false
+  mainImage: DamImageBlockInput
+  name: String!
+  price: Float!
+  productStatus: ProductStatus! = Draft
+  productType: ProductType!
+  publishedAt: DateTime
+  sku: String!
+  slug: String!
+}
+
+input ProductScopeInput {
+  domain: String!
+  language: String!
+}
+
+input ProductSort {
+  direction: SortDirection! = ASC
+  field: ProductSortField!
+}
+
+enum ProductSortField {
+  createdAt
+  id
+  isPublished
+  name
+  price
+  productStatus
+  productType
+  publishedAt
+  sku
+  slug
+  updatedAt
+}
+
+enum ProductStatus {
+  Archived
+  Draft
+  InReview
+  Published
+}
+
+input ProductStatusEnumFilter {
+  equal: ProductStatus
+  isAnyOf: [ProductStatus!]
+  notEqual: ProductStatus
+}
+
+enum ProductType {
+  Digital
+  Physical
+  Subscription
+}
+
+input ProductTypeEnumFilter {
+  equal: ProductType
+  isAnyOf: [ProductType!]
+  notEqual: ProductType
+}
+
+input ProductUpdateInput {
+  description: String
+  isPublished: Boolean
+  mainImage: DamImageBlockInput
+  name: String
+  price: Float
+  productStatus: ProductStatus
+  productType: ProductType
+  publishedAt: DateTime
+  sku: String
+  slug: String
+}
+
+type ProductValidationError {
+  code: String!
+  field: String
 }
 
 type Query {
@@ -559,6 +711,9 @@ type Query {
   pageTreeNodeSlugAvailable(parentId: ID, scope: PageTreeNodeScopeInput!, slug: String!): SlugAvailability!
   paginatedPageTreeNodes(category: String, documentType: String, limit: Int! = 25, offset: Int! = 0, scope: PageTreeNodeScopeInput!, sort: [PageTreeNodeSort!]): PaginatedPageTreeNodes!
   paginatedRedirects(filter: RedirectFilter, limit: Int! = 25, offset: Int! = 0, scope: RedirectScopeInput!, search: String, sort: [RedirectSort!]): PaginatedRedirects!
+  product(id: ID!): Product!
+  productBySlug(scope: ProductScopeInput!, slug: String!): Product
+  products(filter: ProductFilter, limit: Int! = 25, offset: Int! = 0, scope: ProductScopeInput!, search: String, sort: [ProductSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProducts!
   redirect(id: ID!): Redirect!
   redirectBySource(scope: RedirectScopeInput!, source: String!, sourceType: RedirectSourceTypeValues!): Redirect
   redirectSourceAvailable(scope: RedirectScopeInput!, source: String!): Boolean!
@@ -701,6 +856,11 @@ input UpdateDamFolderInput {
 
 input UpdateImageFileInput {
   cropArea: ImageCropAreaInput
+}
+
+type UpdateProductPayload {
+  errors: [ProductValidationError!]!
+  product: Product
 }
 
 input UserContentScopesInput {

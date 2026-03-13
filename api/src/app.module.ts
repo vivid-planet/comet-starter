@@ -36,6 +36,7 @@ import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
 import { DamFolder } from "./dam/entities/dam-folder.entity";
 import { MenusModule } from "./menus/menus.module";
+import { ProductsModule } from "./products/products.module";
 import { StatusModule } from "./status/status.module";
 
 @Module({})
@@ -134,6 +135,7 @@ export class AppModule {
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
+                ProductsModule,
                 WarningsModule,
                 ...(!config.debug
                     ? [
