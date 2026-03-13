@@ -18,7 +18,7 @@
         "lint:ci": "npm run lint",
         "lint:eslint": "eslint --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
         "lint:fix": "run-p lint:fix:{eslint,prettier}",
-        "lint:fix:eslint": "eslint --fix --ext .ts,.tsx,.js,.jsx,.json,.md --max-warnings 0 src/ package.json",
+        "lint:fix:eslint": "npm run lint:eslint -- --fix",
         "lint:fix:prettier": "npx prettier --write '*.{ts,js,json,md,yml,yaml}'",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
