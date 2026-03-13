@@ -50,6 +50,17 @@ npm --prefix admin run lint      # Lint Admin
 npm --prefix site run lint       # Lint Site (includes stylelint)
 ```
 
+### Linting and Formatting (Auto-fix)
+
+```bash
+npm run lint:fix                     # Auto-fix all packages
+npm --prefix api run lint:fix        # Auto-fix API
+npm --prefix admin run lint:fix      # Auto-fix Admin
+npm --prefix site run lint:fix       # Auto-fix Site (includes stylelint)
+```
+
+These commands auto-fix import sorting, remove unused imports, and apply Prettier formatting. The root `lint:fix` also formats config files outside the packages.
+
 ### Testing (API only currently)
 
 ```bash
@@ -140,6 +151,10 @@ The `site-configs/` directory manages site configurations, compiled into environ
 - `.env.site-configs` - Multi-tenant configuration
 
 ## Key Patterns
+
+### Post-Change Workflow
+
+After making code changes, always run `npm --prefix <package> run lint:fix` for each affected package. This auto-fixes import ordering, removes unused imports, and applies Prettier formatting. Run this before committing or presenting changes as complete.
 
 ### API Module Structure
 
