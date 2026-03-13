@@ -1,11 +1,10 @@
 import eslintConfigNestJs from "@comet/eslint-config/nestjs.js";
 import cspellPlugin from "@cspell/eslint-plugin";
 import cspellRecommended from "@cspell/eslint-plugin/recommended";
+import { defineConfig, globalIgnores } from "eslint/config";
 
-const config = [
-    {
-        ignores: ["src/db/migrations/**", "dist/**", "src/**/*.generated.ts", "src/**/generated"],
-    },
+const config = defineConfig([
+    globalIgnores(["src/db/migrations/**", "dist/**", "src/**/*.generated.ts", "src/**/generated"]),
     ...eslintConfigNestJs,
     {
         plugins: {
@@ -13,6 +12,6 @@ const config = [
         },
         ...cspellRecommended,
     },
-];
+]);
 
 export default config;
