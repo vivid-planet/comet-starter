@@ -7,7 +7,7 @@ const docsLink = "https://docs.comet-dxp.com/docs/faqs/environment-variables-in-
 /** @type {import('eslint')} */
 const config = [
     {
-        ignores: ["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**"],
+        ignores: ["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**", "block-meta.json", "package-lock.json"],
     },
     ...eslintConfigNextJs,
     {
