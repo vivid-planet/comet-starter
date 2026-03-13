@@ -4,7 +4,7 @@ import { type GQLProductStatus } from "@src/graphql.generated";
 import { productStatusFormattedMessageMap } from "@src/products/components/productStatus/ProductStatus";
 import { type FunctionComponent } from "react";
 
-export type ProductStatusFormState = GQLProductStatus;
+type ProductStatusFormState = GQLProductStatus;
 
 type ProductStatusSelectFieldProps = Omit<SelectFieldProps<ProductStatusFormState>, "options">;
 

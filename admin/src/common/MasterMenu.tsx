@@ -1,4 +1,4 @@
-import { Assets, Dashboard, PageTree, Snips, Wrench } from "@comet/admin-icons";
+import { Assets, Dashboard, PageTree, Snips, Tag, Wrench } from "@comet/admin-icons";
 import {
     ContentScopeIndicator,
     createRedirectsPage,
@@ -14,6 +14,7 @@ import { DashboardPage } from "@src/dashboard/DashboardPage";
 import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
 import { EditFooterPage } from "@src/footers/EditFooterPage";
+import { ProductsPage } from "@src/products/ProductsPage";
 import { FormattedMessage } from "react-intl";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,6 +50,16 @@ export const masterMenuData: MasterMenuData = [
             ),
         },
         requiredPermission: "pageTree",
+    },
+    {
+        type: "route",
+        primary: <FormattedMessage id="menu.products" defaultMessage="Products" />,
+        icon: <Tag />,
+        route: {
+            path: "/products",
+            component: ProductsPage,
+        },
+        requiredPermission: "products",
     },
     {
         type: "route",
