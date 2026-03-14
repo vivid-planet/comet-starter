@@ -33,7 +33,7 @@
         "@opentelemetry/exporter-trace-otlp-http": "^0.212.0",
         "@opentelemetry/sdk-node": "^0.212.0",
         "clsx": "^2.1.1",
-        "graphql": "^16.13.0",
+        "graphql": "^16.13.1",
         "ioredis": "^5.10.0",
         "lru-cache": "^11.2.6",
         "next": "^14.2.33",
