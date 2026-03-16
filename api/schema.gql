@@ -681,8 +681,13 @@ input ProductUpdateInput {
 }
 
 type ProductValidationError {
-  code: String!
+  code: ProductValidationErrorCode!
   field: String
+}
+
+enum ProductValidationErrorCode {
+  SKU_ALREADY_EXISTS
+  SLUG_ALREADY_EXISTS
 }
 
 type Query {

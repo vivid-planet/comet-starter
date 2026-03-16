@@ -26,6 +26,7 @@ import {
 import { InputAdornment } from "@mui/material";
 import { validatePositiveNumber } from "@src/common/validators/validatePositiveNumber";
 import { validateSkuFormat } from "@src/common/validators/validateSkuFormat";
+import { type GQLProductValidationErrorCode } from "@src/graphql.generated";
 import { ProductStatusSelectField } from "@src/products/components/productStatusSelectField/ProductStatusSelectField";
 import { ProductTypeSelectField } from "@src/products/components/productTypeSelectField/ProductTypeSelectField";
 import { FORM_ERROR, type FormApi } from "final-form";
@@ -55,7 +56,7 @@ type ProductFormDetailsFragment = Omit<GQLProductFormDetailsFragment, "published
 
 type FormValues = ProductFormDetailsFragment;
 
-const submissionErrorMessages: Record<string, ReactNode> = {
+const submissionErrorMessages: Record<GQLProductValidationErrorCode, ReactNode> = {
     SLUG_ALREADY_EXISTS: <FormattedMessage id="product.validation.slugAlreadyExists" defaultMessage="This slug is already in use" />,
     SKU_ALREADY_EXISTS: <FormattedMessage id="product.validation.skuAlreadyExists" defaultMessage="This SKU is already in use" />,
 };
