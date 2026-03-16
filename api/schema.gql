@@ -376,6 +376,7 @@ type Mutation {
   createPageTreeNode(category: String!, input: PageTreeNodeCreateInput!, scope: PageTreeNodeScopeInput!): PageTreeNode!
   createProduct(input: ProductInput!, scope: ProductScopeInput!): CreateProductPayload!
   createProductCategory(input: ProductCategoryInput!, scope: ProductCategoryScopeInput!): CreateProductCategoryPayload!
+  createProductReview(input: ProductReviewInput!): ProductReview!
   createProductVariant(input: ProductVariantInput!, product: ID!): CreateProductVariantPayload!
   createRedirect(input: RedirectInput!, scope: RedirectScopeInput!): Redirect!
   currentUserSignOut: String!
@@ -385,6 +386,7 @@ type Mutation {
   deletePageTreeNode(id: ID!): Boolean!
   deleteProduct(id: ID!): Boolean!
   deleteProductCategory(id: ID!): Boolean!
+  deleteProductReview(id: ID!): Boolean!
   deleteProductVariant(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
   importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
@@ -406,6 +408,7 @@ type Mutation {
   updatePageTreeNodeVisibility(id: ID!, input: PageTreeNodeUpdateVisibilityInput!): PageTreeNode!
   updateProduct(id: ID!, input: ProductUpdateInput!): UpdateProductPayload!
   updateProductCategory(id: ID!, input: ProductCategoryUpdateInput!): UpdateProductCategoryPayload!
+  updateProductReview(id: ID!, input: ProductReviewUpdateInput!): ProductReview!
   updateProductVariant(id: ID!, input: ProductVariantUpdateInput!): UpdateProductVariantPayload!
   updateRedirect(id: ID!, input: RedirectInput!, lastUpdatedAt: DateTime): Redirect!
   updateRedirectActiveness(id: ID!, input: RedirectUpdateActivenessInput!): Redirect!
@@ -560,6 +563,11 @@ type PaginatedProductCategories {
   totalCount: Int!
 }
 
+type PaginatedProductReviews {
+  nodes: [ProductReview!]!
+  totalCount: Int!
+}
+
 type PaginatedProductVariants {
   nodes: [ProductVariant!]!
   totalCount: Int!
@@ -591,6 +599,7 @@ enum Permission {
   pageTree
   prelogin
   productCategories
+  productReviews
   products
   sitePreview
   translation
@@ -719,6 +728,70 @@ input ProductInput {
   publishedAt: DateTime
   sku: String!
   slug: String!
+}
+
+type ProductReview {
+  body: String!
+  createdAt: DateTime!
+  id: ID!
+  isApproved: Boolean!
+  product: Product!
+  rating: Rating!
+  reviewedAt: DateTime!
+  reviewerName: String!
+  title: String!
+  updatedAt: DateTime!
+}
+
+input ProductReviewFilter {
+  and: [ProductReviewFilter!]
+  body: StringFilter
+  createdAt: DateTimeFilter
+  id: IdFilter
+  isApproved: BooleanFilter
+  or: [ProductReviewFilter!]
+  product: ManyToOneFilter
+  rating: RatingEnumFilter
+  reviewedAt: DateTimeFilter
+  reviewerName: StringFilter
+  title: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProductReviewInput {
+  body: String!
+  isApproved: Boolean! = false
+  product: ID!
+  rating: Rating!
+  reviewedAt: DateTime!
+  reviewerName: String!
+  title: String!
+}
+
+input ProductReviewSort {
+  direction: SortDirection! = ASC
+  field: ProductReviewSortField!
+}
+
+enum ProductReviewSortField {
+  createdAt
+  id
+  isApproved
+  rating
+  reviewedAt
+  reviewerName
+  title
+  updatedAt
+}
+
+input ProductReviewUpdateInput {
+  body: String
+  isApproved: Boolean
+  product: ID
+  rating: Rating
+  reviewedAt: DateTime
+  reviewerName: String
+  title: String
 }
 
 input ProductScopeInput {
@@ -893,6 +966,8 @@ type Query {
   productCategories(filter: ProductCategoryFilter, limit: Int! = 25, offset: Int! = 0, scope: ProductCategoryScopeInput!, search: String, sort: [ProductCategorySort!]! = [{direction: ASC, field: position}]): PaginatedProductCategories!
   productCategory(id: ID!): ProductCategory!
   productCategoryBySlug(scope: ProductCategoryScopeInput!, slug: String!): ProductCategory
+  productReview(id: ID!): ProductReview!
+  productReviews(filter: ProductReviewFilter, limit: Int! = 25, offset: Int! = 0, search: String, sort: [ProductReviewSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProductReviews!
   productVariant(id: ID!): ProductVariant!
   productVariants(filter: ProductVariantFilter, limit: Int! = 25, offset: Int! = 0, product: ID!, search: String, sort: [ProductVariantSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProductVariants!
   products(filter: ProductFilter, limit: Int! = 25, offset: Int! = 0, scope: ProductScopeInput!, search: String, sort: [ProductSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProducts!
@@ -910,6 +985,20 @@ type Query {
   userPermissionsUsers(filter: UserPermissionsUserFilter, limit: Int! = 25, offset: Int! = 0, search: String, sort: [UserPermissionsUserSort!]): UserPermissionPaginatedUserList!
   warning(id: ID!): Warning!
   warnings(filter: WarningFilter, limit: Int! = 25, offset: Int! = 0, scopes: [JSONObject!]!, search: String, sort: [WarningSort!], status: [WarningStatus!]! = [open]): PaginatedWarnings!
+}
+
+enum Rating {
+  Five
+  Four
+  One
+  Three
+  Two
+}
+
+input RatingEnumFilter {
+  equal: Rating
+  isAnyOf: [Rating!]
+  notEqual: Rating
 }
 
 type Redirect {

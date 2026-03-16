@@ -21,6 +21,7 @@ import { type FunctionComponent } from "react";
 import { FormattedMessage } from "react-intl";
 
 import { ProductForm } from "./components/productForm/ProductForm";
+import { ProductReviewsDataGrid } from "./components/productReviewsDataGrid/ProductReviewsDataGrid";
 import { ProductsGrid } from "./components/productsDataGrid/ProductsGrid";
 import { ProductToolbar } from "./components/productToolbar/ProductToolbar";
 import { ProductVariantForm } from "./components/productVariantForm/ProductVariantForm";
@@ -66,6 +67,11 @@ export const ProductsPage: FunctionComponent = () => {
                                         label={<FormattedMessage id="products.tab.product" defaultMessage="Product" />}
                                     >
                                         <ProductForm id={id} />
+                                    </RouterTab>
+                                    <RouterTab path="/reviews" label={<FormattedMessage id="products.tab.reviews" defaultMessage="Reviews" />}>
+                                        <FullHeightContent>
+                                            <ProductReviewsDataGrid productId={id} />
+                                        </FullHeightContent>
                                     </RouterTab>
                                     <RouterTab path="/variants" label={<FormattedMessage id="products.tab.variants" defaultMessage="Variants" />}>
                                         <StackSwitch>
