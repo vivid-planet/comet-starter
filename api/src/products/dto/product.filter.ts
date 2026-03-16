@@ -1,4 +1,4 @@
-import { BooleanFilter, createEnumFilter, DateTimeFilter, IdFilter, NumberFilter, StringFilter } from "@comet/cms-api";
+import { BooleanFilter, createEnumFilter, DateTimeFilter, IdFilter, ManyToOneFilter, NumberFilter, StringFilter } from "@comet/cms-api";
 import { Field, InputType } from "@nestjs/graphql";
 import { ProductStatus, ProductType } from "@src/products/entities/product.entity";
 import { Type } from "class-transformer";
@@ -65,6 +65,12 @@ export class ProductFilter {
     @IsOptional()
     @Type(() => ProductTypeFilter)
     productType?: typeof ProductTypeFilter;
+
+    @Field(() => ManyToOneFilter, { nullable: true })
+    @ValidateNested()
+    @IsOptional()
+    @Type(() => ManyToOneFilter)
+    category?: ManyToOneFilter;
 
     @Field(() => DateTimeFilter, { nullable: true })
     @ValidateNested()

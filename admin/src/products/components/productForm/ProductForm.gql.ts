@@ -11,6 +11,10 @@ export const productFormFragment = gql`
         productStatus
         publishedAt
         isPublished
+        category {
+            id
+            name
+        }
     }
 `;
 

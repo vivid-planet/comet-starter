@@ -25,6 +25,7 @@ import { ProductTypeChipEditableForProduct } from "@src/products/components/prod
 import { useMemo } from "react";
 import { FormattedMessage, FormattedNumber, useIntl } from "react-intl";
 
+import { ProductCategoryFilterOperators } from "./filter/ProductCategoryFilter";
 import { deleteProductMutation, productsQuery } from "./ProductsGrid.gql";
 import {
     type GQLDeleteProductMutation,
@@ -84,6 +85,14 @@ export function ProductsGrid() {
                 field: "sku",
                 headerName: intl.formatMessage({ id: "product.sku", defaultMessage: "SKU" }),
                 width: 150,
+            },
+            {
+                field: "category",
+                headerName: intl.formatMessage({ id: "product.category", defaultMessage: "Category" }),
+                width: 150,
+                sortable: false,
+                valueGetter: (_value: unknown, row: GQLProductsGridItemFragment) => row.category?.name,
+                filterOperators: ProductCategoryFilterOperators,
             },
             {
                 field: "productType",
