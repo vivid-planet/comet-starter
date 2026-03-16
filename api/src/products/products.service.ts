@@ -1,7 +1,8 @@
 import { BlockDataInterface, BlocksTransformerService, CurrentUser, gqlArgsToMikroOrmQuery, gqlSortToMikroOrmOrderBy } from "@comet/cms-api";
-import { EntityManager, FindOptions } from "@mikro-orm/postgresql";
+import { EntityManager, FindOptions, Reference } from "@mikro-orm/postgresql";
 import { Injectable } from "@nestjs/common";
 import { Field, ObjectType, registerEnumType } from "@nestjs/graphql";
+import { ProductCategory } from "@src/product-categories/entities/product-category.entity";
 import { ProductInput, ProductUpdateInput } from "@src/products/dto/product.input";
 import { ProductScope } from "@src/products/dto/product-scope.input";
 import { ProductsArgs } from "@src/products/dto/products.args";
@@ -36,12 +37,20 @@ export class ProductsService {
         return this.entityManager.findOneOrFail(Product, id);
     }
 
-    async findAll({ scope, search, filter, sort, offset, limit }: ProductsArgs): Promise<PaginatedProducts> {
+    async findAll({ scope, search, filter, sort, offset, limit }: ProductsArgs, fields?: string[]): Promise<PaginatedProducts> {
         const where = gqlArgsToMikroOrmQuery({ search, filter }, this.entityManager.getMetadata(Product));
         Object.assign(where, scope);
         const options: FindOptions<Product> = { offset, limit };
         if (sort) {
             options.orderBy = gqlSortToMikroOrmOrderBy(sort);
+        }
+        const populate: string[] = [];
+        if (fields?.includes("category")) {
+            populate.push("category");
+        }
+        if (populate.length > 0) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            options.populate = populate as any;
         }
         const [entities, totalCount] = await this.entityManager.findAndCount(Product, where, options);
         return new PaginatedProducts(entities, totalCount);
@@ -58,11 +67,12 @@ export class ProductsService {
             return { errors };
         }
 
-        const { mainImage: mainImageInput, ...assignInput } = input;
+        const { mainImage: mainImageInput, category: categoryInput, ...assignInput } = input;
         const product = this.entityManager.create(Product, {
             ...assignInput,
             ...scope,
             ...(mainImageInput ? { mainImage: mainImageInput.transformToBlockData() } : {}),
+            ...(categoryInput ? { category: Reference.create(await this.entityManager.findOneOrFail(ProductCategory, categoryInput)) } : {}),
         });
         await this.entityManager.flush();
         return { product, errors: [] };
@@ -76,10 +86,13 @@ export class ProductsService {
             return { errors };
         }
 
-        const { mainImage: mainImageInput, ...assignInput } = input;
+        const { mainImage: mainImageInput, category: categoryInput, ...assignInput } = input;
         product.assign({ ...assignInput });
         if (mainImageInput) {
             product.mainImage = mainImageInput.transformToBlockData();
+        }
+        if (categoryInput !== undefined) {
+            product.category = categoryInput ? Reference.create(await this.entityManager.findOneOrFail(ProductCategory, categoryInput)) : undefined;
         }
         await this.entityManager.flush();
         return { product, errors: [] };

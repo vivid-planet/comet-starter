@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const productCategoryAsyncAutocompleteFieldFragment = gql`
+const productCategoryAsyncAutocompleteFieldFragment = gql`
     fragment ProductCategoryAsyncAutocompleteFieldProductCategory on ProductCategory {
         id
         name

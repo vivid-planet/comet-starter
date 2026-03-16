@@ -10,7 +10,7 @@ import {
     type GQLProductCategoryAsyncAutocompleteFieldQueryVariables,
 } from "./ProductCategoryAsyncAutocompleteField.gql.generated";
 
-export type ProductCategoryAsyncAutocompleteFieldOption = GQLProductCategoryAsyncAutocompleteFieldProductCategoryFragment;
+type ProductCategoryAsyncAutocompleteFieldOption = GQLProductCategoryAsyncAutocompleteFieldProductCategoryFragment;
 
 type ProductCategoryAsyncAutocompleteFieldProps = Omit<
     AsyncAutocompleteFieldProps<ProductCategoryAsyncAutocompleteFieldOption, false, true, false>,

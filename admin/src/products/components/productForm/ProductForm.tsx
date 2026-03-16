@@ -28,6 +28,7 @@ import { validatePositiveNumber } from "@src/common/validators/validatePositiveN
 import { validateSkuFormat } from "@src/common/validators/validateSkuFormat";
 import { validateSlug } from "@src/common/validators/validateSlug";
 import { type GQLProductValidationErrorCode } from "@src/graphql.generated";
+import { ProductCategoryAsyncAutocompleteField } from "@src/products/components/productCategoryAsyncAutocompleteField/ProductCategoryAsyncAutocompleteField";
 import { ProductStatusSelectField } from "@src/products/components/productStatusSelectField/ProductStatusSelectField";
 import { ProductTypeSelectField } from "@src/products/components/productTypeSelectField/ProductTypeSelectField";
 import { FORM_ERROR, type FormApi } from "final-form";
@@ -113,6 +114,7 @@ export function ProductForm({ id }: FormProps) {
             ...formValues,
             publishedAt: formValues.publishedAt ? formValues.publishedAt.toISOString() : null,
             mainImage: rootBlocks.mainImage.state2Output(formValues.mainImage),
+            category: formValues.category ? formValues.category.id : null,
         };
 
         if (mode === "edit") {
@@ -238,6 +240,10 @@ export function ProductForm({ id }: FormProps) {
                             fullWidth
                             name="productType"
                             label={<FormattedMessage id="product.productType" defaultMessage="Product Type" />}
+                        />
+                        <ProductCategoryAsyncAutocompleteField
+                            name="category"
+                            label={<FormattedMessage id="product.category" defaultMessage="Category" />}
                         />
                     </FieldSet>
                     <FieldSet initiallyExpanded title={<FormattedMessage id="product.fieldSet.publishing" defaultMessage="Publishing" />}>

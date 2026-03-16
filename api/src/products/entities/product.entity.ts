@@ -1,6 +1,7 @@
 import { BlockDataInterface, DamImageBlock, RootBlock, RootBlockDataScalar, RootBlockEntity, RootBlockType, ScopedEntity } from "@comet/cms-api";
-import { BaseEntity, Entity, Enum, OptionalProps, PrimaryKey, Property } from "@mikro-orm/postgresql";
+import { BaseEntity, Entity, Enum, ManyToOne, OptionalProps, PrimaryKey, Property, Ref } from "@mikro-orm/postgresql";
 import { Field, Float, ID, ObjectType, registerEnumType } from "@nestjs/graphql";
+import { ProductCategory } from "@src/product-categories/entities/product-category.entity";
 import { v4 as uuid } from "uuid";
 
 export enum ProductStatus {
@@ -69,6 +70,10 @@ export class Product extends BaseEntity {
     @Enum({ items: () => ProductType })
     @Field(() => ProductType)
     productType: ProductType;
+
+    @ManyToOne(() => ProductCategory, { ref: true, nullable: true })
+    @Field(() => ProductCategory, { nullable: true })
+    category?: Ref<ProductCategory>;
 
     @RootBlock(DamImageBlock)
     @Property({ type: new RootBlockType(DamImageBlock), nullable: true })

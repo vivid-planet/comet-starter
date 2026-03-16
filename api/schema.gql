@@ -592,6 +592,7 @@ input PermissionFilter {
 }
 
 type Product {
+  category: ProductCategory
   createdAt: DateTime!
   description: String
   domain: String!
@@ -677,6 +678,7 @@ enum ProductCategoryValidationErrorCode {
 
 input ProductFilter {
   and: [ProductFilter!]
+  category: ManyToOneFilter
   createdAt: DateTimeFilter
   id: IdFilter
   isPublished: BooleanFilter
@@ -692,6 +694,7 @@ input ProductFilter {
 }
 
 input ProductInput {
+  category: ID
   description: String
   isPublished: Boolean! = false
   mainImage: DamImageBlockInput
@@ -754,6 +757,7 @@ input ProductTypeEnumFilter {
 }
 
 input ProductUpdateInput {
+  category: ID
   description: String
   isPublished: Boolean
   mainImage: DamImageBlockInput

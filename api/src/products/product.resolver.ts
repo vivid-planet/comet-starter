@@ -1,9 +1,19 @@
-import { AffectedEntity, CurrentUser, DamImageBlock, GetCurrentUser, RequiredPermission, RootBlockDataScalar } from "@comet/cms-api";
-import { Args, Field, ID, Mutation, ObjectType, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import {
+    AffectedEntity,
+    CurrentUser,
+    DamImageBlock,
+    extractGraphqlFields,
+    GetCurrentUser,
+    RequiredPermission,
+    RootBlockDataScalar,
+} from "@comet/cms-api";
+import { Args, Field, ID, Info, Mutation, ObjectType, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { ProductCategory } from "@src/product-categories/entities/product-category.entity";
 import { ProductInput, ProductUpdateInput } from "@src/products/dto/product.input";
 import { ProductScope } from "@src/products/dto/product-scope.input";
 import { ProductsArgs } from "@src/products/dto/products.args";
 import { Product } from "@src/products/entities/product.entity";
+import { GraphQLResolveInfo } from "graphql";
 
 import { PaginatedProducts } from "./dto/paginated-products";
 import { ProductsService, ProductValidationError } from "./products.service";
@@ -41,11 +51,9 @@ export class ProductResolver {
     }
 
     @Query(() => PaginatedProducts)
-    async products(
-        @Args()
-        args: ProductsArgs,
-    ): Promise<PaginatedProducts> {
-        return this.productsService.findAll(args);
+    async products(@Args() args: ProductsArgs, @Info() info: GraphQLResolveInfo): Promise<PaginatedProducts> {
+        const fields = extractGraphqlFields(info, { root: "nodes" });
+        return this.productsService.findAll(args, fields);
     }
 
     @Query(() => Product, { nullable: true })
@@ -79,6 +87,11 @@ export class ProductResolver {
         id: string,
     ): Promise<boolean> {
         return this.productsService.delete(id);
+    }
+
+    @ResolveField(() => ProductCategory, { nullable: true })
+    async category(@Parent() product: Product): Promise<ProductCategory | undefined> {
+        return product.category?.loadOrFail();
     }
 
     @ResolveField(() => RootBlockDataScalar(DamImageBlock), { nullable: true })
