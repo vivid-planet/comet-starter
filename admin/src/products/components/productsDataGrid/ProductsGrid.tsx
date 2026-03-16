@@ -86,6 +86,13 @@ export function ProductsGrid() {
                 width: 150,
             },
             {
+                field: "category",
+                headerName: intl.formatMessage({ id: "product.category", defaultMessage: "Category" }),
+                width: 150,
+                sortable: false,
+                valueGetter: (_value: unknown, row: GQLProductsGridItemFragment) => row.category?.name,
+            },
+            {
                 field: "productType",
                 headerName: intl.formatMessage({ id: "product.productType", defaultMessage: "Type" }),
                 type: "singleSelect",

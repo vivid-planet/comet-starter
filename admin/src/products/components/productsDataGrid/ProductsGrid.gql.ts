@@ -11,6 +11,10 @@ const productsFragment = gql`
         productStatus
         publishedAt
         isPublished
+        category {
+            id
+            name
+        }
     }
 `;
 

@@ -40,7 +40,7 @@ The Product entity represents a product in the catalog. Products are scoped by d
 
 ## DataGrid
 
-Columns: mainImage as thumbnail, name, sku, productType as editable chip, price, productStatus as editable chip, publishedAt, isPublished.
+Columns: mainImage as thumbnail, name, sku, category (show category name), productType as editable chip, price, productStatus as editable chip, publishedAt, isPublished.
 
 The productStatus and productType chips are editable: clicking a chip opens a dropdown to change the value inline via a mutation.
 
