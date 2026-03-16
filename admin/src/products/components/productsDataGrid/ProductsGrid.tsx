@@ -55,7 +55,7 @@ export function ProductsGrid() {
         () => [
             {
                 field: "mainImage",
-                headerName: intl.formatMessage({ id: "product.mainImage", defaultMessage: "Image" }),
+                headerName: intl.formatMessage({ id: "productsGrid.mainImage", defaultMessage: "Image" }),
                 sortable: false,
                 filterable: false,
                 disableExport: true,
@@ -76,18 +76,18 @@ export function ProductsGrid() {
             },
             {
                 field: "name",
-                headerName: intl.formatMessage({ id: "product.name", defaultMessage: "Name" }),
+                headerName: intl.formatMessage({ id: "productsGrid.name", defaultMessage: "Name" }),
                 flex: 1,
                 minWidth: 200,
             },
             {
                 field: "sku",
-                headerName: intl.formatMessage({ id: "product.sku", defaultMessage: "SKU" }),
+                headerName: intl.formatMessage({ id: "productsGrid.sku", defaultMessage: "SKU" }),
                 width: 150,
             },
             {
                 field: "productType",
-                headerName: intl.formatMessage({ id: "product.productType", defaultMessage: "Type" }),
+                headerName: intl.formatMessage({ id: "productsGrid.productType", defaultMessage: "Type" }),
                 type: "singleSelect",
                 valueOptions: messageDescriptorMapToValueOptions(productTypeMessageDescriptorMap, intl),
                 width: 160,
@@ -101,13 +101,13 @@ export function ProductsGrid() {
                 field: "price",
                 renderHeader: () => (
                     <>
-                        <GridColumnHeaderTitle label={intl.formatMessage({ id: "product.price", defaultMessage: "Price" })} columnWidth={150} />
-                        <Tooltip title={<FormattedMessage id="product.price.tooltip" defaultMessage="Price in EUR" />}>
+                        <GridColumnHeaderTitle label={intl.formatMessage({ id: "productsGrid.price", defaultMessage: "Price" })} columnWidth={150} />
+                        <Tooltip title={<FormattedMessage id="productsGrid.price.tooltip" defaultMessage="Price in EUR" />}>
                             <InfoIcon sx={{ marginLeft: 1 }} />
                         </Tooltip>
                     </>
                 ),
-                headerName: intl.formatMessage({ id: "product.price", defaultMessage: "Price" }),
+                headerName: intl.formatMessage({ id: "productsGrid.price", defaultMessage: "Price" }),
                 type: "number",
                 renderCell: ({ value }) => {
                     return typeof value === "number" ? (
@@ -120,7 +120,7 @@ export function ProductsGrid() {
             },
             {
                 field: "productStatus",
-                headerName: intl.formatMessage({ id: "product.productStatus", defaultMessage: "Status" }),
+                headerName: intl.formatMessage({ id: "productsGrid.productStatus", defaultMessage: "Status" }),
                 type: "singleSelect",
                 valueOptions: messageDescriptorMapToValueOptions(productStatusMessageDescriptorMap, intl),
                 width: 160,
@@ -133,12 +133,12 @@ export function ProductsGrid() {
             {
                 ...dataGridDateTimeColumn,
                 field: "publishedAt",
-                headerName: intl.formatMessage({ id: "product.publishedAt", defaultMessage: "Published At" }),
+                headerName: intl.formatMessage({ id: "productsGrid.publishedAt", defaultMessage: "Published At" }),
                 width: 170,
             },
             {
                 field: "isPublished",
-                headerName: intl.formatMessage({ id: "product.isPublished", defaultMessage: "Published" }),
+                headerName: intl.formatMessage({ id: "productsGrid.isPublished", defaultMessage: "Published" }),
                 type: "boolean",
                 width: 100,
             },
