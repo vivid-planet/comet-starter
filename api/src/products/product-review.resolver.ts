@@ -10,7 +10,7 @@ import { PaginatedProductReviews } from "./dto/paginated-product-reviews";
 import { ProductReviewsService } from "./product-reviews.service";
 
 @Resolver(() => ProductReview)
-@RequiredPermission(["productReviews"])
+@RequiredPermission(["productReviews"], { skipScopeCheck: true })
 export class ProductReviewResolver {
     constructor(private readonly productReviewsService: ProductReviewsService) {}
 
