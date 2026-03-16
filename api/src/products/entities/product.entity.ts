@@ -1,8 +1,10 @@
 import { BlockDataInterface, DamImageBlock, RootBlock, RootBlockDataScalar, RootBlockEntity, RootBlockType, ScopedEntity } from "@comet/cms-api";
-import { BaseEntity, Entity, Enum, ManyToOne, OptionalProps, PrimaryKey, Property, Ref } from "@mikro-orm/postgresql";
+import { BaseEntity, Collection, Entity, Enum, ManyToOne, OneToMany, OptionalProps, PrimaryKey, Property, Ref } from "@mikro-orm/postgresql";
 import { Field, Float, ID, ObjectType, registerEnumType } from "@nestjs/graphql";
 import { ProductCategory } from "@src/product-categories/entities/product-category.entity";
 import { v4 as uuid } from "uuid";
+
+import { ProductVariant } from "./product-variant.entity";
 
 export enum ProductStatus {
     Draft = "Draft",
@@ -87,6 +89,9 @@ export class Product extends BaseEntity {
     @Property({ type: "text" })
     @Field()
     language: string;
+
+    @OneToMany(() => ProductVariant, (variant) => variant.product)
+    variants = new Collection<ProductVariant>(this);
 
     @Property({ type: "timestamp with time zone" })
     @Field()

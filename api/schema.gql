@@ -36,6 +36,11 @@ type CreateProductPayload {
   product: Product
 }
 
+type CreateProductVariantPayload {
+  errors: [ProductVariantValidationError!]!
+  productVariant: ProductVariant
+}
+
 type CurrentUser {
   accountUrl: String
   allowedContentScopes: [ContentScopeWithLabel!]!
@@ -371,6 +376,7 @@ type Mutation {
   createPageTreeNode(category: String!, input: PageTreeNodeCreateInput!, scope: PageTreeNodeScopeInput!): PageTreeNode!
   createProduct(input: ProductInput!, scope: ProductScopeInput!): CreateProductPayload!
   createProductCategory(input: ProductCategoryInput!, scope: ProductCategoryScopeInput!): CreateProductCategoryPayload!
+  createProductVariant(input: ProductVariantInput!, product: ID!): CreateProductVariantPayload!
   createRedirect(input: RedirectInput!, scope: RedirectScopeInput!): Redirect!
   currentUserSignOut: String!
   deleteDamFile(id: ID!): Boolean!
@@ -379,6 +385,7 @@ type Mutation {
   deletePageTreeNode(id: ID!): Boolean!
   deleteProduct(id: ID!): Boolean!
   deleteProductCategory(id: ID!): Boolean!
+  deleteProductVariant(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
   importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
@@ -399,6 +406,7 @@ type Mutation {
   updatePageTreeNodeVisibility(id: ID!, input: PageTreeNodeUpdateVisibilityInput!): PageTreeNode!
   updateProduct(id: ID!, input: ProductUpdateInput!): UpdateProductPayload!
   updateProductCategory(id: ID!, input: ProductCategoryUpdateInput!): UpdateProductCategoryPayload!
+  updateProductVariant(id: ID!, input: ProductVariantUpdateInput!): UpdateProductVariantPayload!
   updateRedirect(id: ID!, input: RedirectInput!, lastUpdatedAt: DateTime): Redirect!
   updateRedirectActiveness(id: ID!, input: RedirectUpdateActivenessInput!): Redirect!
   userPermissionsCreatePermission(input: UserPermissionInput!, userId: String!): UserPermission!
@@ -552,6 +560,11 @@ type PaginatedProductCategories {
   totalCount: Int!
 }
 
+type PaginatedProductVariants {
+  nodes: [ProductVariant!]!
+  totalCount: Int!
+}
+
 type PaginatedProducts {
   nodes: [Product!]!
   totalCount: Int!
@@ -608,6 +621,7 @@ type Product {
   sku: String!
   slug: String!
   updatedAt: DateTime!
+  variantCount: Int!
 }
 
 type ProductCategory {
@@ -780,6 +794,74 @@ enum ProductValidationErrorCode {
   SLUG_ALREADY_EXISTS
 }
 
+type ProductVariant {
+  createdAt: DateTime!
+  id: ID!
+  image: DamImageBlockData
+  isAvailable: Boolean!
+  name: String!
+  price: Float!
+  product: Product!
+  sku: String!
+  stock: Int!
+  updatedAt: DateTime!
+  variantStatus: VariantStatus!
+}
+
+input ProductVariantFilter {
+  and: [ProductVariantFilter!]
+  id: IdFilter
+  isAvailable: BooleanFilter
+  name: StringFilter
+  or: [ProductVariantFilter!]
+  price: NumberFilter
+  sku: StringFilter
+  stock: NumberFilter
+  variantStatus: VariantStatusEnumFilter
+}
+
+input ProductVariantInput {
+  image: DamImageBlockInput
+  isAvailable: Boolean! = true
+  name: String!
+  price: Float!
+  sku: String!
+  stock: Int! = 0
+  variantStatus: VariantStatus! = Active
+}
+
+input ProductVariantSort {
+  direction: SortDirection! = ASC
+  field: ProductVariantSortField!
+}
+
+enum ProductVariantSortField {
+  createdAt
+  id
+  isAvailable
+  name
+  price
+  sku
+  stock
+  updatedAt
+  variantStatus
+}
+
+input ProductVariantUpdateInput {
+  image: DamImageBlockInput
+  isAvailable: Boolean
+  name: String
+  price: Float
+  sku: String
+  stock: Int
+  variantStatus: VariantStatus
+}
+
+type ProductVariantValidationError {
+  code: String!
+  field: String
+}
+
 type Query {
   blockPreviewJwt(includeInvisible: Boolean!, scope: JSONObject!, url: String!): String!
   currentUser: CurrentUser!
@@ -811,6 +893,8 @@ type Query {
   productCategories(filter: ProductCategoryFilter, limit: Int! = 25, offset: Int! = 0, scope: ProductCategoryScopeInput!, search: String, sort: [ProductCategorySort!]! = [{direction: ASC, field: position}]): PaginatedProductCategories!
   productCategory(id: ID!): ProductCategory!
   productCategoryBySlug(scope: ProductCategoryScopeInput!, slug: String!): ProductCategory
+  productVariant(id: ID!): ProductVariant!
+  productVariants(filter: ProductVariantFilter, limit: Int! = 25, offset: Int! = 0, product: ID!, search: String, sort: [ProductVariantSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProductVariants!
   products(filter: ProductFilter, limit: Int! = 25, offset: Int! = 0, scope: ProductScopeInput!, search: String, sort: [ProductSort!]! = [{direction: ASC, field: createdAt}]): PaginatedProducts!
   redirect(id: ID!): Redirect!
   redirectBySource(scope: RedirectScopeInput!, source: String!, sourceType: RedirectSourceTypeValues!): Redirect
@@ -966,6 +1050,11 @@ type UpdateProductPayload {
   product: Product
 }
 
+type UpdateProductVariantPayload {
+  errors: [ProductVariantValidationError!]!
+  productVariant: ProductVariant
+}
+
 input UserContentScopesInput {
   contentScopes: [JSONObject!]! = []
 }
@@ -1035,6 +1124,18 @@ enum UserPermissionsUserSortField {
   email
   name
   status
+}
+
+enum VariantStatus {
+  Active
+  Discontinued
+  OutOfStock
+}
+
+input VariantStatusEnumFilter {
+  equal: VariantStatus
+  isAnyOf: [VariantStatus!]
+  notEqual: VariantStatus
 }
 
 type Warning {

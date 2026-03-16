@@ -7,12 +7,14 @@ import {
     RequiredPermission,
     RootBlockDataScalar,
 } from "@comet/cms-api";
-import { Args, Field, ID, Info, Mutation, ObjectType, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { EntityManager } from "@mikro-orm/postgresql";
+import { Args, Field, ID, Info, Int, Mutation, ObjectType, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { ProductCategory } from "@src/product-categories/entities/product-category.entity";
 import { ProductInput, ProductUpdateInput } from "@src/products/dto/product.input";
 import { ProductScope } from "@src/products/dto/product-scope.input";
 import { ProductsArgs } from "@src/products/dto/products.args";
 import { Product } from "@src/products/entities/product.entity";
+import { ProductVariant } from "@src/products/entities/product-variant.entity";
 import { GraphQLResolveInfo } from "graphql";
 
 import { PaginatedProducts } from "./dto/paginated-products";
@@ -39,7 +41,10 @@ class UpdateProductPayload {
 @Resolver(() => Product)
 @RequiredPermission(["products"])
 export class ProductResolver {
-    constructor(private readonly productsService: ProductsService) {}
+    constructor(
+        private readonly productsService: ProductsService,
+        private readonly entityManager: EntityManager,
+    ) {}
 
     @Query(() => Product)
     @AffectedEntity(Product)
@@ -100,5 +105,10 @@ export class ProductResolver {
             return undefined;
         }
         return this.productsService.transformToPlain(product.mainImage);
+    }
+
+    @ResolveField(() => Int)
+    async variantCount(@Parent() product: Product): Promise<number> {
+        return this.entityManager.count(ProductVariant, { product: product.id });
     }
 }
