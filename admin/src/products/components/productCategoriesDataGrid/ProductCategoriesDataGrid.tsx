@@ -115,7 +115,7 @@ export function ProductCategoriesDataGrid() {
             scope,
             sort: [{ field: "position", direction: "ASC" as const }],
             offset: 0,
-            limit: 1000,
+            limit: 100,
         },
     });
 
