@@ -15,7 +15,7 @@ import {
 } from "@comet/admin";
 import { Edit as EditIcon, Info as InfoIcon } from "@comet/admin-icons";
 import { useContentScope } from "@comet/cms-admin";
-import { Box, IconButton } from "@mui/material";
+import { Box, Chip, IconButton } from "@mui/material";
 import { DataGridPro, type DataGridProProps, GridColumnHeaderTitle, type GridSlotsComponent } from "@mui/x-data-grid-pro";
 import { messageDescriptorMapToValueOptions } from "@src/common/components/enums/messageDescriptorMapToValueOptions/messageDescriptorMapToValueOptions";
 import { productStatusMessageDescriptorMap } from "@src/products/components/productStatus/ProductStatus";
@@ -144,6 +144,15 @@ export function ProductsGrid() {
                 field: "publishedAt",
                 headerName: intl.formatMessage({ id: "product.publishedAt", defaultMessage: "Published At" }),
                 width: 170,
+            },
+            {
+                field: "variantCount",
+                headerName: intl.formatMessage({ id: "product.variantCount", defaultMessage: "Variants" }),
+                type: "number",
+                sortable: false,
+                filterable: false,
+                width: 100,
+                renderCell: ({ value }) => <Chip label={value} size="small" color="default" />,
             },
             {
                 field: "isPublished",

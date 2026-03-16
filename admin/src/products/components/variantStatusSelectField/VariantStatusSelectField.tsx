@@ -4,7 +4,7 @@ import { type GQLVariantStatus } from "@src/graphql.generated";
 import { variantStatusFormattedMessageMap } from "@src/products/components/variantStatus/VariantStatus";
 import { type FunctionComponent } from "react";
 
-export type VariantStatusFormState = GQLVariantStatus;
+type VariantStatusFormState = GQLVariantStatus;
 
 type VariantStatusSelectFieldProps = Omit<SelectFieldProps<VariantStatusFormState>, "options">;
 

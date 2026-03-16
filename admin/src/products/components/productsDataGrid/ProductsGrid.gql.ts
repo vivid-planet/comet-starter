@@ -11,6 +11,7 @@ const productsFragment = gql`
         productStatus
         publishedAt
         isPublished
+        variantCount
         category {
             id
             name
