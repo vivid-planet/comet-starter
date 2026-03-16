@@ -4,7 +4,7 @@ import cspellRecommended from "@cspell/eslint-plugin/recommended";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 const config = defineConfig([
-    globalIgnores(["src/db/migrations/**", "dist/**", "src/**/*.generated.ts"]),
+    globalIgnores(["src/db/migrations/**", "dist/**", "src/**/*.generated.ts", "package-lock.json"]),
     ...eslintConfigNestJs,
     {
         plugins: {

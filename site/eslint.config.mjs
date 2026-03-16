@@ -6,7 +6,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 const docsLink = "https://docs.comet-dxp.com/docs/faqs/environment-variables-in-site";
 
 const config = defineConfig([
-    globalIgnores(["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**"]),
+    globalIgnores(["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**", "block-meta.json", "package-lock.json"]),
     ...eslintConfigNextJs,
     {
         plugins: {
