@@ -1,4 +1,4 @@
-import { Assets, Dashboard, Domain, PageTree, Snips, Tag, Wrench } from "@comet/admin-icons";
+import { Assets, ChatCommunication, Dashboard, Domain, PageTree, Snips, Tag, Wrench } from "@comet/admin-icons";
 import {
     ContentScopeIndicator,
     createRedirectsPage,
@@ -15,6 +15,7 @@ import { Link } from "@src/documents/links/Link";
 import { Page } from "@src/documents/pages/Page";
 import { EditFooterPage } from "@src/footers/EditFooterPage";
 import { ProductCategoriesPage } from "@src/products/ProductCategoriesPage";
+import { ProductReviewsPage } from "@src/products/ProductReviewsPage";
 import { ProductsPage } from "@src/products/ProductsPage";
 import { FormattedMessage } from "react-intl";
 
@@ -71,6 +72,16 @@ export const masterMenuData: MasterMenuData = [
             component: ProductCategoriesPage,
         },
         requiredPermission: "productCategories",
+    },
+    {
+        type: "route",
+        primary: <FormattedMessage id="menu.productReviews" defaultMessage="Product Reviews" />,
+        icon: <ChatCommunication />,
+        route: {
+            path: "/product-reviews",
+            component: ProductReviewsPage,
+        },
+        requiredPermission: "productReviews",
     },
     {
         type: "route",

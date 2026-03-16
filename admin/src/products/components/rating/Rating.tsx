@@ -2,11 +2,7 @@ import { createTranslatableEnum } from "@src/common/components/enums/createTrans
 import { type GQLRating } from "@src/graphql.generated";
 import { defineMessage } from "react-intl";
 
-const {
-    messageDescriptorMap,
-    formattedMessageMap,
-    Component: Rating,
-} = createTranslatableEnum<GQLRating>({
+const { formattedMessageMap, Component: Rating } = createTranslatableEnum<GQLRating>({
     One: defineMessage({ defaultMessage: "1", id: "products.rating.one" }),
     Two: defineMessage({ defaultMessage: "2", id: "products.rating.two" }),
     Three: defineMessage({ defaultMessage: "3", id: "products.rating.three" }),
@@ -14,4 +10,4 @@ const {
     Five: defineMessage({ defaultMessage: "5", id: "products.rating.five" }),
 });
 
-export { Rating, formattedMessageMap as ratingFormattedMessageMap, messageDescriptorMap as ratingMessageDescriptorMap };
+export { Rating, formattedMessageMap as ratingFormattedMessageMap };
