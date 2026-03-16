@@ -17,6 +17,10 @@ The Product entity represents a product in the catalog. Products are scoped by d
 - isPublished: boolean, default false
 - mainImage: DAM image, optional
 
+## Relations
+
+- category: ManyToOne to ProductCategory, optional (a product can optionally belong to one category)
+
 ## Enums
 
 - productStatus: Draft, InReview, Published, Archived
@@ -49,7 +53,7 @@ The grid should support search by name and sku, filtering by productStatus and p
 All fields in a single form. Group into FieldSets:
 
 - "General": name, slug, description
-- "Details": sku, price, productType (SelectField)
+- "Details": sku, price, productType (SelectField), category (AsyncSelectField)
 - "Publishing": productStatus (SelectField), publishedAt, isPublished
 - "Media": mainImage
 
