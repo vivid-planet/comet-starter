@@ -26,6 +26,7 @@ import {
 import { InputAdornment } from "@mui/material";
 import { validatePositiveNumber } from "@src/common/validators/validatePositiveNumber";
 import { validateSkuFormat } from "@src/common/validators/validateSkuFormat";
+import { validateSlug } from "@src/common/validators/validateSlug";
 import { type GQLProductValidationErrorCode } from "@src/graphql.generated";
 import { ProductStatusSelectField } from "@src/products/components/productStatusSelectField/ProductStatusSelectField";
 import { ProductTypeSelectField } from "@src/products/components/productTypeSelectField/ProductTypeSelectField";
@@ -192,6 +193,7 @@ export function ProductForm({ id }: FormProps) {
                             fullWidth
                             name="slug"
                             label={<FormattedMessage id="product.slug" defaultMessage="Slug" />}
+                            validate={validateSlug}
                             helperText={
                                 <FormattedMessage
                                     id="product.slug.helperText"
