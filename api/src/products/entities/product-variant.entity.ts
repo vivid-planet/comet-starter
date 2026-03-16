@@ -16,10 +16,10 @@ registerEnumType(VariantStatus, { name: "VariantStatus" });
 @Entity()
 @ObjectType()
 @RootBlockEntity()
-@ScopedEntity((productVariant) => ({
-    domain: productVariant.product.getEntity().domain,
-    language: productVariant.product.getEntity().language,
-}))
+@ScopedEntity(async (productVariant) => {
+    const product = await productVariant.product.loadOrFail();
+    return { domain: product.domain, language: product.language };
+})
 export class ProductVariant extends BaseEntity {
     [OptionalProps]?: "createdAt" | "updatedAt" | "stock" | "isAvailable" | "variantStatus";
 
