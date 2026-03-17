@@ -1,1 +1,3 @@
-export enum AppPermission {}
+export enum AppPermission {
+    products = "products",
+}
