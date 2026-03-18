@@ -2,7 +2,7 @@
     "name": "starter",
     "private": true,
     "scripts": {
-        "create-site-configs-env": "dotenv -e .env.local -e .env -- npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs --base64",
+        "create-site-configs-env": "dotenv -e .env.secrets -e .env.local -e .env -- npx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .env.site-configs.tpl -o .env.site-configs --base64",
         "dev": "npm run create-site-configs-env && dev-pm start",
         "dev:auth-proxy": "dotenv -- ./node_modules/.bin/oauth2-proxy --cookie-secret=$(head -c 16 /dev/random | base64)",
         "dev:auth-provider": "dotenv -- dev-oidc-provider",
