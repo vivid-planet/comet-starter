@@ -7,29 +7,25 @@
         "ghcr.io/devcontainers/features/node:1": {
             "version": "24"
         },
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "moby": false
+        },
         "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
     },
-    "forwardPorts": [3000, 4000, 5432, 6080, 8000, 8001, 16686],
+    "forwardPorts": [3000, 4000, 8000, 8080, 16686],
     "portsAttributes": {
         "3000": { "label": "Site" },
         "4000": { "label": "API" },
-        "5432": { "label": "PostgreSQL" },
-        "6080": { "label": "imgproxy" },
-        "8000": { "label": "Admin (Auth Proxy)" },
-        "8001": { "label": "Admin" },
+        "8000": { "label": "Admin" },
+        "8080": { "label": "IDP" },
         "16686": { "label": "Jaeger" }
     },
-    "mounts": [
-    ],
+    "mounts": [],
     "postCreateCommand": "bash .devcontainer/post-create.sh",
     "postStartCommand": "npm run dev",
     "customizations": {
         "vscode": {
-            "extensions": [
-                "dbaeumer.vscode-eslint",
-                "esbenp.prettier-vscode",
-                "Anthropic.claude-code"
-            ],
+            "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode", "Anthropic.claude-code"],
             "settings": {
                 "editor.defaultFormatter": "esbenp.prettier-vscode",
                 "editor.formatOnSave": true

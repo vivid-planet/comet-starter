@@ -6,15 +6,6 @@ services:
     volumes:
       - ..:/workspace:cached
     command: sleep infinity
-    environment:
-      POSTGRESQL_HOST: postgres
-      POSTGRESQL_PORT: 5432
-      POSTGRESQL_USER: postgres
-      POSTGRESQL_PASSWORD: vivid
-      POSTGRESQL_DB: main
-      IMGPROXY_PORT: 6080
-      DEV_DOMAIN: localhost
-      SERVER_HOST: 0.0.0.0
     depends_on:
       - postgres
       - imgproxy

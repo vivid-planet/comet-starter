@@ -8,8 +8,13 @@ cat > .env.local <<'EOF'
 POSTGRESQL_HOST=postgres
 IMGPROXY_URL=http://imgproxy:8080
 JAEGER_OLTP_PORT=4318
-SERVER_HOST=0.0.0.0
-DEV_DOMAIN=localhost
+JAEGER_OLTP_HOST=jaeger
+SERVER_HOST=::
+PREVIEW_URL=https://${CODESPACE_NAME}-${SITE_PORT}.app.github.dev
+SITE_URL=https://${CODESPACE_NAME}-${SITE_PORT}.app.github.dev
+IDP_SSO_URL=https://${CODESPACE_NAME}-${IDP_PORT}.app.github.dev
+IDP_JWKS_URI=https://${CODESPACE_NAME}-${IDP_PORT}.app.github.dev/jwks
+IDP_END_SESSION_ENDPOINT=https://${CODESPACE_NAME}-${IDP_PORT}.app.github.dev/session/end
 EOF
 
 # Install root dependencies
