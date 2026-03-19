@@ -1,9 +1,9 @@
 {
-    "extends": "@tsconfig/node24/tsconfig.json",
     "compilerOptions": {
-        "rootDir": "src/",
         "outDir": "lib/",
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "rootDir": "src/"
     },
+    "extends": "@tsconfig/node24/tsconfig.json",
     "include": ["src/**/*"]
 }
