@@ -1,4 +1,4 @@
-import { PageTreeNodeInterface, PageTreeNodeVisibility, PageTreeService, RequiredPermission } from "@comet/cms-api";
+import { PageTreeNodeInterface, PageTreeReadApiService, RequiredPermission } from "@comet/cms-api";
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
@@ -7,13 +7,12 @@ import { PageTreeNodeCategory } from "@src/page-tree/page-tree-node-category";
 @Resolver()
 @RequiredPermission(["pageTree"])
 export class MenusResolver {
-    constructor(private readonly pageTreeService: PageTreeService) {}
+    constructor(private readonly pageTreeReadApi: PageTreeReadApiService) {}
 
     @Query(() => [PageTreeNode])
     async mainMenu(@Args("scope", { type: () => PageTreeNodeScope }) scope: PageTreeNodeScope): Promise<PageTreeNodeInterface[]> {
-        const readApi = this.pageTreeService.createReadApi({ visibility: [PageTreeNodeVisibility.Published] });
         // Preload all page-tree nodes for the given scope in a single query to avoid N+1 queries
-        await readApi.preloadNodes(scope);
-        return readApi.pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.mainNavigation, excludeHiddenInMenu: true });
+        await this.pageTreeReadApi.preloadNodes(scope);
+        return this.pageTreeReadApi.pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.mainNavigation, excludeHiddenInMenu: true });
     }
 }
