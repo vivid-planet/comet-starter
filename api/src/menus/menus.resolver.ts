@@ -10,9 +10,10 @@ export class MenusResolver {
     constructor(private readonly pageTreeService: PageTreeService) {}
 
     @Query(() => [PageTreeNode])
-    mainMenu(@Args("scope", { type: () => PageTreeNodeScope }) scope: PageTreeNodeScope): Promise<PageTreeNodeInterface[]> {
-        return this.pageTreeService
-            .createReadApi({ visibility: [PageTreeNodeVisibility.Published] })
-            .pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.mainNavigation, excludeHiddenInMenu: true });
+    async mainMenu(@Args("scope", { type: () => PageTreeNodeScope }) scope: PageTreeNodeScope): Promise<PageTreeNodeInterface[]> {
+        const readApi = this.pageTreeService.createReadApi({ visibility: [PageTreeNodeVisibility.Published] });
+        // Preload all page-tree nodes for the given scope in a single query to avoid N+1 queries
+        await readApi.preloadNodes(scope);
+        return readApi.pageTreeRootNodeList({ scope, category: PageTreeNodeCategory.mainNavigation, excludeHiddenInMenu: true });
     }
 }
