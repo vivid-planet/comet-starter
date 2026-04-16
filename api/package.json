@@ -89,7 +89,7 @@
         "eslint": "^9.39.4",
         "knip": "^6.1.0",
         "npm-run-all2": "^8.0.4",
-        "prettier": "^3.8.1",
+        "prettier": "^3.8.2",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.9.3",

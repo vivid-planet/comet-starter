@@ -41,7 +41,7 @@
         "lint-staged": "^16.4.0",
         "npm-run-all2": "^8.0.4",
         "open-cli": "^9.0.0",
-        "prettier": "^3.8.1",
+        "prettier": "^3.8.2",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.3"
     },
