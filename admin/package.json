@@ -64,7 +64,7 @@
         "@comet/cli": "8.20.0",
         "@comet/eslint-config": "8.20.0",
         "@cspell/eslint-plugin": "^9.7.0",
-        "@formatjs/cli": "^6.14.1",
+        "@formatjs/cli": "^6.14.2",
         "@graphql-codegen/add": "^6.0.0",
         "@graphql-codegen/cli": "^6.2.1",
         "@graphql-codegen/fragment-matcher": "^6.0.0",
