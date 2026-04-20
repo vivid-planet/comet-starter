@@ -19,7 +19,7 @@
         "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:fix": "run-p lint:fix:{eslint,prettier,style}",
         "lint:fix:eslint": "npm run lint:eslint -- --fix",
-        "lint:fix:prettier": "npx prettier --write '*.{ts,js,json,md,yml,yaml,css,scss}'",
+        "lint:fix:prettier": "npm run lint:prettier -- --write",
         "lint:fix:style": "npm run lint:style -- --fix",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml,css,scss}'",
