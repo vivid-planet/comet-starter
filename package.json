@@ -27,7 +27,7 @@
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
         "install-agent-skills": "npx @comet/cli install-agent-skills",
-        "setup:ci": "npm run setup-project-files",
+        "setup:ci": "npm run create-site-configs-env && npm run setup-project-files",
         "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
