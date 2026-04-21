@@ -63,7 +63,7 @@
         "@comet/admin-generator": "8.20.0",
         "@comet/cli": "8.20.0",
         "@comet/eslint-config": "8.20.0",
-        "@cspell/eslint-plugin": "^9.7.0",
+        "@cspell/eslint-plugin": "^10.0.0",
         "@formatjs/cli": "^6.14.2",
         "@graphql-codegen/add": "^6.0.1",
         "@graphql-codegen/cli": "^6.3.0",
