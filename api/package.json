@@ -77,7 +77,7 @@
         "@comet/api-generator": "8.20.0",
         "@comet/cli": "8.20.0",
         "@comet/eslint-config": "8.20.0",
-        "@cspell/eslint-plugin": "^9.7.0",
+        "@cspell/eslint-plugin": "^9.8.0",
         "@nestjs/cli": "^11.0.21",
         "@nestjs/schematics": "^11.1.0",
         "@nestjs/testing": "^11.1.19",
