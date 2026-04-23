@@ -15,19 +15,35 @@ on:
       - next
 
 jobs:
-  test:
-    name: Test
+  changes:
+    name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
     steps:
-      - run: echo "${{ github.actor }}"
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api:
+              - 'api/**'
+              - '.github/workflows/test.yml'
 
+  test:
+    name: Test API
+    needs: changes
+    if: ${{ needs.changes.outputs.api == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
 
       - name: Use Node.js 24.x
         uses: actions/setup-node@v6
@@ -38,12 +54,12 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
+        run: npm ci && npm --prefix api ci
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
 
       - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+        run: npm run setup:ci
 
       - name: Test
         run: npm run test:ci

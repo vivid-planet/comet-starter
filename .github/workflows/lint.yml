@@ -15,19 +15,86 @@ on:
       - next
 
 jobs:
-  lint:
-    name: Lint
+  changes:
+    name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      root: ${{ steps.filter.outputs.root }}
+      api: ${{ steps.filter.outputs.api }}
+      admin: ${{ steps.filter.outputs.admin }}
+      site: ${{ steps.filter.outputs.site }}
+      create-app: ${{ steps.filter.outputs.create-app }}
     steps:
-      - run: echo "${{ github.actor }}"
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            root:
+              - 'package.json'
+              - 'package-lock.json'
+              - 'tsconfig.json'
+              - '.prettierrc'
+              - '.prettierignore'
+              - '.cspell.json'
+              - '.cspellignore'
+              - 'site-configs/**'
+              - 'setup-project-files.js'
+              - '.github/workflows/lint.yml'
+            api:
+              - 'api/**'
+            admin:
+              - 'admin/**'
+            site:
+              - 'site/**'
+              - 'site-configs/**'
+            create-app:
+              - 'create-app/**'
 
+  lint-root:
+    name: Lint Root
+    needs: changes
+    if: ${{ needs.changes.outputs.root == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Setup project for CI run
+        run: npm run setup:ci
+
+      - name: Lint
+        run: npm run lint:ci
+
+  lint-api:
+    name: Lint API
+    needs: changes
+    if: ${{ needs.changes.outputs.api == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Use Node.js 24.x
         uses: actions/setup-node@v6
@@ -38,15 +105,114 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix site ci && npm --prefix create-app ci
+        run: npm ci && npm --prefix api ci
+        env:
+          NPM_CONFIG_STRICT_PEER_DEPS: true
+
+      - name: Lint
+        run: npm --prefix api run lint:ci
+
+      - name: Build
+        run: npm --prefix api run build
+
+  lint-admin:
+    name: Lint Admin
+    needs: changes
+    if: ${{ needs.changes.outputs.admin == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci && npm --prefix admin ci
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
 
       - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+        run: npm run setup:ci && npm --prefix admin run setup:ci
 
       - name: Lint
-        run: npm run lint:ci && npm --prefix api run lint:ci && npm --prefix admin run lint:ci && npm --prefix site run lint:ci && npm --prefix create-app run lint
+        run: npm --prefix admin run lint:ci
 
       - name: Build
-        run: npm run build && npm --prefix create-app run build
+        run: npm --prefix admin run build
+
+  lint-site:
+    name: Lint Site
+    needs: changes
+    if: ${{ needs.changes.outputs.site == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci && npm --prefix site ci
+        env:
+          NPM_CONFIG_STRICT_PEER_DEPS: true
+
+      - name: Setup project for CI run
+        run: npm run setup:ci && npm --prefix site run setup:ci
+
+      - name: Lint
+        run: npm --prefix site run lint:ci
+
+      - name: Build
+        run: npm --prefix site run build
+
+  lint-create-app:
+    name: Lint Create App
+    needs: changes
+    if: ${{ needs.changes.outputs.create-app == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Use Node.js 24.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm ci && npm --prefix create-app ci
+        env:
+          NPM_CONFIG_STRICT_PEER_DEPS: true
+
+      - name: Lint
+        run: npm --prefix create-app run lint
+
+      - name: Build
+        run: npm --prefix create-app run build
