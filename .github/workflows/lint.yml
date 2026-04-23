@@ -73,76 +73,41 @@ jobs:
     name: Lint API
     needs: changes
     if: ${{ needs.changes.outputs.api == 'true' }}
-    runs-on: ubuntu-latest
     permissions:
       contents: read
-    steps:
-      - uses: ./.github/actions/setup-environment
-        with:
-          packages: api
-
-      - name: Lint
-        run: npm --prefix api run lint:ci
-
-      - name: Build
-        run: npm --prefix api run build
+    uses: ./.github/workflows/lint-package.yml
+    with:
+      package: api
 
   lint-admin:
     name: Lint Admin
     needs: changes
     if: ${{ needs.changes.outputs.admin == 'true' }}
-    runs-on: ubuntu-latest
     permissions:
       contents: read
-    steps:
-      - uses: ./.github/actions/setup-environment
-        with:
-          packages: admin
-
-      - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix admin run setup:ci
-
-      - name: Lint
-        run: npm --prefix admin run lint:ci
-
-      - name: Build
-        run: npm --prefix admin run build
+    uses: ./.github/workflows/lint-package.yml
+    with:
+      package: admin
+      setup-ci: true
 
   lint-site:
     name: Lint Site
     needs: changes
     if: ${{ needs.changes.outputs.site == 'true' }}
-    runs-on: ubuntu-latest
     permissions:
       contents: read
-    steps:
-      - uses: ./.github/actions/setup-environment
-        with:
-          packages: site
-
-      - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix site run setup:ci
-
-      - name: Lint
-        run: npm --prefix site run lint:ci
-
-      - name: Build
-        run: npm --prefix site run build
+    uses: ./.github/workflows/lint-package.yml
+    with:
+      package: site
+      setup-ci: true
 
   lint-create-app:
     name: Lint Create App
     needs: changes
     if: ${{ needs.changes.outputs.create-app == 'true' }}
-    runs-on: ubuntu-latest
     permissions:
       contents: read
-    steps:
-      - uses: ./.github/actions/setup-environment
-        with:
-          packages: create-app
-
-      - name: Lint
-        run: npm --prefix create-app run lint
-
-      - name: Build
-        run: npm --prefix create-app run build
+    uses: ./.github/workflows/lint-package.yml
+    with:
+      package: create-app
+      lint-command: lint

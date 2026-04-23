@@ -1,0 +1,40 @@
+name: Lint Package
+
+on:
+  workflow_call:
+    inputs:
+      package:
+        description: "Package directory name (e.g. api, admin, site, create-app)"
+        required: true
+        type: string
+      setup-ci:
+        description: "Whether to run setup:ci for root and the package before linting"
+        required: false
+        type: boolean
+        default: false
+      lint-command:
+        description: "npm script name to run for linting (default: lint:ci)"
+        required: false
+        type: string
+        default: lint:ci
+
+jobs:
+  lint:
+    name: Lint ${{ inputs.package }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: ./.github/actions/setup-environment
+        with:
+          packages: ${{ inputs.package }}
+
+      - name: Setup project for CI run
+        if: ${{ inputs.setup-ci }}
+        run: npm run setup:ci && npm --prefix ${{ inputs.package }} run setup:ci
+
+      - name: Lint
+        run: npm --prefix ${{ inputs.package }} run ${{ inputs.lint-command }}
+
+      - name: Build
+        run: npm --prefix ${{ inputs.package }} run build
