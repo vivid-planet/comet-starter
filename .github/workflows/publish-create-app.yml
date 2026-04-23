@@ -52,7 +52,7 @@ jobs:
         working-directory: create-app/
 
       - name: Commit package.json
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           message: "@comet/create-app: Publish ${{ env.NEW_VERSION }}"
 

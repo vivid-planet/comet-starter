@@ -2,6 +2,16 @@
 
 This file provides guidance to AI agents (Copilot, Cursor, Claude) when working with code in this repository.
 
+## Keeping This File Up to Date
+
+When making changes that affect project structure, commands, architecture, ports, conventions, or configuration, update the relevant section of this file to reflect the new state. This includes:
+
+- Adding or removing packages/services
+- Changing commands or scripts
+- Introducing new patterns or conventions
+- Modifying ports, environment files, or Docker services
+- Updating tooling or linting configuration
+
 ## Project Overview
 
 This is a monorepo containing a Comet DXP project. It contains three main packages:
@@ -12,16 +22,19 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 
 ## Common Commands
 
+**Important:** Always use the correct Node version before executing any npm command or ./install.sh. Run `nvm use` in the project root to do so.
+
 ### Setup
 
 ```bash
 ./install.sh                     # Full installation
 ```
 
+Use `./install.sh` instead of `npm install` whenever you add, remove, or update dependencies in any `package.json` file.
+
 ### Development
 
 ```bash
-nvm use                          # Use Node version from .nvmrc
 npm run dev                      # Start all services via dev-pm
 npx dev-pm status                # Show service status
 npx dev-pm logs <service>        # Tail service logs
@@ -46,6 +59,17 @@ npm --prefix api run lint        # Lint API
 npm --prefix admin run lint      # Lint Admin
 npm --prefix site run lint       # Lint Site (includes stylelint)
 ```
+
+### Linting and Formatting (Auto-fix)
+
+```bash
+npm run lint:fix                     # Auto-fix all packages
+npm --prefix api run lint:fix        # Auto-fix API
+npm --prefix admin run lint:fix      # Auto-fix Admin
+npm --prefix site run lint:fix       # Auto-fix Site (includes stylelint)
+```
+
+These commands auto-fix import sorting, remove unused imports, and apply Prettier formatting. The root `lint:fix` also formats config files outside the packages.
 
 ### Testing (API only currently)
 
@@ -138,6 +162,10 @@ The `site-configs/` directory manages site configurations, compiled into environ
 
 ## Key Patterns
 
+### Post-Change Workflow
+
+After making code changes, always run `npm --prefix <package> run lint:fix` for each affected package. This auto-fixes import ordering, removes unused imports, and applies Prettier formatting. Run this before committing or presenting changes as complete.
+
 ### API Module Structure
 
 Feature-based organization: `auth/`, `documents/`, `dam/`, `menus/`, `footers/`, `redirects/`, `status/`
@@ -149,3 +177,14 @@ Component-based with GraphQL mutations/queries co-located
 ### Site Structure
 
 Next.js App Router conventions with pages in `app/`
+
+## References
+
+This project is derived from the [Comet Starter](https://github.com/vivid-planet/comet-starter) repo and may have diverged over time. When implementing or refactoring features, consult the starter for current best-practice patterns. The repo follows the same `api/`, `admin/`, `site/` structure, so equivalent files can be found at matching paths.
+
+To browse the starter repo, use the GitHub API:
+
+- List a directory: `https://api.github.com/repos/vivid-planet/comet-starter/contents/{path}`
+- Fetch a file: `https://raw.githubusercontent.com/vivid-planet/comet-starter/main/{path}`
+
+Comet DXP documentation is available at https://docs.comet-dxp.com/docs/ - search for relevant pages with `site:docs.comet-dxp.com {topic}`.
