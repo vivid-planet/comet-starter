@@ -61,21 +61,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install root dependencies
-        run: npm ci
+      - uses: ./.github/actions/setup-environment
 
       - name: Setup project for CI run
         run: npm run setup:ci
@@ -91,23 +77,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-environment
         with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm ci && npm --prefix api ci
-        env:
-          NPM_CONFIG_STRICT_PEER_DEPS: true
+          packages: api
 
       - name: Lint
         run: npm --prefix api run lint:ci
@@ -123,23 +95,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-environment
         with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm ci && npm --prefix admin ci
-        env:
-          NPM_CONFIG_STRICT_PEER_DEPS: true
+          packages: admin
 
       - name: Setup project for CI run
         run: npm run setup:ci && npm --prefix admin run setup:ci
@@ -158,23 +116,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-environment
         with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm ci && npm --prefix site ci
-        env:
-          NPM_CONFIG_STRICT_PEER_DEPS: true
+          packages: site
 
       - name: Setup project for CI run
         run: npm run setup:ci && npm --prefix site run setup:ci
@@ -193,23 +137,9 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup-environment
         with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm ci && npm --prefix create-app ci
-        env:
-          NPM_CONFIG_STRICT_PEER_DEPS: true
+          packages: create-app
 
       - name: Lint
         run: npm --prefix create-app run lint

@@ -1,0 +1,36 @@
+name: "Setup Environment"
+description: "Checkout, setup Node.js, and install dependencies for CI jobs"
+
+inputs:
+  packages:
+    description: "Space-separated list of packages to install (e.g. 'api admin'). Leave empty for root-only."
+    required: false
+    default: ""
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.event.pull_request.head.ref || github.ref }}
+        token: ${{ github.token }}
+
+    - name: Use Node.js 24.x
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        cache: "npm"
+        cache-dependency-path: "**/package-lock.json"
+        registry-url: "https://registry.npmjs.org"
+
+    - name: Install dependencies
+      shell: bash
+      env:
+        NPM_CONFIG_STRICT_PEER_DEPS: "true"
+      run: |
+        npm ci
+        if [ -n "${{ inputs.packages }}" ]; then
+          for pkg in ${{ inputs.packages }}; do
+            npm --prefix "$pkg" ci
+          done
+        fi
