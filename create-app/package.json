@@ -43,7 +43,7 @@
         "@cspell/eslint-plugin": "^10.0.0",
         "@tsconfig/node24": "^24.0.4",
         "@types/node": "^24.12.2",
-        "knip": "^6.4.1",
+        "knip": "^6.6.1",
         "npm-run-all2": "^8.0.4",
         "prettier": "^3.8.3",
         "typescript": "^5.9.3"
