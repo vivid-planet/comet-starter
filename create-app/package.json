@@ -42,7 +42,7 @@
         "@comet/eslint-config": "^8.20.0",
         "@cspell/eslint-plugin": "^10.0.0",
         "@tsconfig/node24": "^24.0.4",
-        "@types/node": "^24.12.2",
+        "@types/node": "^24.12.3",
         "knip": "^6.12.1",
         "npm-run-all2": "^8.0.4",
         "prettier": "^3.8.3",
