@@ -168,7 +168,7 @@ After making code changes, always run `npm --prefix <package> run lint:fix` for 
 
 ### API Module Structure
 
-Feature-based organization: `auth/`, `documents/`, `dam/`, `menus/`, `footers/`, `redirects/`, `status/`
+Feature-based organization: `auth/`, `documents/`, `dam/`, `menus/`, `footers/`, `redirects/`, `healthcheck/`
 
 ### Admin Structure
 
