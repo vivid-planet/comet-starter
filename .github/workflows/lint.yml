@@ -37,13 +37,13 @@ jobs:
           cache-dependency-path: "**/package-lock.json"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Setup project for CI run
+        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+
       - name: Install dependencies
         run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix site ci && npm --prefix create-app ci
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
-
-      - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
 
       - name: Lint
         run: npm run lint:ci && npm --prefix api run lint:ci && npm --prefix admin run lint:ci && npm --prefix site run lint:ci && npm --prefix create-app run lint
