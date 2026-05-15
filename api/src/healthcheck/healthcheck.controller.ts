@@ -2,22 +2,22 @@ import { DisableCometGuards } from "@comet/cms-api";
 import { EntityManager } from "@mikro-orm/postgresql";
 import { Controller, Get, Header } from "@nestjs/common";
 
-@Controller("status")
+@Controller("healthcheck")
 @DisableCometGuards()
-export class StatusController {
+export class HealthcheckController {
     constructor(private readonly entityManager: EntityManager) {}
 
-    @Get("liveness")
+    @Get("live")
     @Header("cache-control", "no-store")
-    liveness(): string {
+    live(): string {
         // If this controller returns a non 2xx status code, the pod is restarted by kubernetes
         // see https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
         return "OK";
     }
 
-    @Get("readiness")
+    @Get("ready")
     @Header("cache-control", "no-store")
-    async readiness(): Promise<string> {
+    async ready(): Promise<string> {
         // If this controller returns a non 2xx status code, the pod does not receive traffic
         // If the database is not available, it does not make sense to restart the pod
         // However, the pod should not receive traffic anymore as it can't handle it without the database

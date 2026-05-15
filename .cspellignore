@@ -31,4 +31,7 @@ timestamptz
 formatjs
 cspellignore
 graphiql
+healthcheck
 bitnamilegacy
+usehooks
+valkey
