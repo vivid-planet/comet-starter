@@ -2,9 +2,9 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { type CustomMiddleware } from "./chain";
 
-export function withStatusMiddleware(middleware: CustomMiddleware) {
+export function withHealthcheckMiddleware(middleware: CustomMiddleware) {
     return async (request: NextRequest) => {
-        if (request.nextUrl.pathname === "/api/status") {
+        if (["/healthcheck/live", "/healthcheck/ready"].includes(request.nextUrl.pathname)) {
             return NextResponse.json({ status: "OK" }, { headers: { "cache-control": "no-store" } });
         }
         return middleware(request);

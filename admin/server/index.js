@@ -55,7 +55,7 @@ app.use(
     }),
 );
 
-app.get("/status/health", (req, res) => {
+app.get(["/healthcheck/live", "/healthcheck/ready"], (req, res) => {
     res.setHeader("cache-control", "no-store");
     res.send("OK!");
 });
