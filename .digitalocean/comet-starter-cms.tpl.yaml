@@ -235,7 +235,7 @@ services:
         value: "true"
       - key: OAUTH2_PROXY_SKIP_AUTH_ROUTES
         scope: RUN_AND_BUILD_TIME
-        value: "^(/api)?/status/"
+        value: "^(/api)?/healthcheck/"
       - key: OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS
         scope: RUN_AND_BUILD_TIME
         value: "true"

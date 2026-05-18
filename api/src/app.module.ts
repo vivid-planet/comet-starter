@@ -22,6 +22,7 @@ import { LinksModule } from "@src/documents/links/links.module";
 import { Page } from "@src/documents/pages/entities/page.entity";
 import { PagesModule } from "@src/documents/pages/pages.module";
 import { FootersModule } from "@src/footers/footers.module";
+import { HealthcheckModule } from "@src/healthcheck/healthcheck.module";
 import { PageTreeNodeScope } from "@src/page-tree/dto/page-tree-node-scope";
 import { PageTreeNode } from "@src/page-tree/entities/page-tree-node.entity";
 import { RedirectScope } from "@src/redirects/dto/redirect-scope";
@@ -36,7 +37,6 @@ import { ConfigModule } from "./config/config.module";
 import { DamFile } from "./dam/entities/dam-file.entity";
 import { DamFolder } from "./dam/entities/dam-folder.entity";
 import { MenusModule } from "./menus/menus.module";
-import { StatusModule } from "./status/status.module";
 
 @Module({})
 export class AppModule {
@@ -130,7 +130,7 @@ export class AppModule {
                         maxSrcResolution: config.dam.maxSrcResolution,
                     },
                 }),
-                StatusModule,
+                HealthcheckModule,
                 MenusModule,
                 DependenciesModule,
                 FootersModule,
@@ -138,7 +138,7 @@ export class AppModule {
                 ...(!config.debug
                     ? [
                           AccessLogModule.forRoot({
-                              shouldLogRequest: ({ user, req }) => user !== SYSTEM_USER_NAME && !req.route.path.startsWith("/api/status/"),
+                              shouldLogRequest: ({ user, req }) => user !== SYSTEM_USER_NAME && !req.route.path.startsWith("/api/healthcheck/"),
                           }),
                       ]
                     : []),
