@@ -48,3 +48,5 @@ jobs:
         run: npm ci & npm --prefix api ci & npm --prefix admin ci & npm --prefix site ci & wait
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
+      - name: Install agent skills
+        run: npm run install-agent-skills

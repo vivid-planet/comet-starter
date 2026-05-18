@@ -151,7 +151,6 @@ The `site-configs/` directory manages site configurations, compiled into environ
 - ESLint (flat config, .mjs files) using `@comet/eslint-config` presets
 - Prettier
 - stylelint for Site SCSS/CSS
-- cspell for spell checking
 - knip for unused exports detection
 
 ### Environment Files
@@ -168,7 +167,7 @@ After making code changes, always run `npm --prefix <package> run lint:fix` for 
 
 ### API Module Structure
 
-Feature-based organization: `auth/`, `documents/`, `dam/`, `menus/`, `footers/`, `redirects/`, `status/`
+Feature-based organization: `auth/`, `documents/`, `dam/`, `menus/`, `footers/`, `redirects/`, `healthcheck/`
 
 ### Admin Structure
 
