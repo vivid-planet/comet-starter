@@ -5,7 +5,6 @@ import process from "process";
 
 import { replacePlaceholder } from "../../util/replacePlaceholder";
 import { runEslintFix } from "../../util/runEslintFix";
-import { addProjectNameToUserDictionary } from "./addProjectNameToUserDictionary";
 import { amendCommitChanges } from "./amendCommitChanges";
 import { cleanupReadme } from "./cleanupReadme";
 import { cleanupWorkingDirectory } from "./cleanupWorkingDirectory";
@@ -26,7 +25,6 @@ export async function createApp(commandOptions: CreateAppCommandOptions) {
     cleanupReadme(commandOptions.verbose);
     cleanupWorkingDirectory(commandOptions.verbose);
     replacePlaceholder(commandOptions.projectName, commandOptions.verbose);
-    addProjectNameToUserDictionary(commandOptions.projectName);
     createInitialGitCommit(commandOptions.verbose);
     if (commandOptions.install) {
         const spinner = createSpinner("Installing project...").spin();
