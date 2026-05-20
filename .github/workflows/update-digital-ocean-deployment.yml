@@ -21,6 +21,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          NPM_CONFIG_STRICT_PEER_DEPS: true
 
       - name: Inject Site Configurations
         run: |
