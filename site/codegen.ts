@@ -12,7 +12,11 @@ const pluginConfig = {
     },
     enumsAsTypes: true,
     namingConvention: "keep",
-    scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), { DateTime: "string", LocalDate: "string" }),
+    scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), {
+        DateTime: "string",
+        LocalDate: "string",
+        // ID: "string",
+    }),
     typesPrefix: "GQL",
 };
 
