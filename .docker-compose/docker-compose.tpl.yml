@@ -25,7 +25,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
   imgproxy:
-    image: darthsim/imgproxy:v3
+    image: darthsim/imgproxy:v4
     restart: "on-failure"
     ports:
       - 8080:8080
