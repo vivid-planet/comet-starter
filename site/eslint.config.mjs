@@ -1,6 +1,4 @@
 import eslintConfigNextJs from "@comet/eslint-config/nextjs.js";
-import cspellPlugin from "@cspell/eslint-plugin";
-import cspellRecommended from "@cspell/eslint-plugin/recommended";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 const docsLink = "https://docs.comet-dxp.com/docs/faqs/environment-variables-in-site";
@@ -8,12 +6,6 @@ const docsLink = "https://docs.comet-dxp.com/docs/faqs/environment-variables-in-
 const config = defineConfig([
     globalIgnores(["**/**/*.generated.ts", "dist/**", "lang/**", "lang-compiled/**", "lang-extracted/**", ".next/**", "public/**", "block-meta.json", "package-lock.json"]),
     ...eslintConfigNextJs,
-    {
-        plugins: {
-            "@cspell": cspellPlugin,
-        },
-        ...cspellRecommended,
-    },
     {
         rules: {
             "no-restricted-syntax": [

@@ -15,7 +15,7 @@ services:
       - postgres
 
   imgproxy:
-    image: darthsim/imgproxy:v3
+    image: darthsim/imgproxy:v4
     pull_policy: weekly
     volumes:
       - ./api/uploads:/uploads:ro

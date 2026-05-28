@@ -10,7 +10,6 @@ export function cleanupWorkingDirectory(verbose: boolean) {
     removeReferenceInFile(".vscode/settings.json", /, "create-app"/g, verbose);
     removeReferenceInFile("install.sh", /^.*create-app.*$/gm, verbose);
     removeReferenceInFile("setup-project-files.js", /, "create-app"/g, verbose);
-    removeReferenceInFile(".cspell.json", /"create-app", /g, verbose);
     removeReferenceInFile("package.json", /create-app,/g, verbose);
     removeReferenceInFile("package.json", /.*"lint:create-app".*\n/g, verbose);
     removeReferenceInFile("package.json", /\|create-app/g, verbose);
