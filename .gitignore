@@ -11,3 +11,6 @@ coverage
 
 .agents/skills
 .claude/skills
+
+.playwright
+.playwright-cli
