@@ -1,4 +1,4 @@
-import { CodegenConfig } from "@graphql-codegen/cli";
+import { type CodegenConfig } from "@graphql-codegen/cli";
 import { readFileSync } from "fs";
 import { buildSchema } from "graphql";
 
@@ -30,6 +30,7 @@ const config: CodegenConfig = {
                     DateTime: "string",
                     Date: "string",
                     LocalDate: "string",
+                    ID: "string",
                 }),
                 typesPrefix: "GQL",
             },
@@ -51,6 +52,7 @@ const config: CodegenConfig = {
                     DateTime: "string",
                     Date: "string",
                     LocalDate: "string",
+                    ID: "string",
                 }),
                 typesPrefix: "GQL",
                 skipDocumentsValidation: {
