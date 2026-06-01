@@ -15,7 +15,7 @@ const pluginConfig = {
     scalars: rootBlocks.reduce((scalars, rootBlock) => ({ ...scalars, [rootBlock]: rootBlock }), {
         DateTime: "string",
         LocalDate: "string",
-        // ID: "string",
+        ID: "string",
     }),
     typesPrefix: "GQL",
 };
