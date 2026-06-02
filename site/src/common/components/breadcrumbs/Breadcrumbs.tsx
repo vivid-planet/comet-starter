@@ -1,5 +1,4 @@
 "use client";
-import { JsonLd } from "@comet/site-nextjs";
 import { SvgUse } from "@src/common/helpers/SvgUse";
 import { PageLayout } from "@src/layout/PageLayout";
 import { createSitePath } from "@src/util/createSitePath";
@@ -9,10 +8,16 @@ import NextLink from "next/link";
 import { useId, useState } from "react";
 import ReactFocusLock from "react-focus-lock";
 import { FormattedMessage } from "react-intl";
-import type { BreadcrumbList, WithContext } from "schema-dts";
+import type { BreadcrumbList, Thing, WithContext } from "schema-dts";
 
 import { type GQLBreadcrumbsFragment } from "./Breadcrumbs.fragment.generated";
 import styles from "./Breadcrumbs.module.scss";
+
+// Escape `</` to prevent closing the surrounding script tag (standard XSS guard for inline JSON-LD).
+const escapeJsonForScriptTag = (json: string): string => json.replace(/</g, "\\u003c");
+const JsonLd = <T extends Thing>({ data }: { data: WithContext<T> }) => (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: escapeJsonForScriptTag(JSON.stringify(data)) }} />
+);
 
 export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFragment) => {
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
