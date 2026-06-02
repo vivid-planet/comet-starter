@@ -3,14 +3,14 @@ import { chain } from "./middleware/chain";
 import { withContentSecurityPolicyHeadersMiddleware } from "./middleware/contentSecurityPolicyHeaders";
 import { withDamRewriteMiddleware } from "./middleware/damRewrite";
 import { withDomainRewriteMiddleware } from "./middleware/domainRewrite";
+import { withHealthcheckMiddleware } from "./middleware/healthcheck";
 import { withPreviewMiddleware } from "./middleware/preview";
 import { withRedirectToMainHostMiddleware } from "./middleware/redirectToMainHost";
 import { withRobotsMiddleware } from "./middleware/robots";
 import { withSkipRewriteMiddleware } from "./middleware/skipRewrite";
-import { withStatusMiddleware } from "./middleware/status";
 
 export default chain([
-    withStatusMiddleware,
+    withHealthcheckMiddleware,
     withAdminRedirectMiddleware,
     withSkipRewriteMiddleware,
     withDamRewriteMiddleware,

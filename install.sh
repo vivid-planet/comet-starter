@@ -21,6 +21,9 @@ npm install
 echo -e "\033[34m\nSetup project files\033[0m"
 npm run setup-project-files
 
+# Install agent skills
+npm run install-agent-skills
+
 # Lang install
 sh ./site/intl-update.sh
 sh ./admin/intl-update.sh

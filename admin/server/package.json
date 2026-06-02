@@ -3,9 +3,9 @@
     "private": true,
     "dependencies": {
         "express": "^5.2.1",
-        "express-static-gzip": "^3.0.0",
-        "helmet": "^8.1.0",
-        "http-proxy-middleware": "^3.0.5"
+        "express-static-gzip": "^3.0.1",
+        "helmet": "^8.2.0",
+        "http-proxy-middleware": "^4.0.0"
     },
     "engines": {
         "node": "24"

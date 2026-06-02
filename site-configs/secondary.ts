@@ -1,7 +1,10 @@
 import { Environment, GetSiteConfig } from "./site-configs";
 
+const host = process.env.SERVER_HOST ?? "localhost";
+const port = parseInt(process.env.SITE_PORT || "3000", 10);
+
 const envToDomainMap: Record<Environment, string> = {
-    local: "secondary.localhost:3000",
+    local: `secondary.${host}:${port}`,
     dev: "dev-secondary.comet-dxp.com",
     test: "test-secondary.comet-dxp.com",
     staging: "staging-secondary.comet-dxp.com",
