@@ -43,7 +43,7 @@
     "dependencies": {
         "@apollo/server": "^5.5.1",
         "@as-integrations/express5": "^1.1.2",
-        "@comet/cms-api": "8.23.2",
+        "@comet/cms-api": "8.23.4",
         "@faker-js/faker": "10.4.0",
         "@mikro-orm/cli": "^6.6.14",
         "@mikro-orm/core": "^6.6.14",
@@ -76,9 +76,9 @@
         "uuid": "^14.0.0"
     },
     "devDependencies": {
-        "@comet/api-generator": "8.23.2",
-        "@comet/cli": "8.23.2",
-        "@comet/eslint-config": "8.23.2",
+        "@comet/api-generator": "8.23.4",
+        "@comet/cli": "8.23.4",
+        "@comet/eslint-config": "8.23.4",
         "@nestjs/cli": "^11.0.21",
         "@nestjs/schematics": "^11.1.0",
         "@nestjs/testing": "^11.1.24",
