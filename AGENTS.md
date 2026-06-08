@@ -42,6 +42,17 @@ npx dev-pm restart <service>     # Restart a service
 npx dev-pm shutdown              # Stop all services
 ```
 
+#### Running multiple instances in parallel
+
+To run several checkouts at once without host port collisions, assign a free port offset before starting:
+
+```bash
+./assign-ports.sh                # find a free +100..+900 offset and write base+offset ports to .env.local
+npm run dev
+```
+
+`assign-ports.sh` reads every `*_PORT` entry from `.env`, finds an offset where all ports are free, and writes the offset ports to `.env.local` (leaving `.env` untouched). `npm run dev` runs `dev-pm start` via `dotenv -c secrets`, which exports the cascaded env (including `.env.local`) so both the Node services and the Docker containers (`docker compose` prefers real env vars over the `.env` file) bind the offset ports.
+
 ### Building
 
 ```bash
