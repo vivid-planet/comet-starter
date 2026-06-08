@@ -1,17 +1,17 @@
 export const dynamic = "error";
 
 import { gql } from "@comet/site-nextjs";
-import { type ExternalLinkBlockData, type InternalLinkBlockData, type RedirectsLinkBlockData } from "@src/blocks.generated";
+import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
 import { documentTypes } from "@src/documents";
-import { type GQLPageTreeNodeScope } from "@src/graphql.generated";
-import { type VisibilityParam } from "@src/middleware/domainRewrite";
+import type { GQLPageTreeNodeScope } from "@src/graphql.generated";
+import type { VisibilityParam } from "@src/middleware/domainRewrite";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { setVisibilityParam } from "@src/util/ServerContext";
 import { getSiteConfigForDomain } from "@src/util/siteConfig";
-import { type Metadata, type ResolvingMetadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import { notFound, redirect } from "next/navigation";
 
-import { type GQLDocumentTypeQuery, type GQLDocumentTypeQueryVariables } from "./page.generated";
+import type { GQLDocumentTypeQuery, GQLDocumentTypeQueryVariables } from "./page.generated";
 
 const documentTypeQuery = gql`
     query DocumentType(
@@ -120,7 +120,9 @@ export async function generateMetadata(
         scope,
     };
     const { generateMetadata } = documentTypes[data.pageTreeNodeByPath.documentType];
-    if (!generateMetadata) return {};
+    if (!generateMetadata) {
+        return {};
+    }
 
     return generateMetadata(props, parent);
 }

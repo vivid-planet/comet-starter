@@ -1,6 +1,6 @@
 "use client";
 import { type PropsWithData, withPreview } from "@comet/site-nextjs";
-import { type CallToActionBlockData } from "@src/blocks.generated";
+import type { CallToActionBlockData } from "@src/blocks.generated";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
 
 import { Button, type ButtonVariant } from "../components/Button";

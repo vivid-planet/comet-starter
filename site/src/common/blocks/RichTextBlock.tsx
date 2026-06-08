@@ -1,6 +1,6 @@
 "use client";
 import { hasRichTextBlockContent, PreviewSkeleton, type PropsWithData, withPreview } from "@comet/site-nextjs";
-import { type LinkBlockData, type RichTextBlockData } from "@src/blocks.generated";
+import type { LinkBlockData, RichTextBlockData } from "@src/blocks.generated";
 import { Typography, type TypographyProps } from "@src/common/components/Typography";
 import { isValidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import clsx from "clsx";
