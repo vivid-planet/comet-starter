@@ -1,27 +1,27 @@
 {
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "esModuleInterop": true,
+        "inlineSources": true,
+        "jsx": "react-jsx",
+        "jsxImportSource": "@emotion/react",
+        "module": "preserve",
+        "moduleResolution": "bundler",
+        "noEmit": true,
+        "paths": {
+            "@src/*": ["src/*"]
+        },
+        "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "strict": true,
+        "target": "ESNext"
+    },
+    "include": ["src/**/*"],
     "ts-node": {
         "compilerOptions": {
             "module": "commonjs"
         }
-    },
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "preserve",
-        "moduleResolution": "bundler",
-        "strict": true,
-        "jsx": "react-jsx",
-        "jsxImportSource": "@emotion/react",
-        "noEmit": true,
-        "skipLibCheck": true,
-        "baseUrl": "./",
-        "paths": {
-            "@src/*": ["src/*"]
-        },
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
-        "inlineSources": true
-    },
-    "include": ["src/**/*"]
+    }
 }

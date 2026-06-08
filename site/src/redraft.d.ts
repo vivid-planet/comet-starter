@@ -22,7 +22,7 @@ declare module "redraft" {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const redraft = (raw: any, renderers: Renderers): ReactElement<any, any> | null => {};
+    function redraft(raw: any, renderers: Renderers): ReactElement<any, any> | null;
 
     export default redraft;
 }

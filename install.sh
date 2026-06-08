@@ -38,3 +38,6 @@ npm --prefix create-app install
 mkdir -p ./api/uploads
 
 npm run setup:download-oauth2-proxy
+
+# Install agent skills
+npm run install-agent-skills
