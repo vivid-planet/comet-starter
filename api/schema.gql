@@ -50,7 +50,7 @@ type DamFile {
   contentHash: String!
   createdAt: DateTime!
   damPath: String!
-  dependents(filter: DependentFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0): PaginatedDependencies!
+  dependents(filter: DependentFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0, sort: [DependencySort!]): PaginatedDependencies!
   duplicates: [DamFile!]!
   fileUrl: String!
   folder: DamFolder
@@ -74,6 +74,7 @@ type DamFileImage {
   height: Int!
   id: ID!
   url(height: Int!, width: Int!): String
+  urlTemplate: String
   width: Int!
 }
 
@@ -188,15 +189,37 @@ type Dependency {
 }
 
 input DependencyFilter {
+  and: [DependencyFilter!]
+  name: StringFilter
+  or: [DependencyFilter!]
   rootColumnName: String
-  targetGraphqlObjectType: String
+  secondaryInformation: StringFilter
+  targetGraphqlObjectType: StringFilter
   targetId: String
+  visible: BooleanFilter
+}
+
+input DependencySort {
+  direction: SortDirection! = ASC
+  field: DependencySortField!
+}
+
+enum DependencySortField {
+  graphqlObjectType
+  name
+  secondaryInformation
+  visible
 }
 
 input DependentFilter {
+  and: [DependentFilter!]
+  name: StringFilter
+  or: [DependentFilter!]
   rootColumnName: String
-  rootGraphqlObjectType: String
+  rootGraphqlObjectType: StringFilter
   rootId: String
+  secondaryInformation: StringFilter
+  visible: BooleanFilter
 }
 
 interface DocumentInterface {
@@ -205,6 +228,8 @@ interface DocumentInterface {
 }
 
 type EntityInfo {
+  entityName: String!
+  id: String!
   name: String!
   secondaryInformation: String
 }
@@ -356,7 +381,7 @@ type Mutation {
   deleteDamMediaAlternative(id: ID!): Boolean!
   deletePageTreeNode(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
-  importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
+  deleteRedirects(ids: [ID!]!): Boolean!
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
   moveDamFolders(folderIds: [ID!]!, scope: DamScopeInput! = {}, targetFolderId: ID): [DamFolder!]!
   movePageTreeNodesByNeighbour(ids: [ID!]!, input: MovePageTreeNodesByNeighbourInput!): [PageTreeNode!]!
@@ -409,7 +434,8 @@ input PageInput {
 type PageTreeNode {
   category: PageTreeNodeCategory!
   childNodes: [PageTreeNode!]!
-  dependents(filter: DependentFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0): PaginatedDependencies!
+  dependencies(filter: DependencyFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0, sort: [DependencySort!]): PaginatedDependencies!
+  dependents(filter: DependentFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0, sort: [DependencySort!]): PaginatedDependencies!
   document: PageContentUnion
   documentType: String!
   hideInMenu: Boolean!
@@ -526,6 +552,7 @@ enum Permission {
   dam
   dependencies
   fileUploads
+  fullTextSearch
   impersonation
   pageTree
   prelogin
@@ -581,7 +608,7 @@ type Query {
   paginatedPageTreeNodes(category: String, documentType: String, limit: Int! = 25, offset: Int! = 0, scope: PageTreeNodeScopeInput!, sort: [PageTreeNodeSort!]): PaginatedPageTreeNodes!
   paginatedRedirects(filter: RedirectFilter, limit: Int! = 25, offset: Int! = 0, scope: RedirectScopeInput!, search: String, sort: [RedirectSort!]): PaginatedRedirects!
   redirect(id: ID!): Redirect!
-  redirectBySource(scope: RedirectScopeInput!, source: String!, sourceType: RedirectSourceTypeValues!): Redirect
+  redirectBySource(scope: RedirectScopeInput!, source: String!, sourceType: RedirectSourceType!): Redirect
   redirectSourceAvailable(scope: RedirectScopeInput!, source: String!): Boolean!
   redirects(active: Boolean, query: String, scope: RedirectScopeInput!, sortColumnName: String, sortDirection: SortDirection! = ASC, type: RedirectGenerationType): [Redirect!]! @deprecated(reason: "Use paginatedRedirects instead. Will be removed in the next version.")
   sitePreviewJwt(includeInvisible: Boolean!, path: String!, scope: JSONObject!): String!
@@ -601,12 +628,12 @@ type Redirect {
   active: Boolean!
   comment: String
   createdAt: DateTime!
-  dependencies(filter: DependencyFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0): PaginatedDependencies!
+  dependencies(filter: DependencyFilter, forceRefresh: Boolean! = false, limit: Int! = 25, offset: Int! = 0, sort: [DependencySort!]): PaginatedDependencies!
   generationType: RedirectGenerationType!
   id: ID!
   scope: RedirectScope!
   source: String!
-  sourceType: RedirectSourceTypeValues!
+  sourceType: RedirectSourceType!
   target: JSONObject!
   updatedAt: DateTime!
 }
@@ -619,6 +646,7 @@ input RedirectFilter {
   generationType: StringFilter
   or: [RedirectFilter!]
   source: StringFilter
+  sourceType: RedirectSourceTypeEnumFilter
   target: StringFilter
   updatedAt: DateTimeFilter
 }
@@ -633,7 +661,7 @@ input RedirectInput {
   comment: String
   generationType: RedirectGenerationType!
   source: String!
-  sourceType: RedirectSourceTypeValues!
+  sourceType: RedirectSourceType!
   target: JSONObject!
 }
 
@@ -656,8 +684,15 @@ enum RedirectSortField {
   updatedAt
 }
 
-enum RedirectSourceTypeValues {
+enum RedirectSourceType {
+  domain
   path
+}
+
+input RedirectSourceTypeEnumFilter {
+  equal: RedirectSourceType
+  isAnyOf: [RedirectSourceType!]
+  notEqual: RedirectSourceType
 }
 
 input RedirectUpdateActivenessInput {
