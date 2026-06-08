@@ -43,20 +43,7 @@
     "dependencies": {
         "@apollo/server": "^5.5.1",
         "@as-integrations/express5": "^1.1.2",
-<<<<<<< HEAD
         "@comet/cms-api": "9.0.0-beta.0",
-        "@faker-js/faker": "10.3.0",
-        "@mikro-orm/cli": "^6.6.6",
-        "@mikro-orm/core": "^6.6.6",
-        "@mikro-orm/migrations": "^6.6.6",
-        "@mikro-orm/nestjs": "^6.1.1",
-        "@mikro-orm/postgresql": "^6.6.6",
-        "@nestjs/apollo": "^13.2.4",
-        "@nestjs/common": "^11.1.13",
-        "@nestjs/core": "^11.1.13",
-        "@nestjs/graphql": "^13.2.4",
-=======
-        "@comet/cms-api": "8.23.4",
         "@faker-js/faker": "10.4.0",
         "@mikro-orm/cli": "^6.6.14",
         "@mikro-orm/core": "^6.6.14",
@@ -67,7 +54,6 @@
         "@nestjs/common": "^11.1.24",
         "@nestjs/core": "^11.1.24",
         "@nestjs/graphql": "^13.4.2",
->>>>>>> main
         "@nestjs/jwt": "^11.0.2",
         "@nestjs/platform-express": "^11.1.24",
         "@opentelemetry/api": "^1.9.1",
@@ -90,22 +76,13 @@
         "uuid": "^14.0.0"
     },
     "devDependencies": {
-<<<<<<< HEAD
         "@comet/api-generator": "9.0.0-beta.0",
         "@comet/cli": "9.0.0-beta.0",
         "@comet/eslint-config": "9.0.0-beta.0",
         "@cspell/eslint-plugin": "^9.6.4",
-        "@nestjs/cli": "^11.0.16",
-        "@nestjs/schematics": "^11.0.9",
-        "@nestjs/testing": "^11.1.13",
-=======
-        "@comet/api-generator": "8.23.4",
-        "@comet/cli": "8.23.4",
-        "@comet/eslint-config": "8.23.4",
         "@nestjs/cli": "^11.0.21",
         "@nestjs/schematics": "^11.1.0",
         "@nestjs/testing": "^11.1.24",
->>>>>>> main
         "@types/cli-progress": "^3.11.6",
         "@types/compression": "^1.8.1",
         "@types/cookie-parser": "^1.4.10",

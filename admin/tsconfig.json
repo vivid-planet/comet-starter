@@ -6,8 +6,8 @@
         "inlineSources": true,
         "jsx": "react-jsx",
         "jsxImportSource": "@emotion/react",
-        "module": "ESNext",
-        "moduleResolution": "Node",
+        "module": "preserve",
+        "moduleResolution": "bundler",
         "noEmit": true,
         "paths": {
             "@src/*": ["src/*"]
@@ -23,29 +23,5 @@
         "compilerOptions": {
             "module": "commonjs"
         }
-<<<<<<< HEAD
-    },
-    "compilerOptions": {
-        "target": "ESNext",
-        "module": "preserve",
-        "moduleResolution": "bundler",
-        "strict": true,
-        "jsx": "react-jsx",
-        "jsxImportSource": "@emotion/react",
-        "noEmit": true,
-        "skipLibCheck": true,
-        "baseUrl": "./",
-        "paths": {
-            "@src/*": ["src/*"]
-        },
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,
-        "inlineSources": true
-    },
-    "include": ["src/**/*"]
-=======
     }
->>>>>>> main
 }

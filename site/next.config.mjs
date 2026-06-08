@@ -20,13 +20,6 @@ const nextConfig = {
         // eslint-disable-next-line no-restricted-syntax -- NODE_ENV is set by Next.js itself, not environment-specific
         ignoreBuildErrors: process.env.NODE_ENV === "production",
     },
-<<<<<<< HEAD
-=======
-    eslint: {
-        // eslint-disable-next-line no-restricted-syntax -- NODE_ENV is set by Next.js itself, not environment-specific
-        ignoreDuringBuilds: process.env.NODE_ENV === "production",
-    },
->>>>>>> main
     experimental: {
         optimizePackageImports: ["@comet/site-nextjs"],
     },
@@ -90,7 +83,7 @@ const nextConfig = {
         if (!isServer) {
             config.module.rules.push({
                 test: /\.[jt]sx?$/,
-                include: [dirname(fileURLToPath(import.meta.url)) + "/src"],
+                include: [`${dirname(fileURLToPath(import.meta.url))}/src`],
                 use: [
                     {
                         loader: "@comet/site-nextjs/webpackPersistedQueriesLoader",

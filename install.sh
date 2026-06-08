@@ -21,9 +21,6 @@ npm install
 echo -e "\033[34m\nSetup project files\033[0m"
 npm run setup-project-files
 
-# Install agent skills
-npm run install-agent-skills
-
 # Lang install
 sh ./site/intl-update.sh
 sh ./admin/intl-update.sh
@@ -41,3 +38,6 @@ npm --prefix create-app install
 mkdir -p ./api/uploads
 
 npm run setup:download-oauth2-proxy
+
+# Install agent skills
+npm run install-agent-skills
