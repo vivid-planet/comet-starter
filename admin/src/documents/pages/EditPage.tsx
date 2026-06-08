@@ -21,12 +21,7 @@ import { useRouteMatch } from "react-router";
 import { PageContentBlock } from "./blocks/PageContentBlock";
 import { SeoBlock } from "./blocks/SeoBlock";
 import { StageBlock } from "./blocks/StageBlock";
-import {
-    type GQLEditPageQuery,
-    type GQLEditPageQueryVariables,
-    type GQLUpdatePageMutation,
-    type GQLUpdatePageMutationVariables,
-} from "./EditPage.generated";
+import type { GQLEditPageQuery, GQLEditPageQueryVariables, GQLUpdatePageMutation, GQLUpdatePageMutationVariables } from "./EditPage.generated";
 
 interface Props {
     id: string;
@@ -121,7 +116,9 @@ export const EditPage = ({ id }: Props) => {
             {hasChanges && (
                 <RouterPrompt
                     message={(location) => {
-                        if (location.pathname.startsWith(match.url)) return true; //we navigated within our self
+                        if (location.pathname.startsWith(match.url)) {
+                            return true;
+                        } //we navigated within our self
                         return intl.formatMessage({
                             id: "editPage.discardChanges",
                             defaultMessage: "Discard unsaved changes?",

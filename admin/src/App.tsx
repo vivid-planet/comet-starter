@@ -12,11 +12,11 @@ import {
 } from "@comet/cms-admin";
 import { css, Global } from "@emotion/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { GQLPermission } from "@src/graphql.generated";
 import { getMessages } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
-import { type ContentScope as BaseContentScope } from "@src/site-configs";
+import type { ContentScope as BaseContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { enUS } from "date-fns/locale";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
@@ -66,7 +66,9 @@ export function App() {
                         return config.scope.domain === scope.domain;
                     });
 
-                    if (!siteConfig) throw new Error(`siteConfig not found for domain ${scope.domain}`);
+                    if (!siteConfig) {
+                        throw new Error(`siteConfig not found for domain ${scope.domain}`);
+                    }
                     return {
                         url: siteConfig.url,
                         preloginEnabled: siteConfig.preloginEnabled || false,
