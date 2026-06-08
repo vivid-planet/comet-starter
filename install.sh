@@ -39,5 +39,5 @@ mkdir -p ./api/uploads
 
 npm run setup:download-oauth2-proxy
 
-# Install agent skills
-npm run install-agent-skills
+# Install agent features
+npm run install-agent-features
