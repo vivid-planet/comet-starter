@@ -1,8 +1,8 @@
 "use client";
-import { type PropsWithData } from "@comet/site-nextjs";
-import { type InternalLinkBlockData } from "@src/blocks.generated";
+import type { PropsWithData } from "@comet/site-nextjs";
+import type { InternalLinkBlockData } from "@src/blocks.generated";
 import Link from "next/link";
-import { type AnchorHTMLAttributes, type PropsWithChildren } from "react";
+import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 
 interface InternalLinkBlockProps
     extends PropsWithChildren<PropsWithData<InternalLinkBlockData>>, Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {}

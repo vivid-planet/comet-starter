@@ -4,9 +4,9 @@ import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { createSitePath } from "@src/util/createSitePath";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-import { type GQLPageLinkFragment } from "./PageLink.fragment.generated";
+import type { GQLPageLinkFragment } from "./PageLink.fragment.generated";
 
 interface Props extends PropsWithChildren {
     page: GQLPageLinkFragment;

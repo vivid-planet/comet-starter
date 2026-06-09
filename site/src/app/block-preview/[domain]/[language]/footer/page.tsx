@@ -1,9 +1,9 @@
 "use client";
 
 import { BlockPreviewProvider, IFrameBridgeProvider, useBlockPreviewFetch, useIFrameBridge } from "@comet/site-nextjs";
-import { type FooterContentBlockData } from "@src/blocks.generated";
+import type { FooterContentBlockData } from "@src/blocks.generated";
 import { FooterContentBlock } from "@src/layout/footer/blocks/FooterContentBlock";
-import { type ContentScope } from "@src/site-configs";
+import type { ContentScope } from "@src/site-configs";
 import { recursivelyLoadBlockData } from "@src/util/recursivelyLoadBlockData";
 import { type FunctionComponent, useEffect, useState } from "react";
 
@@ -15,7 +15,9 @@ const PreviewPage: FunctionComponent = () => {
     const [blockData, setBlockData] = useState<FooterContentBlockData>();
     useEffect(() => {
         async function load() {
-            if (!graphQLFetch) return;
+            if (!graphQLFetch) {
+                return;
+            }
             if (!iFrameBridge.block) {
                 setBlockData(undefined);
                 return;
