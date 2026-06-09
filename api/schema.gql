@@ -356,6 +356,7 @@ type Mutation {
   deleteDamMediaAlternative(id: ID!): Boolean!
   deletePageTreeNode(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
+  deleteRedirects(ids: [ID!]!): Boolean!
   importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
   moveDamFolders(folderIds: [ID!]!, scope: DamScopeInput! = {}, targetFolderId: ID): [DamFolder!]!
