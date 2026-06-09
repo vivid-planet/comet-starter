@@ -54,7 +54,7 @@
         "@comet/eslint-config": "8.24.0",
         "@formatjs/cli": "^6.16.6",
         "@graphql-codegen/add": "^7.0.1",
-        "@graphql-codegen/cli": "^7.1.0",
+        "@graphql-codegen/cli": "^7.1.2",
         "@graphql-codegen/named-operations-object": "^4.0.1",
         "@graphql-codegen/near-operation-file-preset": "^5.2.1",
         "@graphql-codegen/typescript": "^6.0.2",
