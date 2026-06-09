@@ -26,6 +26,17 @@ export default defineConfig({
             waitOn: ["tcp:$ADMIN_PORT"],
         },
         {
+            name: "auth-provider",
+            script: "npm run dev:auth-provider",
+            group: "admin",
+        },
+        {
+            name: "auth-proxy",
+            script: "npm run dev:auth-proxy",
+            group: "admin",
+            waitOn: ["tcp:$IDP_PORT", "tcp:$ADMIN_PORT"],
+        },
+        {
             name: "api",
             script: "npm --prefix api run start:dev",
             group: "api",
@@ -58,17 +69,6 @@ export default defineConfig({
             script: "npm --prefix site run generate-block-types:watch",
             group: "site",
             waitOn: ["tcp:$SITE_PORT"],
-        },
-        {
-            name: "auth-provider",
-            script: "npm run dev:auth-provider",
-            group: "login",
-        },
-        {
-            name: "auth-proxy",
-            script: "npm run dev:auth-proxy",
-            group: "login",
-            waitOn: ["tcp:$IDP_PORT", "tcp:$ADMIN_PORT"],
         },
     ],
 });
