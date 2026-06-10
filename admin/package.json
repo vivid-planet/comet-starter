@@ -76,7 +76,7 @@
         "@swc/plugin-emotion": "^14.12.0",
         "@types/lodash.isequal": "^4.5.8",
         "@types/node": "^24.13.1",
-        "@types/react": "^18.3.29",
+        "@types/react": "^18.3.31",
         "@types/react-dom": "^18.3.7",
         "@types/react-router": "^5.1.20",
         "@types/react-router-dom": "^5.3.3",
