@@ -131,6 +131,29 @@ The `site-configs/` directory manages site configurations, compiled into environ
 - API: 4000
 - Site: 3000
 
+### Running Multiple Instances in Parallel
+
+`npm run dev` automatically assigns a free, non-conflicting set of ports via
+`assign-ports.ts` (run standalone with `npm run assign-ports`). It writes a managed block
+of `*_PORT` variables to `.env.local`, controlled by a single `INSTANCE_OFFSET` value
+(`port = default + INSTANCE_OFFSET`, step `100`):
+
+- The primary checkout stays on the real defaults (offset `0`). Only the raw `*_PORT` vars
+  are written — the derived URL vars in `.env` (`API_URL_INTERNAL`, `SITE_URL`,
+  `IDP_SSO_URL`, …) expand from them automatically.
+- To run another clone/worktree in parallel, just run `npm run dev` there: if the default
+  ports are busy it auto-bumps to the next free offset (`100`, `200`, …). Pin a block
+  manually by editing `INSTANCE_OFFSET` in the `.env.local` managed block.
+- Each clone is its own Docker Compose project (named after its directory), so Postgres
+  data/volumes are isolated per checkout.
+- `dev-pm start` is run through the `dotenv` chain so the daemon and all child processes
+  (including the raw `docker compose up`) inherit the overridden ports. Because the dev-pm
+  daemon caches its environment for its lifetime, run `npx dev-pm shutdown` before changing
+  `INSTANCE_OFFSET` on an already-running instance.
+- Node `--inspect` debugger ports (e.g. `site` `9230`, nest `--watch` `9229`) are hardcoded
+  in package scripts and not offset; two instances both debugging may clash (Node warns and
+  continues without the inspector).
+
 ### Code Quality
 
 - ESLint with flat config format
@@ -156,7 +179,7 @@ The `site-configs/` directory manages site configurations, compiled into environ
 ### Environment Files
 
 - `.env` - Development defaults
-- `.env.local` - Local overrides (not committed)
+- `.env.local` - Local overrides (not committed); contains the `assign-ports.ts` managed port block (see "Running Multiple Instances in Parallel")
 - `.env.site-configs` - Multi-tenant configuration
 
 ## Key Patterns
