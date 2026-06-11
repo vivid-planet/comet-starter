@@ -1,5 +1,5 @@
 import { createMigrationsList, createOrmConfig } from "@comet/cms-api";
-import { EntityCaseNamingStrategy } from "@mikro-orm/core";
+import { EntityCaseNamingStrategy, TextType, Type } from "@mikro-orm/core";
 import { defineConfig } from "@mikro-orm/postgresql";
 import path from "path";
 
@@ -15,6 +15,15 @@ export const ormConfig = createOrmConfig(
         },
         namingStrategy: EntityCaseNamingStrategy,
         debug: false,
+        discovery: {
+            getMappedType(type: string, platform) {
+                // Map all string types to TEXT instead of VARCHAR
+                if (type === "string") {
+                    return Type.getType(TextType);
+                }
+                return platform.getDefaultMappedType(type);
+            },
+        },
         connect: process.env.MIKRO_ORM_NO_CONNECT !== "true",
         migrations: {
             tableName: "Migrations",
