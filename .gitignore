@@ -11,3 +11,4 @@ coverage
 
 .agents/skills
 .claude/skills
+.claude/worktrees/
