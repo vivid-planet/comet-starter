@@ -12,5 +12,6 @@ module.exports = {
     "create-app/src/**/*.{ts,tsx,js,jsx,json,css,scss,md}": () => "npm --prefix create-app run lint:eslint",
     "create-app/**/*.{ts,tsx}": () => "npm --prefix create-app run lint:tsc",
     "create-app/*.{ts,js,json,md,yml,yaml}": () => "npm --prefix create-app run lint:prettier",
+    "site-configs/**/*.{ts}": () => ["npm run lint:site-configs:eslint", "npm run lint:site-configs:tsc"],
     "./**/*.{js,json,md,yml,yaml}": () => "npm run lint:root",
 };

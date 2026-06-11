@@ -1,4 +1,4 @@
-import { Environment, GetSiteConfig } from "./site-configs";
+import { type Environment, type GetSiteConfig } from "./site-configs";
 
 const host = process.env.SERVER_HOST ?? "localhost";
 const port = parseInt(process.env.SITE_PORT || "3000", 10);

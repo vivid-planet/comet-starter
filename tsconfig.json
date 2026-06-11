@@ -1,5 +1,11 @@
 {
     "compilerOptions": {
-        "module": "CommonJS"
-    }
+        "module": "CommonJS",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "noEmit": true,
+        "moduleResolution": "node"
+    },
+    "include": ["site-configs/**/*.ts"]
 }
