@@ -38,9 +38,12 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix admin/server ci && npm --prefix site ci
+        run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix site ci
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
+
+      - name: Verify admin/server lockfile is up to date
+        run: npm --prefix admin/server install && git diff --exit-code admin/server/package-lock.json
 
       - name: Setup project for CI run
         run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
