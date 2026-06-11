@@ -52,7 +52,7 @@
     "devDependencies": {
         "@comet/cli": "8.24.0",
         "@comet/eslint-config": "8.24.0",
-        "@formatjs/cli": "^6.16.6",
+        "@formatjs/cli": "^6.16.10",
         "@graphql-codegen/add": "^7.0.1",
         "@graphql-codegen/cli": "^7.1.2",
         "@graphql-codegen/named-operations-object": "^4.0.1",
