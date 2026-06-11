@@ -17,6 +17,7 @@ export const ormConfig = createOrmConfig(
         debug: false,
         discovery: {
             getMappedType(type: string, platform) {
+                // Map all string types to TEXT instead of VARCHAR
                 if (type === "string") {
                     return Type.getType(TextType);
                 }
