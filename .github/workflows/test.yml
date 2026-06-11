@@ -42,6 +42,9 @@ jobs:
         env:
           NPM_CONFIG_STRICT_PEER_DEPS: true
 
+      - name: Verify lockfiles are up to date
+        run: git diff --exit-code -- ':(glob)**/package-lock.json'
+
       - name: Setup project for CI run
         run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
 
