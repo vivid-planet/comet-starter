@@ -1,0 +1,41 @@
+name: "Setup"
+description: "Set up Node.js, install dependencies, and verify lockfiles are up to date"
+
+inputs:
+  setup-ci:
+    description: "Run the project's CI setup scripts"
+    default: "true"
+  build:
+    description: "Build all packages"
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js 24.x
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+        cache: "npm"
+        cache-dependency-path: "**/package-lock.json"
+        registry-url: "https://registry.npmjs.org"
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix admin/server ci && npm --prefix site ci && npm --prefix create-app ci
+      env:
+        NPM_CONFIG_STRICT_PEER_DEPS: true
+
+    - name: Verify lockfiles are up to date
+      shell: bash
+      run: git diff --exit-code -- ':(glob)**/package-lock.json'
+
+    - name: Setup project for CI run
+      if: ${{ inputs.setup-ci == 'true' }}
+      shell: bash
+      run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+
+    - name: Build
+      if: ${{ inputs.build == 'true' }}
+      shell: bash
+      run: npm run build && npm --prefix create-app run build

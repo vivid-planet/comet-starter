@@ -29,27 +29,10 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Use Node.js 24.x
-        uses: actions/setup-node@v6
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Install dependencies
-        run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix admin/server ci && npm --prefix site ci && npm --prefix create-app ci
-        env:
-          NPM_CONFIG_STRICT_PEER_DEPS: true
-
-      - name: Verify lockfiles are up to date
-        run: git diff --exit-code -- ':(glob)**/package-lock.json'
-
-      - name: Setup project for CI run
-        run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+          build: "true"
 
       - name: Lint
         run: npm run lint:ci && npm --prefix api run lint:ci && npm --prefix admin run lint:ci && npm --prefix site run lint:ci && npm --prefix create-app run lint
-
-      - name: Build
-        run: npm run build && npm --prefix create-app run build
