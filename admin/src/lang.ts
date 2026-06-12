@@ -1,7 +1,7 @@
 import { deDE as coreDe, enUS as coreEn } from "@mui/material/locale";
 import { deDE as dataGridDe, enUS as dataGridEn } from "@mui/x-data-grid-pro/locales";
 import { deDE as datePickersDe, enUS as datePickersEn } from "@mui/x-date-pickers/locales";
-import type { Locale } from "date-fns";
+import { type Locale } from "date-fns";
 import { de, enUS } from "date-fns/locale";
 import { type ResolvedIntlConfig } from "react-intl";
 
@@ -14,7 +14,7 @@ import project_messages_en from "../lang-compiled/starter-admin/en.json";
 // so adding a language is a matter of adding its code and the corresponding imports.
 const supportedLanguages = ["en", "de"] as const;
 
-export type SupportedLanguage = (typeof supportedLanguages)[number];
+type SupportedLanguage = (typeof supportedLanguages)[number];
 
 const fallbackLanguage: SupportedLanguage = "en";
 
