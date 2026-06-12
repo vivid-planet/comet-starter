@@ -2,6 +2,7 @@ import "@fontsource-variable/roboto-flex/full.css";
 
 import { ApolloProvider } from "@apollo/client";
 import { ErrorDialogHandler, MasterLayout, MuiThemeProvider, RouterBrowserRouter, SnackbarProvider } from "@comet/admin";
+import { DateFnsLocaleProvider } from "@comet/admin-date-time";
 import {
     CometConfigProvider,
     ContentScopeProvider,
@@ -14,11 +15,10 @@ import { css, Global } from "@emotion/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 import type { GQLPermission } from "@src/graphql.generated";
-import { getMessages } from "@src/lang";
+import { getLanguageConfig } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { type ContentScope as BaseContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
-import { enUS } from "date-fns/locale";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { DndProvider } from "react-dnd-multi-backend";
 import { IntlProvider } from "react-intl";
@@ -44,6 +44,8 @@ const config = createConfig();
 const apolloClient = createApolloClient(config.apiUrl);
 
 export function App() {
+    const { language, messages, dateFnsLocale } = getLanguageConfig();
+
     return (
         <CometConfigProvider
             {...config}
@@ -80,45 +82,50 @@ export function App() {
             redirects={{ scopeParts: ["domain"] }}
         >
             <ApolloProvider client={apolloClient}>
-                <IntlProvider locale="en" messages={getMessages("en")}>
-                    <LocalizationProvider adapterLocale={enUS} dateAdapter={AdapterDateFns}>
-                        <MuiThemeProvider theme={theme}>
-                            <DndProvider options={HTML5toTouch}>
-                                <SnackbarProvider>
-                                    <ErrorDialogHandler />
-                                    <CurrentUserProvider>
-                                        <RouterBrowserRouter>
-                                            <GlobalStyle />
-                                            <ContentScopeProvider>
-                                                {({ match }) => (
-                                                    <Switch>
-                                                        <Route
-                                                            path={`${match.path}/preview`}
-                                                            render={(props) => (
-                                                                <SitePreview
-                                                                    resolvePath={(path: string, scope) => {
-                                                                        return `/${scope.language}${path}`;
-                                                                    }}
-                                                                    {...props}
-                                                                />
-                                                            )}
-                                                        />
-                                                        <Route
-                                                            render={() => (
-                                                                <MasterLayout headerComponent={MasterHeader} menuComponent={AppMasterMenu}>
-                                                                    <MasterMenuRoutes menu={masterMenuData} />
-                                                                </MasterLayout>
-                                                            )}
-                                                        />
-                                                    </Switch>
-                                                )}
-                                            </ContentScopeProvider>
-                                        </RouterBrowserRouter>
-                                    </CurrentUserProvider>
-                                </SnackbarProvider>
-                            </DndProvider>
-                        </MuiThemeProvider>
-                    </LocalizationProvider>
+                <IntlProvider locale={language} messages={messages}>
+                    <MuiThemeProvider theme={theme}>
+                        <LocalizationProvider adapterLocale={dateFnsLocale} dateAdapter={AdapterDateFns}>
+                            <DateFnsLocaleProvider value={dateFnsLocale}>
+                                <DndProvider options={HTML5toTouch}>
+                                    <SnackbarProvider>
+                                        <ErrorDialogHandler />
+                                        <CurrentUserProvider>
+                                            <RouterBrowserRouter>
+                                                <GlobalStyle />
+                                                <ContentScopeProvider>
+                                                    {({ match }) => (
+                                                        <Switch>
+                                                            <Route
+                                                                path={`${match.path}/preview`}
+                                                                render={(props) => (
+                                                                    <SitePreview
+                                                                        resolvePath={(path: string, scope) => {
+                                                                            return `/${scope.language}${path}`;
+                                                                        }}
+                                                                        {...props}
+                                                                    />
+                                                                )}
+                                                            />
+                                                            <Route
+                                                                render={() => (
+                                                                    <MasterLayout
+                                                                        headerComponent={MasterHeader}
+                                                                        menuComponent={AppMasterMenu}
+                                                                    >
+                                                                        <MasterMenuRoutes menu={masterMenuData} />
+                                                                    </MasterLayout>
+                                                                )}
+                                                            />
+                                                        </Switch>
+                                                    )}
+                                                </ContentScopeProvider>
+                                            </RouterBrowserRouter>
+                                        </CurrentUserProvider>
+                                    </SnackbarProvider>
+                                </DndProvider>
+                            </DateFnsLocaleProvider>
+                        </LocalizationProvider>
+                    </MuiThemeProvider>
                 </IntlProvider>
             </ApolloProvider>
         </CometConfigProvider>

@@ -33,6 +33,7 @@
     "dependencies": {
         "@apollo/client": "^3.14.1",
         "@comet/admin": "8.24.0",
+        "@comet/admin-date-time": "8.24.0",
         "@comet/admin-icons": "8.24.0",
         "@comet/cms-admin": "8.24.0",
         "@emotion/react": "^11.14.0",
