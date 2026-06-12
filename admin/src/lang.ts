@@ -1,16 +1,18 @@
-import { enUS as coreEn } from "@mui/material/locale";
-import { enUS as dataGridEn } from "@mui/x-data-grid-pro/locales";
-import { enUS as datePickersEn } from "@mui/x-date-pickers/locales";
+import { deDE as coreDe, enUS as coreEn } from "@mui/material/locale";
+import { deDE as dataGridDe, enUS as dataGridEn } from "@mui/x-data-grid-pro/locales";
+import { deDE as datePickersDe, enUS as datePickersEn } from "@mui/x-date-pickers/locales";
 import type { Locale } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { de, enUS } from "date-fns/locale";
 import { type ResolvedIntlConfig } from "react-intl";
 
+import comet_messages_de from "../lang-compiled/comet-lang/de.json";
 import comet_messages_en from "../lang-compiled/comet-lang/en.json";
+import project_messages_de from "../lang-compiled/starter-admin/de.json";
 import project_messages_en from "../lang-compiled/starter-admin/en.json";
 
 // Add additional languages here. The structure below resolves messages, date-fns and MUI locales for every supported language,
 // so adding a language is a matter of adding its code and the corresponding imports.
-const supportedLanguages = ["en"] as const;
+const supportedLanguages = ["en", "de"] as const;
 
 export type SupportedLanguage = (typeof supportedLanguages)[number];
 
@@ -28,10 +30,12 @@ function getClosestSupportedLanguageFromBrowserLanguages(): SupportedLanguage {
 
 const cometMessages = {
     en: comet_messages_en,
+    de: comet_messages_de,
 } satisfies Record<SupportedLanguage, ResolvedIntlConfig["messages"]>;
 
 const projectMessages = {
     en: project_messages_en,
+    de: project_messages_de,
 } satisfies Record<SupportedLanguage, ResolvedIntlConfig["messages"]>;
 
 function getMessages(language: SupportedLanguage): ResolvedIntlConfig["messages"] {
@@ -43,10 +47,12 @@ function getMessages(language: SupportedLanguage): ResolvedIntlConfig["messages"
 
 const dateFnsLocales: Record<SupportedLanguage, Locale> = {
     en: enUS,
+    de,
 };
 
 const muiLocales: Record<SupportedLanguage, object[]> = {
     en: [coreEn, dataGridEn, datePickersEn],
+    de: [coreDe, dataGridDe, datePickersDe],
 };
 
 export function getLanguageConfig(): {
