@@ -31,7 +31,7 @@
     "dependencies": {
         "@comet/site-nextjs": "8.24.0",
         "@fontsource/roboto": "^5.2.10",
-        "@next/bundle-analyzer": "^14.2.35",
+        "@next/bundle-analyzer": "^16.2.9",
         "@opentelemetry/api": "^1.9.1",
         "@opentelemetry/auto-instrumentations-node": "^0.76.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.218.0",
