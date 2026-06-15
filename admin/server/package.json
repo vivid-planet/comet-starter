@@ -11,6 +11,6 @@
         "node": "24"
     },
     "devDependencies": {
-        "@types/node": "^24.0.0"
+        "@types/node": "^24.13.2"
     }
 }
