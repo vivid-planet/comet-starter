@@ -17,8 +17,9 @@ import type { GQLPermission } from "@src/graphql.generated";
 import { getLanguageConfig } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
 import { type ContentScope as BaseContentScope } from "@src/site-configs";
-import { theme } from "@src/theme";
+import { createTheme } from "@src/theme";
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
+import { useMemo } from "react";
 import { DndProvider } from "react-dnd-multi-backend";
 import { IntlProvider } from "react-intl";
 import { Route, Switch } from "react-router";
@@ -43,7 +44,8 @@ const config = createConfig();
 const apolloClient = createApolloClient(config.apiUrl);
 
 export function App() {
-    const { language, messages, dateFnsLocale } = getLanguageConfig();
+    const { language, messages, dateFnsLocale, muiLocale } = getLanguageConfig();
+    const theme = useMemo(() => createTheme(muiLocale), [muiLocale]);
 
     return (
         <CometConfigProvider
