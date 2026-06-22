@@ -29,7 +29,7 @@
         "setup:ci": "./intl-update.sh"
     },
     "dependencies": {
-        "@comet/site-nextjs": "8.24.0",
+        "@comet/site-nextjs": "8.24.2",
         "@fontsource/roboto": "^5.2.10",
         "@next/bundle-analyzer": "^14.2.35",
         "@opentelemetry/api": "^1.9.1",
@@ -50,8 +50,8 @@
         "usehooks-ts": "^3.1.1"
     },
     "devDependencies": {
-        "@comet/cli": "8.24.0",
-        "@comet/eslint-config": "8.24.0",
+        "@comet/cli": "8.24.2",
+        "@comet/eslint-config": "8.24.2",
         "@formatjs/cli": "^6.16.10",
         "@graphql-codegen/add": "^7.0.1",
         "@graphql-codegen/cli": "^7.1.2",
