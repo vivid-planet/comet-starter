@@ -67,12 +67,6 @@ export class AppModule {
                             return error;
                         },
                         context: ({ req }: { req: Request }) => ({ ...req }),
-                        cors: {
-                            origin: config.corsAllowedOrigin,
-                            methods: ["GET", "POST"],
-                            credentials: false,
-                            maxAge: 600,
-                        },
                         useGlobalPrefix: true,
                         // See https://docs.nestjs.com/graphql/other-features#execute-enhancers-at-the-field-resolver-level
                         fieldResolverEnhancers: ["guards", "interceptors", "filters"] as Enhancer[],

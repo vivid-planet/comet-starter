@@ -16,7 +16,6 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         serverHost: envVars.SERVER_HOST ?? "localhost",
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
-        corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),
         auth: {
             systemUserPassword: envVars.BASIC_AUTH_SYSTEM_USER_PASSWORD,
             idpClientId: envVars.IDP_CLIENT_ID,
