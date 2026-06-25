@@ -17,6 +17,7 @@
         "lint:fix:api": "npm --prefix api run lint:fix",
         "lint:fix:root": "npx prettier --write './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}'",
         "lint:fix:site": "npm --prefix site run lint:fix",
+        "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:root": "npx prettier --check './!(admin|api|site|create-app)/**/*.{js,json,md,yml,yaml}'",
         "lint:site": "npm --prefix site run lint",
         "test:ci": "run-p test:ci:*",
