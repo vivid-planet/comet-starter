@@ -10,5 +10,6 @@ node_modules
 coverage
 
 .agents/skills
+.claude/settings.local.json
 .claude/skills
 .claude/worktrees/
