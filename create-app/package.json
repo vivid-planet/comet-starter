@@ -43,7 +43,7 @@
         "@tsconfig/node24": "^24.0.4",
         "@types/node": "^24.13.2",
         "knip": "^6.14.2",
-        "npm-run-all2": "^9.0.1",
+        "npm-run-all2": "^9.0.2",
         "prettier": "^3.8.4",
         "typescript": "^5.9.3"
     },
