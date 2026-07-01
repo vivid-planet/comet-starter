@@ -1,7 +1,7 @@
 import { createFileUploadInputFromUrl, FileInterface, FilesService } from "@comet/cms-api";
-import { faker } from "@faker-js/faker";
 import { EntityManager } from "@mikro-orm/postgresql";
 import { Injectable } from "@nestjs/common";
+import { faker } from "@src/db/fixtures/faker";
 import * as fs from "fs/promises";
 import path from "path";
 

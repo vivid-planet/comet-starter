@@ -1,6 +1,6 @@
 import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
-import { faker } from "@faker-js/faker";
 import { Injectable } from "@nestjs/common";
+import { faker } from "@src/db/fixtures/faker";
 import { ColumnsBlock, ColumnsContentBlock } from "@src/documents/pages/blocks/columns.block";
 
 import { BlockFixture } from "../block-fixture";
