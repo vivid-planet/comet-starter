@@ -1,10 +1,10 @@
 import { ExtractBlockInputFactoryProps } from "@comet/cms-api";
 import { Injectable } from "@nestjs/common";
-import { faker } from "@src/db/fixtures/faker";
 import {
     Alignment as StandaloneCallToActionListBlockAlignment,
     StandaloneCallToActionListBlock,
 } from "@src/common/blocks/standalone-call-to-action-list.block";
+import { faker } from "@src/db/fixtures/faker";
 
 import { CallToActionListBlockFixtureService } from "./call-to-action-list-block.service";
 
