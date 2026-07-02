@@ -14,12 +14,18 @@ import { css, Global } from "@emotion/react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { GQLPermission } from "@src/graphql.generated";
-import { getMessages } from "@src/lang";
+import { getLanguageConfig } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
+<<<<<<< HEAD
 import type { ContentScope as BaseContentScope } from "@src/site-configs";
 import { theme } from "@src/theme";
 import { enUS } from "date-fns/locale";
+=======
+import { type ContentScope as BaseContentScope } from "@src/site-configs";
+import { createTheme } from "@src/theme";
+>>>>>>> main
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
+import { useMemo } from "react";
 import { DndProvider } from "react-dnd-multi-backend";
 import { IntlProvider } from "react-intl";
 import { Route, Switch } from "react-router";
@@ -44,6 +50,9 @@ const config = createConfig();
 const apolloClient = createApolloClient(config.apiUrl);
 
 export function App() {
+    const { language, messages, dateFnsLocale, muiLocale } = getLanguageConfig();
+    const theme = useMemo(() => createTheme(muiLocale), [muiLocale]);
+
     return (
         <CometConfigProvider
             {...config}
@@ -82,9 +91,9 @@ export function App() {
             redirects={{ scopeParts: ["domain"] }}
         >
             <ApolloProvider client={apolloClient}>
-                <IntlProvider locale="en" messages={getMessages("en")}>
-                    <LocalizationProvider adapterLocale={enUS} dateAdapter={AdapterDateFns}>
-                        <MuiThemeProvider theme={theme}>
+                <IntlProvider locale={language} messages={messages}>
+                    <MuiThemeProvider theme={theme}>
+                        <LocalizationProvider adapterLocale={dateFnsLocale} dateAdapter={AdapterDateFns}>
                             <DndProvider options={HTML5toTouch}>
                                 <SnackbarProvider>
                                     <ErrorDialogHandler />
@@ -119,8 +128,8 @@ export function App() {
                                     </CurrentUserProvider>
                                 </SnackbarProvider>
                             </DndProvider>
-                        </MuiThemeProvider>
-                    </LocalizationProvider>
+                        </LocalizationProvider>
+                    </MuiThemeProvider>
                 </IntlProvider>
             </ApolloProvider>
         </CometConfigProvider>

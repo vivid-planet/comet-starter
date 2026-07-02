@@ -6,7 +6,7 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 const expressStaticGzip = require("express-static-gzip");
 
 const app = express();
-const port = process.env.APP_PORT ?? 3000;
+const port = process.env.ADMIN_PORT ?? 3000;
 const host = process.env.SERVER_HOST ?? "localhost";
 
 let indexFile = fs.readFileSync("./build/index.html", "utf8");

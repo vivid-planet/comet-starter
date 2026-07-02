@@ -29,10 +29,15 @@
         "setup:ci": "./intl-update.sh"
     },
     "dependencies": {
+<<<<<<< HEAD
         "@comet/site-nextjs": "9.0.0-beta.5",
+=======
+        "@comet/site-nextjs": "8.24.5",
+>>>>>>> main
         "@fontsource/roboto": "^5.2.10",
         "@next/bundle-analyzer": "^16.1.6",
         "@opentelemetry/api": "^1.9.1",
+<<<<<<< HEAD
         "@opentelemetry/auto-instrumentations-node": "^0.76.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.218.0",
         "@opentelemetry/sdk-node": "^0.218.0",
@@ -41,6 +46,14 @@
         "graphql": "^16.14.0",
         "ioredis": "^5.10.1",
         "keyv": "^5.5.4",
+=======
+        "@opentelemetry/auto-instrumentations-node": "^0.77.0",
+        "@opentelemetry/exporter-trace-otlp-http": "^0.219.0",
+        "@opentelemetry/sdk-node": "^0.219.0",
+        "clsx": "^2.1.1",
+        "graphql": "^16.14.2",
+        "ioredis": "^5.11.1",
+>>>>>>> main
         "lru-cache": "^11.5.1",
         "next": "^16.1.6",
         "react": "^19.2.4",
@@ -48,32 +61,44 @@
         "react-focus-lock": "^2.13.7",
         "react-intl": "^7.1.14",
         "redraft": "^0.10.2",
-        "swiper": "^12.1.4",
+        "swiper": "^14.0.0",
         "usehooks-ts": "^3.1.1"
     },
     "devDependencies": {
+<<<<<<< HEAD
         "@comet/cli": "9.0.0-beta.5",
         "@comet/eslint-config": "9.0.0-beta.5",
         "@formatjs/cli": "^6.16.6",
+=======
+        "@comet/cli": "8.24.5",
+        "@comet/eslint-config": "8.24.5",
+        "@formatjs/cli": "^6.16.11",
+>>>>>>> main
         "@graphql-codegen/add": "^7.0.1",
-        "@graphql-codegen/cli": "^7.1.0",
+        "@graphql-codegen/cli": "^7.1.3",
         "@graphql-codegen/named-operations-object": "^4.0.1",
         "@graphql-codegen/near-operation-file-preset": "^5.2.1",
         "@graphql-codegen/typescript": "^6.0.2",
-        "@graphql-codegen/typescript-operations": "^6.0.3",
+        "@graphql-codegen/typescript-operations": "^6.0.5",
         "@parcel/watcher": "^2.5.6",
+<<<<<<< HEAD
         "@types/node": "^24.12.4",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
+=======
+        "@types/node": "^24.13.2",
+        "@types/react": "^18.3.31",
+        "@types/react-dom": "^18.3.7",
+>>>>>>> main
         "check-node-version": "^4.2.1",
         "chokidar-cli": "^3.0.0",
         "dotenv-cli": "^11.0.0",
         "eslint": "^9.39.4",
-        "knip": "^6.14.2",
-        "npm-run-all2": "^8.0.4",
-        "prettier": "^3.8.3",
-        "sass": "^1.100.0",
-        "stylelint": "^17.12.0",
+        "knip": "^6.23.0",
+        "npm-run-all2": "^9.0.2",
+        "prettier": "^3.9.1",
+        "sass": "^1.101.0",
+        "stylelint": "^17.14.0",
         "stylelint-config-standard-scss": "^17.0.0",
         "typed-scss-modules": "^8.1.1",
         "typescript": "^5.9.3"
