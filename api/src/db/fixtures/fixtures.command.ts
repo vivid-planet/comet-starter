@@ -1,9 +1,9 @@
 import { DependenciesService } from "@comet/cms-api";
-import { faker } from "@faker-js/faker";
 import { CreateRequestContext, MikroORM } from "@mikro-orm/core";
 import { Inject, Logger } from "@nestjs/common";
 import { Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
+import { faker } from "@src/db/fixtures/faker";
 import { MultiBar, Options, Presets } from "cli-progress";
 import { Command, CommandRunner } from "nest-commander";
 
