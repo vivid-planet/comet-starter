@@ -387,10 +387,6 @@ type Mutation {
   deletePageTreeNode(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
   deleteRedirects(ids: [ID!]!): Boolean!
-<<<<<<< HEAD
-=======
-  importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
->>>>>>> main
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
   moveDamFolders(folderIds: [ID!]!, scope: DamScopeInput! = {}, targetFolderId: ID): [DamFolder!]!
   movePageTreeNodesByNeighbour(ids: [ID!]!, input: MovePageTreeNodesByNeighbourInput!): [PageTreeNode!]!

@@ -1,9 +1,5 @@
 import { createMigrationsList, createOrmConfig } from "@comet/cms-api";
-<<<<<<< HEAD
-import { DataloaderType, EntityCaseNamingStrategy } from "@mikro-orm/core";
-=======
-import { EntityCaseNamingStrategy, TextType, Type } from "@mikro-orm/core";
->>>>>>> main
+import { DataloaderType, EntityCaseNamingStrategy, TextType, Type } from "@mikro-orm/core";
 import { defineConfig } from "@mikro-orm/postgresql";
 import path from "path";
 

@@ -16,14 +16,8 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import type { GQLPermission } from "@src/graphql.generated";
 import { getLanguageConfig } from "@src/lang";
 import { pageTreeCategories } from "@src/pageTree/pageTreeCategories";
-<<<<<<< HEAD
 import type { ContentScope as BaseContentScope } from "@src/site-configs";
-import { theme } from "@src/theme";
-import { enUS } from "date-fns/locale";
-=======
-import { type ContentScope as BaseContentScope } from "@src/site-configs";
 import { createTheme } from "@src/theme";
->>>>>>> main
 import { HTML5toTouch } from "rdndmb-html5-to-touch";
 import { useMemo } from "react";
 import { DndProvider } from "react-dnd-multi-backend";
