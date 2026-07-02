@@ -7,11 +7,6 @@ input AttachedDocumentInput {
   type: String!
 }
 
-"""
-The `BigInt` scalar type represents non-fractional signed whole numeric values.
-"""
-scalar BigInt
-
 input BooleanFilter {
   equal: Boolean
 }
@@ -66,7 +61,7 @@ type DamFile {
   license: DamFileLicense
   mimetype: String!
   name: String!
-  size: BigInt!
+  size: Int!
   thisFileIsAlternativeFor: [DamMediaAlternative!]!
   title: String
   updatedAt: DateTime!
