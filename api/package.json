@@ -43,7 +43,7 @@
     "dependencies": {
         "@apollo/server": "^5.5.1",
         "@as-integrations/express5": "^1.1.2",
-        "@comet/cms-api": "8.25.0",
+        "@comet/cms-api": "9.1.0",
         "@faker-js/faker": "10.5.0",
         "@mikro-orm/cli": "^6.6.15",
         "@mikro-orm/core": "^6.6.15",
@@ -73,12 +73,13 @@
         "rimraf": "^6.1.3",
         "rxjs": "^7.8.2",
         "slugify": "^1.6.9",
+        "tsconfig-paths": "^4.2.0",
         "uuid": "^14.0.1"
     },
     "devDependencies": {
-        "@comet/api-generator": "8.25.0",
-        "@comet/cli": "8.25.0",
-        "@comet/eslint-config": "8.25.0",
+        "@comet/api-generator": "9.1.0",
+        "@comet/cli": "9.1.0",
+        "@comet/eslint-config": "9.1.0",
         "@nestjs/cli": "^11.0.23",
         "@nestjs/schematics": "^11.1.0",
         "@nestjs/testing": "^11.1.27",
@@ -95,7 +96,6 @@
         "npm-run-all2": "^9.0.2",
         "prettier": "^3.9.4",
         "ts-node": "^10.9.2",
-        "tsconfig-paths": "^4.2.0",
         "typescript": "^5.9.3",
         "vite-tsconfig-paths": "^6.1.1",
         "vitest": "^4.1.10"

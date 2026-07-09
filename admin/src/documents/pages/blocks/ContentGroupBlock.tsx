@@ -1,5 +1,5 @@
 import { AnchorBlock, BlockCategory, createBlocksBlock, createCompositeBlock, createCompositeBlockSelectField } from "@comet/cms-admin";
-import { type ContentGroupBlockData } from "@src/blocks.generated";
+import type { ContentGroupBlockData } from "@src/blocks.generated";
 import { AccordionBlock } from "@src/common/blocks/AccordionBlock";
 import { MediaGalleryBlock } from "@src/common/blocks/MediaGalleryBlock";
 import { SpaceBlock } from "@src/common/blocks/SpaceBlock";
@@ -10,7 +10,7 @@ import { StandaloneRichTextBlock } from "@src/common/blocks/StandaloneRichTextBl
 import { ColumnsBlock } from "@src/documents/pages/blocks/ColumnsBlock";
 import { KeyFactsBlock } from "@src/documents/pages/blocks/KeyFactsBlock";
 import { TeaserBlock } from "@src/documents/pages/blocks/TeaserBlock";
-import { type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { FormattedMessage } from "react-intl";
 
 const backgroundColorOptions: Array<{ value: ContentGroupBlockData["backgroundColor"]; label: ReactNode }> = [

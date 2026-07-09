@@ -1,9 +1,9 @@
 import { deDE as coreDe, enUS as coreEn } from "@mui/material/locale";
 import { deDE as dataGridDe, enUS as dataGridEn } from "@mui/x-data-grid-pro/locales";
 import { deDE as datePickersDe, enUS as datePickersEn } from "@mui/x-date-pickers/locales";
-import { type Locale } from "date-fns";
+import type { Locale } from "date-fns";
 import { de, enUS } from "date-fns/locale";
-import { type ResolvedIntlConfig } from "react-intl";
+import type { ResolvedIntlConfig } from "react-intl";
 
 import comet_messages_de from "../lang-compiled/comet-lang/de.json";
 import comet_messages_en from "../lang-compiled/comet-lang/en.json";

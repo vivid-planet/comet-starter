@@ -14,6 +14,7 @@
     "license": "BSD-2-Clause",
     "author": "Vivid Planet Software GmbH <office@vivid-planet.com> (https://www.vivid-planet.com/)",
     "bin": "./bin/index.js",
+    "sideEffects": false,
     "files": [
         "lib/**/*.js"
     ],
@@ -39,7 +40,7 @@
         "rimraf": "^6.1.3"
     },
     "devDependencies": {
-        "@comet/eslint-config": "^8.25.0",
+        "@comet/eslint-config": "9.1.0",
         "@tsconfig/node24": "^24.0.4",
         "@types/node": "^24.13.2",
         "knip": "^6.24.0",

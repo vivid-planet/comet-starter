@@ -35,12 +35,13 @@
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
         "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
-        "install-agent-skills": "npx @comet/cli install-agent-skills",
+        "install-agent-features": "npx @comet/cli install-agent-features",
         "setup:ci": "npm run setup-project-files",
         "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
-        "@comet/cli": "8.25.0",
+        "@comet/agent-features": "9.1.0",
+        "@comet/cli": "9.1.0",
         "@comet/dev-oidc-provider": "^1.2.1",
         "@comet/dev-process-manager": "^3.1.0",
         "dotenv-cli": "^11.0.0",

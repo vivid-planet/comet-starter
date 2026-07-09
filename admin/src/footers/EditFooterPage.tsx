@@ -13,7 +13,7 @@ import {
     useSaveConflictQuery,
     useSiteConfig,
 } from "@comet/cms-admin";
-import { type FooterContentBlockInput } from "@src/blocks.generated";
+import type { FooterContentBlockInput } from "@src/blocks.generated";
 import isEqual from "lodash.isequal";
 import { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
@@ -30,7 +30,7 @@ import {
     namedOperations,
 } from "./EditFooterPage.generated";
 
-export function EditFooterPage(): JSX.Element | null {
+export function EditFooterPage() {
     const { scope } = useContentScope();
     const siteConfig = useSiteConfig({ scope });
     const [footerState, setFooterState] = useState<BlockState<typeof FooterContentBlock>>(FooterContentBlock.defaultValues());
