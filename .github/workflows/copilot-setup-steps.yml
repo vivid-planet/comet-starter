@@ -49,5 +49,5 @@ jobs:
       - name: Setup project for CI run
         run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
 
-      - name: Install agent skills
-        run: npm run install-agent-skills
+      - name: Install agent features
+        run: npm run install-agent-features
