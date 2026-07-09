@@ -14,6 +14,7 @@
     "license": "BSD-2-Clause",
     "author": "Vivid Planet Software GmbH <office@vivid-planet.com> (https://www.vivid-planet.com/)",
     "bin": "./bin/index.js",
+    "sideEffects": false,
     "files": [
         "lib/**/*.js"
     ],

@@ -18,8 +18,11 @@ export function replacePlaceholder(projectName: string, verbose: boolean): void 
             const contents = fs.readFileSync(file, "utf8").toString();
 
             if (placeholder.test(contents)) {
-                if (file.endsWith("intl-update.sh")) fs.writeFileSync(file, contents.replaceAll("lang/starter-lang", `lang/${projectName}-lang`));
-                else fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
+                if (file.endsWith("intl-update.sh")) {
+                    fs.writeFileSync(file, contents.replaceAll("lang/starter-lang", `lang/${projectName}-lang`));
+                } else {
+                    fs.writeFileSync(file, contents.replaceAll(placeholder, projectName));
+                }
                 changedFiles++;
                 if (verbose) {
                     console.log(kleur.grey(`Replaced content in ${file}`));
