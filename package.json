@@ -40,8 +40,8 @@
         "setup:download-oauth2-proxy": "dotenv -- sh -c 'npx @comet/cli download-oauth2-proxy -v $OAUTH2_PROXY_VERSION'"
     },
     "devDependencies": {
-        "@comet/agent-features": "9.0.0-beta.5",
-        "@comet/cli": "9.0.0-beta.5",
+        "@comet/agent-features": "9.1.0",
+        "@comet/cli": "9.1.0",
         "@comet/dev-oidc-provider": "^1.2.1",
         "@comet/dev-process-manager": "^3.1.0",
         "dotenv-cli": "^11.0.0",

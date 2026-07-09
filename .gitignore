@@ -9,7 +9,11 @@ node_modules
 .env.site-configs
 coverage
 
+.agents/rules
 .agents/skills
+.claude/rules
 .claude/settings.local.json
 .claude/skills
 .claude/worktrees/
+.cursor/rules
+.github/instructions
