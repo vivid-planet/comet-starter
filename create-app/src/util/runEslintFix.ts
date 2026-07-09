@@ -19,9 +19,9 @@ export function runEslintFix(verbose: boolean) {
 
         try {
             if (microservice !== "api") {
-                execSync(`npm --prefix ${microservice} run prelint`);
+                execSync(`pnpm --dir ${microservice} run prelint`);
             }
-            execSync(`npm run --prefix ${microservice} lint:eslint -- --fix`);
+            execSync(`pnpm --dir ${microservice} run lint:eslint -- --fix`);
         } catch (err) {
             console.log(kleur.yellow(`Failed to fix ESLint errors in ${microservice}.`));
             if (verbose) {

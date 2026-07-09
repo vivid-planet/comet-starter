@@ -33,7 +33,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Test
-        run: npm run test:ci
+        run: pnpm run test:ci
 
       - name: Upload test results
         uses: actions/upload-artifact@v7

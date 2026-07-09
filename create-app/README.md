@@ -57,11 +57,11 @@ To test the script locally, run the following commands:
 
 1. Start the development process:
     ```bash
-    npm start
+    pnpm start
     ```
 2. Run the script:
     ```bash
     node ./bin/index.js
     ```
 
-Testing a close to production usage of the CLI can be done by calling `npm link` in the create-app/ directory. Then `npx @comet/create-app` can be used.
+Testing a close to production usage of the CLI can be done by calling `pnpm link --global` in the create-app/ directory. Then `npx @comet/create-app` can be used.
