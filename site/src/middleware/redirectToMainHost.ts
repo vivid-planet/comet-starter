@@ -119,6 +119,7 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                 getSiteConfigs().find((siteConfig) => matchesHostWithPattern(siteConfig, host));
 
             if (redirectSiteConfig) {
+<<<<<<< HEAD
                 const { scope } = redirectSiteConfig;
 
                 const domainRedirects = await fetchDomainRedirects(scope);
@@ -167,6 +168,11 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                     }
                     return NextResponse.redirect(destination, { status: 301 });
                 }
+=======
+                return NextResponse.redirect(`https://${redirectSiteConfig.domains.main}${request.nextUrl.pathname}${request.nextUrl.search}`, {
+                    status: 301,
+                });
+>>>>>>> main
             }
 
             return NextResponse.json({ error: `Cannot resolve domain: ${host}` }, { status: 404 });
