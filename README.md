@@ -21,19 +21,19 @@ In use by `@comet/create-app` to create new Comet DXP projects. Find more inform
 
 ### Run Services
 
-    // use correct npm version https://github.com/nvm-sh/nvm#deeper-shell-integration
+    // use correct Node version https://github.com/nvm-sh/nvm#deeper-shell-integration
     nvm use
 
     // All services
-    npm run dev
+    pnpm run dev
 
-    npx dev-pm status [--interval]
-    npx dev-pm logs <service>
-    npx dev-pm restart <service>
-    npx dev-pm shutdown
+    pnpm exec dev-pm status [--interval]
+    pnpm exec dev-pm logs <service>
+    pnpm exec dev-pm restart <service>
+    pnpm exec dev-pm shutdown
 
     // import fixtures
-    npm run --prefix api fixtures
+    pnpm --dir api run fixtures
 
     // start repl
-    npm run --prefix api repl
+    pnpm --dir api run repl

@@ -4,24 +4,27 @@ description: "Set up Node.js, install dependencies, and verify lockfiles are up 
 runs:
   using: "composite"
   steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Use Node.js 24.x
       uses: actions/setup-node@v6
       with:
         node-version: 24
-        cache: "npm"
-        cache-dependency-path: "**/package-lock.json"
+        cache: "pnpm"
+        cache-dependency-path: "**/pnpm-lock.yaml"
         registry-url: "https://registry.npmjs.org"
 
     - name: Install dependencies
       shell: bash
-      run: npm ci && npm --prefix api ci && npm --prefix admin ci && npm --prefix admin/server ci && npm --prefix site ci && npm --prefix create-app ci
+      run: pnpm install --frozen-lockfile && pnpm --dir api install --frozen-lockfile && pnpm --dir admin install --frozen-lockfile && pnpm --dir admin/server install --frozen-lockfile && pnpm --dir site install --frozen-lockfile && pnpm --dir create-app install --frozen-lockfile
       env:
-        NPM_CONFIG_STRICT_PEER_DEPS: true
+        NPM_CONFIG_STRICT_PEER_DEPENDENCIES: true
 
     - name: Verify lockfiles are up to date
       shell: bash
-      run: git diff --exit-code -- ':(glob)**/package-lock.json'
+      run: git diff --exit-code -- ':(glob)**/pnpm-lock.yaml'
 
     - name: Setup project for CI run
       shell: bash
-      run: npm run setup:ci && npm --prefix admin run setup:ci && npm --prefix site run setup:ci
+      run: pnpm run setup:ci && pnpm --dir admin run setup:ci && pnpm --dir site run setup:ci

@@ -2,6 +2,7 @@
     "name": "@comet/create-app",
     "version": "1.212.0",
     "description": "Command-line interface to create a new Comet application",
+    "packageManager": "pnpm@10.33.0",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
     "bugs": {
         "url": "https://github.com/vivid-planet/comet-starter/issues"
@@ -18,16 +19,16 @@
         "lib/**/*.js"
     ],
     "scripts": {
-        "prebuild": "npm run clean",
+        "prebuild": "pnpm run clean",
         "build": "tsc --project tsconfig.json",
         "clean": "rimraf lib",
         "lint": "run-p -l lint:{eslint,knip,prettier,tsc}",
         "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
+        "lint:prettier": "pnpm exec prettier --check '*.{ts,js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.json",
-        "prepublishOnly": "npm run lint && npm run build",
-        "prestart": "npm run clean",
+        "prepublishOnly": "pnpm run lint && pnpm run build",
+        "prestart": "pnpm run clean",
         "start": "tsc --watch --project tsconfig.json"
     },
     "dependencies": {

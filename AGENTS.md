@@ -22,7 +22,7 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 
 ## Common Commands
 
-**Important:** Always use the correct Node version before executing any npm command or ./install.sh. Run `nvm use` in the project root to do so.
+**Important:** Always use the correct Node version before executing any pnpm command or ./install.sh. Run `nvm use` in the project root to do so.
 
 ### Setup
 
@@ -30,43 +30,43 @@ This is a monorepo containing a Comet DXP project. It contains three main packag
 ./install.sh                     # Full installation
 ```
 
-Use `./install.sh` instead of `npm install` whenever you add, remove, or update dependencies in any `package.json` file.
+Use `./install.sh` instead of `pnpm install` whenever you add, remove, or update dependencies in any `package.json` file.
 
 ### Development
 
 ```bash
-npm run dev                      # Start all services via dev-pm
-npx dev-pm status                # Show service status
-npx dev-pm logs <service>        # Tail service logs
-npx dev-pm restart <service>     # Restart a service
-npx dev-pm shutdown              # Stop all services
+pnpm run dev                      # Start all services via dev-pm
+pnpm exec dev-pm status                # Show service status
+pnpm exec dev-pm logs <service>        # Tail service logs
+pnpm exec dev-pm restart <service>     # Restart a service
+pnpm exec dev-pm shutdown              # Stop all services
 ```
 
 ### Building
 
 ```bash
-npm run build                    # Build all packages
-npm --prefix api run build       # Build API (includes api-generator)
-npm --prefix admin run build     # Build Admin
-npm --prefix site run build      # Build Site
+pnpm run build                    # Build all packages
+pnpm --dir api run build       # Build API (includes api-generator)
+pnpm --dir admin run build     # Build Admin
+pnpm --dir site run build      # Build Site
 ```
 
 ### Linting
 
 ```bash
-npm run lint                     # Lint all packages
-npm --prefix api run lint        # Lint API
-npm --prefix admin run lint      # Lint Admin
-npm --prefix site run lint       # Lint Site (includes stylelint)
+pnpm run lint                     # Lint all packages
+pnpm --dir api run lint        # Lint API
+pnpm --dir admin run lint      # Lint Admin
+pnpm --dir site run lint       # Lint Site (includes stylelint)
 ```
 
 ### Linting and Formatting (Auto-fix)
 
 ```bash
-npm run lint:fix                     # Auto-fix all packages
-npm --prefix api run lint:fix        # Auto-fix API
-npm --prefix admin run lint:fix      # Auto-fix Admin
-npm --prefix site run lint:fix       # Auto-fix Site (includes stylelint)
+pnpm run lint:fix                     # Auto-fix all packages
+pnpm --dir api run lint:fix        # Auto-fix API
+pnpm --dir admin run lint:fix      # Auto-fix Admin
+pnpm --dir site run lint:fix       # Auto-fix Site (includes stylelint)
 ```
 
 These commands auto-fix import sorting, remove unused imports, and apply Prettier formatting. The root `lint:fix` also formats config files outside the packages.
@@ -74,26 +74,26 @@ These commands auto-fix import sorting, remove unused imports, and apply Prettie
 ### Testing (API only currently)
 
 ```bash
-npm --prefix api run test                              # Run all tests
-npm --prefix api run test -- src/path/to/file.spec.ts  # Run specific test file
-npm --prefix api run test -- --testNamePattern="name"  # Run tests matching pattern
-npm --prefix api run test:watch                        # Watch mode
+pnpm --dir api run test                              # Run all tests
+pnpm --dir api run test -- src/path/to/file.spec.ts  # Run specific test file
+pnpm --dir api run test -- --testNamePattern="name"  # Run tests matching pattern
+pnpm --dir api run test:watch                        # Watch mode
 ```
 
 ### Database
 
 ```bash
-npm --prefix api run db:migrate                   # Run migrations
-npm --prefix api run fixtures                     # Load test fixtures
-npm --prefix api run repl                         # Interactive REPL
-npm --prefix api run mikro-orm migration:create   # Create new migration
+pnpm --dir api run db:migrate                   # Run migrations
+pnpm --dir api run fixtures                     # Load test fixtures
+pnpm --dir api run repl                         # Interactive REPL
+pnpm --dir api run mikro-orm migration:create   # Create new migration
 ```
 
 ### Code Generation
 
 ```bash
-npm --prefix admin run admin-generator   # Execute admin generator. Generates grid and form react components based on .cometGen.ts(x) files
-npm --prefix api run api-generator       # Execute api generator. Generates resolvers, DTOs, etc. for new entities with the @CrudGenerator decorator
+pnpm --dir admin run admin-generator   # Execute admin generator. Generates grid and form react components based on .cometGen.ts(x) files
+pnpm --dir api run api-generator       # Execute api generator. Generates resolvers, DTOs, etc. for new entities with the @CrudGenerator decorator
 ```
 
 ## Architecture
@@ -109,7 +109,9 @@ npm --prefix api run api-generator       # Execute api generator. Generates reso
 
 ### Package Independence
 
-Each package has its own `node_modules` - this is not an npm workspace monorepo. Install dependencies per-package with `npm --prefix <package> install`.
+Each package has its own `node_modules` - this is not a pnpm workspace monorepo. Install dependencies per-package with `pnpm --dir <package> install`.
+
+The package manager is **pnpm**, pinned via the `packageManager` field in each `package.json` (enable it with `corepack enable pnpm`). Each package keeps its own `pnpm-lock.yaml`; there is intentionally no root `pnpm-workspace.yaml`.
 
 ### Path Aliases
 
@@ -163,7 +165,7 @@ The `site-configs/` directory manages site configurations, compiled into environ
 
 ### Post-Change Workflow
 
-After making code changes, always run `npm --prefix <package> run lint:fix` for each affected package. This auto-fixes import ordering, removes unused imports, and applies Prettier formatting. Run this before committing or presenting changes as complete.
+After making code changes, always run `pnpm --dir <package> run lint:fix` for each affected package. This auto-fixes import ordering, removes unused imports, and applies Prettier formatting. Run this before committing or presenting changes as complete.
 
 ### API Module Structure
 
