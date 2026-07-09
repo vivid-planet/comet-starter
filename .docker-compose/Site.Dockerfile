@@ -1,5 +1,9 @@
 FROM registry.access.redhat.com/ubi10/nodejs-24:latest
 
+ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+
+RUN corepack enable pnpm
+
 USER 1001
 
 COPY --chown=1001:0 ./ ./
@@ -9,8 +13,8 @@ COPY --from=api ./src/comet-config.json ./src/comet-config.json
 COPY --from=site-configs ./site-configs.d.ts ./src/site-configs.d.ts
 
 RUN ./intl-update.sh && \
-    npm ci && \
-    npm run build && \
-    npm prune --omit=dev
+    pnpm install --frozen-lockfile && \
+    pnpm run build && \
+    pnpm prune --prod
 
 CMD "node" "dist/server"

@@ -2,42 +2,53 @@
     "name": "starter-api",
     "version": "1.0.0",
     "private": true,
+    "packageManager": "pnpm@10.33.0",
     "scripts": {
         "api-generator": "rimraf --glob 'src/**/generated' && comet-api-generator generate",
         "api-generator:watch": "rimraf --glob 'src/**/generated' && comet-api-generator generate --watch",
-        "prebuild": "rimraf dist && npm run api-generator",
+        "prebuild": "rimraf dist && pnpm run api-generator",
         "build": "nest build",
         "check-node-version": "check-node-version --node $(cat ../.nvmrc)",
         "console": "NODE_OPTIONS='--max-old-space-size=256' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts",
         "console:prod": "node dist/console.js",
-        "db:migrate": "npm run console migrate --",
-        "db:migrate:prod": "npm run console:prod migrate --",
-        "fixtures": "npm run console fixtures --",
-        "fixtures:prod": "npm run console:prod fixtures --",
-        "lint": "npm run api-generator && run-p -l lint:{eslint,knip,prettier,tsc,api-can-start}",
+        "db:migrate": "pnpm run console migrate --",
+        "db:migrate:prod": "pnpm run console:prod migrate --",
+        "fixtures": "pnpm run console fixtures --",
+        "fixtures:prod": "pnpm run console:prod fixtures --",
+        "lint": "pnpm run api-generator && run-p -l lint:{eslint,knip,prettier,tsc,api-can-start}",
         "lint:api-can-start": "MIKRO_ORM_NO_CONNECT=true PRIVATE_SITE_CONFIGS=$(echo '[]' | base64) dotenv -e ../.env.secrets -e ../.env.local -e ../.env -- ts-node --transpile-only -r tsconfig-paths/register src/console.ts --help",
-        "lint:ci": "npm run lint && npm run lint:generated-files-not-modified",
+        "lint:ci": "pnpm run lint && pnpm run lint:generated-files-not-modified",
         "lint:eslint": "eslint --max-warnings 0 src/ '**/*.json' --no-warn-ignored",
         "lint:fix": "run-p lint:fix:{eslint,prettier}",
-        "lint:fix:eslint": "npm run lint:eslint -- --fix",
-        "lint:fix:prettier": "npm run lint:prettier -- --write",
+        "lint:fix:eslint": "pnpm run lint:eslint -- --fix",
+        "lint:fix:prettier": "pnpm run lint:prettier -- --write",
         "lint:generated-files-not-modified": "git diff --exit-code HEAD -- schema.gql block-meta.json",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
-        "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
+        "lint:prettier": "pnpm exec prettier --check '*.{ts,js,json,md,yml,yaml}'",
         "lint:tsc": "tsc --project ./tsconfig.lint.json",
         "mikro-orm": "dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- mikro-orm",
-        "repl": "npm run start -- --watch --entryFile repl",
-        "start": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start",
-        "start:debug": "npm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
-        "start:dev": "npm run check-node-version && npm run prebuild && npm run db:migrate && npm run console createBlockIndexViews && NODE_OPTIONS='--max-old-space-size=512' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --watch --preserveWatchOutput",
+        "repl": "pnpm run start -- --watch --entryFile repl",
+        "start": "pnpm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start",
+        "start:debug": "pnpm run prebuild && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --debug --watch --preserveWatchOutput",
+        "start:dev": "pnpm run check-node-version && pnpm run prebuild && pnpm run db:migrate && pnpm run console createBlockIndexViews && NODE_OPTIONS='--max-old-space-size=512' dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- nest start --watch --preserveWatchOutput",
         "start:prod": "node dist/main",
         "test": "vitest --run",
-        "test:ci": "npm run test",
+        "test:ci": "pnpm run test",
         "test:watch": "vitest --watch"
     },
-    "overrides": {
-        "@apollo/server-plugin-landing-page-graphql-playground": {
-            "@apollo/server": "^5.0.0"
+    "pnpm": {
+        "onlyBuiltDependencies": [
+            "@apollo/protobufjs",
+            "protobufjs",
+            "sharp"
+        ],
+        "overrides": {
+            "@apollo/server-plugin-landing-page-graphql-playground>@apollo/server": "^5.0.0"
+        },
+        "peerDependencyRules": {
+            "allowedVersions": {
+                "@apollo/server-plugin-landing-page-graphql-playground>@apollo/server": "5"
+            }
         }
     },
     "dependencies": {

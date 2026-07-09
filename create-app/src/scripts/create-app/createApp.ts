@@ -48,17 +48,17 @@ export async function createApp(commandOptions: CreateAppCommandOptions) {
         console.log(kleur.cyan(`sh ./install.sh`));
         console.log(`Installs dependencies.\n`);
     }
-    console.log(kleur.cyan(`npm run dev`));
+    console.log(kleur.cyan(`pnpm run dev`));
     console.log(`Starts all services.\n`);
-    console.log(kleur.cyan(`npx dev-pm status [--interval]`));
+    console.log(kleur.cyan(`pnpm exec dev-pm status [--interval]`));
     console.log(`Checks the status of services.\n`);
-    console.log(kleur.cyan(`npx dev-pm logs <service>`));
+    console.log(kleur.cyan(`pnpm exec dev-pm logs <service>`));
     console.log(`Shows the logs of a service.\n`);
-    console.log(kleur.cyan(`npx dev-pm restart <service>`));
+    console.log(kleur.cyan(`pnpm exec dev-pm restart <service>`));
     console.log(`Restarts a service.\n`);
-    console.log(kleur.cyan(`npx dev-pm shutdown`));
+    console.log(kleur.cyan(`pnpm exec dev-pm shutdown`));
     console.log(`Shutdown all services.\n`);
-    console.log(kleur.cyan(`npm run --prefix api fixtures`));
+    console.log(kleur.cyan(`pnpm --dir api run fixtures`));
     console.log(`Imports fixtures.\n`);
     console.log(kleur.green(`\n☄️ Successfully created Comet app: ${commandOptions.projectName}`));
 }

@@ -11,33 +11,33 @@ then
     echo "# override for local env" > .env.local
 fi
 
-# use correct npm and install dependencies
+# use correct Node version and install dependencies
 nvm install
 nvm use
 
 echo -e "\033[34m\nInstalling dependencies for root package\033[0m"
-npm install
+pnpm install
 
 echo -e "\033[34m\nSetup project files\033[0m"
-npm run setup-project-files
+pnpm run setup-project-files
 
 # Install agent skills
-npm run install-agent-skills
+pnpm run install-agent-skills
 
 # Lang install
 sh ./site/intl-update.sh
 sh ./admin/intl-update.sh
-npm run create-site-configs-env
+pnpm run create-site-configs-env
 
 echo -e "\033[34m\nInstalling dependencies for admin\033[0m"
-npm --prefix admin install
+pnpm --dir admin install
 echo -e "\033[34m\nInstalling dependencies for api\033[0m"
-npm --prefix api install
+pnpm --dir api install
 echo -e "\033[34m\nInstalling dependencies for site\033[0m"
-npm --prefix site install
+pnpm --dir site install
 echo -e "\033[34m\nInstalling dependencies for create-app\033[0m"
-npm --prefix create-app install
+pnpm --dir create-app install
 
 mkdir -p ./api/uploads
 
-npm run setup:download-oauth2-proxy
+pnpm run setup:download-oauth2-proxy

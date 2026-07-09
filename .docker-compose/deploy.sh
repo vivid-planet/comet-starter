@@ -10,11 +10,12 @@ git pull
 
 echo "Installing root dependencies..."
 nvm use 24
-npm ci
+corepack enable pnpm
+pnpm install --frozen-lockfile
 
 echo "Injecting site configs..."
 sed -i 's/dev\.comet\-dxp\.com/docker.comet-dxp.com/g' site-configs/main.ts # TODO: Remove me in real project
-APP_ENV=dev npx -y @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .docker-compose/docker-compose.tpl.yml -o .docker-compose/docker-compose.yml --base64
+APP_ENV=dev pnpm dlx @comet/cli inject-site-configs -f site-configs/site-configs.ts -i .docker-compose/docker-compose.tpl.yml -o .docker-compose/docker-compose.yml --base64
 
 echo "Building and starting the Docker containers..."
 docker compose -f .docker-compose/docker-compose.yml up --build -d

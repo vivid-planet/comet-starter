@@ -28,8 +28,8 @@ region: fra
 services:
   - build_command: |-
       cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
-      npm run build &&
-      npm prune --omit=dev
+      pnpm run build &&
+      pnpm prune --prod
     environment_slug: node-js
     envs:
       - key: NODE_ENV
@@ -169,7 +169,7 @@ services:
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
     name: api
-    run_command: npm run db:migrate:prod && npm run start:prod
+    run_command: pnpm run db:migrate:prod && pnpm run start:prod
     source_dir: /api
   - envs:
       - key: OAUTH2_PROXY_CLIENT_ID
@@ -267,7 +267,7 @@ services:
       cp ../api/block-meta.json block-meta.json &&
       cp ../api/src/comet-config.json src/comet-config.json &&
       cp ../site-configs/site-configs.d.ts src/site-configs.d.ts &&
-      npm run build &&
+      pnpm run build &&
       rm -rf ./node_modules
     environment_slug: node-js
     envs:
@@ -297,5 +297,5 @@ services:
     instance_count: 1
     instance_size_slug: apps-s-1vcpu-0.5gb
     name: admin
-    run_command: cd server && npm i && cd .. && node server # Workaround for missing node_modules in cache (only parent node_mdoules are cached)
+    run_command: cd server && pnpm i && cd .. && node server # Workaround for missing node_modules in cache (only parent node_mdoules are cached)
     source_dir: admin
