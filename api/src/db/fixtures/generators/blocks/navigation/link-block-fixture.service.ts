@@ -15,7 +15,6 @@ export class LinkBlockFixtureService {
                     props: {
                         targetUrl: faker.helpers.arrayElement(urls),
                         openInNewWindow: faker.datatype.boolean(),
-                        noFollow: false,
                     },
                 },
             ],

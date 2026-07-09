@@ -1049,11 +1049,6 @@
                 "name": "openInNewWindow",
                 "kind": "Boolean",
                 "nullable": false
-            },
-            {
-                "name": "noFollow",
-                "kind": "Boolean",
-                "nullable": false
             }
         ],
         "inputFields": [
@@ -1064,11 +1059,6 @@
             },
             {
                 "name": "openInNewWindow",
-                "kind": "Boolean",
-                "nullable": false
-            },
-            {
-                "name": "noFollow",
                 "kind": "Boolean",
                 "nullable": false
             }

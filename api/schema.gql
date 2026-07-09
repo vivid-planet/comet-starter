@@ -7,11 +7,6 @@ input AttachedDocumentInput {
   type: String!
 }
 
-"""
-The `BigInt` scalar type represents non-fractional signed whole numeric values.
-"""
-scalar BigInt
-
 input BooleanFilter {
   equal: Boolean
 }
@@ -66,7 +61,7 @@ type DamFile {
   license: DamFileLicense
   mimetype: String!
   name: String!
-  size: BigInt!
+  size: Int!
   thisFileIsAlternativeFor: [DamMediaAlternative!]!
   title: String
   updatedAt: DateTime!
@@ -387,10 +382,6 @@ type Mutation {
   deletePageTreeNode(id: ID!): Boolean!
   deleteRedirect(id: ID!): Boolean!
   deleteRedirects(ids: [ID!]!): Boolean!
-<<<<<<< HEAD
-=======
-  importDamFileByDownload(input: UpdateDamFileInput!, scope: DamScopeInput! = {}, url: String!): DamFile!
->>>>>>> main
   moveDamFiles(fileIds: [ID!]!, targetFolderId: ID): [DamFile!]!
   moveDamFolders(folderIds: [ID!]!, scope: DamScopeInput! = {}, targetFolderId: ID): [DamFolder!]!
   movePageTreeNodesByNeighbour(ids: [ID!]!, input: MovePageTreeNodesByNeighbourInput!): [PageTreeNode!]!
