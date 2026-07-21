@@ -36,7 +36,7 @@
         "@opentelemetry/auto-instrumentations-node": "^0.78.0",
         "@opentelemetry/exporter-trace-otlp-http": "^0.220.0",
         "@opentelemetry/sdk-node": "^0.220.0",
-        "cache-manager": "^7.2.4",
+        "cache-manager": "^7.2.9",
         "clsx": "^2.1.1",
         "graphql": "^16.14.2",
         "ioredis": "^5.11.1",
