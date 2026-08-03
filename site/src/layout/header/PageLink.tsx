@@ -4,9 +4,9 @@ import { HiddenIfInvalidLink } from "@src/common/helpers/HiddenIfInvalidLink";
 import { createSitePath } from "@src/util/createSitePath";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-import { type GQLPageLinkFragment } from "./PageLink.fragment.generated";
+import type { GQLPageLinkFragment } from "./PageLink.fragment.generated";
 
 interface Props extends PropsWithChildren {
     page: GQLPageLinkFragment;
@@ -14,7 +14,7 @@ interface Props extends PropsWithChildren {
     activeClassName?: string;
 }
 
-function PageLink({ page, children, className: passedClassName, activeClassName }: Props): JSX.Element | null {
+function PageLink({ page, children, className: passedClassName, activeClassName }: Props) {
     const pathname = usePathname();
     const active = pathname && (pathname.substring(3) || "/") === page.path; // Remove language prefix
 

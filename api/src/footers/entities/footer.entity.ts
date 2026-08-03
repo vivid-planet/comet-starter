@@ -18,7 +18,7 @@ import { v4 as uuid } from "uuid";
     implements: () => [DocumentInterface],
 })
 @RootBlockEntity()
-@CrudSingleGenerator({ targetDirectory: `${__dirname}/../generated/`, requiredPermission: "pageTree" })
+@CrudSingleGenerator({ requiredPermission: "pageTree" })
 export class Footer extends BaseEntity implements DocumentInterface {
     [OptionalProps]?: "createdAt" | "updatedAt";
 

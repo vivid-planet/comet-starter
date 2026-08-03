@@ -3,10 +3,7 @@ addAssignees: author
 addReviewers: true
 
 reviewers:
-  - johnnyomair
+  - VPS-Obi
 
 skipKeywords:
   - Merge main into next
-
-skipUsers:
-  - renovate[bot]

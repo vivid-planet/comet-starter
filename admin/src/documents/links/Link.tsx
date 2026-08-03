@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 import { Link as LinkIcon } from "@comet/admin-icons";
 import { createDocumentDependencyMethods, createDocumentRootBlocksMethods, type DependencyInterface, type DocumentInterface } from "@comet/cms-admin";
 import { LinkBlock } from "@src/common/blocks/LinkBlock";
-import { type GQLLink, type GQLLinkInput } from "@src/graphql.generated";
+import type { GQLLink, GQLLinkInput } from "@src/graphql.generated";
 import { categoryToUrlParam } from "@src/pageTree/pageTreeCategories";
 import { FormattedMessage } from "react-intl";
 

@@ -1,6 +1,6 @@
 import { type User, UserPermissions } from "@comet/cms-api";
 import { Test, type TestingModule } from "@nestjs/testing";
-import { type Config } from "@src/config/config";
+import type { Config } from "@src/config/config";
 import { CONFIG } from "@src/config/config.module";
 import { beforeEach, describe, expect, it } from "vitest";
 

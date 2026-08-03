@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { DesktopMenu } from "./DesktopMenu";
-import { type GQLHeaderFragment } from "./Header.fragment.generated";
+import type { GQLHeaderFragment } from "./Header.fragment.generated";
 import styles from "./Header.module.scss";
 
 interface Props {

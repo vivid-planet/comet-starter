@@ -16,6 +16,7 @@ const pluginConfig = {
         DateTime: "string",
         LocalDate: "string",
         ID: "string",
+        BigInt: "number",
     }),
     typesPrefix: "GQL",
 };

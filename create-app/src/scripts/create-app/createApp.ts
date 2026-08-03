@@ -31,12 +31,16 @@ export async function createApp(commandOptions: CreateAppCommandOptions) {
         try {
             execSync("sh ./install.sh");
             spinner.success();
-            if (commandOptions.verbose) console.log(kleur.grey("Successfully installed project."));
+            if (commandOptions.verbose) {
+                console.log(kleur.grey("Successfully installed project."));
+            }
             runEslintFix(commandOptions.verbose);
         } catch (error) {
             spinner.error();
             console.log(kleur.yellow("Could not install project."));
-            if (commandOptions.verbose) console.log(kleur.grey(`${error}`));
+            if (commandOptions.verbose) {
+                console.log(kleur.grey(`${error}`));
+            }
         }
     }
     amendCommitChanges();

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { Redis } from "ioredis";
 import { LRUCache } from "lru-cache";
-import type { CacheHandler as NextCacheHandler } from "next/dist/server/lib/incremental-cache";
+import type { CacheHandler as NextCacheHandler, CacheHandlerValue } from "next/dist/server/lib/incremental-cache";
 
 const VALKEY_HOST = process.env.VALKEY_HOST;
 if (!VALKEY_HOST) {
@@ -28,8 +28,10 @@ const redis = new Redis({
     enableAutoPipelining: true,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const fallbackCache = new LRUCache<string, any>({
+// Typed with Next's `CacheHandlerValue` so the in-memory fallback stores the exact same
+// wrapped `{ lastModified, value }` shape as the Redis path (and as `get` returns). This
+// prevents the two cache paths from drifting apart
+const fallbackCache = new LRUCache<string, CacheHandlerValue>({
     maxSize: 50 * 1024 * 1024, // 50MB
     ttl: CACHE_TTL_IN_S * 1000,
     ttlAutopurge: true,
@@ -54,7 +56,7 @@ function isCacheKeyFullRoute(key: string) {
 }
 
 export default class CacheHandler {
-    async get(key: string): ReturnType<NextCacheHandler["get"]> {
+    async get(key: string): Promise<ReturnType<NextCacheHandler["get"]>> {
         if (isCacheKeyFullRoute(key)) {
             return null;
         }
@@ -68,7 +70,7 @@ export default class CacheHandler {
                 if (!redisResponse) {
                     return null;
                 }
-                return JSON.parse(redisResponse);
+                return JSON.parse(redisResponse) as CacheHandlerValue;
             } catch (e) {
                 console.error("CacheHandler.get error", e);
             }
@@ -97,10 +99,11 @@ export default class CacheHandler {
             }
         }
 
-        const stringData = JSON.stringify({
+        const data: CacheHandlerValue = {
             lastModified: Date.now(),
             value,
-        });
+        };
+        const stringData = JSON.stringify(data);
 
         if (redis.status === "ready") {
             try {
@@ -110,7 +113,7 @@ export default class CacheHandler {
             }
             return;
         }
-        fallbackCache.set(key, value, { size: stringData.length });
+        fallbackCache.set(key, data, { size: stringData.length });
     }
 
     async revalidateTag(tags: string | string[]): Promise<void> {

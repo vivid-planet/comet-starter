@@ -31,6 +31,7 @@ const config: CodegenConfig = {
                     Date: "string",
                     LocalDate: "string",
                     ID: "string",
+                    BigInt: "number",
                 }),
                 typesPrefix: "GQL",
             },
@@ -53,6 +54,7 @@ const config: CodegenConfig = {
                     Date: "string",
                     LocalDate: "string",
                     ID: "string",
+                    BigInt: "number",
                 }),
                 typesPrefix: "GQL",
                 skipDocumentsValidation: {
