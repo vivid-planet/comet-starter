@@ -71,7 +71,7 @@
         "eslint": "^9.39.5",
         "knip": "^6.24.0",
         "npm-run-all2": "^9.0.2",
-        "prettier": "^3.9.4",
+        "prettier": "^3.9.6",
         "sass": "^1.101.0",
         "schema-dts": "^2.0.0",
         "stylelint": "^17.14.1",
