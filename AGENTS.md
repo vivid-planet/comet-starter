@@ -42,6 +42,17 @@ npx dev-pm restart <service>     # Restart a service
 npx dev-pm shutdown              # Stop all services
 ```
 
+#### Running multiple instances in parallel
+
+To run several checkouts at once without host port collisions, assign a free port offset before starting:
+
+```bash
+npm run assign-ports            # find a free PORT_OFFSET digit (0-9) and write it to .env.local
+npm run dev
+```
+
+Every `*_PORT` value in `.env` embeds an offset digit via `${PORT_OFFSET}` (e.g. `API_PORT=4${PORT_OFFSET}00`), with `PORT_OFFSET=0` as the default. `assign-ports.mts` resolves each port for the digits 0-9, finds the first digit where all ports are free, and writes only `PORT_OFFSET=<digit>` to `.env.local` (leaving `.env` untouched). It runs via Node's native TypeScript support (`node assign-ports.mts`), so no build or ts-node is needed. `npm run dev` runs `dev-pm start` via `dotenv -c secrets`, which expands and exports the cascaded env (`.env.local` overrides the `PORT_OFFSET` default from `.env`) so both the Node services and the Docker containers (`docker compose` prefers real env vars over the `.env` file) bind the offset ports.
+
 ### Building
 
 ```bash
@@ -121,9 +132,9 @@ The `site-configs/` directory manages site configurations, compiled into environ
 
 ### Docker Services
 
-- PostgreSQL (port 5432)
+- PostgreSQL (port 5032)
 - imgproxy (port 6080) - image optimization
-- Jaeger (port 16686) - distributed tracing
+- Jaeger (port 16086) - distributed tracing
 
 ### Local Ports
 
