@@ -1,5 +1,5 @@
 {
-    "name": "@comet/create-app",
+    "name": "@dextinity/create-app",
     "version": "1.217.0",
     "description": "Command-line interface to create a new Comet application",
     "homepage": "https://github.com/vivid-planet/comet-starter/tree/main/create-app#readme",
