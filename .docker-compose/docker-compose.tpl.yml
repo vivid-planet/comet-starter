@@ -44,7 +44,7 @@ services:
       OAUTH2_PROXY_CLIENT_ID: "59e44de5-0431-4413-b50b-7e52740a6d7b"
       # Provider
       OAUTH2_PROXY_CODE_CHALLENGE_METHOD: "S256"
-      OAUTH2_PROXY_OIDC_ISSUER_URL: "https://auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_OIDC_ISSUER_URL: "https://login.vivid-planet.cloud"
       OAUTH2_PROXY_PROVIDER: "oidc"
       OAUTH2_PROXY_SCOPE: "openid profile email offline_access"
       # Cookie
@@ -65,7 +65,7 @@ services:
       OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/api)?/healthcheck/"
       OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS: "true"
       OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
-      OAUTH2_PROXY_WHITELIST_DOMAIN: "auth-sso.vivid-planet.cloud"
+      OAUTH2_PROXY_WHITELIST_DOMAIN: "login.vivid-planet.cloud"
       OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180" # allow access from outside the container
       # Upstrean
       OAUTH2_PROXY_UPSTREAMS: "http://admin:3000,http://api:4000/api/"
@@ -130,9 +130,9 @@ services:
       PRIVATE_SITE_CONFIGS: "{{ site://configs/private/dev }}"
       POSTGRESQL_USE_SSL: "true"
       USE_AUTHPROXY: "true"
-      IDP_CLIENT_ID: 59e44de5-0431-4413-b50b-7e52740a6d7b
-      IDP_JWKS_URI: https://auth-sso.vivid-planet.cloud/.well-known/jwks.json
-      IDP_END_SESSION_ENDPOINT: https://auth-sso.vivid-planet.cloud/oauth2/sessions/logout
+      IDP_CLIENT_ID: "390128796298185798"
+      IDP_JWKS_URI: https://login.vivid-planet.cloud/oauth/v2/keys
+      IDP_END_SESSION_ENDPOINT: https://login.vivid-planet.cloud/oidc/v1/end_session
       POST_LOGOUT_REDIRECT_URI: https://admin.docker.dextinity.com/oauth2/sign_out?rd=%2F
       ACL_ALL_PERMISSIONS_DOMAINS: "vivid-planet.com"
     env_file: "api.secrets.env"
