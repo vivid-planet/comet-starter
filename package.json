@@ -42,7 +42,7 @@
     "devDependencies": {
         "@dextinity/agent-features": "10.5.1",
         "@dextinity/cli": "10.5.1",
-        "dev-oidc-provider": "^2.0.0",
+        "dev-oidc-provider": "^2.1.2",
         "dev-process-manager": "^4.0.0",
         "dotenv-cli": "^11.0.0",
         "husky": "^9.1.7",
