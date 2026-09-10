@@ -41,7 +41,7 @@ services:
     ports:
       - 4180:4180
     environment:
-      OAUTH2_PROXY_CLIENT_ID: "59e44de5-0431-4413-b50b-7e52740a6d7b"
+      OAUTH2_PROXY_CLIENT_ID: "390128796298185798"
       # Provider
       OAUTH2_PROXY_CODE_CHALLENGE_METHOD: "S256"
       OAUTH2_PROXY_OIDC_ISSUER_URL: "https://login.vivid-planet.cloud"
