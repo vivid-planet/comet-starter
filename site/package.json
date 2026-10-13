@@ -76,7 +76,7 @@
         "jsdom": "^30.1.2",
         "knip": "^6.41.0",
         "npm-run-all2": "^9.0.3",
-        "prettier": "^3.9.9",
+        "prettier": "^3.9.10",
         "sass": "^1.105.1",
         "schema-dts": "^2.1.0",
         "stylelint": "^17.16.0",
