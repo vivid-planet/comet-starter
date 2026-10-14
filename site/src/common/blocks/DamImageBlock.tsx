@@ -1,9 +1,9 @@
 "use client";
-import { PixelImageBlock, PreviewSkeleton, type PropsWithData, SvgImageBlock, withPreview } from "@dextinity/site-nextjs";
+import { PreviewSkeleton, type PropsWithData, SvgImageBlock, withPreview } from "@dextinity/site-react";
 import type { DamImageBlockData, PixelImageBlockData, SvgImageBlockData } from "@src/blocks.generated";
-import type { ImageProps as NextImageProps } from "next/image";
+import { PixelImageBlock, type PixelImageBlockProps } from "@src/common/blocks/PixelImageBlock";
 
-type DamImageProps = Omit<NextImageProps, "src" | "width" | "height" | "alt"> & {
+type DamImageProps = Omit<PixelImageBlockProps, "data" | "aspectRatio"> & {
     aspectRatio: string | "inherit";
 };
 

@@ -1,14 +1,13 @@
-import { gql } from "@dextinity/site-nextjs";
+import { gql } from "@dextinity/site-react";
 import type { ExternalLinkBlockData, InternalLinkBlockData, RedirectsLinkBlockData } from "@src/blocks.generated";
+import { type Middleware, MiddlewareResponse } from "@src/framework/server/middleware";
 import type { GQLPageTreeNodeScope, GQLRedirectScopeInput } from "@src/graphql.generated";
 import type { PublicSiteConfig } from "@src/site-configs";
 import { createSitePath } from "@src/util/createSitePath";
 import { createGraphQLFetch } from "@src/util/graphQLClient";
 import { getHostByHeaders, getSiteConfigForHost, getSiteConfigs } from "@src/util/siteConfig";
-import { type NextRequest, NextResponse } from "next/server";
 
 import { memoryCache } from "./cache";
-import type { CustomMiddleware } from "./chain";
 import type { GQLDomainRedirectsQuery, GQLDomainRedirectsQueryVariables } from "./redirectToMainHost.generated";
 
 const domainRedirectsQuery = gql`
@@ -107,8 +106,8 @@ function getRedirectTargetUrl(block: RedirectsLinkBlockData["block"], targetBase
  * Also applies admin-configured domain redirects (sourceType="domain") for the resolved scope, and
  * cross-scope domain redirects as a last resort when the host doesn't match any site-config.
  */
-export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
-    return async (request: NextRequest) => {
+export function withRedirectToMainHostMiddleware(middleware: Middleware): Middleware {
+    return async (request) => {
         const headers = request.headers;
         const host = getHostByHeaders(headers);
         const siteConfig = await getSiteConfigForHost(host);
@@ -133,7 +132,7 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                         if (normalizeHost(new URL(destination).host) === normalizeHost(host)) {
                             throw new Error(`Redirect loop detected: ${host} -> ${destination}`);
                         }
-                        return NextResponse.redirect(destination, { status: 301 });
+                        return MiddlewareResponse.redirect(destination, 301);
                     }
                 }
 
@@ -142,9 +141,8 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                 if (mainHost === normalizeHost(host)) {
                     throw new Error(`Redirect loop detected: main host ${mainHost} equals current host`);
                 }
-                return NextResponse.redirect(`https://${redirectSiteConfig.domains.main}${request.nextUrl.pathname}${request.nextUrl.search}`, {
-                    status: 301,
-                });
+                const { pathname, search } = new URL(request.url);
+                return MiddlewareResponse.redirect(`https://${redirectSiteConfig.domains.main}${pathname}${search}`, 301);
             }
 
             // Host doesn't match any site-config — check cross-scope domain redirects as a last resort
@@ -165,11 +163,11 @@ export function withRedirectToMainHostMiddleware(middleware: CustomMiddleware) {
                     if (normalizeHost(new URL(destination).host) === normalizeHost(host)) {
                         throw new Error(`Redirect loop detected: ${host} -> ${destination}`);
                     }
-                    return NextResponse.redirect(destination, { status: 301 });
+                    return MiddlewareResponse.redirect(destination, 301);
                 }
             }
 
-            return NextResponse.json({ error: `Cannot resolve domain: ${host}` }, { status: 404 });
+            return MiddlewareResponse.json({ error: `Cannot resolve domain: ${host}` }, { status: 404 });
         }
         return middleware(request);
     };

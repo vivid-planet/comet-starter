@@ -1,12 +1,10 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type Middleware, MiddlewareResponse } from "@src/framework/server/middleware";
 
-import type { CustomMiddleware } from "./chain";
-
-export function withRobotsMiddleware(middleware: CustomMiddleware) {
-    return async (request: NextRequest) => {
-        if (request.nextUrl.pathname === "/robots.txt") {
+export function withRobotsMiddleware(middleware: Middleware): Middleware {
+    return async (request) => {
+        if (new URL(request.url).pathname === "/robots.txt") {
             // don't apply any other middlewares
-            return NextResponse.next();
+            return MiddlewareResponse.next();
         }
         return middleware(request);
     };

@@ -1,11 +1,9 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type Middleware, MiddlewareResponse } from "@src/framework/server/middleware";
 
-import type { CustomMiddleware } from "./chain";
-
-export function withHealthcheckMiddleware(middleware: CustomMiddleware) {
-    return async (request: NextRequest) => {
-        if (["/healthcheck/live", "/healthcheck/ready"].includes(request.nextUrl.pathname)) {
-            return NextResponse.json({ status: "OK" }, { headers: { "cache-control": "no-store" } });
+export function withHealthcheckMiddleware(middleware: Middleware): Middleware {
+    return async (request) => {
+        if (["/healthcheck/live", "/healthcheck/ready"].includes(new URL(request.url).pathname)) {
+            return MiddlewareResponse.json({ status: "OK" }, { headers: { "cache-control": "no-store" } });
         }
         return middleware(request);
     };

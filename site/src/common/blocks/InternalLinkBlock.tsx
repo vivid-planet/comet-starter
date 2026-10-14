@@ -1,7 +1,7 @@
 "use client";
-import type { PropsWithData } from "@dextinity/site-nextjs";
+import type { PropsWithData } from "@dextinity/site-react";
 import type { InternalLinkBlockData } from "@src/blocks.generated";
-import Link from "next/link";
+import { Link } from "@src/framework/client/Link";
 import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 
 interface InternalLinkBlockProps

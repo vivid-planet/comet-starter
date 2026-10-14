@@ -1,6 +1,4 @@
-import type { NextRequest } from "next/server";
-
-import type { CustomMiddleware } from "./chain";
+import type { Middleware } from "@src/framework/server/middleware";
 
 type ContentSecurityPolicyDirective = {
     directive: string;
@@ -30,8 +28,8 @@ const contentSecurityPolicy = contentSecurityPolicyDirectives
     .map((directive) => `${directive.directive} ${directive.values.filter((value) => value !== undefined).join(" ")}`)
     .join("; ");
 
-export function withContentSecurityPolicyHeadersMiddleware(middleware: CustomMiddleware) {
-    return async (request: NextRequest) => {
+export function withContentSecurityPolicyHeadersMiddleware(middleware: Middleware): Middleware {
+    return async (request) => {
         const response = await middleware(request);
 
         response.headers.set("Content-Security-Policy", contentSecurityPolicy);

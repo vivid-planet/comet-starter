@@ -12,10 +12,6 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 
@@ -55,4 +51,3 @@ tsconfig.tsbuildinfo
 
 /dist
 .npmrc
-next-env.d.ts

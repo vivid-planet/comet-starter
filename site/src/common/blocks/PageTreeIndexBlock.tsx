@@ -1,9 +1,9 @@
-import { type PropsWithData, withPreview } from "@dextinity/site-nextjs";
+import { type PropsWithData, withPreview } from "@dextinity/site-react";
 import type { PageTreeIndexBlockData } from "@src/blocks.generated";
+import { Link } from "@src/framework/client/Link";
 import { PageLayout } from "@src/layout/PageLayout";
 import { AnimateBoxInOnScroll } from "@src/util/animations/AnimateBoxInOnScroll";
 import { createSitePath } from "@src/util/createSitePath";
-import NextLink from "next/link";
 
 import type { LoadedData, PageTreeNode } from "./PageTreeIndexBlock.loader";
 import styles from "./PageTreeIndexBlock.module.scss";
@@ -24,9 +24,9 @@ function renderTree(nodes: PageTreeNodeWithChildren[]) {
         <ul className={styles.list}>
             {nodes.map((node) => (
                 <li key={node.id} className={styles.listItem}>
-                    <NextLink href={createSitePath({ path: node.path, scope: node.scope })} className={styles.link}>
+                    <Link href={createSitePath({ path: node.path, scope: node.scope })} className={styles.link}>
                         {node.name}
-                    </NextLink>
+                    </Link>
                     {node.children.length > 0 && renderTree(node.children)}
                 </li>
             ))}

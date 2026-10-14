@@ -1,9 +1,9 @@
 "use client";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { Link } from "@src/framework/client/Link";
 import { PageLayout } from "@src/layout/PageLayout";
 import { createSitePath } from "@src/util/createSitePath";
 import clsx from "clsx";
-import NextLink from "next/link";
 import { useId, useState } from "react";
 import ReactFocusLock from "react-focus-lock";
 import { FormattedMessage } from "react-intl";
@@ -36,9 +36,9 @@ export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFr
                             </button>
                         </li>
                         <li className={clsx(styles.mobileNavigationListElements, styles.linkContainer)} style={{ "--breadcrumb-level": 0 }}>
-                            <NextLink className={styles.link} href={createSitePath({ path: "/", scope })}>
+                            <Link className={styles.link} href={createSitePath({ path: "/", scope })}>
                                 <FormattedMessage id="header.breadcrumbs.home" defaultMessage="Home" />
-                            </NextLink>
+                            </Link>
                         </li>
                         {parentNodes.map((parentNode, index) => (
                             <li
@@ -52,7 +52,7 @@ export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFr
                                     width={16}
                                     height={16}
                                 />
-                                <NextLink
+                                <Link
                                     className={styles.link}
                                     href={createSitePath({
                                         path: parentNode.path,
@@ -60,7 +60,7 @@ export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFr
                                     })}
                                 >
                                     {parentNode.name}
-                                </NextLink>
+                                </Link>
                                 <SvgUse href="/assets/icons/chevron-down.svg#root" className={styles.chevron} width={16} height={16} />
                             </li>
                         ))}
@@ -74,7 +74,7 @@ export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFr
                                 width={16}
                                 height={16}
                             />
-                            <NextLink
+                            <Link
                                 className={clsx(styles.link, styles["link--active"])}
                                 href={createSitePath({
                                     path: path,
@@ -82,7 +82,7 @@ export const Breadcrumbs = ({ scope, name, path, parentNodes }: GQLBreadcrumbsFr
                                 })}
                             >
                                 {name}
-                            </NextLink>
+                            </Link>
                         </li>
                     </ol>
                 </ReactFocusLock>

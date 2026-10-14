@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@src/common/components/Button";
 import { SvgUse } from "@src/common/helpers/SvgUse";
+import { Link } from "@src/framework/client/Link";
 import { MobileMenu } from "@src/layout/header/MobileMenu";
 import { PageLayout } from "@src/layout/PageLayout";
-import Link from "next/link";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { DesktopMenu } from "./DesktopMenu";

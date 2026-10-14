@@ -1,15 +1,7 @@
-import {
-    DamVideoBlock,
-    OneOfBlock,
-    PreviewSkeleton,
-    type PropsWithData,
-    type SupportedBlocks,
-    VimeoVideoBlock,
-    withPreview,
-    YouTubeVideoBlock,
-} from "@dextinity/site-nextjs";
+import { OneOfBlock, PreviewSkeleton, type PropsWithData, type SupportedBlocks, withPreview } from "@dextinity/site-react";
 import type { MediaBlockData } from "@src/blocks.generated";
 import { DamImageBlock } from "@src/common/blocks/DamImageBlock";
+import { DamVideoBlock, VimeoVideoBlock, YouTubeVideoBlock } from "@src/common/blocks/VideoBlocks";
 
 import { PlayPauseButton } from "../components/PlayPauseButton";
 

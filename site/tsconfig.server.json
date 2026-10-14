@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
+        "allowImportingTsExtensions": false,
         "isolatedModules": false,
-        "lib": ["es2019"],
-        "module": "commonjs",
-        "moduleResolution": "node",
+        "lib": ["es2023"],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
         "noEmit": false,
         "outDir": "dist",
-        "target": "es2019"
+        "rootDir": ".",
+        "target": "es2022",
+        "types": ["node"]
     },
     "extends": "./tsconfig.json",
-    "include": ["server.ts", "tracing.ts", "cache-handler.ts"]
+    "include": ["server.mts", "tracing.ts"]
 }

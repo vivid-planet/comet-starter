@@ -18,7 +18,7 @@ This is a monorepo containing a Dextinity project. It contains three main packag
 
 - **api/** - NestJS GraphQL backend with MikroORM/PostgreSQL
 - **admin/** - React admin interface with Vite and MUI
-- **site/** - Next.js frontend (App Router)
+- **site/** - React Server Components frontend built on Vite and `@vitejs/plugin-rsc` (no Next.js, see "Site Structure")
 
 ## Common Commands
 
@@ -103,8 +103,9 @@ npm --prefix api run api-generator       # Execute api generator. Generates reso
 - `admin/src/` - React admin UI (App.tsx entry, documents/, footers/, dashboard/)
 - `api/src/` - NestJS modules (auth/, documents/, page-tree/, menus/, content-generation/)
 - `api/db/migrations/` - Database migrations
-- `site/src/app/` - Next.js app router
-- `site/src/middleware.ts` - Domain routing, CSP headers
+- `site/src/app/` - Routes (`routes.tsx`), layouts and pages
+- `site/src/framework/` - Minimal RSC framework (entries, router, middleware, request context, metadata, client side navigation)
+- `site/src/middleware/` - Middlewares: domain routing, CSP headers, redirects, DAM proxy
 - `site-configs/site-configs.ts` - Multi-tenant site configuration
 
 ### Package Independence
@@ -145,7 +146,7 @@ The `site-configs/` directory manages site configurations, compiled into environ
 
 - API targets ES2017
 - Admin uses ESNext with @emotion/react JSX transform
-- Site targets ES5 for browser compatibility
+- Site targets ES2022 (bundled by Vite)
 
 ### Linting Stack
 
@@ -176,7 +177,15 @@ Component-based with GraphQL mutations/queries co-located
 
 ### Site Structure
 
-Next.js App Router conventions with pages in `app/`
+The site uses React Server Components without Next.js: Vite with `@vitejs/plugin-rsc` and a small framework in `site/src/framework/`.
+
+- `src/framework/entry.rsc.tsx` - Request handler: runs the middleware chain, matches routes, renders the RSC stream (handles `notFound()`/`redirect()`)
+- `src/framework/entry.ssr.tsx` / `entry.browser.tsx` - HTML rendering, hydration and client side navigation (RSC payload requests use the `_rsc` search param)
+- `src/app/routes.tsx` - Explicit route table (URLPattern syntax) instead of file system routing. Page routes return the server component tree incl. layouts, handler routes return a `Response`
+- Replacements for Next.js APIs: `@src/framework/client/Link` (`next/link`), `usePathname`/`useSearchParams` from `@src/framework/client/router`, `notFound`/`redirect` from `@src/framework/server/navigation`, `headers()`/`cookies()` from `@src/framework/server/requestContext`, `<MetadataTags>` (`generateMetadata`)
+- Data fetching: `createGraphQLFetch()` (server only) caches GraphQL responses (`src/util/fetchCache.ts`, Valkey or in-memory), `createBrowserGraphQLFetch()` for client components (persisted queries only)
+- Use `@dextinity/site-react` (not `@dextinity/site-nextjs`). Image and video blocks are wrapped locally (`PixelImageBlock`, `VideoBlocks`)
+- `server.mts` - Production server (static files from `dist/client`, request handler from `dist/rsc`)
 
 ## References
 

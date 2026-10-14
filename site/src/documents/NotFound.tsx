@@ -1,10 +1,10 @@
 "use client";
 
 import { Typography } from "@src/common/components/Typography";
+import { Link } from "@src/framework/client/Link";
 import { PageLayout } from "@src/layout/PageLayout";
 import type { ContentScope } from "@src/site-configs";
 import { createSitePath } from "@src/util/createSitePath";
-import Link from "next/link";
 import { FormattedMessage } from "react-intl";
 
 import styles from "./NotFound.module.scss";

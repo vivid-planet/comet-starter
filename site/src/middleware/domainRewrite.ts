@@ -1,39 +1,28 @@
-import { previewParams } from "@dextinity/site-nextjs/server";
+import { type Middleware, MiddlewareResponse } from "@src/framework/server/middleware";
 import { getHostByHeaders, getSiteConfigForHost } from "@src/util/siteConfig";
-import { type NextRequest, NextResponse } from "next/server";
-
-import type { CustomMiddleware } from "./chain";
-
-export type VisibilityParam = "default" | "invisiblePages" | "invisibleBlocks";
+import { getSitePreviewParams } from "@src/util/sitePreview";
+import type { VisibilityParam } from "@src/util/visibility";
 
 /**
- * Rewrite request to include the matching domain (from http host) in the path, so the route can have [domain] as parameter.
- *
- * Doing this matching in the middleware makes it possible to keep static rendering, as the page doesn't need headers() to get the domain.
+ * Rewrite request to include the matching domain (from http host) and the visibility in the path, so the route gets them as params.
  */
-export function withDomainRewriteMiddleware(middleware: CustomMiddleware) {
-    return async (request: NextRequest) => {
-        const headers = request.headers;
-        const host = getHostByHeaders(headers);
+export function withDomainRewriteMiddleware(middleware: Middleware): Middleware {
+    return async (request) => {
+        const host = getHostByHeaders(request.headers);
         const siteConfig = await getSiteConfigForHost(host);
         if (!siteConfig) {
             throw new Error(`Cannot get siteConfig for host ${host}`);
         }
 
-        const preview = await previewParams({ skipDraftModeCheck: true });
+        const preview = await getSitePreviewParams();
         let visibilityParam: VisibilityParam = "default";
         if (preview?.previewData) {
             visibilityParam = preview.previewData.includeInvisible ? "invisibleBlocks" : "invisiblePages";
         }
 
-        return NextResponse.rewrite(
-            new URL(
-                `/${visibilityParam}/${siteConfig.scope.domain}${request.nextUrl.pathname}${
-                    request.nextUrl.searchParams.toString().length > 0 ? `?${request.nextUrl.searchParams.toString()}` : ""
-                }`,
-                request.url,
-            ),
-            { request: { headers } },
+        const { pathname, search } = new URL(request.url);
+        return MiddlewareResponse.rewrite(
+            new URL(`/${visibilityParam}/${siteConfig.scope.domain}${pathname === "/" ? "" : pathname}${search}`, request.url),
         );
     };
 }
