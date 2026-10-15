@@ -24,9 +24,9 @@ the npm registry, `mirror.gcr.io` (all images) and github.com (the translations 
 ./start-preview.sh
 ```
 
-The script renders `site-configs/*.ts` for `PREVIEW_HOST` into `.env.site-configs.preview` - the
+The script renders `site-configs/*.ts` for `DEPLOY_PREVIEW_HOST` into `.env.site-configs.preview` - the
 images themselves do not know the preview host - and then brings the compose project up, blocking
-until api and site report healthy. Run it again whenever `PREVIEW_HOST` or anything in
+until api and site report healthy. Run it again whenever `DEPLOY_PREVIEW_HOST` or anything in
 `site-configs/` changes.
 
 Afterwards `docker compose -f .docker-preview/docker-compose.yml --project-directory . logs|ps|down`
@@ -60,7 +60,7 @@ Only one port is published, so a second environment needs a different port and i
 compose project name:
 
 ```bash
-PREVIEW_PORT=8081 COMPOSE_PROJECT_NAME=pr-123 ./start-preview.sh
+DEPLOY_PREVIEW_PORT=8081 COMPOSE_PROJECT_NAME=pr-123 ./start-preview.sh
 ```
 
 The project name keeps containers, networks and volumes of the two environments apart.
@@ -70,21 +70,14 @@ The project name keeps containers, networks and volumes of the two environments 
 
 All variables are optional.
 
-| Variable              | Default                              | Description                                                |
-| --------------------- | ------------------------------------ | ---------------------------------------------------------- |
-| `PREVIEW_PORT`        | `8080`                               | Host port the environment is published on                  |
-| `PREVIEW_BASE_DOMAIN` | `preview.localhost`                  | Base domain, see [Host names](#host-names)                 |
-| `PREVIEW_HOST`        | `$PREVIEW_BASE_DOMAIN:$PREVIEW_PORT` | Public host used in all urls                               |
-| `PREVIEW_SCHEME`      | `http`                               | Set to `https` when TLS is terminated by an upstream proxy |
-| `PREVIEW_URLS`        | unset                                | File to report the urls to, one `<name>=<url>` per line    |
+| Variable                   | Default                                  | Description                                                 |
+| -------------------------- | ---------------------------------------- | ----------------------------------------------------------- |
+| `DEPLOY_PREVIEW_PORT`      | `8080`                                   | Host port the environment is published on                   |
+| `DEPLOY_PREVIEW_HOST`      | `preview.localhost:$DEPLOY_PREVIEW_PORT` | Public host used in all urls, see [Host names](#host-names) |
+| `DEPLOY_PREVIEW_SCHEME`    | `http`                                   | Set to `https` when TLS is terminated by an upstream proxy  |
+| `DEPLOY_PREVIEW_URLS_FILE` | unset                                    | File to report the urls to, one `<name>=<url>` per line     |
 
-The base domain is `PREVIEW_BASE_DOMAIN` and not `PREVIEW_DOMAIN`, because `PREVIEW_DOMAIN` already
-names the domain that serves the site in Dextinity's preview mode. A preview controller that starts
-this project hands the base domain over under the name it knows, `PREVIEW_DOMAIN`, so
-`start-preview.sh` accepts that one as well. It only goes into `PREVIEW_HOST` and never reaches the
-containers.
-
-`PREVIEW_HOST` is what keeps the rendered site-configs and the urls in the compose file in sync:
+`DEPLOY_PREVIEW_HOST` is what keeps the rendered site-configs and the urls in the compose file in sync:
 `start-preview.sh` renders the configs for it and passes it on to compose. Everything else - imgproxy
 keys, `DAM_SECRET`, acl defaults, database credentials - is taken from `.env`, which docker compose
 loads automatically. The preview environment therefore uses the same non-secret development values
@@ -93,8 +86,8 @@ as the local development setup.
 ### Host names
 
 Every host of the environment is the base domain with a prefix in front of it rather than a
-subdomain of it: `$PREVIEW_HOST` serves the main site, `<name>--$PREVIEW_HOST` the other site
-configs, `admin--$PREVIEW_HOST` the admin and the api under `/api`, and `idp--$PREVIEW_HOST` the
+subdomain of it: `$DEPLOY_PREVIEW_HOST` serves the main site, `<name>--$DEPLOY_PREVIEW_HOST` the other site
+configs, `admin--$DEPLOY_PREVIEW_HOST` the admin and the api under `/api`, and `idp--$DEPLOY_PREVIEW_HOST` the
 identity provider.
 
 A wildcard certificate covers one dns label, so `*.example.com` matches `pr-123.example.com` but
@@ -111,14 +104,14 @@ domain is `preview.localhost` and not `localhost`. For other setups add the host
 
 ### Behind another reverse proxy
 
-To serve a preview under a real domain, point an upstream proxy at `PREVIEW_PORT` and forward
+To serve a preview under a real domain, point an upstream proxy at `DEPLOY_PREVIEW_PORT` and forward
 `<domain>`, `admin--<domain>`, `idp--<domain>` and the host of every site config to it, keeping
 the original `Host` header:
 
 ```bash
-export PREVIEW_PORT=30123
-export PREVIEW_HOST=pr-123.example.com
-export PREVIEW_SCHEME=https
+export DEPLOY_PREVIEW_PORT=30123
+export DEPLOY_PREVIEW_HOST=pr-123.example.com
+export DEPLOY_PREVIEW_SCHEME=https
 export COMPOSE_PROJECT_NAME=pr-123
 
 ./start-preview.sh
@@ -127,12 +120,12 @@ export COMPOSE_PROJECT_NAME=pr-123
 ## How it works
 
 ```
-                               ┌────────────────────────────────────────┐
-  :$PREVIEW_PORT ──▶ caddy ──▶ │ admin--<host>   -> authproxy -> admin  │
-                               │                              -> api    │
-                               │ idp--<host>     -> idp                 │
-                               │ everything else -> site                │
-                               └────────────────────────────────────────┘
+                                      ┌────────────────────────────────────────┐
+  :$DEPLOY_PREVIEW_PORT ──▶ caddy ──▶ │ admin--<host>   -> authproxy -> admin  │
+                                      │                              -> api    │
+                                      │ idp--<host>     -> idp                 │
+                                      │ everything else -> site                │
+                                      └────────────────────────────────────────┘
 
   api ──▶ postgres, imgproxy          site ──▶ api (internal)
 ```
@@ -183,7 +176,7 @@ host, and only `docker compose up` has to be repeated for a second environment.
   reason not to expose one to the internet.
 - Images and other uploads are stored in a volume inside the environment. `down --volumes`
   deletes them together with the database.
-- The scheme is `http` unless `PREVIEW_SCHEME` says otherwise; there is no built-in TLS. Admin and
+- The scheme is `http` unless `DEPLOY_PREVIEW_SCHEME` says otherwise; there is no built-in TLS. Admin and
   site send the `upgrade-insecure-requests` csp directive only when their own public url is https,
   so an http preview does not break on it.
 - The fixtures fill the database with demo content on first start. They only run once per

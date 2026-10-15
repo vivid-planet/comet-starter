@@ -8,9 +8,9 @@
 # .env.site-configs.preview are all relative to the root.
 #
 # Read here (all optional, start-preview.sh sets them):
-#   PREVIEW_HOST    public host incl. port (default preview.localhost:8080)
-#   PREVIEW_PORT    host port the environment is published on (default 8080)
-#   PREVIEW_SCHEME  http or https (default http), set to https when TLS is terminated upstream
+#   DEPLOY_PREVIEW_HOST    public host incl. port (default preview.localhost:8080)
+#   DEPLOY_PREVIEW_PORT    host port the environment is published on (default 8080)
+#   DEPLOY_PREVIEW_SCHEME  http or https (default http), set to https when TLS is terminated upstream
 #
 # The images know nothing about the preview host, everything is injected here: the site configs from
 # .env.site-configs.preview, everything else (imgproxy keys, database credentials, ...) from .env,
@@ -22,10 +22,10 @@
 name: dextinity-preview
 
 x-preview-urls:
-  site: &site-url ${PREVIEW_SCHEME:-http}://${PREVIEW_HOST:-preview.localhost:8080}
-  admin: &admin-url ${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}
-  api: &api-url ${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}/api
-  idp: &idp-url ${PREVIEW_SCHEME:-http}://idp--${PREVIEW_HOST:-preview.localhost:8080}
+  site: &site-url ${DEPLOY_PREVIEW_SCHEME:-http}://${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}
+  admin: &admin-url ${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}
+  api: &api-url ${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/api
+  idp: &idp-url ${DEPLOY_PREVIEW_SCHEME:-http}://idp--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}
 
 services:
   # Single entry point for the whole environment, see .docker-preview/Caddyfile.
@@ -34,7 +34,7 @@ services:
     pull_policy: weekly
     restart: unless-stopped
     ports:
-      - "${PREVIEW_PORT:-8080}:80"
+      - "${DEPLOY_PREVIEW_PORT:-8080}:80"
     volumes:
       - ./.docker-preview/Caddyfile:/etc/caddy/Caddyfile:ro
 
@@ -83,7 +83,7 @@ services:
       IDP_CLIENT_ID: ${IDP_CLIENT_ID}
       IDP_CLIENT_SECRET: ${IDP_CLIENT_SECRET}
       AUTHPROXY_URL: *admin-url
-      POST_LOGOUT_REDIRECT_URI: ${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}/oauth2/sign_out?rd=%2F
+      POST_LOGOUT_REDIRECT_URI: ${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/oauth2/sign_out?rd=%2F
       NODE_OPTIONS: --max-old-space-size=256
 
   # Serves the admin and the api under /api on one host, and takes care of the login.
@@ -94,7 +94,7 @@ services:
     environment:
       OAUTH2_PROXY_HTTP_ADDRESS: 0.0.0.0:4180
       OAUTH2_PROXY_UPSTREAMS: http://admin:3000,http://api:4000/api/
-      OAUTH2_PROXY_REDIRECT_URL: ${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}/oauth2/callback
+      OAUTH2_PROXY_REDIRECT_URL: ${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/oauth2/callback
       OAUTH2_PROXY_PROVIDER: oidc
       OAUTH2_PROXY_CLIENT_ID: ${IDP_CLIENT_ID}
       OAUTH2_PROXY_CLIENT_SECRET: ${IDP_CLIENT_SECRET}
@@ -102,7 +102,7 @@ services:
       # directly. Therefore no oidc discovery, the endpoints are configured explicitly.
       OAUTH2_PROXY_SKIP_OIDC_DISCOVERY: "true"
       OAUTH2_PROXY_OIDC_ISSUER_URL: *idp-url
-      OAUTH2_PROXY_LOGIN_URL: ${PREVIEW_SCHEME:-http}://idp--${PREVIEW_HOST:-preview.localhost:8080}/auth
+      OAUTH2_PROXY_LOGIN_URL: ${DEPLOY_PREVIEW_SCHEME:-http}://idp--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/auth
       OAUTH2_PROXY_REDEEM_URL: http://idp:8080/token
       OAUTH2_PROXY_OIDC_JWKS_URL: http://idp:8080/jwks
       OAUTH2_PROXY_PROFILE_URL: http://idp:8080/me
@@ -132,7 +132,7 @@ services:
       API_URL: *api-url
       ADMIN_URL: *admin-url
       # The admin is the only browser client that calls the api cross-origin.
-      CORS_ALLOWED_ORIGIN: ^${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}$$
+      CORS_ALLOWED_ORIGIN: ^${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}$$
       POSTGRESQL_HOST: postgres
       POSTGRESQL_PORT: 5432
       POSTGRESQL_DB: ${POSTGRESQL_DB}
@@ -150,8 +150,8 @@ services:
       IDP_CLIENT_ID: ${IDP_CLIENT_ID}
       # Reached directly, not through caddy.
       IDP_JWKS_URI: http://idp:8080/jwks
-      IDP_END_SESSION_ENDPOINT: ${PREVIEW_SCHEME:-http}://idp--${PREVIEW_HOST:-preview.localhost:8080}/session/end
-      POST_LOGOUT_REDIRECT_URI: ${PREVIEW_SCHEME:-http}://admin--${PREVIEW_HOST:-preview.localhost:8080}/oauth2/sign_out?rd=%2F
+      IDP_END_SESSION_ENDPOINT: ${DEPLOY_PREVIEW_SCHEME:-http}://idp--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/session/end
+      POST_LOGOUT_REDIRECT_URI: ${DEPLOY_PREVIEW_SCHEME:-http}://admin--${DEPLOY_PREVIEW_HOST:-preview.localhost:8080}/oauth2/sign_out?rd=%2F
       ACL_ALL_PERMISSIONS_EMAILS: ${ACL_ALL_PERMISSIONS_EMAILS}
       ACL_ALL_PERMISSIONS_DOMAINS: ${ACL_ALL_PERMISSIONS_DOMAINS}
       TRACING_ENABLED: 0

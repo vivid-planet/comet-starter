@@ -7,12 +7,11 @@ set -e
 #
 # Configured through the environment, all optional:
 #
-#   COMPOSE_PROJECT_NAME  compose project to create (default dextinity-preview)
-#   PREVIEW_PORT          host port the environment is published on (default 8080)
-#   PREVIEW_BASE_DOMAIN   base domain (default preview.localhost), also accepted as PREVIEW_DOMAIN
-#   PREVIEW_HOST          public host incl. port (default <PREVIEW_BASE_DOMAIN>:<PREVIEW_PORT>)
-#   PREVIEW_SCHEME        http or https (default http)
-#   PREVIEW_URLS          file to report the urls of this preview to, one "<name>=<url>" per line
+#   COMPOSE_PROJECT_NAME      compose project to create (default dextinity-preview)
+#   DEPLOY_PREVIEW_PORT       host port the environment is published on (default 8080)
+#   DEPLOY_PREVIEW_HOST       public host incl. port (default preview.localhost:<DEPLOY_PREVIEW_PORT>)
+#   DEPLOY_PREVIEW_SCHEME     http or https (default http)
+#   DEPLOY_PREVIEW_URLS_FILE  file to report the urls of this preview to, one "<name>=<url>" per line
 #
 # Without any of them it starts the preview environment on http://preview.localhost:8080.
 #
@@ -21,15 +20,11 @@ set -e
 
 cd "$(dirname "$0")"
 
-# A preview controller hands the base domain over as PREVIEW_DOMAIN, but in this project that name
-# belongs to the domain that serves the site in Dextinity's preview mode - so it only goes into the
-# host here and none of the containers gets it. See .docker-preview/README.md.
-PREVIEW_BASE_DOMAIN="${PREVIEW_BASE_DOMAIN:-${PREVIEW_DOMAIN:-preview.localhost}}"
-export PREVIEW_PORT="${PREVIEW_PORT:-8080}"
-export PREVIEW_SCHEME="${PREVIEW_SCHEME:-http}"
-export PREVIEW_HOST="${PREVIEW_HOST:-$PREVIEW_BASE_DOMAIN:$PREVIEW_PORT}"
+export DEPLOY_PREVIEW_PORT="${DEPLOY_PREVIEW_PORT:-8080}"
+export DEPLOY_PREVIEW_SCHEME="${DEPLOY_PREVIEW_SCHEME:-http}"
+export DEPLOY_PREVIEW_HOST="${DEPLOY_PREVIEW_HOST:-preview.localhost:$DEPLOY_PREVIEW_PORT}"
 # The auth proxy may only send its session cookie over https when the preview is served over https.
-export PREVIEW_COOKIE_SECURE="${PREVIEW_COOKIE_SECURE:-$([[ $PREVIEW_SCHEME == https ]] && echo true || echo false)}"
+export PREVIEW_COOKIE_SECURE="${PREVIEW_COOKIE_SECURE:-$([[ $DEPLOY_PREVIEW_SCHEME == https ]] && echo true || echo false)}"
 
 if [[ -s "$HOME/.nvm/nvm.sh" ]]
 then
@@ -41,7 +36,7 @@ fi
 # into api, admin and site by the compose file. Rendering needs the root package installed.
 # npm ci and not npm install, so that running the preview never rewrites package-lock.json.
 [[ -x ./node_modules/.bin/dextinity ]] || npm ci --no-audit --no-fund
-SITE_DOMAIN="$PREVIEW_HOST" ./node_modules/.bin/dextinity inject-site-configs \
+SITE_DOMAIN="$DEPLOY_PREVIEW_HOST" ./node_modules/.bin/dextinity inject-site-configs \
     -f site-configs/site-configs.ts \
     -i .env.site-configs.tpl \
     -o .env.site-configs.preview \
@@ -53,10 +48,10 @@ docker compose -p "${COMPOSE_PROJECT_NAME:-dextinity-preview}" -f .docker-previe
     --project-directory . up --build -d --wait
 
 # Tell the caller which domains this project serves, so it can link to them.
-if [[ -n "${PREVIEW_URLS:-}" ]]
+if [[ -n "${DEPLOY_PREVIEW_URLS_FILE:-}" ]]
 then
-    cat > "$PREVIEW_URLS" <<URLS
-Site=$PREVIEW_SCHEME://$PREVIEW_HOST
-Admin=$PREVIEW_SCHEME://admin--$PREVIEW_HOST
+    cat > "$DEPLOY_PREVIEW_URLS_FILE" <<URLS
+Site=$DEPLOY_PREVIEW_SCHEME://$DEPLOY_PREVIEW_HOST
+Admin=$DEPLOY_PREVIEW_SCHEME://admin--$DEPLOY_PREVIEW_HOST
 URLS
 fi
