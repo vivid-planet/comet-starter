@@ -34,7 +34,7 @@
         "browser": "run-p browser:api browser:admin browser:site",
         "browser:api": "dotenv -- sh -c 'open-cli $API_URL/graphql'",
         "browser:admin": "dotenv -- sh -c 'open-cli $ADMIN_URL'",
-        "browser:site": "dotenv -- sh -c 'open-cli $SITE_URL'",
+        "browser:site": "dotenv -- sh -c 'open-cli http://localhost:$SITE_PORT'",
         "browser:jaeger": "dotenv -- sh -c 'open-cli http://localhost:$JAEGER_UI_PORT'",
         "install-agent-features": "npx @dextinity/cli install-agent-features",
         "setup:ci": "npm run setup-project-files",
