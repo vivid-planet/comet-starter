@@ -16,6 +16,11 @@ input BooleanFilter {
   equal: Boolean
 }
 
+type ContentScopeDimension {
+  label: String!
+  name: String!
+}
+
 type ContentScopeWithLabel {
   label: JSONObject!
   scope: JSONObject!
@@ -248,6 +253,7 @@ type EntityInfo {
   id: String!
   name: String!
   secondaryInformation: String
+  visible: Boolean!
 }
 
 input FileFilterInput {
@@ -628,6 +634,7 @@ type Query {
   redirectSourceAvailable(scope: RedirectScopeInput!, source: String!): Boolean!
   redirects(active: Boolean, query: String, scope: RedirectScopeInput!, sortColumnName: String, sortDirection: SortDirection! = ASC, type: RedirectGenerationType): [Redirect!]! @deprecated(reason: "Use paginatedRedirects instead. Will be removed in the next version.")
   sitePreviewJwt(includeInvisible: Boolean!, path: String!, scope: JSONObject!): String!
+  userPermissionsAvailableContentScopeDimensions: [ContentScopeDimension!]!
   userPermissionsAvailableContentScopes: [ContentScopeWithLabel!]!
   userPermissionsAvailablePermissions: [String!]!
   userPermissionsContentScopes(skipManual: Boolean, userId: String!): [JSONObject!]!
@@ -871,6 +878,7 @@ input WarningFilter {
   status: WarningStatusEnumFilter
   type: StringFilter
   updatedAt: DateTimeFilter
+  visible: BooleanFilter
 }
 
 enum WarningSeverity {
@@ -898,6 +906,7 @@ enum WarningSortField {
   status
   type
   updatedAt
+  visible
 }
 
 type WarningSourceInfo {
