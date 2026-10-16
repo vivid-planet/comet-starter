@@ -5,7 +5,7 @@
 #
 # --project-directory keeps the repository root the base of everything, although this file lives in
 # .deploy-preview/: the build contexts, the .env it is interpolated with and
-# .env.site-configs.preview are all relative to the root.
+# .env.site-configs.deploy-preview are all relative to the root.
 #
 # Read here (all optional, start-deploy-preview.sh sets them):
 #   DEPLOY_PREVIEW_HOST    public host incl. port (default preview.localhost:8080)
@@ -13,7 +13,7 @@
 #   DEPLOY_PREVIEW_SCHEME  http or https (default http), set to https when TLS is terminated upstream
 #
 # The images know nothing about the preview host, everything is injected here: the site configs from
-# .env.site-configs.preview, everything else (imgproxy keys, database credentials, ...) from .env,
+# .env.site-configs.deploy-preview, everything else (imgproxy keys, database credentials, ...) from .env,
 # which docker compose loads itself - so the preview environment uses the same non-secret
 # development values as `npm run dev`.
 #
@@ -159,7 +159,7 @@ services:
     volumes:
       - uploads:/app/api/uploads
     env_file:
-      - .env.site-configs.preview
+      - .env.site-configs.deploy-preview
     depends_on:
       postgres:
         condition: service_healthy
@@ -184,7 +184,7 @@ services:
       API_URL_INTERNAL: http://api:4000/api
       NODE_OPTIONS: --max-old-space-size=256
     env_file:
-      - .env.site-configs.preview
+      - .env.site-configs.deploy-preview
 
   site:
     build:
@@ -204,7 +204,7 @@ services:
       TRACING_ENABLED: 0
       NODE_OPTIONS: --max-old-space-size=1024
     env_file:
-      - .env.site-configs.preview
+      - .env.site-configs.deploy-preview
     depends_on:
       api:
         condition: service_healthy

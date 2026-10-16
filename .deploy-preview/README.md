@@ -24,7 +24,7 @@ the npm registry, `mirror.gcr.io` (all images) and github.com (the translations 
 ./start-deploy-preview.sh
 ```
 
-The script renders `site-configs/*.ts` for `DEPLOY_PREVIEW_HOST` into `.env.site-configs.preview` - the
+The script renders `site-configs/*.ts` for `DEPLOY_PREVIEW_HOST` into `.env.site-configs.deploy-preview` - the
 images themselves do not know the preview host - and then brings the compose project up, blocking
 until api and site report healthy. Run it again whenever `DEPLOY_PREVIEW_HOST` or anything in
 `site-configs/` changes.
@@ -64,7 +64,7 @@ DEPLOY_PREVIEW_PORT=8081 COMPOSE_PROJECT_NAME=pr-123 ./start-deploy-preview.sh
 ```
 
 The project name keeps containers, networks and volumes of the two environments apart.
-`.env.site-configs.preview` is not, so start one environment after the other, not both at once.
+`.env.site-configs.deploy-preview` is not, so start one environment after the other, not both at once.
 
 ## Configuration
 
@@ -181,5 +181,5 @@ host, and only `docker compose up` has to be repeated for a second environment.
   so an http preview does not break on it.
 - The fixtures fill the database with demo content on first start. They only run once per
   database, guarded by a marker file in the uploads volume. Delete the volumes to start over.
-- `.env.site-configs.preview` is a single file in the repository, so two environments with
+- `.env.site-configs.deploy-preview` is a single file in the repository, so two environments with
   different hosts cannot be rendered at the same time - render, start, then render the next.

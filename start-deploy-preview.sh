@@ -39,7 +39,7 @@ fi
 SITE_DOMAIN="$DEPLOY_PREVIEW_HOST" ./node_modules/.bin/dextinity inject-site-configs \
     -f site-configs/site-configs.ts \
     -i .env.site-configs.tpl \
-    -o .env.site-configs.preview \
+    -o .env.site-configs.deploy-preview \
     --base64
 
 # --project-directory keeps the repository root the base of the build contexts and of the .env

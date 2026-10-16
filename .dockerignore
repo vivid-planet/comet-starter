@@ -10,7 +10,7 @@
 **/.env.local
 **/.env.secrets
 **/.env.site-configs
-**/.env.site-configs.preview
+**/.env.site-configs.deploy-preview
 
 # Build output
 **/dist
