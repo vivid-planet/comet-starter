@@ -56,8 +56,8 @@ services:
       # Logging
       OAUTH2_PROXY_AUTH_LOGGING: "true"
       OAUTH2_PROXY_REQUEST_LOGGING: "false"
-      OAUTH2_PROXY_SILENCE_PING_LOGGING_true: "true"
-      OAUTH2_PROXY_STANDARD_LOGGING: "false"
+      OAUTH2_PROXY_SILENCE_PING_LOGGING: "true"
+      OAUTH2_PROXY_STANDARD_LOGGING: "true"
       # Proxy
       OAUTH2_PROXY_API_ROUTES: "/api"
       OAUTH2_PROXY_EMAIL_DOMAINS: "*"
@@ -65,7 +65,7 @@ services:
       OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/api)?/healthcheck/"
       OAUTH2_PROXY_SKIP_JWT_BEARER_TOKENS: "true"
       OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
-      OAUTH2_PROXY_WHITELIST_DOMAIN: "login.vivid-planet.cloud"
+      OAUTH2_PROXY_WHITELIST_DOMAINS: "login.vivid-planet.cloud"
       OAUTH2_PROXY_HTTP_ADDRESS: "0.0.0.0:4180" # allow access from outside the container
       # Upstrean
       OAUTH2_PROXY_UPSTREAMS: "http://admin:3000,http://api:4000/api/"

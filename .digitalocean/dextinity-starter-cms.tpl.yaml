@@ -222,7 +222,7 @@ services:
         value: "true"
       - key: OAUTH2_PROXY_STANDARD_LOGGING
         scope: RUN_AND_BUILD_TIME
-        value: "false"
+        value: "true"
       # Proxy
       - key: OAUTH2_PROXY_API_ROUTES
         scope: RUN_AND_BUILD_TIME
@@ -242,7 +242,7 @@ services:
       - key: OAUTH2_PROXY_SKIP_PROVIDER_BUTTON
         scope: RUN_AND_BUILD_TIME
         value: "true"
-      - key: OAUTH2_PROXY_WHITELIST_DOMAIN
+      - key: OAUTH2_PROXY_WHITELIST_DOMAINS
         scope: RUN_AND_BUILD_TIME
         value: login.vivid-planet.cloud
       - key: OAUTH2_PROXY_HTTP_ADDRESS
