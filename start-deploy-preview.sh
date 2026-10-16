@@ -7,7 +7,7 @@ set -e
 #
 # Configured through the environment, all optional:
 #
-#   COMPOSE_PROJECT_NAME      compose project to create (default dextinity-preview)
+#   COMPOSE_PROJECT_NAME      compose project to create (default dextinity-starter-deploy-preview)
 #   DEPLOY_PREVIEW_PORT       host port the environment is published on (default 8080)
 #   DEPLOY_PREVIEW_HOST       public host incl. port (default preview.localhost:<DEPLOY_PREVIEW_PORT>)
 #   DEPLOY_PREVIEW_SCHEME     http or https (default http)
@@ -44,7 +44,7 @@ SITE_DOMAIN="$DEPLOY_PREVIEW_HOST" ./node_modules/.bin/dextinity inject-site-con
 
 # --project-directory keeps the repository root the base of the build contexts and of the .env
 # files, although the compose file itself lives in .deploy-preview/.
-docker compose -p "${COMPOSE_PROJECT_NAME:-dextinity-preview}" -f .deploy-preview/docker-compose.yml \
+docker compose -p "${COMPOSE_PROJECT_NAME:-dextinity-starter-deploy-preview}" -f .deploy-preview/docker-compose.yml \
     --project-directory . up --build -d --wait
 
 # Tell the caller which domains this project serves, so it can link to them.
