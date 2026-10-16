@@ -1,4 +1,4 @@
-# Reverse proxy for the docker preview environment, see docker-compose.yml.
+# Reverse proxy for the deploy preview environment, see docker-compose.yml.
 #
 # Everything is served through a single port, so that multiple preview environments can run on the
 # same host without port conflicts. Requests are routed by how the host name starts, so the proxy

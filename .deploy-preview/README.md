@@ -1,11 +1,11 @@
-# Docker Preview Environment
+# Deploy Preview Environment
 
 Runs the complete application - api, admin, site and everything they need - in Docker.
 It is meant for preview environments, for example to look at a pull request before it is merged.
 
 Dependencies are installed and everything is built inside the images, so neither `./install.sh`
 nor a build has to run on the host. The one thing prepared outside is the site-configs env file,
-which needs the root package installed - `start-preview.sh` does that itself.
+which needs the root package installed - `start-deploy-preview.sh` does that itself.
 
 It is **not** a development environment: there is no hot reloading and no watch mode.
 Everything is built once, production style, and then started. For development use `npm run dev`.
@@ -21,7 +21,7 @@ the npm registry, `mirror.gcr.io` (all images) and github.com (the translations 
 ## Quick start
 
 ```bash
-./start-preview.sh
+./start-deploy-preview.sh
 ```
 
 The script renders `site-configs/*.ts` for `DEPLOY_PREVIEW_HOST` into `.env.site-configs.preview` - the
@@ -29,7 +29,7 @@ images themselves do not know the preview host - and then brings the compose pro
 until api and site report healthy. Run it again whenever `DEPLOY_PREVIEW_HOST` or anything in
 `site-configs/` changes.
 
-Afterwards `docker compose -f .docker-preview/docker-compose.yml --project-directory . logs|ps|down`
+Afterwards `docker compose -f .deploy-preview/docker-compose.yml --project-directory . logs|ps|down`
 work directly; to start or restart the environment, run the script again.
 
 | Application      | URL                                      |
@@ -49,9 +49,9 @@ development: the identity provider is `dev-oidc-provider`, where every static us
 Follow the logs, stop it again, and remove the database:
 
 ```bash
-docker compose -f .docker-preview/docker-compose.yml --project-directory . logs -f
-docker compose -f .docker-preview/docker-compose.yml --project-directory . down
-docker compose -f .docker-preview/docker-compose.yml --project-directory . down --volumes
+docker compose -f .deploy-preview/docker-compose.yml --project-directory . logs -f
+docker compose -f .deploy-preview/docker-compose.yml --project-directory . down
+docker compose -f .deploy-preview/docker-compose.yml --project-directory . down --volumes
 ```
 
 ## Several environments at the same time
@@ -60,7 +60,7 @@ Only one port is published, so a second environment needs a different port and i
 compose project name:
 
 ```bash
-DEPLOY_PREVIEW_PORT=8081 COMPOSE_PROJECT_NAME=pr-123 ./start-preview.sh
+DEPLOY_PREVIEW_PORT=8081 COMPOSE_PROJECT_NAME=pr-123 ./start-deploy-preview.sh
 ```
 
 The project name keeps containers, networks and volumes of the two environments apart.
@@ -78,7 +78,7 @@ All variables are optional.
 | `DEPLOY_PREVIEW_URLS_FILE` | unset                                    | File to report the urls to, one `<name>=<url>` per line     |
 
 `DEPLOY_PREVIEW_HOST` is what keeps the rendered site-configs and the urls in the compose file in sync:
-`start-preview.sh` renders the configs for it and passes it on to compose. Everything else - imgproxy
+`start-deploy-preview.sh` renders the configs for it and passes it on to compose. Everything else - imgproxy
 keys, `DAM_SECRET`, acl defaults, database credentials - is taken from `.env`, which docker compose
 loads automatically. The preview environment therefore uses the same non-secret development values
 as the local development setup.
@@ -114,7 +114,7 @@ export DEPLOY_PREVIEW_HOST=pr-123.example.com
 export DEPLOY_PREVIEW_SCHEME=https
 export COMPOSE_PROJECT_NAME=pr-123
 
-./start-preview.sh
+./start-deploy-preview.sh
 ```
 
 ## How it works

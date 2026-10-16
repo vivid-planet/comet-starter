@@ -12,7 +12,7 @@ COPY .npmrc package.json package-lock.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci --ignore-scripts --no-audit --no-fund
 
 COPY api/src/auth/static-users.ts ./api/src/auth/static-users.ts
-COPY .docker-preview/dev-oidc-provider.config.mts ./
+COPY .deploy-preview/dev-oidc-provider.config.mts ./
 
 EXPOSE 8080
 CMD ["./node_modules/.bin/dev-oidc-provider"]

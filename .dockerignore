@@ -1,11 +1,11 @@
-# Build context for the docker preview environment (see .docker-preview/docker-compose.yml).
+# Build context for the deploy preview environment (see .deploy-preview/docker-compose.yml).
 # Everything that is generated during install/build is excluded, so that a build from a fresh
 # clone and a build from a local working copy produce the same image. Only paths the Dockerfiles
 # copy are sent to the builder at all, so this only has to cover what lies inside those.
 
 **/node_modules
 
-# Local env files - the preview environment gets its config from .docker-preview/docker-compose.yml
+# Local env files - the preview environment gets its config from .deploy-preview/docker-compose.yml
 **/.env
 **/.env.local
 **/.env.secrets

@@ -16,7 +16,7 @@ RUN npm run build
 # Blob storage of the api (FILE_STORAGE_PATH=uploads), shared with imgproxy through a volume.
 RUN mkdir -p uploads
 
-COPY .docker-preview/api-start.sh /api-start.sh
+COPY .deploy-preview/api-start.sh /api-start.sh
 ENV NODE_ENV=production
 EXPOSE 4000
 CMD ["/api-start.sh"]
