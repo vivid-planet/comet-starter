@@ -2,6 +2,7 @@ import { Assets, Dashboard, PageTree, Snips, Wrench } from "@dextinity/admin-ico
 import {
     ContentScopeIndicator,
     createRedirectsPage,
+    CronJobsPage,
     DamPage,
     type DocumentInterface,
     MasterMenu,
@@ -100,6 +101,15 @@ export const masterMenuData: MasterMenuData = [
                     component: RedirectsPage,
                 },
                 requiredPermission: "pageTree",
+            },
+            {
+                type: "route",
+                primary: <FormattedMessage id="menu.cronJobs" defaultMessage="Cron Jobs" />,
+                route: {
+                    path: "/system/cron-jobs",
+                    component: CronJobsPage,
+                },
+                requiredPermission: "cronJobs",
             },
             {
                 type: "route",

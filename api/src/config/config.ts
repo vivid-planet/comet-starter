@@ -14,6 +14,8 @@ export function createConfig(processEnv: NodeJS.ProcessEnv) {
         ...dextinityConfig,
         debug: envVars.NODE_ENV !== "production",
         serverHost: envVars.SERVER_HOST ?? "localhost",
+        // Set automatically by the Helm chart, only needed when running in Kubernetes (e.g. for cron jobs)
+        helmRelease: envVars.HELM_RELEASE ?? "",
         apiUrl: envVars.API_URL,
         apiPort: envVars.API_PORT,
         corsAllowedOrigin: new RegExp(envVars.CORS_ALLOWED_ORIGIN),

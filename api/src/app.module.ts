@@ -3,9 +3,11 @@ import {
     BlobStorageModule,
     BlocksModule,
     BlocksTransformerMiddlewareFactory,
+    CronJobsModule,
     DamModule,
     DependenciesModule,
     ImgproxyModule,
+    KubernetesModule,
     PageTreeModule,
     RedirectsModule,
     UserPermissionsModule,
@@ -134,6 +136,10 @@ export class AppModule {
                 HealthcheckModule,
                 MenusModule,
                 DependenciesModule,
+                KubernetesModule.register({
+                    helmRelease: config.helmRelease,
+                }),
+                CronJobsModule,
                 FootersModule,
                 WarningsModule,
                 ...(!config.debug

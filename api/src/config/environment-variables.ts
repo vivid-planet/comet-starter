@@ -57,6 +57,10 @@ export class EnvironmentVariables {
     @IsUndefinable()
     SERVER_HOST?: string;
 
+    @IsString()
+    @IsUndefinable()
+    HELM_RELEASE?: string;
+
     @Type(() => Number)
     @IsInt()
     API_PORT: number;
