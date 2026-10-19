@@ -2,8 +2,7 @@
 
 FROM mirror.gcr.io/library/node:24-bookworm
 
-# Everything below runs as the unprivileged node user of the base image, during the build and at
-# runtime. WORKDIR would create the directory as root, so it is created and handed over first.
+# WORKDIR would create the directory as root, so it is created and handed over first.
 RUN mkdir -p /app/admin && chown node:node /app/admin
 WORKDIR /app/admin
 USER node
@@ -13,7 +12,7 @@ COPY --chown=node:node .npmrc ./
 COPY --chown=node:node admin/package.json admin/package-lock.json ./
 # The postinstall script of admin installs the dependencies of admin/server.
 COPY --chown=node:node admin/server/package.json admin/server/package-lock.json ./server/
-# uid/gid: a cache mount is created for root unless it is told otherwise, and npm could not write it.
+# uid/gid: the cache mount would belong to root and npm could not write it.
 RUN --mount=type=cache,target=/home/node/.npm,uid=1000,gid=1000 npm ci --no-audit --no-fund
 
 COPY --chown=node:node admin ./
@@ -23,8 +22,7 @@ COPY --chown=node:node api/src/dextinity-config.json site-configs/site-configs.d
 # intl-update.sh clones the translations; the .git directories are only clone metadata.
 RUN ./intl-update.sh && rm -rf lang/*/.git && npm run build
 
-# The build is static. admin/server injects the environment variables into index.html when it
-# starts and serves ./build relative to this directory.
+# admin/server injects the environment variables into index.html and serves ./build from here.
 ENV NODE_ENV=production
 EXPOSE 3000
 CMD ["node", "server"]

@@ -14,9 +14,6 @@ set -e
 #   DEPLOY_PREVIEW_URLS_FILE  file to report the urls of this preview to, one "<name>=<url>" per line
 #
 # Without any of them it starts the preview environment on http://preview.localhost:8080.
-#
-# Everything besides the main site lives one label next to the base domain and not below it -
-# admin--<host> and secondary--<host>, not admin.<host> - so that one wildcard certificate covers it.
 
 cd "$(dirname "$0")"
 
@@ -42,8 +39,6 @@ fi
     -o .env.site-configs.deploy-preview \
     --base64
 
-# --project-directory keeps the repository root the base of the build contexts and of the .env
-# files, although the compose file itself lives in .deploy-preview/.
 docker compose -p "${COMPOSE_PROJECT_NAME:-dextinity-starter-deploy-preview}" -f .deploy-preview/docker-compose.yml \
     --project-directory . up --build -d --wait
 

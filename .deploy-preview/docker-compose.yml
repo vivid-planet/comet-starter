@@ -1,23 +1,8 @@
-# Preview environment: runs the complete application (api, admin, site and everything they need) in
-# Docker, using production-like builds instead of dev servers. Start it with ./start-deploy-preview.sh,
-# which renders the site configs for the preview host first; `docker compose -f
-# .deploy-preview/docker-compose.yml --project-directory . logs|ps|down` work directly afterwards.
+# Started by ./start-deploy-preview.sh, see .deploy-preview/README.md.
 #
 # --project-directory keeps the repository root the base of everything, although this file lives in
 # .deploy-preview/: the build contexts, the .env it is interpolated with and
 # .env.site-configs.deploy-preview are all relative to the root.
-#
-# Read here (all optional, start-deploy-preview.sh sets them):
-#   DEPLOY_PREVIEW_HOST    public host incl. port (default preview.localhost:8080)
-#   DEPLOY_PREVIEW_PORT    host port the environment is published on (default 8080)
-#   DEPLOY_PREVIEW_SCHEME  http or https (default http), set to https when TLS is terminated upstream
-#
-# The images know nothing about the preview host, everything is injected here: the site configs from
-# .env.site-configs.deploy-preview, everything else (imgproxy keys, database credentials, ...) from .env,
-# which docker compose loads itself - so the preview environment uses the same non-secret
-# development values as `npm run dev`.
-#
-# See .deploy-preview/README.md for details.
 
 name: dextinity-starter-deploy-preview
 

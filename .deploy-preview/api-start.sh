@@ -1,5 +1,4 @@
 #!/bin/sh
-# Brings the database up to date and starts the api.
 set -e
 
 # The fixtures command drops all tables, so it must only run once per database.
