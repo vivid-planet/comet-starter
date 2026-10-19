@@ -88,7 +88,8 @@ services:
 
   # Serves the admin and the api under /api on one host, and takes care of the login.
   authproxy:
-    image: ${OAUTH2_PROXY_IMAGE:-mirror.gcr.io/dkarnutsch/oauth2-proxy:latest}
+    # The version is the one .env pins for the oauth2-proxy binary of the local development setup.
+    image: ${OAUTH2_PROXY_IMAGE:-quay.io/oauth2-proxy/oauth2-proxy:${OAUTH2_PROXY_VERSION:-v7.13.0}}
     pull_policy: weekly
     restart: unless-stopped
     environment:

@@ -15,8 +15,8 @@ For the deployment to a server with traefik and letsencrypt see [`.docker-compos
 ## Requirements
 
 Docker (with compose), node for the site-configs step, and network access during the build:
-the npm registry, `mirror.gcr.io` (all images) and github.com (the translations are cloned by
-`intl-update.sh`).
+the npm registry, `mirror.gcr.io` (base images, postgres, imgproxy, caddy), `quay.io` (oauth2-proxy)
+and github.com (the translations are cloned by `intl-update.sh`).
 
 ## Quick start
 
