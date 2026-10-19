@@ -36,7 +36,7 @@ fi
 # into api, admin and site by the compose file. Rendering needs the root package installed.
 # npm ci and not npm install, so that running the preview never rewrites package-lock.json.
 [[ -x ./node_modules/.bin/dextinity ]] || npm ci --no-audit --no-fund
-SITE_DOMAIN="$DEPLOY_PREVIEW_HOST" ./node_modules/.bin/dextinity inject-site-configs \
+./node_modules/.bin/dextinity inject-site-configs \
     -f site-configs/site-configs.ts \
     -i .env.site-configs.tpl \
     -o .env.site-configs.deploy-preview \

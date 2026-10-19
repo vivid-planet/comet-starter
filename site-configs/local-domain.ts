@@ -2,8 +2,8 @@
 // the site is served by `npm run dev` under SERVER_HOST:SITE_PORT, in the deploy preview environment
 // (see .deploy-preview/docker-compose.yml) by its proxy under the host it was started with.
 //
-// SITE_DOMAIN is set by ./start-deploy-preview.sh, everything else uses the development host.
-const deployPreviewDomain = process.env.SITE_DOMAIN;
+// DEPLOY_PREVIEW_HOST is set by ./start-deploy-preview.sh, everything else uses the development host.
+const deployPreviewDomain = process.env.DEPLOY_PREVIEW_HOST;
 const devDomain = `${process.env.SERVER_HOST ?? "localhost"}:${process.env.SITE_PORT || "3000"}`;
 const baseDomain = deployPreviewDomain || devDomain;
 
