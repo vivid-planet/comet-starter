@@ -171,9 +171,6 @@ host, and only `docker compose up` has to be repeated for a second environment.
 - Anyone who can reach the admin host can log in as any static user without a password, because the
   identity provider is the development one. Do not expose an environment to the internet without
   putting authentication in front of it.
-- The applications run as root inside their containers, which keeps the images plain checkouts that
-  were built in place. That is unproblematic for an environment on your own machine and one more
-  reason not to expose one to the internet.
 - Images and other uploads are stored in a volume inside the environment. `down --volumes`
   deletes them together with the database.
 - The scheme is `http` unless `DEPLOY_PREVIEW_SCHEME` says otherwise; there is no built-in TLS. Admin and

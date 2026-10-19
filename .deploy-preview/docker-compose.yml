@@ -33,8 +33,10 @@ services:
     image: mirror.gcr.io/library/caddy:2-alpine
     pull_policy: weekly
     restart: unless-stopped
+    # The caddy image runs as root by default, the four images built here bring their own user.
+    user: "1000:1000"
     ports:
-      - "${DEPLOY_PREVIEW_PORT:-8080}:80"
+      - "${DEPLOY_PREVIEW_PORT:-8080}:8080"
     volumes:
       - ./.deploy-preview/Caddyfile:/etc/caddy/Caddyfile:ro
 

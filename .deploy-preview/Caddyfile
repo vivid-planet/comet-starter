@@ -14,7 +14,8 @@
 	persist_config off
 }
 
-:80 {
+# 8080 and not 80, because caddy runs unprivileged and may not bind a port below 1024.
+:8080 {
 	@admin header_regexp Host ^admin--
 	handle @admin {
 		reverse_proxy authproxy:4180
