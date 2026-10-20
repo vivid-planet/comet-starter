@@ -24,9 +24,9 @@
         "lint:fix:prettier": "npm run lint:prettier -- --write",
         "lint:knip": "knip --exports --files --dependencies --tags=-knipignore",
         "lint:prettier": "npx prettier --check '*.{ts,js,json,md,yml,yaml}'",
-        "lint:tsc": "tsc --project .",
+        "lint:tsc": "tsc --project . && tsc --project server",
         "preview": "npm run build && vite preview",
-        "serve": "node server",
+        "serve": "node server/index.ts",
         "setup:ci": "./intl-update.sh",
         "start": "npm run check-node-version && run-s admin-generator intl:compile && run-p gql:types generate-block-types && dotenv -e .env.secrets -e .env.local -e .env -e .env.site-configs -- vite"
     },
