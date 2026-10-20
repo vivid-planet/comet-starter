@@ -8,7 +8,7 @@
             "project": ["./src/**/*.{ts,tsx}"]
         },
         "server": {
-            "project": ["**/*.js"]
+            "project": ["**/*.ts"]
         }
     }
 }
