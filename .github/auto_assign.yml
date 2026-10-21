@@ -1,6 +1,3 @@
 addAssignees: author
 
 addReviewers: false
-
-skipKeywords:
-  - Merge main into next
