@@ -2,6 +2,7 @@
     "name": "starter-admin",
     "version": "1.0.0",
     "private": true,
+    "type": "module",
     "scripts": {
         "admin-generator": "rimraf --glob 'src/**/generated' && dextinity-admin-generator generate && npm run gql:types",
         "build": "run-s admin-generator intl:compile && run-p gql:types generate-block-types && NODE_ENV=production vite build",
@@ -99,8 +100,7 @@
         "rimraf": "^6.1.3",
         "typescript": "^5.9.3",
         "vite": "^8.3.4",
-        "vite-plugin-compression2": "^2.5.3",
-        "vite-plugin-html": "^3.2.2"
+        "vite-plugin-compression2": "^2.5.3"
     },
     "engines": {
         "node": "24"
