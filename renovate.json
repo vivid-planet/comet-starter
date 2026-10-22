@@ -1,6 +1,6 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["github>vivid-planet/dextinity//renovate/default", ":automergeMinor"],
+    "extends": ["github>vivid-planet/dextinity//renovate/default", ":automergeStableNonMajor"],
     "automergeStrategy": "squash",
     "packageRules": [
         {
