@@ -180,7 +180,7 @@ Component-based with GraphQL mutations/queries co-located
 The site uses React Server Components without Next.js: Vite with `@vitejs/plugin-rsc` and a small framework in `site/src/framework/`.
 
 - `src/framework/entry.rsc.tsx` - Request handler: runs the middleware chain, matches routes, renders the RSC stream (handles `notFound()`/`redirect()`)
-- `src/framework/entry.ssr.tsx` / `entry.browser.tsx` - HTML rendering, hydration and client side navigation (RSC payload requests use the `_rsc` search param)
+- `src/framework/entry.ssr.tsx` / `entry.browser.tsx` - HTML rendering, hydration and client side navigation (RSC payload requests use the page path prefixed with `/_rsc`, e.g. `/_rsc/en/about`)
 - `src/app/routes.tsx` - Explicit route table (URLPattern syntax) instead of file system routing. Page routes return the server component tree incl. layouts, handler routes return a `Response`
 - Replacements for Next.js APIs: `@src/framework/client/Link` (`next/link`), `usePathname`/`useSearchParams` from `@src/framework/client/router`, `notFound`/`redirect` from `@src/framework/server/navigation`, `headers()`/`cookies()` from `@src/framework/server/requestContext`, `<MetadataTags>` (`generateMetadata`)
 - Data fetching: `createGraphQLFetch()` (server only) caches GraphQL responses (`src/util/fetchCache.ts`, Valkey or in-memory), `createBrowserGraphQLFetch()` for client components (persisted queries only)

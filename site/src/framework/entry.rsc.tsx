@@ -10,7 +10,7 @@ import { applyHeaders, runMiddleware } from "./server/middleware";
 import { getNavigationDigest, parseNavigationDigest } from "./server/navigation";
 import { getVisibility, runWithRequestContext } from "./server/requestContext";
 import { isPageRoute, matchRoute } from "./server/router";
-import { RSC_SEARCH_PARAM } from "./shared";
+import { fromRscPath } from "./shared";
 
 /**
  * The data serialized into the RSC stream on the server and deserialized in entry.ssr.tsx and entry.browser.tsx
@@ -27,14 +27,25 @@ const CDN_CACHE_MAX_AGE = 7.5 * 60;
 // @vitejs/plugin-rsc uses the default export as request handler in development (see server.mts for production)
 export default { fetch: handler };
 
-async function handler(request: Request): Promise<Response> {
+async function handler(incomingRequest: Request): Promise<Response> {
+    // Requests for the RSC payload (/_rsc/en/about) are handled like requests for the page itself (/en/about): middlewares and routes
+    // only see the page path
+    let request = incomingRequest;
+    const url = new URL(incomingRequest.url);
+    const pagePath = fromRscPath(url.pathname);
+    const isRscRequest = pagePath !== undefined;
+    if (isRscRequest) {
+        url.pathname = pagePath;
+        request = new Request(url, incomingRequest);
+    }
+
     return runWithRequestContext(request, async () => {
         try {
             const result = await runMiddleware(middleware, request);
             if (result.type === "response") {
                 return result.response;
             }
-            const response = await handleRoute(request, result.url);
+            const response = await handleRoute(request, result.url, isRscRequest);
             return applyHeaders(response, result.headers);
         } catch (error) {
             console.error("Error occurred handling", request.url, error);
@@ -43,11 +54,8 @@ async function handler(request: Request): Promise<Response> {
     });
 }
 
-async function handleRoute(request: Request, routeUrl: URL): Promise<Response> {
+async function handleRoute(request: Request, routeUrl: URL, isRscRequest: boolean): Promise<Response> {
     const browserUrl = new URL(request.url);
-    const isRscRequest = browserUrl.searchParams.has(RSC_SEARCH_PARAM);
-    browserUrl.searchParams.delete(RSC_SEARCH_PARAM);
-    routeUrl.searchParams.delete(RSC_SEARCH_PARAM);
 
     if (browserUrl.pathname.length > 1 && browserUrl.pathname.endsWith("/")) {
         // Remove trailing slash, same as Next.js does by default. Leading slashes are collapsed to prevent redirects to other hosts (//example.com/)

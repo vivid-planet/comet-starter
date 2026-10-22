@@ -5,7 +5,7 @@ import { rscStream } from "rsc-html-stream/client";
 
 import { RouterProvider, setNavigateImplementation } from "./client/router";
 import type { RscPayload } from "./entry.rsc";
-import { RSC_SEARCH_PARAM } from "./shared";
+import { toRscPath } from "./shared";
 
 let hasNavigatedClientSide = false;
 
@@ -68,7 +68,7 @@ async function main() {
 
         const rscUrl = new URL(url);
         rscUrl.hash = "";
-        rscUrl.searchParams.set(RSC_SEARCH_PARAM, "1");
+        rscUrl.pathname = toRscPath(url.pathname);
 
         let response: Response;
         try {
